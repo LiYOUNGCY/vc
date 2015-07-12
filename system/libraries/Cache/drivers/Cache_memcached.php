@@ -171,7 +171,7 @@ class CI_Cache_memcached extends CI_Driver {
 	 *
 	 * @return	mixed	array on success, false on failure
 	 */
-	public function cache_info()
+	public function _default_options_setup_memcached()
 	{
 		return $this->_memcached->getStats();
 	}
@@ -209,8 +209,9 @@ class CI_Cache_memcached extends CI_Driver {
 	 *
 	 * @return	bool
 	 */
-	protected function _setup_memcached()
+	protected  function _setup_memcached()
 	{
+
 		// Try to load memcached server info from the config file.
 		$CI =& get_instance();
 		$defaults = $this->_memcache_conf['default'];
@@ -257,6 +258,7 @@ class CI_Cache_memcached extends CI_Driver {
 					TRUE,
 					$cache_server['weight']
 				);
+				echo var_dump($this->_memcached);
 			}
 			else
 			{
@@ -265,6 +267,7 @@ class CI_Cache_memcached extends CI_Driver {
 					$cache_server['port'],
 					$cache_server['weight']
 				);
+				echo var_dump($this->_memcached);
 			}
 		}
 
@@ -288,7 +291,6 @@ class CI_Cache_memcached extends CI_Driver {
 			log_message('debug', 'The Memcached Extension must be loaded to use Memcached Cache.');
 			return FALSE;
 		}
-
 		return $this->_setup_memcached();
 	}
 
