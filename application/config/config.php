@@ -358,12 +358,13 @@ $config['encryption_key'] = '8573d1b64921b341498ccb5c915760bc';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'artvc_session';
 $config['sess_expiration'] = 0;
-$config['sess_expire_on_close']	= TRUE;
+$config['sess_expire_on_close']	= FALSE;
 $config['sess_encrypt_cookie']	= TRUE;
 $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
+$config['cookie_lifetime'] = 60*60*24*365;
 
 /*
 |--------------------------------------------------------------------------
