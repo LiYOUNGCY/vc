@@ -4,4 +4,9 @@ class Auth_service extends MY_Service{
 	{
 		parent::__construct();
 	}
+
+	public function check_role_auth()
+	{
+		
+	}
 }

@@ -81,7 +81,9 @@ $autoload['libraries'] = array(
 |	$autoload['drivers'] = array('cache');
 */
 
-$autoload['drivers'] = array();
+$autoload['drivers'] = array(
+				'cache'
+			);
 
 
 /*
