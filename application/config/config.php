@@ -131,7 +131,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+$config['composer_autoload'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -358,12 +358,13 @@ $config['encryption_key'] = '8573d1b64921b341498ccb5c915760bc';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'artvc_session';
 $config['sess_expiration'] = 0;
-$config['sess_expire_on_close']	= TRUE;
+$config['sess_expire_on_close']	= FALSE;
 $config['sess_encrypt_cookie']	= TRUE;
 $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
+$config['cookie_lifetime'] = 60*60*24*365;
 
 /*
 |--------------------------------------------------------------------------
@@ -385,6 +386,7 @@ $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
 $config['cookie_httponly'] 	= FALSE;
+$config['cookie_expire']	= 60*60*24*365;
 
 /*
 |--------------------------------------------------------------------------
@@ -501,4 +503,4 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 //时区设置
-$config['time_zone']=date_default_timezone_set('Etc/GMT-8');  //北京时区
+$config['time_zone'] = date_default_timezone_set('Asia/Shanghai');  //北京时区
