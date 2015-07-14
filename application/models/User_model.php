@@ -10,12 +10,12 @@ class User_model extends CI_Model
 
 
 	/**
-	 * [register_user description]
+	 * [register_action description]
 	 * @param  [array] $register_type [array('phone' => xxx), array('email'	=> xxx)]
 	 * @param  [string] $pwd           [description]
 	 * @return [bool]                [description]
 	 */
-	public function register_user ($name, $register_type, $pwd) 
+	public function register_action ($name, $register_type, $pwd) 
 	{
 		if(! ( isset($register_type['email']) || isset($register_type['phone']) ) )
 		{
@@ -43,12 +43,12 @@ class User_model extends CI_Model
 
 
 	/**
-	 * [check_pwd description]
+	 * [login_action description]
 	 * @param  [array] $login_type [array('phone' => xxx), array('email'	=> xxx)]
 	 * @param  [string] $pwd          [description]
 	 * @return [type]               [description]
 	 */
-	public function check_pwd($login_type, $pwd)
+	public function login_action ($login_type, $pwd)
 	{
 		$this->load->library('passwordhash');
 		$this->passwordhash->setPasswordHash(8, FALSE);
@@ -86,13 +86,13 @@ class User_model extends CI_Model
 		return NULL;
 	}
 
-	public function check_email($email)
+	public function check_email ($email)
 	{
 		return $this->db->where('email', $email)->from('user')->count_all_results() === 0 ?
 			true : false; 
 	}
 
-	public function check_phone($phone)
+	public function check_phone ($phone)
 	{
 		return $this->db->where('phone', $phone)->from('user')->count_all_results() === 0 ?
 			true : false; 

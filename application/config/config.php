@@ -386,6 +386,7 @@ $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
 $config['cookie_httponly'] 	= FALSE;
+$config['cookie_expire']	= 60*60*24*365;
 
 /*
 |--------------------------------------------------------------------------
@@ -502,4 +503,4 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 //时区设置
-$config['time_zone']=date_default_timezone_set('Etc/GMT-8');  //北京时区
+$config['time_zone'] = date_default_timezone_set('Asia/Shanghai');  //北京时区
