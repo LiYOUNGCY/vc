@@ -394,13 +394,13 @@ class CI_Input {
 
 		if ( ! is_numeric($expire))
 		{
-			$expire = time() - 86500;
+			$expire = time() + config_item('cookie_expire');
 		}
 		else
 		{
 			$expire = ($expire > 0) ? time() + $expire : 0;
 		}
-
+		
 		setcookie($prefix.$name, $value, $expire, $path, $domain, $secure, $httponly);
 	}
 
