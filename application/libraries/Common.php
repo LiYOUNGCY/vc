@@ -22,4 +22,17 @@ class Common{
 	    return ($ip);
 	}
 
+	/**
+	 * [get_route 获取路由]
+	 * @return [type] [description]
+	 */
+	static function get_route()
+	{
+		$CI = &get_instance();
+		$class = $CI->router->fetch_class();
+		$dir   = $CI->router->fetch_directory();
+		$method= $CI->router->fetch_method();
+		$route = "{$dir}{$class}/{$method}";
+		return $route;
+	}
 }

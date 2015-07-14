@@ -1,28 +1,88 @@
 <?php 
-class Auth_service extends MY_Service
-{
+
+class Auth_service extends MY_Service{
+
 	private $login_in_session_name;
 	private $remember_me_cookie_name;
     private $token_size;
     private $selector_size;
 
+
 	public function __construct()
 	{
 		parent::__construct();
-		$this->login_in_session_name 	= 'artvc_lisn';
-		$this->remember_me_cookie_name 	= 'rmcn';
-
+		$this->load->model('auth_model');
+        $this->load->model('auth_tokens_model');
+        $this->login_in_session_name    = 'artvc_lisn';
+        $this->remember_me_cookie_name  = 'rmcn';
         $this->token_size       = 32;
         $this->selector_size    = 16;
-        $this->load->model('auth_tokens_model');
-        $this->load->helper('cookie');
 
+        $this->load->helper('cookie');        
 	}
-
-	public function check_role_auth()
+	
+	/**
+	 * [check_user_auth 检查用户权限]
+	 * @return [type] [description]
+	 */
+	public function check_user_auth()
 	{
 
+		if(!empty($auths = $this->cache->memcached->get('role_auth')))
+
+			return $this->_is_auth_success($auths);
+		}
+		else
+		{
+			$auths = $this->auth_model->get_user_auth();
+			$new_auths = array();
+			foreach ($auths as $k => $v)
+			{
+				if( ! empty($v['route']) && ! empty($v['role']))
+				{
+					$new_auths[$v['route']] = $v['role'];
+				}
+			}
+			$this->cache->memcached->save('role_auth',$new_auths,60);
+			return $this->_is_auth_success($new_auths);
+		}
+
 	}
+
+	/**
+	 * [_is_auth_success 验证权限是否成功]
+	 * @param  [type]  $auths [description]
+	 * @return boolean        [description]
+	 */
+	private function _is_auth_success($auths)
+	{
+
+		$route = Common::get_route();
+		//需权限
+		if(array_key_exists($route,$auths))
+		{
+			$user 	   = isset($_SESSION['user']) ? $_SESSION['user'] : NULL;
+			$user_role = isset($user['role']) 	  ? $user['role'] 	  : NULL; 
+			//有权限
+			if(strstr($auths[$route],"|{$user_role}|"))
+			{
+				return TRUE;
+			}
+			else
+			{
+				//有登录权限
+				if(strstr($auths[$route],"|1|") && ! empty($user))return TRUE;
+				//没有权限	
+				return FALSE;
+			}
+		}
+		//无需权限
+		else
+		{
+			return TRUE;
+		}		
+	}
+
 
     /**
      * non_login_in 记住密码功能
@@ -134,4 +194,5 @@ class Auth_service extends MY_Service
     {
         set_cookie($this->remember_me_cookie_name, $string);
     }
+
 }

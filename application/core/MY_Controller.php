@@ -1,16 +1,22 @@
 <?php
-class MY_Controller extends CI_Controller
-{
-    protected $user;
 
+class MY_Controller extends CI_Controller{
+
+    protected $user;
 
 	public function __construct()
     {
 		parent::__construct();
-		$this->load->service('auth_service');
+
+		//用户权限检查
+		$auth_result = $this->auth_service->check_user_auth();
+		if( ! $auth_result)
+		{
+			exit('no_auth');
+		}
         $this->user = array();
 
-		// 璁颁綇瀵嗙爜鍔熻兘
+		// 
 		if( $user['id'] = $this->auth_service->non_login_in() )
 		{
 			echo "<script>alert('login in')</script>";

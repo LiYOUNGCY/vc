@@ -1318,6 +1318,12 @@ class CI_Loader {
 		{
 			$this->model($autoload['model']);
 		}
+
+		//Autoload service
+		if(isset($autoload['service']))
+		{
+			$this->service($autoload['service']);	
+		}
 	}
 
 	// --------------------------------------------------------------------
