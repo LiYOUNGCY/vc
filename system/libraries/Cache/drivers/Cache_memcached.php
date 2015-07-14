@@ -76,7 +76,7 @@ class CI_Cache_memcached extends CI_Driver {
 	 */
 	public function get($id)
 	{
-		if(is_supported())
+		if($this->is_supported())
 		{
 			$data = $this->_memcached->get($id);
 
@@ -102,7 +102,7 @@ class CI_Cache_memcached extends CI_Driver {
 	 */
 	public function save($id, $data, $ttl = 60, $raw = FALSE)
 	{
-		if(is_supported())
+		if($this->is_supported())
 		{
 			if ($raw !== TRUE)
 			{
@@ -137,7 +137,7 @@ class CI_Cache_memcached extends CI_Driver {
 	 */
 	public function delete($id)
 	{
-		if(is_supported())
+		if($this->is_supported())
 		{
 			return $this->_memcached->delete($id);
 		}	
@@ -159,7 +159,7 @@ class CI_Cache_memcached extends CI_Driver {
 	 */
 	public function increment($id, $offset = 1)
 	{
-		if(is_supported())
+		if($this->is_supported())
 		{
 			return $this->_memcached->increment($id, $offset);
 		}
@@ -181,7 +181,7 @@ class CI_Cache_memcached extends CI_Driver {
 	 */
 	public function decrement($id, $offset = 1)
 	{
-		if(is_supported())
+		if($this->is_supported())
 		{
 			return $this->_memcached->decrement($id, $offset);
 		}
@@ -201,7 +201,7 @@ class CI_Cache_memcached extends CI_Driver {
 	 */
 	public function clean()
 	{
-		if(is_supported())
+		if($this->is_supported())
 		{		
 			return $this->_memcached->flush();
 		}
@@ -220,7 +220,7 @@ class CI_Cache_memcached extends CI_Driver {
 	 */
 	public function _default_options_setup_memcached()
 	{
-		if(is_supported())
+		if($this->is_supported())
 		{
 			return $this->_memcached->getStats();
 		}	
@@ -241,7 +241,7 @@ class CI_Cache_memcached extends CI_Driver {
 	 */
 	public function get_metadata($id)
 	{
-		if(is_supported())
+		if($this->is_supported())
 		{
 			$stored = $this->_memcached->get($id);
 
@@ -321,7 +321,6 @@ class CI_Cache_memcached extends CI_Driver {
 					TRUE,
 					$cache_server['weight']
 				);
-				echo var_dump($this->_memcached);
 			}
 			else
 			{
@@ -330,7 +329,6 @@ class CI_Cache_memcached extends CI_Driver {
 					$cache_server['port'],
 					$cache_server['weight']
 				);
-				echo var_dump($this->_memcached);
 			}
 		}
 
