@@ -64,8 +64,9 @@ $autoload['libraries'] = array(
 					'error', 
 					'common',
 					'database', 
-					'sc'
-	);
+					'sc',
+					'session'
+				);
 
 
 /*

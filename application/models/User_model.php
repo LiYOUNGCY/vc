@@ -6,6 +6,8 @@ class User_model extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('passwordhash');
+		$this->passwordhash->setPasswordHash(8, FALSE);
 	}
 
 
@@ -21,10 +23,6 @@ class User_model extends CI_Model
 		{
 			return NULL;
 		}
-
-		$this->load->library('passwordhash');
-		$this->passwordhash->setPasswordHash(8, FALSE);
-
 
 		$register_type['pwd'] = $this->passwordhash->HashPassword($pwd);
 		$register_type['name']= $name;
@@ -50,10 +48,6 @@ class User_model extends CI_Model
 	 */
 	public function login_action ($login_type, $pwd)
 	{
-		$this->load->library('passwordhash');
-		$this->passwordhash->setPasswordHash(8, FALSE);
-
-
 		$query = $this->db->select('*');
 
 		if ( isset ($login_type['phone']) )
@@ -70,17 +64,21 @@ class User_model extends CI_Model
 			return NULL;
 		}
 
-		$query = $query->get('user')->result_array();
-
+		$data = $query->get('user')->result_array();
 
 		//验证密码
-		if( count($query) === 1 && $this->passwordhash->CheckPassword($pwd, $data['pwd']) )
+		if( count($data) === 1 )
 		{
-			// 删除 pwd 字段
-			unset($query[0]['pwd']);
+			$data = $data[0];
 
-			// 返回用户数据
-			return $query;
+			if( $this->passwordhash->CheckPassword($pwd, $data['pwd']) )
+			{
+				// 删除 pwd 字段
+				unset($data['pwd']);
+
+				// 返回用户数据
+				return $data;
+			}
 		}
 
 		return NULL;

@@ -7,6 +7,7 @@ class User_service extends MY_Service
 	{
 		parent::__construct();
 		$this->load->model('user_model');
+		$this->load->service('auth_service');
 	}
 
 
@@ -24,8 +25,9 @@ class User_service extends MY_Service
 		else 
 		{
 			//错误
+			return FALSE;
 		}
-		$this->user_model->register_action ($name, $register_type, $pwd);
+		return $this->user_model->register_action ($name, $register_type, $pwd);
 	}
 
 	public function login_action($pwd, $email, $phone)
@@ -50,6 +52,10 @@ class User_service extends MY_Service
 		if( isset( $user ) )
 		{
 			//设置 cookie
+			$this->auth_service->set_remember_me_cookie($user['id']);
+			//设置 SESSION
+			$this->auth_service->set_login_session($user['id']);
+
 			return true;
 		}
 		else 

@@ -44,4 +44,11 @@ class User extends CI_Controller
 		$data['title'] = 'register';
 		$this->load->view('test/user/register_view', $data);
 	}
+
+	public function login()
+	{
+		$data['title'] = 'Login';
+		$this->load->view('test/user/login_view', $data);
+	}
+	
 }

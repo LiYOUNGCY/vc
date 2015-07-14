@@ -18,11 +18,11 @@ class Login extends CI_Controller
 
 		if ( $this->user_service->login_action($pwd, $email, $phone) == TRUE )
 		{
-
+			echo 'login in success';
 		}
 		else 
 		{
-			
+			echo 'login in fail';
 		}
 	}
 }

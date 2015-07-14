@@ -17,6 +17,7 @@ class Register extends CI_Controller
 		$email = $this->sc->input('email');
 		$phone = $this->sc->input('phone');
 
-		$this->user_service->register_action($name, $pwd, $email, $phone);
+		$data = $this->user_service->register_action($name, $pwd, $email, $phone);
+		var_dump($data);
 	}
 }
