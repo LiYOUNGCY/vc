@@ -29,7 +29,7 @@ class Auth_service extends MY_Service{
 	{
 
 		if(!empty($auths = $this->cache->memcached->get('role_auth')))
-
+        {
 			return $this->_is_auth_success($auths);
 		}
 		else
