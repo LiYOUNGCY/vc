@@ -61,7 +61,7 @@ class Auth_service extends MY_Service{
 		//需权限
 		if(array_key_exists($route,$auths))
 		{
-			$user 	   = isset($_SESSION['user']) ? $_SESSION['user'] : NULL;
+			$user 	   = isset($_SESSION[$this->login_in_session_name]) ? $_SESSION[$this->login_in_session_name] : NULL;
 			$user_role = isset($user['role']) 	  ? $user['role'] 	  : NULL; 
 			//有权限
 			if(strstr($auths[$route],"|{$user_role}|"))
@@ -90,12 +90,12 @@ class Auth_service extends MY_Service{
      */
     public function non_login_in()
     {
-        $_userid = $this->_get_session();
+        $_user_id = $this->_get_session();
         $_cookie = NULL;
         //检查 SESSION
-        if ( $_userid )
+        if ( $_user_id )
         {
-            return $_userid;
+            return $_user_id;
         }
         elseif ( ($_cookie = $this->_get_cookie()) != FALSE )
         {
