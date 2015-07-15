@@ -29,7 +29,7 @@ class Auth_service extends MY_Service{
 	{
 
 		if(!empty($auths = $this->cache->memcached->get('role_auth')))
-
+        {
 			return $this->_is_auth_success($auths);
 		}
 		else
@@ -169,6 +169,12 @@ class Auth_service extends MY_Service{
         return $data;
     }
 
+    /**
+     * 生成 cookie ，如果传入 selector 就 代表刷新 cookie 的token
+     * 否则就是 生成一个全新的 cookie 
+     * @param string $selector
+     * @return array
+     */
     private function _generate_cookie($selector = '')
     {
         $factory = new RandomLib\Factory();

@@ -8,7 +8,7 @@ class MY_Controller extends CI_Controller{
     {
 		parent::__construct();
 
-		//用户权限检查
+
 		$auth_result = $this->auth_service->check_user_auth();
 		if( ! $auth_result)
 		{
@@ -17,7 +17,7 @@ class MY_Controller extends CI_Controller{
         $this->user = array();
 
 		// 
-		if( $user['id'] = $this->auth_service->non_login_in() )
+		if( $this->user['id'] = $this->auth_service->non_login_in() )
 		{
 			echo "<script>alert('login in')</script>";
 		}
