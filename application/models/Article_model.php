@@ -39,4 +39,46 @@ class Article_model extends CI_Model {
     {
         return $this->db->where('id', $aid)->get('article')->result_array();
     }
+
+
+    /**
+     * 取文章列表，每页默认6条
+     * uid 查看某人对文章是否点赞
+     * @param int $page
+     * @param int $uid
+     * @param int $limit
+     * @param string $order
+     * @return mixed
+     */
+    public function get_article_list($page = 0, $uid = -1, $limit = 6, $order = "desc")
+    {
+        $query = $this->db
+            ->select('article.id, article.uid, article.title, article.content, article.like, article_like.status')
+            ->from('article');
+
+        if( is_numeric($uid) && $uid != -1)
+        {
+            $query = $query->join('article_like', "article_like.aid = article.id AND article_like.uid = {$uid}", 'left');
+        }
+        else
+        {
+            $query = $query->join('article_like', 'article_like.aid = article.id', 'left');
+        }
+
+        $query =$query->order_by('publish_time', $order)->limit($limit, $page*$limit)->get()->result_array();
+
+
+        //Test
+        foreach( $query as $key => $value)
+        {
+//            $query[$key]['content'] = htmlentities($query[$key]['content']);
+            $query[$key]['author'] = $this->db
+                ->select('user.id, user.name, user.role, user.alias')
+                ->where('id', $query[$key]['uid'])
+                ->get('user')
+                ->result_array()[0];
+        }
+
+        return $query;
+    }
 }

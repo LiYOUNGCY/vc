@@ -36,5 +36,16 @@ class Article_service extends MY_Service{
         return $article;
     }
 
+    public function get_article_list($page, $uid = -1)
+    {
+        $article = $this->article_model->get_article_list($page, $uid);
 
+        foreach( $article as $key => $value )
+        {
+            //对每篇文章内容进行字数截取
+            $article[$key]['content'] = Common::extract_content($article[$key]['content']);
+        }
+
+        return $article;
+    }
 }
