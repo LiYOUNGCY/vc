@@ -13,6 +13,8 @@ class Auth_service extends MY_Service{
 		parent::__construct();
 		$this->load->model('auth_model');
         $this->load->model('auth_tokens_model');
+        $this->load->model('user_model');
+
         $this->login_in_session_name    = 'artvc_lisn';
         $this->remember_me_cookie_name  = 'rmcn';
         $this->token_size       = 32;
@@ -108,7 +110,10 @@ class Auth_service extends MY_Service{
                 //更新数据库的 token
                 $this->auth_tokens_model->update_token_by_selector($_cookie['selector'], $_cookie['token']);
 
-                $this->set_login_session($uid);
+                //查询这个人的信息
+                $user_data = $this->user_model->get_user_by_id($uid);
+
+                $this->set_login_session($user_data);
                 return $uid;
             }
             //可能 cookie 被纂改过
@@ -129,9 +134,9 @@ class Auth_service extends MY_Service{
      * 设置 login 后的 session
      * 登陆后 SESSION 填写 uid
      */
-    public function set_login_session($uid)
+    public function set_login_session($user_data)
     {
-        $this->_set_session($uid);
+        $this->_set_session($user_data);
     }
 
     /**
