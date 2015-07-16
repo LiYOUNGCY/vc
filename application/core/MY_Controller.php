@@ -8,22 +8,22 @@ class MY_Controller extends CI_Controller{
     {
 		parent::__construct();
 
-		//用户权限检查
+        $this->user = array();
+
+        if( $this->user = $this->auth_service->non_login_in() )
+        {
+            echo "<script>alert('login in')</script>";
+            var_dump($this->user);
+        }
+        else
+        {
+            echo "<script>alert('login no')</script>";
+        }
+
 		$auth_result = $this->auth_service->check_user_auth();
 		if( ! $auth_result)
 		{
 			exit('no_auth');
-		}
-        $this->user = array();
-
-		// 
-		if( $user['id'] = $this->auth_service->non_login_in() )
-		{
-			echo "<script>alert('login in')</script>";
-		}
-		else
-		{
-			echo "<script>alert('login no')</script>";
 		}
 	}
 }

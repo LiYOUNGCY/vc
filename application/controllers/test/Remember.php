@@ -10,12 +10,7 @@ class Remember extends MY_Controller
 
 	public function index()
 	{
-		echo "Remember ME TEST";
-
-		echo '<br/>', $this->user['id'], '<br/>';
-
+		echo "Remember ME TEST", "<br/>";
 		var_dump($_SESSION);
-		$this->lang->load('example', 'zh-CN');
-		echo lang('test');
 	}
 }

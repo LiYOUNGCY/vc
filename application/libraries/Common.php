@@ -22,6 +22,7 @@ class Common{
 	    return ($ip);
 	}
 
+
 	/**
 	 * [get_route 获取路由]
 	 * @return [type] [description]
@@ -35,4 +36,41 @@ class Common{
 		$route = "{$dir}{$class}/{$method}";
 		return $route;
 	}
+
+
+
+
+
+    /**
+     * 删除文章的格式，空格
+     * @param $article_content
+     * @return string
+     */
+    static function extract_content($article_content)
+    {
+        //去掉 HTML 的开标签
+        $article_content = preg_replace("/(<([\w]+)[^>]*>)/i", "", $article_content);
+
+        //去掉 HTML 的闭标签
+        $article_content = preg_replace("/(<\/([\w]+)[^>]*>)/i", "", $article_content);
+
+        //去掉空格
+        $article_content = preg_replace("/\s/", "", $article_content);
+
+        $clean_content = mb_substr($article_content, 0, 100);
+        return $clean_content;
+    }
+
+
+    /**
+     * 获取文章中的第一张图片
+     * @param $article_content
+     * @return string
+     */
+    static function extract_first_img($article_content)
+    {
+        $match = array();
+        preg_match_all("/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/", $article_content, $match);
+        return isset( $match[1][0] ) ? $match[1][0] : '';
+    }
 }
