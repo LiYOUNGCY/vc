@@ -48,11 +48,12 @@ class Auth_tokens_Model extends CI_Model {
             $expires = time() + 30 * 24 * 60 * 60;
         }
 
+
         $data = array(
-            'uid' => $uid,
-            'selector' => $selector,
-            'token' => $token,
-            'expires' => $expires
+            'uid'       => $uid,
+            'selector'  => $selector,
+            'token'     => $token,
+            'expires'   => $expires
         );
 
         $this->db->insert('auth_tokens', $data);

@@ -137,21 +137,30 @@ class Auth_service extends MY_Service{
     /**
      * 记住密码的 cookie
      */
-    public function set_remember_me_cookie($uid)
+    public function set_remember_me_cookie($user)
     {
+        if(is_array($user)) {
+            $uid = $user['id'];
+        }
+        else {
+            $uid = $user;
+        }
         $_cookie = $this->_generate_cookie();
         $this->auth_tokens_model->set_token ($uid, $_cookie['selector'], $_cookie['token']);
     }
+
 
 	private function _get_session()
 	{
 		return isset( $_SESSION[$this->login_in_session_name] ) ? $_SESSION[$this->login_in_session_name] : FALSE;
 	}
 
+
 	private function _set_session($uid)
 	{
 		$this->session->set_userdata($this->login_in_session_name, $uid);
 	}
+
 
     private function _get_cookie()
     {
