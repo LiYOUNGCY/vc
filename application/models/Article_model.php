@@ -37,20 +37,20 @@ class Article_model extends CI_Model {
 
     public function get_article_by_id($aid)
     {
-        return $this->db->where('id', $aid)->get('article')->result_array();
+        return $this->db->where('id', $aid)->get('article')->row_array();
     }
 
 
     /**
-     * 取文章列表，每页默认6条
-     * uid 查看某人对文章是否点赞
-     * @param int $page
-     * @param int $uid
-     * @param int $limit
-     * @param string $order
-     * @return mixed
+     * [get_article_list 获取文章列表]
+     * @param  integer $page  [页数]
+     * @param  integer $uid   [用户id]
+     * @param  [type]  $type  [文章类型(文章,展览)]
+     * @param  integer $limit [页面个数限制]
+     * @param  string  $order [排序]
+     * @return [type]         [description]
      */
-    public function get_article_list($page = 0, $uid = -1, $limit = 6, $order = "desc")
+    public function get_article_list($page = 0, $uid = -1, $type, $limit = 6, $order = "id desc")
     {
         $query = $this->db
             ->select('article.id, article.uid, article.title, article.content, article.like, article_like.status')
@@ -65,7 +65,7 @@ class Article_model extends CI_Model {
             $query = $query->join('article_like', 'article_like.aid = article.id', 'left');
         }
 
-        $query =$query->order_by('publish_time', $order)->limit($limit, $page*$limit)->get()->result_array();
+        $query =$query->order_by($order)->limit($limit, $page*$limit)->get()->result_array();
 
 
         //Test
@@ -81,4 +81,27 @@ class Article_model extends CI_Model {
 
         return $query;
     }
+
+    /**
+     * [update_count 更新文章字段数量]
+     * @param  array  $field [字段(格式:array('name'=>'like','amount'=>1))]
+     * @return [type]        [description]
+     */
+    public function update_count($aid,$field = array()){
+        $where = array('id' => $aid);
+        $query = $this->db->select($field['name'])
+                          ->from('article')
+                          ->where($where)
+                          ->get()
+                          ->row_array();
+                          
+        if(!empty($query)){
+            $query[$field['name']]=(int)$query[$field['name']]+(int)$field['amount'];     
+            $this->db->where($where)->update('article',$query);
+            return $this->db->affected_rows() === 1;
+        }
+        else{
+            return FALSE;
+        }
+    }    
 }

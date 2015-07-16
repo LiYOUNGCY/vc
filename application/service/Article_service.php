@@ -11,6 +11,7 @@ class Article_service extends MY_Service{
     {
         parent::__construct();
         $this->load->model('article_model');
+        $this->load->model('article_like_model');        
     }
 
 
@@ -35,10 +36,28 @@ class Article_service extends MY_Service{
 
         return $article;
     }
-
-    public function get_article_list($page, $uid = -1)
+    /**
+     * [get_article_list 获取文章列表]
+     * @param  [type]  $page [页数]
+     * @param  integer $uid  [用户id]
+     * @param  integer $type [文章类型]
+     * @return [type]        [description]
+     */
+    public function get_article_list($page, $uid = -1, $type)
     {
-        $article = $this->article_model->get_article_list($page, $uid);
+        switch ($type) {
+            case 'article':
+                $type = 1;
+                break;
+            case 'exhibition':
+                $type = 2;
+                break;
+            default:
+                $type = 1;
+                break;
+        }
+
+        $article = $this->article_model->get_article_list($page, $uid, $type);
 
         foreach( $article as $key => $value )
         {
@@ -47,5 +66,39 @@ class Article_service extends MY_Service{
         }
 
         return $article;
+    }
+    
+    /**
+     * [get_article_by_id 获取文章详细信息]
+     * @param  [type] $aid [description]
+     * @return [type]      [description]
+     */
+    public function get_article_by_id($aid)
+    {
+        $article = $this->article_model->get_article_by_id($aid);
+        return $article;
+    }
+
+    /**
+     * 文章点赞或取消
+     * @param $aid  文章id
+     * @param $uid  用户id
+     */
+    public function article_vote($aid, $uid)
+    {
+        //点赞     
+        return  $this->article_like_model->article_vote($aid, $uid);    
+    }
+
+    /**
+     * [update_count 更新文章字段数量]
+     * @param  [type] $aid    [文章id]
+     * @param  [type] $name   [字段名称]
+     * @param  [type] $amount [数量]
+     * @return [type]         [description]
+     */
+    public function update_count($aid,$name,$amount)
+    {
+        return $this->article_model->update_count($aid,array('name' => $name, 'amount' => $amount));
     }
 }

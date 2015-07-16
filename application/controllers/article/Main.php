@@ -13,13 +13,17 @@ class Main extends MY_Controller {
         $this->load->service('article_service');
     }
 
-    public function get_article_list()
+    /**
+     * [get_article_list 获取文章列表]
+     * @param $[type] [文章类型]
+     * @return [type] [description]
+     */
+    public function get_article_list($type = 'article')
     {
-        //获得页数 和 登陆者的 id
+        //获得页数
         $page = $this->sc->input('page');
-        $uid  = $this->sc->input('uid');
-
-        $query = $this->article_service->get_article_list($page, $uid);
+        $uid  = isset($this->user['id']) ? $this->user['id'] : -1;
+        $query = $this->article_service->get_article_list($page,$uid,$type);
         var_dump($query);
     }
 }

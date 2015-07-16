@@ -29,14 +29,14 @@ class User_model extends CI_Model
         $register_type['register_time'] = date("Y-m-d H:i:s", time());
 
 		$this->db->insert('user', $register_type);
-        $uid = $this->db->last_insert_id();
+        $uid = $this->db->insert_id();
 
 		//注册成功
 		if($this->db->affected_rows() === 1) {
             //插入 user_online 表
             $this->_insert_user_online($uid);
 
-            return $this->get_user_by_id(uid);
+            return $this->get_user_by_id($uid);
 		}
 		else {
 			return NULL;
@@ -139,4 +139,27 @@ class User_model extends CI_Model
         );
         $this->db->insert('user_online', $data);
     }
+
+    /**
+     * [update_count 更新用户字段数量]
+     * @param  array  $field [字段(格式:array('name'=>'like','amount'=>1))]
+     * @return [type]        [description]
+     */
+    public function update_count($uid,$field = array()){
+    	$where = array('id' => $uid);
+        $query = $this->db->select($field['name'])
+                          ->from('user')
+                          ->where($where)
+                          ->get()
+                          ->row_array();
+                          
+        if(!empty($query)){
+            $query[$field['name']]=(int)$query[$field['name']]+(int)$field['amount'];     
+            $this->db->where($where)->update('user',$query);
+            return $this->db->affected_rows() === 1;
+        }
+        else{
+            return FALSE;
+        }
+    }  
 }
