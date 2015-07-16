@@ -113,6 +113,10 @@ class User_model extends CI_Model
     public function get_user_by_id($uid)
     {
         $query = $this->db->where('id', $uid)->get('user')->result_array();
+
+        //删除敏感信息
+        unset($query[0]['pwd']);
+
         return isset($query) ? $query[0] : NULL;
     }
 

@@ -92,12 +92,12 @@ class Auth_service extends MY_Service{
      */
     public function non_login_in()
     {
-        $_user_id = $this->_get_session();
+        $_user_data = $this->_get_session();
         $_cookie = NULL;
         //检查 SESSION
-        if ( $_user_id )
+        if ( $_user_data )
         {
-            return $_user_id;
+            return $_user_data;
         }
         elseif ( ($_cookie = $this->_get_cookie()) != FALSE )
         {
@@ -111,10 +111,10 @@ class Auth_service extends MY_Service{
                 $this->auth_tokens_model->update_token_by_selector($_cookie['selector'], $_cookie['token']);
 
                 //查询这个人的信息
-                $user_data = $this->user_model->get_user_by_id($uid);
+                $user_data = $this->user_model->get_login_msg_by_id($uid);
 
                 $this->set_login_session($user_data);
-                return $uid;
+                return $user_data;
             }
             //可能 cookie 被纂改过
             else

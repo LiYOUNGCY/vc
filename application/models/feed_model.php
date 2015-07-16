@@ -12,7 +12,7 @@ class Feed_model extends CI_Model {
             'uid'       => $user_id,
             'type'      => $type,
             'content'   => $content,
-            'publish'   => date('y-m-d h:i:s',time())
+            'publish_time'   => date('y-m-d h:i:s',time())
         );
 
         $this->db->insert('feed', $data);

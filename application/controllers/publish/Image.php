@@ -50,7 +50,7 @@ class Image extends CI_Controller{
 
 		}
 
-    	$callback= isset($_GET['callback']) ? $_GET['callback'] : NULL;	
+    	$callback= isset($_GET['callback']) ? $_GET['callback'] : NULL;
 		$info = $this->um_upload->getFileInfo();
 
 		//返回数据

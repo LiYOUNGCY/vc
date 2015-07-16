@@ -10,9 +10,10 @@ class MY_Controller extends CI_Controller{
 
         $this->user = array();
 
-        if( $this->user['id'] = $this->auth_service->non_login_in() )
+        if( $this->user = $this->auth_service->non_login_in() )
         {
             echo "<script>alert('login in')</script>";
+            var_dump($this->user);
         }
         else
         {

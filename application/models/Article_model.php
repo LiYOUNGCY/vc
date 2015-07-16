@@ -30,7 +30,9 @@ class Article_model extends CI_Model {
             return FALSE;
         }
 
-        return $this->db->insert_id();
+        $data['id'] = $this->db->insert_id();
+
+        return $data;
     }
 
     public function get_article_by_id($aid)

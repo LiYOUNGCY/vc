@@ -112,14 +112,18 @@
     </style>
 </head>
 <body>
-<h1>UMEDITOR 完整demo</h1>
+<h1>发布文章测试</h1>
 
 <!--style给定宽度可以影响编辑器的最终宽度-->
-<script type="text/plain" id="myEditor" style="width:1000px;height:240px;">
-
-    <p>这里我可以写一些输入提示</p>
-</script>
-
+<form action="<?= base_url().'article/publish'?>" method="post">
+    Title:<input type="text" name="title"> <br>
+    SubTitle:<input type="text" name="subtitle"><br>
+    <input type="hidden" name="type" value="1">
+    <script type="text/plain" id="myEditor" name="content" style="width:50%;height:240px;">
+        <p>这里我可以写一些输入提示</p>
+    </script>
+    <input type="submit" value="Submit">
+</form>
 
 <div class="clear"></div>
 
