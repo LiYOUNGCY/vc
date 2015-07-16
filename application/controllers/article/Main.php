@@ -17,29 +17,6 @@ class Main extends MY_Controller {
 
 
     /**
-     * 发布文章
-     */
-    public function publish()
-    {
-        $article_title      = $this->sc->input('title');
-        $article_subtitle   = $this->sc->input('subtitle');
-        $article_content    = $this->sc->input('content');
-        $article_type       = $this->sc->input('type');
-
-        //把文章插入到数据库
-        $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_subtitle, $article_type, $article_content);
-
-        if( $article === FALSE ) {
-            echo 'fault';
-            return ;
-        }
-
-        //更新动态表
-        $this->feed_service->insert_feed($this->user['id'], $article['id'], $article['title'], $article['subtitle'], $article['content']);
-    }
-
-
-    /**
      * 为文章点赞
      */
     public function article_vote()
