@@ -11,20 +11,15 @@ class Main extends MY_Controller {
     {
         parent::__construct();
         $this->load->service('article_service');
-        $this->load->service('feed_service');
-        $this->load->service('article_like_service');
     }
 
-
-    /**
-     * 为文章点赞
-     */
-    public function article_vote()
+    public function get_article_list()
     {
-        //获得点赞的人的 id 和文章id
-        $aid = $this->sc->input('aid');
-        $uid = $this->user['id'];
+        //获得页数 和 登陆者的 id
+        $page = $this->sc->input('page');
+        $uid  = $this->sc->input('uid');
 
-        $this->article_like_service->article_vote($aid, $uid);
+        $query = $this->article_service->get_article_list($page, $uid);
+        var_dump($query);
     }
 }
