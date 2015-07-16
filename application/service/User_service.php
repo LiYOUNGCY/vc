@@ -52,9 +52,9 @@ class User_service extends MY_Service
 		if( isset( $user ) )
 		{
 			//设置 cookie
-			$this->auth_service->set_remember_me_cookie($user['id']);
+			$this->auth_service->set_remember_me_cookie($user);
 			//设置 SESSION
-			$this->auth_service->set_login_session($user['id']);
+			$this->auth_service->set_login_session($user);
 
 			return true;
 		}
