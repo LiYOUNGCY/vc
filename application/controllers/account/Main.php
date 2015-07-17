@@ -10,8 +10,10 @@ class Main extends MY_Controller
 	}
 
 	public function index()
-	{
-		$this->load->view('login');
+	{	
+		$body = $this->load->view('sidebar', '', TRUE);
+		$body = $body.$this->load->view('main', '', TRUE);
+		$this->load->view('body', array('body' =>$body));
 	}
 
 	public function login()
@@ -20,8 +22,9 @@ class Main extends MY_Controller
 		$email = $this->sc->input('email');
 
 		$pwd   = $this->sc->input('pwd');
+		$rememberme = $this->sc->input('rememberme');
 
-		if ( $this->user_service->login_action($pwd, $email, $phone) == TRUE )
+		if ( $this->user_service->login_action($pwd, $email, $phone, $rememberme) == TRUE )
 		{
 			echo 'login in success';
 		}
