@@ -67,18 +67,6 @@ class Article_model extends CI_Model {
 
         $query =$query->order_by($order)->limit($limit, $page*$limit)->get()->result_array();
 
-
-        //Test
-        foreach( $query as $key => $value)
-        {
-//            $query[$key]['content'] = htmlentities($query[$key]['content']);
-            $query[$key]['author'] = $this->db
-                ->select('user.id, user.name, user.role, user.alias')
-                ->where('id', $query[$key]['uid'])
-                ->get('user')
-                ->result_array()[0];
-        }
-
         return $query;
     }
 

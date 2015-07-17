@@ -8,12 +8,12 @@ class Notification_service extends MY_Service{
 	}
 
 	/**
-	 * [get_notification_by_id 获取用户的消息列表]
+	 * [get_notification_list 获取用户的消息列表]
 	 * @param  [type] $uid  [用户id]
 	 * @param  [type] $type [消息类型]
 	 * @return [type]       [description]
 	 */
-	public function get_notification_by_id($uid,$type)
+	public function get_notification_list($page,$uid,$type)
 	{
 		switch ($type) {
 			case 'all':
@@ -29,7 +29,7 @@ class Notification_service extends MY_Service{
 				$type =3;
 				break;
 		}
-		$notification = $this->notification_model->get_notification_by_id($uid,$type);
+		$notification = $this->notification_model->get_notification_list($page,$uid,$type);
 		return $notification;
 	}
 

@@ -110,14 +110,24 @@ class User_model extends CI_Model
 		return $this->db->where('phone', $phone)->from('user')->count_all_results() === 0 ? true : false;
 	}
 
-    public function get_user_by_id($uid)
+	/**
+	 * [get_user_by_id 获取用户信息]
+	 * @param  [type] $uid    [用户id]
+	 * @param  [type] $custom [自定义查询条件]
+	 * @return [type]         [description]
+	 */
+    public function get_user_by_id($uid, $custom)
     {
+    	if( ! empty($custom))
+    	{
+    		$this->db->select($custom);
+    	}
         $query = $this->db->where('id', $uid)->get('user')->result_array();
 
         //删除敏感信息
         unset($query[0]['pwd']);
 
-        return isset($query) ? $query[0] : NULL;
+        return ! empty($query) ? $query[0] : NULL;
     }
 
 

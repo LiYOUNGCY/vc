@@ -7,22 +7,25 @@ class Notification_model extends CI_Model{
 	}
 
 	/**
-	 * [get_notification_by_id 获取用户的消息列表]
+	 * [get_notification_list 获取用户的消息列表]
+	 * @param  [type] $page [页面数]
 	 * @param  [type] $uid  [用户id]
 	 * @param  [type] $type [消息类型]
+	 * @param  [type] $limit[页面显示个数]
+	 * @param  [type] $order[排序]
 	 * @return [type]       [description]
 	 */
-	public function get_notification_by_id($uid,$type,$order = 'id DESC')
+	public function get_notification_list($page = 0,$uid,$type,$limit = 10,$order = 'id DESC')
 	{
-		$query = $this->db->select('notification.*,user.pic,user.name,user.alias')
-						  ->join('user','notification.sender_id = user.id');
-		if(!empty($type))
+		$query = $this->db->select('notification.*');
+		if( ! empty($type))
 		{
 			$this->db->where('notification.type',$type);
 		}
 		$query = $this->db->where('notification.reciver_id',$uid)
 						  ->order_by($order)
-						  ->get('notification',10,0)
+						  ->limit($limit, $page*$limit)
+						  ->get('notification')
 		     		      ->result_array();
 
 		return $query;

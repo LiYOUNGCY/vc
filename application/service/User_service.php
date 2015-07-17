@@ -74,5 +74,15 @@ class User_service extends MY_Service
     public function update_count($uid,$name,$amount)
     {
         return $this->user_model->update_count($uid,array('name' => $name, 'amount' => $amount));
+    }
+
+    /**
+     * [get_user_by_id 获取用户信息]
+     * @param  [type] $uid [用户id]
+     * @return [type]      [description]
+     */
+    public function get_user_by_id($uid,$custom = NULL)
+    {
+    	return $this->user_model->get_user_by_id($uid,$custom);
     }	
 }
