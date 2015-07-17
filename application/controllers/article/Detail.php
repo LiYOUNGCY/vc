@@ -13,7 +13,8 @@ class Detail extends MY_Controller
         parent::__construct();
         $this->load->service('article_service');
         $this->load->service('feed_service');   
-        $this->load->service('notification_service');            
+        $this->load->service('notification_service');
+        $this->load->service('user_service');
     }
 
     /**
@@ -48,7 +49,6 @@ class Detail extends MY_Controller
                 $content = array('content_id' => $article['id'], 'content_type' => 'article');
                 $notification_result = $this->notification_service->insert($this->user['id'],$article['uid'],3,$content);               
             }
-
         }
         else
         {
@@ -56,4 +56,48 @@ class Detail extends MY_Controller
         }
     }
 
+
+    public function index($aid)
+    {
+        if(! is_numeric($aid))
+        {
+            //不是数字,错误!!
+            exit();
+        }
+
+        $article = $this->article_service->get_article_by_id($aid);
+
+        //获取点赞的人的列表的 uid
+        $article['like_people'] = $this->article_service->get_user_by_aid($aid);
+
+        //将 uid 转换为对应的参数
+        if( isset($article['like_people']) ) {
+            foreach( $article['like_people'] as $key => $value ) {
+                $article['like_people'][$key] = $this->user_service->get_user_by_id($article['like_people'][$key]['uid']);
+            }
+        }
+
+        echo json_encode($article);
+    }
+
+    public function insert_article_comment()
+    {
+        $aid    = $this->sc->input('$aid');
+        $uid    = $this->user['id'];
+        $comment = $this->sc->input('content');
+
+        //首先，找下有没有这一篇文章
+        $article_user_id = $this->article_service->get_uid_by_aid($aid);
+        if($article_user_id === NULL)
+        {
+            //错误
+            echo 'no article user';
+            exit();
+        }
+
+        $comment_id = $this->article_service->insert_article_comment($aid, $uid, $comment);
+
+        $content   = array('content_id' => $comment_id, 'content_type' => 'article','comment_content' => $comment);
+        $this->notification_service->insert($uid, $article_user_id, 2,$content);
+    }
 }

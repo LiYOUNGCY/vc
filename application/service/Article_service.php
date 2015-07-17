@@ -11,7 +11,8 @@ class Article_service extends MY_Service{
     {
         parent::__construct();
         $this->load->model('article_model');
-        $this->load->model('article_like_model');        
+        $this->load->model('article_like_model');
+        $this->load->model('article_comment_model');
     }
 
 
@@ -100,5 +101,20 @@ class Article_service extends MY_Service{
     public function update_count($aid,$name,$amount)
     {
         return $this->article_model->update_count($aid,array('name' => $name, 'amount' => $amount));
+    }
+
+    public function get_user_by_aid($uid)
+    {
+        return $this->article_like_model->get_user_by_aid($uid);
+    }
+
+    public function insert_article_comment($aid, $uid, $content)
+    {
+        return $this->article_comment_model->article_comment_model($aid, $uid, $content);
+    }
+
+    public function get_uid_by_aid($aid)
+    {
+        return $this->article_model->get_uid_by_aid($aid);
     }
 }

@@ -53,4 +53,10 @@ class Article_like_model extends CI_Model {
     {
         return $this->db->where(array('aid' => $aid,'uid' => $uid))->get('article_like')->row_array();
     }
+
+
+    public function get_user_by_aid($aid)
+    {
+        return $this->db->select('uid')->where('aid', $aid)->get('article_like')->result_array();
+    }
 }

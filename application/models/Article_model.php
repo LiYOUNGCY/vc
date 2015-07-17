@@ -91,5 +91,11 @@ class Article_model extends CI_Model {
         else{
             return FALSE;
         }
-    }    
+    }
+
+    public function get_uid_by_aid($aid)
+    {
+        $query = $this->select('uid')->where('id', $aid)->get('article')->result_array();
+        return count($query) === 1 ? $query[0] : NULL;
+    }
 }
