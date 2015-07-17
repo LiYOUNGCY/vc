@@ -5,6 +5,7 @@ class Notification_service extends MY_Service{
 	{
 		parent::__construct();
 		$this->load->model('notification_model');		
+		$this->load->model('user_model');
 	}
 
 	/**
@@ -30,6 +31,12 @@ class Notification_service extends MY_Service{
 				break;
 		}
 		$notification = $this->notification_model->get_notification_list($page,$uid,$type);
+		
+		//获取消息发送者信息
+		foreach ($notification as $k => $v) {
+			$notification[$k]['author'] = $this->user_model->get_user_by_id($v['sender_id']);
+		}
+		
 		return $notification;
 	}
 

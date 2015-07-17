@@ -5,78 +5,55 @@ class Feed_service extends MY_Service {
     {
         parent::__construct();
         $this->load->model('feed_model');
+        $this->load->model('user_model');
+        $this->load->model('article_model');
     }
 
+ 
     /**
-     * [insert_article_feed 添加发布新文章动态]
-     * @param  [type] $user_id          [description]
-     * @param  [type] $article_id       [description]
-     * @param  [type] $article_title    [description]
-     * @param  [type] $article_subtitle [description]
-     * @param  [type] $article_content  [description]
-     * @return [type]                   [description]
+     * [get_feed_list 获取动态列表]
+     * @param  [type] $page [页数]
+     * @param  [type] $uid [用户id]
+     * @return [type]       [description]
      */
-    public function insert_article_feed($user_id, $article_id, $article_title, $article_subtitle, $article_content)
+    public function get_feed_list($page = 0, $uid, $limit = 10, $order = 'id DESC')
     {
-        $content = $this->_extract_article($article_id, $article_title, $article_subtitle, $article_content);
-        //更新动态表
-        return $this->feed_model->insert_feed($user_id, 2, $content) ? TRUE : FALSE;
+       //获取用户关注列表
+       $uids = $this->user_model->get_user_follow(0,$uid,NULL);
+       $count= empty($uids) ? 0 : count($uids);
+       $uids[$count]['follow'] = $uid;      
+
+       $new_uids = array();
+       if( ! empty($uids))
+       {
+           foreach ($uids as $k => $v) {
+                array_push($new_uids,$v['follow']);
+           }
+       }
+
+       //获取动态列表
+       $feed = $this->feed_model->get_feed_list($page,$new_uids,$limit,$order);
+
+       foreach ($feed as $k => $v) {
+            $feed[$k]['user']  = $this->user_model->get_user_by_id($v['uid']);   
+            $content = (array)json_decode($v['content']);
+            //点赞
+            if($v['type'] == 1)
+            {
+                $feed[$k]['author'] = $this->user_model->get_user_by_id($content['article_id']);
+            }
+            //发布
+            else if($v['type'] == 2)
+            {
+                //获取点赞列表与点赞用户信息
+                $vote = $this->article_model->get_article_vote($content['article_id']);
+                foreach ($vote as $k1 => $v1) {
+                    $feed[$k]['like'][$v1['uid']] = $this->user_model->get_user_by_id($v1['uid']);
+                }
+            }
+       }
+       return $feed;
     }
 
-    /**
-     * [insert_vote_feed 添加新点赞动态]
-     * @param  [type] $user_id          [description]
-     * @param  [type] $article_id       [description]
-     * @param  [type] $article_uid      [description]
-     * @param  [type] $article_title    [description]
-     * @param  [type] $article_subtitle [description]
-     * @param  [type] $article_content  [description]
-     * @param  [type] $article_image    [description]
-     * @return [type]                   [description]
-     */
-    public function insert_vote_feed($user_id,$article_id,$article_uid,$article_title,$article_subtitle,$article_content)
-    {
-        $content = $this->_extract_vote($article_id, $article_uid, $article_title, $article_subtitle, $article_content);
-        //更新动态表
-        return $this->feed_model->insert_feed($user_id, 1, $content) ? TRUE : FALSE;
-    }
 
-    /**
-     * 将文章的信息转换为动态表的格式
-     * @param $article_id
-     * @param $article_title
-     * @param $article_subtitle
-     * @param $article_content
-     * @return string
-     */
-    private function _extract_article($article_id, $article_title, $article_subtitle, $article_content)
-    {
-        $content = array(
-            'article_id'        => $article_id,
-            'article_title'     => $article_title,
-            'article_subtitle'  => $article_subtitle,
-            'article_content'   => Common::extract_content($article_content),
-            'article_image'     => Common::extract_first_img($article_content)
-        );
-        return json_encode($content);
-    }
-
-    /**
-     * 解析文章点赞的 content
-     * @param $aid
-     * @return array
-     */
-    private function _extract_vote($article_id, $article_uid, $article_title, $article_subtitle, $article_content)
-    {
-
-        $content = array(
-            'article_id'        => $article_id,
-            'article_uid'       => $article_uid,
-            'article_title'     => $article_title,
-            'article_subtitle'  => $article_subtitle,
-            'article_content'   => Common::extract_content($article_content),
-            'article_image'     => Common::extract_first_img($article_content)
-        );
-        return json_encode($content);
-    }   
 }

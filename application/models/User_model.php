@@ -116,7 +116,7 @@ class User_model extends CI_Model
 	 * @param  [type] $custom [自定义查询条件]
 	 * @return [type]         [description]
 	 */
-    public function get_user_by_id($uid, $custom)
+    public function get_user_by_id($uid, $custom = NULL)
     {
     	if( ! empty($custom))
     	{
@@ -171,5 +171,26 @@ class User_model extends CI_Model
         else{
             return FALSE;
         }
+    }
+
+    /**
+     * [get_user_follow 获取用户关注列表]
+     * @param  [type] $page  [description]
+     * @param  [type] $uid   [description]
+     * @param  [type] $limit [description]
+     * @param  [type] $order [description]
+     * @return [type]        [description]
+     */
+    public function get_user_follow($page = 0, $uid, $limit = 10, $order = 'update_time DESC')
+    {
+    	$this->db->where(array('uid' => $uid,'status' => 1))->order_by($order);
+		if( ! empty($limit))
+		{
+			$this->db->limit($limit, $page*$limit);
+		}
+    	$query = $this->db->get('user_follow')
+    		     		  ->result_array();
+    	return $query;
+
     }  
 }
