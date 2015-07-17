@@ -7,15 +7,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
   <meta name="format-detection" content="telephone=yes" /> 
   <meta name="msapplication-tap-highlight" content="no" /> 
-  <script type="text/javascript" src="js/j162.min.js"></script> 
-  <link href="css/common.css" type="text/css" rel="stylesheet" /> 
-  <link href="css/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" /> 
+  <script type="text/javascript" src="<?=base_url().'public/'?>js/j162.min.js"></script> 
+  <link href="<?=base_url().'public/'?>css/common.css" type="text/css" rel="stylesheet" /> 
+  <link href="<?=base_url().'public/'?>css/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" /> 
  </head> 
  <body style="height:100%;"> 
   <div id="vc_sidebar" class="sidebar"> 
    <div class="name"> 
     <div class="head"> 
-     <a href="#"> <img src="img/mm1.jpg" /> </a> 
+     <a href="#"> <img src="<?=base_url().'public/'?>img/mm1.jpg" /> </a> 
     </div> 
     <div class="text"> 
      <a href="#"> YOUNGCY </a> 
@@ -79,7 +79,7 @@
    <div id="vc_sidebar" class="sidebar"> 
     <div class="name"> 
      <div class="head"> 
-      <a href="#"> <img src="img/mm1.jpg" /> </a> 
+      <a href="#"> <img src="<?=base_url().'public/'?>img/mm1.jpg" /> </a> 
      </div> 
      <div class="text"> 
       <a href="#"> YOUNGCY </a> 
@@ -171,14 +171,14 @@
     </div> 
     <div class="logform width-100p"> 
      <div class="float-l"> 
-      <form> 
+      <form name="login_form" id="login_form" action="<?=base_url().'account/main/login'?>" method="post"> 
        <div class="form"> 
         <input type="text" id="username" placeholder="手机号/邮箱" /> 
         <hr style="color:#B3B3B3;" /> 
         <input type="password" id="password" placeholder="密码" /> 
        </div> 
        <div class="width-100p"> 
-        <a href="#"> 
+        <a href="javascript:submit();"> 
          <div class="loginbtn btn">
           登陆
          </div> </a> 
@@ -217,6 +217,8 @@
     </div> 
    </div> 
   </div>  
-  <script type="text/javascript" src="js/vchome.js"></script> 
+  <script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script> 
+  <script type="text/javascript">
+  </script>
  </body>
 </html>

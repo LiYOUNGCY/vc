@@ -7,9 +7,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
   <meta name="format-detection" content="telephone=yes" /> 
   <meta name="msapplication-tap-highlight" content="no" /> 
-  <script type="text/javascript" src="js/j162.min.js"></script> 
-  <link href="css/common.css" type="text/css" rel="stylesheet" /> 
-  <link href="css/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" /> 
+  <script type="text/javascript" src="<?=base_url().'public/'?>js/j162.min.js"></script> 
+  <link href="<?=base_url().'public/'?>css/common.css" type="text/css" rel="stylesheet" /> 
+  <link href="<?=base_url().'public/'?>css/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" /> 
  </head> 
  <body> 
   <div id="vc_sidebar" class="sidebar"> 
