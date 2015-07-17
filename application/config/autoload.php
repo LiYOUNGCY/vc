@@ -64,8 +64,9 @@ $autoload['libraries'] = array(
 					'error', 
 					'common',
 					'database', 
-					'sc'
-	);
+					'sc',
+					'session'
+				);
 
 
 /*
@@ -145,3 +146,16 @@ $autoload['language'] = array();
 */
 
 $autoload['model'] = array();
+
+/*
+| -------------------------------------------------------------------
+|  Auto-load Services
+| -------------------------------------------------------------------
+| Prototype:
+|
+|	$autoload['service'] = array('auth_service');
+|
+*/
+$autoload['service'] = array(
+			'auth_service'
+		);

@@ -6,6 +6,8 @@ class User_model extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('passwordhash');
+		$this->passwordhash->setPasswordHash(8, FALSE);
 	}
 
 
@@ -22,19 +24,19 @@ class User_model extends CI_Model
 			return NULL;
 		}
 
-		$this->load->library('passwordhash');
-		$this->passwordhash->setPasswordHash(8, FALSE);
-
-
 		$register_type['pwd'] = $this->passwordhash->HashPassword($pwd);
 		$register_type['name']= $name;
+        $register_type['register_time'] = date("Y-m-d H:i:s", time());
 
 		$this->db->insert('user', $register_type);
+        $uid = $this->db->insert_id();
 
 		//注册成功
 		if($this->db->affected_rows() === 1) {
-			$data = $register_type;
-			return $data;
+            //插入 user_online 表
+            $this->_insert_user_online($uid);
+
+            return $this->get_user_by_id($uid);
 		}
 		else {
 			return NULL;
@@ -50,10 +52,6 @@ class User_model extends CI_Model
 	 */
 	public function login_action ($login_type, $pwd)
 	{
-		$this->load->library('passwordhash');
-		$this->passwordhash->setPasswordHash(8, FALSE);
-
-
 		$query = $this->db->select('*');
 
 		if ( isset ($login_type['phone']) )
@@ -70,31 +68,108 @@ class User_model extends CI_Model
 			return NULL;
 		}
 
-		$query = $query->get('user')->result_array();
-
+		$data = $query->get('user')->result_array();
 
 		//验证密码
-		if( count($query) === 1 && $this->passwordhash->CheckPassword($pwd, $data['pwd']) )
+		if( count($data) === 1 )
 		{
-			// 删除 pwd 字段
-			unset($query[0]['pwd']);
+			$data = $data[0];
 
-			// 返回用户数据
-			return $query;
+			if( $this->passwordhash->CheckPassword($pwd, $data['pwd']) )
+			{
+				// 删除 pwd 字段
+				unset($data['pwd']);
+
+				// 返回用户数据
+				return $data;
+			}
 		}
 
 		return NULL;
 	}
 
+
+    /**
+     * 当用户登录的时候，刷新 user_online 表
+     * @param $uid
+     * @return mixed
+     */
+    public function get_login_msg_by_id($uid)
+    {
+        $this->_update_user_online_by_id($uid);
+        return $this->get_user_by_id($uid);
+    }
+
 	public function check_email ($email)
 	{
-		return $this->db->where('email', $email)->from('user')->count_all_results() === 0 ?
-			true : false; 
+		return $this->db->where('email', $email)->from('user')->count_all_results() === 0 ? true : false;
 	}
 
 	public function check_phone ($phone)
 	{
-		return $this->db->where('phone', $phone)->from('user')->count_all_results() === 0 ?
-			true : false; 
+		return $this->db->where('phone', $phone)->from('user')->count_all_results() === 0 ? true : false;
 	}
+
+	/**
+	 * [get_user_by_id 获取用户信息]
+	 * @param  [type] $uid    [用户id]
+	 * @param  [type] $custom [自定义查询条件]
+	 * @return [type]         [description]
+	 */
+    public function get_user_by_id($uid, $custom)
+    {
+    	if( ! empty($custom))
+    	{
+    		$this->db->select($custom);
+    	}
+        $query = $this->db->where('id', $uid)->get('user')->result_array();
+
+        //删除敏感信息
+        unset($query[0]['pwd']);
+
+        return ! empty($query) ? $query[0] : NULL;
+    }
+
+
+    private function _update_user_online_by_id($uid)
+    {
+        $data = array(
+            'last_active'   => date("Y-m-d H:i:s", time()),
+            'ip'            => Common::getIP()
+        );
+        $this->db->where('uid',$uid)->update('user_online', $data);
+    }
+
+    private function _insert_user_online($uid)
+    {
+        $data = array(
+            'uid'           => $uid,
+            'last_active'   => date("Y-m-d H:i:s", time()),
+            'ip'            => Common::getIP()
+        );
+        $this->db->insert('user_online', $data);
+    }
+
+    /**
+     * [update_count 更新用户字段数量]
+     * @param  array  $field [字段(格式:array('name'=>'like','amount'=>1))]
+     * @return [type]        [description]
+     */
+    public function update_count($uid,$field = array()){
+    	$where = array('id' => $uid);
+        $query = $this->db->select($field['name'])
+                          ->from('user')
+                          ->where($where)
+                          ->get()
+                          ->row_array();
+                          
+        if(!empty($query)){
+            $query[$field['name']]=(int)$query[$field['name']]+(int)$field['amount'];     
+            $this->db->where($where)->update('user',$query);
+            return $this->db->affected_rows() === 1;
+        }
+        else{
+            return FALSE;
+        }
+    }  
 }

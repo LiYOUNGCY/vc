@@ -7,6 +7,7 @@ class User_service extends MY_Service
 	{
 		parent::__construct();
 		$this->load->model('user_model');
+		$this->load->service('auth_service');
 	}
 
 
@@ -24,8 +25,9 @@ class User_service extends MY_Service
 		else 
 		{
 			//错误
+			return FALSE;
 		}
-		$this->user_model->register_action ($name, $register_type, $pwd);
+		return $this->user_model->register_action ($name, $register_type, $pwd);
 	}
 
 	public function login_action($pwd, $email, $phone)
@@ -50,6 +52,10 @@ class User_service extends MY_Service
 		if( isset( $user ) )
 		{
 			//设置 cookie
+			$this->auth_service->set_remember_me_cookie($user);
+			//设置 SESSION
+			$this->auth_service->set_login_session($user);
+
 			return true;
 		}
 		else 
@@ -57,4 +63,26 @@ class User_service extends MY_Service
 			return false;
 		}
 	}
+
+    /**
+     * [update_count 更新用户字段数量]
+     * @param  [type] $uid    [用户id]
+     * @param  [type] $name   [字段名称]
+     * @param  [type] $amount [数量]
+     * @return [type]         [description]
+     */
+    public function update_count($uid,$name,$amount)
+    {
+        return $this->user_model->update_count($uid,array('name' => $name, 'amount' => $amount));
+    }
+
+    /**
+     * [get_user_by_id 获取用户信息]
+     * @param  [type] $uid [用户id]
+     * @return [type]      [description]
+     */
+    public function get_user_by_id($uid,$custom = NULL)
+    {
+    	return $this->user_model->get_user_by_id($uid,$custom);
+    }	
 }
