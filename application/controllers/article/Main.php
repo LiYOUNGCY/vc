@@ -31,6 +31,6 @@ class Main extends MY_Controller {
             $article[$k]['author'] = $this->user_service->get_user_by_id($v['uid']);
         }
 
-        var_dump($article);
+        $this->load->view('main');
     }
 }

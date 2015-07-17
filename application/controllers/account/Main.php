@@ -9,6 +9,11 @@ class Main extends MY_Controller
 		$this->load->service('user_service');
 	}
 
+	public function index()
+	{
+		$this->load->view('login');
+	}
+
 	public function login()
 	{
 		$phone = $this->sc->input('phone');

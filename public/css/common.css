@@ -1,0 +1,616 @@
+*{padding: 0px;margin: 0px;}
+body{
+    width: 100%;
+    background: #FFFFFF;
+    font-family:"微软雅黑",tahoma,arial,simhei,"宋体";
+    overflow-x: hidden;
+}
+ul,ol,li{
+    list-style: outside none none;
+}
+input,textarea{
+    font-family: "微软雅黑",tahoma,arial,simhei,"宋体";
+    outline: none;
+}
+a:hover{
+    -webkit-animation: color-y 0.2s ease-out forwards;
+    animation: color-y 0.2s ease-out forwards;
+    
+}
+a{
+    text-decoration: none;
+    color: #B3B3B3;
+    outline: 0px none;
+}
+img{
+    vertical-align: middle;
+}
+@-webkit-keyframes color-y{
+    0%{}
+    100%{color:#FCEE21;}
+}
+@keyframes color-y{
+    0%{}
+    100%{color:#FCEE21;}
+}
+@-webkit-keyframes bgcolor-y{
+    0%{}
+    100%{background-color:#FCEE21;}
+}
+@keyframes bgcolor-y{
+    0%{}
+    100%{background-color:#FCEE21;}
+}
+@-webkit-keyframes bdcolor-y{
+    0%{}
+    100%{border-color:#FCEE21;}
+}
+@keyframes bdcolor-y{
+    0%{}
+    100%{border-color:#FCEE21;}
+}
+.width-100p{
+    width: 100%;
+    margin: 0px auto;
+}
+.height-100p{
+    height: 100%;
+}
+.float-r{
+    float: right;
+}
+.float-l{
+    float: left;
+}    
+.hide-x{
+    overflow-x: hidden;
+}
+.hide-y{
+    overflow-y: hidden;
+}
+.btn{
+    display: inline-block;
+    background: #F2F2F2;
+    border-radius: 5px;
+    color: #808080 !important;
+}
+
+#vi_content .logo{
+     padding: 80px 0;
+}
+
+.icon{
+    clear: both;
+}
+
+.icon .logo-a{
+    width: 509px;
+    height: 168px;
+    background: transparent url("../img/icon/logo_big.png") no-repeat scroll;
+}
+.icon .logo-w{
+    width: 61px;
+    height: 71px;
+    background: transparent url("../img/icon/logo_writh.png") no-repeat scroll;
+    display: inline-block;
+}
+.icon .QRcode{
+    width: 118px;
+    height: 118px;
+    background: transparent url("../img/icon/QRcode.jpg") no-repeat scroll;
+    display: inline-block;
+}
+
+.icon .sidebtn{
+     width: 41px;
+    height: 41px;
+    background: transparent url("../img/icon/slidBar_Btn_normal.png") no-repeat scroll;
+    display: inline-block;
+}
+.icon .sidebtn:hover{
+    background: transparent url("../img/icon/slidBar_Btn_over.png") no-repeat scroll;
+    display: inline-block;
+}
+
+.icon .home {
+    width: 22px;
+    height: 22px;
+    background: transparent url("../img/icon/slidBar_home_normal.png") no-repeat scroll;
+}
+
+.icon .logout {
+    width: 22px;
+    height: 22px;
+    background: transparent url("../img/icon/slidBar_logout_normal.png") no-repeat scroll;
+}
+
+.icon .guanzhu {
+    width: 22px;
+    height: 22px;
+    background: transparent url("../img/icon/slidBar_guanzhu_normal.png") no-repeat scroll;
+}
+
+.icon .tongji {
+    width: 22px;
+    height: 22px;
+    background: transparent url("../img/icon/slidBar_tongji_normal.png") no-repeat scroll;
+}
+
+.icon .sixin {
+    width: 22px;
+    height: 22px;
+    background: transparent url("../img/icon/slidBar_sixin_normal.png") no-repeat scroll;
+}
+
+.icon .setting {
+    width: 22px;
+    height: 22px;
+    background: transparent url("../img/icon/slidBar_setting_normal.png") no-repeat scroll;
+}
+
+.vi-menu {
+    
+}
+.vi-menu ul{
+    display: block;
+    overflow:auto;
+    zoom:1;
+}
+.vi-menu ul li{
+    display: block;
+    float: left;
+    margin: 0 5px;
+    padding: 10px 7px;
+}
+.vi-menu .active{
+    border-bottom :5px solid #FCEE21;
+}
+.vi-menu .active a {
+    color: #999999;
+    font-weight: bold;
+}
+.sidebar {
+    height: 100%;
+    background-color: #4C4640;
+    width: 280px;
+    position: fixed;
+    right: -280PX;
+    top: 0;
+    z-index: 3;
+}
+.sidebar .name{
+    width:100%;
+    margin-top: 50px;
+    clear: both;
+    display: inline-block;
+}
+.sidebar .name .head{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px #B3B3B3 solid;
+    float: left;
+    display: inline-block;
+    margin: 0 15px;
+}
+.sidebar .name .head img{
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    border-radius: 50px;
+}
+.sidebar .name .text{
+    font-size: 110%;
+    font-weight: bolder;
+    height: 50px;
+    float: left;
+    display: inline-block;
+    margin: 20px 10px;
+}
+.shade{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color:dimgray;
+    opacity: 0.4;
+    z-index: 4;
+}
+
+.loginlogo {
+    padding-top: 110px;
+    display: inline-block;
+    float: left;
+}
+
+
+.loginlogo .text{
+    display: inline-block;
+    color:#BCBCBC;
+    text-align: left;
+    margin-left: 15px;
+}
+
+
+.sbtn {
+    width: 40px;
+    position: fixed;
+    right: 0;
+    top:0;
+    outline: 0px none;
+    cursor: pointer;
+    z-index: 5;
+}
+.content {
+    max-width: 960px;
+    margin: 0px auto;
+    text-align: center;
+    display: inline-block;
+}
+
+.vi-user {
+    margin: 5px 0px;
+    margin-top: 45px;
+    width: 100%;
+}
+.userhead{
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    border-radius: 50px;
+    float: left;
+    overflow: hidden;
+}
+.userhead{
+
+}
+.main {
+    margin: 0 auto;
+
+}
+.main ul{
+
+    display: inline-block;
+    margin: 0px auto;
+    width: 100%;
+    margin-top: 20px;
+}
+.main ul li{
+    display: inline-block;
+    padding: 0 7px;
+    margin-bottom: 20px;
+   
+}
+.main ul li .activity{
+    float: left;
+     border: 1px #000 solid;
+}
+.activity-box{
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+}
+.container {
+    margin: 0px auto;
+    text-align: center;
+    position: relative;
+    height: 100%;
+}
+.load_btn {
+    width: 40%;
+    min-width: 280px;
+    height:38px;
+    font-size: 20px;
+    padding-top: 12px;
+}
+.load_btn:hover{
+    -moz-animation: bgcolor-y 0.2s ease-out forwards;
+    -ms-animation: bgcolor-y 0.2s ease-out forwards;
+    -webkit-animation: bgcolor-y 0.2s ease-out forwards;
+    animation: bgcolor-y 0.2s ease-out forwards;
+}
+.vi_footer {
+    margin-top: 50px;
+    border-top: 3px #cccccc solid;
+    color:#CCCCCC;
+    overflow:auto;
+    zoom:1;
+}
+.vi_footer_left {
+    float: left;
+    margin: 20px 0px;
+    margin-left: 10px;
+}
+.vi_footer_right {
+    float: right;
+    margin: 20px 0px;
+    margin-right: 10px;
+}
+.vi-sign {
+    
+    padding-top: 50px;
+    font-size: 105%;
+    width: 100%;
+    overflow:auto;
+    zoom:1;
+}
+.sidebar .search {
+    width: 80%;
+    margin: 0 auto;
+    
+}
+
+.sidebar .search div {
+    display: inline-block;
+    font-size: 24px;
+}
+
+
+.sidebar .search input[type="text"] {
+    height: 30px;
+    width: 80%;
+    background-color: transparent;
+    border: 1px #B3B3B3 solid;
+    border-radius: 5px;
+    margin-right: 8px;
+    padding: 2px 0;
+    padding-left: 3px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #B3B3B3;
+}
+
+ 
+.sidebar .search input[type="text"]:focus{
+    -webkit-animation: bdcolor-y 0.4s ease-out forwards;
+    animation: bdcolor-y 0.4s ease-out forwards;
+}
+
+.sidebar .menu {
+    margin-top: 35px;
+}
+
+.sidebar .menu ul {
+    width: 100%;
+}
+
+.sidebar .menu .menu-list {
+    width: 100%;
+    display: block;
+    height: 40px;
+}
+
+.sidebar .menu .menu-list .menu-list-item {
+    position: relative;
+    height: 100%;
+}
+
+
+
+.sidebar .menu .menu-list .menu-list-item .icon{
+    float: left;
+    margin-left: 15px;
+    display: inline-block;
+    position: relative;
+    top: 8px;
+}
+
+.sidebar .menu .menu-list .menu-list-item a {
+    display: block;
+}
+
+.sidebar .menu .menu-list .menu-list-item .menu-list-item-text{
+    margin-left: 40px;
+    position: relative;
+    top: 8px;
+}
+
+.sidebar .menu .active .menu-list-item{
+    background-color: #FCEE21;
+}
+
+.sidebar .menu .active .menu-list-item .icon .home{
+    background-image: url(../img/icon/slidBar_home_over.png);
+}
+.sidebar .menu .active .menu-list-item .icon .guanzhu{
+    background-image: url(../img/icon/slidBar_guanzhu_over.png);
+}
+.sidebar .menu .active .menu-list-item .icon .tongji{
+    background-image: url(../img/icon/slidBar_tongji_over.png);
+}
+.sidebar .menu .active .menu-list-item .icon .sixin{
+    background-image: url(../img/icon/slidBar_sixin_over.png);
+}
+.sidebar .menu .active .menu-list-item .icon .setting{
+    background-image: url(../img/icon/slidBar_setting_over.png);
+}
+.sidebar .menu .active .menu-list-item .icon .logout{
+    background-image: url(../img/icon/slidBar_logout_over.png);
+}
+
+.sidebar .menu .active .menu-list-item .menu-list-item-text{
+    color:  #4C4640;
+    font-weight:900;
+}
+
+.sidebar .menu .menu-list:hover .menu-list-item{
+    background-color: #FCEE21;
+}
+
+.sidebar .menu .menu-list:hover .menu-list-item .icon .home{
+    background-image: url(../img/icon/slidBar_home_over.png);
+}
+.sidebar .menu .menu-list:hover .menu-list-item .icon .guanzhu{
+    background-image: url(../img/icon/slidBar_guanzhu_over.png);
+}
+.sidebar .menu .menu-list:hover .menu-list-item .icon .tongji{
+    background-image: url(../img/icon/slidBar_tongji_over.png);
+}
+.sidebar .menu .menu-list:hover .menu-list-item .icon .sixin{
+    background-image: url(../img/icon/slidBar_sixin_over.png);
+}
+.sidebar .menu .menu-list:hover .menu-list-item .icon .setting{
+    background-image: url(../img/icon/slidBar_setting_over.png);
+}
+.sidebar .menu .menu-list:hover .menu-list-item .icon .logout{
+    background-image: url(../img/icon/slidBar_logout_over.png);
+}
+.sidebar .menu .menu-list:hover .menu-list-item .menu-list-item-text{
+    color:  #4C4640;
+    font-weight:900;
+}
+.loginbg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url(../img/bigbg.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+@media screen and (max-width: 960px){
+.logo{
+        display: inline-block;
+        margin:0px auto;
+        width: 100%;
+        padding: 50px 0;
+    }
+    .logo .icon .logo-a{
+        margin: 0px auto;
+        width: 201px;
+        height: 130px;
+        background: transparent url("../img/icon/logo_1.png") no-repeat scroll;
+    }
+    .vi-menu{
+        width:100%;
+        margin: 0px auto;
+        overflow:hidden;
+    }
+    .vi-menu ul{
+        float: none;
+        overflow:hidden;
+        margin: 0px auto;
+        display: inline-block;
+    }
+    
+    .vi_footer{
+        margin:0px auto;
+        margin-top:50px; 
+        width:90%;
+    }
+}
+
+.logtext {
+    font-size: 150%;
+    color: #B3B3B3;
+    display: inline-block;
+    width: 100%;
+    float: left;
+    font-weight: 200;
+    padding-top: 40px;
+    letter-spacing: 2px;
+
+}
+
+.logform {
+    padding-top: 20px;
+    display: inline-block;
+}
+
+.logform .form{
+    display: inline-block;
+    width: 360px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.logform .form input[type="text"],input[type="password"]{
+    display: block;
+    border: none;
+    height: 50px;
+    width: 100%;
+    color: #B4B4B4;
+    padding-left: 10px;
+}
+
+
+
+.loginbtn {
+    padding-top: 10px;
+    margin-top: 20px;
+    width: 100%;
+    height: 35px;
+    background:#CCCCCC; 
+    color: #000000 !important;
+    font-size: 20px;
+}
+.loginbtn:hover{
+    -webkit-animation:bgcolor-y 0.2s ease-out forwards;
+    animation:bgcolor-y 0.2s ease-out forwards;
+}
+
+.remember {
+    margin-top: 10px;
+	width: 28px;
+    height: 28px;
+	position: relative;
+    border: 2px #FCEE21 solid; 
+    border-radius: 5px;
+    float: left;
+    overflow: hidden;
+}
+.remember label {
+	cursor: pointer;
+	position: absolute;
+	width: 26px;
+	height: 26px;
+	top: 0;
+  	left: 0;
+    border-radius: 2px;
+	background-color: transparent;
+	border:1px solid #ddd;
+}
+
+.remember label:after {
+	opacity: 0;
+	content: '';
+	position: absolute;
+	width: 8px;
+	height: 5px;
+	background: transparent;
+	top: 9px;
+	left: 8px;
+	border: 3px solid #FCEE21;
+	border-top: none;
+	border-right: none;
+ 
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+/**
+ * Create the hover event of the tick
+ */
+.remember label:hover::after {
+	opacity: 0.5;
+}
+ 
+/**
+ * Create the checkbox state for the tick
+ */
+.remember input[type=checkbox]:checked + label:after {
+	opacity: 1;
+}
+.loginoption .text{
+    margin-top: 15PX;
+    margin-left: 10PX;
+    color: #B3B3B3;
+}
+
+.vi_footer .icon{
+        
+}
