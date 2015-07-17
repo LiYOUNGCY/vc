@@ -30,8 +30,12 @@ class User_service extends MY_Service
 		return $this->user_model->register_action ($name, $register_type, $pwd);
 	}
 
-	public function login_action($pwd, $email, $phone)
+	public function login_action($pwd, $email, $phone, $rememberme)
 	{
+		var_dump($pwd);
+		var_dump($phone);
+		var_dump($rememberme);
+		
 		$login_type = array();
 
 		if( isset($phone) )
@@ -51,8 +55,11 @@ class User_service extends MY_Service
 
 		if( isset( $user ) )
 		{
-			//设置 cookie
-			$this->auth_service->set_remember_me_cookie($user);
+			if($rememberme === TRUE) {
+				//设置 cookie
+				$this->auth_service->set_remember_me_cookie($user);
+			}
+			
 			//设置 SESSION
 			$this->auth_service->set_login_session($user);
 
