@@ -6,7 +6,7 @@
 
 <body>
 	<h1><?=$title?></h1>
-	<form action="<?=base_url().'account/login' ?>" method="post">
+	<form action="<?=base_url().'account/main/login' ?>" method="post">
 		User Name: <input type="text" name="name"><br/>
 		Phone: <input type="text" name="phone"> <br/>
 		Password: <input type="password" name="pwd"> <br/>

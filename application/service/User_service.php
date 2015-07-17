@@ -63,4 +63,16 @@ class User_service extends MY_Service
 			return false;
 		}
 	}
+
+    /**
+     * [update_count 更新用户字段数量]
+     * @param  [type] $uid    [用户id]
+     * @param  [type] $name   [字段名称]
+     * @param  [type] $amount [数量]
+     * @return [type]         [description]
+     */
+    public function update_count($uid,$name,$amount)
+    {
+        return $this->user_model->update_count($uid,array('name' => $name, 'amount' => $amount));
+    }	
 }
