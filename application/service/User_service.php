@@ -32,17 +32,18 @@ class User_service extends MY_Service
 
 	public function login_action($pwd, $email, $phone, $rememberme)
 	{
+		var_dump($email);
 		var_dump($pwd);
 		var_dump($phone);
 		var_dump($rememberme);
 		
 		$login_type = array();
 
-		if( isset($phone) )
+		if( ! empty($phone) )
 		{
 			$login_type ['phone'] = $phone;
 		}
-		else if( isset($email) )
+		else if( ! empty($email) )
 		{
 			$login_type ['email'] = $email;
 		}
@@ -55,7 +56,7 @@ class User_service extends MY_Service
 
 		if( isset( $user ) )
 		{
-			if($rememberme === TRUE) {
+			if($rememberme) {
 				//设置 cookie
 				$this->auth_service->set_remember_me_cookie($user);
 			}

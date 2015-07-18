@@ -470,37 +470,6 @@ img{
     background-size: cover;
 }
 
-@media screen and (max-width: 960px){
-.logo{
-        display: inline-block;
-        margin:0px auto;
-        width: 100%;
-        padding: 50px 0;
-    }
-    .logo .icon .logo-a{
-        margin: 0px auto;
-        width: 201px;
-        height: 130px;
-        background: transparent url("../img/icon/logo_1.png") no-repeat scroll;
-    }
-    .vi-menu{
-        width:100%;
-        margin: 0px auto;
-        overflow:hidden;
-    }
-    .vi-menu ul{
-        float: none;
-        overflow:hidden;
-        margin: 0px auto;
-        display: inline-block;
-    }
-    
-    .vi_footer{
-        margin:0px auto;
-        margin-top:50px; 
-        width:90%;
-    }
-}
 
 .logtext {
     font-size: 150%;
@@ -614,3 +583,38 @@ img{
 .vi_footer .icon{
         
 }
+
+
+@media screen and (max-width: 960px){
+	.logo{
+        display: inline-block;
+        margin:0px auto;
+        width: 100%;
+        padding: 50px 0;
+    }
+    .logo .icon .logo-a{
+        margin: 0px auto;
+        width: 201px;
+        height: 130px;
+        background: transparent url("../img/icon/logo_1.png") no-repeat scroll;
+    }
+    .vi-menu{
+        width:100%;
+        margin: 0px auto;
+        overflow:hidden;
+    }
+    .vi-menu ul{
+        float: none;
+        overflow:hidden;
+        margin: 0px auto;
+        display: inline-block;
+    }
+    
+    .vi_footer{
+        margin:0px auto;
+        margin-top:50px; 
+        width:90%;
+    }
+}
+
+

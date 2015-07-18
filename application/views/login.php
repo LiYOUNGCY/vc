@@ -11,7 +11,7 @@
   <link href="<?=base_url().'public/'?>css/common.css" type="text/css" rel="stylesheet" /> 
   <link href="<?=base_url().'public/'?>css/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" /> 
  </head> 
- <body style="height:100%;"> 
+ <body style="height:100%;overflow: hidden;"> 
   <div id="vc_sidebar" class="sidebar"> 
    <div class="name"> 
     <div class="head"> 
@@ -25,7 +25,7 @@
     </div> 
    </div> 
    <div class="search"> 
-    <input id="" name="" type="text" /> 
+    <input type="text" /> 
     <div> 
      <a href="#"><i class="fa fa-search"></i></a> 
     </div> 
@@ -102,7 +102,7 @@
       <font style="font-size:70%;text-decoration: underline;"><a href="#">注册账号</a></font> 
      </div> 
     </div> 
-    <div class="logform width-100p"> 
+    <div id="login" class="logform width-100p"> 
      <div class="float-l"> 
       <form name="login_form" novalidate="novalidate"> 
        <div class="form"> 
@@ -111,7 +111,7 @@
         <input type="password" id="password" placeholder="密码" /> 
        </div> 
        <div class="width-100p"> 
-        <a href="javascript:submit();"> 
+        <a href="javascript:login();"> 
          <div class="loginbtn btn">
           登陆
          </div> </a> 
@@ -152,36 +152,49 @@
   </div>  
   <script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script> 
   <script type="text/javascript">
-		function submit(){ 
 
-			var username = $("#username").val();
-			var password = $("#password").val();
-			var login_URL = "main/login";
-			
-			var ce = !!username.match("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$");
-			var cp = !!username.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+	$("#login #password").bind('keypress',function(event){
+		if(event.keyCode == "13")
+		{
+			login();
+		}
+	})
+	
+	function login(){ 
+		var username = $("#username").val();
+		var password = $("#password").val();
+		var LOGIN_URL = "login";
+		var ce = !!username.match("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$");
+		var cp = !!username.match("^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$");
+	  	var is_remember = $("#rememberme").attr("checked");
+		if(is_remember == "checked") is_remember = 1; else is_remember = 0;
 
-			if( ce == true ){
-				var method = "email";		
-				 }
-			else{
-				var method = "phone";
-			}
-			
-			var is_remember = $("#rememberme").attr("checked");
-			if(is_remember == "checked") is_remember = 1; else is_remember = 0;
-			
-			$.post(
-				login_URL,{
-					method	: username,
+	  
+	  
+		if( ce == true ){
+		  	$.post(
+				LOGIN_URL,{
+					email	: username,
 					pwd			:	password,
 					rememberme : is_remember
 				},function(data){
 					alert(data);
 				}
 			)
-			
 		}
+		else if( cp == true ){
+		  	$.post(
+				login_URL,{
+					phone	: username,
+					pwd			:	password,
+					rememberme : is_remember
+				},function(data){
+					alert(data);
+				}
+			)
+		}
+
+	}
   </script>
  </body>
 </html>

@@ -116,7 +116,7 @@ class User_model extends CI_Model
 	 * @param  [type] $custom [自定义查询条件]
 	 * @return [type]         [description]
 	 */
-    public function get_user_by_id($uid, $custom)
+    public function get_user_by_id($uid, $custom=NULL)
     {
     	if( ! empty($custom))
     	{
