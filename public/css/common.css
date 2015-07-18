@@ -245,13 +245,16 @@ img{
     display: inline-block;
     float: left;
 }
-
+.loginlogo .icon{
+	float: left;
+}
 
 .loginlogo .text{
     display: inline-block;
     color:#BCBCBC;
     text-align: left;
     margin-left: 15px;
+    margin-top: 30px;
 }
 
 
@@ -595,7 +598,7 @@ img{
 
 .logform .form{
     display: inline-block;
-    width: 360px;
+    width: 100%;
     border-radius: 5px;
     overflow: hidden;
 }
@@ -720,6 +723,43 @@ img{
         margin-top:50px; 
         width:90%;
     }
+  	
+	.loginlogo{
+	  float:none;
+	  padding-top: 30px;
+	}
+  .loginlogo .icon {
+  	float: none;
+	
+  } 
+  .loginlogo .text {
+	top: 5px;
+  	text-align: center;
+	font-weight: bold;
+  } 
+  	.logtext{
+	  float: none;
+	  margin: 0 auto;
+	  font-size: 120%;
+	  display: inline-block;
+	  
+  	}
+  
+  
+  .logtext div{
+  	float: none;
+	padding-top: 20px;
+  }
+  .formcon{
+  	float: none;
+	display: inline-block;
+  }
+  
 }
 
 
+
+.logform .formcon {
+	float: left;
+	width:320px; 
+}

@@ -88,11 +88,11 @@
    </div> 
    <div id="vl_content" class="content"> 
     <div class="loginlogo"> 
-     <div class="icon float-l"> 
-      <a href="#">
-       <div class="logo-w"></div></a> 
-      <span class="text"> <b>艺术维C</b><br /> affecting the life in a mysterious way </span> 
-     </div> 
+     <div class="icon"> 
+      <a href="javascript:void(0);">
+       <div class="logo-w"></div></a>  
+     </div>
+     <span class="text"> <b>艺术维C</b><br /> affecting the life in a mysterious way </span>
     </div> 
     <div class="logtext"> 
      <div class="float-l">
@@ -103,7 +103,7 @@
      </div> 
     </div> 
     <div id="login" class="logform width-100p"> 
-     <div class="float-l"> 
+     <div class="formcon"> 
       <form name="login_form" novalidate="novalidate"> 
        <div class="form"> 
         <input type="text" id="username" placeholder="手机号/邮箱" /> 
@@ -128,11 +128,7 @@
          <a href="#">忘记密码</a> 
         </div> 
        </div> 
-      </form> 
-      <div class="width-100p"> 
-       <div class="float-l "> 
-       </div> 
-      </div> 
+      </form>
      </div> 
     </div> 
     <div id="vi_footer" class="width-100p"> 
@@ -144,6 +140,10 @@
         <a href="#">隐私政策</a>&nbsp;-&nbsp;
         <a href="#">联系我们</a>&nbsp;-&nbsp;
         <a href="#">意见反馈</a> 
+        qwertyuiopqwertyuiopqwertyuiop
+        意见反馈意见反馈
+        yi
+        亿
        </div> 
       </div> 
      </div> 
