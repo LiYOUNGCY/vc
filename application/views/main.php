@@ -113,7 +113,9 @@
       <ul> 
        <li> 
         <div class="activity"> 
-         <div class="activity-box"></div> 
+         <div class="activity-box">
+         	
+         </div> 
         </div> </li> 
        <li> 
         <div class="activity"> 
