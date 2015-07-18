@@ -26,12 +26,13 @@ class Main extends MY_Controller {
         $article = $this->article_service->get_article_list($page,$uid,$type);
         if( ! empty($article))
         {
-            var_dump($article);
+            //var_dump($article);
+            $this->load->view('main');
         }
         else
         {
             echo "failed";
         }
-        $this->load->view('main');
+        
     }
 }

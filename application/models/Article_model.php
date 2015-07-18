@@ -93,13 +93,13 @@ class Article_model extends CI_Model {
         }
     }
 
-<<<<<<< HEAD
     public function get_uid_by_aid($aid)
     {
         $query = $this->select('uid')->where('id', $aid)->get('article')->result_array();
         return count($query) === 1 ? $query[0] : NULL;
     }
-=======
+
+
     /**
      * [get_article_vote 获取文章点赞列表]
      * @param  [type] $aid [description]
@@ -114,5 +114,4 @@ class Article_model extends CI_Model {
                         ->result_array();
       return $query;
     }    
->>>>>>> pr/7
 }
