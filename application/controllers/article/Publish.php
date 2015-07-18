@@ -11,7 +11,6 @@ class Publish extends MY_Controller {
     {
         parent::__construct();
         $this->load->service('article_service');
-        $this->load->service('feed_service');
     }
 
     /**
@@ -23,14 +22,13 @@ class Publish extends MY_Controller {
         $article_subtitle   = $this->sc->input('subtitle');
         $article_content    = $this->sc->input('content');
         $article_type       = $this->sc->input('type');
- 
+        $this->user = array();
+        $this->user['id'] = 4;
         //把文章插入到数据库
         $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_subtitle, $article_type, $article_content);
         if( ! empty($article))
         {
-            echo "success";
-            //更新动态表
-            $this->feed_service->insert_article_feed($this->user['id'], $article['id'], $article['title'], $article['subtitle'], $article['content']);            
+            
         }
         else
         {

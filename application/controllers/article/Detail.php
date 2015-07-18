@@ -25,8 +25,11 @@ class Detail extends MY_Controller
     {
         //»ñµÃÎÄÕÂid
         $aid = $this->sc->input('aid');
+        $aid = 19;
+        $this->user = array();
+        $this->user['id'] = 4;        
         $vote_result = $this->article_service->article_vote($aid, $this->user['id']);
-        if(!empty($vote_result))
+        if( ! empty($vote_result))
         {
             echo "success";            
             if($vote_result['status'] == 1)
@@ -52,7 +55,7 @@ class Detail extends MY_Controller
         }
         else
         {
-            echo "failed";
+             echo "failed";           
         }
     }
 

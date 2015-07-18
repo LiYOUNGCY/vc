@@ -5,7 +5,6 @@ class Main extends MY_Controller{
 	{
 		parent::__construct();
 		$this->load->service('notification_service');
-		$this->load->service('user_service');
 	}
 
 	/**
@@ -15,14 +14,7 @@ class Main extends MY_Controller{
 	public function index($type = "all")
 	{
 		$page = $this->sc->input('page');
-		$this->user = array();
-		$this->user['id'] = 5;	
 		$notification = $this->notification_service->get_notification_list($page,$this->user['id'],$type);
-		
-		//获取消息发送者信息
-		foreach ($notification as $k => $v) {
-			$notification[$k]['author'] = $this->user_service->get_user_by_id($v['sender_id']);
-		}
 
 		echo json_encode($notification);
 	}
