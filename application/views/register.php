@@ -25,7 +25,7 @@
     </div> 
    </div> 
    <div class="search"> 
-    <input type="text" /> 
+    <input id="" name="" type="text" /> 
     <div> 
      <a href="#"><i class="fa fa-search"></i></a> 
     </div> 
@@ -96,38 +96,35 @@
     </div> 
     <div class="logtext"> 
      <div class="float-l">
-       欢迎登陆
+       欢迎注册
       <font style="margin:0 10px;font-size:200%;letter-spacing: 0px;">artVC</font>
       <i style="color:#FCEE21;font-weight: bold;padding:0 10px;font-size:70%;">/</i>
-      <font style="font-size:70%;text-decoration: underline;"><a href="#">注册账号</a></font> 
+      <font style="font-size:70%;text-decoration: underline;"><a href="javascript:void(0);">登陆</a></font> 
      </div> 
     </div> 
-    <div id="login" class="logform width-100p"> 
-     <div class="float-l"> 
+    <div class="logform width-100p"> 
+     <div class="float-l">
+      <div class="float-r " style="margin-bottom:5px;font-weight:bold;display:none;" id="tophone" ><a href="javascript:void(0);" id="change">使用手机注册</a></div> 
+      <div class="float-r " style="margin-bottom:5px;font-weight:bold;display:block;" id="toemail"><a href="javascript:void(0);" id="change">使用邮箱注册</a></div> 
       <form name="login_form" novalidate="novalidate"> 
-       <div class="form"> 
-        <input type="text" id="username" placeholder="手机号/邮箱" /> 
+       <div class="form" id="phone_sign"> 
+        <input type="text" id="phone" placeholder="手机号" /> 
         <hr style="color:#B3B3B3;" /> 
         <input type="password" id="password" placeholder="密码" /> 
-       </div> 
+       </div>
+       <div class="form" style="display:none;" id="email_sign"> 
+        <input type="text" id="email" placeholder="邮箱地址" /> 
+        <hr style="color:#B3B3B3;" /> 
+        <input type="password" id="password" placeholder="密码" /> 
+       </div>
+       <input type="hidden" value="phone" id="signway">
        <div class="width-100p"> 
-        <a href="javascript:login();"> 
+        <a href="javascript:signup();"> 
          <div class="loginbtn btn">
-          登陆
+          注册
          </div> </a> 
        </div> 
-       <div class="width-100p loginoption" style="display:inline-block"> 
-        <div class="remember"> 
-         <input type="checkbox" value="1" id="rememberme" name="" style="display:none;" /> 
-         <label for="rememberme"></label> 
-        </div> 
-        <div class="text float-l"> 
-         <label for="rememberme">下次自动登录 </label> 
-        </div> 
-        <div class="text float-r"> 
-         <a href="#">忘记密码</a> 
-        </div> 
-       </div> 
+ 
       </form> 
       <div class="width-100p"> 
        <div class="float-l "> 
@@ -140,10 +137,10 @@
       <div class="vi_footer_left"> 
        <div>
          &copy;&nbsp;artvc.cc&nbsp;京ICP备09025489号-4&nbsp; 
-        <a href="#">用户协议</a>&nbsp;-&nbsp;
-        <a href="#">隐私政策</a>&nbsp;-&nbsp;
-        <a href="#">联系我们</a>&nbsp;-&nbsp;
-        <a href="#">意见反馈</a> 
+        <a href="javascript:void(0);">用户协议</a>&nbsp;-&nbsp;
+        <a href="javascript:void(0);">隐私政策</a>&nbsp;-&nbsp;
+        <a href="javascript:void(0);">联系我们</a>&nbsp;-&nbsp;
+        <a href="javascript:void(0);">意见反馈</a> 
        </div> 
       </div> 
      </div> 
@@ -153,48 +150,74 @@
   <script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script> 
   <script type="text/javascript">
 
-	$("#login #password").bind('keypress',function(event){
-		if(event.keyCode == "13")
-		{
-			login();
-		}
+	$(function() {
+		$("#toemail").click(function() {
+			$(this).css({"display":"none"});
+			$("#phone_sign").css({"display":"none"});
+		  	$("#phone_sign input").each(function(i){
+				$(this).val("");
+			});
+		  	$("#signway").val("email");
+			$("#email_sign").css({"display":"block"});
+			$("#tophone").css({"display":"block"});
+	  	
+		})
+
+		$("#tophone").click(function() {
+			$(this).css({"display":"none"});
+			$("#phone_sign").css({"display":"block"});
+		  	$("#email_sign input").each(function(i){
+				$(this).val("");
+			});
+		  	$("#signway").val("phone");
+			$("#email_sign").css({"display":"none"});
+			$("#toemail").css({"display":"block"});
+		})
 	})
-	
-	function login(){ 
-		var username = $("#username").val();
-		var password = $("#password").val();
-		var LOGIN_URL = "login";
-		var ce = !!username.match("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$");
-		var cp = !!username.match("^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$");
-	  	var is_remember = $("#rememberme").attr("checked");
-		if(is_remember == "checked") is_remember = 1; else is_remember = 0;
-
-	  
-	  
-		if( ce == true ){
-		  	$.post(
-				LOGIN_URL,{
-					email	: username,
-					pwd			:	password,
-					rememberme : is_remember
-				},function(data){
-					alert(data);
+		
+		
+		function signup(){ 
+		  	var SIGNUP_URL = "register";
+		  	var signup_way = $("#signway").val();
+		  	
+		  	if( signup_way == "phone" ){
+				var phone = $("#phone_sign #phone").val();
+				var pwd = $("#phone_sign #password").val();
+			  	var cp = !!phone.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+			  	if(cp == true){
+					$.post(
+						SIGNUP_URL,{
+							phone	: phone,
+							pwd		: pwd,
+							name	: phone
+						},function(data){
+							alert(data);
+						}
+					)
+				}else{
+					alert("请填入正确的手机号码");
 				}
-			)
-		}
-		else if( cp == true ){
-		  	$.post(
-				login_URL,{
-					phone	: username,
-					pwd			:	password,
-					rememberme : is_remember
-				},function(data){
-					alert(data);
+			}
+		  	else{
+				var email = $("#email_sign #email").val();
+			  	var pwd = $("#email #password").val();
+				var ce = !!email.match("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$");
+			  	var name = email.split('@');
+			  	if(ce == true){
+					$.post(
+						SIGNUP_URL,{
+							email	: email,
+							pwd		: pwd,
+							name	: name[0]
+						},function(data){
+							alert(data);
+						}
+					)
+				}else{
+					alert("请填入正确的手机号码");
 				}
-			)
+			}
 		}
-
-	}
   </script>
  </body>
 </html>

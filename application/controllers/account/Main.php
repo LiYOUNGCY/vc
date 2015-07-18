@@ -11,9 +11,12 @@ class Main extends MY_Controller
 
 	public function index()
 	{	
-		$body = $this->load->view('sidebar', '', TRUE);
-		$body = $body.$this->load->view('main', '', TRUE);
-		$this->load->view('body', array('body' =>$body));
+		$this->load->view('login');
+	}
+	
+	public function signup()
+	{
+		$this->load->view('register');
 	}
 
 	public function login()
