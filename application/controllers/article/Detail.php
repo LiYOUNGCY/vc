@@ -18,12 +18,12 @@ class Detail extends MY_Controller
     }
 
     /**
-     * [article_vote 文章点赞或取消]
+     * [article_vote 脦脛脮脗碌茫脭脼禄貌脠隆脧没]
      * @return [type] [description]
      */
     public function article_vote()
     {
-        //获得文章id
+        //禄帽碌脙脦脛脮脗id
         $aid = $this->sc->input('aid');
         $vote_result = $this->article_service->article_vote($aid, $this->user['id']);
         if(!empty($vote_result))
@@ -31,21 +31,21 @@ class Detail extends MY_Controller
             echo "success";            
             if($vote_result['status'] == 1)
             {
-                //增加文章点赞数
+                //脭枚录脫脦脛脮脗碌茫脭脼脢媒
                 $this->article_service->update_count($aid,'like',1);             
             }
             else
             {
-                //减少文章点赞数
+                //录玫脡脵脦脛脮脗碌茫脭脼脢媒
                 $this->article_service->update_count($aid,'like',-1);                
             }
-            //首次点赞
+            //脢脳麓脦碌茫脭脼
             if( $vote_result['type'] == 0)
             {
-                //添加点赞动态                
+                //脤铆录脫碌茫脭脼露炉脤卢                
                 $article = $this->article_service->get_article_by_id($aid);
                 $feed_result = $this->feed_service->insert_vote_feed($this->user['id'], $article['id'], $article['uid'], $article['title'], $article['subtitle'], $article['content']);
-                //添加点赞消息
+                //脤铆录脫碌茫脭脼脧没脧垄
                 $content = array('content_id' => $article['id'], 'content_type' => 'article');
                 $notification_result = $this->notification_service->insert($this->user['id'],$article['uid'],3,$content);               
             }
@@ -61,16 +61,16 @@ class Detail extends MY_Controller
     {
         if(! is_numeric($aid))
         {
-            //不是数字,错误!!
+            //虏禄脢脟脢媒脳脰,麓铆脦贸!!
             exit();
         }
 
         $article = $this->article_service->get_article_by_id($aid);
 
-        //获取点赞的人的列表的 uid
+        //禄帽脠隆碌茫脭脼碌脛脠脣碌脛脕脨卤铆碌脛 uid
         $article['like_people'] = $this->article_service->get_user_by_aid($aid);
 
-        //将 uid 转换为对应的参数
+        //陆芦 uid 脳陋禄禄脦陋露脭脫娄碌脛虏脦脢媒
         if( isset($article['like_people']) ) {
             foreach( $article['like_people'] as $key => $value ) {
                 $article['like_people'][$key] = $this->user_service->get_user_by_id($article['like_people'][$key]['uid']);
@@ -86,11 +86,11 @@ class Detail extends MY_Controller
         $uid    = $this->user['id'];
         $comment = $this->sc->input('content');
 
-        //首先，找下有没有这一篇文章
+        //脢脳脧脠拢卢脮脪脧脗脫脨脙禄脫脨脮芒脪禄脝陋脦脛脮脗
         $article_user_id = $this->article_service->get_uid_by_aid($aid);
         if($article_user_id === NULL)
         {
-            //错误
+            //麓铆脦贸
             echo 'no article user';
             exit();
         }

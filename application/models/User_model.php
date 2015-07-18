@@ -116,7 +116,7 @@ class User_model extends CI_Model
 	 * @param  [type] $custom [自定义查询条件]
 	 * @return [type]         [description]
 	 */
-    public function get_user_by_id($uid, $custom=NULL)
+    public function get_user_by_id($uid, $custom='')
     {
     	if( ! empty($custom))
     	{
@@ -171,5 +171,50 @@ class User_model extends CI_Model
         else{
             return FALSE;
         }
-    }  
+    }
+
+
+    /**
+     * [update_account 更新用户信息字段]
+     * @param  [type] $uid    [description]
+     * @param  [type] $update [array('name'	=> 'tom', .......)]
+     * @return [type]         [description]
+     */
+    public function update_account($uid, $update)
+    {
+    	if(! is_array($update))
+    	{
+    		return FALSE;
+    	}
+
+    	//删除敏感字段
+    	unset($update['pwd']);
+    	$this->db->where('id', $uid)->update('user', $update);
+    	return $this->db->affected_rows() === 1;
+    }
+
+
+    /**
+     * [change_password 更改密码]
+     * @param  [type] $uid     [description]
+     * @param  [type] $old_pwd [description]
+     * @param  [type] $new_pwd [description]
+     * @return [type]          [description]
+     */
+    public function change_password($uid, $old_pwd, $new_pwd)
+    {
+    	$pwd = $this->db->select('pwd')->where('id',$uid)->get('user')->result_array();
+
+    	if(count($pwd) === 1)
+    	{
+    		$pwd = $pwd[0]['pwd'];
+    		if( $this->passwordhash->CheckPassword($old_pwd, $pwd) )
+    		{
+    			$new_pwd = $this->passwordhash->HashPassword($new_pwd);
+    			$this->db->where('id', $uid)->update('user', array('pwd' => $new_pwd));
+    			return $this->db->affected_rows() === 1;
+    		}
+    	}
+    	return FALSE;
+    }
 }
