@@ -41,6 +41,7 @@ class Main extends MY_Controller
 
 		$email = $this->sc->input('email');
 		$phone = $this->sc->input('phone');
+		var_dump($email);
 
 		$data = $this->user_service->register_action($name, $pwd, $email, $phone);
 		var_dump($data);
