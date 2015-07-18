@@ -11,7 +11,6 @@ class Main extends MY_Controller {
     {
         parent::__construct();
         $this->load->service('article_service');
-        $this->load->service('user_service');
     }
 
     /**
@@ -25,12 +24,14 @@ class Main extends MY_Controller {
         $page = $this->sc->input('page');
         $uid  = isset($this->user['id']) ? $this->user['id'] : -1;
         $article = $this->article_service->get_article_list($page,$uid,$type);
-
-        //获取发布者信息
-        foreach ($article as $k => $v) {
-            $article[$k]['author'] = $this->user_service->get_user_by_id($v['uid']);
+        if( ! empty($article))
+        {
+            var_dump($article);
         }
-
+        else
+        {
+            echo "failed";
+        }
         $this->load->view('main');
     }
 }

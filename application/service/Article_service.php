@@ -12,7 +12,9 @@ class Article_service extends MY_Service{
         parent::__construct();
         $this->load->model('article_model');
         $this->load->model('article_like_model');
-        $this->load->model('article_comment_model');
+        $this->load->model('article_comment_model');  
+        $this->load->model('feed_model');   
+        $this->load->model('user_model'); 
     }
 
 
@@ -29,13 +31,17 @@ class Article_service extends MY_Service{
     {
         //将文章插入到数据库
         $article = $this->article_model->publish_article($user_id, $article_title, $article_subtitle, $article_type, $article_content);
-
-        if($article === FALSE)
+        if( ! empty($article))
+        {
+            echo "success";
+            //更新动态表
+            $this->insert_article_feed($user_id, $article['id'], $article['title'], $article['subtitle'], $article['content']);               
+            return TRUE;
+        }
+        else
         {
             return FALSE;
         }
-
-        return $article;
     }
     /**
      * [get_article_list 获取文章列表]
@@ -61,25 +67,15 @@ class Article_service extends MY_Service{
         $article = $this->article_model->get_article_list($page, $uid, $type);
 
         foreach( $article as $key => $value )
-        {
+        {           
             //对每篇文章内容进行字数截取
             $article[$key]['content'] = Common::extract_content($article[$key]['content']);
+            $article[$key]['author'] = $this->user_model->get_user_by_id($value['uid']);            
         }
 
         return $article;
     }
-    
-    /**
-     * [get_article_by_id 获取文章详细信息]
-     * @param  [type] $aid [description]
-     * @return [type]      [description]
-     */
-    public function get_article_by_id($aid)
-    {
-        $article = $this->article_model->get_article_by_id($aid);
-        return $article;
-    }
-
+ 
     /**
      * 文章点赞或取消
      * @param $aid  文章id
@@ -88,20 +84,72 @@ class Article_service extends MY_Service{
     public function article_vote($aid, $uid)
     {
         //点赞     
-        return  $this->article_like_model->article_vote($aid, $uid);    
+        $vote_result = $this->article_like_model->article_vote($aid, $uid);
+        if( ! empty($vote_result))
+        {
+            echo "success";            
+            if($vote_result['status'] == 1)
+            {
+                //增加文章点赞数
+                $this->article_model->update_count($aid,array('name' => 'like','amount' => 1));             
+            } 
+            else
+            {
+                //减少文章点赞数
+                $this->article_model->update_count($aid,array('name' => 'like','amount' => -1));              
+            }
+            //首次点赞
+            if( $vote_result['type'] == 0)
+            {
+                //添加点赞动态                
+                $article = $this->article_model->get_article_by_id($aid);
+                $feed_result = $this->insert_vote_feed($uid, $article['id'], $article['uid'], $article['title'], $article['subtitle'], $article['content']);
+                //添加点赞消息
+                $content = array('content_id' => $article['id'], 'content_type' => 'article');
+                $notification_result = $this->notification_model->insert($uid,$article['uid'],3,json_encode($content));               
+            } 
+            return TRUE;             
+        }    
+        else
+        {
+            return FALSE;
+        }
+    }
+
+   /**
+     * [insert_article_feed 添加发布新文章动态]
+     * @param  [type] $user_id          [description]
+     * @param  [type] $article_id       [description]
+     * @param  [type] $article_title    [description]
+     * @param  [type] $article_subtitle [description]
+     * @param  [type] $article_content  [description]
+     * @return [type]                   [description]
+     */
+    public function insert_article_feed($user_id, $article_id, $article_title, $article_subtitle, $article_content)
+    {
+        $content = $this->_extract_article($article_id, $article_title, $article_subtitle, $article_content);
+        //更新动态表
+        return $this->feed_model->insert_feed($user_id, 2, $content) ? TRUE : FALSE;
     }
 
     /**
-     * [update_count 更新文章字段数量]
-     * @param  [type] $aid    [文章id]
-     * @param  [type] $name   [字段名称]
-     * @param  [type] $amount [数量]
-     * @return [type]         [description]
+     * [insert_vote_feed 添加新点赞动态]
+     * @param  [type] $user_id          [description]
+     * @param  [type] $article_id       [description]
+     * @param  [type] $article_uid      [description]
+     * @param  [type] $article_title    [description]
+     * @param  [type] $article_subtitle [description]
+     * @param  [type] $article_content  [description]
+     * @param  [type] $article_image    [description]
+     * @return [type]                   [description]
      */
-    public function update_count($aid,$name,$amount)
+    public function insert_vote_feed($user_id,$article_id,$article_uid,$article_title,$article_subtitle,$article_content)
     {
-        return $this->article_model->update_count($aid,array('name' => $name, 'amount' => $amount));
+        $content = $this->_extract_vote($article_id, $article_uid, $article_title, $article_subtitle, $article_content);
+        //更新动态表
+        return $this->feed_model->insert_feed($user_id, 1, $content) ? TRUE : FALSE;
     }
+
 
     public function get_user_by_aid($uid)
     {
@@ -117,4 +165,45 @@ class Article_service extends MY_Service{
     {
         return $this->article_model->get_uid_by_aid($aid);
     }
+
+
+    /**
+     * 将文章的信息转换为动态表的格式
+     * @param $article_id
+     * @param $article_title
+     * @param $article_subtitle
+     * @param $article_content
+     * @return string
+     */
+    private function _extract_article($article_id, $article_title, $article_subtitle, $article_content)
+    {
+        $content = array(
+            'article_id'        => $article_id,
+            'article_title'     => $article_title,
+            'article_subtitle'  => $article_subtitle,
+            'article_content'   => Common::extract_content($article_content),
+            'article_image'     => Common::extract_first_img($article_content)
+        );
+        return json_encode($content);
+    }
+
+    /**
+     * 解析文章点赞的 content
+     * @param $aid
+     * @return array
+     */
+    private function _extract_vote($article_id, $article_uid, $article_title, $article_subtitle, $article_content)
+    {
+
+        $content = array(
+            'article_id'        => $article_id,
+            'article_uid'       => $article_uid,
+            'article_title'     => $article_title,
+            'article_subtitle'  => $article_subtitle,
+            'article_content'   => Common::extract_content($article_content),
+            'article_image'     => Common::extract_first_img($article_content)
+        );
+        return json_encode($content);
+    }  
+
 }

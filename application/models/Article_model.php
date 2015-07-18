@@ -93,9 +93,26 @@ class Article_model extends CI_Model {
         }
     }
 
+<<<<<<< HEAD
     public function get_uid_by_aid($aid)
     {
         $query = $this->select('uid')->where('id', $aid)->get('article')->result_array();
         return count($query) === 1 ? $query[0] : NULL;
     }
+=======
+    /**
+     * [get_article_vote 获取文章点赞列表]
+     * @param  [type] $aid [description]
+     * @return [type]      [description]
+     */
+    public function get_article_vote($aid, $order = 'id')
+    {
+      $query = $this->db->where(array('aid' => $aid,'status' => 1))
+                        ->select('uid')
+                        ->order_by($order)
+                        ->get('article_like')
+                        ->result_array();
+      return $query;
+    }    
+>>>>>>> pr/7
 }
