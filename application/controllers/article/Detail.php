@@ -64,23 +64,24 @@ class Detail extends MY_Controller
     {
         if(! is_numeric($aid))
         {
-            //²»ÊÇÊý×Ö,´íÎó!!
+            //不是数字， 错误
             exit();
         }
 
         $article = $this->article_service->get_article_by_id($aid);
 
-        //»ñÈ¡µãÔÞµÄÈËµÄÁÐ±íµÄ uid
         $article['like_people'] = $this->article_service->get_user_by_aid($aid);
 
-        //½« uid ×ª»»Îª¶ÔÓ¦µÄ²ÎÊý
         if( isset($article['like_people']) ) {
             foreach( $article['like_people'] as $key => $value ) {
                 $article['like_people'][$key] = $this->user_service->get_user_by_id($article['like_people'][$key]['uid']);
             }
         }
 
-        echo json_encode($article);
+        $data['article'] = $article;
+        $data['title']   = 
+
+        $this->load->view('article_detail', $data);
     }
 
     public function insert_article_comment()
