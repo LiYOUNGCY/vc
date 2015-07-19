@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Rache
- * Date: 2015/7/15
- * Time: 22:23
- */
+
 class Article_model extends CI_Model {
     public function __construct()
     {
@@ -41,28 +36,20 @@ class Article_model extends CI_Model {
     }
 
 
-    /**
-     * [get_article_list 获取文章列表]
-     * @param  integer $page  [页数]
-     * @param  integer $uid   [用户id]
-     * @param  [type]  $type  [文章类型(文章,展览)]
-     * @param  integer $limit [页面个数限制]
-     * @param  string  $order [排序]
-     * @return [type]         [description]
-     */
-    public function get_article_list($page = 0, $uid = -1, $type, $limit = 6, $order = "id desc")
+    public function get_article_list($page = 0, $uid = -1, $type, $limit = 6, $order = "publish_time desc")
     {
         $query = $this->db
-            ->select('article.id, article.uid, article.title, article.content, article.like, article_like.status')
+            ->select('article.id, article.uid, article.title, article.content, article.like')
             ->from('article');
 
         if( is_numeric($uid) && $uid != -1)
         {
+          $query = $query->select('article_like.status');
             $query = $query->join('article_like', "article_like.aid = article.id AND article_like.uid = {$uid}", 'left');
         }
         else
         {
-            $query = $query->join('article_like', 'article_like.aid = article.id', 'left');
+            //$query = $query->join('article_like', 'article_like.aid = article.id', 'left');
         }
 
         $query =$query->order_by($order)->limit($limit, $page*$limit)->get()->result_array();
@@ -70,11 +57,7 @@ class Article_model extends CI_Model {
         return $query;
     }
 
-    /**
-     * [update_count 更新文章字段数量]
-     * @param  array  $field [字段(格式:array('name'=>'like','amount'=>1))]
-     * @return [type]        [description]
-     */
+
     public function update_count($aid,$field = array()){
         $where = array('id' => $aid);
         $query = $this->db->select($field['name'])
@@ -100,11 +83,6 @@ class Article_model extends CI_Model {
     }
 
 
-    /**
-     * [get_article_vote 获取文章点赞列表]
-     * @param  [type] $aid [description]
-     * @return [type]      [description]
-     */
     public function get_article_vote($aid, $order = 'id')
     {
       $query = $this->db->where(array('aid' => $aid,'status' => 1))
