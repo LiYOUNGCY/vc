@@ -332,7 +332,21 @@
 	<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
 </body>
 <script type="text/javascript">
+	var GET_ARTICLE_URL = document.getElementById("BASE_URL").value+"article/main/get_article_list";
+	$(function(){
+		$.ajax({
+            url: GET_ARTICLE_URL,
+            success: function(data) {
+                data = eval(data.options); 
 
+				for(var i=0; i<data.length; i++)  
+				{  
+					alert(data[i].text+" " + data[i].value)  
+				} 
+
+            }
+        });
+	})
 	
 </script>
 </html>
