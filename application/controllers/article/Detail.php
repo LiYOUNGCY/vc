@@ -70,18 +70,15 @@ class Detail extends MY_Controller
 
         $article = $this->article_service->get_article_by_id($aid);
 
-        $article['like_people'] = $this->article_service->get_user_by_aid($aid);
+        // $article['like_people'] = $this->article_service->get_user_by_aid($aid);
 
-        if( isset($article['like_people']) ) {
-            foreach( $article['like_people'] as $key => $value ) {
-                $article['like_people'][$key] = $this->user_service->get_user_by_id($article['like_people'][$key]['uid']);
-            }
-        }
+        // if( isset($article['like_people']) ) {
+        //     foreach( $article['like_people'] as $key => $value ) {
+        //         $article['like_people'][$key] = $this->user_service->get_user_by_id($article['like_people'][$key]['uid']);
+        //     }
+        // }
 
-        $data['article'] = $article;
-        $data['title']   = 
-
-        $this->load->view('article_detail', $data);
+        $this->load->view('article_detail', $article);
     }
 
     public function insert_article_comment()
