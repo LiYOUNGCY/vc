@@ -21,18 +21,16 @@ class Main extends MY_Controller {
     public function get_article_list($type = 'article')
     {
         //获得页数
-        $page = $this->sc->input('page');
+        $page = $this->sc->input('page', 'get');
         $uid  = isset($this->user['id']) ? $this->user['id'] : -1;
+
         $article = $this->article_service->get_article_list($page,$uid,$type);
-        if( ! empty($article))
-        {
-            //var_dump($article);
-            $this->load->view('main');
-        }
-        else
-        {
-            echo "failed";
-        }
-        
+
+        echo json_encode($article);
+    }
+
+    public function index()
+    {
+        $this->load->view('main');
     }
 }

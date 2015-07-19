@@ -69,8 +69,15 @@ class Article_service extends MY_Service{
         foreach( $article as $key => $value )
         {           
             //对每篇文章内容进行字数截取
-            $article[$key]['content'] = Common::extract_content($article[$key]['content']);
-            $article[$key]['author'] = $this->user_model->get_user_by_id($value['uid']);            
+            $content = $this->article_model->get_article_by_id($article[$key]['id']);
+            $article[$key]['content'] = $this->_extract_article($article[$key]['id'], $content['title'], $content['subtitle'], $content['content']);
+
+            $arr = array('role', 'name', 'pic', 'alias');
+            $article[$key]['author'] = $this->user_model->get_user_by_id($value['uid'], $arr); 
+            unset($article[$key]['id']);
+            unset($article[$key]['title']); 
+            unset($article[$key]['uid']);     
+            //unset($article[$key]['content']);
         }
 
         return $article;
@@ -127,7 +134,7 @@ class Article_service extends MY_Service{
      */
     public function insert_article_feed($user_id, $article_id, $article_title, $article_subtitle, $article_content)
     {
-        $content = $this->_extract_article($article_id, $article_title, $article_subtitle, $article_content);
+        $content = json_encode($this->_extract_article($article_id, $article_title, $article_subtitle, $article_content));
         //更新动态表
         return $this->feed_model->insert_feed($user_id, 2, $content) ? TRUE : FALSE;
     }
@@ -148,6 +155,16 @@ class Article_service extends MY_Service{
         $content = $this->_extract_vote($article_id, $article_uid, $article_title, $article_subtitle, $article_content);
         //更新动态表
         return $this->feed_model->insert_feed($user_id, 1, $content) ? TRUE : FALSE;
+    }
+
+    /**
+     * [get_article_by_id 获取文章的全部信息]
+     * @param  [type] $aid [description]
+     * @return [type]      [description]
+     */
+    public function get_article_by_id($aid)
+    {
+        return $this->article_model->get_article_by_id($aid);
     }
 
 
@@ -181,10 +198,10 @@ class Article_service extends MY_Service{
             'article_id'        => $article_id,
             'article_title'     => $article_title,
             'article_subtitle'  => $article_subtitle,
-            'article_content'   => Common::extract_content($article_content),
+            'article_content'   => Common::extract_content($article_content).'...',
             'article_image'     => Common::extract_first_img($article_content)
         );
-        return json_encode($content);
+        return $content;
     }
 
     /**
