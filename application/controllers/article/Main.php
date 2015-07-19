@@ -23,20 +23,7 @@ class Main extends MY_Controller {
         //获得页数
         $page = $this->sc->input('page');
         $uid  = isset($this->user['id']) ? $this->user['id'] : -1;
-
         $article = $this->article_service->get_article_list($page,$uid,$type);
-
-        if( ! empty($article))
-        {
-            //var_dump($article);
-            // $this->load->view('main');
-            echo json_encode($article);
-        }
-        else
-        {
-            echo "failed";
-        }
-        
         echo json_encode($article);
     }
 

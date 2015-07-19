@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: Rache
@@ -16,8 +15,6 @@ class Article_service extends MY_Service{
         $this->load->model('feed_model');   
         $this->load->model('user_model'); 
     }
-
-
     /**
      * 发表文章
      * @param $user_id
@@ -63,15 +60,12 @@ class Article_service extends MY_Service{
                 $type = 1;
                 break;
         }
-
         $article = $this->article_model->get_article_list($page, $uid, $type);
-
         foreach( $article as $key => $value )
         {           
             //对每篇文章内容进行字数截取
             $content = $this->article_model->get_article_by_id($article[$key]['id']);
             $article[$key]['content'] = $this->_extract_article($article[$key]['id'], $content['title'], $content['subtitle'], $content['content']);
-
             $arr = array('role', 'name', 'pic', 'alias');
             $article[$key]['author'] = $this->user_model->get_user_by_id($value['uid'], $arr); 
             unset($article[$key]['id']);
@@ -79,9 +73,9 @@ class Article_service extends MY_Service{
             unset($article[$key]['uid']);     
             //unset($article[$key]['content']);
         }
-
         return $article;
     }
+ 
     /**
      * 文章点赞或取消
      * @param $aid  文章id
@@ -121,7 +115,6 @@ class Article_service extends MY_Service{
             return FALSE;
         }
     }
-
    /**
      * [insert_article_feed 添加发布新文章动态]
      * @param  [type] $user_id          [description]
@@ -137,7 +130,6 @@ class Article_service extends MY_Service{
         //更新动态表
         return $this->feed_model->insert_feed($user_id, 2, $content) ? TRUE : FALSE;
     }
-
     /**
      * [insert_vote_feed 添加新点赞动态]
      * @param  [type] $user_id          [description]
@@ -155,7 +147,6 @@ class Article_service extends MY_Service{
         //更新动态表
         return $this->feed_model->insert_feed($user_id, 1, $content) ? TRUE : FALSE;
     }
-
     /**
      * [get_article_by_id 获取文章的全部信息]
      * @param  [type] $aid [description]
@@ -165,24 +156,18 @@ class Article_service extends MY_Service{
     {
         return $this->article_model->get_article_by_id($aid);
     }
-
-
     public function get_user_by_aid($uid)
     {
         return $this->article_like_model->get_user_by_aid($uid);
     }
-
     public function insert_article_comment($aid, $uid, $content)
     {
         return $this->article_comment_model->article_comment_model($aid, $uid, $content);
     }
-
     public function get_uid_by_aid($aid)
     {
         return $this->article_model->get_uid_by_aid($aid);
     }
-
-
     /**
      * 将文章的信息转换为动态表的格式
      * @param $article_id
@@ -202,7 +187,6 @@ class Article_service extends MY_Service{
         );
         return $content;
     }
-
     /**
      * 解析文章点赞的 content
      * @param $aid
@@ -210,7 +194,6 @@ class Article_service extends MY_Service{
      */
     private function _extract_vote($article_id, $article_uid, $article_title, $article_subtitle, $article_content)
     {
-
         $content = array(
             'article_id'        => $article_id,
             'article_uid'       => $article_uid,
@@ -221,5 +204,4 @@ class Article_service extends MY_Service{
         );
         return json_encode($content);
     }  
-
 }
