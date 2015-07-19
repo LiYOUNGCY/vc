@@ -7,15 +7,19 @@ $(function(){
                 right: "280px"
             },400);
             $("#sbtn").stop().animate({
-                right: "280px"
+                right: "281px"
             },400);
             
             $("#vc_sidebar").stop().animate({
                 right: "0px"
             },400);
-            $("#shade").addClass("shade");
+            $("#shade").addClass("shade").animate({
+                left: "-280px"
+            });
         }else{
-            $("#shade").removeClass("shade");
+            $("#shade").removeClass("shade").animate({
+                left: "0px"
+            });
             $("#vi_container").stop().animate({
             right: "0px"
             },400);
@@ -30,7 +34,9 @@ $(function(){
     });
     $("#shade").click(function(){
         
-        $("#shade").removeClass("shade");
+        $("#shade").removeClass("shade").animate({
+                left: "0px"
+            });;
         $("#vi_container").stop().animate({
         right: "0px"
         },400);

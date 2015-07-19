@@ -27,7 +27,8 @@ class Main extends MY_Controller {
         if( ! empty($article))
         {
             //var_dump($article);
-            $this->load->view('main');
+            // $this->load->view('main');
+            echo json_encode($article);
         }
         else
         {
