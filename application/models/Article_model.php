@@ -42,15 +42,15 @@ class Article_model extends CI_Model {
             ->select('article.id, article.uid, article.title, article.content, article.like')
             ->from('article');
 
-        if( is_numeric($uid) && $uid != -1)
+        if( is_numeric($uid))
         {
-          $query = $query->select('article_like.status');
+            $query = $query->select('article_like.status');
             $query = $query->join('article_like', "article_like.aid = article.id AND article_like.uid = {$uid}", 'left');
         }
-        else
-        {
-            //$query = $query->join('article_like', 'article_like.aid = article.id', 'left');
-        }
+        // else
+        // {
+        //     //$query = $query->join('article_like', 'article_like.aid = article.id', 'left');
+        // }
 
         $query =$query->order_by($order)->limit($limit, $page*$limit)->get()->result_array();
 
