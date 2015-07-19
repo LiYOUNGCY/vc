@@ -763,3 +763,114 @@ img{
 	float: left;
 	width:320px; 
 }
+.article-container {
+    min-height: 100px;
+    max-width: 750px;
+    margin: 0 auto;
+    padding-top: 80px;
+}
+@media screen and (max-width: 960px){
+    .article-container {
+        width: 80%;
+    }
+}
+.detail-box {
+    width: 100%;
+    text-align: center;
+}
+.detail-box h5 {
+    margin-top: 20px;
+}
+.person-box {
+    width: 100%;
+    height: 50px;
+    margin: 20px 0;
+    border: 1px solid #B3B3B3;
+    border-style:solid none none none;
+}
+.person-box .author {
+    width: 90%;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+.detail-box .person-box .head {
+    height: 50px; 
+    line-height: 50px;
+}
+.detail-box .person-box .status {
+    float: right;
+}
+.person-box .status .icon {
+    display: inline-block;
+}
+.person-box .status span {
+    margin-left: 5px;
+}
+.article-container .article-content img {
+    max-width: 100%;
+}
+.article-container .comment .write-comment {
+    width: 100%;
+}
+.article-container .comment ul li {
+    margin-top: 25px;
+}
+.article-container .comment .de-content {
+    background-color: rgb(237, 239, 240);
+    float: left;
+    margin-left: 20px;
+    min-width: 40%;
+    min-height: 60px;
+    padding: 10px 10px;
+    text-align: left;
+    border-radius: 5px;
+
+}
+.article-container .comment .me {
+    float: right ! important;
+    margin-right: 20px;
+}
+.article-container .comment .de-content .name {
+    float: left;
+}
+.article-container .comment .de-content .time {
+    float: right;
+}
+.article-container .comment .write-comment textarea{
+    float: right;
+    font-size: 16px;
+    padding: 8px 10px;
+    resize:none;
+    word-wrap:word-break;
+
+}
+.comment .point1{
+    background:url(../img/commentpoint.png) 100% 33% no-repeat;
+    z-index: 100;
+    height: 18px;
+    width: 20px;
+    display: inline-block;
+    position: relative;
+    top: -40px;
+    left: 51px;
+}
+
+.comment .point2{
+    background:url(../img/commentpoint.png) 0% 33% no-repeat;
+    z-index: 100;
+    height: 18px;
+    width: 20px;
+    display: inline-block;
+    position: relative;
+    top: -40px;
+    right: 51px;
+}
+
+.article-container .comment .btn{
+    height: 28px;
+    width: 64px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 20px;
+}

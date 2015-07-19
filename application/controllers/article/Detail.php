@@ -68,7 +68,11 @@ class Detail extends MY_Controller
             exit();
         }
 
+        //获取文章信息
         $article = $this->article_service->get_article_by_id($aid);
+
+        //获取文章评论
+        $comment = $this->article_service->get_comment_by_aid($aid);
 
         // $article['like_people'] = $this->article_service->get_user_by_aid($aid);
 
@@ -77,8 +81,12 @@ class Detail extends MY_Controller
         //         $article['like_people'][$key] = $this->user_service->get_user_by_id($article['like_people'][$key]['uid']);
         //     }
         // }
+        
+        $data['article'] = $article;
+        $data['comment'] = $comment;
 
-        $this->load->view('article_detail', $article);
+        $this->load->view('article_detail', $data);
+        //var_dump($comment);
     }
 
     public function insert_article_comment()
@@ -87,11 +95,9 @@ class Detail extends MY_Controller
         $uid    = $this->user['id'];
         $comment = $this->sc->input('content');
 
-        //Ê×ÏÈ£¬ÕÒÏÂÓÐÃ»ÓÐÕâÒ»ÆªÎÄÕÂ
         $article_user_id = $this->article_service->get_uid_by_aid($aid);
         if($article_user_id === NULL)
         {
-            //´íÎó
             echo 'no article user';
             exit();
         }

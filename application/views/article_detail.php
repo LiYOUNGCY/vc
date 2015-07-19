@@ -107,7 +107,47 @@
 			</div>
 		</div>
 		<div class="article-container">
-		
+			<div class="detail-box">
+				<h1><?=$article['title']?></h1>
+				<h5><?=$article['subtitle']?></h5>
+				<div class="person-box">
+					<div class="author">
+						<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
+						<div class="status"><div class="icon"><div class="like"></div></div><span><?=$article['like']?></span></div>
+					</div>
+				</div>
+			</div>
+			<div class="article-content">
+				<?=$article['content']?>
+			</div>
+			<div class="person-box">
+				
+			</div>
+			<div class="comment clearfix">
+				<ul>
+				<?php foreach ($comment as $key => $value) { ?>
+				<li class="clearfix">
+					<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"><div class="point1"></div></div>
+					<div class="de-content">
+						<div class="name"><a href=""><?=$value['uid']?></a></div>
+						<div class="time"><?=$value['publish_time']?></div>
+						<div style="clear:both; visiable:hidden;"></div>
+						<div class="text"><?=$value['content']?></div>
+					</div>
+				</li>
+				<?php } ?>
+<!-- 					<li class="clearfix">
+						<div class="head me"><img src="<?=base_url().'public/'?>img/mm1.jpg"><div class="point2"></div></div>
+						<div class="content me">第一滴嗲大师傅大势发达省份大师傅</div>
+					</li> -->
+				</ul>
+
+				<!-- <div class="write-comment clearfix">
+					<textarea rows="3" cols="40" ></textarea>
+				</div>
+				<div class="btn">提交</div> -->
+			</div>
+
 		</div>
 	</div>
 </body>
