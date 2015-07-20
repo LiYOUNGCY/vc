@@ -179,7 +179,12 @@ class Article_service extends MY_Service{
      */
     public function get_comment_by_aid($aid)
     {
-        return $this->article_comment_model->get_comment_by_aid($aid);
+        $query = $this->article_comment_model->get_comment_by_aid($aid);
+        $arr = array('role', 'name', 'pic', 'alias');
+        foreach ($query as $key => $value) {
+            $query[$key]['user'] = $this->user_model->get_user_by_id($query[$key]['uid'], $arr); 
+        }
+        return $query;
     }
 
 
