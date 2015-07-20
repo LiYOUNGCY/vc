@@ -17,15 +17,9 @@ class Detail extends MY_Controller
         $this->load->service('user_service');
     }
 
-    /**
-     * [article_vote ÎÄÕÂµãÔÞ»òÈ¡Ïû]
-     * @return [type] [description]
-     */
     public function article_vote()
     {
-        //»ñµÃÎÄÕÂid
         $aid = $this->sc->input('aid');
-        $aid = 19;
         $this->user = array();
         $this->user['id'] = 4;        
         $vote_result = $this->article_service->article_vote($aid, $this->user['id']);
@@ -34,21 +28,16 @@ class Detail extends MY_Controller
             echo "success";            
             if($vote_result['status'] == 1)
             {
-                //Ôö¼ÓÎÄÕÂµãÔÞÊý
                 $this->article_service->update_count($aid,'like',1);             
             }
             else
             {
-                //¼õÉÙÎÄÕÂµãÔÞÊý
                 $this->article_service->update_count($aid,'like',-1);                
             }
-            //Ê×´ÎµãÔÞ
             if( $vote_result['type'] == 0)
-            {
-                //Ìí¼ÓµãÔÞ¶¯Ì¬                
+            {               
                 $article = $this->article_service->get_article_by_id($aid);
                 $feed_result = $this->feed_service->insert_vote_feed($this->user['id'], $article['id'], $article['uid'], $article['title'], $article['subtitle'], $article['content']);
-                //Ìí¼ÓµãÔÞÏûÏ¢
                 $content = array('content_id' => $article['id'], 'content_type' => 'article');
                 $notification_result = $this->notification_service->insert($this->user['id'],$article['uid'],3,$content);               
             }
@@ -64,12 +53,16 @@ class Detail extends MY_Controller
     {
         if(! is_numeric($aid))
         {
-            //不是数字， 错误
-            exit();
+            show_404();
         }
 
         //获取文章信息
         $article = $this->article_service->get_article_by_id($aid);
+        
+        if($article == FALSE) 
+        {
+        	show_404();
+        }
 
         //获取文章评论
         $comment = $this->article_service->get_comment_by_aid($aid);
@@ -86,7 +79,6 @@ class Detail extends MY_Controller
         $data['comment'] = $comment;
 
         $this->load->view('article_detail', $data);
-        //var_dump($comment);
     }
 
     public function insert_article_comment()

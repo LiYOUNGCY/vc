@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Rache
- * Date: 2015/7/15
- * Time: 12:07
- */
+
 class Main extends MY_Controller {
     public function __construct()
     {
@@ -23,10 +18,11 @@ class Main extends MY_Controller {
         //获得页数
         $page = $this->sc->input('page');
         $uid  = isset($this->user['id']) ? $this->user['id'] : -1;
-        $article = $this->article_service->get_article_list($page,$uid,$type);
+        $article = $this->article_service->get_article_list($page, $uid, $type);
         echo json_encode($article);
     }
 
+    
     public function index()
     {
         $this->load->view('main');

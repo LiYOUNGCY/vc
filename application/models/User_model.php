@@ -22,7 +22,7 @@ class User_model extends CI_Model
 			return FALSE;
 		}
 
-        if( isset($register_type['email'] && $this->have_email($register_type['email']) )
+        if( isset($register_type['email']) && $this->have_email($register_type['email']) )
         {
             $this->error->output('email_repeat');
         }

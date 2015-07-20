@@ -141,6 +141,7 @@
 					</div>
 				</li>
 				<?php } }?>
+				<!-- 
 					<li class="clearfix">
 					<div class="name me">
                       <div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"><div class="point2"></div></div>
@@ -150,8 +151,9 @@
 						<div style="clear:both; visiable:hidden;"></div>
 						<div class="text"><?=$value['content']?></div>
 						<div class="time"><?=$value['publish_time']?></div>
-					</div>
+					</div> 
 					</li>
+				-->
 				</ul>
 
 				<div class="write-comment clearfix">
