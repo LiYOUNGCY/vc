@@ -9,44 +9,49 @@ class Main extends MY_Controller
 		$this->load->service('user_service');
 	}
 
+
 	public function index()
 	{	
 		$this->load->view('login');
 	}
 	
+
 	public function signup()
 	{
 		$this->load->view('register');
 	}
 
+
+	/**
+	 * [login 登陆]
+	 */
 	public function login()
 	{
-		$phone = $this->sc->input('phone');
-		$email = $this->sc->input('email');
-
-		$pwd   = $this->sc->input('pwd');
+		$phone 		= $this->sc->input('phone');
+		$email 		= $this->sc->input('email');
+		$pwd   		= $this->sc->input('pwd');
 		$rememberme = $this->sc->input('rememberme');
 
-		if ( $this->user_service->login_action($pwd, $email, $phone, $rememberme) == TRUE )
-		{
-			echo 'login in success';
-		}
-		else 
-		{
-			echo 'login in fail';
-		}
+		$this->user_service->login_action($pwd, $email, $phone, $rememberme);
+
+		//登陆成功, 重定向首页 ?
+		redirect();
 	}
 
+
+	/**
+	 * [register 注册]
+	 */
 	public function register()
 	{
-		$name = $this->sc->input('name');
-		$pwd = $this->sc->input('pwd');
+		$name 	= $this->sc->input('name');
+		$pwd 	= $this->sc->input('pwd');
+		$email 	= $this->sc->input('email');
+		$phone 	= $this->sc->input('phone');
 
-		$email = $this->sc->input('email');
-		$phone = $this->sc->input('phone');
-		var_dump($email);
+		$this->user_service->register_action($name, $pwd, $email, $phone);
 
-		$data = $this->user_service->register_action($name, $pwd, $email, $phone);
-		var_dump($data);
+		//注册成功, 重定向首页 ?
+		redirect();
 	}
 }

@@ -243,6 +243,5 @@ class Article_service extends MY_Service{
             'article_image'     => Common::extract_first_img($article_content)
         );
         return json_encode($content);
-    }  
-
+    }
 }

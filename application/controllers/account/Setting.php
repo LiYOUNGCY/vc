@@ -10,18 +10,9 @@ class Setting extends MY_Controller
 
 	public function index($type = '')
 	{
-		if( ! empty($type) && is_string($type) )
-		{
-			if(strcmp($type, 'pwd'))
-			{
-				//进入修改密码界面
-			}
-			else if(strcmp($type, 'account'))
-			{
-				//进入个人信息的界面
-			}
-		}
+		//修改个人信息的页面
 	}
+
 
 	public function change_password()
 	{
@@ -38,5 +29,10 @@ class Setting extends MY_Controller
 		$data = $this->sc->input($arr);
 
 		$this->user_service->update_account($this->user['id'], $data);
+	}
+
+	public function pwd()
+	{
+		//加载修改密码的页面
 	}
 }

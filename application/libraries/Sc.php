@@ -17,11 +17,10 @@ class Sc {
 		$this->CI = &get_instance();
 		$this->CI->load->library('form_validation');
 		$this->rule = array(
-				 // 'phone'		=> 'max_length[12]|numeric',		//手机号码的规则
-				 // 'pwd'			=> 'required|min_length[8]|max_length[36]|alpha_dash',
-				 // 'username'		=> 'required|min_length[2]|max_length[36]',
-				 // 'school'		=> 'required|min_length[1]',
-				 // 'sex'			=> 'required|min_length[1]|max_length[1]'
+				 'phone'		=> 'exact_length[11]|numeric',		//手机号码的规则
+				 'pwd'			=> 'required|min_length[8]|max_length[36]|alpha_dash',
+				 'name'			=> 'required|min_length[2]|max_length[36]',
+				 'sex'			=> 'required|min_length[1]|max_length[1]'
 			);
 	}
 
@@ -58,7 +57,8 @@ class Sc {
 			if(isset($this->rule[$name])) {
 				$this->CI->form_validation->set_rules($name, $name, $this->rule[$name]);
 				if($this->CI->form_validation->run() == FALSE) {
-					return array('error' => "invalid_".$name);
+					$this->CI->error->output("invalid_".$name);
+					exit();
 				}
 			}
 
@@ -70,7 +70,8 @@ class Sc {
 				if(isset($this->rule[$value])) {
 					$this->CI->form_validation->set_rules($value, $value, $this->rule[$value]);
 					if($this->CI->form_validation->run() == FALSE) {
-						return array('error' => "invalid_".$value);
+						$this->CI->error->output("invalid_".$value);
+						exit();
 					}
 				}
 				
