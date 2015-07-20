@@ -49,10 +49,6 @@ class User_service extends MY_Service
 	 */
 	public function login_action($pwd, $email, $phone, $rememberme)
 	{
-		var_dump($email);
-		var_dump($pwd);
-		var_dump($e);
-		var_dump($rememberme);
 		
 		$login_type = array();
 

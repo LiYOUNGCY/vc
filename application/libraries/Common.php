@@ -57,7 +57,7 @@ class Common{
         //去掉空格
         $article_content = preg_replace("/\s/", "", $article_content);
 
-        $clean_content = mb_substr($article_content, 0, 100);
+        $clean_content = mb_substr($article_content, 0, 70);
         return $clean_content;
     }
 
