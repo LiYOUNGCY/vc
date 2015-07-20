@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Rache
- * Date: 2015/7/17
- * Time: 14:01
- */
+
 class Article_comment_model extends CI_Model
 {
     public function __construct()
@@ -15,13 +10,13 @@ class Article_comment_model extends CI_Model
 
 
     /**
-     * ²åÈëÎÄÕÂµÄÆÀÂÛ
+     * æ–°å¢è¯„è®º
      * @param $aid
      * @param $uid
      * @param $content
      * @return mixed
      */
-    public function article_comment_model($aid, $uid, $content)
+    public function insert_comment($aid, $uid, $content)
     {
         $data = array(
             'aid'           => $aid,
@@ -32,5 +27,10 @@ class Article_comment_model extends CI_Model
 
         $this->db->insert('article_comment', $data);
         return $this->db->insert_id();
+    }
+
+    public function get_comment_by_aid($aid)
+    {
+        return $this->db->where('aid', $aid)->get('article_comment')->result_array();
     }
 }

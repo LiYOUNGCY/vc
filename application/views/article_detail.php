@@ -107,7 +107,59 @@
 			</div>
 		</div>
 		<div class="article-container">
-		
+			<div class="detail-box">
+				<h1><?=$article['title']?></h1>
+				<h5><?=$article['subtitle']?></h5>
+				<div class="person-box">
+					<div class="author">
+						<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
+						<div class="status"><div class="icon"><div class="like"></div></div><span><?=$article['like']?></span></div>
+					</div>
+				</div>
+			</div>
+			<div class="article-content">
+				<?=$article['content']?>
+			</div>
+			<div class="person-box">
+				
+			</div>
+			<div class="comment clearfix">
+				<?php if( empty($comment) ) { ?>
+					<div class="empty"></div>
+			<?php } else { ?>	
+				<ul>
+				<?php foreach ($comment as $key => $value) { ?>
+				<li class="clearfix">
+					<div class="name">
+                      <div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"><div class="point1"></div></div>
+                      <div class="username"><?=$value['user']['name']?></div>
+                    </div>
+					<div class="de-content">
+						<div style="clear:both; visiable:hidden;"></div>
+						<div class="text"><?=$value['content']?></div>
+						<div class="time"><?=$value['publish_time']?></div>
+					</div>
+				</li>
+				<?php } }?>
+					<li class="clearfix">
+					<div class="name me">
+                      <div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"><div class="point2"></div></div>
+                      <div class="username">艺术维C束身衣啊速度和</div>
+                    </div>
+                    <div class="de-content me">
+						<div style="clear:both; visiable:hidden;"></div>
+						<div class="text"><?=$value['content']?></div>
+						<div class="time"><?=$value['publish_time']?></div>
+					</div>
+					</li>
+				</ul>
+
+				<div class="write-comment clearfix">
+					<textarea rows="3" cols="40" ></textarea>
+				</div>
+				<div class="btn">提交</div>
+			</div>
+
 		</div>
 	</div>
 </body>
