@@ -8,20 +8,27 @@ body{
 ul,ol,li{
     list-style: outside none none;
 }
+body a{
+    outline: none;
+}
 input,textarea{
     font-family: "微软雅黑",tahoma,arial,simhei,"宋体";
     outline: none;
 }
-a:hover{
-    -webkit-animation: color-y 0.2s ease-out forwards;
-    animation: color-y 0.2s ease-out forwards;
-    
-}
-a{
+
+
+.link{
     text-decoration: none;
     color: #B3B3B3;
-    outline: 0px none;
+    transition: color 0.1s linear 0s;
 }
+
+.link:hover{
+    color:#FCEE21;
+}
+
+
+
 img{
     vertical-align: middle;
 }
@@ -232,12 +239,16 @@ img{
     margin: 20px 10px;
 }
 .shade{
-    position: absolute;
     width: 100%;
     height: 100%;
     background-color:dimgray;
     opacity: 0.4;
     z-index: 4;
+    bottom: 0;
+    left: 0px;
+    position: fixed;
+    right: 0;
+    top: 0;
 }
 
 .loginlogo {
@@ -272,6 +283,7 @@ img{
     margin: 0px auto;
     text-align: center;
     display: inline-block;
+    width: 100%;
 }
 
 .vi-user {
@@ -315,6 +327,7 @@ img{
     height: 350px;
     color: #B3B3B3;
     border: 1px solid #CCCCCC;
+    position: relative;
 }
 .arimg {
     width: 100%;
@@ -339,7 +352,15 @@ img{
     float: left;
     color: #4C4640;
     font-weight: bold;
+
 }
+.armain .link{
+    color: #4C4640;
+}
+.armain .link:hover{
+    color: #FCEE21;
+}
+
 .armain .artitle:before {
     content: "《 ";
     font-weight: bolder;
@@ -350,9 +371,16 @@ img{
     font-weight: bolder;
     color: #FCEE21;
 }
-.armain .like {
+.arlike{
+    width: 80px;
+    color: #4C4640;
+    font-size: 14px;
+}
+.armain .like,.unlike {
     float: right;
     margin-right: 10px;
+    margin-top: 3px;
+    cursor: pointer;
 }
 .arcon .name{
     display: inline-block;
@@ -370,6 +398,7 @@ img{
     font-weight: bold;
     word-break:normal;
 }
+
 .arcon .head {
     width: 40px;
     height: 40px;
@@ -384,16 +413,24 @@ img{
     text-align: left;
     text-indent: 2em;
 }
+.arbtn{
+    bottom: 5px;
+    position: absolute;
+    left: 50%;
+    margin-left: -65px;
+}
+.arbtn .link{
+    transition: background-color 0.1s linear 0s;
+}
+.arbtn .link:hover{
+    background-color: #FCEE21;
+}
 .arbtn .btn{
     width: 130px;
     height: 26px;
-    padding: 4px;
+    padding-top: 4px;
     color: #4C4640 !important;
     cursor: pointer;
-}
-.arbtn .btn:hover{
-    -webkit-animation:bgcolor-y 0.2s ease-out forwards;
-    animation:bgcolor-y 0.2s ease-out forwards;
 }
 
 
@@ -409,6 +446,7 @@ img{
     height:38px;
     font-size: 20px;
     padding-top: 12px;
+    cursor: pointer;
 }
 .load_btn:hover{
     -moz-animation: bgcolor-y 0.2s ease-out forwards;
@@ -434,13 +472,23 @@ img{
     margin-right: 10px;
 }
 .vi-sign {
-    
     padding-top: 50px;
     font-size: 105%;
     width: 100%;
     overflow:auto;
     zoom:1;
 }
+.vi-sign .sign{
+    font-size:130%;    
+}
+.vi-sign .sign:after{
+    color:#FCEE21;
+    font-weight: bold;
+    padding:0 5px;
+    content:"/";
+    text-decoration: inherit;
+}
+
 .sidebar .search {
     width: 80%;
     margin: 0 auto;
@@ -502,7 +550,7 @@ img{
     top: 8px;
 }
 
-.sidebar .menu .menu-list .menu-list-item a {
+.sidebar .menu .menu-list .menu-list-item a{
     display: block;
 }
 
@@ -567,7 +615,7 @@ img{
     font-weight:900;
 }
 .loginbg{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width:100%;
@@ -587,9 +635,22 @@ img{
     float: left;
     font-weight: 200;
     padding-top: 40px;
-    letter-spacing: 2px;
 
 }
+
+.logtext .big{
+    font-size:100%;
+    letter-spacing: 0px;
+}
+.logtext .big:after{
+    color:#FCEE21;
+    font-weight: bold;
+    padding:0 10px;
+    font-size:75%;
+    text-decoration: inherit;
+    content:"or";
+}
+
 
 .logform {
     padding-top: 20px;
@@ -688,11 +749,6 @@ img{
     color: #B3B3B3;
 }
 
-.vi_footer .icon{
-        
-}
-
-
 @media screen and (max-width: 960px){
 	.logo{
         display: inline-block;
@@ -725,43 +781,45 @@ img{
     }
   	
 	.loginlogo{
-	  float:none;
-	  padding-top: 30px;
+	   float:none;
+	   padding-top: 80px;
 	}
-  .loginlogo .icon {
-  	float: none;
-	
-  } 
-  .loginlogo .text {
-	top: 5px;
-  	text-align: center;
-	font-weight: bold;
-  } 
-  	.logtext{
-	  float: none;
-	  margin: 0 auto;
-	  font-size: 120%;
-	  display: inline-block;
-	  
-  	}
-  
-  
-  .logtext div{
-  	float: none;
-	padding-top: 20px;
-  }
-  .formcon{
-  	float: none;
-	display: inline-block;
-  }
-  
+    .loginlogo .icon {
+      float: none;
+    	
+    } 
+    .loginlogo .text {   
+    	top: 5px;
+      	text-align: center;
+    	font-weight: bold;
+    } 
+    .logtext{
+        padding-top: 40px;
+    }
+    .logtext div{
+      	float: none;
+    	padding-top: 10px;
+    }
+    .formcon{
+        float: none !important;
+    	display: inline-block;
+    }
+    .logfooter{
+        display: none;
+    }
+    .loginoption{
+        margin-top: 10px;
+        margin-bottom: 50px;
+    }
+    .article-container {
+        width: 80%;
+    }
 }
-
-
 
 .logform .formcon {
 	float: left;
-	width:320px; 
+	max-width:360px; 
+    width: 85%
 }
 .article-container {
     min-height: 100px;
@@ -769,11 +827,7 @@ img{
     margin: 0 auto;
     padding-top: 80px;
 }
-@media screen and (max-width: 960px){
-    .article-container {
-        width: 80%;
-    }
-}
+
 .detail-box {
     width: 100%;
     text-align: center;

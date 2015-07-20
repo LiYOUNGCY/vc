@@ -15,10 +15,10 @@
   <div id="vc_sidebar" class="sidebar"> 
    <div class="name"> 
     <div class="head"> 
-     <a href="#"> <img src="<?=base_url().'public/'?>img/mm1.jpg" /> </a> 
+     <a class="link" href="#"> <img src="<?=base_url().'public/'?>img/mm1.jpg" /> </a> 
     </div> 
     <div class="text"> 
-     <a href="#"> YOUNGCY </a> 
+     <a class="link" href="#"> YOUNGCY </a> 
      <div class="identity"> 
       <span class="icon identity"></span> 
      </div> 
@@ -27,19 +27,19 @@
    <div class="search"> 
     <input id="" name="" type="text" /> 
     <div> 
-     <a href="#"><i class="fa fa-search"></i></a> 
+     <a class="link" href="#"><i class="fa fa-search"></i></a> 
     </div> 
    </div> 
    <div class="menu"> 
     <ul> 
      <li class="menu-list"> 
       <div class="menu-list-item"> 
-       <a href="dfdfdf"> 
+       <a class="link" href="dfdfdf"> 
         <div class="icon"> 
          <div class="home"></div> 
         </div> <span class="menu-list-item-text">个人首页</span> </a> 
       </div> </li> 
-     <a href="asasdas"> <li class="menu-list active"> 
+     <a class="link" href="asasdas"> <li class="menu-list active"> 
        <div class="menu-list-item"> 
         <div class="icon"> 
          <div class="guanzhu"></div> 
@@ -48,28 +48,28 @@
        </div> </li> </a> 
      <li class="menu-list"> 
       <div class="menu-list-item"> 
-       <a href="#"> 
+       <a class="link" href="#"> 
         <div class="icon"> 
          <div class="tongji"></div> 
         </div> <span class="menu-list-item-text">统计</span> </a> 
       </div> </li> 
      <li class="menu-list"> 
       <div class="menu-list-item"> 
-       <a href="#"> 
+       <a class="link" href="#"> 
         <div class="icon"> 
          <div class="sixin"></div> 
         </div> <span class="menu-list-item-text">私信</span> </a> 
       </div> </li> 
      <li class="menu-list"> 
       <div class="menu-list-item"> 
-       <a href="#"> 
+       <a class="link" href="#"> 
         <div class="icon"> 
          <div class="setting"></div> 
         </div> <span class="menu-list-item-text">设置</span> </a> 
       </div> </li> 
      <li class="menu-list"> 
       <div class="menu-list-item"> 
-       <a href="#"> 
+       <a class="link" href="#"> 
         <div class="icon"> 
          <div class="logout"></div> 
         </div> <span class="menu-list-item-text">退出</span> </a> 
@@ -88,26 +88,24 @@
    </div> 
    <div id="vl_content" class="content"> 
     <div class="loginlogo"> 
-     <div class="icon float-l"> 
-      <a href="#">
-       <div class="logo-w"></div></a> 
-      <span class="text"> <b>艺术维C</b><br /> affecting the life in a mysterious way </span> 
-     </div> 
-    </div> 
+     <div class="icon"> 
+      <a class="link" href="javascript:void(0);">
+       <div class="logo-w"></div></a>  
+     </div>
+     <span class="text"> <a href="" class="link"><b>艺术维C</b></a><br /> affecting the life in a mysterious way </span>
+    </div>
     <div class="logtext"> 
      <div class="float-l">
-       欢迎注册
-      <font style="margin:0 10px;font-size:200%;letter-spacing: 0px;">artVC</font>
-      <i style="color:#FCEE21;font-weight: bold;padding:0 10px;font-size:70%;">/</i>
-      <font style="font-size:70%;text-decoration: underline;"><a href="javascript:void(0);">登陆</a></font> 
-     </div> 
+        <font class="big">欢迎注册</font>
+        <font style="font-size:70%;text-decoration: underline;font-weight:bold;"><a class="link" href="<?=base_url()?>account/main">登陆</a></font>
+      </font> 
+     </div>  
     </div> 
     <div class="logform width-100p"> 
-     <div class="float-l">
-      <div class="float-r " style="margin-bottom:5px;font-weight:bold;display:none;" id="tophone" ><a href="javascript:void(0);" id="change">使用手机注册</a></div> 
-      <div class="float-r " style="margin-bottom:5px;font-weight:bold;display:block;" id="toemail"><a href="javascript:void(0);" id="change">使用邮箱注册</a></div> 
-      <form name="login_form" novalidate="novalidate"> 
-       <div class="form" id="phone_sign"> 
+     <div class="formcon">
+      <div class="float-r " style="margin-bottom:5px;font-weight:bold;display:none;" id="tophone" ><a class="link" href="javascript:void(0);" id="change">使用手机注册</a></div> 
+      <div class="float-r " style="margin-bottom:5px;font-weight:bold;display:block;" id="toemail"><a class="link" href="javascript:void(0);" id="change">使用邮箱注册</a></div> 
+      <div class="form" id="phone_sign"> 
         <input type="text" id="phone" placeholder="手机号" /> 
         <hr style="color:#B3B3B3;" /> 
         <input type="password" id="password" placeholder="密码" /> 
@@ -117,30 +115,25 @@
         <hr style="color:#B3B3B3;" /> 
         <input type="password" id="password" placeholder="密码" /> 
        </div>
-       <input type="hidden" value="phone" id="signway">
+
        <div class="width-100p"> 
-        <a href="javascript:signup();"> 
+        <a class="link" href="javascript:signup();"> 
          <div class="loginbtn btn">
           注册
          </div> </a> 
        </div> 
- 
-      </form> 
-      <div class="width-100p"> 
-       <div class="float-l "> 
-       </div> 
-      </div> 
+
      </div> 
     </div> 
-    <div id="vi_footer" class="width-100p"> 
-     <div class="vi_footer" style="margin-top:70px"> 
+    <div id="vi_footer" class="width-100p logfooter"> 
+     <div class="vi_footer" style="margin-top:130px"> 
       <div class="vi_footer_left"> 
        <div>
          &copy;&nbsp;artvc.cc&nbsp;京ICP备09025489号-4&nbsp; 
-        <a href="javascript:void(0);">用户协议</a>&nbsp;-&nbsp;
-        <a href="javascript:void(0);">隐私政策</a>&nbsp;-&nbsp;
-        <a href="javascript:void(0);">联系我们</a>&nbsp;-&nbsp;
-        <a href="javascript:void(0);">意见反馈</a> 
+        <a class="link" href="javascript:void(0);">用户协议</a>&nbsp;-&nbsp;
+        <a class="link" href="javascript:void(0);">隐私政策</a>&nbsp;-&nbsp;
+        <a class="link" href="javascript:void(0);">联系我们</a>&nbsp;-&nbsp;
+        <a class="link" href="javascript:void(0);">意见反馈</a> 
        </div> 
       </div> 
      </div> 

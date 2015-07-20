@@ -21,11 +21,9 @@ class Main extends MY_Controller {
     public function get_article_list($type = 'article')
     {
         //获得页数
-        $page = $this->sc->input('page', 'get');
+        $page = $this->sc->input('page');
         $uid  = isset($this->user['id']) ? $this->user['id'] : -1;
-
         $article = $this->article_service->get_article_list($page,$uid,$type);
-
         echo json_encode($article);
     }
 
