@@ -125,6 +125,15 @@ class User_model extends CI_Model
 		return $this->db->where('phone', $phone)->from('user')->count_all_results() !== 0 ? true : false;
 	}
 
+	
+	/**
+	 * [get_user_base_id 获得用户的基本的信息]
+	 */
+	public function get_user_base_id($uid)
+	{
+		$field = array('id', 'name', 'pic', 'alias', 'role');
+		return $this->get_user_by_id($uid, $field);
+	}
 
 	/**
 	 * [get_user_by_id 获取用户信息]

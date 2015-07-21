@@ -8,16 +8,13 @@ class Article_service extends MY_Service{
         $this->load->model('article_model');
         $this->load->model('article_comment_model');   
         $this->load->model('article_like_model');
-        
-        $this->load->service('user_service');
-        $this->load->service('feed_service');
-        $this->load->service('article_like_service');
+        $this->load->model('user_model');
+        $this->load->model('feed_model');
     }
     
     
     /**
      * 发表文章
-     * @return bool
      */
     public function publish_article($user_id, $article_title, $article_subtitle, $article_type, $article_content)
     {
@@ -26,7 +23,7 @@ class Article_service extends MY_Service{
         if( ! empty($article_id))
         {
             //更新动态表 
-            $this->feed_service->insert_article_feed($user_id, $article_id, $this->_extract_article($article_id, $article_title, $article_subtitle, $article_content));
+            $this->feed_model->insert_feed($user_id, $article_id, 2, $this->_extract_article($article_id, $article_title, $article_subtitle, $article_content));
             return TRUE;
         }
         else
@@ -38,10 +35,6 @@ class Article_service extends MY_Service{
 
     /**
      * [get_article_list 获取文章列表]
-     * @param  [type]  $page [页数]
-     * @param  integer $uid  [用户id]
-     * @param  integer $type [文章类型]
-     * @return [type]        [description]
      */
     public function get_article_list($page, $uid = -1, $type)
     {
@@ -60,11 +53,10 @@ class Article_service extends MY_Service{
         foreach( $article as $key => $value )
         {           
             //对每篇文章内容进行字数截取
-            $content = $this->article_model->get_article_by_id($article[$key]['id']);
-            $article[$key]['content'] = $this->_extract_article($article[$key]['id'], $content['title'], $content['subtitle'], $content['content']);
+            $article[$key]['content'] = $this->_extract_article($article[$key]['id'], $article[$key]['title'], $article[$key]['subtitle'], $article[$key]['content']);
             
             //查询作者的信息
-            $article[$key]['author'] = $this->user_service->get_user_base_id($article[$key]['uid']);
+            $article[$key]['author'] = $this->user_model->get_user_base_id($article[$key]['uid']);
             unset($article[$key]['id']);
             unset($article[$key]['title']); 
             unset($article[$key]['uid']);
@@ -90,12 +82,16 @@ class Article_service extends MY_Service{
         $query = $this->article_comment_model->get_comment_by_aid($aid);
         
         foreach ($query as $key => $value) {
-            $query[$key]['user'] = $this->user_service->get_user_base_id($query[$key]['uid']); 
+            $query[$key]['user'] = $this->user_model->get_user_base_id($query[$key]['uid']); 
         }
         
         return $query;
     }
     
+
+    /**
+     * [vote_article 点赞]
+     */
     public function vote_article($aid, $uid)
     {
     	$article = $this->article_model->get_article_by_id($aid);
@@ -103,7 +99,7 @@ class Article_service extends MY_Service{
     	{
     		$this->error->output('ARTICLE_NOT_EXIST');
     	}
-    	$status = $this->article_like_service->vote_article($aid, $uid);
+    	$status = $this->article_like_model->article_vote($aid, $uid);
     	
     	//点赞
     	if($status)
@@ -114,7 +110,7 @@ class Article_service extends MY_Service{
     		//解析文章
     		$content = $this->_extract_vote($article['id'], $article['uid'], $article['title'], $article['subtitle'], $article['content']);
     		//更新动态表
-    		$this->feed_service->insert_vote_feed($uid, $article['id'], $content);
+    		$this->feed_model->insert_feed($uid, $article['id'], 1, $content);
     	}
     	else 
     	{
@@ -122,8 +118,24 @@ class Article_service extends MY_Service{
     		$this->article_model->disargee_article($aid);
     		
     		//删除动态表的动态
-            $this->feed_service->delete_vote_feed($uid, $article['id']);
+            $this->feed_model->delete_feed($uid, $article['id'], 1);
     	}
+    }
+
+
+    /**
+     * 获取文章点过赞的人
+     */
+    public function get_vote_person_by_aid($aid)
+    {
+        $users = $this->article_like_model->get_vote_person_by_aid($aid);
+        
+        foreach ($users as $key => $value)
+        {
+            $users[$key] = $this->user_model->get_user_base_id($users[$key]['uid']);
+            unset($users[$key]['uid']);
+        }
+        return $users;
     }
     
     

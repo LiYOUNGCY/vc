@@ -43,7 +43,7 @@ class Article_model extends CI_Model {
     public function get_article_list($page = 0, $uid = -1, $type, $limit = 6, $order = "id DESC")
     {
         $query = $this->db
-            ->select('article.id, article.uid, article.title, article.content, article.like')
+            ->select('article.id, article.uid, article.title, article.subtitle, article.content, article.like')
             ->from('article');
 
         if( is_numeric($uid))

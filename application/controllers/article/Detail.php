@@ -12,10 +12,6 @@ class Detail extends MY_Controller
     {
         parent::__construct();
         $this->load->service('article_service');
-        $this->load->service('feed_service');   
-        $this->load->service('notification_service');
-        $this->load->service('user_service');
-        $this->load->service('article_like_service');
     }
 
     
@@ -37,8 +33,8 @@ class Detail extends MY_Controller
         //获取文章评论
         $comment = $this->article_service->get_comment_by_aid($aid);
 
-        $data['like_people'] = $this->article_like_service->get_vote_person_by_aid($aid);
-         $data['article'] = $article;
+        $data['like_people'] = $this->article_service->get_vote_person_by_aid($aid);
+        $data['article'] = $article;
         $data['comment'] = $comment;
         
 //         echo json_encode($data);

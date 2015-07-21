@@ -33,7 +33,7 @@ class User_service extends MY_Service
 		
 		//注册成功，设置 session
 		if ( $user_id = $this->user_model->register_action ($name, $register_type, $pwd) != FALSE ) {
-			$user = $this->get_user_base_id($user_id);
+			$user = $this->user_model->get_user_base_id($user_id);
 			//设置 SESSION
 			$this->auth_service->set_login_session($user);
 		}
@@ -71,15 +71,6 @@ class User_service extends MY_Service
 		$this->auth_service->set_login_session($user);
 	}
 
-
-	/**
-     * [get_user_base_id 获得用户的基本的信息]
-     */
-    public function get_user_base_id($uid)
-    {
-        $field = array('id', 'name', 'pic', 'alias', 'role');
-        return $this->get_user_by_id($uid, $field);
-    }
 
 
     /**
@@ -122,7 +113,7 @@ class User_service extends MY_Service
     {
     	if(isset($old_pwd, $new_pwd)) 
     	{
-    		return $this->user_service->change_password($uid, $old_pwd, $new_pwd);
+    		return $this->user_model->change_password($uid, $old_pwd, $new_pwd);
     	}
     	return FALSE;
     }
