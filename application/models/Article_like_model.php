@@ -16,13 +16,14 @@ class Article_like_model extends CI_Model {
      * [article_vote 文章点赞或取消]
      * @param  [type] $aid [文章id]
      * @param  [type] $uid [用户id]
-     * @return [type]      [description]
+     * @return [type]      [TRUE:点赞, FALSE:取消点赞]
      */
     public function article_vote($aid, $uid)
     {
         $query = $this->get_article_vote_by_both($aid, $uid);
         //首次点赞
-        if( empty($query) ) {
+        if( empty($query) ) 
+        {
             $data = array(
                 'aid'           => $aid,
                 'uid'           => $uid,
@@ -30,21 +31,21 @@ class Article_like_model extends CI_Model {
                 'update_time'   => date("Y-m-d H:i:s", time())
             );
             $this->db->insert('article_like', $data);
-            return $this->db->affected_rows() === 1 ? array('status' => 1,'type' => 0) : FALSE;
+            return $this->db->affected_rows() === 1 ;
         }
-        else{
+        else
+        {
             $status = ! $query['status'];
             $this->db->where('aid', $aid)
                      ->where('uid', $uid)
                      ->update('article_like', array('status' => $status, 'update_time' => date("Y-m-d H:i:s", time())));
             
-            return $this->db->affected_rows() === 1 ? array('status' => $status,'type' => 1) : FALSE;
+            return $this->db->affected_rows() === 1 && $status;
         }
-        return FALSE;
     }
 
     /**
-     * [get_article_vote_by_both 获取用户对文章的点赞信息]
+     * [get_article_vote_by_both 获取用户对文章的点过赞信息]
      * @param  [type] $aid [description]
      * @param  [type] $uid [description]
      * @return [type]      [description]
@@ -54,8 +55,11 @@ class Article_like_model extends CI_Model {
         return $this->db->where(array('aid' => $aid,'uid' => $uid))->get('article_like')->row_array();
     }
 
-
-    public function get_user_by_aid($aid)
+	
+    /**
+     * 获取对谋篇文章点过赞的所有用户
+     */
+    public function get_vote_person_by_aid($aid)
     {
         return $this->db->select('uid')->where('aid', $aid)->get('article_like')->result_array();
     }

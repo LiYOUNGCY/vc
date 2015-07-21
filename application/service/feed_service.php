@@ -54,6 +54,38 @@ class Feed_service extends MY_Service {
        }
        return $feed;
     }
+    
 
+	/**
+	 * 插入文章类的动态
+	 */
+    public function insert_article_feed($uid, $cid, $content)
+    {
+    	$this->feed_model->insert_feed($uid, $cid, 2, $content);
+    }
 
+    /**
+     * [delete_article_feed 删除文章类的动态]
+     */
+    public function delete_article_feed($uid, $cid)
+    {
+      $this->feed_model->delete_feed($uid, $cid, 2);
+    }
+    
+    
+    /**
+     * 插入点赞类的动态
+     */
+    public function insert_vote_feed($uid, $cid, $content)
+    {
+    	$this->feed_model->insert_feed($uid, $cid, 1, $content);
+    }
+
+    /**
+     * [delete_vote_feed 删除点赞类的动态]
+     */
+    public function delete_vote_feed($uid, $cid)
+    {
+      $this->feed_model->delete_feed($uid, $cid, 1);
+    }
 }

@@ -77,7 +77,7 @@ class User_service extends MY_Service
      */
     public function get_user_base_id($uid)
     {
-        $field = array('name, pic, alias');
+        $field = array('id', 'name', 'pic', 'alias', 'role');
         return $this->get_user_by_id($uid, $field);
     }
 
