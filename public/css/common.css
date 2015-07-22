@@ -299,9 +299,6 @@ img{
     float: left;
     overflow: hidden;
 }
-.userhead{
-
-}
 .main {
     margin: 0 auto;
 
@@ -951,4 +948,89 @@ img{
     word-wrap:break-word;
     font-weight: bold;
     word-break:normal;
+}
+
+.setting {
+  width: 480px;
+  margin: 0 auto;
+  margin-top: 80px;
+}
+
+.setting .main h1{
+  font-size: 48px;
+  font-weight: 100;
+}
+.setting .main .vi-menu ul{
+    width: auto;
+    margin: 30px auto;
+}
+.form-group {
+  vertical-align: middle;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: inline-block;
+  width: 90px;
+  margin-bottom: 5px;
+  text-align: right;
+}
+
+.form-group input[type="text"]{
+  box-sizing: border-box;
+  display: inline-block;
+  width: 300px;
+  height: 34px;
+  padding: 6px 12px;
+  color: #555;
+  background-color: #FFF;
+  border: 1px solid #CCC;
+  border-radius: 4px;
+  margin: 0;
+}
+.form-group .radio-group {
+    display: inline-block;
+    width: 300px;
+    text-align: left;
+}
+.form-group .radio-group div {
+    display: inline-block;
+}
+.form-group input[type="radio"] {
+    margin-left: 15px;
+}
+.form-group .birthday {
+    width: 300px;
+    display: inline-block;
+    text-align: normal;
+}
+.form-group select {
+    display: inline-block;
+    width: 25%;
+    margin-left: 5px;
+    box-sizing: border-box;
+    padding: 6px 12px;
+    color: #555;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+}
+
+.setting .set-btn{
+    box-sizing:content-box;
+    width: 30%;
+    height: 24px;
+    display: inline-block;
+}
+
+.setting .set-btn {
+    font-size: 18px;
+    padding: 6px 0;
+    cursor: pointer;
+}
+.setting .set-btn:hover{
+    -moz-animation: bgcolor-y 0.2s ease-out forwards;
+    -ms-animation: bgcolor-y 0.2s ease-out forwards;
+    -webkit-animation: bgcolor-y 0.2s ease-out forwards;
+    animation: bgcolor-y 0.2s ease-out forwards;
 }
