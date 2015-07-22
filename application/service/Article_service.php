@@ -87,6 +87,12 @@ class Article_service extends MY_Service{
         
         return $query;
     }
+
+
+    public function read_article($aid)
+    {
+        $this->article_model->read_article($aid);
+    }
     
 
     /**
@@ -120,6 +126,12 @@ class Article_service extends MY_Service{
     		//删除动态表的动态
             $this->feed_model->delete_feed($uid, $article['id'], 1);
     	}
+    }
+
+
+    public function write_comment($aid, $uid, $comment)
+    {
+        $this->article_comment_model->insert_comment($aid, $uid, $comment);
     }
 
 

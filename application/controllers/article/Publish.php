@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Rache
- * Date: 2015/7/15
- * Time: 12:07
- */
+
 class Publish extends MY_Controller {
     public function __construct()
     {

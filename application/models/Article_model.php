@@ -102,8 +102,8 @@ class Article_model extends CI_Model {
      */
     public function argee_article($aid)
     {
-    	$table_name = $this->db->protect_identifiers('av__article', TRUE);
-    	$this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` + 1 WHERE {$table_name}.id = ".$aid);
+    	$table_name = $this->db->protect_identifiers('article', TRUE);
+    	$this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` + 1 WHERE {$table_name}.id = {$aid}");
     }
     
     /**
@@ -111,7 +111,14 @@ class Article_model extends CI_Model {
      */
     public function disargee_article($aid)
     {
-    	$table_name = $this->db->protect_identifiers('av__article', TRUE);
+    	$table_name = $this->db->protect_identifiers('article', TRUE);
     	$this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` - 1 WHERE {$table_name}.id = {$aid} and {$table_name}.`like` > 0");
+    }
+
+
+    public function read_article($aid)
+    {
+        $table_name = $this->db->protect_identifiers('article', TRUE);
+        $this->db->query("UPDATE {$table_name} SET {$table_name}.`read` = {$table_name}.`read` + 1 WHERE {$table_name}.id = {$aid}");
     }
 }
