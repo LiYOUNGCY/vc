@@ -13,6 +13,12 @@
   <input id="BASE_URL" type="hidden" value="<?=base_url()?>">
  </head>
 <body>
-
+	<textarea></textarea>
 </body>
+	<script src="<?=base_url().'/public/js/jquery.flexText.min.js' ?>"></script>
+	<script>
+		$(function(){
+			 $('textarea').flexText();
+		});
+	</script>
 </html>
