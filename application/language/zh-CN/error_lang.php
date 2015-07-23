@@ -9,3 +9,4 @@ $lang['error_PHONE_REPEAT']			= "该手机号码已被注册";
 $lang['error_EMAIL_REPEAT']			= "该邮箱已被注册";
 $lang['error_OLD_PASSWORD_ERROR']	= "旧密码错误";
 $lang['error_ARTICLE_NOT_EXIST']	= "文章不存在";
+$lang['error_INVALID_REQUEST']		= "无效的请求";

@@ -248,17 +248,4 @@ class User_model extends CI_Model
     	$this->error->output('old_password_error');
     }
 
-
-    /**
-     * [get_user_follow 获取用户关注列表]
-     */
-    public function get_user_follow($page = 0, $uid, $limit = 10, $order = 'id DESC')
-    {
-    	$this->db->where(array('uid' => $uid,'status' => 1))->order_by($order);
-		if( ! empty($limit))
-		{
-			$this->db->limit($limit, $page*$limit);
-		}
-    	return $this->db->get('user_follow')->result_array();
-    }
 }
