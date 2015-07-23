@@ -146,12 +146,12 @@ class User_model extends CI_Model
     	{
     		$this->db->select($custom);
     	}
-        $query = $this->db->where('id', $uid)->get('user')->result_array();
+      $query = $this->db->where('id', $uid)->get('user')->result_array();
 
-        //删除敏感信息
-        unset($query[0]['pwd']);
+      //删除敏感信息
+      unset($query[0]['pwd']);
 
-        return ! empty($query) ? $query[0] : NULL;
+      return ! empty($query) ? $query[0] : NULL;
     }
 
 
@@ -215,11 +215,12 @@ class User_model extends CI_Model
      */
     public function update_account($uid, $update)
     {
+      var_dump($update);
     	if(! is_array($update))
     	{
-    		return FALSE;
+    		return FASLE;
     	}
-
+      echo $uid;
     	//删除敏感字段
     	unset($update['pwd']);
     	$this->db->where('id', $uid)->update('user', $update);
