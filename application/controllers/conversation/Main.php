@@ -15,13 +15,11 @@ class Main extends MY_Controller{
 	 * @param  [type] $cid [对话id]
 	 * @return [type]      [description]
 	 */
-	public function get_conversation_content($cid)
+	public function get_conversation_content()
 	{
 		$page = $this->sc->input('page');
-		if( ! is_numeric($cid))
-		{
-			show_404();
-		}
+		$cid  = $this->sc->input('cid');
+
 		$content = $this->conversation_service->get_conversation_content($page,$this->user['id'],$cid);
 		echo json_encode($content);
 	}

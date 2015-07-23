@@ -11,14 +11,26 @@ class Main extends MY_Controller{
 	 * [index 显示消息列表]
 	 * @return [type] [description]
 	 */
-	public function index($type = "all")
+	public function index()
+	{
+
+	}
+
+	/**
+	 * [get_notification_list 获取消息列表]
+	 * @return [type] [description]
+	 */
+	public function get_notification_list()
 	{
 		$page = $this->sc->input('page');
+		//消息类型
+		$type = $this->sc->input('type');
+		$type = ! empty($type) ? $type : 'all';
+		
 		$notification = $this->notification_service->get_notification_list($page,$this->user['id'],$type);
 
 		echo json_encode($notification);
 	}
-
 	/**
 	 * [read 阅读消息]
 	 * @return [type] [description]

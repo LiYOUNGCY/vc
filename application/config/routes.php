@@ -52,3 +52,52 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = '';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+/**
+ * 文章
+ */
+$route['article/(:num)'] = 'article/detail/index/$1';
+$route['article'] = 'article/main';
+$route['article/([a-z]*)'] = 'article/main';
+
+/**
+ *联系人
+ */
+$route['contacts']  = 'contacts/main';
+
+/**
+ * 用户
+ */
+$route['login'] = 'account/main/index/login';
+$route['signup'] = 'account/main/index/signup';
+$route['setting']   = 'account/setting/index/user';
+$route['setting/(([a-z]*))']   = 'account/setting/index/$1';
+
+/**
+ *圈子 
+ */
+$route['community/(:num)'] = 'community/main';
+$route['post/(:num)'] = 'community/post/index/$1';
+$route['publish/community'] = 'community/publish/index/community';
+$route['publish/post'] = 'community/publish/index/post';
+
+/**
+ * 联系人
+ */
+$route['contacts'] = 'contacts/main';
+$route['contacts/([a-z]*)'] = 'contacts/main';
+
+/**
+ * 私信
+ */
+$route['conversation/(:num)'] = 'conversation/main/index/$1';
+
+/**
+ * 动态
+ */
+$route['feed'] = 'feed/main';
+
+/**
+ *消息 
+ */
+$route['notification']  = 'notification/main';
+$route['notification/([a-z]*)'] = 'notification/main';

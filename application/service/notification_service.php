@@ -16,6 +16,7 @@ class Notification_service extends MY_Service{
 	 */
 	public function get_notification_list($page,$uid,$type)
 	{
+		
 		switch ($type) {
 			case 'all':
 				$type = NULL;

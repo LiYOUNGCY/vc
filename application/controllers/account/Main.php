@@ -10,18 +10,18 @@ class Main extends MY_Controller
 	}
 
 
-	public function index()
+	public function index($type = 'login')
 	{	
-		$this->load->view('login');
+		if($type == 'login')
+		{
+			$this->load->view('login');			
+		}
+		else if($type == 'signup')
+		{
+			$this->load->view('register');			
+		}
 	}
-	
-
-	public function signup()
-	{
-		$this->load->view('register');
-	}
-
-
+		
 	/**
 	 * [login 登陆]
 	 */

@@ -6,9 +6,21 @@ class Publish extends MY_Controller{
 		$this->load->service('community_service');		
 	}
 
-	public function index()
+	/**
+	 * [index 显示发布界面]
+	 * @param  string $type [界面类型]
+	 * @return [type]       [description]
+	 */
+	public function index($type = 'community')
 	{
+		if($type == 'community')
+		{
 
+		}
+		else if($type == 'post')
+		{
+
+		}
 	}
 
 	/**

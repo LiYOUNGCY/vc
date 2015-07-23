@@ -40,7 +40,7 @@ class Article_model extends CI_Model {
     /**
      * 获取文章列表
      */
-    public function get_article_list($page = 0, $uid = -1, $type, $limit = 6, $order = "id DESC")
+    public function get_article_list($page = 0, $uid = -1, $type, $tag, $limit = 6, $order = "id DESC")
     {
         $query = $this->db
             ->select('article.id, article.uid, article.title, article.subtitle, article.content, article.like')
