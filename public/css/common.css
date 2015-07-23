@@ -27,8 +27,6 @@ input,textarea{
     color:#FCEE21;
 }
 
-
-
 img{
     vertical-align: middle;
 }
@@ -988,6 +986,22 @@ img{
   border: 1px solid #CCC;
   border-radius: 4px;
   margin: 0;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+.form-group input[type="text"]:focus {
+    -moz-animation: bdcolor 0.2s ease-out forwards;
+    -ms-animation: bdcolor 0.2s ease-out forwards;
+    -webkit-animation: bdcolor 0.2s ease-out forwards;
+    animation: bdcolor 0.2s ease-out forwards;
+    box-shadow:0px 1px 1px rgba(252, 238, 33, 0.075) inset, 0px 0px 8px rgba(102, 175, 233, 0.6);
+}
+.form-group select:focus{
+    -moz-animation: bdcolor 0.2s ease-out forwards;
+    -ms-animation: bdcolor 0.2s ease-out forwards;
+    -webkit-animation: bdcolor 0.2s ease-out forwards;
+    animation: bdcolor 0.2s ease-out forwards;
+    box-shadow:0px 1px 1px rgba(252, 238, 33, 0.075) inset, 0px 0px 8px rgba(102, 175, 233, 0.6);
+    outline: none;
 }
 .form-group .radio-group {
     display: inline-block;
@@ -1033,4 +1047,22 @@ img{
     -ms-animation: bgcolor-y 0.2s ease-out forwards;
     -webkit-animation: bgcolor-y 0.2s ease-out forwards;
     animation: bgcolor-y 0.2s ease-out forwards;
+}
+
+@-webkit-keyframes bdcolor{
+    0%{}
+    100%{border-color:#FCEE21;}
+}
+@keyframes bdcolor{
+    0%{}
+    100%{border-color:#FCEE21;}
+}
+
+.form-group .error_div {
+    text-align: right;
+    width: 390px;
+    position: relative;
+    font-size: 14px;
+    color: red;
+    display: none;
 }

@@ -134,7 +134,7 @@ class User_service extends MY_Service
     			$data[$key] = trim($data[$key]);
     		}
     		//unset 空的变量
-    		if(empty($data[$kye]))
+    		if(empty($data[$key]))
     		{
     			unset($data[$key]);
     		}
