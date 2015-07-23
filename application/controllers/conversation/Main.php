@@ -5,7 +5,11 @@ class Main extends MY_Controller{
 		parent::__construct();
 		$this->load->service('conversation_service');
 	}
-
+	
+	public function index()
+	{
+		
+	}
 	/**
 	 * [get_conversation_content 获取对话内容]
 	 * @param  [type] $cid [对话id]
