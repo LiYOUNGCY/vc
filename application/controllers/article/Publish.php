@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Rache
- * Date: 2015/7/15
- * Time: 12:07
- */
+
 class Publish extends MY_Controller {
     public function __construct()
     {
@@ -25,14 +20,6 @@ class Publish extends MY_Controller {
         $this->user = array();
         $this->user['id'] = 4;
         //把文章插入到数据库
-        $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_subtitle, $article_type, $article_content);
-        if( ! empty($article))
-        {
-            
-        }
-        else
-        {
-            echo 'fault';
-        }       
+        $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_subtitle, $article_type, $article_content);     
     }
 }

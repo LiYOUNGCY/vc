@@ -54,6 +54,4 @@ class Feed_service extends MY_Service {
        }
        return $feed;
     }
-
-
 }

@@ -11,10 +11,6 @@ class Article_comment_model extends CI_Model
 
     /**
      * 新增评论
-     * @param $aid
-     * @param $uid
-     * @param $content
-     * @return mixed
      */
     public function insert_comment($aid, $uid, $content)
     {

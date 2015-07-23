@@ -13,11 +13,6 @@ class User_service extends MY_Service
 
 	/**
 	 * [register_action 用户注册]
-	 * @param  [type] $name  [description]
-	 * @param  [type] $pwd   [description]
-	 * @param  [type] $email [description]
-	 * @param  [type] $phone [description]
-	 * @return [type]        [description]
 	 */
 	public function register_action($name, $pwd, $email, $phone)
 	{
@@ -35,21 +30,21 @@ class User_service extends MY_Service
 			//错误
 			return FALSE;
 		}
-		return $this->user_model->register_action ($name, $register_type, $pwd);
+		
+		//注册成功，设置 session
+		if ( $user_id = $this->user_model->register_action ($name, $register_type, $pwd) != FALSE ) {
+			$user = $this->user_model->get_user_base_id($user_id);
+			//设置 SESSION
+			$this->auth_service->set_login_session($user);
+		}
 	}
 
 
 	/**
 	 * [login_action 用户登录]
-	 * @param  [type] $pwd        [description]
-	 * @param  [type] $email      [description]
-	 * @param  [type] $phone      [description]
-	 * @param  [type] $rememberme [description]
-	 * @return [type]             [description]
 	 */
 	public function login_action($pwd, $email, $phone, $rememberme)
 	{
-		
 		$login_type = array();
 
 		if( ! empty($phone) )
@@ -67,23 +62,15 @@ class User_service extends MY_Service
 
 		$user = $this->user_model->login_action($login_type, $pwd);
 
-		if( isset( $user ) )
+		if($rememberme) 
 		{
-			if($rememberme) {
-				//设置 cookie
-				$this->auth_service->set_remember_me_cookie($user);
-			}
-			
-			//设置 SESSION
-			$this->auth_service->set_login_session($user);
-
-			return true;
+			//设置 cookie
+			$this->auth_service->set_remember_me_cookie($user);
 		}
-		else 
-		{
-			return false;
-		}
+		//设置 SESSION
+		$this->auth_service->set_login_session($user);
 	}
+
 
 
     /**
@@ -93,7 +80,7 @@ class User_service extends MY_Service
      * @param  [type] $amount [数量]
      * @return [type]         [description]
      */
-    public function update_count($uid,$name,$amount)
+    public function update_count($uid, $name, $amount)
     {
         return $this->user_model->update_count($uid,array('name' => $name, 'amount' => $amount));
     }
@@ -101,8 +88,6 @@ class User_service extends MY_Service
 
     /**
      * [get_user_by_id 获取用户信息]
-     * @param  [type] $uid [用户id]
-     * @return [type]      [description]
      */
     public function get_user_by_id($uid,$custom = NULL)
     {
@@ -112,9 +97,6 @@ class User_service extends MY_Service
 
     /**
      * [update_account 更新个人信息]
-     * @param  [type] $uid  [description]
-     * @param  [type] $data [description]
-     * @return [type]       [description]
      */
     public function update_account($uid, $data)
     {
@@ -124,11 +106,14 @@ class User_service extends MY_Service
     }
 
 
+    /**
+     * [change_password 更改密码]
+     */
     public function change_password($uid, $old_pwd, $new_pwd)
     {
     	if(isset($old_pwd, $new_pwd)) 
     	{
-    		return $this->user_service->change_password($uid, $old_pwd, $new_pwd);
+    		return $this->user_model->change_password($uid, $old_pwd, $new_pwd);
     	}
     	return FALSE;
     }
@@ -141,18 +126,19 @@ class User_service extends MY_Service
      */
     private function _clear($data)
     {
-    	foreach ($data as $key => $value) {
-    		if(is_string($data[$key])) {
+    	foreach ($data as $key => $value) 
+    	{
+    		if(is_string($data[$key])) 
+    		{
     			//去除字符串两端的空格
     			$data[$key] = trim($data[$key]);
     		}
     		//unset 空的变量
-    		if(empty($data[$kye]))
+    		if(empty($data[$key]))
     		{
     			unset($data[$key]);
     		}
     	}
-
     	return $data;
     }
 }

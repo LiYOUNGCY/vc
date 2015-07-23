@@ -8,20 +8,11 @@ class Setting extends MY_Controller
 		$this->load->service('user_service');
 	}
 
-	public function index($type = '')
-	{
-		if( ! empty($type) && is_string($type) )
-		{
-			if(strcmp($type, 'pwd'))
-			{
-				//进入修改密码界面
-			}
-			else if(strcmp($type, 'account'))
-			{
-				//进入个人信息的界面
-			}
-		}
+	public function index() { 
+		//修改个人信息的页面
+		$this->load->view('setting');
 	}
+
 
 	public function change_password()
 	{
@@ -34,9 +25,34 @@ class Setting extends MY_Controller
 
 	public function update_account()
 	{
-		$arr = array('name', 'alias', 'sex', 'birthday', 'area', 'email', 'phone');
+		$arr 	= array('name', 'alias', 'sex', 'area', 'email', 'phone');
+		$year 	= $this->sc->input('year');
+		$mouth	= $this->sc->input('mouth');
+		$day  	= $this->sc->input('day');
+
+		$mouth 	= strlen($mouth) < 2 ? '0'.$mouth : $mouth;
+		$day 	= strlen($day) < 2 ? '0'.$day : $day;
+
 		$data = $this->sc->input($arr);
 
+		$data['birthday'] = $year.'-'.$mouth.'-'.$day;
+ 
+
 		$this->user_service->update_account($this->user['id'], $data);
+	}
+
+	public function pwd()
+	{
+		//加载修改密码的页面
+	}
+
+	public function get_msg()
+	{
+		//$uid = $this->user['id'];
+		$uid = 4;
+
+		$data = $this->user_service->get_user_by_id($uid);
+
+		echo json_encode($data);
 	}
 }

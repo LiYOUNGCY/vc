@@ -14,15 +14,23 @@ class User_model extends CI_Model
 	/**
 	 * [register_action description]
 	 * @param  [array] $register_type [array('phone' => xxx), array('email'	=> xxx)]
-	 * @param  [string] $pwd           [description]
-	 * @return [bool]                [description]
 	 */
 	public function register_action ($name, $register_type, $pwd) 
 	{
 		if(! ( isset($register_type['email']) || isset($register_type['phone']) ) )
 		{
-			return NULL;
+			return FALSE;
 		}
+
+        if( isset($register_type['email']) && $this->have_email($register_type['email']) )
+        {
+            $this->error->output('email_repeat');
+        }
+        elseif( isset($register_type['phone']) && $this->have_phone($register_type['phone']) )
+        {
+            $this->error->output('phone_repeat');
+        }
+
 
 		$register_type['pwd'] = $this->passwordhash->HashPassword($pwd);
 		$register_type['name']= $name;
@@ -32,14 +40,16 @@ class User_model extends CI_Model
         $uid = $this->db->insert_id();
 
 		//注册成功
-		if($this->db->affected_rows() === 1) {
+		if($this->db->affected_rows() === 1) 
+        {
             //插入 user_online 表
             $this->_insert_user_online($uid);
 
-            return $this->get_user_by_id($uid);
+            return $uid;
 		}
-		else {
-			return NULL;
+		else 
+        {
+			$this->error->output('register_error');
 		}
 	}
 
@@ -52,7 +62,7 @@ class User_model extends CI_Model
 	 */
 	public function login_action ($login_type, $pwd)
 	{
-		$query = $this->db->select('*');
+		$query = $this->db->select('id, pwd');
 
 		if ( isset ($login_type['phone']) )
 		{
@@ -65,7 +75,7 @@ class User_model extends CI_Model
 		//调用错误
 		else
 		{
-			return NULL;
+			return FALSE;
 		}
 
 		$data = $query->get('user')->result_array();
@@ -81,18 +91,16 @@ class User_model extends CI_Model
 				unset($data['pwd']);
 
 				// 返回用户数据
-				return $data;
+				return $data['id'];
 			}
 		}
 
-		return NULL;
+		$this->error->output('password_error');
 	}
 
 
     /**
      * 当用户登录的时候，刷新 user_online 表
-     * @param $uid
-     * @return mixed
      */
     public function get_login_msg_by_id($uid)
     {
@@ -100,21 +108,37 @@ class User_model extends CI_Model
         return $this->get_user_by_id($uid);
     }
 
-	public function check_email ($email)
+    /**
+     * [check_email 检查 email 是否重复]
+     */
+	public function have_email ($email)
 	{
-		return $this->db->where('email', $email)->from('user')->count_all_results() === 0 ? true : false;
+		return $this->db->where('email', $email)->from('user')->count_all_results() !== 0 ? true : false;
 	}
 
-	public function check_phone ($phone)
+
+    /**
+     * [check_phone 检查 phone 是否重复]
+     */
+	public function have_phone ($phone)
 	{
-		return $this->db->where('phone', $phone)->from('user')->count_all_results() === 0 ? true : false;
+		return $this->db->where('phone', $phone)->from('user')->count_all_results() !== 0 ? true : false;
+	}
+
+	
+	/**
+	 * [get_user_base_id 获得用户的基本的信息]
+	 */
+	public function get_user_base_id($uid)
+	{
+		$field = array('id', 'name', 'pic', 'alias', 'role');
+		return $this->get_user_by_id($uid, $field);
 	}
 
 	/**
 	 * [get_user_by_id 获取用户信息]
 	 * @param  [type] $uid    [用户id]
 	 * @param  [type] $custom [自定义查询条件]
-	 * @return [type]         [description]
 	 */
     public function get_user_by_id($uid, $custom='')
     {
@@ -122,15 +146,18 @@ class User_model extends CI_Model
     	{
     		$this->db->select($custom);
     	}
-        $query = $this->db->where('id', $uid)->get('user')->result_array();
+      $query = $this->db->where('id', $uid)->get('user')->result_array();
 
-        //删除敏感信息
-        unset($query[0]['pwd']);
+      //删除敏感信息
+      unset($query[0]['pwd']);
 
-        return ! empty($query) ? $query[0] : NULL;
+      return ! empty($query) ? $query[0] : NULL;
     }
 
 
+    /**
+     * [_update_user_online_by_id 登陆时，更新用户的登陆时间和 ip ]
+     */
     private function _update_user_online_by_id($uid)
     {
         $data = array(
@@ -140,6 +167,11 @@ class User_model extends CI_Model
         $this->db->where('uid',$uid)->update('user_online', $data);
     }
 
+
+    
+    /**
+     * [_insert_user_online 用户注册时，插入一条信息]
+     */
     private function _insert_user_online($uid)
     {
         $data = array(
@@ -149,6 +181,7 @@ class User_model extends CI_Model
         );
         $this->db->insert('user_online', $data);
     }
+
 
     /**
      * [update_count 更新用户字段数量]
@@ -182,11 +215,12 @@ class User_model extends CI_Model
      */
     public function update_account($uid, $update)
     {
+      var_dump($update);
     	if(! is_array($update))
     	{
-    		return FALSE;
+    		return FASLE;
     	}
-
+      echo $uid;
     	//删除敏感字段
     	unset($update['pwd']);
     	$this->db->where('id', $uid)->update('user', $update);
@@ -196,10 +230,6 @@ class User_model extends CI_Model
 
     /**
      * [change_password 更改密码]
-     * @param  [type] $uid     [description]
-     * @param  [type] $old_pwd [description]
-     * @param  [type] $new_pwd [description]
-     * @return [type]          [description]
      */
     public function change_password($uid, $old_pwd, $new_pwd)
     {
@@ -215,26 +245,7 @@ class User_model extends CI_Model
     			return $this->db->affected_rows() === 1;
     		}
     	}
-    	return FALSE;
+    	$this->error->output('old_password_error');
     }
-    /**
-     * [get_user_follow 获取用户关注列表]
-     * @param  [type] $page  [description]
-     * @param  [type] $uid   [description]
-     * @param  [type] $limit [description]
-     * @param  [type] $order [description]
-     * @return [type]        [description]
-     */
-    public function get_user_follow($page = 0, $uid, $limit = 10, $order = 'update_time DESC')
-    {
-    	$this->db->where(array('uid' => $uid,'status' => 1))->order_by($order);
-		if( ! empty($limit))
-		{
-			$this->db->limit($limit, $page*$limit);
-		}
-    	$query = $this->db->get('user_follow')
-    		     		  ->result_array();
-    	return $query;
 
-    }
 }

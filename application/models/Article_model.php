@@ -6,7 +6,10 @@ class Article_model extends CI_Model {
     {
         parent::__construct();
     }
-
+	
+    /**
+     * 把文章的信息插入到数据库
+     */
     public function publish_article($user_id, $article_title, $article_subtitle, $article_type, $article_content)
     {
         $data = array(
@@ -24,10 +27,8 @@ class Article_model extends CI_Model {
         {
             return FALSE;
         }
-
-        $data['id'] = $this->db->insert_id();
-
-        return $data;
+        
+        return $this->db->insert_id();
     }
 
     public function get_article_by_id($aid)
@@ -35,11 +36,14 @@ class Article_model extends CI_Model {
         return $this->db->where('id', $aid)->get('article')->row_array();
     }
 
-
-    public function get_article_list($page = 0, $uid = -1, $type, $limit = 6, $order = "publish_time desc")
+	
+    /**
+     * 获取文章列表
+     */
+    public function get_article_list($page = 0, $uid = -1, $type, $limit = 6, $order = "id DESC")
     {
         $query = $this->db
-            ->select('article.id, article.uid, article.title, article.content, article.like')
+            ->select('article.id, article.uid, article.title, article.subtitle, article.content, article.like')
             ->from('article');
 
         if( is_numeric($uid))
@@ -91,5 +95,30 @@ class Article_model extends CI_Model {
                         ->get('article_like')
                         ->result_array();
       return $query;
-    }    
+    }
+    
+    /**
+     * 点赞时，文章的 like 加一
+     */
+    public function argee_article($aid)
+    {
+    	$table_name = $this->db->protect_identifiers('article', TRUE);
+    	$this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` + 1 WHERE {$table_name}.id = {$aid}");
+    }
+    
+    /**
+     * 取消点赞时，文章的 like 减一
+     */
+    public function disargee_article($aid)
+    {
+    	$table_name = $this->db->protect_identifiers('article', TRUE);
+    	$this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` - 1 WHERE {$table_name}.id = {$aid} and {$table_name}.`like` > 0");
+    }
+
+
+    public function read_article($aid)
+    {
+        $table_name = $this->db->protect_identifiers('article', TRUE);
+        $this->db->query("UPDATE {$table_name} SET {$table_name}.`read` = {$table_name}.`read` + 1 WHERE {$table_name}.id = {$aid}");
+    }
 }

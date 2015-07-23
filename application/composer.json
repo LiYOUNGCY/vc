@@ -1,5 +1,6 @@
 {
     "require": {
-        "ircmaxell/random-lib": "1.0.*"
+        "ircmaxell/random-lib": "1.0.*",
+        "endroid/qrcode":"1.5.4"
     }
 }
