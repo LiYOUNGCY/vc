@@ -136,7 +136,16 @@ class Community_service extends MY_Service{
 		if( ! empty($check_result))
 		{
 			$insert_result = $this->community_post_model->insert_post($cid,$uid,$title,$content);
-			return $insert_result;			
+			if($insert_result)
+			{
+				echo "success";
+				$this->community_model->update_community($cid,array('post' => array(FALSE,'post+1')));
+				return TRUE;
+			}	
+			else
+			{
+				return FALSE;
+			}		
 		}
 		else
 		{
@@ -156,7 +165,16 @@ class Community_service extends MY_Service{
 	{
 		//这里少了对用户的验证,验证是否关注该圈子
 		$insert_result = $this->community_answer_model->insert_answer($pid,$uid,$content);
-		return $insert_result;
+		if($insert_result)
+		{
+			echo "success";
+			$this->community_post_model->update_post($pid,array('answer' => array(FALSE,'answer+1'),'last_active' =>array(TRUE,date("Y-m-d H:i:s",time()))));
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
 	}
 
 

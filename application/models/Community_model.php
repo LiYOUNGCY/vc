@@ -49,4 +49,22 @@ class Community_model extends CI_Model{
  		$this->db->insert('community',$arr);
   		return $this->db->affected_rows() === 1;
 	}
+
+	/**
+	 * [update_community 更新圈子]
+	 * @param  [type] $cid [圈子id]
+	 * @param  [type] $arr [键值数组]
+	 * @return [type]      [description]
+	 */
+    public function update_community($cid,$arr){
+    	$this->db->where('id',$cid);
+
+    	foreach ($arr as $k => $v) {
+    		$this->db->set($k,$v[1],$v[0]);
+    	}
+
+    	$this->db->update('community');
+  		return $this->db->affected_rows() === 1;    	
+    }
+
 }

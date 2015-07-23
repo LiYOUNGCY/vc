@@ -36,4 +36,5 @@ class Community_answer_model extends CI_Model{
 		$this->db->insert('community_answer',$arr);
   		return $this->db->affected_rows() === 1;		
 	}
+
 }
