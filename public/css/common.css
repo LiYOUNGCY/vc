@@ -278,7 +278,7 @@ img{
 }
 .content {
     max-width: 960px;
-    margin: 0px auto;
+    margin: 0 auto;
     text-align: center;
     display: inline-block;
     width: 100%;
@@ -948,17 +948,17 @@ img{
     word-break:normal;
 }
 
-.setting {
+.contianer-480p {
   width: 480px;
   margin: 0 auto;
   margin-top: 80px;
 }
 
-.setting .main h1{
+.contianer-480p .main h1{
   font-size: 48px;
   font-weight: 100;
 }
-.setting .main .vi-menu ul{
+.contianer-480p .main .vi-menu ul{
     width: auto;
     margin: 30px auto;
 }
@@ -993,14 +993,14 @@ img{
     -ms-animation: bdcolor 0.2s ease-out forwards;
     -webkit-animation: bdcolor 0.2s ease-out forwards;
     animation: bdcolor 0.2s ease-out forwards;
-    box-shadow:0px 1px 1px rgba(252, 238, 33, 0.075) inset, 0px 0px 8px rgba(102, 175, 233, 0.6);
+    box-shadow:0 1px 1px rgba(252, 238, 33, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
 }
 .form-group select:focus{
     -moz-animation: bdcolor 0.2s ease-out forwards;
     -ms-animation: bdcolor 0.2s ease-out forwards;
     -webkit-animation: bdcolor 0.2s ease-out forwards;
     animation: bdcolor 0.2s ease-out forwards;
-    box-shadow:0px 1px 1px rgba(252, 238, 33, 0.075) inset, 0px 0px 8px rgba(102, 175, 233, 0.6);
+    box-shadow:0 1px 1px rgba(252, 238, 33, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
     outline: none;
 }
 .form-group .radio-group {
@@ -1017,7 +1017,6 @@ img{
 .form-group .birthday {
     width: 300px;
     display: inline-block;
-    text-align: normal;
 }
 .form-group select {
     display: inline-block;
@@ -1030,19 +1029,19 @@ img{
     border: 1px solid #CCC;
 }
 
-.setting .set-btn{
+.contianer-480p .set-btn{
     box-sizing:content-box;
     width: 30%;
     height: 24px;
     display: inline-block;
 }
 
-.setting .set-btn {
+.contianer-480p .set-btn {
     font-size: 18px;
     padding: 6px 0;
     cursor: pointer;
 }
-.setting .set-btn:hover{
+.contianer-480p .set-btn:hover{
     -moz-animation: bgcolor-y 0.2s ease-out forwards;
     -ms-animation: bgcolor-y 0.2s ease-out forwards;
     -webkit-animation: bgcolor-y 0.2s ease-out forwards;
@@ -1058,11 +1057,12 @@ img{
     100%{border-color:#FCEE21;}
 }
 
-.form-group .error_div {
+.error_div {
     text-align: right;
     width: 390px;
     position: relative;
     font-size: 14px;
-    color: red;
+    color: crimson;
     display: none;
 }
+

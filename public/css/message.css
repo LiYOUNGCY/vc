@@ -1,0 +1,179 @@
+.container-960 {
+    margin: 0 auto;
+    width: 960px;
+}
+
+.container-head {
+    margin-top: 80px;
+
+    text-align: left;
+}
+
+.container-head h1 {
+    margin-bottom: 35px;
+
+    font-size: 48px;
+    font-weight: 100;
+
+    color: #b3b3b3;
+}
+
+.conversation {
+    margin-top: 25px;
+    border: 2px solid #b3b3b3;
+    border-style: solid none;
+    padding: 15px 5px;
+}
+
+.conversation .msg {
+    float: right;
+
+    width: 600px;
+}
+
+.conversation .emotion {
+    float: right;
+    width: 32px;
+    height: 32px;
+    background: url(../img/icon/smile_icon.png);
+    margin-left: 10px; 
+    cursor: pointer;
+}
+
+.conversation .send {
+    float: right;
+
+    margin-right: 5px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    width: 52.1px;
+    height: 32.2px;
+
+    cursor: pointer;
+}
+
+.conversation .send:hover {
+    -webkit-animation: bgcolor-y .2s ease-out forwards;
+       -moz-animation: bgcolor-y .2s ease-out forwards;
+        -ms-animation: bgcolor-y .2s ease-out forwards;
+            animation: bgcolor-y .2s ease-out forwards;
+}
+
+.avatar {
+    width: 52px;
+    height: auto;
+
+    text-align: center;
+}
+
+.avatar-left {
+    position: absolute;
+    top: 0;
+    left: -75px;
+}
+
+.avatar-right {
+    position: absolute;
+    top: 0;
+    right: -75px;
+}
+
+.avatar img {
+    border: 1px #b3b3b3 solid;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+}
+
+.avatar .username {
+    font-size: 12px;
+
+    color: #000;
+}
+
+.message {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.message-box {
+    box-sizing: border-box;
+    width: 576px;
+    min-height: 100px;
+
+    background-color: #fff;
+}
+
+.message-left {
+    padding: 15px 5px 15px 85px;
+}
+
+.message-right {
+    float: right;
+
+    padding: 15px 85px 15px 5px;
+}
+
+.message-content {
+    position: relative;
+
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 15px;
+    min-height: 70px;
+}
+
+.triangle-left {
+    border-top: 8px solid transparent;
+    border-right: 15px solid #e5e9ef;
+    border-bottom: 8px solid transparent;
+    border-radius: 1px;
+    width: 0;
+    height: 0;
+}
+
+.triangle-right {
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 15px solid #cde9f5;
+    border-radius: 1px;
+    width: 0;
+    height: 0;
+}
+
+.message-content .triangle-left {
+    position: absolute;
+    left: -15px;
+}
+
+.message-content .triangle-right {
+    position: absolute;
+    right: -15px;
+}
+
+.message-right .message-content {
+    border: 1px solid #c3d7e6;
+
+    text-align: right;
+
+    background-color: #cde9f5;
+}
+
+.message-left .message-content {
+    border: 1px solid #d0d7dd;
+
+    text-align: left;
+
+    background-color: #e5e9ef;
+}
+
+.message .time-box {
+    margin: 5px auto;
+    width: 80%;
+
+    font-size: 14px;
+    text-align: center;
+
+    color: #b3b3b3;
+}
