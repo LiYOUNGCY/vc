@@ -19,7 +19,7 @@ class Main extends MY_Controller{
 	{
 		$page = $this->sc->input('page');
 		$cid  = $this->sc->input('cid');
-	
+
 		$content = $this->conversation_service->get_conversation_content($page,$this->user['id'],$cid);
 		echo json_encode($content);
 	}
