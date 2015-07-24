@@ -34,8 +34,9 @@ class Main extends MY_Controller{
 		$content    = $this->sc->input('conversation_content');
 		/*
 		$this->user = array();
-		$this->user['id'] = 4;
+		$this->user['id'] = 20;
 		$reciver_id = 9;
+		$content = '捉急吧';
 		*/
 		$this->conversation_service->publish_conversation($this->user['id'],$reciver_id,$content);
 
