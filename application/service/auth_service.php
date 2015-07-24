@@ -94,8 +94,10 @@ class Auth_service extends MY_Service{
     {
         $_user_data = $this->_get_session();
         $_cookie = NULL;
+
         //检查 SESSION
-        if ( $_user_data )
+        
+        if ( $_user_data !== FALSE )
         {
             return $_user_data;
         }
@@ -114,6 +116,7 @@ class Auth_service extends MY_Service{
                 $user_data = $this->user_model->get_login_msg_by_id($uid);
 
                 $this->set_login_session($user_data);
+
                 return $user_data;
             }
             //可能 cookie 被纂改过

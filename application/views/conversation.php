@@ -96,6 +96,7 @@
                 alert(str);
             });
 
+
             // ajax 获取数据
             $.ajax({
                 type: "POST",
@@ -104,9 +105,8 @@
                     page: page,
                     cid: cid
                 },
-                dataType: "json",
                 success: function(data) {
-
+                    alert(data);
                 }
             });
 		});
