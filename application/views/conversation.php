@@ -20,7 +20,7 @@
         </div>
         </div>
         <div class="conversation">
-            <div class="clearfix">
+            <div class="clearfix" style="position:relative;">
                 <div id="submit" class="send btn">发送</div>
                 <div id="emotion" class="emotion"></div>
                 <div class="msg"><textarea id="msg"  placeholder="想说写什么..."></textarea></div>
@@ -79,8 +79,8 @@
             var BASE_URL = $("#BASE_URL").val();
 			 $('#msg').flexText();
              $('#emotion').qqFace({ 
-                assign: 'msg',   //给输入框赋值 
-                path: BASE_URL + "public/img/face/"    //表情图片存放的路径 
+                assign: 'msg',                          //给输入框赋值 
+                path: BASE_URL + "public/img/face/"     //表情图片存放的路径 
             });
 
             $("#submit").click(function(){ 

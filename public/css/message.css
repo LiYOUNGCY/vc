@@ -33,10 +33,13 @@
 
 .conversation .emotion {
     float: right;
+
+    margin-left: 10px;
     width: 32px;
     height: 32px;
+
     background: url(../img/icon/smile_icon.png);
-    margin-left: 10px; 
+
     cursor: pointer;
 }
 
@@ -176,4 +179,43 @@
     text-align: center;
 
     color: #b3b3b3;
+}
+
+
+@media screen and (max-width: 960px) {
+    .container-960 {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .container-head {
+        text-align: center;
+    }
+
+    .conversation .msg {
+        float: none;
+
+        width: 65%;
+    }
+
+    .message {
+        margin-top: 20px;
+    }
+
+    .message .message-box {
+        width: 100%;
+    }
+    .message .message-box .message-content {
+        width: 80%;
+    }
+
+    .message-right {
+        float: right;
+
+        padding: 12px 20% 15px 5px;
+    }
+
+    .message-right .message-content {
+        float: right;
+    }
 }
