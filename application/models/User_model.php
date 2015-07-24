@@ -3,11 +3,14 @@
 
 class User_model extends CI_Model
 {
+  private $base_field;
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->library('passwordhash');
 		$this->passwordhash->setPasswordHash(8, FALSE);
+
+    $this->base_field = array('id', 'name', 'pic', 'alias', 'role');
 	}
 
 
@@ -62,7 +65,7 @@ class User_model extends CI_Model
 	 */
 	public function login_action ($login_type, $pwd)
 	{
-		$query = $this->db->select('id, pwd');
+		$query = $this->db->select($this->base_field)->select('pwd');
 
 		if ( isset ($login_type['phone']) )
 		{
@@ -91,7 +94,7 @@ class User_model extends CI_Model
 				unset($data['pwd']);
 
 				// 返回用户数据
-				return $data['id'];
+				return $data;
 			}
       else
       {
@@ -137,8 +140,8 @@ class User_model extends CI_Model
 	 */
 	public function get_user_base_id($uid)
 	{
-		$field = array('id', 'name', 'pic', 'alias', 'role');
-		return $this->get_user_by_id($uid, $field);
+		
+		return $this->get_user_by_id($uid, $this->base_field);
 	}
 
 	/**
