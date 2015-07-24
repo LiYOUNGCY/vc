@@ -14,7 +14,7 @@
  </head> 
 <body>
   <div class="container">
-    <div class="setting">
+    <div class="container-480p">
       <div class="main">
         <h1>设置</h1>
         <div id="vi_menu" class="vi-menu width-100p">

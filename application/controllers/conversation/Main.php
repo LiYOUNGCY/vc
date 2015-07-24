@@ -8,7 +8,22 @@ class Main extends MY_Controller{
 	
 	public function index()
 	{
-		
+		$data['css'] = array(
+			'common.css',
+			'flex-style.css', 
+			'message.css',
+			'qqFace.css'
+		);
+
+		$data['javascript'] = array(
+			'jquery.js', 
+			'jquery.flexText.min.js', 
+			'jquery.qqFace.js'
+		);
+
+
+		$this->load->view('common/head', $data);
+		$this->load->view('conversation');
 	}
 	/**
 	 * [get_conversation_content 获取对话内容]

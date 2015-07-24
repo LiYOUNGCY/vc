@@ -7,9 +7,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
   <meta name="format-detection" content="telephone=yes" /> 
   <meta name="msapplication-tap-highlight" content="no" /> 
-  <script type="text/javascript" src="<?=base_url().'public/'?>js/j162.min.js"></script> 
+  <script type="text/javascript" src="<?=base_url().'public/'?>js/jquery.js"></script> 
   <link href="<?=base_url().'public/'?>css/common.css" type="text/css" rel="stylesheet" /> 
-  <link href="<?=base_url().'public/'?>css/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" /> 
+  <link href="<?=base_url().'public/'?>css/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+  <input id="BASE_URL" type="hidden" value="<?=base_url()?>">
  </head> 
  <body style="height:100%;overflow: hidden;"> 
   <div id="vc_sidebar" class="sidebar"> 
@@ -122,7 +123,8 @@
           注册
          </div> </a> 
        </div> 
-
+        
+        <input id="signway" type="hidden" value="phone">
      </div> 
     </div> 
     <div id="vi_footer" class="width-100p logfooter"> 
@@ -170,16 +172,21 @@
 		
 		
 		function signup(){ 
-		  	var SIGNUP_URL = "register";
+        var BASE_URL = $("#BASE_URL").val();
+		  	var EMAIL_SIGNUP_URL = BASE_URL + "account/main/register_by_email";
+        var PHONE_SIGNUP_URL = BASE_URL + "account/main/register_by_phone";
+
 		  	var signup_way = $("#signway").val();
-		  	
+        
 		  	if( signup_way == "phone" ){
+
 				var phone = $("#phone_sign #phone").val();
 				var pwd = $("#phone_sign #password").val();
 			  	var cp = !!phone.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
 			  	if(cp == true){
+
 					$.post(
-						SIGNUP_URL,{
+						PHONE_SIGNUP_URL,{
 							phone	: phone,
 							pwd		: pwd,
 							name	: phone
@@ -193,12 +200,13 @@
 			}
 		  	else{
 				var email = $("#email_sign #email").val();
-			  	var pwd = $("#email #password").val();
+			  var pwd = $("#email_sign #password").val();
 				var ce = !!email.match("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$");
 			  	var name = email.split('@');
+
 			  	if(ce == true){
 					$.post(
-						SIGNUP_URL,{
+						EMAIL_SIGNUP_URL,{
 							email	: email,
 							pwd		: pwd,
 							name	: name[0]

@@ -18,7 +18,7 @@ class Sc {
 		$this->CI->load->library('form_validation');
 		$this->rule = array(
 				 'phone'		=> 'exact_length[11]|numeric',		//手机号码的规则
-				 'pwd'			=> 'required|min_length[8]|max_length[36]|alpha_dash',
+				 'pwd'			=> 'required|min_length[8]|max_length[36]',
 				 'name'			=> 'required|min_length[2]|max_length[36]',
 				 'sex'			=> 'required|min_length[1]|max_length[1]'
 			);
@@ -57,6 +57,7 @@ class Sc {
 			if(isset($this->rule[$name])) {
 				$this->CI->form_validation->set_rules($name, $name, $this->rule[$name]);
 				if($this->CI->form_validation->run() == FALSE) {
+					echo $name;
 					$this->CI->error->output("invalid_".$name);
 					exit();
 				}
