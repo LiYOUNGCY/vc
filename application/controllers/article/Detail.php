@@ -34,7 +34,7 @@ class Detail extends MY_Controller
 
         $this->article_service->read_article($aid);
         
-//         echo json_encode($data);
+         echo json_encode($data);
         $this->load->view('article_detail', $data);
     }
     

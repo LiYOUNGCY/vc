@@ -9,22 +9,23 @@ class Main extends MY_Controller {
     }
 
     /**
-     * [index 显示动态列表]
+     * [index 显示动态界面]
      * @return [type] [description]
      */
     public function index()
     {
+    	
+    }
+
+    /**
+     * [get_feed_list 获取动态列表]
+     * @return [type] [description]
+     */
+    public function get_feed_list()
+    {
 		$page = $this->sc->input('page');
-		$this->user = array();
-		$this->user['id'] = 4;
+
 		$feed = $this->feed_service->get_feed_list($page,$this->user['id']);
-		if( ! empty($feed))
-		{
-			echo json_encode($feed);
-		}
-		else
-		{
-			echo "failed";
-		}
+		echo json_encode($feed);
     }
 }

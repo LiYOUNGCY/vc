@@ -57,4 +57,22 @@ class Community_post_model extends CI_Model{
 		$this->db->insert('community_post',$arr);
   		return $this->db->affected_rows() === 1;		
 	}
+
+	/**
+	 * [update_post 更新帖子]
+	 * @param  [type] $pid [帖子id]
+	 * @param  [type] $arr [键值数组]
+	 * @return [type]      [description]
+	 */
+	public function update_post($pid, $arr)
+	{	
+    	$this->db->where('id',$pid);
+
+    	foreach ($arr as $k => $v) {
+    		$this->db->set($k,$v[1],$v[0]);
+    	}
+
+    	$this->db->update('community_post');
+  		return $this->db->affected_rows() === 1;  
+	}	
 }

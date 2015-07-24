@@ -13,6 +13,10 @@ class Post extends MY_Controller{
 	 */
 	public function index($pid)
 	{
+		if( ! is_numeric($pid))
+		{
+			show_404();
+		}
 		$post = $this->community_service->get_post_detail($pid,$this->user['id']);
 		echo json_encode($post);
 	}

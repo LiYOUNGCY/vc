@@ -61,6 +61,6 @@ class Article_like_model extends CI_Model {
      */
     public function get_vote_person_by_aid($aid)
     {
-        return $this->db->select('uid')->where('aid', $aid)->get('article_like')->result_array();
+        return $this->db->select('uid')->where(array('aid' => $aid,'status' => 1))->get('article_like')->result_array();
     }
 }

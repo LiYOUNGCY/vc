@@ -21,9 +21,8 @@ class Main extends MY_Controller{
 	 */
 	public function get_community()
 	{
+		$cid = $this->sc->input('cid');
 		$page 	   = $this->sc->input('page');
-		$cid 	   = $this->sc->input('cid');
-
 		$community = $this->community_service->get_community($page,$this->user['id'],$cid);
 		echo json_encode($community);		
 	}
