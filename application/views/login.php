@@ -9,7 +9,8 @@
   <meta name="msapplication-tap-highlight" content="no" /> 
   <script type="text/javascript" src="<?=base_url().'public/'?>js/j162.min.js"></script> 
   <link href="<?=base_url().'public/'?>css/common.css" type="text/css" rel="stylesheet" /> 
-  <link href="<?=base_url().'public/'?>css/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" /> 
+  <link href="<?=base_url().'public/'?>css/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+  <input id="BASE_URL" type="hidden" value="<?=base_url()?>">
  </head> 
  <body style="height:100%;overflow: hidden;"> 
   <div id="vc_sidebar" class="sidebar"> 
@@ -97,11 +98,11 @@
     <div class="logtext"> 
      <div class="float-l">
       <font class="big">欢迎登陆</font>
-      <font style="font-size:70%;text-decoration: underline;font-weight:bold;"><a class="link" href="<?=base_url()?>account/main/signup">注册账号</a></font> 
+      <font style="font-size:70%;text-decoration: underline;font-weight:bold;"><a class="link" href="<?=base_url()?>signup">注册账号</a></font> 
      </div> 
     </div> 
     <div id="login" class="logform width-100p "> 
-     <div class="formcon">
+     <div class="fsormcon">
 
        <div class="form"> 
         <input type="text" id="username" placeholder="手机号/邮箱" /> 
@@ -146,18 +147,28 @@
   </div>  
   <script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script> 
   <script type="text/javascript">
+$(function(){
+  
 
-	$("#login #password").bind('keypress',function(event){
-		if(event.keyCode == "13")
-		{
-			login();
-		}
-	})
+  $("#login #password").bind('keypress',function(event){
+    
+    if(event.keyCode == "13")
+    {
+      login(BASE_URL);
+    }
+  });
+
+});
 	
-	function login(){ 
+	
+	function login(URL){ 
 		var username = $("#username").val();
 		var password = $("#password").val();
-		var LOGIN_URL = "main/login";
+    var URL = $("#BASE_URL").val();
+
+    var PHONE_LOGIN_URL = URL + "account/main/login_by_phone";
+    var EMAIL_LOGIN_URL = URL + "account/main/login_by_email";
+
 		var ce = !!username.match("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$");
 		var cp = !!username.match("^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$");
 	  	var is_remember = $("#rememberme").attr("checked");
@@ -167,7 +178,7 @@
 	  
 		if( ce == true ){
 		  	$.post(
-				LOGIN_URL,{
+				EMAIL_LOGIN_URL,{
 					email	: username,
 					pwd			:	password,
 					rememberme : is_remember
@@ -178,7 +189,7 @@
 		}
 		else if( cp == true ){
 		  	$.post(
-				LOGIN_URL,{
+				PHONE_LOGIN_URL,{
 					phone	 : username,
 					pwd		 :	password,
 					rememberme : is_remember

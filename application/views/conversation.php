@@ -77,6 +77,14 @@
         }
 		$(function(){
             var BASE_URL = $("#BASE_URL").val();
+            var URL = BASE_URL + "conversation/main/get_conversation_content";
+
+            var page = 0;
+            //获得对话的 id
+            var cid = window.location.href.split("/");
+            cid = cid[cid.length-1];
+
+            var BASE_URL = $("#BASE_URL").val();
 			 $('#msg').flexText();
              $('#emotion').qqFace({ 
                 assign: 'msg',                          //给输入框赋值 
@@ -86,6 +94,20 @@
             $("#submit").click(function(){ 
                 var str = replace_em(BASE_URL + "public/img/face/", $("#msg").val());
                 alert(str);
+            });
+
+            // ajax 获取数据
+            $.ajax({
+                type: "POST",
+                url: URL,
+                data: {
+                    page: page,
+                    cid: cid
+                },
+                dataType: "json",
+                success: function(data) {
+
+                }
             });
 		});
 	</script>
