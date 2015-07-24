@@ -36,7 +36,7 @@ class Article_service extends MY_Service{
     /**
      * [get_article_list 获取文章列表]
      */
-    public function get_article_list($page, $uid = -1, $type)
+    public function get_article_list($page, $uid = -1, $type,$tag)
     {
         switch ($type) {
             case 'article':
@@ -49,7 +49,7 @@ class Article_service extends MY_Service{
                 $type = 1;
                 break;
         }
-        $article = $this->article_model->get_article_list($page, $uid, $type);
+        $article = $this->article_model->get_article_list($page, $uid, $type,$tag);
         foreach( $article as $key => $value )
         {           
             //对每篇文章内容进行字数截取

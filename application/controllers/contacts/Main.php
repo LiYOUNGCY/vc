@@ -7,13 +7,25 @@ class Main extends MY_Controller{
 	}
 
 	/**
-	 * [index 我的联系人列表]
-	 * @param  string $type [follow关注 follower粉丝]
-	 * @return [type]       [description]
+	 * [index 显示界面]
+	 * @return [type] [description]
 	 */
-	public function index($type = 'follow')
+	public function index()
+	{
+		
+	}
+
+	/**
+	 * [get_contacts_list 获取我的联系人列表]
+	 * @return [type]       [description]
+	 */	
+	public function get_contacts_list()
 	{
 		$page = $this->sc->input('page');
+		//列表类型
+		$type = $this->sc->input('type');
+		$type = ! empty($type) ? $type : 'follow';
+
 		$contacts = $this->contacts_service->get_contacts_list($page,$this->user['id'],$type);
 		echo json_encode($contacts);
 	}

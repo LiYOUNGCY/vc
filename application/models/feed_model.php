@@ -33,4 +33,22 @@ class Feed_model extends CI_Model {
         $this->db->delete('feed', $data);
         return $this->db->affected_rows() === 1;
     }
+
+    /**
+     * [get_feed_list 获取动态列表]
+     * @param  integer $page  [页数]
+     * @param  [type]  $uids  [关注的用户集合]
+     * @param  integer $limit [页面个数限制]
+     * @param  string  $order [排序]
+     * @return [type]         [description]
+     */
+    public function get_feed_list($page = 0, $uids, $limit = 20, $order = 'id DESC')
+    {
+        $query = $this->db->where_in('uid',$uids)
+                          ->order_by($order)
+                          ->limit($limit, $page*$limit)
+                          ->get('feed')
+                          ->result_array();
+        return $query;
+    }
 }
