@@ -35,7 +35,7 @@ class Notification_service extends MY_Service{
 		
 		//获取消息发送者信息
 		foreach ($notification as $k => $v) {
-			$notification[$k]['author'] = $this->user_model->get_user_by_id($v['sender_id']);
+			$notification[$k]['sender'] = $this->user_model->get_user_base_id($v['sender_id']);
 		}
 		
 		return $notification;

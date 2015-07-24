@@ -86,17 +86,6 @@ class Article_model extends CI_Model {
         return count($query) === 1 ? $query[0] : NULL;
     }
 
-
-    public function get_article_vote($aid, $order = 'id')
-    {
-      $query = $this->db->where(array('aid' => $aid,'status' => 1))
-                        ->select('uid')
-                        ->order_by($order)
-                        ->get('article_like')
-                        ->result_array();
-      return $query;
-    }
-    
     /**
      * 点赞时，文章的 like 加一
      */

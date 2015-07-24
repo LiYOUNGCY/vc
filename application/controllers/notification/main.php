@@ -26,7 +26,7 @@ class Main extends MY_Controller{
 		//消息类型
 		$type = $this->sc->input('type');
 		$type = ! empty($type) ? $type : 'all';
-		
+
 		$notification = $this->notification_service->get_notification_list($page,$this->user['id'],$type);
 
 		echo json_encode($notification);

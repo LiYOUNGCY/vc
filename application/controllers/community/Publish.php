@@ -39,7 +39,7 @@ class Publish extends MY_Controller{
 		}
 		else
 		{
-			echo "failed";
+			$this->error->output('INVALID_REQUEST');
 		}
 	}	
 

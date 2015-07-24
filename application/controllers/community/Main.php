@@ -23,7 +23,6 @@ class Main extends MY_Controller{
 	{
 		$cid = $this->sc->input('cid');
 		$page 	   = $this->sc->input('page');
-
 		$community = $this->community_service->get_community($page,$this->user['id'],$cid);
 		echo json_encode($community);		
 	}

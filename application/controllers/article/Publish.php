@@ -22,13 +22,21 @@ class Publish extends MY_Controller {
      */
     public function publish_article()
     {
-        $article_title      = $this->sc->input('title');
-        $article_subtitle   = $this->sc->input('subtitle');
-        $article_content    = $this->sc->input('content');
-        $article_type       = $this->sc->input('type');
+        $article_title      = $this->sc->input('article_title');
+        $article_subtitle   = $this->sc->input('article_subtitle');
+        $article_content    = $this->sc->input('article_content');
+        $article_type       = $this->sc->input('article_type');
         $this->user = array();
         $this->user['id'] = 4;
         //把文章插入到数据库
-        $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_subtitle, $article_type, $article_content);
+        $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_subtitle, $article_type, $article_content);
+        if($result)
+        {
+            echo 'success';
+        }
+        else
+        {
+            $this->error->output('INVALID_REQUEST');
+        }
     }
 }

@@ -19,7 +19,7 @@ class Main extends MY_Controller{
 	{
 		$page = $this->sc->input('page');
 		$cid  = $this->sc->input('cid');
-
+	
 		$content = $this->conversation_service->get_conversation_content($page,$this->user['id'],$cid);
 		echo json_encode($content);
 	}
@@ -31,7 +31,7 @@ class Main extends MY_Controller{
 	public function publish_conversation()
 	{
 		$reciver_id = $this->sc->input('uid');
-		$content    = $this->sc->input('content');
+		$content    = $this->sc->input('conversation_content');
 		/*
 		$this->user = array();
 		$this->user['id'] = 4;

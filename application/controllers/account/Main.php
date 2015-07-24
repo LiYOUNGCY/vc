@@ -32,10 +32,17 @@ class Main extends MY_Controller
 		$pwd   		= $this->sc->input('pwd');
 		$rememberme = $this->sc->input('rememberme');
 
-		$this->user_service->login_action($pwd, $email, $phone, $rememberme);
+		$result = $this->user_service->login_action($pwd, $email, $phone, $rememberme);
+		if($result)
+		{
+			//登陆成功, 重定向首页 ?
+			redirect();			
+		}
+		else
+		{
+			$this->error->output('LOGIN_ERROR');			
+		}
 
-		//登陆成功, 重定向首页 ?
-		redirect();
 	}
 
 
@@ -53,5 +60,42 @@ class Main extends MY_Controller
 
 		//注册成功, 重定向首页 ?
 		redirect();
+	}
+
+	/**
+	 * [check_phone 查看手机是否重复]
+	 * @return [type] [description]
+	 */
+	public function check_phone()
+	{
+		$phone  = $this->sc->input('phone');
+		$result = $this->user_service->check_phone($phone);
+		if($result)
+		{
+			echo json_encode(array('success' => 0));
+		}
+		else
+		{
+			$this->error->output('PHONE_REPEAT');
+		}
+
+	}
+
+	/**
+	 * [check_email 查看邮箱是否重复]
+	 * @return [type] [description]
+	 */
+	public function check_email()
+	{
+		$email  = $this->sc->input('email');
+		$result = $this->user_service->check_email($email);		
+		if($result)
+		{
+			echo json_encode(array('success' => 0));
+		}
+		else
+		{
+			$this->error->output('EMAIL_REPEAT');
+		}
 	}
 }

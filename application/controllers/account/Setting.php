@@ -20,16 +20,30 @@ class Setting extends MY_Controller
 		}
 	}
 
-
+	/**
+	 * [change_password 修改密码]
+	 * @return [type] [description]
+	 */
 	public function change_password()
 	{
 		$old_pwd = $this->sc->input('old_pwd');
 		$new_pwd = $this->sc->input('new_pwd');
 
-		$this->user_service->change_password($this->user['id'], $old_pwd, $new_pwd);
+		$result = $this->user_service->change_password($this->user['id'], $old_pwd, $new_pwd);
+		if($result)
+		{
+			echo 'success';		
+		}
+		else
+		{
+			$this->error->output('INVALID_REQUEST');
+		}
 	}
 
-
+	/**
+	 * [update_account 更新个人资料]
+	 * @return [type] [description]
+	 */
 	public function update_account()
 	{
 		$arr 	= array('name', 'alias', 'sex', 'area', 'email', 'phone');
@@ -44,14 +58,23 @@ class Setting extends MY_Controller
 
 		$data['birthday'] = $year.'-'.$mouth.'-'.$day;
 
-		$this->user_service->update_account($this->user['id'], $data);
+		$result = $this->user_service->update_account($this->user['id'], $data);
+		
+		if($result)
+		{
+			echo 'success';
+		}	
+		else
+		{
+			$this->error->output('INVALID_REQUEST');
+		}
 	}
 	
 	public function get_msg()
 	{
-		//$uid = $this->user['id'];
-		$uid = 4;
+		$uid = $this->user['id'];
 
+		$uid = 4;
 		$data = $this->user_service->get_user_by_id($uid);
 
 		echo json_encode($data);

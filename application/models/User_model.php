@@ -93,9 +93,15 @@ class User_model extends CI_Model
 				// 返回用户数据
 				return $data['id'];
 			}
+      else
+      {
+        return FALSE;
+      }
 		}
-
-		$this->error->output('password_error');
+    else
+    {
+      return FALSE;
+    }
 	}
 
 

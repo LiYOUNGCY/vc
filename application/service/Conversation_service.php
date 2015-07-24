@@ -51,7 +51,7 @@ class Conversation_service extends MY_Service{
 		}
 		else
 		{
-			return FALSE;
+			show_404();
 		}				
 	}
 

@@ -57,18 +57,26 @@ class User_service extends MY_Service
 		}
 		else
 		{
-			//错误
+			return FALSE;
 		}
 
 		$user = $this->user_model->login_action($login_type, $pwd);
-
-		if($rememberme) 
+		if( ! empty($user))
 		{
-			//设置 cookie
-			$this->auth_service->set_remember_me_cookie($user);
+			if($rememberme) 
+			{
+				//设置 cookie
+				$this->auth_service->set_remember_me_cookie($user);
+			}
+			//设置 SESSION
+			$this->auth_service->set_login_session($user);
+			return TRUE;
 		}
-		//设置 SESSION
-		$this->auth_service->set_login_session($user);
+		else
+		{
+			return FALSE;
+		}
+
 	}
 
 
@@ -102,7 +110,7 @@ class User_service extends MY_Service
     {
     	//清除值为空的变量
     	$this->_clear($data);
-    	$this->user_model->update_account($uid, $data);
+    	return $this->user_model->update_account($uid, $data);
     }
 
 
@@ -118,6 +126,25 @@ class User_service extends MY_Service
     	return FALSE;
     }
 
+    /**
+     * [check_email 查看邮箱是否重复]
+     * @param  [type] $email [邮箱]
+     * @return [type]        [description]
+     */
+    public function check_email($email)
+    {
+    	return $this->user_model->have_email($email);
+    }
+
+    /**
+     * [check_phone 查看手机是否重复]
+     * @param  [type] $phone [手机]
+     * @return [type]        [description]
+     */
+    public function check_phone($phone)
+    {
+    	return $this->user_model->have_phone($phone);
+    }
 
     /**
      * [_clear 清除值为空的变量]
