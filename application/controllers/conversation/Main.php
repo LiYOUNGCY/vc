@@ -34,7 +34,7 @@ class Main extends MY_Controller{
 	{
 		$page = $this->sc->input('page');
 		$cid  = $this->sc->input('cid');
-	
+
 		$content = $this->conversation_service->get_conversation_content($page,$this->user['id'],$cid);
 		echo json_encode($content);
 	}
@@ -49,8 +49,9 @@ class Main extends MY_Controller{
 		$content    = $this->sc->input('conversation_content');
 		/*
 		$this->user = array();
-		$this->user['id'] = 4;
+		$this->user['id'] = 20;
 		$reciver_id = 9;
+		$content = '捉急吧';
 		*/
 		$this->conversation_service->publish_conversation($this->user['id'],$reciver_id,$content);
 

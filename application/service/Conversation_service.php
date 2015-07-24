@@ -6,6 +6,7 @@ class Conversation_service extends MY_Service{
 		$this->load->model('conversation_model');
 		$this->load->model('conversation_content_model');
 		$this->load->model('notification_model');
+		$this->load->model('user_model');
 	}
 
 	/**
@@ -21,7 +22,21 @@ class Conversation_service extends MY_Service{
 		if($check_result)
 		{
 			$content = $this->conversation_content_model->get_conversation_content($page,$cid);
-			return $content;			
+			if( ! empty($content))
+			{
+				$bid = $content[0]['sender_id'] == $uid ? $content[0]['reciver_id'] : $content[0]['sender_id'];
+				//对方信息
+				$conversation['he'] = $this->user_model->get_user_base_id($bid);
+				//我的信息
+				$conversation['me']= $this->user_model->get_user_base_id($uid);
+
+				$conversation['list'] = $content;
+				return $conversation;
+			}
+			else
+			{
+				return FALSE;
+			}	
 		}
 		else
 		{

@@ -79,4 +79,30 @@ class Notification_model extends CI_Model{
 		return $this->db->affected_rows() === 1; 		
 	}
 
+	/**
+	 * [check_conversation_notification 查看与某人的私信消息是否存在]
+	 * @param  [type] $sender_id  [description]
+	 * @param  [type] $reciver_id [description]
+	 * @return [type]             [description]
+	 */
+	public function check_conversation_notification($sender_id,$reciver_id)
+	{
+		$query = $this->db->where(array('sender_id' => $sender_id,'reciver_id' => $reciver_id,'type' => 1))
+						  ->get('notification')
+						  ->row_array();
+		return $query;
+	}
+
+	/**
+	 * [update_notification 更新消息]
+	 * @param  [type] $nid [消息id]
+	 * @param  [type] $arr [键值数组]
+	 * @return [type]      [description]
+	 */
+	public function update_notification($nid,$arr)
+	{
+		$this->db->where('id',$nid)
+				 ->update('notification',$arr);
+		return $this->db->affected_rows() === 1;		
+	}
 }
