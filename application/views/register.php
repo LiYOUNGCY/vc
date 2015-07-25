@@ -191,7 +191,7 @@
 							pwd		: pwd,
 							name	: phone
 						},function(data){
-							alert(data);
+							alert(eval("("+data+")").error);
 						}
 					)
 				}else{
