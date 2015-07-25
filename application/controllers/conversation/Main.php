@@ -36,6 +36,7 @@ class Main extends MY_Controller{
 		$cid  = $this->sc->input('cid');
 
 		//var_dump($this->user);
+
 		$content = $this->conversation_service->get_conversation_content($page,$this->user['id'],$cid);
 		echo json_encode($content);
 	}

@@ -8,7 +8,7 @@ body{
 ul,ol,li{
     list-style: outside none none;
 }
-body a{
+body a{ 
     outline: none;
 }
 input,textarea{
@@ -90,6 +90,7 @@ img{
     background: #F2F2F2;
     border-radius: 5px;
     color: #808080 !important;
+	cursor: pointer;
 }
 
 #vi_content .logo{
@@ -119,13 +120,13 @@ img{
 }
 
 .icon .sidebtn{
-     width: 41px;
+    width: 41px;
     height: 41px;
-    background: transparent url("../img/icon/slidBar_Btn_normal.png") no-repeat scroll;
+    background: transparent url("../img/icon/slidBar_Btn_over.png") no-repeat scroll;
     display: inline-block;
 }
 .icon .sidebtn:hover{
-    background: transparent url("../img/icon/slidBar_Btn_over.png") no-repeat scroll;
+    background: transparent url("../img/icon/slidBar_Btn_normal.png") no-repeat scroll;
     display: inline-block;
 }
 
@@ -176,7 +177,9 @@ img{
     height: 16px;
     background: transparent url("../img/icon/unlike.png") no-repeat scroll;
 }
-
+.icon .identity{
+    
+}
 .vi-menu {
     
 }
@@ -234,8 +237,27 @@ img{
     height: 50px;
     float: left;
     display: inline-block;
-    margin: 20px 10px;
+    padding: 20px 10px 0;
 }
+.sidebar .lop{
+    width:100%;
+    height:0px;
+    overflow: hidden;
+}
+.sidebar .lop .btn{
+    background-color: #B3B3B3;
+    width: 139.5px;
+    text-align: center;
+    border-radius: 0;
+    float: left;
+    padding: 10px 0;
+    transition:color 0.1s linear 0s, background-color 0.1s linear 0s;
+}
+.sidebar .lop .btn:hover{
+    background-color: #FCEE21;
+    color: #4C4640 !important;
+}
+
 .shade{
     width: 100%;
     height: 100%;
@@ -299,7 +321,7 @@ img{
 }
 .main {
     margin: 0 auto;
-
+	display: inline-block;
 }
 .main ul{
 
@@ -441,11 +463,8 @@ img{
     height:38px;
     font-size: 20px;
     padding-top: 12px;
-    cursor: pointer;
 }
 .load_btn:hover{
-    -moz-animation: bgcolor-y 0.2s ease-out forwards;
-    -ms-animation: bgcolor-y 0.2s ease-out forwards;
     -webkit-animation: bgcolor-y 0.2s ease-out forwards;
     animation: bgcolor-y 0.2s ease-out forwards;
 }
@@ -514,10 +533,6 @@ img{
 .sidebar .search input[type="text"]:focus{
     -webkit-animation: bdcolor-y 0.4s ease-out forwards;
     animation: bdcolor-y 0.4s ease-out forwards;
-}
-
-.sidebar .menu {
-    margin-top: 35px;
 }
 
 .sidebar .menu ul {
@@ -744,72 +759,7 @@ img{
     color: #B3B3B3;
 }
 
-@media screen and (max-width: 960px){
-	.logo{
-        display: inline-block;
-        margin:0px auto;
-        width: 100%;
-        padding: 50px 0;
-    }
-    .logo .icon .logo-a{
-        margin: 0px auto;
-        width: 201px;
-        height: 130px;
-        background: transparent url("../img/icon/logo_1.png") no-repeat scroll;
-    }
-    .vi-menu{
-        width:100%;
-        margin: 0px auto;
-        overflow:hidden;
-    }
-    .vi-menu ul{
-        float: none;
-        overflow:hidden;
-        margin: 0px auto;
-        display: inline-block;
-    }
-    
-    .vi_footer{
-        margin:0px auto;
-        margin-top:50px; 
-        width:90%;
-    }
-  	
-	.loginlogo{
-	   float:none;
-	   padding-top: 80px;
-	}
-    .loginlogo .icon {
-      float: none;
-    	
-    } 
-    .loginlogo .text {   
-    	top: 5px;
-      	text-align: center;
-    	font-weight: bold;
-    } 
-    .logtext{
-        padding-top: 40px;
-    }
-    .logtext div{
-      	float: none;
-    	padding-top: 10px;
-    }
-    .formcon{
-        float: none !important;
-    	display: inline-block;
-    }
-    .logfooter{
-        display: none;
-    }
-    .loginoption{
-        margin-top: 10px;
-        margin-bottom: 50px;
-    }
-    .article-container {
-        width: 80%;
-    }
-}
+
 
 .logform .formcon {
 	float: left;
@@ -948,6 +898,7 @@ img{
     word-break:normal;
 }
 
+
 .contianer-480p {
   width: 480px;
   margin: 0 auto;
@@ -1048,6 +999,7 @@ img{
     animation: bgcolor-y 0.2s ease-out forwards;
 }
 
+
 @-webkit-keyframes bdcolor{
     0%{}
     100%{border-color:#FCEE21;}
@@ -1065,4 +1017,236 @@ img{
     color: crimson;
     display: none;
 }
+.ac-left{
+		max-width: 610px;
+		width: 100%;
+		margin: 0 auto;
+		min-width: 300px;
+		float: left;
+		margin-top: 20px;
+}
+.ac-boxlist{
+		width: 100%;
+}
+.ac-boxlist .box{
+		width: 100%;
+		float: left;
+		margin-bottom: 20px;
+		border: 1px #E4E4E4 solid;
+		overflow: hidden;
+		color: #B3B3B3;
+		padding-top:10px;
+}
 
+.ac-boxlist .box .boxtop{
+		width: 80%;
+		position: relative;
+		margin-bottom: 10px;
+		text-align: left;
+}
+.ac-boxlist .box .link{
+		color: #4c4640;
+	  margin: 0 5px;
+}
+.ac-boxlist .box  .link:hover{
+		color: #FCEE21;
+}
+.ac-boxlist .box .name{
+		width: 100%;
+		display: inline-block;
+}
+.ac-boxlist .box .name .text{
+		height: 100%;
+		padding-top: 10px;
+}
+.ac-boxlist .box .article{
+		width: 95%;
+		position: relative;
+		background: #F9F9EF;
+		height: 200px;
+	  margin: 0 auto;
+}
+.ac-boxlist .box .article .ar_text{
+		float: left;
+		height: 100%;
+		padding: 5px;
+		width: 300px;
+		text-align: left;
+}
+
+.ac-boxlist .box .article .ar_text .title:after{
+		content: "》";
+		color: #FCEE21;
+		margin: 0 5px;
+		font-weight: bolder;
+}
+.ac-boxlist .box .article .ar_text .title:before{
+		content: "《";
+		color: #FCEE21;
+		margin: 0 5px; 
+		font-weight: bolder;
+}
+
+.ac-boxlist .box .article .con{
+		padding: 10px;
+		text-indent:2em;
+		height: 140px;
+}
+
+.ac-boxlist .box .article .ar_pic{
+		float: left;
+		width: 269px;
+		height: 200px;
+		overflow: hidden;
+}
+.ac-boxlist .box .article .ar_pic img{
+		width: 100%;
+}
+
+.ac-right{
+		width: 300px;
+		margin: 0 auto;
+		float: right;
+		margin-top: 20px;
+}
+.ac-right .box {
+		width: 100%;
+		margin-bottom: 20px;
+		border: 1px #E4E4E4 solid;
+		overflow: hidden;
+}
+
+.ac-right .ac-user .name{
+		width: 100%;
+		display: inline-block;
+		position: relative;
+		padding-top: 10px;
+}
+.ac-right .ac-user .text{
+		padding-top: 20px; 
+	  padding-top: 18px;
+  	text-align: left;
+}
+.ac-right .ac-user .text .link{
+		color: #4c4640;
+		white-space: nowrap;	
+		text-overflow: ellipsis;
+		max-width: 12em;
+		overflow: hidden;
+		display: inline-block;
+}
+.ac-right .ac-user .text .link:hover{
+		color: #FCEE21;
+}
+
+.ac-right .ac-user .public{ 
+		width: 100%;
+		position: relative;
+		margin-top: 10px;
+}
+.ac-right .ac-user .public .btn{
+		width: 100%;
+		height: 100%;
+		border-radius: 0px;
+		font-size: 25px;
+		padding: 15px 0;
+		letter-spacing: 10px;
+		transition:border 0.1s linear 0s,color 0.1s linear 0s, background-color 0.1s linear 0s;
+}
+.ac-right .ac-user .public .btn:hover{
+    color: #4c4640 !important;
+		background-color: #FCEE21;
+		border: 0px;
+}
+
+@media screen and (max-width: 960px){
+		.logo{
+        display: inline-block;
+        margin:0px auto;
+        width: 100%;
+        padding: 50px 0;
+    }
+    .logo .icon .logo-a{
+        margin: 0px auto;
+        width: 201px;
+        height: 130px;
+        background: transparent url("../img/icon/logo_1.png") no-repeat scroll;
+    }
+    .vi-menu{
+        width:100%;
+        margin: 0px auto;
+        overflow:hidden;
+    }
+    .vi-menu ul{
+        float: none;
+        overflow:hidden;
+        margin: 0px auto;
+        display: inline-block;
+    }
+    
+    .vi_footer{
+        margin:0px auto;
+        margin-top:50px; 
+        width:90%;
+    }
+  	
+		.loginlogo{
+	   	float:none;
+	   	padding-top: 80px;
+		}
+    .loginlogo .icon {
+      float: none;
+    	
+    } 
+    .loginlogo .text {   
+    	top: 5px;
+      	text-align: center;
+    	font-weight: bold;
+    } 
+    .logtext{
+        padding-top: 40px;
+    }
+    .logtext div{
+      	float: none;
+    		padding-top: 10px;
+    }
+    .formcon{
+        float: none !important;
+    		display: inline-block;
+    }
+    .logfooter{
+        display: none;
+    }
+    .loginoption{
+        margin-top: 10px;
+        margin-bottom: 50px;
+    }
+    .article-container {
+        width: 80%;
+    }
+		.ac-left{
+				width: 80%;
+				float: none;
+		}
+		.ac-right{
+				width: 300px;
+				float: none;
+		}
+		.ac-boxlist .box .article .con{
+				padding: 10px;
+				text-indent:2em;
+				height: auto;
+		}
+		.ac-boxlist .box .article{
+				display: inline-block;
+				height: auto;
+		} 
+		.ac-boxlist .box .article .ar_text {
+				width: 100%;
+		}
+		.ac-boxlist .box .article .ar_pic {
+				width: 100%;
+		}
+		
+		
+}
