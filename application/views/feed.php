@@ -73,8 +73,8 @@
 									<div class="text">
 										<a class="link" href="#">YOUNG啥第六届CY</a>赞了<a class="link" href="#">artvc官方账号</a>的文章
 									</div>
-									<div class=""></div>
 								</div>
+								<div class="time">123</div>
 							</div>
 							<div class="article">
 								<div class="ar_text">
@@ -104,99 +104,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="box">
-							<div class="boxtop">
-								<div class="name">
-									<div class="head">
-										<a href="#">
-											<img src="<?=base_url().'public/'?>img/mm1.jpg" /></a>
-									<div class="identity">
-											<span class="icon identity"></span>
-										</div>
-									</div>
-									<div class="text">
-										<a class="link" href="#">YOUNG啥第六届CY</a>赞了<a class="link" href="#">artvc官方账号</a>的文章
-									</div>
-								</div>
-							</div>
-							<div class="article">
-								<div class="ar_text">
-									<div class="title">
-										<a class="link" href="#">阿斯顿阿斯顿</a>
-									</div>
-									
-									<div class="con">
-										<p>首先让我产生兴趣的是姜绥吾将他的绘画和装置艺术归于当代艺术，这说明他比较介意时间在各种艺术流派的进程中所起的作用。“当代”一词对于绘画艺术而言如同一个大熔炉，已经消化的，未经消化的，各种流派的，或具有实验性质的，都可以成为燃料或者...</p>	
-									</div>
-								</div>
-								<div class="ar_pic">
-									<img src="<?=base_url().'public/'?>img/mm1.jpg">		
-								</div>
-							</div>
-							<div class="btn"></div>
-						</div>
-						<div class="box">
-							<div class="boxtop">
-								<div class="name">
-									<div class="head">
-										<a href="#">
-											<img src="<?=base_url().'public/'?>img/mm1.jpg" /></a>
-									<div class="identity">
-											<span class="icon identity"></span>
-										</div>
-									</div>
-									<div class="text">
-										<a class="link" href="#">YOUNG啥第六届CY</a>赞了<a class="link" href="#">artvc官方账号</a>的文章
-									</div>
-								</div>
-							</div>
-							<div class="article">
-								<div class="ar_text">
-									<div class="title">
-										<a class="link" href="#">阿斯顿阿斯顿</a>
-									</div>
-									
-									<div class="con">
-										<p>首先让我产生兴趣的是姜绥吾将他的绘画和装置艺术归于当代艺术，这说明他比较介意时间在各种艺术流派的进程中所起的作用。“当代”一词对于绘画艺术而言如同一个大熔炉，已经消化的，未经消化的，各种流派的，或具有实验性质的，都可以成为燃料或者...</p>	
-									</div>
-								</div>
-								<div class="ar_pic">
-									<img src="<?=base_url().'public/'?>img/mm1.jpg">		
-								</div>
-							</div>
-							<div class="btn"></div>
-						</div>
-						<div class="box">
-							<div class="boxtop">
-								<div class="name">
-									<div class="head">
-										<a href="#">
-											<img src="<?=base_url().'public/'?>img/mm1.jpg" /></a>
-									<div class="identity">
-											<span class="icon identity"></span>
-										</div>
-									</div>
-									<div class="text">
-										<a class="link" href="#">YOUNG啥第六届CY</a>赞了<a class="link" href="#">artvc官方账号</a>的文章
-									</div>
-								</div>
-							</div>
-							<div class="article">
-								<div class="ar_text">
-									<div class="title">
-										<a class="link" href="#">阿斯顿阿斯顿</a>
-									</div>
-									
-									<div class="con">
-										<p>首先让我产生兴趣的是姜绥吾将他的绘画和装置艺术归于当代艺术，这说明他比较介意时间在各种艺术流派的进程中所起的作用。“当代”一词对于绘画艺术而言如同一个大熔炉，已经消化的，未经消化的，各种流派的，或具有实验性质的，都可以成为燃料或者...</p>	
-									</div>
-								</div>
-								<div class="ar_pic">
-									<img src="<?=base_url().'public/'?>img/mm1.jpg">		
-								</div>
-							</div>
-							<div class="btn"></div>
-						</div>
+						
 						<div class="loadmore width-100p">
 							<div id="loadmore" class="btn load_btn">
 								<font id="text">加载更多</font>
@@ -245,7 +153,7 @@
 	var GET_FEED_LIST_URL = $("#BASE_URL").val() +"feed/main/get_feed_list"; 
 	var PAGE = 1;
 	window.onload = function() { 
-    loadfeed(0);
+    //loadfeed(0);
 		// $(window).bind("scroll",function() {
 		//       	if($(document).scrollTop() + $(window).height() > $(document).height() - 150 && PAGE < 2){
 		//       		$("#loadmore #text").html("加载中");
@@ -276,15 +184,21 @@
           data = eval("("+data+")"); 
 					for(var i = 0; i < data.length; i++)  
 					{
-						var article = eval("(" +data.content+ ")");
-						var feed_type							= 
+						var feed_type = data[i].type;
+						var article = eval("(" +data[i].content+ ")");
+
+
+						var element 	=	"";
+
 						var user_head_src					= data[i].user.pic;
 						var user_name							= data[i].user.name;	
 						var author								= data[i].author.name;
 						var article_title					= article.article_title;
 						var article_content				= article.article_content;
-						// var like[num];
-						// var like[];
+						
+						var like									= data[i].like;
+						var like_num							= like.length;
+						alert(feed_type+"\r"+user_head_src+"\r"+user_name+"\r"+author+"\r"+article_title+"\r"+like_num);
 					}
 	       }
 		 });
@@ -305,6 +219,44 @@
   //   	}
   //   });
 	}
+
+// <div class="box"><div class="boxtop"><div class="name"><div class="head"><a href="#"><img src="<?=base_url().'public/'?>img/mm1.jpg" /></a><div class="identity"><span class="icon identity"></span>
+// 				</div>
+// 			</div>
+// 			<div class="text">
+// 				<a class="link" href="#">YOUNG啥第六届CY</a>赞了<a class="link" href="#">artvc官方账号</a>的文章
+// 			</div>
+// 			<div class=""></div>
+// 		</div>
+// 	</div>
+// 	<div class="article">
+// 		<div class="ar_text">
+// 			<div class="title">
+// 				<a class="link" href="#">阿斯顿阿斯顿</a>
+// 			</div>
+			
+// 			<div class="con">
+// 				<p>首先让我产生兴趣的是姜绥吾将他的绘画和装置艺术归于当代艺术，这说明他比较介意时间在各种艺术流派的进程中所起的作用。“当代”一词对于绘画艺术而言如同一个大熔炉，已经消化的，未经消化的，各种流派的，或具有实验性质的，都可以成为燃料或者...</p>	
+// 			</div>
+// 		</div>
+// 		<div class="ar_pic">
+// 			<img src="<?=base_url().'public/'?>img/mm1.jpg">		
+// 		</div>
+// 	</div>
+// 	<div class="support">
+// 		<div class="like float-l">
+// 			<div class="btn">
+// 				<i class="fa fa-heart"></i> 24
+// 			</div>
+// 		</div>
+// 		<div class="list">
+// 			<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
+// 			<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
+// 			<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
+// 			<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
+// 		</div>
+// 	</div>
+// </div>
 
 </script>
 </html>
