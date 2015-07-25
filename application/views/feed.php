@@ -47,7 +47,7 @@
 							<div class="text">
 								<a class="link" href="#">YOUNG啥第第六第六六届CY</a>
 							</div>
-							<inout type="hidden" value="4" />
+							<inout type="hidden" value="4" id="userid" />
 						</div>
 						<div class="public">
 							<a href="" class="link">
@@ -242,10 +242,69 @@
 	<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
 </body>
 <script type="text/javascript">
-	var GET_FEED_LIST_URL = BASE_URL +"feed/main/get_feed_list"; 
+	var GET_FEED_LIST_URL = $("#BASE_URL").val() +"feed/main/get_feed_list"; 
+	var PAGE = 1;
 	window.onload = function() { 
-
+    loadfeed(0);
+		// $(window).bind("scroll",function() {
+		//       	if($(document).scrollTop() + $(window).height() > $(document).height() - 150 && PAGE < 2){
+		//       		$("#loadmore #text").html("加载中");
+		// 			$("#loadmore #icon").css({"display":"inline-block"});
+		//       		loadfeed(PAGE);
+		//       		PAGE++;
+		//       		$("#loadmore #text").html("加载更多");
+		// 			$("#loadmore #icon").css({"display":"none"});
+		//       	}
+		//   	});
+		// 	$("#loadmore").click(function(){
+		// 		$("#loadmore #text").html("加载中");
+		// 		$("#loadmore #icon").css({"display":"inline-block"});
+		// 		loadfeed(PAGE);
+		// 		PAGE++;
+		// 		$("#loadmore #text").html("加载更多");
+		// 		$("#loadmore #icon").css({"display":"none"});
+		// 	});
 	}; 
+
+	function loadfeed(pageTemp){
+		$.ajax({
+        url: GET_FEED_LIST_URL,
+        async: false, 
+        type: 'POST',
+        data:{page : pageTemp},
+        success: function(data) {
+          data = eval("("+data+")"); 
+					for(var i = 0; i < data.length; i++)  
+					{
+						var article = eval("(" +data.content+ ")");
+						var feed_type							= 
+						var user_head_src					= data[i].user.pic;
+						var user_name							= data[i].user.name;	
+						var author								= data[i].author.name;
+						var article_title					= article.article_title;
+						var article_content				= article.article_content;
+						// var like[num];
+						// var like[];
+					}
+	       }
+		 });
+
+		// $.ajax({
+  //     url: GET_ARTICLE_URL,
+  //     type: 'POST',
+  //     data:{page : pageTemp},
+  //     success: function(data) {
+  //         data = eval("("+data+")"); 
+		// 		for(var i = 0; i < data.length; i++)  
+		// 		{  
+		// 			var id			= data[i].content.article_id;
+		// 			var image 		= data[i].content.article_image;
+
+		// 			$("#arimg #"+id).attr("src",image);
+		// 		}
+  //   	}
+  //   });
+	}
 
 </script>
 </html>

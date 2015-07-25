@@ -1098,6 +1098,7 @@ img{
 		width: 269px;
 		height: 200px;
 		overflow: hidden;
+        background-color: #B3B3B3;
 }
 .ac-boxlist .box .article .ar_pic img{
 		width: 100%;
@@ -1174,11 +1175,11 @@ img{
         padding: 2px 5px;
         margin: 7px;
         text-align: left;
-        transition:color 0.1s linear 0s, background-color 0.1s linear 0s;
+        transition:color 0.1s linear 0s, border 0.1s linear 0s;
 }
 .ac-boxlist .box .support .like .btn:hover{
-        background-color: #FCEE21;
-        color: crimson !important;
+        border: 1px #FCEE21 solid;
+        color: #FCEE21 !important;
 }
 
 .ac-boxlist .box .support .list{
