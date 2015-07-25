@@ -34,7 +34,7 @@ class Main extends MY_Controller{
 			$this->load->view('common/head', $data);
 			$this->load->view('notification_list');
 		}
-		elseif(strcmp($type, 'conversation'))
+		elseif(strcmp($type, 'conversation') == 0)
 		{
 			$data['css'] = array(
 				'common.css',

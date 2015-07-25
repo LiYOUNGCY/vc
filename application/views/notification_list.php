@@ -6,10 +6,10 @@
             <div id="vi_menu" class="vi-menu width-100p">
                 <ul>
                     <li class="active">
-                        <a href="#" class="link">全部</a>
+                        <a href="<?=base_url().'notification';?>" class="link">全部</a>
                     </li>
                     <li>
-                        <a href="#" class="link">私信</a>
+                        <a href="<?=base_url().'notification/conversation'?>" class="link">私信</a>
                     </li>
                     <li>
                         <a href="#" class="link">评论</a>
@@ -19,7 +19,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="conversation">
+            <div id="messgae" class="conversation">
 
                 <div class="message-item">
                     <div class="message-row">
@@ -27,7 +27,7 @@
                             <img src="<?=base_url().'public/img/icon/info_icon_com.png'?>" />
                         </div>
                         <h3>评论</h3>
-                        <p>您收到了Jack、小然May1989、Rongyun、等20位用户的评论</p>
+                        <p id="comment"></p>
                     </div>
                 </div>
                 <div class="message-item">
@@ -36,6 +36,7 @@
                             <img src="<?=base_url().'public/img/icon/info_icon_dum.png'?>" />
                         </div>
                         <h3>赞</h3>
+                        <p id="like"></p>
                     </div>
                 </div>
                 <div class="message-item">
@@ -44,6 +45,7 @@
                             <img src="<?=base_url().'public/img/icon/info_icon_follow.png'?>" />
                         </div>
                         <h3>关注</h3>
+                        <p id="follower"></p>
                     </div>
                 </div>
             </div>
@@ -51,9 +53,14 @@
     </div>
 </body>
 <script>
+    function insert_message(img, conversation_url, name, content) {
+        $("#messgae").append('<a class="link" href="'+conversation_url+'"><div class="message-item"><div class="message-row"><div class="avatar av-icon"><img src="' + img + '" /></div><h3>'+name+'</h3><p>'+content+'</p></div></div></a>');
+    }
+
     $(function (){
         var BASE_URL = $("#BASE_URL").val();
         var GET_NOTIFICATION_URL = BASE_URL + "notification/main/get_notification_list";
+        var CONVERSATION_URL = BASE_URL + 'conversation/';
         var page = 0;
 
 
@@ -67,7 +74,30 @@
             success: function(data) {
                 var obj = eval("(" + data + ")");
                 page += 1;
-                alert(data);
+
+                for(i in obj) {
+                    var item = obj[i];
+
+                    if(item.type == 1) {
+                        var data = eval("(" + item.content + ")");
+
+                        var content = data.conversation_content;
+                        var cid = data.conversation_id;
+                        var img = item.sender.pic;
+                        var name= item.sender.name;
+
+                        insert_message(img, CONVERSATION_URL+cid, name, content);
+                    }
+                    else if(item.type == 2) {
+                        $("#comment").html(item.count);
+                    }
+                    else if(item.type == 3) {
+                        $("#like").html("您被" + item.count + "人点赞");
+                    }
+                    else if(item.type == 4) {
+                        $("#follower").html("您被" + item.count + "人关注");
+                    }
+                }
             }
         });
 
