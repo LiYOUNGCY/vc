@@ -1,4 +1,4 @@
-<!-- 私信列表的界面 -->
+<!-- 显示全部消息的界面 -->
 <body>
     <div class="container-960">
         <div class="container-head">

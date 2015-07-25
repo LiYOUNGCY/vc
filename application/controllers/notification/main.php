@@ -22,16 +22,17 @@ class Main extends MY_Controller{
 		if(strcmp($type, 'all')) 
 		{
 			$data['css'] = array(
-			'common.css',
-			'message.css',
-			'message_center.css'
-		);
+				'common.css',
+				'message.css',
+				'message_center.css'
+			);
 
-		$data['javascript'] = array(
-			'jquery.js'
-		);
+			$data['javascript'] = array(
+				'jquery.js'
+			);
+
 			$this->load->view('common/head', $data);
-			$this->load->view('conversation_list');
+			$this->load->view('notification_list');
 		}
 	}
 
