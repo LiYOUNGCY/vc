@@ -11,9 +11,28 @@ class Main extends MY_Controller{
 	 * [index 显示消息列表]
 	 * @return [type] [description]
 	 */
-	public function index()
+	public function index($type = 'conversation')
 	{
-		
+		if( !is_string($type) ) {
+			show_404();
+		}
+
+		$data = array();
+
+		if(strcmp($type, 'all')) 
+		{
+			$data['css'] = array(
+			'common.css',
+			'message.css',
+			'message_center.css'
+		);
+
+		$data['javascript'] = array(
+			'jquery.js'
+		);
+			$this->load->view('common/head', $data);
+			$this->load->view('conversation_list');
+		}
 	}
 
 	/**
