@@ -48,8 +48,9 @@ class Feed_service extends MY_Service {
             {
                 //获取点赞列表与点赞用户信息
                 $vote = $this->article_like_model->get_vote_person_by_aid($content['article_id']);
+                $feed[$k]['like'] = array();
                 foreach ($vote as $k1 => $v1) {
-                    $feed[$k]['like'][$v1['uid']] = $this->user_model->get_user_base_id($v1['uid']);
+                    array_push($feed[$k]['like'], $this->user_model->get_user_base_id($v1['uid']));
                 }
             }
        }
