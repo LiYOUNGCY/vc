@@ -90,7 +90,7 @@ img{
     background: #F2F2F2;
     border-radius: 5px;
     color: #808080 !important;
-		cursor: pointer;
+	cursor: pointer;
 }
 
 #vi_content .logo{
@@ -120,13 +120,13 @@ img{
 }
 
 .icon .sidebtn{
-     width: 41px;
+    width: 41px;
     height: 41px;
-    background: transparent url("../img/icon/slidBar_Btn_normal.png") no-repeat scroll;
+    background: transparent url("../img/icon/slidBar_Btn_over.png") no-repeat scroll;
     display: inline-block;
 }
 .icon .sidebtn:hover{
-    background: transparent url("../img/icon/slidBar_Btn_over.png") no-repeat scroll;
+    background: transparent url("../img/icon/slidBar_Btn_normal.png") no-repeat scroll;
     display: inline-block;
 }
 
@@ -177,7 +177,9 @@ img{
     height: 16px;
     background: transparent url("../img/icon/unlike.png") no-repeat scroll;
 }
-
+.icon .identity{
+    
+}
 .vi-menu {
     
 }
@@ -235,8 +237,27 @@ img{
     height: 50px;
     float: left;
     display: inline-block;
-    margin: 20px 10px;
+    padding: 20px 10px 0;
 }
+.sidebar .lop{
+    width:100%;
+    height:0px;
+    overflow: hidden;
+}
+.sidebar .lop .btn{
+    background-color: #B3B3B3;
+    width: 139.5px;
+    text-align: center;
+    border-radius: 0;
+    float: left;
+    padding: 10px 0;
+    transition:color 0.1s linear 0s, background-color 0.1s linear 0s;
+}
+.sidebar .lop .btn:hover{
+    background-color: #FCEE21;
+    color: #4C4640 !important;
+}
+
 .shade{
     width: 100%;
     height: 100%;
@@ -300,7 +321,7 @@ img{
 }
 .main {
     margin: 0 auto;
-		display: inline-block;
+	display: inline-block;
 }
 .main ul{
 
@@ -512,10 +533,6 @@ img{
 .sidebar .search input[type="text"]:focus{
     -webkit-animation: bdcolor-y 0.4s ease-out forwards;
     animation: bdcolor-y 0.4s ease-out forwards;
-}
-
-.sidebar .menu {
-    margin-top: 35px;
 }
 
 .sidebar .menu ul {
@@ -881,17 +898,17 @@ img{
     word-break:normal;
 }
 
-.setting {
+.vs-setting {
   width: 480px;
   margin: 0 auto;
   margin-top: 80px;
 }
 
-.setting .main h1{
+.vs-setting .main h1{
   font-size: 48px;
   font-weight: 100;
 }
-.setting .main .vi-menu ul{
+.vs-setting .main .vi-menu ul{
     width: auto;
     margin: 30px auto;
 }

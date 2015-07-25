@@ -21,83 +21,77 @@
 			</div>
 			<div class="text">
 				<a class="link" href="#">YOUNGCY</a>
-				<div class="identity">
-					<span class="icon identity"></span>
+				<div class="icon">
+					<span class="identity"></span>
 				</div>
 			</div>
 		</div>
-		<div class="search">
-			<form>
-				<input id="" name="" type="text" />
-				<div>
-					<a class="link" href="#"> <i class="fa fa-search"></i>
-					</a>
-				</div>				
-			</form>
-
-		</div>
 		<div class="menu">
 			<ul>
-				<li class="menu-list">
+				<a class="link" href="<?=base_url()?>article">
+				<li class="menu-list active">
 					<div class="menu-list-item">
-						<a class="link" href="<?=base_url()?>article/main">
-							<div class="icon">
-								<div class="home"></div>
-							</div>
-							<span class="menu-list-item-text">首页</span>
-						</a>
+						<div class="icon"><div class="home"></div></div>
+						<span class="menu-list-item-text">首页</span>
 					</div>
 				</li>
-				<a class="link" href="asasdas">
-					<li class="menu-list active">
-						<div class="menu-list-item">
-							<div class="icon">
-								<div class="guanzhu"></div>
-							</div>
-							<span class="menu-list-item-text">我的关注</span>
-						</div>
-					</li>
+				<a class="link" href="<?=base_url()?>login">		
+				<li class="menu-list">
+					<div class="menu-list-item">
+						<div class="icon"><div class="sixin"></div></div>
+						<span class="menu-list-item-text">登陆</span>
+					</div>
+				</li>
 				</a>
+				<a class="link" href="<?=base_url()?>signup">		
 				<li class="menu-list">
 					<div class="menu-list-item">
-						<a class="link" href="#">
-							<div class="icon">
-								<div class="tongji"></div>
-							</div>
-							<span class="menu-list-item-text">统计</span>
-						</a>
+						<div class="icon"><div class="sixin"></div></div>
+						<span class="menu-list-item-text">注册</span>
 					</div>
 				</li>
+				</a>
+				</a>
+				<a class="link" href="<?=base_url()?>notification/conversation">		
 				<li class="menu-list">
 					<div class="menu-list-item">
-						<a class="link" href="#">
-							<div class="icon">
-								<div class="sixin"></div>
-							</div>
-							<span class="menu-list-item-text">私信</span>
-						</a>
+						<div class="icon"><div class="sixin"></div></div>
+						<span class="menu-list-item-text">消息</span>
 					</div>
 				</li>
+				</a>
+				<a class="link" href="<?=base_url()?>setting">
 				<li class="menu-list">
 					<div class="menu-list-item">
-						<a class="link" href="#">
-							<div class="icon">
-								<div class="setting"></div>
-							</div>
-							<span class="menu-list-item-text">设置</span>
-						</a>
+						<div class="icon"><div class="setting"></div></div>
+						<span class="menu-list-item-text">设置</span>
 					</div>
 				</li>
+				</a>
+				<a class="link" id="showlang" href="javascript:void(0);">
 				<li class="menu-list">
 					<div class="menu-list-item">
-						<a class="link" href="#">
-							<div class="icon">
-								<div class="logout"></div>
-							</div>
-							<span class="menu-list-item-text">退出</span>
-						</a>
+						<div class="icon">
+							<div class="logout"></div>
+						</div>
+						<span class="menu-list-item-text">语言</span>
 					</div>
 				</li>
+				</a>
+				<div class="lop" id="lop">
+					<div id="lop-zh" style="border-right: 1px solid #4C4640;" class="btn">简体中文</div>
+					<div id="lop-en" class="btn">English</div>
+				</div>
+				<a class="link" href="#">
+				<li class="menu-list">
+					<div class="menu-list-item">
+						<div class="icon">
+							<div class="logout"></div>
+						</div>
+						<span class="menu-list-item-text">退出</span>
+					</div>
+				</li>
+				</a>
 			</ul>
 		</div>
 	</div>
@@ -127,17 +121,15 @@
 		<div id="vi_menu" class="vi-menu width-100p">
 			<ul>
 				<li>
-					<a href="#" class="link">发现</a>
+					<a href="<?=base_url()?>feed" class="link">动态</a>
 				</li>
 				<li class="active">
-					<a href="#" class="link">动态</a>
+					<a href="<?=base_url()?>article" class="link">文章</a>
 				</li>
 				<li>
-					<a href="#" class="link">作品</a>
+					<a href="#" class="link"></a>
 				</li>
-				<li>
-					<a href="#" class="link">文章</a>
-				</li>
+
 			</ul>
 		</div>
 		<div id="vi_main" class="width-100p ">

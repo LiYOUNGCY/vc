@@ -116,17 +116,20 @@
 		</div>
 		<div id="vi_menu" class="vi-menu width-100p">
 			<ul>
-				<li>
-					<a href="#" class="link">发现</a>
-				</li>
 				<li class="active">
-					<a href="#" class="link">动态</a>
+					<a href="<?=base_url()?>feed" class="link">动态</a>
 				</li>
 				<li>
-					<a href="#" class="link">作品</a>
+					<a href="<?=base_url()?>article" class="link">文章</a>
 				</li>
 				<li>
-					<a href="#" class="link">文章</a>
+					<a href="#" class="link">访谈</a>
+				</li>
+				<li>
+					<a href="#" class="link">展览</a>
+				</li>
+				<li>
+					<a href="#" class="link"></a>
 				</li>
 			</ul>
 		</div>

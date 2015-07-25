@@ -28,7 +28,9 @@ $(function(){
             },400);
             $("#vc_sidebar").stop().animate({
                 right: "-280px"
-            },400);
+            },400,function(){
+                $("#lop").css({height:0});
+            });
             $("body").removeClass("hide-y");
         }
     });
@@ -45,11 +47,22 @@ $(function(){
             },400);
         $("#vc_sidebar").stop().animate({
             right: "-280px"
-        },400);
+        },400,function(){
+            $("#lop").css({height:0});
+        });
         $("body").removeClass("hide-y");
     })
     
 	
-    
-
+    $("#showlang").click(function(){
+        if($("#lop").height() == 0){
+            $("#lop").animate({
+                height:"40px"
+            },100);
+        }else{
+            $("#lop").animate({
+                height:0
+            },100);
+        }
+    })
 })
