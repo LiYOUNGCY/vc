@@ -11,7 +11,7 @@ class Main extends MY_Controller{
 	 * [index 显示消息列表]
 	 * @return [type] [description]
 	 */
-	public function index($type = 'conversation')
+	public function index($type = 'all')
 	{
 		if( !is_string($type) ) {
 			show_404();
@@ -19,7 +19,7 @@ class Main extends MY_Controller{
 
 		$data = array();
 
-		if(strcmp($type, 'all')) 
+		if(strcmp($type, 'all') == 0) 
 		{
 			$data['css'] = array(
 				'common.css',

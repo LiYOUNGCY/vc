@@ -51,3 +51,22 @@
         </div>
     </div>
 </body>
+<script>
+    $(function (){
+        var BASE_URL = $("#BASE_URL").val();
+        var GET_NOTIFICATION_URL = BASE_URL + "notification/main/get_notification_list";
+        var page = 0;
+
+
+        $.ajax({
+            type: "POST",
+            url: GET_NOTIFICATION_URL,
+            data: {
+                type: 'all',
+                page: page,
+            }
+
+        });
+    });
+</script>
+</html>
