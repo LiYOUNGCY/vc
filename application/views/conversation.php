@@ -26,48 +26,56 @@
                 <div class="msg"><textarea id="msg"  placeholder="想说写什么..."></textarea></div>
             </div>
 
-            <div class="message clearfix">
+            <div id="message" class="message clearfix">
+            </div>
 
-                <div class="message-box message-left">
-                    <div class="message-content">
-                        <div class="triangle-left"></div>
-                        <div class="avatar avatar-left">
-                            <img src="<?=base_url().'public/'?>img/mm1.jpg">
-                            <div class="username">鸡巴白</div>
-                        </div>
-                        <p>qwer</p>
-                    </div>
+            <div class="loadmore width-100p" style="text-align:center;">
+                <div id="loadmore" class="btn load_btn">
+                    <font id="text">加载更多</font>
+                    <i class="fa fa-spinner fa-pulse" style="text-decoration: none;display:none" id="icon"></i>
                 </div>
-
-                <div class="message-box message-left">
-                    <div class="message-content">
-                        <div class="triangle-left"></div>
-                        <div class="avatar avatar-left">
-                            <img src="<?=base_url().'public/'?>img/mm1.jpg">
-                            <div class="username">鸡巴白</div>
-                        </div>
-                        <p>qwer鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡qwer鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白qwer鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白鸡巴白巴白鸡巴白鸡巴白</p>
-                    </div>
-                </div>
-
-                <div class="time-box">2015-7-24</div>
-
-                <div class="message-box message-right">
-                    <div class="message-content">
-                        <div class="triangle-right"></div>
-                        <div class="avatar avatar-right">
-                            <img src="<?=base_url().'public/'?>img/mm1.jpg">
-                            <div class="username">鸡巴白</div>
-                        </div>
-                        <p>rewq</p>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
 </body>
 	<script>
+        function insert_left_msg(img, username, content){
+            $("#message").append('<div class="message-box message-left"><div class="message-content"><div class="triangle-left"></div><div class="avatar avatar-left"><img src="'+ img +'"><div class="username">'+ username +'</div></div><p>'+ content +'</p></div></div>');
+        }
+
+
+        function insert_right_msg(img, username, content) {
+            $("#message").append('<div class="message-box message-right"><div class="message-content"><div class="triangle-right"></div><div class="avatar avatar-right"><img src="' + img + '"><div class="username">' + username + '</div></div><p>'+ content +'</p></div></div>');
+        }
+
+        function insert_time(time) {
+            $("#message").append('<div class="time-box">' + time + '</div>')
+        }
+
+
+        function insert_data(obj, last_time) {
+            var he = obj.he;
+            var me = obj.me;
+            
+
+            for(i in obj.list) {
+                var item = obj.list[i];
+
+                //创建时间
+                var time = item.publish_time.substr(0, 10);
+                if(time != last_time) {
+                    last_time = time;
+                    insert_time(last_time);
+                }
+
+                if(me.id == item.sender_id) {
+                    insert_right_msg(me.pic, me.name, item.content);
+                }
+                else if(he.id == item.sender_id ){
+                    insert_left_msg(he.pic, he.name, item.content);
+                }
+            }
+        }
         function replace_em(URL, str){ 
             str = str.replace(/\</g,'<；'); 
             str = str.replace(/\>/g,'>；'); 
@@ -78,6 +86,10 @@
 		$(function(){
             var BASE_URL = $("#BASE_URL").val();
             var URL = BASE_URL + "conversation/main/get_conversation_content";
+            var SEND_URL = BASE_URL + "conversation/main/publish_conversation";
+
+            var uid = -1;
+            var last_time = 0;
 
             var page = 0;
             //获得对话的 id
@@ -92,8 +104,19 @@
             });
 
             $("#submit").click(function(){ 
-                var str = replace_em(BASE_URL + "public/img/face/", $("#msg").val());
-                alert(str);
+                var str = $("#msg").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: SEND_URL,
+                    data: {
+                        uid: uid,
+                        conversation_content: str
+                    },
+                    success: function(data) {
+                        location.reload();
+                    }
+                });
             });
 
 
@@ -106,8 +129,29 @@
                     cid: cid
                 },
                 success: function(data) {
-                    alert(data);
+                    var obj = eval("(" + data + ")");
+                    uid = obj.he.id;
+                    // alert(obj.he.id);
+                    insert_data(obj, last_time);
                 }
+            });
+            
+            $('#loadmore').click(function(){
+                page = page + 1;
+
+                $.ajax({
+                    type: "POST",
+                    url: URL,
+                    data: {
+                        page: page,
+                        cid: cid
+                    },
+                    success: function(data) {
+                        var obj = eval("(" + data + ")");
+                        // alert(obj.he.id);
+                        insert_data(obj, last_time);
+                    }
+                });
             });
 		});
 	</script>

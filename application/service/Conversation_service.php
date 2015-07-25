@@ -79,6 +79,7 @@ class Conversation_service extends MY_Service{
 	 */
 	public function publish_conversation($sender_id, $reciver_id, $content)
 	{
+		$content = $this->replace_face_url($content);
 		$aid = "";
 		$bid = "";
 		if($sender_id < $reciver_id)
@@ -164,4 +165,13 @@ class Conversation_service extends MY_Service{
 			$this->notification_model->update_notification($nid,$arr);			
 		}
 	}
+
+	private function replace_face_url($str){
+		$face_url = base_url().'public/img/face/';
+		$str = str_replace(">",'<；',$str); 
+		$str = str_replace(">",'>；',$str); 
+		$str = str_replace("\n",'<br/>',$str); 
+		$str = preg_replace("[\[em_([0-9]*)\]]","<img src=\"{$face_url}$1.gif\" />",$str); 
+		return $str; 
+	} 
 }
