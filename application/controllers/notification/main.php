@@ -34,6 +34,21 @@ class Main extends MY_Controller{
 			$this->load->view('common/head', $data);
 			$this->load->view('notification_list');
 		}
+		elseif(strcmp($type, 'conversation'))
+		{
+			$data['css'] = array(
+				'common.css',
+				'message.css',
+				'message_center.css'
+			);
+
+			$data['javascript'] = array(
+				'jquery.js'
+			);
+
+			$this->load->view('common/head', $data);
+			$this->load->view('conversation_list');			
+		}
 	}
 
 	/**
@@ -51,6 +66,7 @@ class Main extends MY_Controller{
 
 		echo json_encode($notification);
 	}
+
 	/**
 	 * [read 阅读消息]
 	 * @return [type] [description]
