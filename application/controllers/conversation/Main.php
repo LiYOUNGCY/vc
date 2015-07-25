@@ -18,12 +18,15 @@ class Main extends MY_Controller{
 		$data['javascript'] = array(
 			'jquery.js', 
 			'jquery.flexText.min.js', 
-			'jquery.qqFace.js'
+			'jquery.qqFace.js',
+			'vchome.js'
 		);
 
-
+		$sidebar = $this->load->view('common/sidebar', '', TRUE);
+        $body['sidebar'] = $sidebar;
+        
 		$this->load->view('common/head', $data);
-		$this->load->view('conversation');
+		$this->load->view('conversation',$body);
 	}
 	/**
 	 * [get_conversation_content 获取对话内容]

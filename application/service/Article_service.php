@@ -51,9 +51,14 @@ class Article_service extends MY_Service{
         }
         $article = $this->article_model->get_article_list($page, $uid, $type,$tag);
         foreach( $article as $key => $value )
-        {           
+        {        
+            
+               
             //对每篇文章内容进行字数截取
             $article[$key]['content'] = $this->_extract_article($article[$key]['id'], $article[$key]['title'], $article[$key]['subtitle'], $article[$key]['content']);
+            
+            //对文章标题字数截取
+            $article[$key]['content']["sort_title"] = mb_strlen($article[$key]['content']["article_title"]) > 10 ? mb_substr($article[$key]['content']["article_title"], 0, 10).'..' : $article[$key]['content']["article_title"];
             
             //查询作者的信息
             $article[$key]['author'] = $this->user_model->get_user_base_id($article[$key]['uid']);

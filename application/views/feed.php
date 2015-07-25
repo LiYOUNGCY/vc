@@ -1,106 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	<meta name="format-detection" content="telephone=yes" />
-	<meta name="msapplication-tap-highlight" content="no" />
-	<script type="text/javascript" src="<?=base_url().'public/'?>js/j162.min.js"></script>
-	<link href="<?=base_url().'public/'?>css/common.css" type="text/css" rel="stylesheet" />
-	<link href="<?=base_url().'public/'?>css/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
-	<input type="hidden" value="<?=base_url()?>" id="BASE_URL"> 
-</head>
-<body>
-	<div id="vc_sidebar" class="sidebar">
-		<div class="name">
-			<div class="head">
-				<a class="link" href="#">
-					<img src="<?=base_url().'public/'?>img/mm1.jpg" /></a>
-			</div>
-			<div class="text">
-				<a class="link" href="#">YOUNGCY</a>
-				<div class="identity">
-					<span class="icon identity"></span>
-				</div>
-			</div>
-		</div>
-		<div class="search">
-			<form>
-				<input id="" name="" type="text" />
-				<div>
-					<a class="link" href="#"> <i class="fa fa-search"></i>
-					</a>
-				</div>				
-			</form>
 
-		</div>
-		<div class="menu">
-			<ul>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a class="link" href="<?=base_url()?>article/main">
-							<div class="icon">
-								<div class="home"></div>
-							</div>
-							<span class="menu-list-item-text">首页</span>
-						</a>
-					</div>
-				</li>
-				<a class="link" href="asasdas">
-					<li class="menu-list active">
-						<div class="menu-list-item">
-							<div class="icon">
-								<div class="guanzhu"></div>
-							</div>
-							<span class="menu-list-item-text">我的关注</span>
-						</div>
-					</li>
-				</a>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a class="link" href="#">
-							<div class="icon">
-								<div class="tongji"></div>
-							</div>
-							<span class="menu-list-item-text">统计</span>
-						</a>
-					</div>
-				</li>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a class="link" href="#">
-							<div class="icon">
-								<div class="sixin"></div>
-							</div>
-							<span class="menu-list-item-text">私信</span>
-						</a>
-					</div>
-				</li>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a class="link" href="#">
-							<div class="icon">
-								<div class="setting"></div>
-							</div>
-							<span class="menu-list-item-text">设置</span>
-						</a>
-					</div>
-				</li>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a class="link" href="#">
-							<div class="icon">
-								<div class="logout"></div>
-							</div>
-							<span class="menu-list-item-text">退出</span>
-						</a>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</div>
+<body>
+    <?php 
+    echo $sidebar;
+    ?>
 	<div id="vi_container" class="container">
 		<div id="shade"></div>
 		<div id="sbtn" class="sbtn">
@@ -109,7 +11,7 @@
 			</div>
 		</div>
 		<div id="vi_content" class="content">
-		<div id="vc_logo" class="logo">
+		<div id="vc_logo" class="logo" style="padding-top: 159px;">
 			<div class="icon">
 				<div class="logo-a"></div>
 			</div>
@@ -128,14 +30,10 @@
 				<li>
 					<a href="#" class="link">展览</a>
 				</li>
-				<li>
-					<a href="#" class="link"></a>
-				</li>
 			</ul>
 		</div>
 		<div id="vi_main" class="width-100p ">
 			<div class="main width-100p">
-								
 				<div class="ac-right">
 					<div class="box ac-user">
 						<div class="name">
@@ -149,7 +47,7 @@
 							<div class="text">
 								<a class="link" href="#">YOUNG啥第第六第六六届CY</a>
 							</div>
-
+							<inout type="hidden" value="4" />
 						</div>
 						<div class="public">
 							<a href="" class="link">
@@ -175,6 +73,7 @@
 									<div class="text">
 										<a class="link" href="#">YOUNG啥第六届CY</a>赞了<a class="link" href="#">artvc官方账号</a>的文章
 									</div>
+									<div class=""></div>
 								</div>
 							</div>
 							<div class="article">
@@ -191,7 +90,19 @@
 									<img src="<?=base_url().'public/'?>img/mm1.jpg">		
 								</div>
 							</div>
-							<div class="btn"></div>
+							<div class="support">
+								<div class="like float-l">
+									<div class="btn">
+										<i class="fa fa-heart"></i> 24
+									</div>
+								</div>
+								<div class="list">
+									<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
+									<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
+									<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
+									<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
+								</div>
+							</div>
 						</div>
 						<div class="box">
 							<div class="boxtop">
@@ -331,7 +242,7 @@
 	<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
 </body>
 <script type="text/javascript">
-
+	var GET_FEED_LIST_URL = BASE_URL +"feed/main/get_feed_list"; 
 	window.onload = function() { 
 
 	}; 

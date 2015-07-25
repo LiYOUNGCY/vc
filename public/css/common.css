@@ -8,6 +8,9 @@ body{
 ul,ol,li{
     list-style: outside none none;
 }
+h1,h2,h3,h4,h5,h6{
+    color: #4C4640;
+}
 body a{ 
     outline: none;
 }
@@ -177,9 +180,7 @@ img{
     height: 16px;
     background: transparent url("../img/icon/unlike.png") no-repeat scroll;
 }
-.icon .identity{
-    
-}
+
 .vi-menu {
     
 }
@@ -265,9 +266,8 @@ img{
     opacity: 0.4;
     z-index: 4;
     bottom: 0;
-    left: 0px;
     position: fixed;
-    right: 0;
+    right: 0px;
     top: 0;
 }
 
@@ -1039,7 +1039,7 @@ img{
 }
 
 .ac-boxlist .box .boxtop{
-		width: 80%;
+		width: 100%;
 		position: relative;
 		margin-bottom: 10px;
 		text-align: left;
@@ -1159,6 +1159,43 @@ img{
 		border: 0px;
 }
 
+.ac-boxlist .box .support{
+        float: left;
+        margin: 0 15px 10px;
+        width: 95%;
+        overflow: hidden;
+}
+
+.ac-boxlist .box .support .like .btn{
+        background-color: #FFFFFF;
+        border-radius: 5px;
+        border: 1px #B3B3B3 solid;
+        width: 40px;
+        padding: 2px 5px;
+        margin: 7px;
+        text-align: left;
+        transition:color 0.1s linear 0s, background-color 0.1s linear 0s;
+}
+.ac-boxlist .box .support .like .btn:hover{
+        background-color: #FCEE21;
+        color: crimson !important;
+}
+
+.ac-boxlist .box .support .list{
+        display: inline-block;
+        float: left;  
+        width: 86%;
+        height: 38px;
+}
+.ac-boxlist .box .support .list .head{
+        height: 40px;
+        width: 40px;
+        margin: 0 10px;
+}
+
+
+
+
 @media screen and (max-width: 960px){
 		.logo{
         display: inline-block;
@@ -1224,29 +1261,38 @@ img{
     .article-container {
         width: 80%;
     }
-		.ac-left{
-				width: 80%;
-				float: none;
-		}
-		.ac-right{
-				width: 300px;
-				float: none;
-		}
-		.ac-boxlist .box .article .con{
-				padding: 10px;
-				text-indent:2em;
-				height: auto;
-		}
-		.ac-boxlist .box .article{
-				display: inline-block;
-				height: auto;
-		} 
-		.ac-boxlist .box .article .ar_text {
-				width: 100%;
-		}
-		.ac-boxlist .box .article .ar_pic {
-				width: 100%;
-		}
+	.ac-left{
+			width: 80%;
+			float: none;
+	}
+	.ac-right{
+			width: 300px;
+			float: none;
+	}
+	.ac-boxlist .box .article .con{
+			padding: 10px;
+			text-indent:2em;
+			height: auto;
+	}
+	.ac-boxlist .box .article{
+			display: inline-block;
+			height: auto;
+	} 
+	.ac-boxlist .box .article .ar_text {
+			width: 100%;
+	}
+	.ac-boxlist .box .article .ar_pic {
+			width: 100%;
+	}
+    .ac-boxlist .box .support .like{
+        float: none;
+    }
+
+    .ac-boxlist .box .support .list{
+        display: inline-block;
+        float: none;  
+    }
 		
 		
 }
+
