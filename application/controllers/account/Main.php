@@ -21,22 +21,24 @@ class Main extends MY_Controller
 			$this->load->view('register');			
 		}
 	}
-		
+
+
 	/**
-	 * [login 登陆]
+	 * [login_by_email 邮箱登陆]
 	 */
-	public function login()
+	public function login_by_email()
 	{
-		$phone 		= $this->sc->input('phone');
 		$email 		= $this->sc->input('email');
 		$pwd   		= $this->sc->input('pwd');
 		$rememberme = $this->sc->input('rememberme');
 
-		$result = $this->user_service->login_action($pwd, $email, $phone, $rememberme);
+
+		$result = $this->user_service->login_action($pwd, $email, NULL, $rememberme);
 		if($result)
 		{
 			//登陆成功, 重定向首页 ?
-			redirect();			
+			//redirect()
+			echo 'success';		
 		}
 		else
 		{
@@ -47,19 +49,56 @@ class Main extends MY_Controller
 
 
 	/**
-	 * [register 注册]
+	 * [login_by_phone 手机号码登陆]
 	 */
-	public function register()
+	public function login_by_phone()
+	{
+		$phone 		= $this->sc->input('phone');
+		$pwd   		= $this->sc->input('pwd');
+		$rememberme = $this->sc->input('rememberme');
+
+
+		$result = $this->user_service->login_action($pwd, NULL, $phone, $rememberme);
+		if($result)
+		{
+			//登陆成功, 重定向首页 ?
+			//redirect()
+			echo 'success';		
+		}
+		else
+		{
+			$this->error->output('LOGIN_ERROR');			
+		}
+	}
+
+
+	/**
+	 * [register 邮箱注册]
+	 */
+	public function register_by_email()
 	{
 		$name 	= $this->sc->input('name');
-		$pwd 	= $this->sc->input('pwd');
 		$email 	= $this->sc->input('email');
-		$phone 	= $this->sc->input('phone');
+		$pwd 	= $this->sc->input('pwd');
 
-		$this->user_service->register_action($name, $pwd, $email, $phone);
+
+		$this->user_service->register_action($name, $pwd, $email, NULL);
 
 		//注册成功, 重定向首页 ?
-		redirect();
+		//redirect();
+	}
+
+
+	/**
+	 * [register_by_phone 手机号码注册]
+	 */
+	public function register_by_phone()
+	{
+		$name 	= $this->sc->input('name');
+		$phone 	= $this->sc->input('phone');
+		$pwd 	= $this->sc->input('pwd');
+
+		$this->user_service->register_action($name, $pwd, NULL, $phone);
 	}
 
 	/**

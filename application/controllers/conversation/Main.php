@@ -8,7 +8,22 @@ class Main extends MY_Controller{
 	
 	public function index()
 	{
-		
+		$data['css'] = array(
+			'common.css',
+			'flex-style.css', 
+			'message.css',
+			'qqFace.css'
+		);
+
+		$data['javascript'] = array(
+			'jquery.js', 
+			'jquery.flexText.min.js', 
+			'jquery.qqFace.js'
+		);
+
+
+		$this->load->view('common/head', $data);
+		$this->load->view('conversation');
 	}
 	/**
 	 * [get_conversation_content 获取对话内容]
@@ -19,7 +34,9 @@ class Main extends MY_Controller{
 	{
 		$page = $this->sc->input('page');
 		$cid  = $this->sc->input('cid');
-	
+
+		//var_dump($this->user);
+
 		$content = $this->conversation_service->get_conversation_content($page,$this->user['id'],$cid);
 		echo json_encode($content);
 	}
@@ -34,8 +51,9 @@ class Main extends MY_Controller{
 		$content    = $this->sc->input('conversation_content');
 		/*
 		$this->user = array();
-		$this->user['id'] = 4;
+		$this->user['id'] = 20;
 		$reciver_id = 9;
+		$content = '捉急吧';
 		*/
 		$this->conversation_service->publish_conversation($this->user['id'],$reciver_id,$content);
 

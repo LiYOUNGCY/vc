@@ -61,6 +61,7 @@ class User_service extends MY_Service
 		}
 
 		$user = $this->user_model->login_action($login_type, $pwd);
+        
 		if( ! empty($user))
 		{
 			if($rememberme) 
