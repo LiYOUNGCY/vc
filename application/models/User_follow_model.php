@@ -35,6 +35,23 @@ class User_follow_model extends CI_Model{
     }
 
     /**
+     * [get_follow_media_by_uid 获取用户关注的自媒体]
+     * @param  integer $page  [页数]
+     * @param  [type]  $uid   [用户id]
+     * @param  integer $limit [页面个数限制]
+     * @return [type]         [description]
+     */
+    public function get_follow_media_by_uid($page = 0, $uid, $limit = 10)
+    {
+        $query = $this->db->select('user.id, user.alias, user.name, user.pic, user.alias, user.role')
+                          ->join('user','user.id = user_follow.follow')
+                          ->where(array('user_follow.uid' => $uid, 'user.role' => 2))
+                          ->limit($limit, $page*$limit)
+                          ->get('user_follow')
+                          ->result_array();
+        return $query;
+    }
+    /**
      * [insert_follow 添加关注]
      * @param  [type] $myid [关注者的id]
      * @param  [type] $uid  [被关注者id]

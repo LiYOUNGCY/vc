@@ -73,4 +73,32 @@ class Common{
         preg_match_all("/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/", $article_content, $match);
         return isset( $match[1][0] ) ? $match[1][0] : '';
     }
+
+    static function arr_sort($array,$key,$order="asc")
+    {//asc是升序 desc是降序
+
+		$arr_nums=$arr=array();
+
+		foreach($array as $k=>$v)
+		{
+			$arr_nums[$k]=$v[$key];
+		}
+
+		if($order=='asc')
+		{
+			asort($arr_nums);
+		}
+		else
+		{
+			arsort($arr_nums);
+		}
+
+		foreach($arr_nums as $k=>$v){
+			array_push($arr, $array[$k]);
+
+		}
+
+		return $arr;
+
+	}
 }

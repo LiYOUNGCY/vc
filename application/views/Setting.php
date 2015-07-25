@@ -14,7 +14,6 @@
  </head> 
 <body>
   <div class="container">
-
     <div class="container-480p">
       <div class="main">
         <h1>设置</h1>

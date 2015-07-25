@@ -74,7 +74,6 @@ class Setting extends MY_Controller
 	{
 		$uid = $this->user['id'];
 
-		$uid = 4;
 		$data = $this->user_service->get_user_by_id($uid);
 
 		echo json_encode($data);

@@ -899,6 +899,20 @@ img{
 }
 
 
+.contianer-480p {
+  width: 480px;
+  margin: 0 auto;
+  margin-top: 80px;
+}
+
+.contianer-480p .main h1{
+  font-size: 48px;
+  font-weight: 100;
+}
+.contianer-480p .main .vi-menu ul{
+    width: auto;
+    margin: 30px auto;
+}
 .form-group {
   vertical-align: middle;
   margin-bottom: 20px;
@@ -965,19 +979,7 @@ img{
     background-color: #FFF;
     border: 1px solid #CCC;
 }
-.contianer-480p {
-  width: 480px;
-  margin: 0 auto;
-  margin-top: 80px;
-}
-.contianer-480p .main h1{
-  font-size: 48px;
-  font-weight: 100;
-}
-.contianer-480p .main .vi-menu ul{
-    width: auto;
-    margin: 30px auto;
-}
+
 .contianer-480p .set-btn{
     box-sizing:content-box;
     width: 30%;
@@ -1008,7 +1010,6 @@ img{
 }
 
 .error_div {
-
     text-align: right;
     width: 390px;
     position: relative;
@@ -1016,7 +1017,6 @@ img{
     color: crimson;
     display: none;
 }
-
 .ac-left{
 		max-width: 610px;
 		width: 100%;

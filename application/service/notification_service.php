@@ -19,7 +19,7 @@ class Notification_service extends MY_Service{
 		
 		switch ($type) {
 			case 'all':
-				$type = NULL;
+				$type = 0;
 				break;
 			case 'conversation':
 				$type = 1;
@@ -30,9 +30,26 @@ class Notification_service extends MY_Service{
 			case 'like':
 				$type =3;
 				break;
+			default:
+				$type =0;
+				break;
 		}
-		$notification = $this->notification_model->get_notification_list($page,$uid,$type);
-		
+		//全部
+		if($type == 0)
+		{
+			//取出前100条私信消息
+			$notification = $this->notification_model->get_notification_list(0,$uid,1,100);
+			//取出所有消息组
+			$group 	      = $this->notification_model->get_notification_group($uid);
+			//合并成一个消息组
+			$notification = array_merge($notification,$group);
+			//根据时间排序
+			$notification = Common::arr_sort($notification,'publish_time','desc');
+		}
+		else
+		{
+			$notification = $this->notification_model->get_notification_list($page,$uid,$type);			
+		}
 		//获取消息发送者信息
 		foreach ($notification as $k => $v) {
 			$notification[$k]['sender'] = $this->user_model->get_user_base_id($v['sender_id']);

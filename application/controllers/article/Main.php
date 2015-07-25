@@ -18,7 +18,7 @@ class Main extends MY_Controller {
         //获得页数
         $page = $this->sc->input('page');
 
-        $uid  = isset($this->user['id']) ? $this->user['id'] : -1;
+        $uid  = isset($this->user['id']) ? $this->user['id'] : NULL;
         //文章标签类型
         $tag = $this->sc->input('tag');
 

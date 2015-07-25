@@ -23,6 +23,8 @@ class Main extends MY_Controller {
         $body['sidebar'] = $sidebar;
 
     	$this->load->view("feed",$body);
+
+    	$this->load->view("feed");
     }
 
     /**
@@ -32,7 +34,6 @@ class Main extends MY_Controller {
     public function get_feed_list()
     {
 		$page = $this->sc->input('page');
-
 		$feed = $this->feed_service->get_feed_list($page,$this->user['id']);
 		echo json_encode($feed);
     }

@@ -98,7 +98,7 @@
     <div class="logtext"> 
      <div class="float-l">
         <font class="big">欢迎注册</font>
-        <font style="font-size:70%;text-decoration: underline;font-weight:bold;"><a class="link" href="<?=base_url()?>account/main">登陆</a></font>
+        <font style="font-size:70%;text-decoration: underline;font-weight:bold;"><a class="link" href="<?=base_url()?>login">登陆</a></font>
       </font> 
      </div>  
     </div> 
