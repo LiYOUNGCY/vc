@@ -43,16 +43,14 @@ class Feed_service extends MY_Service {
             {
                 $feed[$k]['author'] = $this->user_model->get_user_base_id($content['article_id']);
             }
-            //发布
-            else if($v['type'] == 2)
-            {
-                //获取点赞列表与点赞用户信息
-                $vote = $this->article_like_model->get_vote_person_by_aid($content['article_id']);
-                $feed[$k]['like'] = array();
-                foreach ($vote as $k1 => $v1) {
-                    array_push($feed[$k]['like'], $this->user_model->get_user_base_id($v1['uid']));
-                }
+
+            //获取点赞列表与点赞用户信息
+            $vote = $this->article_like_model->get_vote_person_by_aid($content['article_id']);
+            $feed[$k]['like'] = array();
+            foreach ($vote as $k1 => $v1) {
+                array_push($feed[$k]['like'], $this->user_model->get_user_base_id($v1['uid']));
             }
+            
        }
        return $feed;
     }
