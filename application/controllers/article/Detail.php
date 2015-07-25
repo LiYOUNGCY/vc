@@ -37,21 +37,30 @@ class Detail extends MY_Controller
         $this->load->view('article_detail', $data);
     }
     
-    
+    /**
+     * [vote_article 文章点赞]
+     * @return [type] [description]
+     */
     public function vote_article()
     {
     	$aid = $this->sc->input('aid');
     	$uid = $this->user['id'];
-    	
+
     	$this->article_service->vote_article($aid, $uid);
     }
 
+    /**
+     * [write_comment 评论文章]
+     * @return [type] [description]
+     */
     public function write_comment()
     {
         $aid = $this->sc->input('aid');
         $uid = $this->user['id'];
         $comment = $this->sc->input('comment');
-
+        $aid = 16;
+        $uid = 23;
+        $comment = 'sad';
         $this->article_service->write_comment($aid, $uid, $comment);
     }
 }

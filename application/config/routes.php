@@ -100,7 +100,7 @@ $route['feed'] = 'feed/main';
  *消息 
  */
 $route['notification']  = 'notification/main';
-$route['notification/([a-z]*)'] = 'notification/main';
+$route['notification/([a-z]*)'] = 'notification/main/index/$1';
 
 /**
  * 用户主页

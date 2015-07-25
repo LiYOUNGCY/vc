@@ -10,6 +10,7 @@ class Article_service extends MY_Service{
         $this->load->model('article_like_model');
         $this->load->model('user_model');
         $this->load->model('feed_model');
+        $this->load->model('notification_model');
     }
     
     
@@ -106,32 +107,70 @@ class Article_service extends MY_Service{
     		$this->error->output('ARTICLE_NOT_EXIST');
     	}
     	$status = $this->article_like_model->article_vote($aid, $uid);
-    	
-    	//点赞
+        //成功
     	if($status)
     	{
-    		//更新文章的 like 数加一
-    		$this->article_model->argee_article($aid);
-    		
-    		//解析文章
-    		$content = $this->_extract_vote($article['id'], $article['uid'], $article['title'], $article['subtitle'], $article['content']);
-    		//更新动态表
-    		$this->feed_model->insert_feed($uid, $article['id'], 1, $content);
+            echo json_encode(array('success' => 0));
+            //首次点赞
+            if( ! isset($status['status']))
+            {
+                //更新文章的 like 数加一
+                $this->article_model->argee_article($aid);
+                
+                //解析文章
+                $content = $this->_extract_vote($article['id'], $article['uid'], $article['title'], $article['subtitle'], $article['content']);
+                //更新动态表
+                $this->feed_model->insert_feed($uid, $article['id'], 1, $content);
+                //更新消息
+                $content = json_encode(array('content_id' => $article['id'], 'content_type' => 'article'));
+                $this->notification_model->insert($uid,$article['uid'],3,$content);
+            }
+            else
+            {
+                if($status['status'] == 0)
+                {
+                    //文章的 like 数减一
+                    $this->article_model->disargee_article($aid);                   
+                    //删除动态表的动态
+                    //$this->feed_model->delete_feed($uid, $article['id'], 1);
+                }
+                else
+                {
+                     //更新文章的 like 数加一
+                    $this->article_model->argee_article($aid);                   
+                }
+            }
+
     	}
+        //失败
     	else 
     	{
-    		//文章的 like 数减一
-    		$this->article_model->disargee_article($aid);
-    		
-    		//删除动态表的动态
-            $this->feed_model->delete_feed($uid, $article['id'], 1);
+            $this->error->output('INVALID_REQUEST');
     	}
     }
 
-
+    /**
+     * [write_comment 发表评论]
+     * @param  [type] $aid     [文章id]
+     * @param  [type] $uid     [用户id]
+     * @param  [type] $comment [评论内容]
+     * @return [type]          [description]
+     */
     public function write_comment($aid, $uid, $comment)
     {
-        $this->article_comment_model->insert_comment($aid, $uid, $comment);
+        $insert_result = $this->article_comment_model->insert_comment($aid, $uid, $comment);
+        if($insert_result)
+        {
+            echo json_encode(array('success' => 0));
+             //更新消息
+            $article = $this->article_model->get_article_by_id($aid);
+            $content = json_encode(array('content_id' => $aid, 'content_type' => 'article', 'comment_content' => $comment));
+            $this->notification_model->insert($uid,$article['uid'],2,$content);
+        }
+        else
+        {
+            $this->error->output('INVALID_REQUEST');
+        }
     }
 
 

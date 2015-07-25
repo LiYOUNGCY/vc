@@ -40,7 +40,15 @@ class Article_like_model extends CI_Model {
                      ->where('uid', $uid)
                      ->update('article_like', array('status' => $status, 'update_time' => date("Y-m-d H:i:s", time())));
             
-            return $this->db->affected_rows() === 1 && $status;
+            $result = $this->db->affected_rows() === 1;
+            if($result)
+            {
+                return array('status' => $status);
+            }
+            else
+            {
+                return FALSE;
+            }
         }
     }
 
