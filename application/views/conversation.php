@@ -3,21 +3,21 @@
         <div class="container-head">
             <h1>消息中心</h1>
             <div id="vi_menu" class="vi-menu width-100p">
-            <ul>
-                <li>
-                    <a href="#" class="link">发现</a>
-                </li>
-                <li class="active">
-                    <a href="#" class="link">动态</a>
-                </li>
-                <li>
-                    <a href="#" class="link">作品</a>
-                </li>
-                <li>
-                    <a href="#" class="link">文章</a>
-                </li>
-            </ul>
-        </div>
+                <ul>
+                    <li>
+                        <a href="#" class="link">全部</a>
+                    </li>
+                    <li class="active">
+                        <a href="#" class="link">私信</a>
+                    </li>
+                    <li>
+                        <a href="#" class="link">评论</a>
+                    </li>
+                    <li>
+                        <a href="#" class="link">赞</a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="conversation">
             <div class="clearfix" style="position:relative;">
