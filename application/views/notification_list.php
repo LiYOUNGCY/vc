@@ -46,8 +46,67 @@
                         <h3>关注</h3>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </body>
+<script>
+function insert_data(obj){
+    for(var i in obj)
+    {
+        switch(obj[i].type)
+        {
+            case '1':
+            alert('conversation');
+            break;
+            case '2':
+            alert('comment');
+            break;
+            case '3':
+            alert('like');
+            break;
+            case '4':
+            alert('follow');
+            break;                                    
+        }
+    }
+}
+function insert_like()
+{
+
+}
+function insert_comment()
+{
+
+}
+function insert_conversation()
+{
+
+}
+function insert_follow()
+{
+
+}
+$(function(){
+    var BASE_URL = $("#BASE_URL").val();
+    var URL = BASE_URL + "notification/main/get_notification_list";
+    var page = 0;
+    //获得消息类型
+    var type = window.location.href.split("/");
+    type = type[type.length-1];
+
+    $.ajax({
+        type: "POST",
+        url: URL,
+        data: {
+            page: page,
+            type: type
+        },
+        success: function(data) {
+            var obj = eval("(" + data + ")");
+            insert_data(obj);
+        }        
+    });
+});
+</script>
+</html>

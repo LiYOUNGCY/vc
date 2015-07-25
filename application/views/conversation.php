@@ -96,7 +96,6 @@
             var cid = window.location.href.split("/");
             cid = cid[cid.length-1];
 
-            var BASE_URL = $("#BASE_URL").val();
 			 $('#msg').flexText();
              $('#emotion').qqFace({ 
                 assign: 'msg',                          //给输入框赋值 
