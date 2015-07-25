@@ -102,7 +102,7 @@
      </div> 
     </div> 
     <div id="login" class="logform width-100p "> 
-     <div class="fsormcon">
+     <div class="formcon">
 
        <div class="form"> 
         <input type="text" id="username" placeholder="手机号/邮箱" /> 
