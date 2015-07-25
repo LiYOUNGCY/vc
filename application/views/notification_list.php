@@ -64,9 +64,14 @@
             data: {
                 type: 'all',
                 page: page,
+            },
+            success: function(data) {
+                var obj = eval("(" + data + ")");
+                page += 1;
+                alert(data);
             }
-
         });
+
     });
 </script>
 </html>
