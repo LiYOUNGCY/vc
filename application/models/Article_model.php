@@ -36,20 +36,52 @@ class Article_model extends CI_Model {
         return $this->db->where('id', $aid)->get('article')->row_array();
     }
 
-	
     /**
-     * 获取文章列表
+     * [get_intro 获取简介]
+     * @param  [type] $uid [用户id]
+     * @return [type]      [description]
      */
-    public function get_article_list($page = 0, $uid = -1, $type, $tag, $limit = 6, $order = "id DESC")
+	public function get_intro_by_uid($uid)
+    {
+        $query = $this->db->where(array('uid' => $uid,'type' => 3))
+                          ->get('article')
+                          ->row_array();
+        return $query;
+    }
+
+    /**
+     * [get_article_list 获取文章列表]
+     * @param  integer $page  [页数]
+     * @param  [type]  $meid  [我的id]
+     * @param  [type]  $uid   [用户id]
+     * @param  [type]  $type  [文章类型]
+     * @param  [type]  $tag   [文章标签]
+     * @param  integer $limit [页面个数限制]
+     * @param  string  $order [排序]
+     * @return [type]         [description]
+     */
+    public function get_article_list($page = 0, $meid = NULL, $uid = NULL, $type = NULL, $tag = NULL, $limit = 6, $order = "id DESC")
     {
         $query = $this->db
             ->select('article.id, article.uid, article.title, article.subtitle, article.content, article.like')
             ->from('article');
 
-        if( is_numeric($uid))
+        if( is_numeric($meid))
         {
             $query = $query->select('article_like.status');
-            $query = $query->join('article_like', "article_like.aid = article.id AND article_like.uid = {$uid}", 'left');
+            $query = $query->join('article_like', "article_like.aid = article.id AND article_like.uid = {$meid}", 'left');
+        }
+        if( ! empty($uid))
+        {
+            $query->where('article.uid',$uid);
+        }
+        if( ! empty($type))
+        {
+            $query->where('article.type',$type);
+        }
+        if(! empty($tag))
+        {
+            $query->where('article.tag',$tag);
         }
         // else
         // {
@@ -60,7 +92,6 @@ class Article_model extends CI_Model {
 
         return $query;
     }
-
 
     public function update_count($aid,$field = array()){
         $where = array('id' => $aid);
