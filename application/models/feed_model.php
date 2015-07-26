@@ -42,7 +42,7 @@ class Feed_model extends CI_Model {
      * @param  string  $order [排序]
      * @return [type]         [description]
      */
-    public function get_feed_list($page = 0, $uids, $limit = 0, $order = 'id DESC')
+    public function get_feed_list($page = 0, $uids, $limit = 2, $order = 'id DESC')
     {
         $query = $this->db->order_by($order)
                           ->limit($limit, $page*$limit)

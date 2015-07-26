@@ -17,7 +17,7 @@ class Feed_service extends MY_Service {
      * @param  [type] $uid [用户id]
      * @return [type]       [description]
      */
-    public function get_feed_list($page = 0, $uid, $limit = 10, $order = 'id DESC')
+    public function get_feed_list($page, $uid)
     {
        //获取用户关注列表
        $uids = $this->user_follow_model->get_user_follow(0,$uid,NULL);
@@ -33,7 +33,7 @@ class Feed_service extends MY_Service {
        }
 
        //获取动态列表
-       $feed = $this->feed_model->get_feed_list($page,$new_uids,$limit,$order);
+       $feed = $this->feed_model->get_feed_list($page,$new_uids);
 
        foreach ($feed as $k => $v) {
             $feed[$k]['user']  = $this->user_model->get_user_base_id($v['uid']);   
