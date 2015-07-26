@@ -1,100 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	<meta name="format-detection" content="telephone=yes" />
-	<meta name="msapplication-tap-highlight" content="no" />
-	<script type="text/javascript" src="<?=base_url().'public/'?>js/j162.min.js"></script>
-	<link href="<?=base_url().'public/'?>css/common.css" type="text/css" rel="stylesheet" />
-	<link href="<?=base_url().'public/'?>css/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
-	<input type="hidden" value="<?=base_url()?>" id="BASE_URL"> 
-</head>
 <body>
-	<div id="vc_sidebar" class="sidebar">
-		<div class="name">
-			<div class="head">
-				<a class="link" href="#">
-					<img src="<?=base_url().'public/'?>img/mm1.jpg" /></a>
-			</div>
-			<div class="text">
-				<a class="link" href="#">YOUNGCY</a>
-				<div class="icon">
-					<span class="identity"></span>
-				</div>
-			</div>
-		</div>
-		<div class="menu">
-			<ul>
-				<a class="link" href="<?=base_url()?>article">
-				<li class="menu-list active">
-					<div class="menu-list-item">
-						<div class="icon"><div class="home"></div></div>
-						<span class="menu-list-item-text">首页</span>
-					</div>
-				</li>
-				<a class="link" href="<?=base_url()?>login">		
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<div class="icon"><div class="sixin"></div></div>
-						<span class="menu-list-item-text">登陆</span>
-					</div>
-				</li>
-				</a>
-				<a class="link" href="<?=base_url()?>signup">		
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<div class="icon"><div class="sixin"></div></div>
-						<span class="menu-list-item-text">注册</span>
-					</div>
-				</li>
-				</a>
-				</a>
-				<a class="link" href="<?=base_url()?>notification/conversation">		
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<div class="icon"><div class="sixin"></div></div>
-						<span class="menu-list-item-text">消息</span>
-					</div>
-				</li>
-				</a>
-				<a class="link" href="<?=base_url()?>setting">
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<div class="icon"><div class="setting"></div></div>
-						<span class="menu-list-item-text">设置</span>
-					</div>
-				</li>
-				</a>
-				<a class="link" id="showlang" href="javascript:void(0);">
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<div class="icon">
-							<div class="logout"></div>
-						</div>
-						<span class="menu-list-item-text">语言</span>
-					</div>
-				</li>
-				</a>
-				<div class="lop" id="lop">
-					<div id="lop-zh" style="border-right: 1px solid #4C4640;" class="btn">简体中文</div>
-					<div id="lop-en" class="btn">English</div>
-				</div>
-				<a class="link" href="#">
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<div class="icon">
-							<div class="logout"></div>
-						</div>
-						<span class="menu-list-item-text">退出</span>
-					</div>
-				</li>
-				</a>
-			</ul>
-		</div>
-	</div>
+	<?php 
+	echo $sidebar;
+	?>
 	<div id="vi_container" class="container">
 		<div id="shade"></div>
 		<div id="sbtn" class="sbtn">
@@ -103,16 +10,18 @@
 			</div>
 		</div>
 		<div id="vi_content" class="content">
-			<!--                <div id="vi_user" class="vi-user float-r">
-			<a href="/" class="link">YOUNGCY</a>
-		</div>
-		-->
-		<div id="vi_sign" class="vi-sign ">
-			<div class="float-r">
-				<a href="<?=base_url()?>account/main" class="link sign">登陆</a>
-				<a href="<?=base_url()?>account/main/signup" class="link">注册</a>
+		<?php if( $user['role'] != 0) { ?>
+			<div id="vi_user" class="vi-user float-r">
+				<a href="<?=$user['alias']?>" class="link"><?=$user['name']?></a>
 			</div>
-		</div>
+		<?php } else { ?>
+			<div id="vi_sign" class="vi-sign ">
+				<div class="float-r">
+					<a href="<?=base_url()?>login" class="link sign">登陆</a>
+					<a href="<?=base_url()?>register" class="link">注册</a>
+				</div>
+			</div>
+		<?php } ?>
 		<div id="vc_logo" class="logo">
 			<div class="icon">
 				<div class="logo-a"></div>
@@ -127,7 +36,10 @@
 					<a href="<?=base_url()?>article" class="link">文章</a>
 				</li>
 				<li>
-					<a href="#" class="link"></a>
+					<a href="#" class="link">访谈</a>
+				</li>
+				<li>
+					<a href="#" class="link">展览</a>
 				</li>
 
 			</ul>
@@ -218,6 +130,7 @@
 				for(var i = 0; i < data.length; i++)  
 				{  
 					var id			= data[i].content.article_id;
+					var sort_title	= data[i].content.sort_title;
 					var title 		= data[i].content.article_title;
 					var content		= data[i].content.article_content;
 					var image 		= data[i].content.article_image;
@@ -227,10 +140,8 @@
 					var author_name	= data[i].author.name;
 					var author_pic	= data[i].author.pic;
 					var author_alias= data[i].author.alias;
-
-					var element 	= "<li><div class='article'><div class='article-box'><div id='arimg' class='arimg'><img id='"+id+"'></div><div class='armain width-100p'><div class='clearfix hide-y' style='margin: 10px 10px;'><span class='artitle'><a href='"+ARTICLE_DETAIL_URL+id+"' class='link'>"+title+"</a></span><div class='arlike float-r'><div class='icon'>"+like;
-					if(status == "null"){
-						alert("1");
+					var element 	= "<li><div class='article'><div class='article-box'><div id='arimg' class='arimg'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"'><img id='"+id+"'></a></div><div class='armain width-100p'><div class='clearfix hide-y' style='margin: 10px 10px;'><span class='artitle'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"' class='link'>"+sort_title+"</a></span><div class='arlike float-r'><div class='icon'>"+like;
+					if(status == null){
 						element += "<div class='unlike'></div>"
 					}else{
 						element += "<div class='like'></div>"
@@ -251,6 +162,7 @@
 				{  
 					var id			= data[i].content.article_id;
 					var image 		= data[i].content.article_image;
+
 					$("#arimg #"+id).attr("src",image);
 				}
             }

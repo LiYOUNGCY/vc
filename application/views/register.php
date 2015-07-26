@@ -13,71 +13,7 @@
   <input id="BASE_URL" type="hidden" value="<?=base_url()?>">
  </head> 
  <body style="height:100%;overflow: hidden;"> 
-  <div id="vc_sidebar" class="sidebar"> 
-   <div class="name"> 
-    <div class="head"> 
-     <a class="link" href="#"> <img src="<?=base_url().'public/'?>img/mm1.jpg" /> </a> 
-    </div> 
-    <div class="text"> 
-     <a class="link" href="#"> YOUNGCY </a> 
-     <div class="identity"> 
-      <span class="icon identity"></span> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="search"> 
-    <input id="" name="" type="text" /> 
-    <div> 
-     <a class="link" href="#"><i class="fa fa-search"></i></a> 
-    </div> 
-   </div> 
-   <div class="menu"> 
-    <ul> 
-     <li class="menu-list"> 
-      <div class="menu-list-item"> 
-       <a class="link" href="dfdfdf"> 
-        <div class="icon"> 
-         <div class="home"></div> 
-        </div> <span class="menu-list-item-text">个人首页</span> </a> 
-      </div> </li> 
-     <a class="link" href="asasdas"> <li class="menu-list active"> 
-       <div class="menu-list-item"> 
-        <div class="icon"> 
-         <div class="guanzhu"></div> 
-        </div> 
-        <span class="menu-list-item-text">我的关注</span> 
-       </div> </li> </a> 
-     <li class="menu-list"> 
-      <div class="menu-list-item"> 
-       <a class="link" href="#"> 
-        <div class="icon"> 
-         <div class="tongji"></div> 
-        </div> <span class="menu-list-item-text">统计</span> </a> 
-      </div> </li> 
-     <li class="menu-list"> 
-      <div class="menu-list-item"> 
-       <a class="link" href="#"> 
-        <div class="icon"> 
-         <div class="sixin"></div> 
-        </div> <span class="menu-list-item-text">私信</span> </a> 
-      </div> </li> 
-     <li class="menu-list"> 
-      <div class="menu-list-item"> 
-       <a class="link" href="#"> 
-        <div class="icon"> 
-         <div class="setting"></div> 
-        </div> <span class="menu-list-item-text">设置</span> </a> 
-      </div> </li> 
-     <li class="menu-list"> 
-      <div class="menu-list-item"> 
-       <a class="link" href="#"> 
-        <div class="icon"> 
-         <div class="logout"></div> 
-        </div> <span class="menu-list-item-text">退出</span> </a> 
-      </div> </li> 
-    </ul> 
-   </div> 
-  </div> 
+ <?=$sidebar ?>
   <div id="vi_container" class="container"> 
    <div id="loginbg" class="loginbg"> 
    </div> 
@@ -191,7 +127,7 @@
 							pwd		: pwd,
 							name	: phone
 						},function(data){
-							alert(data);
+							alert(eval("("+data+")").error);
 						}
 					)
 				}else{

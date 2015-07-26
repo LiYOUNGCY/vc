@@ -29,6 +29,21 @@ class Main extends MY_Controller {
     
     public function index()
     {
-        $this->load->view('article');
+        $data['css'] = array(
+            'common.css',
+            'font-awesome/css/font-awesome.min.css'
+        );
+        $data['javascript'] = array(
+            'j162.min.js'
+        );
+
+        $user['user'] = $this->user;
+        $sidebar = $this->load->view('common/sidebar', $user, TRUE);
+
+        $body['sidebar'] = $sidebar;
+        $body['user'] = $this->user;
+
+        $this->load->view('common/head', $data);
+        $this->load->view('article', $body);
     }
 }

@@ -1,5 +1,14 @@
 <body>
-    <div class="container-960">
+    <?php 
+    echo $sidebar;
+    ?>
+    <div id="vi_container" class="container-960">
+        <div id="shade"></div>
+        <div id="sbtn" class="sbtn">
+            <div class="icon">
+                <div class="sidebtn"></div>
+            </div>
+        </div>
         <div class="container-head">
             <h1>消息中心</h1>
             <div id="vi_menu" class="vi-menu width-100p">

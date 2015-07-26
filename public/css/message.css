@@ -1,6 +1,7 @@
 .container-960 {
     margin: 0 auto;
     width: 960px;
+    position: relative;
 }
 
 .container-head {
@@ -28,7 +29,6 @@
 
 .conversation .msg {
     float: right;
-
     width: 600px;
 }
 

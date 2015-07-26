@@ -1,104 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	<meta name="format-detection" content="telephone=yes" />
-	<meta name="msapplication-tap-highlight" content="no" />
-	<script type="text/javascript" src="<?=base_url().'public/'?>js/j162.min.js"></script>
-	<link href="<?=base_url().'public/'?>css/common.css" type="text/css" rel="stylesheet" />
-	<link href="<?=base_url().'public/'?>css/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
-</head>
 <body>
-	<div id="vc_sidebar" class="sidebar">
-		<div class="name">
-			<div class="head">
-				<a href="#">
-					<img src="<?=base_url().'public/'?>img/mm1.jpg" /></a>
-			</div>
-			<div class="text">
-				<a href="#">YOUNGCY</a>
-				<div class="identity">
-					<span class="icon identity"></span>
-				</div>
-			</div>
-		</div>
-		<div class="search">
-			<form>
-				<input id="" name="" type="text" />
-			</form>
-			<div>
-				<a href="#"> <i class="fa fa-search"></i>
-				</a>
-			</div>
-		</div>
-		<div class="menu">
-			<ul>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a href="dfdfdf">
-							<div class="icon">
-								<div class="home"></div>
-							</div>
-							<span class="menu-list-item-text">个人首页</span>
-						</a>
-					</div>
-				</li>
-				<a href="asasdas">
-					<li class="menu-list active">
-						<div class="menu-list-item">
-							<div class="icon">
-								<div class="guanzhu"></div>
-							</div>
-							<span class="menu-list-item-text">我的关注</span>
-						</div>
-					</li>
-				</a>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a href="#">
-							<div class="icon">
-								<div class="tongji"></div>
-							</div>
-							<span class="menu-list-item-text">统计</span>
-						</a>
-					</div>
-				</li>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a href="#">
-							<div class="icon">
-								<div class="sixin"></div>
-							</div>
-							<span class="menu-list-item-text">私信</span>
-						</a>
-					</div>
-				</li>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a href="#">
-							<div class="icon">
-								<div class="setting"></div>
-							</div>
-							<span class="menu-list-item-text">设置</span>
-						</a>
-					</div>
-				</li>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a href="#">
-							<div class="icon">
-								<div class="logout"></div>
-							</div>
-							<span class="menu-list-item-text">退出</span>
-						</a>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</div>
+	<?=$sidebar ?>
 	<div id="vi_container" class="container">
 		<div id="shade"></div>
 		<div id="sbtn" class="sbtn">
@@ -120,50 +21,106 @@
 			<div class="article-content">
 				<?=$article['content']?>
 			</div>
-			<div class="person-box">
-				
-			</div>
-			<div class="comment clearfix">
-				<?php if( empty($comment) ) { ?>
-					<div class="empty"></div>
-			<?php } else { ?>	
-				<ul>
-				<?php foreach ($comment as $key => $value) { ?>
-				<li class="clearfix">
-					<div class="name">
-                      <div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"><div class="point1"></div></div>
-                      <div class="username"><?=$value['user']['name']?></div>
-                    </div>
-					<div class="de-content">
-						<div style="clear:both; visiable:hidden;"></div>
-						<div class="text"><?=$value['content']?></div>
-						<div class="time"><?=$value['publish_time']?></div>
-					</div>
-				</li>
-				<?php } }?>
-				<!-- 
-					<li class="clearfix">
-					<div class="name me">
-                      <div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"><div class="point2"></div></div>
-                      <div class="username">艺术维C束身衣啊速度和</div>
-                    </div>
-                    <div class="de-content me">
-						<div style="clear:both; visiable:hidden;"></div>
-						<div class="text"><?=$value['content']?></div>
-						<div class="time"><?=$value['publish_time']?></div>
-					</div> 
-					</li>
-				-->
-				</ul>
-
-				<div class="write-comment clearfix">
-					<textarea rows="3" cols="40" ></textarea>
-				</div>
-				<div class="btn">提交</div>
-			</div>
-
+			<div class="playground">
+    <div class="box buddycloud">
+      <h1>Buddycloud</h1>
+      <div class="stream">
+        <article class="topic">
+          <section class="opener">
+            <div class="avatar user2"></div>
+            <div class="postmeta">
+              <span class="time">3 days</span>
+            </div>
+            <span class="name">Vera</span><span class="location">from Campus Library</span>
+            <p>Pretend. You pretend the feelings are there, for the world, for the people around you.</p>
+          </section>
+          <div class="hidden">
+            <section class="comment">
+              <div class="avatar user6"></div>
+              <div class="postmeta">
+                <span class="time">3 days</span>
+              </div>
+              <span class="name">Mona</span><span class="location">from Cafe Extra</span>
+              <p>Who knows? Maybe one day they will be. I like seafood.</p>
+            </section>
+            <section class="comment">
+              <div class="avatar user7"></div>
+              <div class="postmeta">
+                <span class="time">3 days</span>
+              </div>
+              <span class="name">Verena</span><span class="location">from Home</span>
+              <p>Finding a needle in a haystack isn't hard when every straw is computerized. I'm really more an apartment person.</p>
+            </section>
+            <section class="comment">
+              <div class="avatar user12"></div>
+              <div class="postmeta">
+                <span class="time">3 days</span>
+              </div>
+              <span class="name">Sebastian</span><span class="location">from Passau</span>
+              <p>I feel like a jigsaw puzzle missing a piece. And I'm not even sure what the picture should be.</p>
+            </section>
+            <section class="comment">
+              <div class="avatar user3"></div>
+              <div class="postmeta">
+                <span class="time">3 days</span>
+              </div>
+              <span class="name">Tom</span><span class="location">from Island</span>
+              <p>Who knows? Maybe one day they will be. I like seafood.</p>
+            </section>
+            <section class="comment">
+              <div class="avatar user2"></div>
+              <div class="postmeta">
+                <span class="time">3 days</span>
+              </div>
+              <span class="name">Vera</span><span class="location">from Munich</span>
+              <p>Finding a needle in a haystack isn't hard when every straw is computerized. I'm really more an apartment person.</p>
+            </section>
+          </div><!-- /hidden -->
+          <section class="seeMore">
+            <span>See <span>5</span> More Posts</span>
+          </section>
+          <section class="comment">
+            <div class="avatar user5"></div>
+            <div class="postmeta">
+              <span class="time">3 days</span>
+            </div>
+            <span class="name">Gero</span><span class="location">from Regensburg</span>
+            <p>I feel like a jigsaw puzzle missing a piece. And I'm not even sure what the picture should be.</p>
+          </section>
+          <section class="comment">
+            <div class="avatar user11"></div>
+            <div class="postmeta">
+              <span class="time">3 days</span>
+            </div>
+            <span class="name">Betty</span><span class="location">from Deggendorf</span>
+            <p>I'm going to tell you something that I've never told anyone before.</p>
+          </section>
+        </article>
+        <article class="topic">
+          <section class="opener">
+            <div class="avatar user2"></div>
+            <div class="postmeta">
+              <span class="time" title="5:06pm 06.06.2011">5 days</span>
+            </div>
+            <span class="name">Vera</span><span class="location">from Home</span>
+            <p>
+              Night time - sympathize - I've been working on white lies.
+              So I'll tell the truth - I'll give it up to you.
+              And when the day come, it will have all been fun. We'll talk about it soon.
+            </p>
+          </section>
+          <section class="answer">
+            <div class="avatar user1"></div>
+            <textarea placeholder="post a comment..."></textarea>
+            <div class="controls">
+              <div class="button small prominent">Post</div>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+  </div>
 		</div>
 	</div>
 </body>
-	<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
 </html>
