@@ -341,14 +341,14 @@ img{
 }
 .article-box{
     width: 300px;
-    height: 350px;
+    height: 410px;
     color: #B3B3B3;
     border: 1px solid #CCCCCC;
     position: relative;
 }
 .arimg {
     width: 100%;
-    height: 170px;
+    height: 230px;
     background-color: aqua;
 }
 .arimg img {
@@ -1044,9 +1044,17 @@ img{
 		margin-bottom: 10px;
 		text-align: left;
 }
+.ac-boxlist .box .boxtop .time{
+        width: 95%;
+        text-align: right;
+        margin-right: 15px;
+}
+.timeago{
+        font-size: 14px;
+}
 .ac-boxlist .box .link{
 		color: #4c4640;
-	  margin: 0 5px;
+        margin: 0 5px;
 }
 .ac-boxlist .box  .link:hover{
 		color: #FCEE21;
@@ -1064,7 +1072,7 @@ img{
 		position: relative;
 		background: #F9F9EF;
 		height: 200px;
-	  margin: 0 auto;
+	    margin: 0 auto;
 }
 .ac-boxlist .box .article .ar_text{
 		float: left;
@@ -1101,7 +1109,8 @@ img{
         background-color: #B3B3B3;
 }
 .ac-boxlist .box .article .ar_pic img{
-		width: 100%;
+		height: 100%;
+        width: 100%;
 }
 
 .ac-right{

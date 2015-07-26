@@ -13,7 +13,7 @@ class Main extends MY_Controller{
 	 * @param  string $type  [description]
 	 * @return [type]        [description]
 	 */
-	public function index($alias, $type = 'community')
+	public function index($alias, $type = 'quanzi')
 	{
 		$uid = isset($this->user['id']) ? $this->user['id'] : NULL;
 
@@ -23,9 +23,9 @@ class Main extends MY_Controller{
 			$data['user'] = $user;
 			$data['me']   = $this->user;
 			//载入视图
-			if($type == 'community')
+			if($type == 'quanzi')
 			{
-				$this->load->view('home/community',$data);
+				$this->load->view('quanzi',$data);
 			}
 			elseif($type == 'intro')
 			{
@@ -40,7 +40,7 @@ class Main extends MY_Controller{
 			}
 			elseif($type == 'cooperate')
 			{
-				$this->load->view('home/cooperate',$data);		
+				$this->load->view('home/cooperate',$data);
 			}
 			else
 			{
