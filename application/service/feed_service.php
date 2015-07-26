@@ -41,7 +41,7 @@ class Feed_service extends MY_Service {
             //点赞
             if($v['type'] == 1)
             {
-                $feed[$k]['author'] = $this->user_model->get_user_base_id($content['article_id']);
+                $feed[$k]['author'] = $this->user_model->get_user_base_id($content['article_uid']);
             }
 
             //获取点赞列表与点赞用户信息

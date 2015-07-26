@@ -105,7 +105,7 @@ class Home_service extends MY_Service{
 		}
 		else
 		{
-			return FALSE;
+			return NULL;
 		}
 	}
 }

@@ -57,8 +57,13 @@ class Common{
         //去掉空格
         $article_content = preg_replace("/\s/", "", $article_content);
 
-        $clean_content = mb_substr($article_content, 0, 70);
-        return $clean_content;
+		if(mb_strlen($article_content) > 70)
+		{
+       		$article_content = mb_substr($article_content, 0, 70);	
+       		$article_content.="...";		
+		}        
+
+        return $article_content;
     }
 
 
@@ -71,7 +76,21 @@ class Common{
     {
         $match = array();
         preg_match_all("/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/", $article_content, $match);
-        return isset( $match[1][0] ) ? $match[1][0] : '';
+        $result = isset( $match[1][0] ) ? $match[1][0] : '';
+    	if(isset($match[1][0]))
+    	{
+    		$path = $match[1][0];
+    		$path = explode('/', $path);
+    		$count= count($path);
+    		$filename = "thumb1_".$path[$count-1];
+    		$path[$count-1] = $filename;
+    		$path = implode('/',$path);
+    		return $path;
+    	}
+    	else
+    	{
+    		return "";
+    	}
     }
 
     static function arr_sort($array,$key,$order="asc")

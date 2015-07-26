@@ -72,9 +72,6 @@ class Detail extends MY_Controller
         $aid = $this->sc->input('aid');
         $uid = $this->user['id'];
         $comment = $this->sc->input('comment');
-        $aid = 16;
-        $uid = 23;
-        $comment = 'sad';
         $this->article_service->write_comment($aid, $uid, $comment);
     }
 

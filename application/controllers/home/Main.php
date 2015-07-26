@@ -61,6 +61,7 @@ class Main extends MY_Controller{
 	{
 		$page= $this->sc->input('page');
 		$uid = $this->sc->input('uid');
+		$uid = 9;
 		$community = $this->home_service->get_user_community($page,$uid);
 		echo json_encode($community);
 	}
@@ -74,6 +75,8 @@ class Main extends MY_Controller{
 		$page = $this->sc->input('page');
 		$uid  = $this->sc->input('uid');
 		$type = $this->sc->input('type');
+		$uid  = 4;
+		$type = 1;
 		$meid = isset($this->user['id']) ? $this->user['id'] : NULL;
 		$article = $this->home_service->get_user_article($page,$meid,$uid,$type); 
 		echo json_encode($article);

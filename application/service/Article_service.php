@@ -204,7 +204,7 @@ class Article_service extends MY_Service{
             'article_id'        => $article_id,
             'article_title'     => $article_title,
             'article_subtitle'  => $article_subtitle,
-            'article_content'   => Common::extract_content($article_content).'...',
+            'article_content'   => Common::extract_content($article_content),
             'article_image'     => Common::extract_first_img($article_content)
         );
         return $content;
