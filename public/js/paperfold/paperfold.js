@@ -44,7 +44,7 @@ var paperfold = {
     // add folds containing the previously cached children elements
     // to the element
     for (var i = 0, j = 0; i < this.foldCount; i++, j += 2) {
-      var topHeight = bottomHeight = Math.floor(this.foldHeight / 2);
+      var topHeight = bottomHeight = Math.floor(this.foldHeight / 2) + 1;
       if ((i + 1) === this.foldCount && this.foldHeight / 2 % 2) bottomHeight = this.height - (j + 1) * topHeight;
       this.element.append(this.createFold(j, topHeight, bottomHeight));
     }
@@ -58,8 +58,7 @@ var paperfold = {
 
     // bind buttons
     this.element.next('.seeMore').click($.proxy(this, 'toggle'));
-    $('#go').click($.proxy(this, 'toggle'));
-
+    // $('#go').click($.proxy(this, 'toggle'));
 
     this.element.addClass('ready');
   },
@@ -91,19 +90,8 @@ var paperfold = {
 
       // if the time slider was already used, reset the folds
       if (!this.timeVirigin) this.open(1);
+      $('.seeMore').css('display', 'none');
 
-      // change button text
-      $('#go').text('Close');
-
-      // adapt time slider
-      $(clock).animate({
-        time: 100
-      }, {
-        duration: 400,
-        step: function(now) {
-          $('#time').val(now);
-        }
-      });
     } else {
       // close
       // animate folds height (css transition)
@@ -111,19 +99,6 @@ var paperfold = {
 
       // if the time slider was already used, reset the folds
       if (!this.timeVirigin) this.open(0);
-
-      // change button text
-      $('#go').text('Open');
-
-      // adapt time slider
-      $(clock).animate({
-        time: 0
-      }, {
-        duration: 400,
-        step: function(now) {
-          $('#time').val(now);
-        }
-      });
     }
     this.tops.add(this.bottoms).css('background-color', '').css(transformString, '');
   },
