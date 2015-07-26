@@ -18,6 +18,11 @@ class Main extends MY_Controller
         $body['sidebar'] = $sidebar;
 		if($type == 'login')
 		{
+			//如果已经登录
+			if(isset($this->user['id']))
+			{
+				redirect(base_url(),'location');
+			}
 			$this->load->view('login', $body);			
 		}
 		else if($type == 'signup')
@@ -38,17 +43,9 @@ class Main extends MY_Controller
 
 
 		$result = $this->user_service->login_action($pwd, $email, NULL, $rememberme);
-		if($result)
-		{
-			//登陆成功, 重定向首页 ?
-			//redirect()
-			echo 'success';		
-		}
-		else
-		{
-			$this->error->output('LOGIN_ERROR');			
-		}
-
+		//登陆成功, 重定向首页
+		echo "success";
+		
 	}
 
 
@@ -63,16 +60,8 @@ class Main extends MY_Controller
 
 
 		$result = $this->user_service->login_action($pwd, NULL, $phone, $rememberme);
-		if($result)
-		{
-			//登陆成功, 重定向首页 ?
-			//redirect()
-			echo 'success';		
-		}
-		else
-		{
-			$this->error->output('LOGIN_ERROR');			
-		}
+		//登陆成功, 重定向首页
+		echo "success";
 	}
 
 
@@ -86,10 +75,10 @@ class Main extends MY_Controller
 		$pwd 	= $this->sc->input('pwd');
 
 
-		$this->user_service->register_action($name, $pwd, $email, NULL);
+		$result = $this->user_service->register_action($name, $pwd, $email, NULL);
+		//注册成功, 重定向首页
+		echo "success";
 
-		//注册成功, 重定向首页 ?
-		//redirect();
 	}
 
 
@@ -102,7 +91,9 @@ class Main extends MY_Controller
 		$phone 	= $this->sc->input('phone');
 		$pwd 	= $this->sc->input('pwd');
 
-		$this->user_service->register_action($name, $pwd, NULL, $phone);
+		$result = $this->user_service->register_action($name, $pwd, NULL, $phone);
+		//注册成功, 重定向首页
+		echo "success";
 	}
 
 	/**
