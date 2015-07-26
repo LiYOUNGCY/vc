@@ -185,9 +185,13 @@ class Notification_model extends CI_Model{
 	 * @param  [type] $arr [键值数组]
 	 * @return [type]      [description]
 	 */
-	public function update_notification_group($nid,$arr)
+	public function update_notification_group($nid, $arr, $uid = NULL)
 	{
 		$arr['publish_time'] = date('Y-m-d H-m-s');
+		if( ! empty($uid))
+		{
+			$this->db->where('uid',$uid);
+		}
 		$this->db->where(array('id' => $nid))
 				 ->update('notification_group',$arr);
 

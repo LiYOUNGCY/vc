@@ -65,9 +65,18 @@ class Notification_service extends MY_Service{
 	 * @param  [type] $arr [更新键值]
 	 * @return [type]      [description]
 	 */
-	public function update($uid,$nid,$arr)
+	public function update($uid,$nid,$type,$arr)
 	{	
-		return $this->notification_model->update($uid,$nid,$arr);
+		if($type == 1)
+		{
+			//私信消息
+			return $this->notification_model->update($uid,$nid,$arr);
+		}
+		else
+		{
+			//其它消息组
+			return $this->notification_model->update_notification_group($nid,$arr,$uid);
+		}	
 	}
 
 	/**
