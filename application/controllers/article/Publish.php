@@ -25,11 +25,10 @@ class Publish extends MY_Controller {
         $article_title      = $this->sc->input('article_title');
         $article_subtitle   = $this->sc->input('article_subtitle');
         $article_content    = $this->sc->input('article_content');
-        $article_type       = $this->sc->input('article_type');
-        $this->user = array();
-        $this->user['id'] = 4;
+        $article_tag        = $this->sc->input('article_tag');
+
         //把文章插入到数据库
-        $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_subtitle, $article_type, $article_content);
+        $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_subtitle, 1, $article_tag, $article_content);
         if($result)
         {
             echo 'success';
@@ -39,4 +38,29 @@ class Publish extends MY_Controller {
             $this->error->output('INVALID_REQUEST');
         }
     }
+
+    /**
+     * [update_article 更新文章]
+     * @return [type] [description]
+     */
+    public function update_article()
+    {
+        $aid                = $this->sc->input('aid');
+        $article_title      = $this->sc->input('article_title');
+        $article_subtitle   = $this->sc->input('article_subtitle');
+        $article_content    = $this->sc->input('article_content');
+        $article_tag        = $this->sc->input('article_tag'); 
+
+        $result = $this->article_service->update_article($aid,$this->user['id'],$article_title,$article_subtitle,1,$article_tag,$article_content);       
+        if($result)
+        {
+            echo "success";
+        }
+        else
+        {
+            $this->error->output('INVALID_REQUEST');
+        } 
+    }
+
+    
 }

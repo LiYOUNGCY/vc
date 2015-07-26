@@ -19,6 +19,19 @@ class Community_answer_model extends CI_Model{
 	}
 
 	/**
+	 * [get_answer_by_id 获取评论]
+	 * @param  [type] $aid [评论id]
+	 * @return [type]      [description]
+	 */
+	public function get_answer_by_id($aid)
+	{
+		$query = $this->db->where('id',$aid)
+						  ->get('community_answer')
+						  ->row_array();
+		return $query;
+	}	
+
+	/**
 	 * [insert_answer 添加回复]
 	 * @param  [type] $pid     [帖子id]
 	 * @param  [type] $uid     [用户id]
@@ -37,4 +50,14 @@ class Community_answer_model extends CI_Model{
   		return $this->db->affected_rows() === 1;		
 	}
 
+	/**
+	 * [delete_answer 删除回复]
+	 * @param  [type] $aid [回复id]
+	 * @return [type]      [description]
+	 */
+	public function delete_answer($aid)
+	{
+		$this->db->delete('community_answer',array('id' => $aid));
+  		return $this->db->affected_rows() === 1;		
+	}
 }

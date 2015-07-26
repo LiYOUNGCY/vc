@@ -93,6 +93,23 @@ class Community_service extends MY_Service{
 	}
 
 	/**
+	 * [update_community description]
+	 * @param  [type] $cid             [圈子id]
+	 * @param  [type] $community_name  [圈子名称]
+	 * @param  [type] $community_intro [圈子介绍]
+	 * @param  [type] $uid             [用户id]
+	 * @return [type]                  [description]
+	 */
+	public function update_community($cid,$community_name,$community_intro,$uid)
+	{
+		$arr = array(
+			'name' => array(TRUE,$community_name),
+			'intro'=> array(TRUE,$community_intro)
+		);
+		return $this->community_model->update_community($cid,$arr,$uid);
+	}
+
+	/**
 	 * [get_post_detail 获取帖子详情]
 	 * @return [type] [description]
 	 */
@@ -155,6 +172,35 @@ class Community_service extends MY_Service{
 	}
 
 	/**
+	 * [update_post 更新帖子]
+	 * @param  [type] $pid     [帖子id]
+	 * @param  [type] $content [内容]
+	 * @param  [type] $title   [标题]
+	 * @param  [type] $uid     [用户id]
+	 * @return [type]          [description]
+	 */
+	public function update_post($pid, $title, $content, $uid)
+	{
+		$arr = array(
+			'content' => array(TRUE,$content),
+			'title'   => array(TRUE,$title)
+		);
+		return $this->community_post_model->update_post($pid,$arr,$uid);
+	}
+
+	/**
+	 * [delete_post 删除帖子]
+	 * @param  [type] $pid [帖子id]
+	 * @param  [type] $uid [用户id]
+	 * @return [type]      [description]
+	 */
+	public function delete_post($pid, $uid)
+	{
+		return $this->community_post_model->delete_post($pid,$uid);
+	}	
+
+
+	/**
 	 * [publish_answer 回复帖子]
 	 * @param  [type] $pid     [帖子id]
 	 * @param  [type] $uid     [用户id]
@@ -177,5 +223,27 @@ class Community_service extends MY_Service{
 		}
 	}
 
-
+	/**
+	 * [delete_answer 删除回复]
+	 * @param  [type] $aid [回复id]
+	 * @param  [type] $uid [用户id]
+	 * @return [type]      [description]
+	 */
+	public function delete_answer($aid, $uid)
+	{
+		$answer = $this->community_answer_model->get_answer_by_id($aid);
+		if( ! empty($answer))
+		{
+			$post = $this->community_post_model->get_post_by_id($answer['pid']);
+			if($post['uid'] == $uid)
+			{
+				$result = $this->community_answer_model->delete_answer($aid);
+				return $result;
+			}
+		}		
+		else
+		{
+			$this->error->output('INVALID_REQUEST');
+		}
+	}
 }

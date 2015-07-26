@@ -10,11 +10,12 @@ class Article_model extends CI_Model {
     /**
      * 把文章的信息插入到数据库
      */
-    public function publish_article($user_id, $article_title, $article_subtitle, $article_type, $article_content)
+    public function publish_article($user_id, $article_title, $article_subtitle, $article_type, $article_tag, $article_content)
     {
         $data = array(
             'uid'           => $user_id,
             'type'          => $article_type,
+            'tag'           => $article_tag,
             'title'         => $article_title,
             'subtitle'      => $article_subtitle,
             'content'       => $article_content,
@@ -140,5 +141,41 @@ class Article_model extends CI_Model {
     {
         $table_name = $this->db->protect_identifiers('article', TRUE);
         $this->db->query("UPDATE {$table_name} SET {$table_name}.`read` = {$table_name}.`read` + 1 WHERE {$table_name}.id = {$aid}");
+    }
+
+    /**
+     * [delete_article 删除文章]
+     * @param  [type] $aid [文章id]
+     * @param  [type] $uid [用户id]
+     * @return [type]      [description]
+     */
+    public function delete_article($aid, $uid = NULL)
+    {
+        $where = array();   
+        $where['id'] = $aid;
+        if( ! empty($uid))
+        {
+            $where['uid'] = $uid;
+        }
+        $this->db->delete('article',$where);
+        return $this->db->affected_rows() === 1;        
+    }
+
+    /**
+     * [update_article 更新文章]
+     * @param  [type] $aid [文章id]
+     * @param  [type] $uid [用户id]
+     * @param  [type] $arr [键值数组]
+     * @return [type]      [description]
+     */
+    public function update_article($aid, $arr, $uid = NULL)
+    {
+      if( ! empty($uid))
+      {
+        $this->db->where('uid',$uid);
+      }
+      $this->db->where('id', $aid)
+               ->update('article',$arr);
+      return $this->db->affected_rows() === 1;                  
     }
 }

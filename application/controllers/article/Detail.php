@@ -77,4 +77,22 @@ class Detail extends MY_Controller
         $comment = 'sad';
         $this->article_service->write_comment($aid, $uid, $comment);
     }
+
+    /**
+     * [delete_article 删除文章]
+     * @return [type] [description]
+     */
+    public function delete_article()
+    {
+        $aid = $this->sc->input('aid');
+        $result = $this->article_model->delete_article($aid,$this->user['id']);
+        if($result)
+        {
+            echo "success";
+        }
+        else
+        {
+            $this->error->output('INVALID_REQUEST');
+        }        
+    }
 }
