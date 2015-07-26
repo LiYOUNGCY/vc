@@ -102,7 +102,7 @@ class Notification_model extends CI_Model{
 			{
 				//更新消息组
 				$count = (int)$check_result['count'] + 1;
-				$this->update_notification_group($check_result['id'],array('count' => $count,'read_flag' => 0));
+				$this->update_notification_group($check_result['id'],array('count' => $count,'read_flag' => 0,'publish_time' => date('Y-m-d H-m-s')));
 			}
 			else
 			{
@@ -187,7 +187,6 @@ class Notification_model extends CI_Model{
 	 */
 	public function update_notification_group($nid, $arr, $uid = NULL)
 	{
-		$arr['publish_time'] = date('Y-m-d H-m-s');
 		if( ! empty($uid))
 		{
 			$this->db->where('uid',$uid);
@@ -198,4 +197,8 @@ class Notification_model extends CI_Model{
 		return $this->db->affected_rows() === 1;
 	}
 
+	public function delete_notification_group()
+	{
+
+	}
 }
