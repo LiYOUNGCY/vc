@@ -189,7 +189,7 @@ class Notification_model extends CI_Model{
 	{
 		if( ! empty($uid))
 		{
-			$this->db->where('uid',$uid);
+			$this->db->where('reciver_id',$uid);
 		}
 		$this->db->where(array('id' => $nid))
 				 ->update('notification_group',$arr);
@@ -197,8 +197,19 @@ class Notification_model extends CI_Model{
 		return $this->db->affected_rows() === 1;
 	}
 
-	public function delete_notification_group()
+	/**
+	 * [delete_notification_group 删除消息组]
+	 * @return [type] [description]
+	 */
+	public function delete_notification_group($nid,$uid = NULL)
 	{
-
+		$where = array();
+		$where['id'] = $nid;
+		if( ! empty($uid))
+		{
+			$where['reciver_id'] = $uid;
+		}
+		$this->db->delete('notification_group',$where);
+		return $this->db->affected_rows() === 1;		
 	}
 }

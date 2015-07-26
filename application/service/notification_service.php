@@ -84,9 +84,19 @@ class Notification_service extends MY_Service{
 	 * @param  [type] $nid [description]
 	 * @return [type]      [description]
 	 */
-	public function delete($uid,$nid)
+	public function delete($uid,$nid,$type)
 	{
-		return $this->notification_model->delete($uid,$nid);
+		if($type == 1)
+		{
+			//删除私信消息
+			return $this->notification_model->delete($uid,$nid);
+		}
+		else
+		{
+			//删除其它消息组
+			return $this->notification_model->delete_notification_group($nid,$uid);
+		}
+
 	}
 
 	/**
