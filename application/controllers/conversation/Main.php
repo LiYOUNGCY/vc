@@ -21,8 +21,9 @@ class Main extends MY_Controller{
 			'jquery.qqFace.js',
 			'vchome.js'
 		);
-
-		$sidebar = $this->load->view('common/sidebar', '', TRUE);
+		
+        $user['user'] = $this->user;
+        $sidebar = $this->load->view('common/sidebar', $user, TRUE);
         $body['sidebar'] = $sidebar;
         
 		$this->load->view('common/head', $data);

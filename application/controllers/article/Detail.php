@@ -31,9 +31,23 @@ class Detail extends MY_Controller
         $data['like_people'] = $this->article_service->get_vote_person_by_aid($aid);
         $data['article'] = $article;
         $data['comment'] = $comment;
+        $data['sidebar'] = $this->load->view('common/sidebar', '', TRUE);
 
         $this->article_service->read_article($aid);
         
+        $head['css'] = array(
+                'common.css',
+                'paperfold/buddycloud.css',
+                'paperfold/paperfold.css'
+            );
+        $head['javascript'] = array(
+                'jquery.js',
+                'vchome.js',
+                'paperfold/modernizr.custom.01022.js',
+                'paperfold/paperfold.js',
+                'paperfold/ui.js'
+            );
+        $this->load->view('common/head', $head);
         $this->load->view('article_detail', $data);
     }
     

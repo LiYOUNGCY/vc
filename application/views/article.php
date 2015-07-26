@@ -10,16 +10,18 @@
 			</div>
 		</div>
 		<div id="vi_content" class="content">
-			<!--                <div id="vi_user" class="vi-user float-r">
-			<a href="/" class="link">YOUNGCY</a>
-		</div>
-		-->
-		<div id="vi_sign" class="vi-sign ">
-			<div class="float-r">
-				<a href="<?=base_url()?>account/main" class="link sign">登陆</a>
-				<a href="<?=base_url()?>account/main/signup" class="link">注册</a>
+		<?php if( $user['role'] != 0) { ?>
+			<div id="vi_user" class="vi-user float-r">
+				<a href="<?=$user['alias']?>" class="link"><?=$user['name']?></a>
 			</div>
-		</div>
+		<?php } else { ?>
+			<div id="vi_sign" class="vi-sign ">
+				<div class="float-r">
+					<a href="<?=base_url()?>login" class="link sign">登陆</a>
+					<a href="<?=base_url()?>register" class="link">注册</a>
+				</div>
+			</div>
+		<?php } ?>
 		<div id="vc_logo" class="logo">
 			<div class="icon">
 				<div class="logo-a"></div>

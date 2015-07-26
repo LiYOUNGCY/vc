@@ -1,11 +1,12 @@
 <div id="vc_sidebar" class="sidebar">
 	<div class="name">
 		<div class="head">
-			<a class="link" href="#">
-				<img src="<?=base_url().'public/'?>img/mm1.jpg" /></a>
+			<a class="link" href="<?=$user['alias']?>">
+				<img src="<?=$user['pic']?>" />
+			</a>
 		</div>
 		<div class="text">
-			<a class="link" href="#">YOUNGCY</a>
+			<a class="link" href="<?=$user['alias']?>"><?php echo $user['name'];?></a>
 			<div class="icon">
 				<span class="identity"></span>
 			</div>

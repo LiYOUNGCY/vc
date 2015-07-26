@@ -18,7 +18,8 @@ class Main extends MY_Controller {
         $data['javascript'] = array('jquery.js');
 
         $this->load->view('common/head', $data);
-        $sidebar = $this->load->view('common/sidebar', '', TRUE);
+        $user['user'] = $this->user;
+        $sidebar = $this->load->view('common/sidebar', $user, TRUE);
 
         $body['sidebar'] = $sidebar;
 

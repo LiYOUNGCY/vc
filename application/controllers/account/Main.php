@@ -11,14 +11,18 @@ class Main extends MY_Controller
 
 
 	public function index($type = 'login')
-	{	
+	{
+		$user['user'] = $this->user;
+		$sidebar = $this->load->view('common/sidebar', $user, TRUE);
+
+        $body['sidebar'] = $sidebar;
 		if($type == 'login')
 		{
-			$this->load->view('login');			
+			$this->load->view('login', $body);			
 		}
 		else if($type == 'signup')
 		{
-			$this->load->view('register');			
+			$this->load->view('register', $body);			
 		}
 	}
 
