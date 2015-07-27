@@ -6,6 +6,7 @@ class Publish extends MY_Controller {
     {
         parent::__construct();
         $this->load->service('article_service');
+        $this->load->library('htmlpurifier');
     }
 
     /**
@@ -24,9 +25,10 @@ class Publish extends MY_Controller {
     {
         $article_title      = $this->sc->input('article_title');
         $article_subtitle   = $this->sc->input('article_subtitle');
-        $article_content    = $this->sc->input('article_content');
+        $article_content    = $this->sc->input('article_content','post',FALSE);
+        //过滤富文本
+        $article_content    = $this->htmlpurifier->purify($article_content);
         $article_tag        = $this->sc->input('article_tag');
-
         //把文章插入到数据库
         $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_subtitle, 1, $article_tag, $article_content);
         if($result)
@@ -49,6 +51,8 @@ class Publish extends MY_Controller {
         $article_title      = $this->sc->input('article_title');
         $article_subtitle   = $this->sc->input('article_subtitle');
         $article_content    = $this->sc->input('article_content');
+        //过滤富文本
+        $article_content    = $this->htmlpurifier->purify($article_content);        
         $article_tag        = $this->sc->input('article_tag'); 
 
         $result = $this->article_service->update_article($aid,$this->user['id'],$article_title,$article_subtitle,1,$article_tag,$article_content);       

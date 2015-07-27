@@ -19,7 +19,6 @@ class Detail extends MY_Controller
 
         //获取文章信息
         $article = $this->article_service->get_article_by_id($aid);
-        
         if($article == FALSE) 
         {
         	show_404();

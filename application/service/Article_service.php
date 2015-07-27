@@ -77,8 +77,15 @@ class Article_service extends MY_Service{
     public function get_article_by_id($aid)
     {
         $query = $this->article_model->get_article_by_id($aid);
-        $query['author'] = $this->user_model->get_user_base_id($query['uid']);
-        return $query;
+        if( ! empty($query))
+        {
+            $query['author'] = $this->user_model->get_user_base_id($query['uid']);
+            return $query;            
+        }
+        else
+        {
+            return FALSE;
+        }
     }
 
 
