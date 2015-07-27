@@ -212,7 +212,7 @@ class Article_service extends MY_Service{
         
         foreach ($users as $key => $value)
         {
-            $users[$key] = $this->user_model->get_user_base_id($users[$key]['uid']);
+            $users[$key]['user'] = $this->user_model->get_user_base_id($users[$key]['uid']);
             unset($users[$key]['uid']);
         }
         return $users;
