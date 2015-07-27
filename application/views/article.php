@@ -3,6 +3,8 @@
 	echo $sidebar;
 	?>
 	<div id="vi_container" class="container">
+		<input type="hidden" name="article_type" value="<?php echo $article_type;?>" />
+		<input type="hidden" name="article_tag"  value="<?php echo $article_tag;?>"/>
 		<div id="shade"></div>
 		<div id="sbtn" class="sbtn">
 			<div class="icon">
@@ -94,6 +96,7 @@
 	var GET_ARTICLE_URL = document.getElementById("BASE_URL").value+"article/main/get_article_list";
 	var ARTICLE_DETAIL_URL = document.getElementById("BASE_URL").value+"article/detail/index/";
 	var PAGE = 1;
+
 	window.onload = function() { 
         loadarticel(0);
 		$(window).bind("scroll",function() {
@@ -120,11 +123,13 @@
 	}; 
 
 	function loadarticel(pageTemp){
+		var type = $("input[name=article_type]").val();
+		var tag  = $("input[name=article_tag]").val();
 		$.ajax({
             url: GET_ARTICLE_URL,
             async: false, 
             type: 'POST',
-            data:{page : pageTemp},
+            data:{page : pageTemp, type:type, tag:tag},
             success: function(data) {
                 data = eval("("+data+")"); 
 				for(var i = 0; i < data.length; i++)  
@@ -155,7 +160,7 @@
 		$.ajax({
             url: GET_ARTICLE_URL,
             type: 'POST',
-            data:{page : pageTemp},
+            data:{page : pageTemp, type:type, tag:tag},
             success: function(data) {
                 data = eval("("+data+")"); 
 				for(var i = 0; i < data.length; i++)  

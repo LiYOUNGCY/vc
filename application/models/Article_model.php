@@ -82,7 +82,7 @@ class Article_model extends CI_Model {
         }
         if(! empty($tag))
         {
-            $query->where('article.tag',$tag);
+            $query->like('article.tag', '|{$tag}|'); 
         }
         // else
         // {
