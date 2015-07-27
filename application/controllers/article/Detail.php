@@ -27,7 +27,7 @@ class Detail extends MY_Controller
         //获取文章评论
         $comment = $this->article_service->get_comment_by_aid($aid);
 
-        $data['like_people'] = $this->article_service->get_vote_person_by_aid($aid);
+        
         $data['article'] = $article;
         $data['comment'] = $comment;
 
@@ -41,7 +41,8 @@ class Detail extends MY_Controller
                 'common.css',
                 'paperfold/buddycloud.css',
                 'paperfold/paperfold.css',
-                'flex-style.css'
+                'flex-style.css',
+                'font-awesome/css/font-awesome.min.css'
             );
         $head['javascript'] = array(
                 'jquery.js',
@@ -49,10 +50,17 @@ class Detail extends MY_Controller
                 'paperfold/modernizr.custom.01022.js',
                 'jquery.flexText.min.js',
                 'jquery.qqFace.js',
-                'jquery.timeago.js'
+                // 'jquery.timeago.js'
             );
         $this->load->view('common/head', $head);
         $this->load->view('article_detail', $data);
+    }
+
+    public function get_vote_list()
+    {
+        $aid = $this->sc->input('aid');
+        $data = $this->article_service->get_vote_person_by_aid($aid);
+        echo json_encode($data);
     }
     
     /**
