@@ -180,6 +180,8 @@
           var item = list[i];
           $("#people").append('<div class="item clearfix"><div class="head"><img src="' + item.user.pic + '"></div><a class="link" href="'+item.user.alias+'"><div class="username">'+item.user.name+'</div></a><div class="time">'+item.update_time+'</div></div>');
         }
+
+        firstTime = false;
       }
     });
 
