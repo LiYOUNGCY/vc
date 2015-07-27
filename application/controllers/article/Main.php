@@ -23,7 +23,6 @@ class Main extends MY_Controller {
         $tag = $this->sc->input('tag');
         //文章类型
         $type= $this->sc->input('type');
-
         $article = $this->article_service->get_article_list($page,$uid,$type,$tag);
         echo json_encode($article);
     }
@@ -41,7 +40,8 @@ class Main extends MY_Controller {
             'font-awesome/css/font-awesome.min.css'
         );
         $data['javascript'] = array(
-            'j162.min.js'
+            'j162.min.js',
+            'jquery.scrollLoading.js'
         );
 
         $user['user'] = $this->user;

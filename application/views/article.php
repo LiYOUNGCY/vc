@@ -93,8 +93,9 @@
 	<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
 </body>
 <script type="text/javascript">
+	var BASE_URL = document.getElementById("BASE_URL").value;
 	var GET_ARTICLE_URL = document.getElementById("BASE_URL").value+"article/main/get_article_list";
-	var ARTICLE_DETAIL_URL = document.getElementById("BASE_URL").value+"article/detail/index/";
+	var ARTICLE_DETAIL_URL = document.getElementById("BASE_URL").value+"article/";
 	var PAGE = 1;
 
 	window.onload = function() { 
@@ -120,6 +121,7 @@
 			$("#loadmore #text").html("加载更多");
 			$("#loadmore #icon").css({"display":"none"});
 		});
+
 	}; 
 
 	function loadarticel(pageTemp){
@@ -145,7 +147,7 @@
 					var author_name	= data[i].author.name;
 					var author_pic	= data[i].author.pic;
 					var author_alias= data[i].author.alias;
-					var element 	= "<li><div class='article'><div class='article-box'><div id='arimg' class='arimg'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"'><img id='"+id+"'></a></div><div class='armain width-100p'><div class='clearfix hide-y' style='margin: 10px 10px;'><span class='artitle'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"' class='link'>"+sort_title+"</a></span><div class='arlike float-r'><div class='icon'>"+like;
+					var element 	= "<li><div class='article'><div class='article-box'><div id='arimg' class='arimg'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"'><img id='"+id+"'  data-url='"+image+"' class='img-lazyload_"+pageTemp+"' ></a></div><div class='armain width-100p'><div class='clearfix hide-y' style='margin: 10px 10px;'><span class='artitle'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"' class='link'>"+sort_title+"</a></span><div class='arlike float-r'><div class='icon'>"+like;
 					if(status == null){
 						element += "<div class='unlike'></div>"
 					}else{
@@ -154,9 +156,11 @@
 					element += "</div></div></div><div class='arcon width-100p clearfix'><div class='name'><a href='javascript:void(0);'><div class='head'><img src='"+author_pic+"'></div></a><div class='username'><a href='javascript:void(0);' class='link'>"+author_name+"</a></div></div><div class='artext'><p>"+content+"</p></div></div><div class='arbtn margintop-10'><a href='"+ARTICLE_DETAIL_URL+id+"' class='link btn'>阅读文章</a></div></div></div></li>";
 					$("#article_list").append(element);
 				}
+				//图片异步加载
+                $(".img-lazyload_"+pageTemp).scrollLoading();				
             }
         });
-
+		/*
 		$.ajax({
             url: GET_ARTICLE_URL,
             type: 'POST',
@@ -172,6 +176,7 @@
 				}
             }
         });
+        */
 	}
 // {
 // "content": {

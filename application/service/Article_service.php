@@ -50,6 +50,21 @@ class Article_service extends MY_Service{
                 $type = 1;
                 break;
         }
+
+        switch ($tag) {
+            case 'interview':
+                $tag = '|1|';
+                break;
+            case 'discuss':
+                $tag = '|2|';
+                break;
+            case 'consult':
+                $tag = '|3|';
+                break;
+            default:
+                $tag = '';
+                break;
+        }
         $article = $this->article_model->get_article_list($page, $uid, NULL,$type,$tag);
         foreach( $article as $key => $value )
         {        

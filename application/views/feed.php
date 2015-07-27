@@ -195,6 +195,7 @@
 					var article_id			= article.article_id;
 					var article_title		= article.article_title;
 					var article_content		= article.article_content;
+					var image 				= article.article_image;					
 					var user_head_src		= data[i].user.pic;
 					var user_name			= data[i].user.name;
 					var user_alias			= data[i].user.alias;
@@ -210,7 +211,7 @@
 						var action			= '<a class="link" href="#">'+ user_name +'</a>发布了一篇文章';
 					}
 
-					element = '<div class="box"><div class="boxtop"><div class="name"><div class="head"><a href="#"><img src="'+ user_head_src +'" /></a><div class="identity"><span class="icon identity"></span></div></div><div class="text">'+ action +'</div></div><div class="time"><time class="timeago" title="'+ time +'" datetime="'+ time +'+08:00"></time></div></div><div class="article"><div class="ar_text"><div class="title"><a class="link" href="'+ BASE_URL +'article/'+article_id+'">'+ article_title +'</a></div><div class="con"><p>'+ article_content +'</p></div></div><div class="ar_pic"><a href="'+ BASE_URL +'article/'+article_id+'"><img  id="'+ id +'"></a></div></div><div class="support"><div class="like float-l"><div class="btn"><i class="fa fa-heart"></i> '+ like_num +'</div></div><div class="list">';
+					element = '<div class="box"><div class="boxtop"><div class="name"><div class="head"><a href="#"><img src="'+ user_head_src +'" /></a><div class="identity"><span class="icon identity"></span></div></div><div class="text">'+ action +'</div></div><div class="time"><time class="timeago" title="'+ time +'" datetime="'+ time +'+08:00"></time></div></div><div class="article"><div class="ar_text"><div class="title"><a class="link" href="'+ BASE_URL +'article/'+article_id+'">'+ article_title +'</a></div><div class="con"><p>'+ article_content +'</p></div></div><div class="ar_pic"><a href="'+ BASE_URL +'article/'+article_id+'"><img  id="'+ id +'" data-url="'+image+'" class="img-lazyload_'+pageTemp+'" ></a></div></div><div class="support"><div class="like float-l"><div class="btn"><i class="fa fa-heart"></i> '+ like_num +'</div></div><div class="list">';
 					for(var y = 0; y < like.length; y++){
 						element += '<div class="head"><img title="'+ like[y].name +'" src="'+ like[y].pic +'"></div>';
 					}
@@ -218,9 +219,11 @@
 					$(".ac-boxlist").append(element);
 					$(".timeago").timeago();
 				}
+			//图片异步加载
+            $(".img-lazyload_"+pageTemp).scrollLoading();				
       }
 	});
-
+	/*
 	$.ajax({
         url: GET_FEED_LIST_URL,
         type: 'POST',
@@ -236,6 +239,7 @@
 				}
     	}
     });
+    */
 	}
 
 
