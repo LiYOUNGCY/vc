@@ -36,7 +36,9 @@ class User_service extends MY_Service
 			$user = $this->user_model->get_user_base_id($user_id);
 			//设置 SESSION
 			$this->auth_service->set_login_session($user);
+            return TRUE;
 		}
+        return FALSE;
 	}
 
 
@@ -57,26 +59,19 @@ class User_service extends MY_Service
 		}
 		else
 		{
-			return FALSE;
+            $this->error->output('LOGIN_ERROR');  
 		}
 
 		$user = $this->user_model->login_action($login_type, $pwd);
-        
-		if( ! empty($user))
+
+		if($rememberme) 
 		{
-			if($rememberme) 
-			{
-				//设置 cookie
-				$this->auth_service->set_remember_me_cookie($user);
-			}
-			//设置 SESSION
-			$this->auth_service->set_login_session($user);
-			return TRUE;
+			//设置 cookie
+			$this->auth_service->set_remember_me_cookie($user);
 		}
-		else
-		{
-			return FALSE;
-		}
+		//设置 SESSION
+		$this->auth_service->set_login_session($user);
+		return TRUE;
 
 	}
 

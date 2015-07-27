@@ -102,7 +102,7 @@ class Notification_model extends CI_Model{
 			{
 				//更新消息组
 				$count = (int)$check_result['count'] + 1;
-				$this->update_notification_group($check_result['id'],array('count' => $count,'read_flag' => 0));
+				$this->update_notification_group($check_result['id'],array('count' => $count,'read_flag' => 0,'publish_time' => date('Y-m-d H-m-s')));
 			}
 			else
 			{
@@ -185,13 +185,31 @@ class Notification_model extends CI_Model{
 	 * @param  [type] $arr [键值数组]
 	 * @return [type]      [description]
 	 */
-	public function update_notification_group($nid,$arr)
+	public function update_notification_group($nid, $arr, $uid = NULL)
 	{
-		$arr['publish_time'] = date('Y-m-d H-m-s');
+		if( ! empty($uid))
+		{
+			$this->db->where('reciver_id',$uid);
+		}
 		$this->db->where(array('id' => $nid))
 				 ->update('notification_group',$arr);
 
 		return $this->db->affected_rows() === 1;
 	}
 
+	/**
+	 * [delete_notification_group 删除消息组]
+	 * @return [type] [description]
+	 */
+	public function delete_notification_group($nid,$uid = NULL)
+	{
+		$where = array();
+		$where['id'] = $nid;
+		if( ! empty($uid))
+		{
+			$where['reciver_id'] = $uid;
+		}
+		$this->db->delete('notification_group',$where);
+		return $this->db->affected_rows() === 1;		
+	}
 }

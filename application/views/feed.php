@@ -60,7 +60,7 @@
 				</div>
 				<div class="ac-left">
 					<div class="ac-boxlist clearfix">
-						<div class="box">
+<!-- 						<div class="box">
 							<div class="boxtop">
 								<div class="name">
 									<div class="head">
@@ -74,7 +74,9 @@
 										<a class="link" href="#">YOUNG啥第六届CY</a>赞了<a class="link" href="#">artvc官方账号</a>的文章
 									</div>
 								</div>
-								<div class="time">123</div>
+								<div class="time">
+									<time class="timeago" title="2011-07-26 06:19:55" datetime="2015-07-26 14:27:10+08:00"></time> 
+								</div>
 							</div>
 							<div class="article">
 								<div class="ar_text">
@@ -103,13 +105,14 @@
 									<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						
-						<div class="loadmore width-100p">
-							<div id="loadmore" class="btn load_btn">
-								<font id="text">加载更多</font>
-								<i class="fa fa-spinner fa-pulse" style="text-decoration: none;display:none" id="icon"></i>
-							</div>
+						
+					</div>
+					<div class="loadmore width-100p">
+						<div id="loadmore" class="btn load_btn">
+							<font id="text">加载更多</font>
+							<i class="fa fa-spinner fa-pulse" style="text-decoration: none;display:none" id="icon"></i>
 						</div>
 					</div>
 				</div>
@@ -150,113 +153,92 @@
 	<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
 </body>
 <script type="text/javascript">
-	var GET_FEED_LIST_URL = $("#BASE_URL").val() +"feed/main/get_feed_list"; 
+	var BASE_URL = $("#BASE_URL").val();
+	var GET_FEED_LIST_URL = BASE_URL +"feed/main/get_feed_list"; 
 	var PAGE = 1;
+
 	window.onload = function() { 
-    //loadfeed(0);
-		// $(window).bind("scroll",function() {
-		//       	if($(document).scrollTop() + $(window).height() > $(document).height() - 150 && PAGE < 2){
-		//       		$("#loadmore #text").html("加载中");
-		// 			$("#loadmore #icon").css({"display":"inline-block"});
-		//       		loadfeed(PAGE);
-		//       		PAGE++;
-		//       		$("#loadmore #text").html("加载更多");
-		// 			$("#loadmore #icon").css({"display":"none"});
-		//       	}
-		//   	});
-		// 	$("#loadmore").click(function(){
-		// 		$("#loadmore #text").html("加载中");
-		// 		$("#loadmore #icon").css({"display":"inline-block"});
-		// 		loadfeed(PAGE);
-		// 		PAGE++;
-		// 		$("#loadmore #text").html("加载更多");
-		// 		$("#loadmore #icon").css({"display":"none"});
-		// 	});
+    loadfeed(0); 
+		$(window).bind("scroll",function() {
+      	if($(document).scrollTop() + $(window).height() > $(document).height() - 150 && PAGE < 2){
+      		$("#loadmore #text").html("加载中");
+			$("#loadmore #icon").css({"display":"inline-block"});
+      		loadfeed(PAGE);
+      		PAGE++;
+      		$("#loadmore #text").html("加载更多");
+			$("#loadmore #icon").css({"display":"none"});
+      	}
+  	});
+		$("#loadmore").click(function(){
+			$("#loadmore #text").html("加载中");
+			$("#loadmore #icon").css({"display":"inline-block"});
+			loadfeed(PAGE);
+			PAGE++;
+			$("#loadmore #text").html("加载更多");
+			$("#loadmore #icon").css({"display":"none"});
+		});
 	}; 
 
 	function loadfeed(pageTemp){
 		$.ajax({
-        url: GET_FEED_LIST_URL,
-        async: false, 
-        type: 'POST',
-        data:{page : pageTemp},
-        success: function(data) {
-          data = eval("("+data+")"); 
-					for(var i = 0; i < data.length; i++)  
-					{
-						var feed_type = data[i].type;
-						var article = eval("(" +data[i].content+ ")");
-
-
-						var element 	=	"";
-
-						var user_head_src					= data[i].user.pic;
-						var user_name							= data[i].user.name;	
-						var author								= data[i].author.name;
-						var article_title					= article.article_title;
-						var article_content				= article.article_content;
-						
-						var like									= data[i].like;
-						var like_num							= like.length;
-						alert(feed_type+"\r"+user_head_src+"\r"+user_name+"\r"+author+"\r"+article_title+"\r"+like_num);
+      url: GET_FEED_LIST_URL,
+      async: false, 
+      type: 'POST',
+      data:{page : pageTemp},
+      success: function(data) {
+        data = eval("("+data+")"); 
+				for(var i = 0; i < data.length; i++)  
+				{
+					var id 										= data[i].id;
+					var feed_type 						= data[i].type;
+					var article 							= eval("(" +data[i].content+ ")");
+					var article_id						= article.article_id;
+					var article_title					= article.article_title;
+					var article_content				= article.article_content;
+					var user_head_src					= data[i].user.pic;
+					var user_name							= data[i].user.name;
+					var user_alias						= data[i].user.alias;
+					var like									= data[i].like;
+					var like_num							= like.length;
+					var time 									= data[i].publish_time;
+					var element 							=	"";
+					if(feed_type == 1){
+						var author							= data[i].author.name;
+						var author_alias				= data[i].author.alias;	
+						var action							= '<a class="link" href="#">'+ user_name +'</a>赞了<a class="link" href="#">'+ author +'</a>的一篇文章';
+					}else{
+						var action							= '<a class="link" href="#">'+ user_name +'</a>发布了一篇文章';
 					}
-	       }
-		 });
 
-		// $.ajax({
-  //     url: GET_ARTICLE_URL,
-  //     type: 'POST',
-  //     data:{page : pageTemp},
-  //     success: function(data) {
-  //         data = eval("("+data+")"); 
-		// 		for(var i = 0; i < data.length; i++)  
-		// 		{  
-		// 			var id			= data[i].content.article_id;
-		// 			var image 		= data[i].content.article_image;
+					element = '<div class="box"><div class="boxtop"><div class="name"><div class="head"><a href="#"><img src="'+ user_head_src +'" /></a><div class="identity"><span class="icon identity"></span></div></div><div class="text">'+ action +'</div></div><div class="time"><time class="timeago" title="'+ time +'" datetime="'+ time +'+08:00"></time></div></div><div class="article"><div class="ar_text"><div class="title"><a class="link" href="'+ BASE_URL +'article/'+article_id+'">'+ article_title +'</a></div><div class="con"><p>'+ article_content +'</p></div></div><div class="ar_pic"><a href="'+ BASE_URL +'article/'+article_id+'"><img  id="'+ id +'"></a></div></div><div class="support"><div class="like float-l"><div class="btn"><i class="fa fa-heart"></i> '+ like_num +'</div></div><div class="list">';
+					for(var y = 0; y < like.length; y++){
+						element += '<div class="head"><img title="'+ like[y].name +'" src="'+ like[y].pic +'"></div>';
+					}
+					element += '</div></div></div>';
+					$(".ac-boxlist").append(element);
+					$(".timeago").timeago();
+				}
+      }
+		});
 
-		// 			$("#arimg #"+id).attr("src",image);
-		// 		}
-  //   	}
-  //   });
+		$.ajax({
+      url: GET_FEED_LIST_URL,
+      type: 'POST',
+      data:{page : pageTemp},
+      success: function(data) {
+          data = eval("("+data+")"); 
+				for(var i = 0; i < data.length; i++)  
+				{  
+					var article 	= eval("(" +data[i].content+ ")");
+					var id 				= data[i].id;
+					var image 		= article.article_image;
+					$(".ar_pic #"+id).attr("src",image);
+				}
+    	}
+    });
 	}
 
-// <div class="box"><div class="boxtop"><div class="name"><div class="head"><a href="#"><img src="<?=base_url().'public/'?>img/mm1.jpg" /></a><div class="identity"><span class="icon identity"></span>
-// 				</div>
-// 			</div>
-// 			<div class="text">
-// 				<a class="link" href="#">YOUNG啥第六届CY</a>赞了<a class="link" href="#">artvc官方账号</a>的文章
-// 			</div>
-// 			<div class=""></div>
-// 		</div>
-// 	</div>
-// 	<div class="article">
-// 		<div class="ar_text">
-// 			<div class="title">
-// 				<a class="link" href="#">阿斯顿阿斯顿</a>
-// 			</div>
-			
-// 			<div class="con">
-// 				<p>首先让我产生兴趣的是姜绥吾将他的绘画和装置艺术归于当代艺术，这说明他比较介意时间在各种艺术流派的进程中所起的作用。“当代”一词对于绘画艺术而言如同一个大熔炉，已经消化的，未经消化的，各种流派的，或具有实验性质的，都可以成为燃料或者...</p>	
-// 			</div>
-// 		</div>
-// 		<div class="ar_pic">
-// 			<img src="<?=base_url().'public/'?>img/mm1.jpg">		
-// 		</div>
-// 	</div>
-// 	<div class="support">
-// 		<div class="like float-l">
-// 			<div class="btn">
-// 				<i class="fa fa-heart"></i> 24
-// 			</div>
-// 		</div>
-// 		<div class="list">
-// 			<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
-// 			<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
-// 			<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
-// 			<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
-// 		</div>
-// 	</div>
-// </div>
+
 
 </script>
 </html>

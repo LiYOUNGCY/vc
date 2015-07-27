@@ -44,6 +44,26 @@ class Publish extends MY_Controller{
 	}	
 
 	/**
+	 * [update_community 更新圈子]
+	 * @return [type] [description]
+	 */
+	public function update_community()
+	{
+		$community_id   = $this->sc->input('cid');
+		$community_name = $this->sc->input('community_name');
+		$community_intro= $this->sc->input('community_intro');
+		$result = $this->community_service->update_community($community_id,$community_name,$community_intro,$this->user['id']);
+		if($result)
+		{
+			echo "success";
+		}
+		else
+		{
+			$this->error->output('INVALID_REQUEST');
+		}
+	}
+
+	/**
 	 * [publish_post 发布帖子]
 	 * @return [type] [description]
 	 */
@@ -59,6 +79,28 @@ class Publish extends MY_Controller{
 			echo "failed";
 		}
 	}
+
+	/**
+	 * [update_post 更新帖子]
+	 * @return [type] [description]
+	 */
+	public function update_post()
+	{
+		$pid     = $this->sc->input('pid');
+		$title   = $this->sc->input('post_title');
+		$content = $this->sc->input('post_content');		
+
+		$result = $this->community_service->update_post($pid,$title,$content,$this->user['id']);
+		if($result)
+		{
+			echo "success";
+		}
+		else
+		{
+			$this->error->output('INVALID_REQUEST');
+		}		
+	}
+
 	/**
 	 * [publish_answer 回复帖子]
 	 * @return [type] [description]

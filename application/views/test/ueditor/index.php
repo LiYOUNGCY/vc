@@ -115,11 +115,11 @@
 <h1>发布文章测试</h1>
 
 <!--style给定宽度可以影响编辑器的最终宽度-->
-<form action="<?= base_url().'article/publish'?>" method="post">
-    Title:<input type="text" name="title"> <br>
-    SubTitle:<input type="text" name="subtitle"><br>
-    <input type="hidden" name="type" value="1">
-    <script type="text/plain" id="myEditor" name="content" style="width:50%;height:240px;">
+<form action="<?= base_url().'article/publish/publish_article'?>" method="post">
+    Title:<input type="text" name="article_title"> <br>
+    SubTitle:<input type="text" name="article_subtitle"><br>
+    <input type="hidden" name="article_tag" value="">
+    <script type="text/plain" id="myEditor" name="article_content" style="width:50%;height:240px;">
         <p>这里我可以写一些输入提示</p>
     </script>
     <input type="submit" value="Submit">

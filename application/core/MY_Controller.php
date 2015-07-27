@@ -36,5 +36,6 @@ class MY_Controller extends CI_Controller{
 
         //加载语言
         $this->lang->load('error', $this->default_lang);
+        $this->lang->load('base', $this->default_lang);        
 	}
 }

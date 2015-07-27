@@ -32,7 +32,7 @@ class Setting extends MY_Controller
 		$result = $this->user_service->change_password($this->user['id'], $old_pwd, $new_pwd);
 		if($result)
 		{
-			echo 'success';		
+			echo json_encode(array('success' => 0, 'note' => lang('OPERATE_SUCCESS'), 'script' => ''));		
 		}
 		else
 		{
@@ -62,7 +62,7 @@ class Setting extends MY_Controller
 		
 		if($result)
 		{
-			echo 'success';
+			echo json_encode(array('success' => 0, 'note' => lang('OPERATE_SUCCESS'), 'script' => ''));	
 		}	
 		else
 		{

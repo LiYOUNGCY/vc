@@ -54,9 +54,14 @@ class Community_model extends CI_Model{
 	 * [update_community 更新圈子]
 	 * @param  [type] $cid [圈子id]
 	 * @param  [type] $arr [键值数组]
+	 * @param  [type] $uid [创建者id]
 	 * @return [type]      [description]
 	 */
-    public function update_community($cid,$arr){
+    public function update_community($cid,$arr,$uid = NULL){
+    	if( ! empty($uid))
+    	{
+    		$this->db->where('uid',$uid);
+    	}
     	$this->db->where('id',$cid);
 
     	foreach ($arr as $k => $v) {

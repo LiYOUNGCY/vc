@@ -13,7 +13,7 @@ class Main extends MY_Controller{
 	 * @param  string $type  [description]
 	 * @return [type]        [description]
 	 */
-	public function index($alias, $type = 'community')
+	public function index($alias, $type = 'quanzi')
 	{
 		$uid = isset($this->user['id']) ? $this->user['id'] : NULL;
 
@@ -23,9 +23,9 @@ class Main extends MY_Controller{
 			$data['user'] = $user;
 			$data['me']   = $this->user;
 			//载入视图
-			if($type == 'community')
+			if($type == 'quanzi')
 			{
-				$this->load->view('home/community',$data);
+				$this->load->view('quanzi',$data);
 			}
 			elseif($type == 'intro')
 			{
@@ -40,7 +40,7 @@ class Main extends MY_Controller{
 			}
 			elseif($type == 'cooperate')
 			{
-				$this->load->view('home/cooperate',$data);		
+				$this->load->view('home/cooperate',$data);
 			}
 			else
 			{
@@ -61,6 +61,7 @@ class Main extends MY_Controller{
 	{
 		$page= $this->sc->input('page');
 		$uid = $this->sc->input('uid');
+		$uid = 9;
 		$community = $this->home_service->get_user_community($page,$uid);
 		echo json_encode($community);
 	}
@@ -74,6 +75,8 @@ class Main extends MY_Controller{
 		$page = $this->sc->input('page');
 		$uid  = $this->sc->input('uid');
 		$type = $this->sc->input('type');
+		$uid  = 4;
+		$type = 1;
 		$meid = isset($this->user['id']) ? $this->user['id'] : NULL;
 		$article = $this->home_service->get_user_article($page,$meid,$uid,$type); 
 		echo json_encode($article);

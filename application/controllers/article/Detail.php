@@ -19,7 +19,6 @@ class Detail extends MY_Controller
 
         //获取文章信息
         $article = $this->article_service->get_article_by_id($aid);
-        
         if($article == FALSE) 
         {
         	show_404();
@@ -77,9 +76,24 @@ class Detail extends MY_Controller
         $aid = $this->sc->input('aid');
         $uid = $this->user['id'];
         $comment = $this->sc->input('comment');
-        $aid = 16;
-        $uid = 23;
-        $comment = 'sad';
         $this->article_service->write_comment($aid, $uid, $comment);
+    }
+
+    /**
+     * [delete_article 删除文章]
+     * @return [type] [description]
+     */
+    public function delete_article()
+    {
+        $aid = $this->sc->input('aid');
+        $result = $this->article_model->delete_article($aid,$this->user['id']);
+        if($result)
+        {
+            echo "success";
+        }
+        else
+        {
+            $this->error->output('INVALID_REQUEST');
+        }        
     }
 }

@@ -4,6 +4,7 @@ class Image extends CI_Controller{
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('CImage');
 	}
 
 	/**
@@ -32,9 +33,30 @@ class Image extends CI_Controller{
 			$osspath = $this->um_upload->getFileInfo();
 
 			$osspath = !empty($osspath['url']) ? $osspath['url'] : NULL;
-			$osspath = substr($osspath, 2);
+
+			/**
+			 * [生成缩略图]
+			 * $tofile [缩略图本地保存路径]
+			 * $osspath[原图本地保存路径]
+			 */
+			$arr = explode('/',$osspath);
+			$toFile = "thumb1_".$arr[count($arr)-1];
+			$arr[count($arr)-1] = $toFile;
+			$toFile = implode('/', $arr);
+			$thumb_result = $this->cimage->img2thumb($osspath,$toFile,300,230,1);
+			/**
+			 * [上传到oss]
+			 * $ossresult[上传结果]
+			 */
 			$this->load->library('Oss');
-			//上传到oss
+			if($thumb_result)
+			{
+				//上传缩略图到oss
+				$toFile = substr($toFile, 2);
+				$this->oss->upload_by_file($toFile);
+			}
+			//上传原图到oss
+			$osspath = substr($osspath, 2);			
 			$oss_result = $this->oss->upload_by_file($osspath);		
 
 			//设置上传结果
@@ -44,10 +66,10 @@ class Image extends CI_Controller{
 			{	
 				//设置图片url
 				$this->um_upload->setFullName(OSS_URL."/{$osspath}");	
-				//删除本地服务器图片		
-				@unlink($osspath);
 			}	
-
+			//删除本地服务器图片		
+			@unlink($osspath);
+			@unlink($toFile);
 		}
 
     	$callback= isset($_GET['callback']) ? $_GET['callback'] : NULL;
@@ -61,4 +83,5 @@ class Image extends CI_Controller{
 	    }			
 	}
 
+	
 }

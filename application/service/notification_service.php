@@ -65,9 +65,18 @@ class Notification_service extends MY_Service{
 	 * @param  [type] $arr [更新键值]
 	 * @return [type]      [description]
 	 */
-	public function update($uid,$nid,$arr)
+	public function update($uid,$nid,$type,$arr)
 	{	
-		return $this->notification_model->update($uid,$nid,$arr);
+		if($type == 1)
+		{
+			//私信消息
+			return $this->notification_model->update($uid,$nid,$arr);
+		}
+		else
+		{
+			//其它消息组
+			return $this->notification_model->update_notification_group($nid,$arr,$uid);
+		}	
 	}
 
 	/**
@@ -75,9 +84,19 @@ class Notification_service extends MY_Service{
 	 * @param  [type] $nid [description]
 	 * @return [type]      [description]
 	 */
-	public function delete($uid,$nid)
+	public function delete($uid,$nid,$type)
 	{
-		return $this->notification_model->delete($uid,$nid);
+		if($type == 1)
+		{
+			//删除私信消息
+			return $this->notification_model->delete($uid,$nid);
+		}
+		else
+		{
+			//删除其它消息组
+			return $this->notification_model->delete_notification_group($nid,$uid);
+		}
+
 	}
 
 	/**

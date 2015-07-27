@@ -44,7 +44,7 @@ class Sc {
 	 *         						'name'	=> name_value
 	 *         					)
 	 */
-	public function input($name, $type = 'post') {
+	public function input($name, $type = 'post' , $xss = TRUE) {
 
 		$ret = array();
 
@@ -63,7 +63,7 @@ class Sc {
 				}
 			}
 
-			$ret = trim($this->CI->input->$type($name, TRUE));
+			$ret = trim($this->CI->input->$type($name, $xss));
 		}
 		else if (is_array($name)) {
 			foreach ($name as $key => $value) {
@@ -76,7 +76,7 @@ class Sc {
 					}
 				}
 				
-				$ret[$value] = trim($this->CI->input->$type($value, TRUE));
+				$ret[$value] = trim($this->CI->input->$type($value, $xss));				
 			}
 		}
 		else if(empty($name)){
@@ -88,8 +88,7 @@ class Sc {
 						return array('error' => "invalid_".$key);
 					}
 				}				
-				 $ret[$key] = trim($this->CI->input->$type($key, TRUE));
-									
+				 $ret[$key] = trim($this->CI->input->$type($key, $xss));								
 			}
 		}
 
