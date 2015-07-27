@@ -3,6 +3,8 @@
 	echo $sidebar;
 	?>
 	<div id="vi_container" class="container">
+		<input type="hidden" name="article_type" value="<?php echo $article_type;?>" />
+		<input type="hidden" name="article_tag"  value="<?php echo $article_tag;?>"/>
 		<div id="shade"></div>
 		<div id="sbtn" class="sbtn">
 			<div class="icon">
@@ -91,9 +93,11 @@
 	<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
 </body>
 <script type="text/javascript">
+	var BASE_URL = document.getElementById("BASE_URL").value;
 	var GET_ARTICLE_URL = document.getElementById("BASE_URL").value+"article/main/get_article_list";
-	var ARTICLE_DETAIL_URL = document.getElementById("BASE_URL").value+"article/detail/index/";
+	var ARTICLE_DETAIL_URL = document.getElementById("BASE_URL").value+"article/";
 	var PAGE = 1;
+
 	window.onload = function() { 
         loadarticel(0);
 		$(window).bind("scroll",function() {
@@ -117,14 +121,17 @@
 			$("#loadmore #text").html("加载更多");
 			$("#loadmore #icon").css({"display":"none"});
 		});
+
 	}; 
 
 	function loadarticel(pageTemp){
+		var type = $("input[name=article_type]").val();
+		var tag  = $("input[name=article_tag]").val();
 		$.ajax({
             url: GET_ARTICLE_URL,
             async: false, 
             type: 'POST',
-            data:{page : pageTemp},
+            data:{page : pageTemp, type:type, tag:tag},
             success: function(data) {
                 data = eval("("+data+")"); 
 				for(var i = 0; i < data.length; i++)  
@@ -140,7 +147,7 @@
 					var author_name	= data[i].author.name;
 					var author_pic	= data[i].author.pic;
 					var author_alias= data[i].author.alias;
-					var element 	= "<li><div class='article'><div class='article-box'><div id='arimg' class='arimg'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"'><img id='"+id+"'></a></div><div class='armain width-100p'><div class='clearfix hide-y' style='margin: 10px 10px;'><span class='artitle'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"' class='link'>"+sort_title+"</a></span><div class='arlike float-r'><div class='icon'>"+like;
+					var element 	= "<li><div class='article'><div class='article-box'><div id='arimg' class='arimg'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"'><img id='"+id+"'  data-url='"+image+"' class='img-lazyload_"+pageTemp+"' ></a></div><div class='armain width-100p'><div class='clearfix hide-y' style='margin: 10px 10px;'><span class='artitle'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"' class='link'>"+sort_title+"</a></span><div class='arlike float-r'><div class='icon'>"+like;
 					if(status == null){
 						element += "<div class='unlike'></div>"
 					}else{
@@ -149,13 +156,15 @@
 					element += "</div></div></div><div class='arcon width-100p clearfix'><div class='name'><a href='javascript:void(0);'><div class='head'><img src='"+author_pic+"'></div></a><div class='username'><a href='javascript:void(0);' class='link'>"+author_name+"</a></div></div><div class='artext'><p>"+content+"</p></div></div><div class='arbtn margintop-10'><a href='"+ARTICLE_DETAIL_URL+id+"' class='link btn'>阅读文章</a></div></div></div></li>";
 					$("#article_list").append(element);
 				}
+				//图片异步加载
+                $(".img-lazyload_"+pageTemp).scrollLoading();				
             }
         });
-
+		/*
 		$.ajax({
             url: GET_ARTICLE_URL,
             type: 'POST',
-            data:{page : pageTemp},
+            data:{page : pageTemp, type:type, tag:tag},
             success: function(data) {
                 data = eval("("+data+")"); 
 				for(var i = 0; i < data.length; i++)  
@@ -167,6 +176,7 @@
 				}
             }
         });
+        */
 	}
 // {
 // "content": {

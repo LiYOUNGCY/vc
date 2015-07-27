@@ -59,8 +59,9 @@ $route['default_controller'] = 'index';
 
 $route['article/(:num)'] = 'article/detail/index/$1';
 $route['article'] = 'article/main';
-$route['article/([a-z]*)'] = 'article/main';
-
+$route['article/([a-z]*)'] = 'article/main/index/article/$1';
+$route['exhibition'] = 'article/main/index/exhibition';
+$route['exhibition/([a-z]*)'] = 'article/main/index/exhibition/$1';
 /**
  *联系人
  */

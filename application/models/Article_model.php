@@ -82,7 +82,7 @@ class Article_model extends CI_Model {
         }
         if(! empty($tag))
         {
-            $query->where('article.tag',$tag);
+            $this->db->like('article.tag',$tag); 
         }
         // else
         // {
@@ -90,7 +90,6 @@ class Article_model extends CI_Model {
         // }
 
         $query =$query->order_by($order)->limit($limit, $page*$limit)->get()->result_array();
-
         return $query;
     }
 

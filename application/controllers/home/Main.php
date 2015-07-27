@@ -20,6 +20,14 @@ class Main extends MY_Controller{
 		$user = $this->home_service->get_user($uid,$alias);
 		if($user)
 		{
+			$data['css'] = array('common.css', 'font-awesome/css/font-awesome.min.css');
+	        $data['javascript'] = array('j162.min.js','timeago.js');
+
+	        $this->load->view('common/head', $data);
+	        $sidebar = $this->load->view('common/sidebar', '', TRUE);
+
+	        $data['sidebar'] = $sidebar;
+
 			$data['user'] = $user;
 			$data['me']   = $this->user;
 			//载入视图

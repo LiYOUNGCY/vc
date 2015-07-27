@@ -15,7 +15,7 @@ class Main extends MY_Controller {
     public function index()
     {
         $data['css'] = array('common.css', 'font-awesome/css/font-awesome.min.css');
-        $data['javascript'] = array('j162.min.js','timeago.js');
+        $data['javascript'] = array('j162.min.js','jquery.scrollLoading.js','timeago.js');
 
         $this->load->view('common/head', $data);
         $user['user'] = $this->user;
