@@ -38,14 +38,14 @@ class Oss{
 	 */
 	public function delete_object($osspath) {
 		$isok = true;
-		$osspath = substr_replace($osspath, "", 0, 1);
+		//$osspath = substr_replace($osspath, "", 0, 1);
 		$isexist = $this->ossobj->is_object_exist($this->ossbuket, $osspath);
 		if ($isexist) {
 			$response = $this->ossobj->delete_object($this->ossbuket, $osspath);
 			$isok = $response->isOK();
 			if (!$isok) {
 				//$this->_format($response);
-				die();
+				return FALSE;
 			}
 		}
 		return $isok;
