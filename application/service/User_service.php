@@ -71,11 +71,19 @@ class User_service extends MY_Service
 		}
 		//设置 SESSION
 		$this->auth_service->set_login_session($user);
-		return TRUE;
+
+		return $user;
 
 	}
 
-
+    /**
+     * [logout 注销]
+     * @return [type] [description]
+     */
+    public function logout()
+    {
+        $this->auth_service->logout();
+    }
 
     /**
      * [update_count 更新用户字段数量]

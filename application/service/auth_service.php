@@ -134,6 +134,16 @@ class Auth_service extends MY_Service{
     }
 
     /**
+     * [logout 注销]
+     * @return [type] [description]
+     */
+    public function logout()
+    {
+        $this->session->unset_userdata($this->login_in_session_name);
+        $this->_set_cookie(NULL);   
+    }
+
+    /**
      * 设置 login 后的 session
      * 登陆后 SESSION 填写 uid
      */

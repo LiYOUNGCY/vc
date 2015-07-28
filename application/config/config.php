@@ -504,3 +504,5 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 //时区设置
 $config['time_zone'] = date_default_timezone_set('Asia/Shanghai');  //北京时区
+
+define('ADMINROUTE','admin/');

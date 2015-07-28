@@ -31,7 +31,6 @@ class Main extends MY_Controller
 		}
 	}
 
-
 	/**
 	 * [login_by_email 邮箱登陆]
 	 */
@@ -64,6 +63,16 @@ class Main extends MY_Controller
 		echo "success";
 	}
 
+	/**
+	 * [logout 注销]
+	 * @return [type] [description]
+	 */
+	public function logout()
+	{
+		$this->user_service->logout();
+		//重定向至首页
+		redirect(base_url(),'location');
+	}
 
 	/**
 	 * [register 邮箱注册]
