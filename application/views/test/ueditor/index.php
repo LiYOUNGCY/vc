@@ -7,11 +7,7 @@
     <input type="hidden" name="BASE_URL" id="BASE_URL" value="<?php echo base_url();?>" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="<?php echo base_url();?>public/ueditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="<?php echo base_url();?>public/ueditor/third-party/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo base_url();?>public/ueditor/umeditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo base_url();?>public/ueditor/umeditor.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>public/ueditor/lang/zh-cn/zh-cn.js"></script>
-    <style type="text/css">
+    <style>
         h1{
             font-family: "微软雅黑";
             font-weight: normal;

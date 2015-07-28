@@ -191,6 +191,7 @@ class Article_service extends MY_Service{
      */
     public function write_comment($aid, $uid, $comment)
     {
+        $comment = Common::replace_face_url($comment);
         $insert_result = $this->article_comment_model->insert_comment($aid, $uid, $comment);
         if($insert_result)
         {
