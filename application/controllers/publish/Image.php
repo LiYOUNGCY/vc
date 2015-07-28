@@ -43,6 +43,7 @@ class Image extends MY_Controller{
 	{
 		$uid = $this->user['id'];
 		$result = $this->image_service->upload_headpic('upfile',$uid);
+		header('Content-Type:text/x-json');
 		echo json_encode($result);
 	}
 

@@ -52,6 +52,7 @@ class upload extends CI_Controller{
 			$result = array();	
 			$result['error'] = $this->upload->display_errors();
 		}
+		header('Content-Type:text/x-json');
 		echo json_encode($result);			
 	}
 
@@ -73,4 +74,5 @@ class upload extends CI_Controller{
 			}
 		}
 	}
+
 }

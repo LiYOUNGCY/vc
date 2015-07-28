@@ -219,9 +219,10 @@ handleError: function( s, xhr, status, e )    {
         }
             
         // Get the JavaScript object, ifJSON is used.
-        if( type == "json" )
+        if( type == "JSON" )
         {
-         eval( "data = " + data );
+          data = jQuery.parseJSON(jQuery(data).text());
+          //eval("data = " "+data+" " ");
         }
             
         // evaluate scripts within html

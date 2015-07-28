@@ -19,7 +19,7 @@
             <input type="submit" value="裁剪" />  
 </form>
 <script src="<?php echo base_url()?>public/js/jquery.Jcrop.js" type="text/javascript"></script>
-
+<script src="<?php echo base_url()?>public/js/jquery.upload.js" type="text/javascript"></script>
 <script type="text/javascript">
 var img_src = "";
 $(function(){
@@ -64,11 +64,10 @@ function file_upload()
     var UPLOAD_URL= BASE_URL+'publish/image/upload_headpic';
     $.ajaxFileUpload({
         url: UPLOAD_URL,
-        secureuri: false,
         fileElementId: 'upfile',
-        dataType: 'json',
+        dataType: 'JSON',
+        type:'post',
         success: function (data) {
-
             $("#error_div").html("");
             if(data.error != null)
             {
