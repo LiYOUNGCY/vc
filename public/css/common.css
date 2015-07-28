@@ -1205,8 +1205,6 @@ img{
 
 .author .name {
     font-size: 14px;
-
-    color: #4c4640;
 }
 
 .author .author-info {
@@ -1238,9 +1236,15 @@ img{
 .article-detial .article-info {
     float: right;
 
-    font-size: 12px;
-
     color: #4c4640;
+}
+
+.article-detial .article-info i {
+    font-size: 18px;
+}
+
+.article-detial .article-info span{
+    font-size: 12px;
 }
 
 .article-detial .article-content {
@@ -1343,6 +1347,10 @@ hr.line {
     line-height: 50px;
 }
 
+.article-detial .like .mark-like.active {
+    color: #fff;
+    background-color: #ddd340;
+}
 
 .article-detial .like .like-num {
     float: left;

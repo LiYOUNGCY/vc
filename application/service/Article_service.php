@@ -103,6 +103,10 @@ class Article_service extends MY_Service{
         }
     }
 
+    public function get_article_vote_by_both($aid, $uid) {
+        return $this->article_like_model->get_article_vote_by_both($aid, $uid)['status'];
+    }
+
 
     /**
      * [get_comment_by_aid 获取文章评论]

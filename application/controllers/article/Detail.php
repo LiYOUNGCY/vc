@@ -26,9 +26,12 @@ class Detail extends MY_Controller
 
         //获取文章评论
         $comment = $this->article_service->get_comment_by_aid($aid);
-
+        $status  = $this->article_service->get_article_vote_by_both($aid, $this->user['id']);
         
         $data['article'] = $article;
+        //echo json_encode($status);
+        $data['status'] = $status;
+
         $data['comment'] = $comment;
 
 
