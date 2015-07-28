@@ -1542,4 +1542,7 @@ hr.line {
     .like-list .item .time {
         display: none;
     }
+    .article-detial {
+        text-align: center;
+    }
 }
