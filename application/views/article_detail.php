@@ -51,6 +51,7 @@
             喜欢
           </div>
         </div>
+        <div class="hover-line"></div>
         <div id="seeLike" class="like-num">
           <?=$article['like']?></div>
       </div>

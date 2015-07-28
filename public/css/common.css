@@ -1081,8 +1081,6 @@ img{
         background-position: center;
         background-size: cover;    
 }
-.homeshowcar .
-
 
 @media screen and (max-width: 960px){
 		.logo{
@@ -1322,26 +1320,29 @@ hr.line {
     height: 52px;
 
     color: #ddd340;
-
     outline: none;
-
     cursor: pointer;
+}
+
+.article-detial .like:hover {
+    color: #FFF;
+    background-color: #E9DD35
 }
 
 .article-detial .like .mark-like {
     float: left;
 
     box-sizing: border-box;
-    border-right: 1px solid #ddd340;
-    padding-left: 20px;
-    width: 50%;
+    /*border-right: 1px solid #ddd340;*/
+    width: 70%;
     height: 100%;
+    text-align: center;
 }
 
-.article-detial .like .mark-like:hover {
+/*.article-detial .like .mark-like:hover {
     color: #fff;
     background-color: #ddd340;
-}
+}*/
 
 .article-detial .like .mark-like div {
     line-height: 50px;
@@ -1352,21 +1353,30 @@ hr.line {
     background-color: #ddd340;
 }
 
+.article-detial .like .hover-line {
+    float: left;
+    display: inline;
+    height: 40%;
+    width: 1px;
+    background-color: #ddd340; 
+    margin-top: 10%;
+}
+
 .article-detial .like .like-num {
     float: left;
 
     box-sizing: border-box;
-    width: 50%;
+    width: 29%;
     height: 100%;
 
     line-height: 50px;
     text-align: center;
 }
 
-.article-detial .like .like-num:hover {
+/*.article-detial .like .like-num:hover {
     color: #fff;
     background-color: #ddd340;
-}
+}*/
 
 .like-list {
     overflow-x: hidden;
