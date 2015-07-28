@@ -14,7 +14,22 @@ class Publish extends MY_Controller {
      */
     public function index()
     {
-        
+        $head['css'] = array(
+                'common.css',
+                'font-awesome/css/font-awesome.min.css',
+                '../ueditor/themes/default/css/umeditor.css',
+                'ueditor.css',
+                'radiocheck.min.css'
+            );
+        $head['javascript'] = array(
+                'jquery.js',
+                'vchome.js'
+            );
+        $user['user']    = $this->user;
+        $data['sidebar'] = $this->load->view('common/sidebar', $user, TRUE);
+
+        $this->load->view('common/head', $head);
+        $this->load->view('publish_article', $data);
     }
 
     /**

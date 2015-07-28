@@ -1546,3 +1546,79 @@ hr.line {
         text-align: center;
     }
 }
+
+.publish-article {
+    width: 900px;
+    margin-top: 80px;
+}
+
+.publish-article .title {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #EEE;
+    font-size: 38px;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.publish-article .subtitle {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #EEE;
+    font-size: 24px;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.publish-article .radio-box {
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #EEE;
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.publish-article .radio-box p {
+    float: left;
+    line-height: 20px;
+    height: 20px;
+}
+
+
+.publish-article .option{
+    margin: 10px auto 20px;
+}
+
+.publish-article .option .btn{
+    width: 120px;
+    height: 40px;
+    margin: 0 10px;
+    border: 1px solid #EEE;
+    line-height: 40px;
+    border-radius: 0;
+    transition: all 0.1s ease-in-out;
+}
+
+.publish-article .option .publish {
+    background-color: #EDE12B;
+}
+
+.publish-article .option .publish:hover {
+    color: #4C4640 !important;
+    background-color: #FCEE21;
+}
+.publish-article .option .publish:active {
+    background-color: #ddd340;
+}
+
+
+.publish-article .option .cancel:hover {
+    color: #4C4640 !important;
+    background-color: #E04E6B;
+}
+.publish-article .option .cancel:active {
+    background-color: #C53A55;
+}

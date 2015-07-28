@@ -121,4 +121,13 @@ class Common{
 
 	}
 
+
+    static function replace_face_url($str){
+        $face_url = base_url().'public/img/face/';
+        $str = str_replace(">",'<；',$str); 
+        $str = str_replace(">",'>；',$str); 
+        $str = str_replace("\n",'<br/>',$str); 
+        $str = preg_replace("[\[em_([0-9]*)\]]","<img src=\"{$face_url}$1.gif\" />",$str); 
+        return $str; 
+    } 
 }
