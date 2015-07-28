@@ -8,7 +8,7 @@ $(function(){
                 right: "280px"
             },200);
             $("#sbtn").stop().animate({
-                right: "281px"
+                right: "280px"
             },200); 
             
             $("#vc_sidebar").stop().animate({

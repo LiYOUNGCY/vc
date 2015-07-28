@@ -39,15 +39,15 @@
 			<div class="home-menu">
 				<ul>
 					<a href="javascript:void(0);">
-						<li class="active">
+						<li>
 							<div class="icon home_quanzi"></div>
 							圈子
 						</li>	
 					</a>
 					<a href="javascript:void(0);">
-						<li>
+						<li class="active">
 							<div class="icon home_jieshao"></div>
-							介绍
+							介绍s
 						</li>	
 					</a>
 					<a href="javascript:void(0);">
@@ -69,89 +69,7 @@
 		</div>
 		<div id="vi_content" class="content">
 			<div id="vi_main" class="main width-100p">
-				<div class="qzlist">
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-
-				</div>
+				<?php print_r($intro);?>
 			</div>
 		<div id="vi_footer" class="width-100p">
 			<div class="vi_footer">

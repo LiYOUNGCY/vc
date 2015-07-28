@@ -5,9 +5,7 @@
 	<div id="vi_container" class="container">
 		<div id="shade"></div>
 		<div id="sbtn" class="sbtn">
-			<div class="icon">
-				<div class="sidebtn"></div>
-			</div>
+			<div class="icon sidebtn"></div>
 		</div>
 		<div id="vi_content" class="content">
 			<!--                <div id="vi_user" class="vi-user float-r">
@@ -21,9 +19,7 @@
 			</div>
 		</div>
 		<div id="vc_logo" class="logo">
-			<div class="icon">
-				<div class="logo-a"></div>
-			</div>
+			<div class="icon logo-a"></div>
 		</div>
 		<div id="vi_menu" class="vi-menu width-100p">
 			<ul>

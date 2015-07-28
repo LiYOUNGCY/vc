@@ -39,7 +39,7 @@ class Main extends MY_Controller{
 			{
 				//获取用户简介
 				$data['intro'] = $this->home_service->get_user_intro($user['id']);
-				$this->load->view('home/intro',$data);				
+				$this->load->view('intro',$data);				
 			}
 			//自媒体才有文章
 			elseif($type == 'article' && $user['role'] == 2)

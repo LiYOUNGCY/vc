@@ -88,11 +88,8 @@
     </div> 
    </div> 
    <div id="vl_content" class="content"> 
-    <div class="loginlogo"> 
-     <div class="icon"> 
-      <a class="link" href="javascript:void(0);">
-       <div class="logo-w"></div></a>  
-     </div>
+    <div class="loginlogo">
+      <a class="link" href="javascript:void(0);"><div class="icon logo-w"></div></a> 
      <span class="text"> <a href="" class="link"><b>艺术维C</b></a><br /> affecting the life in a mysterious way </span>
     </div>
     <div class="logtext"> 

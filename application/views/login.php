@@ -83,16 +83,11 @@
    </div> 
    <div id="shade"></div> 
    <div id="sbtn" class="sbtn"> 
-    <div class="icon"> 
-     <div class="sidebtn"></div> 
-    </div> 
+    <div class="icon sidebtn"></div> 
    </div> 
    <div id="vl_content" class="content"> 
     <div class="loginlogo"> 
-     <div class="icon"> 
-      <a class="link" href="javascript:void(0);">
-       <div class="logo-w"></div></a>  
-     </div>
+    <a class="link" href="javascript:void(0);"><div class="icon logo-w"></div></a> 
      <span class="text"> <a href="" class="link"><b>艺术维C</b></a><br /> affecting the life in a mysterious way </span>
     </div> 
     <div class="logtext"> 

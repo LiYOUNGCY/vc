@@ -57,7 +57,7 @@
 			<li class="menu-list">
 				<div class="menu-list-item">
 					<div class="icon">
-						<div class="logout"></div>
+						<div class="language"></div>
 					</div>
 					<span class="menu-list-item-text">语言</span>
 				</div>
