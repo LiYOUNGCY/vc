@@ -13,13 +13,14 @@ class Image_service extends MY_Service{
 	 */	
 	public function up_um_img($fileField, $config)
 	{
-
+		$result = FALSE;
 		$this->load->library('Um_upload',array(
 						'fileField' => $fileField,
 						'config'	=> $config
 						));
-		
+
 		$up_result = $this->um_upload->upFile();
+
 		//上传到本服务器成功
 		if($up_result)
 		{
@@ -37,33 +38,48 @@ class Image_service extends MY_Service{
 			$arr[count($arr)-1] = $toFile;
 			$toFile = implode('/', $arr);
 			$thumb_result = $this->cimage->img2thumb($osspath,$toFile,300,230,1);
-			/**
-			 * [上传到oss]
-			 * $ossresult[上传结果]
-			 */
+
+			//生成缩略图成功
 			if($thumb_result)
 			{
 				//上传缩略图到oss
 				$toFile = substr($toFile, 2);
-				$this->oss->upload_by_file($toFile);
+				$oss_result = $this->oss->upload_by_file($toFile);
+				//缩略图上传成功
+				if($oss_result)
+				{
+					/**
+					 * [上传原图到oss]
+					 * $oss_result [type]
+					 */
+					$osspath = substr($osspath, 2);			
+					$oss_result = $this->oss->upload_by_file($osspath);		
+
+					//设置上传结果
+					$result = $oss_result;
+					
+					//上传原图成功
+					if($oss_result)
+					{	
+						//设置图片url
+						$this->um_upload->setFullName(OSS_URL."/{$osspath}");	
+					}
+					//失败
+					else
+					{
+						//删除oss上缩略图
+						$this->oss->delete_object($toFile);
+					}				
+				}
+
+				//删除本地缩略图
+				@unlink($toFile);					
 			}
-			//上传原图到oss
-			$osspath = substr($osspath, 2);			
-			$oss_result = $this->oss->upload_by_file($osspath);		
-
-			//设置上传结果
-			$this->um_upload->setStateInfo($oss_result);
-			//上传至oss服务器成功
-			if($oss_result)
-			{	
-				//设置图片url
-				$this->um_upload->setFullName(OSS_URL."/{$osspath}");	
-			}	
 			//删除本地服务器图片		
-			@unlink($osspath);
-			@unlink($toFile);
+			@unlink($osspath);	
 		}
-
+		//设置上传结果
+		$this->um_upload->setStateInfo($result);		
 		$info = $this->um_upload->getFileInfo();
 		return $info;	
 	}	
@@ -177,6 +193,7 @@ class Image_service extends MY_Service{
 				else
 				{
 					//删除oss上的文件
+					$this->oss->delete_object($shot_name);
 				}
 			}
 		}
