@@ -15,11 +15,9 @@ class Main extends MY_Controller{
 		$foot = $this->load->view('admin/common/foot',"",TRUE);				
 		$body['navbar'] = $navbar;	
 		$body['foot']	= $foot;
-
-		$this->load->view('admin/common/head');		
+ 		$this->load->view('admin/common/head');		
 		$this->load->view('admin/main',$body);
 	}
-
 	/**
 	 * [logout 注销]
 	 * @return [type] [description]

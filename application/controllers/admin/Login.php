@@ -45,6 +45,5 @@ class Login extends MY_Controller{
 			//失败,重定向至首页
 			redirect(base_url(),'location');
 		}
-
 	}	
 }

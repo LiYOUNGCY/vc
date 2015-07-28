@@ -113,3 +113,13 @@ $route['home/([a-z0-9_]*)/community'] = 'home/main/index/$1/community';
 $route['home/([a-z0-9_]*)/intro'] = 'home/main/index/$1/intro';
 $route['home/([a-z0-9_]*)/article'] = 'home/main/index/$1/article';
 $route['home/([a-z0-9_]*)/cooperate'] = 'home/main/index/$1/cooperate';
+
+
+
+/**
+ * 管理员用户管理
+ */
+$route['admin/user/u'] = 'admin/user/index/u';
+$route['admin/user/u/(:num)'] = 'admin/user/index/u/$1';
+$route['admin/user/a'] = 'admin/user/index/a';
+$route['admin/user/a/(:num)'] = 'admin/user/index/a/$1';
