@@ -78,7 +78,7 @@ class User_model extends CI_Model
 		//调用错误
 		else
 		{
-        $this->error->output('LOGIN_ERROR');  
+        return FALSE; 
 		}
 
 		$data = $query->get('user')->result_array();
@@ -98,12 +98,12 @@ class User_model extends CI_Model
 			}
       else
       {
-        $this->error->output('LOGIN_ERROR');  
+        return FALSE;  
       }
 		}
     else
     {
-      $this->error->output('NOUSER_ERROR');  
+        return FALSE;  
     }
 	}
 
@@ -274,4 +274,45 @@ class User_model extends CI_Model
     	$this->error->output('old_password_error');
     }
 
+    /**
+     * [get_user_list 获取用户列表]
+     * @param  [type]  $page   [页数]
+     * @param  integer $limit  [页面个数限制]
+     * @param  string  $order  [排序]
+     * @param  array  $custom  [自定义条件查询]
+     * @return [type]          [description]
+     */
+    public function get_user_list($page = 0, $limit = 10, $order = 'id DESC', $custom = array())
+    {
+      if( ! empty($custom))
+      {
+        $this->db->select($custom);
+      }
+      else
+      {
+        $this->db->select('user.id,user.name,role,user_role.name as role_name,phone,email,register_time,user_online.last_active');
+      }
+      $query = $this->db->join('user_online','user.id = user_online.uid','left')
+                        ->join('user_role','user.role = user_role.id','left')
+                        ->order_by($order)
+                        ->limit($limit,$page*$limit)
+                        ->get('user')
+                        ->result_array();
+      return $query;
+    }
+
+    /**
+     * [get_user_count 获取用户数量]
+     * @return [type] [description]
+     */
+    public function get_user_count()
+    {
+       return $this->db->count_all('user');
+    }
+
+    public function delete_user($uid)
+    {
+        $this->db->where_in('id',$uid)->delete('user');
+        return $this->db->affected_rows() > 0;
+    }
 }

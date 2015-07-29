@@ -12,10 +12,10 @@
             <div id="vi_menu" class="vi-menu width-100p">
                 <ul>
                     <li>
-                        <a href="#" class="link">全部</a>
+                        <a href="<?=base_url().'notification';?>" class="link">全部</a>
                     </li>
                     <li class="active">
-                        <a href="#" class="link">私信</a>
+                        <a href="<?=base_url().'notification/conversation'?>" class="link">私信</a>
                     </li>
                     <li>
                         <a href="#" class="link">评论</a>
@@ -83,13 +83,6 @@
                 }
             }
         }
-        function replace_em(URL, str){ 
-            str = str.replace(/\</g,'<；'); 
-            str = str.replace(/\>/g,'>；'); 
-            str = str.replace(/\n/g,'<；br/>；'); 
-            str = str.replace(/\[em_([0-9]*)\]/g,'<img src=' + URL + '"/$1.gif" border="0" />'); 
-            return str; 
-        }
 		$(function(){
             var BASE_URL = $("#BASE_URL").val();
             var URL = BASE_URL + "conversation/main/get_conversation_content";
@@ -120,7 +113,18 @@
                         conversation_content: str
                     },
                     success: function(data) {
-                        location.reload();
+                        data = eval('('+data+')');
+                        if(data.error != null)
+                        {
+                            ERROR_OUTPUT(data);
+                            return false;
+                        }
+                        else if(data.success == 0)
+                        {
+                           //成功处理
+                           location.reload();
+                        }
+
                     }
                 });
             });
@@ -136,6 +140,17 @@
                 },
                 success: function(data) {
                     var obj = eval("(" + data + ")");
+                    //错误
+                    if(obj.error != null)
+                    {
+                        ERROR_OUTPUT(obj);
+                        return false;
+                    }
+                    //没数据
+                    else if(obj == null || obj == "")
+                    {
+                        return false;
+                    }
                     uid = obj.he.id;
                     // alert(obj.he.id);
                     insert_data(obj, last_time);
@@ -154,6 +169,17 @@
                     },
                     success: function(data) {
                         var obj = eval("(" + data + ")");
+                        //错误
+                        if(obj.error != null)
+                        {
+                            ERROR_OUTPUT(obj);
+                            return false;
+                        }
+                        //没数据
+                        else if(obj == null || obj == "")
+                        {
+                            return false;
+                        }                        
                         // alert(obj.he.id);
                         insert_data(obj, last_time);
                     }

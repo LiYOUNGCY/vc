@@ -814,124 +814,7 @@ img{
 	max-width:360px; 
     width: 85%
 }
-.contianer-480p {
-  width: 480px;
-  margin: 0 auto;
-  margin-top: 80px;
-}
 
-.contianer-480p .main h1{
-  font-size: 48px;
-  font-weight: 100;
-}
-.contianer-480p .main .vi-menu ul{
-    width: auto;
-    margin: 30px auto;
-}
-.form-group {
-  vertical-align: middle;
-  margin-bottom: 20px;
-  text-align: left;
-}
-
-.form-group label {
-  display: inline-block;
-  width: 90px;
-  margin-bottom: 5px;
-  text-align: right;
-}
-
-.form-group input[type="text"]{
-  box-sizing: border-box;
-  display: inline-block;
-  width: 300px;
-  height: 34px;
-  padding: 6px 12px;
-  color: #555;
-  background-color: #FFF;
-  border: 1px solid #CCC;
-  border-radius: 4px;
-  margin: 0;
-  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-}
-.form-group input[type="text"]:focus {
-    -moz-animation: bdcolor 0.2s ease-out forwards;
-    -ms-animation: bdcolor 0.2s ease-out forwards;
-    -webkit-animation: bdcolor 0.2s ease-out forwards;
-    animation: bdcolor 0.2s ease-out forwards;
-    box-shadow:0 1px 1px rgba(252, 238, 33, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
-}
-.form-group select:focus{
-    -moz-animation: bdcolor 0.2s ease-out forwards;
-    -ms-animation: bdcolor 0.2s ease-out forwards;
-    -webkit-animation: bdcolor 0.2s ease-out forwards;
-    animation: bdcolor 0.2s ease-out forwards;
-    box-shadow:0 1px 1px rgba(252, 238, 33, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
-    outline: none;
-}
-.form-group .radio-group {
-    display: inline-block;
-    width: 300px;
-    text-align: left;
-}
-.form-group .radio-group div {
-    display: inline-block;
-}
-.form-group input[type="radio"] {
-    margin-left: 15px;
-}
-.form-group .birthday {
-    width: 300px;
-    display: inline-block;
-}
-.form-group select {
-    display: inline-block;
-    width: 25%;
-    margin-left: 5px;
-    box-sizing: border-box;
-    padding: 6px 12px;
-    color: #555;
-    background-color: #FFF;
-    border: 1px solid #CCC;
-}
-
-.contianer-480p .set-btn{
-    box-sizing:content-box;
-    width: 30%;
-    height: 24px;
-    display: inline-block;
-}
-
-.contianer-480p .set-btn {
-    font-size: 18px;
-    padding: 6px 0;
-    cursor: pointer;
-}
-.contianer-480p .set-btn:hover{
-    -moz-animation: bgcolor-y 0.2s ease-out forwards;
-    -ms-animation: bgcolor-y 0.2s ease-out forwards;
-    -webkit-animation: bgcolor-y 0.2s ease-out forwards;
-    animation: bgcolor-y 0.2s ease-out forwards;
-}
-
-
-@-webkit-keyframes bdcolor{
-    0%{}
-    100%{border-color:#FCEE21;}
-}
-@keyframes bdcolor{
-    0%{}
-    100%{border-color:#FCEE21;}
-}
-
-.error_div {
-    text-align: right;
-    width: 390px;
-    position: relative;
-    font-size: 14px;
-    color: crimson;
-    display: none;
-}
 .ac-left{
 	max-width: 610px;
 	width: 100%;
@@ -1881,4 +1764,374 @@ hr.line {
 }
 .publish-article .option .cancel:active {
     background-color: #C53A55;
+}
+
+.container-head {
+    margin-top: 80px;
+
+    text-align: left;
+}
+
+.container-head h1 {
+    margin-bottom: 35px;
+
+    font-size: 48px;
+    font-weight: 100;
+
+    color: #b3b3b3;
+}
+
+.conversation {
+    margin-top: 25px;
+    border: 2px solid #b3b3b3;
+    border-style: solid none;
+    padding: 15px 5px;
+    min-height: 480px;
+}
+
+.conversation .msg {
+    float: right;
+
+    width: 600px;
+}
+
+.conversation .emotion {
+    float: right;
+
+    margin-left: 10px;
+    width: 32px;
+    height: 32px;
+
+    background: url(../img/icon/smile_icon.png);
+
+    cursor: pointer;
+}
+
+.conversation .send {
+    float: right;
+
+    margin-right: 5px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    width: 52.1px;
+    height: 32.2px;
+
+    cursor: pointer;
+}
+
+.conversation .send:hover {
+    -webkit-animation: bgcolor-y .2s ease-out forwards;
+       -moz-animation: bgcolor-y .2s ease-out forwards;
+        -ms-animation: bgcolor-y .2s ease-out forwards;
+            animation: bgcolor-y .2s ease-out forwards;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+
+    text-align: center;
+}
+
+.avatar-left {
+    position: absolute;
+    top: 0;
+    left: -75px;
+}
+
+.avatar-right {
+    position: absolute;
+    top: 0;
+    right: -75px;
+}
+
+.avatar img {
+    border: 1px #b3b3b3 solid;
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.avatar .username {
+    font-size: 12px;
+
+    color: #000;
+}
+
+.message {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.message-box {
+    box-sizing: border-box;
+    width: 576px;
+    min-height: 100px;
+
+    background-color: #fff;
+}
+
+.message-left {
+    padding: 15px 5px 15px 85px;
+}
+
+.message-right {
+    margin-left: 384px;
+    padding: 15px 85px 15px 5px;
+}
+
+.message-content {
+    position: relative;
+
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 15px;
+    min-height: 70px;
+}
+
+.triangle-left {
+    border-top: 8px solid transparent;
+    border-right: 15px solid #e5e9ef;
+    border-bottom: 8px solid transparent;
+    border-radius: 1px;
+    width: 0;
+    height: 0;
+}
+
+.triangle-right {
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 15px solid #cde9f5;
+    border-radius: 1px;
+    width: 0;
+    height: 0;
+}
+
+.message-content .triangle-left {
+    position: absolute;
+    left: -15px;
+}
+
+.message-content .triangle-right {
+    position: absolute;
+    right: -15px;
+}
+
+.message-right .message-content {
+    border: 1px solid #c3d7e6;
+
+    text-align: right;
+
+    background-color: #cde9f5;
+}
+
+.message-left .message-content {
+    border: 1px solid #d0d7dd;
+
+    text-align: left;
+
+    background-color: #e5e9ef;
+}
+
+.message .time-box {
+    margin: 5px auto;
+    width: 80%;
+
+    font-size: 14px;
+    text-align: center;
+
+    color: #b3b3b3;
+}
+
+
+@media screen and (max-width: 960px) {
+    .container-960 {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .container-head {
+        text-align: center;
+    }
+
+    .conversation .msg {
+        float: none;
+
+        width: 65%;
+    }
+
+    .message {
+        margin-top: 20px;
+    }
+
+    .message .message-box {
+        width: 100%;
+    }
+    .message .message-box .message-content {
+        width: 80%;
+    }
+
+    .message-right {
+        margin-left: 0;
+        padding: 12px 20% 15px 5px;
+    }
+
+    .message-right .message-content {
+        float: right;
+    }
+}
+
+.message-item {
+    margin-top: 15px;
+    box-sizing: border-box;
+    padding: 18px 20px 18px 94px;
+    width: 100%;
+    height: 100px;
+
+    cursor: pointer;
+}
+
+.message-item:hover {
+    background-color: #f2f2f2;
+}
+
+.av-icon {
+    display: inline-block;
+
+    position: absolute;
+    top: 0;
+    left: -80px;
+
+    border: none;
+    width: 64px;
+    height: 64px;
+}
+
+.av-icon img {
+    border: none;
+}
+
+.message-item .message-row {
+    position: relative;
+    /*background-color: red;*/
+
+    box-sizing: border-box;
+    padding: 5px 10px 10px 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.message-item .message-row h3 {
+    margin-bottom: 2px;
+
+    text-align: left;
+
+    color: #4b463f;
+}
+
+.message-item .message-row p {
+    font-size: 14px;
+    text-align: left;
+
+    color: #c9c9c9;
+}
+
+.conversation h1 {
+    margin-bottom: 40px;
+    padding: 20px;
+}
+
+main,
+.flp,
+.flp div,
+.flp label,
+.flp input,
+.ch {
+    box-sizing: border-box;
+}
+
+main {
+    overflow: hidden;
+
+    border-radius: 3px;
+    padding-bottom: 10px;
+    width: 500px;
+    background: white;
+
+    padding-top: 10px;
+}
+main h2 {
+    margin-bottom: 40px;
+    padding: 20px 0;
+
+    font-size: 24px;
+    font-weight: normal;
+    text-align: center;
+
+    color: hsl(120, 40%, 40%);
+    background: hsl(120, 40%, 95%);
+}
+
+/*Let's place the label over the input*/
+.flp div {
+    position: relative;
+
+    margin-bottom: 30px;
+}
+
+.flp input,
+.flp label {
+    display: block;
+
+    border: 1px solid #999;
+    width: 400px;
+    /*fixed height for FF line height issue. 
+height = 24(lineheight) + 10*2(padding) + 2(border)*/
+    height: 46px;
+
+    font: inherit;
+    font-size: 16px;
+    line-height: 24px;
+}
+.flp input {
+    border-radius: 3px;
+    padding: 10px;
+
+    outline: none;
+}
+.flp label {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    border-color: transparent;
+    /*left/right padding will be 2px less, adjusted by padding on .ch*/
+    padding: 10px 8px;
+
+    color: #666;
+
+    cursor: text;
+}
+
+/*label styles*/
+.ch {
+    display: block;
+    float: left;
+
+    position: relative; /*for upward animation*/
+
+    background: white;
+}
+.ch:first-child {
+    padding-left: 2px;
+}
+.ch:last-child {
+    padding-right: 2px;
+}
+
+/*active input label*/
+.focussed {
+    /*when any input is already focussed clicking on it(label) again won't do anything*/
+    pointer-events: none;
 }

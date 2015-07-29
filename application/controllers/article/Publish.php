@@ -38,6 +38,12 @@ class Publish extends MY_Controller {
      */
     public function publish_article()
     {
+        $error_redirect = array(
+            'script' => "window.location.href='".base_url()."publish/article';",
+            'type'   => 1
+        );
+        $this->sc->set_error_redirect($error_redirect);
+
         $article_title      = $this->sc->input('article_title');
         $article_subtitle   = $this->sc->input('article_subtitle');
         $article_content    = $this->sc->input('article_content','post',FALSE);

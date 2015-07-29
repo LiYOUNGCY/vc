@@ -68,7 +68,7 @@
 				<div id="lop-zh" style="border-right: 1px solid #4C4640;" class="btn">简体中文</div>
 				<div id="lop-en" class="btn">English</div>
 			</div>
-			<a class="link" href="#">
+			<a class="link" href="<?=base_url()?>account/main/logout">
 			<li class="menu-list">
 				<div class="menu-list-item">
 					<div class="icon">

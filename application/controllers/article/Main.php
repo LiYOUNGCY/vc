@@ -41,7 +41,8 @@ class Main extends MY_Controller {
         );
         $data['javascript'] = array(
             'j162.min.js',
-            'jquery.scrollLoading.js'
+            'jquery.scrollLoading.js',
+            'error.js'
         );
 
         $user['user'] = $this->user;

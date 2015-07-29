@@ -8,5 +8,4 @@ class upload extends CI_Controller{
 	{
 		$this->load->view('test/upload');
 	}
-
 }

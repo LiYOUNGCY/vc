@@ -59,23 +59,36 @@ class User_service extends MY_Service
 		}
 		else
 		{
-            $this->error->output('LOGIN_ERROR');  
+            return FALSE;  
 		}
 
 		$user = $this->user_model->login_action($login_type, $pwd);
-
-		if($rememberme) 
-		{
-			//设置 cookie
-			$this->auth_service->set_remember_me_cookie($user);
-		}
-		//设置 SESSION
-		$this->auth_service->set_login_session($user);
-		return TRUE;
+        if( ! empty($user))
+        {
+            if($rememberme) 
+            {
+                //设置 cookie
+                $this->auth_service->set_remember_me_cookie($user);
+            }
+            //设置 SESSION
+            $this->auth_service->set_login_session($user); 
+            return $user;          
+        }
+        else
+        {
+            return FALSE;
+        }
 
 	}
 
-
+    /**
+     * [logout 注销]
+     * @return [type] [description]
+     */
+    public function logout()
+    {
+        $this->auth_service->logout();
+    }
 
     /**
      * [update_count 更新用户字段数量]

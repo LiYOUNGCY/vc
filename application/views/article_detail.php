@@ -1,7 +1,6 @@
 <body>
 <?=$sidebar ?>
-<input id="aid" type="hidden" value="<?=$article['id']?>
-">
+<input id="aid" type="hidden" value="<?=$article['id']?>">
 <div id="vi_container" class="container">
   <div id="shade"></div>
   <div id="sbtn" class="sbtn">
@@ -169,8 +168,16 @@
               comment: str
           },
           success: function(data) {
-              alert(data);
               var obj = eval("(" + data + ")");
+              if(data.error != null)
+              {
+                ERROR_OUTPUT(data);
+                return false;
+              }
+              else 
+              {
+                 alert('success');
+              }
           }
       });
     });
@@ -214,6 +221,11 @@
             else {
               $('#seeLike').html(parseInt($('#seeLike').html())-1);
             }
+          }
+          else if(status.error != null)
+          {
+             ERROR_OUTPUT(data);
+             return false;
           }
         }
       });

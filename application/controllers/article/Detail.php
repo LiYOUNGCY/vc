@@ -26,7 +26,14 @@ class Detail extends MY_Controller
 
         //获取文章评论
         $comment = $this->article_service->get_comment_by_aid($aid);
-        $status  = $this->article_service->get_article_vote_by_both($aid, $this->user['id']);
+        if(isset($this->user['id']))
+        {
+            $status  = $this->article_service->get_article_vote_by_both($aid, $this->user['id']);            
+        }
+        else
+        {
+            $status  = 0;
+        }
         
         $data['article'] = $article;
         //echo json_encode($status);
@@ -53,6 +60,7 @@ class Detail extends MY_Controller
                 'paperfold/modernizr.custom.01022.js',
                 'jquery.flexText.min.js',
                 'jquery.qqFace.js',
+                'error.js'
                 // 'jquery.timeago.js'
             );
         $this->load->view('common/head', $head);

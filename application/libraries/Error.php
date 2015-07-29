@@ -10,11 +10,35 @@ class Error {
 	function __construct() {
 	}
 
-	public function output($key) {
+	/**
+	 * [output 错误处理]
+	 * @param  [type] $key            [错误代号]
+	 * @param  [type] $error_redirect [错误重定向数组]
+	 * @return [type]                 [description]
+	 */
+	public function output($key, $error_redirect = array('script' => "", 'type' => 0)) {
 		$msg = array();
 		$msg['error'] = lang('error_'.strtoupper($key));
-		echo json_encode($msg);
-		//遇到错误终止运行
-		exit();
+
+		//如果重定向脚本不为空
+		if( ! empty($error_redirect['script']))
+		{
+			$msg['script'] = $error_redirect['script'];
+		}
+		//如果错误类型是ajax提交
+		if($error_redirect['type'] == 0)
+		{				
+			echo json_encode($msg);
+			//遇到错误终止运行
+			exit();			
+		}
+		//如果错误类型是form提交
+		else if($error_redirect['type'] == 1)
+		{	
+
+			$script = "<script>alert('{$msg['error']}');".$error_redirect['script']."</script>";
+			echo $script;
+			exit();
+		}
 	}
 }
