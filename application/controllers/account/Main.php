@@ -12,6 +12,14 @@ class Main extends MY_Controller
 
 	public function index($type = 'login')
 	{
+		$head['css'] = array(
+				'common.css',
+				'font-awesome/css/font-awesome.min.css'
+			);
+		$head['javascript'] = array(
+				'jquery.js'
+			);
+		$this->load->view('common/head', $head);
 		$user['user'] = $this->user;
 		$sidebar = $this->load->view('common/sidebar', $user, TRUE);
 
