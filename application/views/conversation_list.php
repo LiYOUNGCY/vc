@@ -1,6 +1,14 @@
 <!-- 私信列表的界面 -->
 <body>
-    <div class="container-960">
+<?=$sidebar?>
+<div id="vi_container" class="container">
+    <div id="shade"></div>
+    <div id="sbtn" class="sbtn">
+        <div class="icon">
+            <div class="sidebtn"></div>
+        </div>
+    </div>
+    <div class="content">
         <div class="container-head">
             <h1>消息中心</h1>
             <div id="vi_menu" class="vi-menu width-100p">
@@ -19,10 +27,10 @@
                     </li>
                 </ul>
             </div>
-            <div id="conversation_list" class="conversation">
-            </div>
+            <div id="conversation_list" class="conversation"></div>
         </div>
     </div>
+</div>
 </body>
 <script>
     function insert_message(img, conversation_url, name, content) {

@@ -6,15 +6,11 @@
 	<div id="vi_container" class="container">
 		<div id="shade"></div>
 		<div id="sbtn" class="sbtn">
-			<div class="icon">
-				<div class="sidebtn"></div>
-			</div>
+			<div class="icon sidebtn"></div>
 		</div>
 		<div id="vi_content" class="content">
 		<div id="vc_logo" class="logo" style="padding-top: 159px;">
-			<div class="icon">
-				<div class="logo-a"></div>
-			</div>
+			<div class="icon logo-a"></div>
 		</div>
 		<div id="vi_menu" class="vi-menu width-100p">
 			<ul>
@@ -60,54 +56,6 @@
 				</div>
 				<div class="ac-left">
 					<div class="ac-boxlist clearfix">
-<!-- 						<div class="box">
-							<div class="boxtop">
-								<div class="name">
-									<div class="head">
-										<a href="#">
-											<img src="<?=base_url().'public/'?>img/mm1.jpg" /></a>
-									<div class="identity">
-											<span class="icon identity"></span>
-										</div>
-									</div>
-									<div class="text">
-										<a class="link" href="#">YOUNG啥第六届CY</a>赞了<a class="link" href="#">artvc官方账号</a>的文章
-									</div>
-								</div>
-								<div class="time">
-									<time class="timeago" title="2011-07-26 06:19:55" datetime="2015-07-26 14:27:10+08:00"></time> 
-								</div>
-							</div>
-							<div class="article">
-								<div class="ar_text">
-									<div class="title">
-										<a class="link" href="#">阿斯顿阿斯顿</a>
-									</div>
-									
-									<div class="con">
-										<p>首先让我产生兴趣的是姜绥吾将他的绘画和装置艺术归于当代艺术，这说明他比较介意时间在各种艺术流派的进程中所起的作用。“当代”一词对于绘画艺术而言如同一个大熔炉，已经消化的，未经消化的，各种流派的，或具有实验性质的，都可以成为燃料或者...</p>	
-									</div>
-								</div>
-								<div class="ar_pic">
-									<img src="<?=base_url().'public/'?>img/mm1.jpg">		
-								</div>
-							</div>
-							<div class="support">
-								<div class="like float-l">
-									<div class="btn">
-										<i class="fa fa-heart"></i> 24
-									</div>
-								</div>
-								<div class="list">
-									<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
-									<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
-									<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
-									<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
-								</div>
-							</div>
-						</div> -->
-						
-						
 					</div>
 					<div class="loadmore width-100p">
 						<div id="loadmore" class="btn load_btn">
@@ -180,7 +128,7 @@
 	}; 
 
 	function loadfeed(pageTemp){
-		$.ajax({
+	$.ajax({
       url: GET_FEED_LIST_URL,
       async: false, 
       type: 'POST',

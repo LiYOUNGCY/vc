@@ -9,14 +9,30 @@ class Setting extends MY_Controller
 	}
 
 	public function index($type = "user") {
+		$head['css'] = array(
+				'common.css',
+				'normalize.css',
+				'default.css',
+				'radiocheck.min.css',
+				'font-awesome/css/font-awesome.min.css'
+			);
+		$head['javascript'] = array(
+				'jquery.js',
+				'vchome.js'
+			);
+		$this->load->view('common/head', $head);
+
+		$user['user'] 	= $this->user;
+        $data['sidebar']= $this->load->view('common/sidebar', $user, TRUE);
+
 		if($type == 'pwd')
 		{
 			//修改密码
 		}
+		//修改个人信息的页面
 		else if($type == 'user')
 		{
-			//修改个人信息的页面
-			$this->load->view('setting');			
+			$this->load->view('setting', $data);			
 		}
 	}
 
@@ -46,17 +62,8 @@ class Setting extends MY_Controller
 	 */
 	public function update_account()
 	{
-		$arr 	= array('name', 'alias', 'sex', 'area', 'email', 'phone');
-		$year 	= $this->sc->input('year');
-		$mouth	= $this->sc->input('mouth');
-		$day  	= $this->sc->input('day');
-
-		$mouth 	= strlen($mouth) < 2 ? '0'.$mouth : $mouth;
-		$day 	= strlen($day) < 2 ? '0'.$day : $day;
-
+		$arr 	= array('name', 'alias', 'sex', 'area', 'email', 'phone', 'birthday');
 		$data = $this->sc->input($arr);
-
-		$data['birthday'] = $year.'-'.$mouth.'-'.$day;
 
 		$result = $this->user_service->update_account($this->user['id'], $data);
 		

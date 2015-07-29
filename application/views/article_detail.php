@@ -1,7 +1,6 @@
 <body>
 <?=$sidebar ?>
-<input id="aid" type="hidden" value="<?=$article['id']?>
-">
+<input id="aid" type="hidden" value="<?=$article['id']?>">
 <div id="vi_container" class="container">
   <div id="shade"></div>
   <div id="sbtn" class="sbtn">
@@ -36,7 +35,6 @@
       <i class="fa fa-eye"></i>
       <span><?=$article['read']?></span>
       </div>
-    <div class="clearfix"></div>
     <div class="article-content">
       <?=$article['content']?></div>
 
@@ -61,7 +59,7 @@
       <div class="no-comment">暂时还没有评论</div>
       <?php } else { ?>
       <div class="playground">
-        <div class="box buddycloud">
+        <div class="box buddycloud">  
           <div class="stream">
             <article class="topic">
               <?php
@@ -111,11 +109,11 @@
       <?php } ?>
       <article class="topic">
         <div class="answer clearfix" style="position:relative;">
-          <div id="submit" class="send btn">发送</div>
           <div id="emotion" class="emotion"></div>
           <div class="msg">
             <textarea id="msg"  placeholder="想说写什么..."></textarea>
           </div>
+          <div id="submit" class="send btn">发送</div>
         </div>
       </article>
     </div>

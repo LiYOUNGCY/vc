@@ -24,16 +24,16 @@ class Main extends MY_Controller{
 	        $data['javascript'] = array('j162.min.js','timeago.js');
 
 	        $this->load->view('common/head', $data);
-	        $sidebar = $this->load->view('common/sidebar', '', TRUE);
+	        $u['user']    = $this->user;
 
-	        $data['sidebar'] = $sidebar;
-
+        	$data['sidebar'] = $this->load->view('common/sidebar', $u, TRUE);
+         	$data['footer'] = $this->load->view('common/footer',"", TRUE);       	
 			$data['user'] = $user;
-			$data['me']   = $this->user;
+			$data['me'] = $this->user;
 			//载入视图
 			if($type == 'quanzi')
 			{
-				$this->load->view('quanzi',$data);
+				$this->load->view('home/quanzi',$data);
 			}
 			elseif($type == 'intro')
 			{
@@ -66,10 +66,9 @@ class Main extends MY_Controller{
 	 * @return [type] [description]
 	 */
 	public function get_user_community()
-	{
+	{	
 		$page= $this->sc->input('page');
 		$uid = $this->sc->input('uid');
-		$uid = 9;
 		$community = $this->home_service->get_user_community($page,$uid);
 		echo json_encode($community);
 	}

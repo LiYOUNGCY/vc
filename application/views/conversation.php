@@ -5,19 +5,17 @@
     <div id="vi_container" class="container-960">
         <div id="shade"></div>
         <div id="sbtn" class="sbtn">
-            <div class="icon">
-                <div class="sidebtn"></div>
-            </div>
+            <div class="icon sidebtn"></div>
         </div>
         <div class="container-head">
             <h1>消息中心</h1>
             <div id="vi_menu" class="vi-menu width-100p">
                 <ul>
                     <li>
-                        <a href="#" class="link">全部</a>
+                        <a href="<?=base_url().'notification';?>" class="link">全部</a>
                     </li>
                     <li class="active">
-                        <a href="#" class="link">私信</a>
+                        <a href="<?=base_url().'notification/conversation'?>" class="link">私信</a>
                     </li>
                     <li>
                         <a href="#" class="link">评论</a>
@@ -84,13 +82,6 @@
                     insert_left_msg(he.pic, he.name, item.content);
                 }
             }
-        }
-        function replace_em(URL, str){ 
-            str = str.replace(/\</g,'<；'); 
-            str = str.replace(/\>/g,'>；'); 
-            str = str.replace(/\n/g,'<；br/>；'); 
-            str = str.replace(/\[em_([0-9]*)\]/g,'<img src=' + URL + '"/$1.gif" border="0" />'); 
-            return str; 
         }
 		$(function(){
             var BASE_URL = $("#BASE_URL").val();

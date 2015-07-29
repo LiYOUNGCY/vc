@@ -1,0 +1,323 @@
+
+[class^="icon-"],
+[class*=" icon-"] {
+    font-family: "icomoon";
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-transform: none;
+    /* Better Font Rendering =========== */
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: none;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+    display: table;
+
+    content: " ";
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+a {
+    text-decoration: none;
+
+    color: #2fa0ec;
+
+    outline: none;
+}
+a:hover,
+a:focus {
+    color: #74777b;
+}
+
+.htmleaf-container {
+    overflow: hidden;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+.htmleaf-content {
+    /*font-size: 150%;*/
+    padding: 1em 2em;
+    min-height: 500px;
+}
+
+
+.bgcolor-1 {
+    background: #f0efee;
+}
+.bgcolor-2 {
+    background: #f9f9f9;
+}
+.bgcolor-3 {
+    background: #e8e8e8;
+}/*light grey*/
+.bgcolor-4 {
+    color: #fff; 
+    background: #2f3238;
+}/*Dark grey*/
+.bgcolor-5 {
+    color: #521e18; 
+    background: #df6659;
+}/*pink1*/
+.bgcolor-6 {
+    background: #2fa8ec;
+}/*sky blue*/
+.bgcolor-7 {
+    background: #d0d6d6;
+}/*White tea*/
+.bgcolor-8 {
+    color: #fff; 
+    background: #3d4444;
+}/*Dark grey2*/
+.bgcolor-9 {
+    color: #fff;
+    background: #ef3f52;
+}/*pink2*/
+.bgcolor-10 {
+    color: #fff;
+    background: #64448f;
+}/*Violet*/
+.bgcolor-11 {
+    color: #fff;
+    background: #3755ad;
+}/*dark blue*/
+.bgcolor-12 {
+    color: #fff;
+    background: #3498db;
+}/*light blue*/
+.bgcolor-15 {
+    color: #fff;
+    background: #6ca446;
+}/*green*/
+/* Header */
+.htmleaf-header {
+    padding: 1em 190px 1em;
+
+    text-align: center;
+    letter-spacing: -1px;
+}
+.htmleaf-header h1 {
+    margin-bottom: 0;
+
+    font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
+    font-size: 2em;
+    font-weight: 600;
+    line-height: 1;
+}
+.htmleaf-header h1 span {
+    display: block;
+
+    padding: .8em 0 .5em 0;
+
+    font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
+    font-size: 60%;
+    font-weight: 400;
+
+    color: #c3c8cd;
+}
+/*nav*/
+.htmleaf-demo a {
+    text-decoration: none;
+
+    color: #fff;
+}
+.htmleaf-demo {
+    padding-bottom: 1.2em;
+    width: 100%;
+}
+.htmleaf-demo a {
+    display: inline-block;
+
+    margin: .5em;
+    border: 3px solid #fff;
+    padding: .6em 1em;
+
+    font-weight: 700;
+}
+.htmleaf-demo a:hover {
+    opacity: .6;
+}
+.htmleaf-demo a.current {
+    color: #fff; 
+    background: #1d7db1;
+}
+
+.htmleaf-demo-4 a {
+    border-color: #354768;
+
+    color: #354768;
+}
+/* Top Navigation Style */
+.htmleaf-links {
+    display: inline-block;
+
+    position: relative;
+
+    font-size: 1.5em;
+    text-align: center;
+    white-space: nowrap;
+}
+.htmleaf-links a {
+    color: #fff;
+}
+.htmleaf-links::after {
+    position: absolute;
+    top: 0;
+    left: 50%;
+
+    margin-left: -1px;
+    width: 2px;
+    height: 100%;
+
+    background: #dbdbdb;
+
+    -webkit-transform: rotate3d(0,0,1,22.5deg);
+            transform: rotate3d(0,0,1,22.5deg);
+
+    content: "";
+}
+
+.htmleaf-icon {
+    display: inline-block;
+
+    margin: .5em;
+    padding: 0 0;
+    width: 1.5em;
+
+    text-decoration: none;
+}
+
+.htmleaf-icon span {
+    display: none;
+}
+
+.htmleaf-icon:before {
+    margin: 0 5px;
+
+    font-family: "icomoon";
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-transform: none;
+
+    -webkit-font-smoothing: antialiased;
+    speak: none;
+}
+/* footer */
+.htmleaf-footer {
+    padding-top: 10px;
+    width: 100%;
+}
+.htmleaf-small {
+    font-size: .8em;
+}
+.center {
+    text-align: center;
+}
+/****/
+.related {
+    overflow: hidden;
+
+    padding: .5em 0;
+
+    font-size: 1.25em;
+    text-align: center;
+
+    color: #fff;
+    background: #333;
+}
+
+.related > a {
+    display: inline-block;
+
+    margin: 20px 10px;
+    padding: 25px;
+    width: calc(100% - 20px);
+    max-width: 340px;
+
+    font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
+    text-align: center;
+    vertical-align: top;
+}
+.related a {
+    display: inline-block;
+
+    margin: 20px auto;
+    padding: 10px 20px;
+
+    text-align: left;
+
+    opacity: .8;
+
+    -webkit-transition: opacity .3s;
+            transition: opacity .3s;
+
+    -webkit-backface-visibility: hidden;
+}
+
+.related a:hover,
+.related a:active {
+    opacity: 1;
+}
+
+.related a img {
+    border-radius: 4px;
+    max-width: 100%;
+
+    opacity: .8;
+}
+.related a:hover img,
+.related a:active img {
+    opacity: 1;
+}
+.related h3 {
+    font-family: "Microsoft YaHei", sans-serif;
+}
+.related a h3 {
+    margin-top: .15em;
+
+    font-weight: 300;
+
+    color: #fff;
+}
+/* icomoon */
+.icon-htmleaf-home-outline:before {
+    content: "\e5000";
+}
+
+.icon-htmleaf-arrow-forward-outline:before {
+    content: "\e5001";
+}
+
+@media screen and (max-width: 50em) {
+    .htmleaf-header {
+        padding: 3em 10% 4em;
+    }
+    .htmleaf-header h1 {
+        font-size: 2em;
+    }
+}
+
+
+@media screen and (max-width: 40em) {
+    .htmleaf-header h1 {
+        font-size: 1.5em;
+    }
+}
+
+@media screen and (max-width: 30em) {
+    .htmleaf-header h1 {
+        font-size: 1.2em;
+    }
+}

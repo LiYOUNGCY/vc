@@ -21,7 +21,8 @@ class Home_service extends MY_Service{
 	{
 		$user = $this->user_model->get_user_by_alias($alias,array('id', 'name', 'pic', 'alias', 'role','intro','follower','area'));
 		if( ! empty($user))
-		{	//获取关注状态
+		{
+			//获取关注状态
 			if( ! empty($uid) && $uid != $user['id'])
 			{
 				$user['follow_status'] = $this->user_follow_model->check_follow($uid,$user['id']);				
@@ -45,9 +46,9 @@ class Home_service extends MY_Service{
 		if( ! empty($intro))
 		{
 			//获取点赞列表
-			$intro['like'] = $this->article_model->get_vote_person_by_aid($intro['id']);
+			$intro['like'] = $this->article_like_model->get_vote_person_by_aid($intro['id']);
 			//获取评论列表
-			$intro['comment'] = $this->article_model->get_comment_by_aid($intro['id']);
+			$intro['comment'] = $this->article_comment_model->get_comment_by_aid($intro['id']);
 			return $intro;
 		}
 		else
@@ -84,7 +85,7 @@ class Home_service extends MY_Service{
 		$user   = $this->user_model->get_user_base_id($uid);
 
 		//如果该用户是自媒体,加上该用户的信息
-		if($user['role'] == 2)
+		if($user['role'] == 2 && $page == 0)
 		{
 			$follow[count($follow)] = $user;					
 		}		

@@ -17,23 +17,23 @@ class Main extends MY_Controller{
 			show_404();
 		}
 
-		$data = array();
+		$head['css'] = array(
+			'common.css'
+		);
+
+		$head['javascript'] = array(
+			'jquery.js',
+			'vchome.js'
+		);
+
+		$user['user'] 	= $this->user;
+        $body['sidebar']= $this->load->view('common/sidebar', $user, TRUE);
 
 		if(strcmp($type, 'all') == 0) 
 		{
-			$data['css'] = array(
-				'common.css',
-				'message.css',
-				'message_center.css'
-			);
 
-			$data['javascript'] = array(
-				'jquery.js',
-				'error.js'
-			);
-
-			$this->load->view('common/head', $data);
-			$this->load->view('notification_list');
+			$this->load->view('common/head', $head);
+			$this->load->view('notification_list', $body);
 		}
 		elseif(strcmp($type, 'conversation') == 0)
 		{
@@ -49,7 +49,8 @@ class Main extends MY_Controller{
 			);
 
 			$this->load->view('common/head', $data);
-			$this->load->view('conversation_list');			
+			$this->load->view('conversation_list', $body);			
+
 		}
 	}
 
