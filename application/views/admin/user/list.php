@@ -32,6 +32,9 @@
 										<i class="fa fa-calendar fa-fw"></i>
 										最后活跃时间
 									</th>
+									<th>
+										状态
+									</th>									
 									<th></th>
 								</tr>
 							</thead>
@@ -66,10 +69,13 @@
 											<td>
 												<?=$v['last_active']?>
 											</td>
+											<td>
+												<?php if($v['forbidden'] == 0){echo "正常";}else{echo "被封禁";}?>
+											</td>											
 											<td class="tooltip-btn">
-												<button data-toggle="tooltip"  title="编辑" id="edit" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-edit"></i>
+												<button data-toggle="tooltip"  title="编辑" effect="edit" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-edit"></i>
 								                </button>
-												<button data-toggle="tooltip"  title="封禁" id="forbidden" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-ban"></i>
+												<button data-toggle="tooltip"  title="封禁" effect="forbidden" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-ban"></i>
 								                </button>								                				
 											</td>
 										</tr>																					
@@ -88,7 +94,7 @@
 	                                        <h4 class="modal-title" id="myModalLabel">删除提示</h4>
 	                                    </div>
 	                                    <div class="modal-body">
-											确认删除所勾选的用户？
+										确认删除所勾选的用户?
 	                                    </div>
 	                                    <div class="modal-footer">
 	                                        <button type="button" class="btn btn-default" id="close_modal" data-dismiss="modal">Close</button>
@@ -119,6 +125,7 @@
 var BASE_URL = $("#BASE_URL").val();
 var ADMIN    = $("#ADMIN").val();
 var DELETE_URL= ADMIN+'user/delete_user';
+var FORBID_URL= ADMIN+'user/forbid_user';
 $(function()
 {
     $('.tooltip-btn').tooltip({
@@ -195,6 +202,48 @@ $(function()
 			});
 		}
 	});
+	//封禁
+	$("button[effect=forbidden]").click(function()
+	{
+		var uid = $(this).attr('u');
+		if(uid != null && uid != undefined && uid != "")
+		{
+			$.post(FORBID_URL,{uid:uid},function(data)
+			{
+				data = eval('('+data+')');
+				if(data.error != null)
+				{
+					$(".alert-danger").append(data.error);
+					$(".alert-danger").fadeIn(1000,function(){
+						$(this).fadeOut();
+						if(data.script != "")
+						{
+							eval(data.script);							
+						}
+	
+					});
+				}	
+				else if(data.success == 0)
+				{ 
+					$(".alert-success").append(data.note);
+					$(".alert-success").fadeIn(1000,function(){
+						$(this).fadeOut();	
+						eval(data.script);								
+					});
+				}
+			});
+		}
+	});
+	//编辑
+	$("button[effect=edit]").click(function()
+	{
+		var uid = $(this).attr('u');	
+		if(uid != null && uid != "")
+		{
+			window.location.href=ADMIN+"user/edit/u/"+uid;
+		}
+	});
+
 
 
 });

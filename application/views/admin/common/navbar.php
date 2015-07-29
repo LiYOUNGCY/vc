@@ -17,9 +17,9 @@
                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="javascript:void(0);"><i class="fa fa-user fa-fw"></i>用户主页</a>
+                <li><a href="<?=base_url()?>"><i class="fa fa-user fa-fw"></i>返回首页</a>
                 </li>
-                <li><a href="javascript:void(0);"><i class="fa fa-gear fa-fw"></i>个人设置</a>
+                <li><a href="<?=base_url()?>setting"><i class="fa fa-gear fa-fw"></i>个人设置</a>
                 </li>
                 <li class="divider"></li>
                 <li><a href="<?=base_url().ADMINROUTE?>main/logout" id="logout"><i class="fa fa-sign-out fa-fw"></i>注销</a>

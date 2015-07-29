@@ -1341,7 +1341,7 @@ class CI_Form_validation {
 	 */
 	public function alpha_dash($str)
 	{
-		return (bool) preg_match('/^[a-z0-9_-]+$/i', $str);
+		return (bool) preg_match('/^[a-z0-9_]+$/i', $str);
 	}
 
 	// --------------------------------------------------------------------
@@ -1357,6 +1357,7 @@ class CI_Form_validation {
 		return (bool) preg_match('/^[\-+]?[0-9]*\.?[0-9]+$/', $str);
 
 	}
+
 
 	// --------------------------------------------------------------------
 

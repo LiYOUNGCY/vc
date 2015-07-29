@@ -47,7 +47,8 @@ class User_model extends CI_Model
         {
             //插入 user_online 表
             $this->_insert_user_online($uid);
-
+            //更新默认键值
+            $this->update_account($uid,array('alias' => 'home/uid_'.$uid));
             return $uid;
 		}
 		else 
@@ -273,6 +274,17 @@ class User_model extends CI_Model
     	}
     	$this->error->output('old_password_error');
     }
+    /**
+     * [update_password 更新用户密码]
+     * @param  [type] $uid [用户id]
+     * @param  [type] $pwd [密码]
+     * @return [type]      [description]
+     */
+    public function update_password($uid, $pwd)
+    {
+      $this->db->where('id',$uid)->update('user',array('pwd' => $this->passwordhash->HashPassword($pwd)));
+      return $this->db->affected_rows() === 1;
+    }
 
     /**
      * [get_user_list 获取用户列表]
@@ -290,7 +302,7 @@ class User_model extends CI_Model
       }
       else
       {
-        $this->db->select('user.id,user.name,role,user_role.name as role_name,phone,email,register_time,user_online.last_active');
+        $this->db->select('user.id,user.name,role,user_role.name as role_name,phone,email,forbidden,register_time,user_online.last_active');
       }
       $query = $this->db->join('user_online','user.id = user_online.uid','left')
                         ->join('user_role','user.role = user_role.id','left')
@@ -314,5 +326,25 @@ class User_model extends CI_Model
     {
         $this->db->where_in('id',$uid)->delete('user');
         return $this->db->affected_rows() > 0;
+    }
+
+    /**
+     * [get_role_list 获得角色列表]
+     * @return [type] [description]
+     */
+    public function get_role_list()
+    {
+      $query = $this->db->get('user_role')->result_array();
+      return $query;
+    }
+
+    /**
+     * [get_user_online_by_id 获得用户的登录信息]
+     * @return [type] [description]
+     */
+    public function get_user_online_by_id($uid)
+    {
+       $query = $this->db->where('uid',$uid)->get('user_online')->row_array();
+       return $query;
     }
 }
