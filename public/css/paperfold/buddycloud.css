@@ -1,0 +1,296 @@
+.buddycloud {
+    margin-top: 20px;
+
+    font: 13px/19px "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+}
+
+.buddycloud h1 {
+    text-align: center;
+}
+
+.buddycloud .stream {
+    position: relative;
+
+    margin: 8px 0 21px;
+    border-radius: 5px;
+    width: 100%;
+
+    -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+}
+
+.buddycloud article {
+    position: relative;
+
+    border-bottom: 1px solid rgba(0,0,0,.13);
+
+    -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+}
+
+.buddycloud section {
+    border-right: 1px solid rgba(0,0,0,.13);
+    border-left: 1px solid rgba(0,0,0,.13);
+}
+
+.buddycloud article:first-child > section:first-child {
+    border-top: 1px solid rgba(0,0,0,.13);
+    border-radius: 5px 5px 0 0;
+}
+
+.buddycloud article:last-child {
+    border-bottom: none;
+}
+.buddycloud article:last-child > section:last-child {
+    border-bottom: 1px solid rgba(0,0,0,.13);
+    border-radius: 0 0 5px 5px;
+
+    box-shadow: 0 2px 0 -1px white, 0 3px 0 -1px rgba(0,0,0,.08);
+}
+
+.button.small,
+button.small {
+    -moz-border-radius: 3px;
+         border-radius: 3px;
+         border-radius: 3px;
+    padding: 0 10px;
+    height: 20px;
+
+    font-size: 11px;
+    line-height: 20px;
+    line-height: 20px;
+
+     -ms-border-radius: 3px;
+      -o-border-radius: 3px;
+}
+.button.callToAction,
+button.callToAction {
+    border-color: rgba(0,0,0,.34);
+    border-bottom-color: rgba(0,0,0,.55);
+
+    color: #fff;
+    background: #83ac35;
+
+    -moz-box-shadow: 0 1px 0 rgba(255,255,255,.55) inset,0 1px rgba(0,0,0,.05);
+         box-shadow: 0 1px 0 rgba(255,255,255,.55) inset,0 1px rgba(0,0,0,.05);
+         box-shadow: 0 1px 0 rgba(255,255,255,.55) inset,0 1px rgba(0,0,0,.05);
+    text-shadow: 0 1px rgba(0,0,0,.13);
+
+     -ms-box-shadow: 0 1px 0 rgba(255,255,255,.55) inset,0 1px rgba(0,0,0,.05);
+      -o-box-shadow: 0 1px 0 rgba(255,255,255,.55) inset,0 1px rgba(0,0,0,.05);
+}
+.button.callToAction:hover,
+button.callToAction:hover {
+    background: lighter(#83ac35,13%);
+}
+.button.prominent,
+button.prominent {
+    border-color: rgba(0,0,0,.34);
+    border-bottom-color: rgba(0,0,0,.55);
+
+    color: #fff;
+    background: rgba(0,0,0,.89);
+
+    -moz-box-shadow: 0 1px rgba(255,255,255,.21) inset,0 1px rgba(0,0,0,.05);
+         box-shadow: 0 1px rgba(255,255,255,.21) inset,0 1px rgba(0,0,0,.05);
+         box-shadow: 0 1px rgba(255,255,255,.21) inset,0 1px rgba(0,0,0,.05);
+    text-shadow: 0 1px rgba(0,0,0,.13);
+
+     -ms-box-shadow: 0 1px rgba(255,255,255,.21) inset,0 1px rgba(0,0,0,.05);
+      -o-box-shadow: 0 1px rgba(255,255,255,.21) inset,0 1px rgba(0,0,0,.05);
+}
+.button.prominent:hover,
+button.prominent:hover {
+    background: #000;
+}
+.button.danger,
+button.danger {
+    color: #fff;
+    background: #f00;
+
+    text-shadow: 0 1px #600;
+}
+.button.danger:hover,
+button.danger:hover {
+    background: #f00;
+}
+.button.translucid,
+button.translucid,
+.button.translucid:hover,
+button.translucid:hover {
+    background: none;
+}
+.button.checkbox,
+button.checkbox {
+    padding-left: 2px;
+}
+.buddycloud .controls {
+    position: absolute;
+    right: 13px;
+    bottom: 13px;
+
+    font-size: 11px;
+}
+.buddycloud .controls .button {
+    margin-left: 3px;
+}
+.buddycloud .postmeta {
+    float: right;
+
+    margin: 0 0 0 13px;
+
+    text-align: right;
+}
+.buddycloud .postmeta nav {
+    visibility: hidden;
+}
+.buddycloud .postmeta span {
+    font-size: 11.5px;
+    line-height: 19.5px;
+
+    color: rgba(0,0,0,.50);
+}
+.buddycloud .postmeta span.time {
+    display: block;
+
+    color: rgba(0,0,0,.34);
+}
+.buddycloud .name {
+    overflow: hidden;
+
+    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    color: black;
+}
+.buddycloud .name + .location {
+    margin-left: 5px;
+
+    font-size: 11px;
+    line-height: 19.5px;
+
+    color: rgba(0,0,0,.34);
+}
+.buddycloud .opener:hover nav,
+.buddycloud .comment:hover nav {
+    visibility: visible;
+}
+.buddycloud p {
+    margin: 2px 0 0;
+
+    color: black;
+}
+
+.buddycloud .postcontent {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.buddycloud .controls {
+    position: absolute;
+    right: 13px;
+    bottom: 13px;
+
+    font-size: 11px;
+}
+.buddycloud .controls .button {
+    margin-left: 3px;
+}
+.buddycloud .controls .postError {
+    display: inline-block;
+
+    margin-left: 5px;
+
+    color: #f00;
+}
+.buddycloud .message {
+    padding-left: 66px;
+    min-height: 14px;
+
+    color: rgba(0,0,0,.55);
+
+    cursor: pointer;
+}
+.buddycloud .message.new {
+    background-color: rgba(0,0,0,.08);
+}
+.buddycloud .message.selected {
+    color: #517312;
+    background: #abe245;
+}
+.buddycloud .message.selected .location,
+.buddycloud .message.selected .time {
+    color: rgba(81,115,18,.55);
+}
+.buddycloud .message:last-child {
+    -moz-box-shadow: none;
+         box-shadow: none;
+         box-shadow: none;
+
+     -ms-box-shadow: none;
+      -o-box-shadow: none;
+}
+.buddycloud .message .avatar {
+    width: 40px;
+}
+.buddycloud .message p {
+    overflow: hidden;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.buddycloud .opener {
+    border-bottom: 1px solid #b3b3b3;
+    padding: 13px 13px 13px 76px;
+    min-height: 50px;
+}
+.buddycloud .avatar {
+    position: absolute;
+    left: 14px;
+}
+
+.buddycloud section {
+    background-color: white;
+}
+
+.buddycloud .comment {
+    position: relative;
+
+    border-bottom: 1px solid #b3b3b3;
+    min-height: 40px;
+}
+.buddycloud .comment .avatar {
+    top: 8px;
+    left: 25px;
+
+    border-radius: 2px;
+    width: 40px;
+    height: 40px;
+
+    background-repeat: no-repeat;
+    background-size: 40px 40px;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+
+    text-align: center;
+}
+
+.avatar img {
+    border: 1px #b3b3b3 solid;
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+}

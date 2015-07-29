@@ -63,7 +63,7 @@
 						</li>
 					</a>
 				</ul>
-			</div>	
+			</div>
 			</div>
 
 		</div>
@@ -76,7 +76,7 @@
 					<div class="content">
 						<?php echo $intro['content'] ;?>
 					</div>
-					<div>
+					<div class="likeopt">
 						
 					</div>
 

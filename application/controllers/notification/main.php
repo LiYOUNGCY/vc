@@ -74,7 +74,9 @@ class Main extends MY_Controller{
 	public function read()
 	{
 		$nid = $this->sc->input('nid');
-		$result = $this->notification_service->update($this->user['id'],$nid,array('read_flag' => 1));
+		$type= $this->sc->input('type');
+
+		$result = $this->notification_service->update($this->user['id'],$nid,$type,array('read_flag' => 1));
 		if(!empty($result))
 		{
 			echo "success";
@@ -92,7 +94,8 @@ class Main extends MY_Controller{
 	public function delete()
 	{
 		$nid = $this->sc->input('nid');
-		$result = $this->notification_service->delete($this->user['id'],$nid);
+		$type= $this->sc->input('type');			
+		$result = $this->notification_service->delete($this->user['id'],$nid,$type);
 		if(!empty($result))
 		{
 			echo "success";

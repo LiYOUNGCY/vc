@@ -7,11 +7,7 @@
     <input type="hidden" name="BASE_URL" id="BASE_URL" value="<?php echo base_url();?>" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="<?php echo base_url();?>public/ueditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="<?php echo base_url();?>public/ueditor/third-party/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo base_url();?>public/ueditor/umeditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo base_url();?>public/ueditor/umeditor.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>public/ueditor/lang/zh-cn/zh-cn.js"></script>
-    <style type="text/css">
+    <style>
         h1{
             font-family: "微软雅黑";
             font-weight: normal;
@@ -115,11 +111,11 @@
 <h1>发布文章测试</h1>
 
 <!--style给定宽度可以影响编辑器的最终宽度-->
-<form action="<?= base_url().'article/publish'?>" method="post">
-    Title:<input type="text" name="title"> <br>
-    SubTitle:<input type="text" name="subtitle"><br>
-    <input type="hidden" name="type" value="1">
-    <script type="text/plain" id="myEditor" name="content" style="width:50%;height:240px;">
+<form action="<?= base_url().'article/publish/publish_article'?>" method="post">
+    Title:<input type="text" name="article_title"> <br>
+    SubTitle:<input type="text" name="article_subtitle"><br>
+    <input type="hidden" name="article_tag" value="">
+    <script type="text/plain" id="myEditor" name="article_content" style="width:50%;height:240px;">
         <p>这里我可以写一些输入提示</p>
     </script>
     <input type="submit" value="Submit">

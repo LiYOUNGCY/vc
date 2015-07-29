@@ -17,10 +17,10 @@ class Article_service extends MY_Service{
     /**
      * 发表文章
      */
-    public function publish_article($user_id, $article_title, $article_subtitle, $article_type, $article_content)
+    public function publish_article($user_id, $article_title, $article_subtitle, $article_type,  $article_tag, $article_content)
     {
         //将文章插入到数据库
-        $article_id = $this->article_model->publish_article($user_id, $article_title, $article_subtitle, $article_type, $article_content);
+        $article_id = $this->article_model->publish_article($user_id, $article_title, $article_subtitle, $article_type, $article_tag, $article_content);
         if( ! empty($article_id))
         {
             //更新动态表 
@@ -50,6 +50,21 @@ class Article_service extends MY_Service{
                 $type = 1;
                 break;
         }
+
+        switch ($tag) {
+            case 'interview':
+                $tag = '|1|';
+                break;
+            case 'discuss':
+                $tag = '|2|';
+                break;
+            case 'consult':
+                $tag = '|3|';
+                break;
+            default:
+                $tag = '';
+                break;
+        }
         $article = $this->article_model->get_article_list($page, $uid, NULL,$type,$tag);
         foreach( $article as $key => $value )
         {        
@@ -76,7 +91,20 @@ class Article_service extends MY_Service{
      */
     public function get_article_by_id($aid)
     {
-        return $this->article_model->get_article_by_id($aid);
+        $query = $this->article_model->get_article_by_id($aid);
+        if( ! empty($query))
+        {
+            $query['author'] = $this->user_model->get_user_base_id($query['uid']);
+            return $query;            
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    public function get_article_vote_by_both($aid, $uid) {
+        return $this->article_like_model->get_article_vote_by_both($aid, $uid)['status'];
     }
 
 
@@ -163,6 +191,7 @@ class Article_service extends MY_Service{
      */
     public function write_comment($aid, $uid, $comment)
     {
+        $comment = Common::replace_face_url($comment);
         $insert_result = $this->article_comment_model->insert_comment($aid, $uid, $comment);
         if($insert_result)
         {
@@ -188,7 +217,7 @@ class Article_service extends MY_Service{
         
         foreach ($users as $key => $value)
         {
-            $users[$key] = $this->user_model->get_user_base_id($users[$key]['uid']);
+            $users[$key]['user'] = $this->user_model->get_user_base_id($users[$key]['uid']);
             unset($users[$key]['uid']);
         }
         return $users;
@@ -204,7 +233,7 @@ class Article_service extends MY_Service{
             'article_id'        => $article_id,
             'article_title'     => $article_title,
             'article_subtitle'  => $article_subtitle,
-            'article_content'   => Common::extract_content($article_content).'...',
+            'article_content'   => Common::extract_content($article_content),
             'article_image'     => Common::extract_first_img($article_content)
         );
         return $content;
@@ -225,5 +254,34 @@ class Article_service extends MY_Service{
             'article_image'     => Common::extract_first_img($article_content)
         );
         return $content;
+    }
+
+    /**
+     * [update_article 更新文章]
+     * @param  [type] $aid [文章id]
+     * @param  [type] $uid [用户id]
+     * @return [type]      [description]
+     */
+    public function update_article($aid, $uid, $article_title, $article_subtitle, $article_type, $article_tag, $article_content)
+    {
+        $arr = array(
+            'title'    => $article_title,
+            'subtitle' => $article_subtitle,
+            'type'     => $article_type,
+            'tag'      => $article_tag,
+            'content'  => $article_content
+        );
+        return $this->article_model->update_article($aid,$arr,$uid);
+    }
+
+    /**
+     * [delete_article 删除文章]
+     * @param  [type] $aid [文章id]
+     * @param  [type] $uid [用户id]
+     * @return [type]      [description]
+     */
+    public function delete_article($aid,$uid)
+    {
+        return $this->article_model->delete_article($aid,$uid);
     }
 }

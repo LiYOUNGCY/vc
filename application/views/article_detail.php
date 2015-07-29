@@ -1,169 +1,225 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	<meta name="format-detection" content="telephone=yes" />
-	<meta name="msapplication-tap-highlight" content="no" />
-	<script type="text/javascript" src="<?=base_url().'public/'?>js/j162.min.js"></script>
-	<link href="<?=base_url().'public/'?>css/common.css" type="text/css" rel="stylesheet" />
-	<link href="<?=base_url().'public/'?>css/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
-</head>
 <body>
-	<div id="vc_sidebar" class="sidebar">
-		<div class="name">
-			<div class="head">
-				<a href="#">
-					<img src="<?=base_url().'public/'?>img/mm1.jpg" /></a>
-			</div>
-			<div class="text">
-				<a href="#">YOUNGCY</a>
-				<div class="identity">
-					<span class="icon identity"></span>
-				</div>
-			</div>
-		</div>
-		<div class="search">
-			<form>
-				<input id="" name="" type="text" />
-			</form>
-			<div>
-				<a href="#"> <i class="fa fa-search"></i>
-				</a>
-			</div>
-		</div>
-		<div class="menu">
-			<ul>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a href="dfdfdf">
-							<div class="icon">
-								<div class="home"></div>
-							</div>
-							<span class="menu-list-item-text">个人首页</span>
-						</a>
-					</div>
-				</li>
-				<a href="asasdas">
-					<li class="menu-list active">
-						<div class="menu-list-item">
-							<div class="icon">
-								<div class="guanzhu"></div>
-							</div>
-							<span class="menu-list-item-text">我的关注</span>
-						</div>
-					</li>
-				</a>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a href="#">
-							<div class="icon">
-								<div class="tongji"></div>
-							</div>
-							<span class="menu-list-item-text">统计</span>
-						</a>
-					</div>
-				</li>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a href="#">
-							<div class="icon">
-								<div class="sixin"></div>
-							</div>
-							<span class="menu-list-item-text">私信</span>
-						</a>
-					</div>
-				</li>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a href="#">
-							<div class="icon">
-								<div class="setting"></div>
-							</div>
-							<span class="menu-list-item-text">设置</span>
-						</a>
-					</div>
-				</li>
-				<li class="menu-list">
-					<div class="menu-list-item">
-						<a href="#">
-							<div class="icon">
-								<div class="logout"></div>
-							</div>
-							<span class="menu-list-item-text">退出</span>
-						</a>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div id="vi_container" class="container">
-		<div id="shade"></div>
-		<div id="sbtn" class="sbtn">
-			<div class="icon">
-				<div class="sidebtn"></div>
-			</div>
-		</div>
-		<div class="article-container">
-			<div class="detail-box">
-				<h1><?=$article['title']?></h1>
-				<h5><?=$article['subtitle']?></h5>
-				<div class="person-box">
-					<div class="author">
-						<div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"></div>
-						<div class="status"><div class="icon"><div class="like"></div></div><span><?=$article['like']?></span></div>
-					</div>
-				</div>
-			</div>
-			<div class="article-content">
-				<?=$article['content']?>
-			</div>
-			<div class="person-box">
-				
-			</div>
-			<div class="comment clearfix">
-				<?php if( empty($comment) ) { ?>
-					<div class="empty"></div>
-			<?php } else { ?>	
-				<ul>
-				<?php foreach ($comment as $key => $value) { ?>
-				<li class="clearfix">
-					<div class="name">
-                      <div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"><div class="point1"></div></div>
-                      <div class="username"><?=$value['user']['name']?></div>
-                    </div>
-					<div class="de-content">
-						<div style="clear:both; visiable:hidden;"></div>
-						<div class="text"><?=$value['content']?></div>
-						<div class="time"><?=$value['publish_time']?></div>
-					</div>
-				</li>
-				<?php } }?>
-				<!-- 
-					<li class="clearfix">
-					<div class="name me">
-                      <div class="head"><img src="<?=base_url().'public/'?>img/mm1.jpg"><div class="point2"></div></div>
-                      <div class="username">艺术维C束身衣啊速度和</div>
-                    </div>
-                    <div class="de-content me">
-						<div style="clear:both; visiable:hidden;"></div>
-						<div class="text"><?=$value['content']?></div>
-						<div class="time"><?=$value['publish_time']?></div>
-					</div> 
-					</li>
-				-->
-				</ul>
+<?=$sidebar ?>
+<input id="aid" type="hidden" value="<?=$article['id']?>
+">
+<div id="vi_container" class="container">
+  <div id="shade"></div>
+  <div id="sbtn" class="sbtn">
+    <div class="icon">
+      <div class="sidebtn"></div>
+    </div>
+  </div>
+  <div class="content article-detial">
+    <div id="likeList" class="like-list">
+      <div id="close" class="close"> <i class="fa fa-close fa-2x"></i>
+      </div>
+      <div id="people" class="people">
+        <h1>喜欢的人</h1>
+        <div id="list" class="list"></div>
+      </div>
+    </div>
+    <div class="author">
+      <div class="head">
+        <img src="<?=base_url().'public/img/mm1.jpg'?>"></div>
+      <a class="link" href="<?=$article['author']['alias']?>">
+        <span class="name">
+          <?=$article['author']['name']?>
+        </span>
+      </a>
+      <p class="author-info"><?=$article['author']['intro']?></p>
+    </div>
+    <h1 class="article-title">
+      <?=$article['title']?></h1>
+    <h2 class="article-subtitle">
+      <?=$article['subtitle']?></h2>
+    <div class="article-info"> 
+      <i class="fa fa-eye"></i>
+      <span><?=$article['read']?></span>
+      </div>
+    <div class="clearfix"></div>
+    <div class="article-content">
+      <?=$article['content']?></div>
 
-				<div class="write-comment clearfix">
-					<textarea rows="3" cols="40" ></textarea>
-				</div>
-				<div class="btn">提交</div>
-			</div>
+    <div class="like">
+      <?php if($status == '0') { ?>
+      <div id="mark-like" class="mark-like">
+        <?php } else { ?>
+        <div id="mark-like" class="mark-like active">
+          <?php } ?>
+          <div>
+            <i class="fa fa-heart" style="margin-right:2px;"></i>
+            喜欢
+          </div>
+        </div>
+        <div class="hover-line"></div>
+        <div id="seeLike" class="like-num">
+          <?=$article['like']?></div>
+      </div>
+      <hr class="line">
 
-		</div>
-	</div>
+      <?php if(count($comment) == 0) { ?>
+      <div class="no-comment">暂时还没有评论</div>
+      <?php } else { ?>
+      <div class="playground">
+        <div class="box buddycloud">
+          <div class="stream">
+            <article class="topic">
+              <?php
+          $len = count($comment) < 5 ? count($comment) : 5;
+          for($i = 0; $i < $len; $i++) {
+          ?>
+              <section class="opener">
+                <div class="avatar">
+                  <img src="<?=$comment[$i]['user']['pic']?>"></div>
+                <div class="postmeta">
+                  <span class="time">
+                    <?=$comment[$i]['publish_time']?></span>
+                </div>
+                <span class="name">
+                  <?=$comment[$i]['user']['name']?></span>
+                <p>
+                  <?=$comment[$i]['content']?></p>
+              </section>
+              <?php } ?>
+              <div class="hidden">
+                <?php $len = count($comment);
+            for($i = 5; $i < $len; $i ++) {
+            ?>
+                <section class="opener">
+                  <div class="avatar">
+                    <img src="<?=$comment[$i]['user']['pic']?>"></div>
+                  <div class="postmeta">
+                    <span class="time">
+                      <?=$comment[$i]['publish_time']?></span>
+                  </div>
+                  <span class="name">
+                    <?=$comment[$i]['user']['name']?></span>
+                  <p>
+                    <?=$comment[$i]['content']?></p>
+                </section>
+                <?php } ?></div>
+              <!-- /hidden -->
+              <?php if($len >
+              5){ ?>
+              <section class="seeMore">
+                <span>查看全部评论</span>
+              </section>
+              <?php } ?></article>
+          </div>
+        </div>
+      </div>
+      <?php } ?>
+      <article class="topic">
+        <div class="answer clearfix" style="position:relative;">
+          <div id="submit" class="send btn">发送</div>
+          <div id="emotion" class="emotion"></div>
+          <div class="msg">
+            <textarea id="msg"  placeholder="想说写什么..."></textarea>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+<script src="<?=base_url().'/public/js/paperfold/paperfold.js'?>"></script>
+<script>
+  function get_data(url)
+  {
+    var aid = $('#aid').val();
+    var ret = '';
+
+    $.ajax({
+      type: 'POST',
+      url: url,
+      async: false,
+      data: {
+        aid: aid
+      },
+     success:function(data){
+            ret = data;
+        }
+    });
+    return ret;
+  }
+  $(function (){
+    var BASE_URL = $('#BASE_URL').val();
+    var COMMENT_URL = BASE_URL + 'article/detail/write_comment';
+    var VOTE_URL = BASE_URL + 'article/detail/get_vote_list';
+    var ARGEE_URL = BASE_URL + 'article/detail/vote_article';
+
+    //获取文章的id
+    var aid = window.location.href.split("/");
+    aid = aid[aid.length-1];
+    var firstTime = true;
+
+
+    $('#msg').flexText();
+    $('#emotion').qqFace({ 
+        assign: 'msg',                          //给输入框赋值 
+        path: BASE_URL + "public/img/face/"     //表情图片存放的路径 
+    });
+
+    $('#submit').click(function(){
+      var str = $('#msg').val();
+      alert(str);
+      $.ajax({
+          type: "POST",
+          url: COMMENT_URL,
+          data: {
+              aid: aid,
+              comment: str
+          },
+          success: function(data) {
+              alert(data);
+              var obj = eval("(" + data + ")");
+          }
+      });
+    });
+
+    $("#seeLike").click(function(){
+      $("body").addClass("hide-y");
+      $('#likeList').removeClass('fadeOut');
+      $("#likeList").addClass('fadeIn');
+      $('#list').empty();
+
+      var list = get_data(VOTE_URL);
+      list = eval('(' + list + ')');
+      for(i in list) {
+        var item = list[i];
+        $("#list").append('<div class="item clearfix"><div class="head"><img src="' + item.user.pic + '"></div><a class="link" href="'+item.user.alias+'"><div class="username">'+item.user.name+'</div></a><div class="time">'+item.update_time+'</div></div>');
+      }
+
+    });
+
+    $("#close").click(function(){
+      $('body').removeClass('hide-y');
+      $('#likeList').removeClass('fadeIn');
+      $("#likeList").addClass('fadeOut');
+    });
+
+    $("#mark-like").click(function(){
+      $.ajax({
+        type: 'POST',
+        url: ARGEE_URL,
+        async: false,
+        data: {
+          aid: aid
+        },
+        success:function(data){
+          var status = eval('(' + data + ')');
+          if(status.success == 0) {
+            $('#mark-like').toggleClass('active');
+            if($('#mark-like').hasClass('active')) {
+              $('#seeLike').html(parseInt($('#seeLike').html())+1);
+            }
+            else {
+              $('#seeLike').html(parseInt($('#seeLike').html())-1);
+            }
+          }
+        }
+      });
+    });
+  });
+</script>
 </body>
-	<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
 </html>

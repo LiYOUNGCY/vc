@@ -10,7 +10,7 @@ class User_model extends CI_Model
 		$this->load->library('passwordhash');
 		$this->passwordhash->setPasswordHash(8, FALSE);
 
-    $this->base_field = array('id', 'name', 'pic', 'alias', 'role');
+    $this->base_field = array('id', 'name', 'pic', 'alias', 'role', 'intro');
 	}
 
 
@@ -78,7 +78,7 @@ class User_model extends CI_Model
 		//调用错误
 		else
 		{
-			return FALSE;
+        $this->error->output('LOGIN_ERROR');  
 		}
 
 		$data = $query->get('user')->result_array();
@@ -98,12 +98,12 @@ class User_model extends CI_Model
 			}
       else
       {
-        return FALSE;
+        $this->error->output('LOGIN_ERROR');  
       }
 		}
     else
     {
-      return FALSE;
+      $this->error->output('NOUSER_ERROR');  
     }
 	}
 

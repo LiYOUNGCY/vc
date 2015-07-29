@@ -1,9 +1,10 @@
 <?php
-class Image extends CI_Controller{
+class Image extends MY_Controller{
 	
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->service('image_service');
 	}
 
 	/**
@@ -11,54 +12,57 @@ class Image extends CI_Controller{
 	 * @return [type] [description]
 	 */
 	public function up_um_img()
-	{
-		
+	{		
 	    //上传配置
 	    $config = array(
 	        "savePath"   => "./public/upload/" ,             //存储文件夹
 	        "maxSize"    => 1000 ,                          //允许的文件最大尺寸，单位KB
 	        "allowFiles" => array( ".gif" , ".png" , ".jpg" , ".jpeg" , ".bmp" )  //允许的文件格式
-	    );	    	
-
-		$this->load->library('Um_upload',array(
-						'fileField' => 'upfile',
-						'config'	=> $config
-						));
-	
-		$up_result = $this->um_upload->upFile();
-		//上传到本服务器成功
-		if($up_result)
+	    );	    			
+    	//上传文件域名
+    	$fileField = 'upfile';
+		if( isset($_FILES[$fileField]))
 		{
-			$osspath = $this->um_upload->getFileInfo();
+	    	$info = $this->image_service->up_um_img($fileField,$config);
 
-			$osspath = !empty($osspath['url']) ? $osspath['url'] : NULL;
-			$osspath = substr($osspath, 2);
-			$this->load->library('Oss');
-			//上传到oss
-			$oss_result = $this->oss->upload_by_file($osspath);		
-
-			//设置上传结果
-			$this->um_upload->setStateInfo($oss_result);
-			//上传至oss服务器成功
-			if($oss_result)
-			{	
-				//设置图片url
-				$this->um_upload->setFullName(OSS_URL."/{$osspath}");	
-				//删除本地服务器图片		
-				@unlink($osspath);
-			}	
-
+	     	$callback= isset($_GET['callback']) ? $_GET['callback'] : NULL;		   	
+			//返回数据
+			if($callback) {
+		        echo '<script>'.$callback.'('.json_encode($info).')</script>';
+		    } else {
+		        echo json_encode($info);
+		    }				
 		}
-
-    	$callback= isset($_GET['callback']) ? $_GET['callback'] : NULL;
-		$info = $this->um_upload->getFileInfo();
-
-		//返回数据
-		if($callback) {
-	        echo '<script>'.$callback.'('.json_encode($info).')</script>';
-	    } else {
-	        echo json_encode($info);
-	    }			
 	}
 
+	/**
+	 * [upload_headpic 上传头像]
+	 * @return [type] [description]
+	 */
+	public function upload_headpic()
+	{
+		$uid = $this->user['id'];
+		$result = $this->image_service->upload_headpic('upfile',$uid);
+		header('Content-Type:text/x-json');
+		echo json_encode($result);
+	}
+
+	/**
+	 * [save_headpic 保存裁剪后的头像]
+	 * @return [type] [description]
+	 */
+	public function save_headpic()
+	{
+		$img = $this->sc->input(array('img','x','y','w','h'));
+		$uid = $this->user['id'];
+		$result = $this->image_service->save_headpic($img['img'],$img['x'],$img['y'],$img['w'],$img['h'],$uid);	
+		if($result)
+		{
+			redirect(base_url()."feed",'location');
+		}
+		else
+		{
+			echo "<script>alert('"+lang('error_INVALID_REQUEST')+"');</script>";
+		}
+	}
 }

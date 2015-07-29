@@ -64,8 +64,12 @@ class Community_post_model extends CI_Model{
 	 * @param  [type] $arr [键值数组]
 	 * @return [type]      [description]
 	 */
-	public function update_post($pid, $arr)
-	{	
+	public function update_post($pid, $arr, $uid = NULL)
+	{
+		if( ! empty($uid))
+		{
+			$this->db->where('uid',$uid);
+		}	
     	$this->db->where('id',$pid);
 
     	foreach ($arr as $k => $v) {
@@ -75,4 +79,22 @@ class Community_post_model extends CI_Model{
     	$this->db->update('community_post');
   		return $this->db->affected_rows() === 1;  
 	}	
+
+	/**
+	 * [delete_post 删除帖子]
+	 * @param  [type] $pid [帖子id]
+	 * @param  [type] $uid [用户id]
+	 * @return [type]      [description]
+	 */
+	public function delete_post($pid, $uid = NULL)
+	{
+		$where = array();
+		$where['id'] = $pid;
+		if( ! empty($uid))
+		{
+			$where['uid'] = $uid;
+		}
+		$this->db->delete('community_post',$where);
+  		return $this->db->affected_rows() === 1;
+	}
 }
