@@ -24,16 +24,16 @@ class Main extends MY_Controller{
 	        $data['javascript'] = array('j162.min.js','timeago.js');
 
 	        $this->load->view('common/head', $data);
-	        $sidebar = $this->load->view('common/sidebar', '', TRUE);
+	        $user['user']    = $this->user;
+        	$data['sidebar'] = $this->load->view('common/sidebar', $user, TRUE);
 
-	        $data['sidebar'] = $sidebar;
 
 			$data['user'] = $user;
 			$data['me']   = $this->user;
 			//载入视图
 			if($type == 'quanzi')
 			{
-				$this->load->view('quanzi',$data);
+				$this->load->view('home/quanzi',$data);
 			}
 			elseif($type == 'intro')
 			{

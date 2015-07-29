@@ -10,6 +10,7 @@
 
 textarea,
 .flex-text-wrap {
+    outline: 0;
     margin: 0;
     border: none;
     padding: 0;
@@ -67,11 +68,6 @@ textarea,
     -webkit-background-clip: padding-box;
        -moz-background-clip: padding;
             background-clip: padding-box;
-
-    -webkit-box-shadow: 0 0 8px rgba(182, 195, 214, .6) inset, 0 1px 1px #fff;
-       -moz-box-shadow: 0 0 8px rgba(182, 195, 214, .6) inset, 0 1px 1px #fff;
-            box-shadow: 0 0 8px rgba(182, 195, 214, .6) inset, 0 1px 1px #fff;
-
     -webkit-transition-duration: 300ms;
        -moz-transition-duration: 300ms;
         -ms-transition-duration: 300ms;
@@ -96,7 +92,6 @@ textarea,
 textarea:focus {
     border-color: #fcee21;
 
-    box-shadow: 0 1px 1px rgba(252, 238, 33, .075) inset, 0 0 8px rgba(102, 175, 233, .6);
 }
 
 .fork-link {
