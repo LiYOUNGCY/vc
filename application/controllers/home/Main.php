@@ -24,12 +24,12 @@ class Main extends MY_Controller{
 	        $data['javascript'] = array('j162.min.js','timeago.js');
 
 	        $this->load->view('common/head', $data);
-	        $user['user']    = $this->user;
-        	$data['sidebar'] = $this->load->view('common/sidebar', $user, TRUE);
+	        $u['user']    = $this->user;
 
-
+        	$data['sidebar'] = $this->load->view('common/sidebar', $u, TRUE);
+         	$data['footer'] = $this->load->view('common/footer',"", TRUE);       	
 			$data['user'] = $user;
-			$data['me']   = $this->user;
+			$data['me'] = $this->user;
 			//载入视图
 			if($type == 'quanzi')
 			{
