@@ -60,6 +60,11 @@ $route['default_controller'] = 'index';
 $route['article/(:num)'] = 'article/detail/index/$1';
 $route['article'] = 'article/main';
 $route['article/([a-z]*)'] = 'article/main/index/article/$1';
+//发布文章
+$route['publish/article']  = 'article/publish';
+//更新文章
+$route['update/article']   = 'article/update';
+
 $route['exhibition'] = 'article/main/index/exhibition';
 $route['exhibition/([a-z]*)'] = 'article/main/index/exhibition/$1';
 /**
@@ -113,3 +118,13 @@ $route['home/([a-z0-9_]*)/community'] = 'home/main/index/$1/community';
 $route['home/([a-z0-9_]*)/intro'] = 'home/main/index/$1/intro';
 $route['home/([a-z0-9_]*)/article'] = 'home/main/index/$1/article';
 $route['home/([a-z0-9_]*)/cooperate'] = 'home/main/index/$1/cooperate';
+
+
+
+/**
+ * 管理员用户管理
+ */
+$route['admin/user/u'] = 'admin/user/index/u';
+$route['admin/user/u/(:num)'] = 'admin/user/index/u/$1';
+$route['admin/user/a'] = 'admin/user/index/a';
+$route['admin/user/a/(:num)'] = 'admin/user/index/a/$1';

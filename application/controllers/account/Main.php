@@ -31,7 +31,6 @@ class Main extends MY_Controller
 		}
 	}
 
-
 	/**
 	 * [login_by_email 邮箱登陆]
 	 */
@@ -43,8 +42,15 @@ class Main extends MY_Controller
 
 
 		$result = $this->user_service->login_action($pwd, $email, NULL, $rememberme);
-		//登陆成功, 重定向首页
-		echo "success";
+		if($result)
+		{
+			//登陆成功, 重定向首页
+			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));	
+		}
+		else
+		{
+			$this->error->output('LOGIN_ERROR');
+		}
 		
 	}
 
@@ -60,10 +66,27 @@ class Main extends MY_Controller
 
 
 		$result = $this->user_service->login_action($pwd, NULL, $phone, $rememberme);
-		//登陆成功, 重定向首页
-		echo "success";
+		if($result)
+		{
+			//登陆成功, 重定向首页
+			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));	
+		}
+		else
+		{
+			$this->error->output('LOGIN_ERROR');
+		}
 	}
 
+	/**
+	 * [logout 注销]
+	 * @return [type] [description]
+	 */
+	public function logout()
+	{
+		$this->user_service->logout();
+		//重定向至首页
+		redirect(base_url(),'location');
+	}
 
 	/**
 	 * [register 邮箱注册]
@@ -76,8 +99,15 @@ class Main extends MY_Controller
 
 
 		$result = $this->user_service->register_action($name, $pwd, $email, NULL);
-		//注册成功, 重定向首页
-		echo "success";
+		if($result)
+		{
+			//注册成功, 重定向首页
+			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));			
+		}
+		else
+		{
+			$this->error->output('REGISTER_ERROR');
+		}
 
 	}
 
@@ -92,8 +122,15 @@ class Main extends MY_Controller
 		$pwd 	= $this->sc->input('pwd');
 
 		$result = $this->user_service->register_action($name, $pwd, NULL, $phone);
-		//注册成功, 重定向首页
-		echo "success";
+		if($result)
+		{
+			//注册成功, 重定向首页
+			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));					
+		}
+		else
+		{
+			$this->error->output('REGISTER_ERROR');
+		}
 	}
 
 	/**

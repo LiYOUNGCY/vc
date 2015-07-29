@@ -40,7 +40,7 @@ class Conversation_service extends MY_Service{
 		}
 		else
 		{
-			$this->error->output('INVALID_REQUEST');
+			$this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().'notification";','type' => 0));
 		}
 	}
 
@@ -59,15 +59,8 @@ class Conversation_service extends MY_Service{
 			{
 				return $result;
 			}
-			else
-			{
-				return FALSE;
-			}
 		}
-		else
-		{
-			show_404();
-		}				
+		return false;			
 	}
 
 	/**
@@ -111,10 +104,9 @@ class Conversation_service extends MY_Service{
 			//添加对话内容
 			$insert_result = $this->conversation_content_model->insert_conversation_content($cid,$sender_id,$reciver_id,$content);			
 		}
-
 		if($insert_result)
 		{
-			echo 'success';
+			echo json_encode(array('success' => 0));
 			//添加私信消息（异步）
 			$this->insert_conversation_notification($sender_id,$reciver_id,$content,$cid);
 		}

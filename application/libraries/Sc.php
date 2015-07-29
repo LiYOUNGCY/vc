@@ -18,13 +18,33 @@ class Sc {
 		$this->CI->load->library('form_validation');
 		$this->rule = array(
 				 'phone'		=> 'exact_length[11]|numeric',		//手机号码的规则
-				 'pwd'			=> 'required|min_length[8]|max_length[36]',
-				 'name'			=> 'required|min_length[2]|max_length[36]',
-				 'sex'			=> 'required|min_length[1]|max_length[1]'
+				 'email' 		=> 'valid_email',
+				 'pwd'			=> 'required|min_length[8]|max_length[36]|alpha_dash',
+				 'name'			=> 'required|min_length[2]|max_length[30]',
+				 'sex'			=> 'required|min_length[1]|max_length[1]|numeric',
+				 'article_title'=> 'required|min_length[1]|max_length[50]',
+				 'article_subtitle'=> 'max_length[125]',
+				 'article_tag' 	   => 'max_length[255]',
+				 'article_content' => 'required|min_length[1]',
+				 'page' 		=> 'required|numeric',				 
+				 'uid' 			=> 'required|numeric',
+				 'cid' 			=> 'required|numeric',
+				 'nid' 			=> 'required|numeric',
+				 'conversation_content' => 'required|min_length[1]|max_length[400]'
 			);
+
+		//验证错误重定向
+		$this->error_redirect = array('script' => NULL, 'type' => 0);	
 	}
 
-
+	/**
+	 * [set_error_redirect 设置错误重定向]
+	 * @param [type] $error_redirect [description]
+	 */
+	public function set_error_redirect($error_redirect)
+	{
+		$this->error_redirect = $error_redirect;
+	}
 	/**
 	 * [input 输入]
 	 * 传入一个名称或一组名称,
@@ -44,7 +64,7 @@ class Sc {
 	 *         						'name'	=> name_value
 	 *         					)
 	 */
-	public function input($name, $type = 'post' , $xss = TRUE) {
+	public function input($name, $type = 'post' , $xss = TRUE){
 
 		$ret = array();
 
@@ -57,9 +77,7 @@ class Sc {
 			if(isset($this->rule[$name])) {
 				$this->CI->form_validation->set_rules($name, $name, $this->rule[$name]);
 				if($this->CI->form_validation->run() == FALSE) {
-					echo $name;
-					$this->CI->error->output("invalid_".$name);
-					exit();
+					$this->CI->error->output("invalid_".$name,$this->error_redirect);
 				}
 			}
 
@@ -71,27 +89,13 @@ class Sc {
 				if(isset($this->rule[$value])) {
 					$this->CI->form_validation->set_rules($value, $value, $this->rule[$value]);
 					if($this->CI->form_validation->run() == FALSE) {
-						$this->CI->error->output("invalid_".$value);
-						exit();
+						$this->CI->error->output("invalid_".$value,$this->error_redirect);
 					}
 				}
 				
 				$ret[$value] = trim($this->CI->input->$type($value, $xss));				
 			}
 		}
-		else if(empty($name)){
-			foreach ($_POST as $key => $value) {
-
-				if(isset($this->rule[$key])) {
-					$this->CI->form_validation->set_rules($key, $key, $this->rule[$key]);
-					if($this->CI->form_validation->run() == FALSE) {
-						return array('error' => "invalid_".$key);
-					}
-				}				
-				 $ret[$key] = trim($this->CI->input->$type($key, $xss));								
-			}
-		}
-
 		return $ret;
 	}
 }

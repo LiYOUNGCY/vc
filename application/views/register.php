@@ -79,6 +79,7 @@
    </div> 
   </div>  
   <script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script> 
+  <script type="text/javascript" src="<?=base_url().'public/'?>js/error.js"></script>    
   <script type="text/javascript">
 
 	$(function() {
@@ -127,7 +128,16 @@
 							pwd		: pwd,
 							name	: phone
 						},function(data){
-							alert(eval("("+data+")").error);
+              data = eval('('+data+')');
+              if(data.error != null)
+              {
+                 ERROR_OUTPUT(data);
+                 return false;                 
+              }
+              else if(data.success == 0)
+              {
+                 eval(data.script);
+              }
 						}
 					)
 				}else{
@@ -147,7 +157,16 @@
 							pwd		: pwd,
 							name	: name[0]
 						},function(data){
-							alert(data);
+              data = eval('('+data+')');
+              if(data.error != null)
+              {
+                 ERROR_OUTPUT(data);
+                 return false;                 
+              }
+              else if(data.success == 0)
+              {
+                 eval(data.script);
+              }
 						}
 					)
 				}else{

@@ -73,9 +73,22 @@ class Auth_service extends MY_Service{
 			else
 			{
 				//有登录权限
-				if(strstr($auths[$route],"|1|") && ! empty($user))return TRUE;
+				if(strstr($auths[$route],"|1|"))
+                {
+                    //已登录
+                    if( ! empty($user))
+                    {
+                        return TRUE;                        
+                    }
+                    //未登录
+                    else
+                    {
+                        $this->error->output('NOTLOGIN_ERROR',array('script' => 'window.location.href ="'.base_url().'login";'));
+                    }
+                }
+
 				//没有权限	
-				return FALSE;
+                $this->error->output('NOAUTH_ERROR',array('script' => 'window.location.href ="'.base_url().'";'));
 			}
 		}
 		//无需权限
@@ -131,6 +144,16 @@ class Auth_service extends MY_Service{
         {
             return FALSE;
         }
+    }
+
+    /**
+     * [logout 注销]
+     * @return [type] [description]
+     */
+    public function logout()
+    {
+        $this->session->unset_userdata($this->login_in_session_name);
+        $this->_set_cookie(NULL);   
     }
 
     /**

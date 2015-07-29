@@ -169,8 +169,16 @@
               comment: str
           },
           success: function(data) {
-              alert(data);
               var obj = eval("(" + data + ")");
+              if(data.error != null)
+              {
+                ERROR_OUTPUT(data);
+                return false;
+              }
+              else 
+              {
+                 alert('success');
+              }
           }
       });
     });
@@ -214,6 +222,11 @@
             else {
               $('#seeLike').html(parseInt($('#seeLike').html())-1);
             }
+          }
+          else if(status.error != null)
+          {
+             ERROR_OUTPUT(data);
+             return false;
           }
         }
       });
