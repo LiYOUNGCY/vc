@@ -11,6 +11,10 @@ class Setting extends MY_Controller
 	public function index($type = "user") {
 		$head['css'] = array(
 				'common.css',
+				'normalize.css',
+				'default.css',
+				'radiocheck.min.css',
+				'font-awesome/css/font-awesome.min.css'
 			);
 		$head['javascript'] = array(
 				'jquery.js',

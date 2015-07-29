@@ -1777,74 +1777,101 @@ hr.line {
     color: #c9c9c9;
 }
 
-/* 输入的框 */
-.form-group {
-    /*vertical-align: middle;*/
-    margin-bottom:  20px;
+.conversation h1 {
+    margin-bottom: 40px;
+    padding: 20px;
+}
+
+main,
+.flp,
+.flp div,
+.flp label,
+.flp input,
+.ch {
+    box-sizing: border-box;
+}
+
+main {
+    overflow: hidden;
+
+    border-radius: 3px;
+    padding-bottom: 10px;
+    width: 500px;
+    background: white;
+
     padding-top: 10px;
+}
+main h2 {
+    margin-bottom: 40px;
+    padding: 20px 0;
 
-    text-align: left;
+    font-size: 24px;
+    font-weight: normal;
+    text-align: center;
+
+    color: hsl(120, 40%, 40%);
+    background: hsl(120, 40%, 95%);
 }
 
-.form-group label {
-    display: inline-block;
+/*Let's place the label over the input*/
+.flp div {
+    position: relative;
 
-    text-align: left;
+    margin-bottom: 30px;
 }
 
-.form-group input[type="text"] {
-    display: inline-block;
+.flp input,
+.flp label {
+    display: block;
 
-    margin: 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    padding: 6px 12px;
-    width: 300px;
-    height: 34px;
+    border: 1px solid #999;
+    width: 400px;
+    /*fixed height for FF line height issue. 
+height = 24(lineheight) + 10*2(padding) + 2(border)*/
+    height: 46px;
 
-    color: #555;
+    font: inherit;
+    font-size: 16px;
+    line-height: 24px;
+}
+.flp input {
+    border-radius: 3px;
+    padding: 10px;
 
-    transition: all .1s ease-in-out;
+    outline: none;
 }
-.form-group input[type="text"]:focus {
-    border-color: #FCEE21;
-}
-.form-group select:focus {
-    border-color: #FCEE21;
-}
-.form-group .radio-group {
-    display: inline-block;
+.flp label {
+    position: absolute;
+    top: 0;
+    left: 0;
 
-    width: 300px;
+    border-color: transparent;
+    /*left/right padding will be 2px less, adjusted by padding on .ch*/
+    padding: 10px 8px;
 
-    text-align: left;
-}
-.form-group .radio-group div {
-    display: inline-block;
-}
-.form-group input[type="radio"] {
-    margin-left: 15px;
-}
-.form-group .birthday {
-    display: inline-block;
-    width: 350px;
-}
-.form-group select {
-    display: inline-block;
+    color: #666;
 
-    margin-left: 5px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    padding: 6px 12px;
-    width: 25%;
-
-    color: #555;
-    background-color: #fff;
+    cursor: text;
 }
 
-.error_div {
-    text-align: right;
-    font-size: 14px;
-    color: crimson;
-    display: none;
+/*label styles*/
+.ch {
+    display: block;
+    float: left;
+
+    position: relative; /*for upward animation*/
+
+    background: white;
+}
+.ch:first-child {
+    padding-left: 2px;
+}
+.ch:last-child {
+    padding-right: 2px;
+}
+
+/*active input label*/
+.focussed {
+    /*when any input is already focussed clicking on it(label) again won't do anything*/
+    pointer-events: none;
 }
