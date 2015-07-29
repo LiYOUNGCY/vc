@@ -498,7 +498,6 @@ img{
     text-align: center;
     position: relative;
     height: 100%;
-    background: #FFF;
 }
 .load_btn {
     width: 40%;
@@ -1767,6 +1766,8 @@ hr.line {
 }
 
 .container-head {
+    max-width: 960px;
+    width: 80%;
     margin-top: 80px;
 
     text-align: left;
@@ -1953,6 +1954,8 @@ hr.line {
 
     .container-head {
         text-align: center;
+        margin-right: auto;
+        margin-left: auto;
     }
 
     .conversation .msg {
@@ -2044,48 +2047,44 @@ hr.line {
 
 main,
 .flp,
-.flp div,
-.flp label,
-.flp input,
+.flp .form-group,
+.flp .label,
+.flp .flp-input,
 .ch {
     box-sizing: border-box;
 }
+
 
 main {
     overflow: hidden;
 
     border-radius: 3px;
-    padding-bottom: 10px;
-    width: 500px;
-    background: white;
-
     padding-top: 10px;
-}
-main h2 {
-    margin-bottom: 40px;
-    padding: 20px 0;
+    padding-bottom: 10px;
+    width: 60%;
 
-    font-size: 24px;
-    font-weight: normal;
-    text-align: center;
-
-    color: hsl(120, 40%, 40%);
-    background: hsl(120, 40%, 95%);
+    background: white;
 }
 
-/*Let's place the label over the input*/
-.flp div {
+@media screen and (max-width: 960px) {
+    main {
+        width: 100%;
+    }
+}
+
+/*Let's place the .label over the .flp-input*/
+.flp .form-group {
     position: relative;
 
     margin-bottom: 30px;
 }
 
-.flp input,
-.flp label {
+.flp .flp-input,
+.flp .label {
     display: block;
 
     border: 1px solid #999;
-    width: 400px;
+    width: 100%;
     /*fixed height for FF line height issue. 
 height = 24(lineheight) + 10*2(padding) + 2(border)*/
     height: 46px;
@@ -2094,13 +2093,15 @@ height = 24(lineheight) + 10*2(padding) + 2(border)*/
     font-size: 16px;
     line-height: 24px;
 }
-.flp input {
+
+.flp .flp-input {
     border-radius: 3px;
     padding: 10px;
 
     outline: none;
 }
-.flp label {
+
+.flp .label {
     position: absolute;
     top: 0;
     left: 0;
@@ -2114,7 +2115,7 @@ height = 24(lineheight) + 10*2(padding) + 2(border)*/
     cursor: text;
 }
 
-/*label styles*/
+/*.label styles*/
 .ch {
     display: block;
     float: left;
@@ -2123,15 +2124,76 @@ height = 24(lineheight) + 10*2(padding) + 2(border)*/
 
     background: white;
 }
+
 .ch:first-child {
     padding-left: 2px;
 }
+
 .ch:last-child {
     padding-right: 2px;
 }
 
-/*active input label*/
+/*active .flp-input label*/
 .focussed {
     /*when any input is already focussed clicking on it(label) again won't do anything*/
     pointer-events: none;
+}
+
+.conversation .radio-box {
+    margin: 20px 0;
+    box-sizing: border-box;
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 10px;
+    width: 100%;
+    height: 46px;
+
+    text-align: right;
+
+    color: #666;
+}
+
+.conversation .radio-box p {
+    float: left;
+
+    height: 20px;
+
+    line-height: 20px;
+}
+
+.conversation .option {
+    margin: 20px 0;
+    box-sizing: border-box;
+    border-radius: 3px;
+    width: 100%;
+    height: 46px;
+
+    line-height: 46px;
+    text-align: left;
+
+    color: #666;
+}
+
+.conversation .option .save {
+    display: inline-block;
+
+    width: 20%;
+
+    text-align: center;
+
+    transition: all .1s ease-in-out;
+}
+
+.conversation .option .cancel {
+    display: inline-block;
+
+    margin-right: 10px;
+    width: 20%;
+
+    text-align: center;
+}
+
+.conversation .option .save:hover,
+.conversation .option .cancel:hover {
+    background-color: #fcee21;
 }

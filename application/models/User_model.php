@@ -215,7 +215,7 @@ class User_model extends CI_Model
      * @return [type]        [description]
      */
     public function update_count($uid,$field = array()){
-    	$where = array('id' => $uid);
+    	 $where = array('id' => $uid);
         $query = $this->db->select($field['name'])
                           ->from('user')
                           ->where($where)

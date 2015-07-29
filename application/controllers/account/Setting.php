@@ -62,17 +62,8 @@ class Setting extends MY_Controller
 	 */
 	public function update_account()
 	{
-		$arr 	= array('name', 'alias', 'sex', 'area', 'email', 'phone');
-		$year 	= $this->sc->input('year');
-		$mouth	= $this->sc->input('mouth');
-		$day  	= $this->sc->input('day');
-
-		$mouth 	= strlen($mouth) < 2 ? '0'.$mouth : $mouth;
-		$day 	= strlen($day) < 2 ? '0'.$day : $day;
-
+		$arr 	= array('name', 'alias', 'sex', 'area', 'email', 'phone', 'birthday');
 		$data = $this->sc->input($arr);
-
-		$data['birthday'] = $year.'-'.$mouth.'-'.$day;
 
 		$result = $this->user_service->update_account($this->user['id'], $data);
 		
