@@ -66,10 +66,9 @@ class Main extends MY_Controller{
 	 * @return [type] [description]
 	 */
 	public function get_user_community()
-	{
+	{	
 		$page= $this->sc->input('page');
 		$uid = $this->sc->input('uid');
-		$uid = 9;
 		$community = $this->home_service->get_user_community($page,$uid);
 		echo json_encode($community);
 	}

@@ -117,10 +117,10 @@ img{
     background: transparent url("../img/icon/logo_writh.png") no-repeat scroll;
     display: inline-block;
 }
-.icon .QRcode{
-    width: 118px;
-    height: 118px;
-    background: transparent url("../img/icon/QRcode.jpg") no-repeat scroll;
+.icon.logo-f{
+    width: 61px;
+    height: 71px;
+    background: transparent url("../img/icon/logo_gray.png") no-repeat scroll;
     display: inline-block;
 }
 
@@ -512,7 +512,7 @@ img{
 }
 .vi_footer {
     margin-top: 50px;
-    border-top: 3px #cccccc solid;
+    border-top: 2px #eeeeee solid;
     color:#CCCCCC;
     overflow:auto;
     zoom:1;
@@ -1132,11 +1132,28 @@ img{
 	max-width: 12em;
 	overflow: hidden;
 }
-.qzlist .box:hover{
+.qzlist .box:hover,.loadmore:hover{
 	background-color: #F0F0F0;
 }
-.qzlist .box:active{
+.qzlist .box:hover,.loadmore:active{
 	background-color: #F9F9F9;
+}
+.qzlist .loadmore{
+	border: 1px #eee solid;
+	max-width: 900px;
+	width: 98%;
+	line-height: 40px;
+	height: 40px;
+	display: inline-block;
+	margin: 0 auto;
+	text-align: center;
+	cursor: pointer;
+	transition: all 0.1s ease-in-out;
+}
+
+.qzlist .loadmore.disable{
+	cursor: default;
+	color: #D9D9D9;
 }
 
 .homeintro{
@@ -1267,6 +1284,13 @@ img{
     .qzlist .box{
     	float:none;
     }
+    .qzlist .loadmore{
+    	width: 280px;
+    }
+    .vi_footer_right{
+    	float:none;
+    }
+
 }
 
 .identity {

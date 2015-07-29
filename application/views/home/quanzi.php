@@ -2,6 +2,7 @@
     <?php 
     echo $sidebar;
     ?>
+    <input type="hidden" id="userid" value="<?php echo $user['id']?>">
 	<div id="vi_container" class="container">
 		<div id="shade"></div>
 		<div id="sbtn" class="sbtn">
@@ -33,7 +34,7 @@
 					<div class="gz-btn btn"><i class="fa fa-plus"></i>关注</div>
 					<div class="sx-btn btn"><i class="fa fa-envelope"></i>私信</div>
 				</div>
-				<?php		
+				<?php
 					}
 				?>
 			<div class="home-menu">
@@ -71,92 +72,17 @@
 			<div id="vi_main" class="main width-100p">
 				
 				
-				<div class="qzlist">
+				<div id="qzlist" class="qzlist">
 				<div class="title">
 					<h2><?php echo $user['name'];?>关注的圈子</h2>
 				</div>
 				<hr class="line" />
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-
+				<div id="list">
+					
+				</div>
+				<div id="loadmore" class="loadmore">
+					加载更多
+				</div>
 				</div>
 			</div>
 		<div id="vi_footer" class="width-100p">
@@ -172,20 +98,10 @@
 						 - 
 						<a href="#" class="link">意见反馈</a>
 					</div>
-					<div class="float-l">
-						<a href="#" class="link">
-							<i class="fa fa-weibo fa-2x icon"></i>
-						</a>
-						<a href="#" class="link">
-							<i class="fa fa-wechat fa-2x icon"></i>
-						</a>
-						<a href="#" class="link">
-							<i class="fa fa-facebook-official fa-2x icon"></i>
-						</a>
-					</div>
 				</div>
 				<div class="vi_footer_right">
-					<img src="<?=base_url().'public/'?>img/QRCode.png" /></div>
+					<div class="icon logo-f"></div>
+				</div>
 			</div>
 		</div>
 		</div>
@@ -194,11 +110,45 @@
 </body>
 <script type="text/javascript">
 	var BASE_URL = $("#BASE_URL").val();
-	var GET_FEED_LIST_URL = BASE_URL +"feed/main/get_feed_list"; 
+	var GET_COMMU_LIST_URL = BASE_URL +"home/main/get_user_community";
+	var uid  = $("#userid").val();
 	var PAGE = 1;
+	var is_more = 1;
 
 	window.onload = function() { 
+		loadcommu(0,uid);
 
+		$("#loadmore").click(function(){
+			loadcommu(PAGE,uid);
+			PAGE++;
+		})
 	}; 
+
+	function loadcommu(pageTemp, id){
+		$.ajax({
+			url: GET_COMMU_LIST_URL,
+			async: false, 
+            type: 'POST',
+            data: {page : pageTemp, uid:id},
+            success:function(data){
+            	data = eval("("+data+")");
+            	if(data == null || data == ""){
+            		$("#loadmore").addClass('disable');
+            		$("#loadmore").html("没有更多");
+            		$("#loadmore").unbind();
+            		return false;
+            	}
+            	for(var i = 0; i < data.length; i++){
+	            	var name 	= data[i].name;
+	            	var intro   = data[i].intro;
+	            	var pic     = data[i].media.pic;
+	            	var element = '<div class="box"><div class="user"><div class="head"><img src="'+ pic +'"></div><div class="name">'+ name +'</div><div class="intro">'+ intro +'</div></div></div>';
+	            	$("#qzlist #list").append(element);
+            	}
+            }
+		});
+	}
+
+
 </script>
 </html>

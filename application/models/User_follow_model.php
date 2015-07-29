@@ -41,7 +41,7 @@ class User_follow_model extends CI_Model{
      * @param  integer $limit [页面个数限制]
      * @return [type]         [description]
      */
-    public function get_follow_media_by_uid($page = 0, $uid, $limit = 10)
+    public function get_follow_media_by_uid($page = 0, $uid, $limit = 3)
     {
         $query = $this->db->select('user.id, user.alias, user.name, user.pic, user.alias, user.role')
                           ->join('user','user.id = user_follow.follow')
