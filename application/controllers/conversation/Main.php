@@ -11,7 +11,6 @@ class Main extends MY_Controller{
 		$data['css'] = array(
 			'common.css',
 			'flex-style.css', 
-			'message.css',
 			'qqFace.css'
 		);
 

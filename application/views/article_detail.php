@@ -1,7 +1,6 @@
 <body>
 <?=$sidebar ?>
-<input id="aid" type="hidden" value="<?=$article['id']?>
-">
+<input id="aid" type="hidden" value="<?=$article['id']?>">
 <div id="vi_container" class="container">
   <div id="shade"></div>
   <div id="sbtn" class="sbtn">
