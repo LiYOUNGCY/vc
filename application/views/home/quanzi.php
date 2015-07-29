@@ -28,7 +28,7 @@
 					<a class="link" href="javascript:void(0);"><i class="fa fa-edit"></i></a>
 				</div>
 				<?php 
-					if($me['id'] != $user['id']){
+					if(isset($me['id']) && $me['id'] != $user['id']){
 				?>
 				<div class="option">
 					<div class="gz-btn btn"><i class="fa fa-plus"></i>关注</div>
@@ -85,25 +85,7 @@
 				</div>
 				</div>
 			</div>
-		<div id="vi_footer" class="width-100p">
-			<div class="vi_footer">
-				<div class="vi_footer_left">
-					<div>
-						 &nbsp;artvc.cc 京ICP备09025489号-4 
-						<a href="#" class="link">用户协议</a>
-						 - 
-						<a href="#" class="link">隐私政策</a>
-						 - 
-						<a href="#" class="link">联系我们</a>
-						 - 
-						<a href="#" class="link">意见反馈</a>
-					</div>
-				</div>
-				<div class="vi_footer_right">
-					<div class="icon logo-f"></div>
-				</div>
-			</div>
-		</div>
+			<?=$footer?>
 		</div>
 	</div>
 	<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
