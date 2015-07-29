@@ -141,40 +141,55 @@ img{
     display: inline-block;
 }
 
-.icon .home {
+.icon.home {
     width: 22px;
     height: 22px;
     background: transparent url("../img/icon/slidBar_home_normal.png") no-repeat scroll;
 }
 
-.icon .logout {
+.icon.logout {
     width: 22px;
     height: 22px;
     background: transparent url("../img/icon/slidBar_logout_normal.png") no-repeat scroll;
 }
 
-.icon .guanzhu {
+.icon.guanzhu {
     width: 22px;
     height: 22px;
     background: transparent url("../img/icon/slidBar_guanzhu_normal.png") no-repeat scroll;
 }
 
-.icon .tongji {
+.icon.tongji {
     width: 22px;
     height: 22px;
     background: transparent url("../img/icon/slidBar_tongji_normal.png") no-repeat scroll;
 }
 
-.icon .sixin {
+.icon.sixin {
     width: 22px;
     height: 22px;
     background: transparent url("../img/icon/slidBar_sixin_normal.png") no-repeat scroll;
 }
 
-.icon .setting {
+.icon.setting {
     width: 22px;
     height: 22px;
     background: transparent url("../img/icon/slidBar_setting_normal.png") no-repeat scroll;
+}
+.icon.language{
+    width: 22px;
+    height: 22px;
+    background: transparent url("../img/icon/slidBar_yuyan_normal.png") no-repeat scroll;
+}
+.icon.login{
+    width: 22px;
+    height: 22px;
+    background: transparent url("../img/icon/sb_login_normal.png") no-repeat scroll;
+}
+.icon.signup{
+    width: 22px;
+    height: 22px;
+    background: transparent url("../img/icon/sb_signup_normal.png") no-repeat scroll;
 }
 
 .icon .like {
@@ -189,21 +204,6 @@ img{
     background: transparent url("../img/icon/unlike.png") no-repeat scroll;
 }
 
-.icon .language{
-    width: 22px;
-    height: 22px;
-    background: transparent url("../img/icon/slidBar_yuyan_normal.png") no-repeat scroll;
-}
-.icon .login{
-    width: 22px;
-    height: 22px;
-    background: transparent url("../img/icon/slidBar_yuyan_normal.png") no-repeat scroll;
-}
-.icon .signup{
-    width: 22px;
-    height: 22px;
-    background: transparent url("../img/icon/slidBar_yuyan_normal.png") no-repeat scroll;
-}
 .icon.home_setting{
 	width: 38px;
     height: 38px;
@@ -337,7 +337,7 @@ img{
     top:0;
     outline: 0px none;
     cursor: pointer;
-
+	z-index: 5;
 }
 .content {
     max-width: 960px;
@@ -616,27 +616,6 @@ img{
     background-color: #FCEE21;
 }
 
-.sidebar .menu .active .menu-list-item .icon .home{
-    background-image: url(../img/icon/slidBar_home_over.png);
-}
-.sidebar .menu .active .menu-list-item .icon .guanzhu{
-    background-image: url(../img/icon/slidBar_guanzhu_over.png);
-}
-.sidebar .menu .active .menu-list-item .icon .tongji{
-    background-image: url(../img/icon/slidBar_tongji_over.png);
-}
-.sidebar .menu .active .menu-list-item .icon .sixin{
-    background-image: url(../img/icon/slidBar_sixin_over.png);
-}
-.sidebar .menu .active .menu-list-item .icon .setting{
-    background-image: url(../img/icon/slidBar_setting_over.png);
-}
-.sidebar .menu .active .menu-list-item .icon .logout{
-    background-image: url(../img/icon/slidBar_logout_over.png);
-}
-.sidebar .menu .active .menu-list-item .icon .language{
-    background-image: url(../img/icon/slidBar_yuyan_over.png);
-}
 .sidebar .menu .active .menu-list-item .menu-list-item-text{
     color:  #4C4640;
     font-weight:900;
@@ -646,27 +625,34 @@ img{
     background-color: #FCEE21;
 }
 
-.sidebar .menu .menu-list:hover .menu-list-item .icon .home{
+.sidebar .menu .menu-list:hover .menu-list-item .icon.home{
     background-image: url(../img/icon/slidBar_home_over.png);
 }
-.sidebar .menu .menu-list:hover .menu-list-item .icon .guanzhu{
+.sidebar .menu .menu-list:hover .menu-list-item .icon.guanzhu{
     background-image: url(../img/icon/slidBar_guanzhu_over.png);
 }
-.sidebar .menu .menu-list:hover .menu-list-item .icon .tongji{
+.sidebar .menu .menu-list:hover .menu-list-item .icon.tongji{
     background-image: url(../img/icon/slidBar_tongji_over.png);
 }
-.sidebar .menu .menu-list:hover .menu-list-item .icon .sixin{
+.sidebar .menu .menu-list:hover .menu-list-item .icon.sixin{
     background-image: url(../img/icon/slidBar_sixin_over.png);
 }
-.sidebar .menu .menu-list:hover .menu-list-item .icon .setting{
+.sidebar .menu .menu-list:hover .menu-list-item .icon.setting{
     background-image: url(../img/icon/slidBar_setting_over.png);
 }
-.sidebar .menu .menu-list:hover .menu-list-item .icon .logout{
+.sidebar .menu .menu-list:hover .menu-list-item .icon.logout{
     background-image: url(../img/icon/slidBar_logout_over.png);
 }
-.sidebar .menu .menu-list:hover .menu-list-item .icon .language{
+.sidebar .menu .menu-list:hover .menu-list-item .icon.language{
     background-image: url(../img/icon/slidBar_yuyan_over.png);
 }
+.sidebar .menu .menu-list:hover .menu-list-item .icon.login{
+    background-image: url(../img/icon/sb_login_over.png);
+}
+.sidebar .menu .menu-list:hover .menu-list-item .icon.signup{
+    background-image: url(../img/icon/sb_signup_over.png);
+}
+
 .sidebar .menu .menu-list:hover .menu-list-item .menu-list-item-text{
     color:  #4C4640;
     font-weight:900;

@@ -17,14 +17,16 @@
 			<a class="link" href="<?=base_url()?>article">
 			<li class="menu-list">
 				<div class="menu-list-item">
-					<div class="icon"><div class="home"></div></div>
+					<div class="icon home"></div>
 					<span class="menu-list-item-text">首页</span>
 				</div>
 			</li>
+			</a>
+			<?php if($user['role'] == 0) { ?>
 			<a class="link" href="<?=base_url()?>login">		
 			<li class="menu-list">
 				<div class="menu-list-item">
-					<div class="icon"><div class="sixin"></div></div>
+					<div class="icon login"></div>
 					<span class="menu-list-item-text">登陆</span>
 				</div>
 			</li>
@@ -32,16 +34,17 @@
 			<a class="link" href="<?=base_url()?>signup">		
 			<li class="menu-list">
 				<div class="menu-list-item">
-					<div class="icon"><div class="sixin"></div></div>
+					<div class="icon signup"></div>
 					<span class="menu-list-item-text">注册</span>
 				</div>
 			</li>
 			</a>
-			</a>
+			<?php }?>
+			<?php if($user['role'] != 0) { ?>
 			<a class="link" href="<?=base_url()?>notification/conversation">		
 			<li class="menu-list">
 				<div class="menu-list-item">
-					<div class="icon"><div class="sixin"></div></div>
+					<div class="icon sixin"></div>
 					<span class="menu-list-item-text">消息</span>
 				</div>
 			</li>
@@ -49,17 +52,16 @@
 			<a class="link" href="<?=base_url()?>setting">
 			<li class="menu-list">
 				<div class="menu-list-item">
-					<div class="icon"><div class="setting"></div></div>
+					<div class="icon setting"></div>
 					<span class="menu-list-item-text">设置</span>
 				</div>
 			</li>
 			</a>
+			<?php } ?>
 			<a class="link" id="showlang" href="javascript:void(0);">
 			<li class="menu-list">
 				<div class="menu-list-item">
-					<div class="icon">
-						<div class="language"></div>
-					</div>
+					<div class="icon language"></div>
 					<span class="menu-list-item-text">语言</span>
 				</div>
 			</li>
@@ -68,16 +70,16 @@
 				<div id="lop-zh" style="border-right: 1px solid #4C4640;" class="btn">简体中文</div>
 				<div id="lop-en" class="btn">English</div>
 			</div>
+			<?php if($user['role'] != 0) { ?>
 			<a class="link" href="<?=base_url()?>account/main/logout">
 			<li class="menu-list">
 				<div class="menu-list-item">
-					<div class="icon">
-						<div class="logout"></div>
-					</div>
+					<div class="icon logout"></div>
 					<span class="menu-list-item-text">退出</span>
 				</div>
 			</li>
 			</a>
+			<?php } ?>
 		</ul>
 	</div>
 </div>

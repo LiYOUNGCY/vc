@@ -2,7 +2,7 @@
     <?php 
     echo $sidebar;
     ?>
-    <input type="hidden" id="userid" value="<?php echo $user['id']?>">
+    <input type="hidden" id="userid" value="<?=$user['id']?>">
 	<div id="vi_container" class="container">
 		<div id="shade"></div>
 		<div id="sbtn" class="sbtn">
