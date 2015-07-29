@@ -2160,3 +2160,40 @@ height = 24(lineheight) + 10*2(padding) + 2(border)*/
 
     line-height: 20px;
 }
+
+.conversation .option {
+    margin: 20px 0;
+    box-sizing: border-box;
+    border-radius: 3px;
+    width: 100%;
+    height: 46px;
+
+    line-height: 46px;
+    text-align: left;
+
+    color: #666;
+}
+
+.conversation .option .save {
+    display: inline-block;
+
+    width: 20%;
+
+    text-align: center;
+
+    transition: all .1s ease-in-out;
+}
+
+.conversation .option .cancel {
+    display: inline-block;
+
+    margin-right: 10px;
+    width: 20%;
+
+    text-align: center;
+}
+
+.conversation .option .save:hover,
+.conversation .option .cancel:hover {
+    background-color: #fcee21;
+}

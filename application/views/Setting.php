@@ -39,12 +39,12 @@
             </div>
             <div class="radio-box">
               <p>性别</p>
-              <input class="radiocheck" name="article_tag" id="interview" type="radio">
-              <label class="nofull default left" for="interview">男</label>
-              <input class="radiocheck" name="article_tag" id="exhibition" type="radio">
-              <label class="nofull default left" for="exhibition">女</label>
-              <input class="radiocheck" name="article_tag" id="discuss" type="radio">
-              <label class="nofull default left" for="discuss">保密</label>
+              <input class="radiocheck" name="sex" id="male" type="radio" value="1">
+              <label class="nofull default left" for="male">男</label>
+              <input class="radiocheck" name="sex" id="female" type="radio" value="2">
+              <label class="nofull default left" for="female">女</label>
+              <input class="radiocheck" name="sex" id="secret" type="radio" value="0">
+              <label class="nofull default left" for="secret">保密</label>
             </div>
             <div class="form-group">
               <input class="flp-input" type="text" id="phone" name="phone">
@@ -62,7 +62,10 @@
               <input class="flp-input" type="text" id="birthday" name="birthday">
               <label class="label" for="birthday">生日(YYYY-MM-DD)</label>
             </div>
-            
+            <div class="option">
+              <div id="cancel" class="btn cancel">取消</div>
+              <div id="save" class="btn save">保存</div>
+            </div>
           </form>
         </main>
       </div>
@@ -107,6 +110,7 @@
 
   $(function(){
     var last_len = 0;
+    var BASE_URL = $("#BASE_URL").val();
 
     $('#birthday').bind('input propertychange', function() {
       var str = $(this).val();
@@ -125,21 +129,58 @@
       }
     });
 
-    var BASE_URL = $("#BASE_URL").val();
+    function set_height(input_id, data, height) {
+      if(data != '') {
+        $("#" + input_id).val(data);
+        $("#" + input_id).next().addClass("focussed").children().stop(true).each(function(i){
+            $(this).css('top', height);
+        })
+      }
+    }
+    
   $.ajax({
     url:BASE_URL+"account/setting/get_msg",
     type:'post',
     dataType:'text',
     success:function(data) {
-      alert(data);
       var user = eval("(" + data + ")");
-      $("#name").val(user.name);
-      $("#alias").val(user.alias);
-      $("#area").val(user.area);
-      $("#email").val(user.email);
-      $("#phone").val(user.phone);
+
+      var height = $("#name").outerHeight()/2 *-1 + "px";
+
+      // if(user.name != '') {
+      //   $("#name").val(user.name);
+      //   $("#name").next().addClass("focussed").children().stop(true).each(function(i){
+      //       $(this).css('top', height);
+      //   })
+      // }
+
+      set_height('name', user.name, height);
+      set_height('alias', user.alias, height);
+      set_height('area', user.area, height);
+      set_height('email', user.email, height);
+      set_height('phone', user.phone, height);
+      set_height('birthday', user.birthday, height);
+      
+      // $("#alias").val(user.alias);
+      // $("#area").val(user.area);
+      // $("#email").val(user.email);
+      // $("#phone").val(user.phone);
+
+      if(user.sex == 0) {
+        $('#secret').attr('checked', 'true');
+      }
+      else if( user.sex == 1) {
+        $('#male').attr('checked', 'true');
+      }
+      else if( user.sex == 2) {
+        $('#female').attr('checked', 'true');
+      }
     }
   });
+
+  $('#save').click(function(){
+    $('form').submit();
   });
+});
 </script>
 </html>
