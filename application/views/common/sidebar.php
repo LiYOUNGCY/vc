@@ -14,7 +14,7 @@
 	<div class="menu">
 		<ul>
 			<a class="link" href="<?=base_url()?>article">
-			<li class="menu-list active">
+			<li class="menu-list">
 				<div class="menu-list-item">
 					<div class="icon"><div class="home"></div></div>
 					<span class="menu-list-item-text">首页</span>

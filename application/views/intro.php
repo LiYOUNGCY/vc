@@ -47,7 +47,7 @@
 					<a href="javascript:void(0);">
 						<li class="active">
 							<div class="icon home_jieshao"></div>
-							介绍s
+							介绍
 						</li>	
 					</a>
 					<a href="javascript:void(0);">
@@ -60,7 +60,7 @@
 						<li>
 							<div class="icon home_setting"></div>
 							设置
-						</li>	
+						</li>
 					</a>
 				</ul>
 			</div>	
@@ -69,7 +69,18 @@
 		</div>
 		<div id="vi_content" class="content">
 			<div id="vi_main" class="main width-100p">
-				<?php print_r($intro);?>
+				<div class="homeintro">
+					<div class="title">
+						<h1><?php echo $intro['title'] ;?></h1>
+					</div>
+					<div class="content">
+						<?php echo $intro['content'] ;?>
+					</div>
+					<div>
+						
+					</div>
+
+				</div>
 			</div>
 		<div id="vi_footer" class="width-100p">
 			<div class="vi_footer">
