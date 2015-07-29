@@ -85,7 +85,7 @@ class Home_service extends MY_Service{
 		$user   = $this->user_model->get_user_base_id($uid);
 
 		//如果该用户是自媒体,加上该用户的信息
-		if($user['role'] == 2)
+		if($user['role'] == 2 && $page == 0)
 		{
 			$follow[count($follow)] = $user;					
 		}		
