@@ -38,119 +38,39 @@
 				?>
 			<div class="home-menu">
 				<ul>
-					<a href="javascript:void(0);">
-						<li class="active">
+					<a href="<?php echo base_url().'home/'.$user['alias'];?>">
+						<li>
 							<div class="icon home_quanzi"></div>
 							圈子
 						</li>	
 					</a>
-					<a href="javascript:void(0);">
+					<a href="<?php echo base_url().'home/'.$user['alias'].'/intro';?>">
 						<li>
 							<div class="icon home_jieshao"></div>
 							介绍
 						</li>	
 					</a>
-					<a href="javascript:void(0);">
-						<li>
+					<a href="<?php echo base_url().'home/'.$user['alias'].'/cooperate';?>">
+						<li class="active">
 							<div class="icon home_hezuo"></div>
 							合作
 						</li>	
 					</a>
-					<a href="javascript:void(0);">
+					<a href="<?php echo base_url().'account/setting';?>">
 						<li>
 							<div class="icon home_setting"></div>
 							设置
 						</li>	
 					</a>
 				</ul>
-			</div>	
+			</div>
 			</div>
 
 		</div>
 		<div id="vi_content" class="content">
 			<div id="vi_main" class="main width-100p">
-				<div class="qzlist">
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="user">
-							<div class="head">
-								<img src="<?php echo $user['pic']; ?>">
-								<span class="icon identity tooplit">
-									<a href=""><div class="i_media"><span>自媒体</span></div></a>
-								</span>
-							</div>
-							<div class="name">
-								<?php echo $user['name']; ?>
-							</div>
-							<div class="intro">
-								12342343
-							</div>
-						</div>
-					</div>
-
+				<div class="cooperate">
+					
 				</div>
 			</div>
 		<div id="vi_footer" class="width-100p">
@@ -179,7 +99,8 @@
 					</div>
 				</div>
 				<div class="vi_footer_right">
-					<img src="<?=base_url().'public/'?>img/QRCode.png" /></div>
+					<img src="<?=base_url().'public/'?>img/QRCode.png" />
+				</div>
 			</div>
 		</div>
 		</div>

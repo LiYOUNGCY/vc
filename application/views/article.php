@@ -10,18 +10,14 @@
 			<div class="icon sidebtn"></div>
 		</div>
 		<div id="vi_content" class="content">
-		<?php if( $user['role'] != 0) { ?>
-			<div id="vi_user" class="vi-user float-r">
-				<a href="<?=$user['alias']?>" class="link"><?=$user['name']?></a>
-			</div>
-		<?php } else { ?>
+		<?php if( $user['role'] == 0) { ?>
 			<div id="vi_sign" class="vi-sign ">
 				<div class="float-r">
 					<a href="<?=base_url()?>login" class="link sign">登陆</a>
 					<a href="<?=base_url()?>register" class="link">注册</a>
 				</div>
 			</div>
-		<?php } ?>
+		<?php }  ?>
 		<div id="vc_logo" class="logo">
 			<div class="icon logo-a"></div>
 		</div>

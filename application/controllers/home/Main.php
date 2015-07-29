@@ -24,22 +24,22 @@ class Main extends MY_Controller{
 	        $data['javascript'] = array('j162.min.js','timeago.js');
 
 	        $this->load->view('common/head', $data);
-	        $sidebar = $this->load->view('common/sidebar', '', TRUE);
+	        $user['user']    = $this->user;
+        	$data['sidebar'] = $this->load->view('common/sidebar', $user, TRUE);
 
-	        $data['sidebar'] = $sidebar;
 
 			$data['user'] = $user;
 			$data['me']   = $this->user;
 			//载入视图
 			if($type == 'quanzi')
 			{
-				$this->load->view('quanzi',$data);
+				$this->load->view('home/quanzi',$data);
 			}
 			elseif($type == 'intro')
 			{
 				//获取用户简介
 				$data['intro'] = $this->home_service->get_user_intro($user['id']);
-				$this->load->view('intro',$data);				
+				$this->load->view('home/intro',$data);				
 			}
 			//自媒体才有文章
 			elseif($type == 'article' && $user['role'] == 2)

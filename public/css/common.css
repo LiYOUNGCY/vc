@@ -246,11 +246,10 @@ img{
 .sidebar {
     height: 100%;
     background-color: #4C4640;
-    width: 280px;
+    width: 260px;
     position: fixed;
-    right: -280PX;
+    right: -260px;
     top: 0;
-    z-index: 3;
 }
 .sidebar .name{
     width:100%;
@@ -338,7 +337,7 @@ img{
     top:0;
     outline: 0px none;
     cursor: pointer;
-    z-index: 5;
+
 }
 .content {
     max-width: 960px;
@@ -499,6 +498,7 @@ img{
     text-align: center;
     position: relative;
     height: 100%;
+    background: #FFF;
 }
 .load_btn {
     width: 40%;
@@ -1268,17 +1268,26 @@ img{
 	text-align: left;
   	max-width: 700px;
   	margin: 0 auto;
+  	width: 88%;
 }
-.homeintro .content{
+.homeintro .intro{
 	width: 88%;
 	max-width: 700px;
-	text-align: left;
-	margin-top: 20px;
+	text-align: left;	
+	margin: 0 auto;
 }
-.homeintro .content img{
+.homeintro .intro img{
 	width: 100%;
 }
-
+.homeintro hr.line{
+	width: 88%;
+	max-width:700px;
+	margin:  20px auto;
+    background: #333;
+    background-image: -webkit-linear-gradient(left, #333, #eee, #fff);
+    background-image: -moz-linear-gradient(left, #333, #eee, #fff);
+    background-image: linear-gradient(left, #333, #eee, #fff);
+}
 @media screen and (max-width: 960px){
 	.logo{
         display: inline-block;
@@ -1438,6 +1447,11 @@ img{
     text-align: left;
 }
 
+.article-detial .no-comment{
+	margin: 10px;
+	color: #B3B3B3;
+
+}
 .author {
     border: 1px solid #eee;
     border-style: none none solid none;
@@ -1482,8 +1496,7 @@ img{
 }
 
 .article-detial .article-info {
-    float: right;
-
+  	width: 100%;
     color: #4c4640;
 }
 
@@ -1497,9 +1510,8 @@ img{
 
 .article-detial .article-content {
     margin: 15px 0;
-
+	border-top:1px #eee solid; 
     text-align: justify;
-
     color: #2f2f2f;
 }
 
@@ -1512,20 +1524,21 @@ hr.line {
     margin: 20px 0;
     border: 0;
     height: 1px;
-
     background: #333;
+    background-image: -webkit-linear-gradient(left, #fff, #333, #fff);
     background-image: -moz-linear-gradient(left, #fff, #333, #fff);
+    background-image: linear-gradient(left, #fff, #333, #fff);
 }
 
 .answer {
     margin-top: 5px;
     box-sizing: border-box;
-    height: 32.2px;
+    display: inline-block;
+	width: 100%;
 }
 
 .answer .msg {
-    float: right;
-
+	display: inline-block;
     width: 75%;
     height: 32.2px;
 }
@@ -1535,28 +1548,25 @@ hr.line {
 }
 
 .answer .emotion {
-    float: right;
-
     margin-left: 10px;
+    float: left;
+    margin: 0 10px;
     width: 32px;
     height: 32px;
-
     background: url(../img/icon/smile_icon.png);
-
     cursor: pointer;
+    display: inline-block;
 }
 
 .answer .send {
-    float: right;
-
     margin-right: 5px;
     margin-left: 10px;
     box-sizing: border-box;
     padding: 5px 10px;
     width: 52.1px;
     height: 32.2px;
-
     cursor: pointer;
+    display: inline-block;
 }
 
 
