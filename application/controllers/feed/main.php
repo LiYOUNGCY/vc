@@ -15,14 +15,14 @@ class Main extends MY_Controller {
     public function index()
     {
         $data['css'] = array('common.css', 'font-awesome/css/font-awesome.min.css');
-        $data['javascript'] = array('j162.min.js','jquery.scrollLoading.js','timeago.js');
+        $data['javascript'] = array('j162.min.js','jquery.scrollLoading.js','timeago.js','error.js');
 
         $this->load->view('common/head', $data);
         $user['user'] = $this->user;
         $sidebar = $this->load->view('common/sidebar', $user, TRUE);
 
         $body['sidebar'] = $sidebar;
-
+        
     	$this->load->view("feed",$body);
     }
 

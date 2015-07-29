@@ -45,4 +45,31 @@ class User extends MY_Controller
 
 		}
 	}
+
+	/**
+	 * [delete_user 删除用户]
+	 * @return [type] [description]
+	 */
+	public function delete_user()
+	{
+
+		$uid = $this->sc->input('uids');
+		$uid = explode(",",$uid);
+		$result = $this->user_model->delete_user($uid);
+		if($result)
+		{
+			echo json_encode(array('success' => 0,'note' => lang('OPERATE_SUCCESS'),'script' => 'location.reload();'));
+		}
+		else
+		{
+			$this->error->output('INVALID_REQUEST');
+		}
+	}
+
+	public function forbid_user()
+	{
+		$uid = $this->sc->input('uid');
+		$result = $this->user_model->update_account($uid,array('forbidden' => 1));
+
+	}
 }

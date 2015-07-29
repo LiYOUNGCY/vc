@@ -78,7 +78,7 @@ class User_model extends CI_Model
 		//调用错误
 		else
 		{
-        $this->error->output('LOGIN_ERROR');  
+        return FALSE; 
 		}
 
 		$data = $query->get('user')->result_array();
@@ -98,12 +98,12 @@ class User_model extends CI_Model
 			}
       else
       {
-        $this->error->output('LOGIN_ERROR');  
+        return FALSE;  
       }
 		}
     else
     {
-      $this->error->output('NOUSER_ERROR');  
+        return FALSE;  
     }
 	}
 
@@ -308,5 +308,11 @@ class User_model extends CI_Model
     public function get_user_count()
     {
        return $this->db->count_all('user');
+    }
+
+    public function delete_user($uid)
+    {
+        $this->db->where_in('id',$uid)->delete('user');
+        return $this->db->affected_rows() > 0;
     }
 }

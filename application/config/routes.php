@@ -60,6 +60,11 @@ $route['default_controller'] = 'index';
 $route['article/(:num)'] = 'article/detail/index/$1';
 $route['article'] = 'article/main';
 $route['article/([a-z]*)'] = 'article/main/index/article/$1';
+//发布文章
+$route['publish/article']  = 'article/publish';
+//更新文章
+$route['update/article']   = 'article/update';
+
 $route['exhibition'] = 'article/main/index/exhibition';
 $route['exhibition/([a-z]*)'] = 'article/main/index/exhibition/$1';
 /**

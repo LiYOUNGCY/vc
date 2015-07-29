@@ -30,6 +30,19 @@
         <!-- /.dropdown -->
     </ul>
     <!-- /.navbar-top-links -->
+
+    <!--弹出提示层-->
+    <div id="alert_group">
+        <div class="alert alert-success alert-dismissable" style="position:fixed;z-index:999;width:100%;display:none;">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        </div>
+        <div class="alert alert-danger alert-dismissable" style="position:fixed;z-index:999;width:100%;display:none;">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+
+        </div>
+    </div>    
+    <!-- /弹出提示层-->
+
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">

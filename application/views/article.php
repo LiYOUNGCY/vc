@@ -133,7 +133,18 @@
             type: 'POST',
             data:{page : pageTemp, type:type, tag:tag},
             success: function(data) {
-                data = eval("("+data+")"); 
+                data = eval("("+data+")");
+                //没有数据
+                if(data == null || data == "")
+                {
+                	$("#loadmore").unbind();
+ 					return false;
+                }
+                //错误
+                if(data.error != null)
+                {
+                	return false;
+                } 
 				for(var i = 0; i < data.length; i++)  
 				{  
 					var id			= data[i].content.article_id;

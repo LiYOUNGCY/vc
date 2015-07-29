@@ -28,12 +28,8 @@ class MY_Controller extends CI_Controller{
             $this->user = $user;
         }
 
-		$auth_result = $this->auth_service->check_user_auth();
-		if( ! $auth_result)
-		{
-			exit('no_auth');
-		}
-
+		$this->auth_service->check_user_auth();
+        
         //加载语言
         $this->lang->load('error', $this->default_lang);
         $this->lang->load('base', $this->default_lang);        

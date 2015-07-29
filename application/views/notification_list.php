@@ -72,7 +72,18 @@
                 page: page,
             },
             success: function(data) {
-                var obj = eval("(" + data + ")");
+                var obj = eval("(" + data + ")");                
+                //错误
+                if(obj.error != null)
+                {
+                    ERROR_OUTPUT(obj);
+                    return false;
+                }
+                //没数据
+                else if(obj == null || obj == "")
+                {
+                    return false;
+                }
                 page += 1;
 
                 for(i in obj) {

@@ -51,5 +51,6 @@
 
     ?>
 
-    <input id="BASE_URL" type="hidden" value="<?=base_url()?>">   
+    <input id="BASE_URL" type="hidden" value="<?=base_url()?>" />   
+    <input id="ADMIN" type="hidden" value="<?=base_url().ADMINROUTE?>" />    
 </head>

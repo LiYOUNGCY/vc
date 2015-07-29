@@ -86,6 +86,7 @@
     </div>
   </div>
   <script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
+  <script type="text/javascript" src="<?=base_url().'public/'?>js/error.js"></script>    
   <script type="text/javascript">
 $(function(){
   
@@ -123,7 +124,16 @@ $(function(){
           pwd     : password,
           rememberme : is_remember
         },function(data){
-          alert(data);
+          data = eval('('+data+')');
+          if(data.error != null)
+          {
+            ERROR_OUTPUT(data);
+            return false;
+          }
+          else if(data.success == 0)
+          {
+             eval(data.script);
+          }
         }
       )
     }
@@ -134,7 +144,16 @@ $(function(){
           pwd    :  password,
           rememberme : is_remember
         },function(data){
-          alert(data);
+          data = eval('('+data+')');
+          if(data.error != null)
+          {
+            ERROR_OUTPUT(data);
+            return false;
+          }
+          else if(data.success == 0)
+          {
+             eval(data.script);
+          }
         }
       )
     }

@@ -19,7 +19,8 @@ class Main extends MY_Controller{
 			'jquery.js', 
 			'jquery.flexText.min.js', 
 			'jquery.qqFace.js',
-			'vchome.js'
+			'vchome.js',
+			'error.js'
 		);
 		
         $user['user'] = $this->user;
@@ -53,12 +54,6 @@ class Main extends MY_Controller{
 	{
 		$reciver_id = $this->sc->input('uid');
 		$content    = $this->sc->input('conversation_content');
-		/*
-		$this->user = array();
-		$this->user['id'] = 20;
-		$reciver_id = 9;
-		$content = '捉急吧';
-		*/
 		$this->conversation_service->publish_conversation($this->user['id'],$reciver_id,$content);
 
 	}

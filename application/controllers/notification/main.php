@@ -28,7 +28,8 @@ class Main extends MY_Controller{
 			);
 
 			$data['javascript'] = array(
-				'jquery.js'
+				'jquery.js',
+				'error.js'
 			);
 
 			$this->load->view('common/head', $data);
@@ -43,7 +44,8 @@ class Main extends MY_Controller{
 			);
 
 			$data['javascript'] = array(
-				'jquery.js'
+				'jquery.js',
+				'error.js'
 			);
 
 			$this->load->view('common/head', $data);
@@ -105,38 +107,4 @@ class Main extends MY_Controller{
 			echo "failed";
 		}
 	}
-
-	public function test_conversation()
-	{
-		$sender_id = '2';  //$this->user['id']
-		$reciver_id= '4';
-		$conversation_id = 1;
-		$content = array('conversation_content' => '第一条私信','conversation_id' => $conversation_id);
-		$this->notification_service->insert($sender_id,$reciver_id,1,$content);
-	}
-
-	public function test_comment()
-	{
-		$sender_id = '2';  //$this->user['id']
-		$reciver_id= '4';
-		$content   = array('content_id' => '内容id', 'content_type' => 'article','comment_content' => '第一条评论');
-		$this->notification_service->insert($sender_id,$reciver_id,2,$content);					
-	}
-	
-	public function test_like()
-	{
-		$sender_id = '2';  //$this->user['id']
-		$reciver_id= '4';
-		$content   = array('content_id' => '内容id', 'content_type' => 'article');
-		$this->notification_service->insert($sender_id,$reciver_id,3,$content);				
-	}
-
-	public function test_follow()
-	{
-		$sender_id = '2';  //$this->user['id']
-		$reciver_id= '4';
-		$this->notification_service->insert($sender_id,$reciver_id,4,array());
-
-	}	
-
 }

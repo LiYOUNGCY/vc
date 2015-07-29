@@ -2,10 +2,9 @@
     <!-- Page Content -->
     <div id="page-wrapper">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row">            	
                 <div class="col-lg-12">
                     <h1 class="page-header">用户列表</h1>
-
                         <!--表格-->
 						<table id="sample-table-1" style="font-family:'Open Sans';" class="table table-striped table-bordered table-hover">
 							<thead>
@@ -68,9 +67,9 @@
 												<?=$v['last_active']?>
 											</td>
 											<td class="tooltip-btn">
-												<button data-toggle="tooltip"  title="删除" effect="edit" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-edit"></i>
+												<button data-toggle="tooltip"  title="编辑" id="edit" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-edit"></i>
 								                </button>
-												<button data-toggle="tooltip"  title="封禁" effect="forbidden" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-ban"></i>
+												<button data-toggle="tooltip"  title="封禁" id="forbidden" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-ban"></i>
 								                </button>								                				
 											</td>
 										</tr>																					
@@ -78,7 +77,7 @@
 							</tbody>
 						</table>
                         <!-- /表格-->
-						<button  id="delete"  type="button" class="btn btn-outline btn-danger">编辑</button>
+						<button  id="delete"  type="button" class="btn btn-outline btn-danger">删除</button>
 	                     <input id="modal_open" type="hidden" data-toggle="modal" data-target="#myModal"  />
 	                        <!-- Modal -->
 	                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -92,7 +91,7 @@
 											确认删除所勾选的用户？
 	                                    </div>
 	                                    <div class="modal-footer">
-	                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                                        <button type="button" class="btn btn-default" id="close_modal" data-dismiss="modal">Close</button>
 	                                        <button type="button" id="delete_confirm" class="btn btn-primary">确认</button>
 	                                    </div>
 	                                </div>
@@ -117,9 +116,11 @@
 
 <?php echo $foot;?>
 <script type="text/javascript">
+var BASE_URL = $("#BASE_URL").val();
+var ADMIN    = $("#ADMIN").val();
+var DELETE_URL= ADMIN+'user/delete_user';
 $(function()
 {
-	$("#delete").click();
     $('.tooltip-btn').tooltip({
         selector: "[data-toggle=tooltip]",
         container: "body"
@@ -154,17 +155,48 @@ $(function()
 
 	//确认删除
 	$("#delete_confirm").click(function(){
-		var delete_arr = Array();
+		var delete_str = "";
 		var child = $("input[tag=child_check]:checked");
 		child.each(function()
 		{
 			var uid = $(this).attr('u');
 			if(uid != null && uid != undefined && uid != "")
 			{
-				delete_arr.push(uid);				
+				delete_str += uid+",";		
 			}
-		});		
+		});
+		if(delete_str != "")
+		{
+			delete_str = delete_str.substr(0,delete_str.length-1);
+			$.post(DELETE_URL,{uids:delete_str},function(data)
+			{
+				data = eval('('+data+')');
+				$("#close_modal").click();
+				if(data.error != null)
+				{
+					$(".alert-danger").append(data.error);
+					$(".alert-danger").fadeIn(1000,function(){
+						$(this).fadeOut();
+						if(data.script != "")
+						{
+							eval(data.script);							
+						}
+	
+					});
+				}	
+				else if(data.success == 0)
+				{ 
+					$(".alert-success").append(data.note);
+					$(".alert-success").fadeIn(1000,function(){
+						$(this).fadeOut();	
+						eval(data.script);								
+					});
+				}
+			});
+		}
 	});
+
+
 });
 </script>
 </body>

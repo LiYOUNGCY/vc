@@ -186,6 +186,17 @@
       type: 'POST',
       data:{page : pageTemp},
       success: function(data) {
+      	//错误
+      	if(data.error != null)
+      	{
+      		ERROR_OUTPUT(data);
+      		return false;
+      	}
+      	//没数据
+      	else if(data == null || data == "")
+      	{
+      		return false;
+      	}
         data = eval("("+data+")"); 
 				for(var i = 0; i < data.length; i++)  
 				{

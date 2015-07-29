@@ -122,7 +122,18 @@
                         conversation_content: str
                     },
                     success: function(data) {
-                        location.reload();
+                        data = eval('('+data+')');
+                        if(data.error != null)
+                        {
+                            ERROR_OUTPUT(data);
+                            return false;
+                        }
+                        else if(data.success == 0)
+                        {
+                           //成功处理
+                           location.reload();
+                        }
+
                     }
                 });
             });
@@ -138,6 +149,17 @@
                 },
                 success: function(data) {
                     var obj = eval("(" + data + ")");
+                    //错误
+                    if(obj.error != null)
+                    {
+                        ERROR_OUTPUT(obj);
+                        return false;
+                    }
+                    //没数据
+                    else if(obj == null || obj == "")
+                    {
+                        return false;
+                    }
                     uid = obj.he.id;
                     // alert(obj.he.id);
                     insert_data(obj, last_time);
@@ -156,6 +178,17 @@
                     },
                     success: function(data) {
                         var obj = eval("(" + data + ")");
+                        //错误
+                        if(obj.error != null)
+                        {
+                            ERROR_OUTPUT(obj);
+                            return false;
+                        }
+                        //没数据
+                        else if(obj == null || obj == "")
+                        {
+                            return false;
+                        }                        
                         // alert(obj.he.id);
                         insert_data(obj, last_time);
                     }
