@@ -12,17 +12,11 @@
       <div id="vi_menu" class="vi-menu width-100p">
         <ul>
           <li class="active">
-            <a href="<?=base_url().'notification';?>" class="link">基本信息</a>
+            <a href="<?=base_url().'setting';?>" class="link">基本信息</a>
           </li>
           <li>
-            <a href="<?=base_url().'notification/conversation'?>" class="link">修改密码</a>
-          </li>
-          <li>
-            <a href="#" class="link">评论</a>
-          </li>
-          <li>
-            <a href="#" class="link">赞</a>
-          </li>
+            <a href="<?=base_url().'setting/pwd'?>" class="link">修改密码</a>
+          </li> 
         </ul>
       </div>
 
@@ -32,10 +26,12 @@
             <div class="form-group">
               <input class="flp-input" type="text" id="name" name="name">
               <label class="label" for="name">昵称</label>
+              <div id="name_error" class="error_div"></div>
             </div>
             <div class="form-group">
               <input class="flp-input" type="text" id="alias" name="alias">
-              <label class="label" for="alias">主页地址(www.artvc.cc)</label>
+              <label class="label" for="alias">主页地址(www.artvc.cc/home)</label>
+              <div id="alias_error" class="error_div"></div>
             </div>
             <div class="radio-box">
               <p>性别</p>
@@ -49,18 +45,22 @@
             <div class="form-group">
               <input class="flp-input" type="text" id="phone" name="phone">
               <label class="label" for="phone">手机</label>
+              <div id="phone_error" class="error_div"></div>
             </div>
             <div class="form-group">
               <input class="flp-input" type="text" id="email" name="email">
               <label class="label" for="email">邮箱</label>
+              <div id="email_error" class="error_div"></div>
             </div>
             <div class="form-group">
               <input class="flp-input" type="text" id="area" name="area">
               <label class="label" for="area">地区</label>
+              <div id="area_error" class="error_div"></div>
             </div>
             <div class="form-group">
               <input class="flp-input" type="text" id="birthday" name="birthday">
               <label class="label" for="birthday">生日(YYYY-MM-DD)</label>
+              <div id="birthday_error" class="error_div"></div>
             </div>
             <div class="option">
               <div id="cancel" class="btn cancel">取消</div>
@@ -69,12 +69,14 @@
           </form>
         </main>
       </div>
-
+      
     </div>
+    <?=$footer?>
   </div>
 </div>
 </body>
 <script type="text/javascript" src="<?=base_url()?>public/js/jquery.easing.min.js"></script>
+<script type="text/javascript" src="<?=base_url()?>public/js/validate.js"></script>
 <script type="text/javascript">
   $(".label").each(function(){
     var sop = '<span class="ch">'; //span opening
@@ -147,12 +149,6 @@
 
       var height = $("#name").outerHeight()/2 *-1 + "px";
 
-      // if(user.name != '') {
-      //   $("#name").val(user.name);
-      //   $("#name").next().addClass("focussed").children().stop(true).each(function(i){
-      //       $(this).css('top', height);
-      //   })
-      // }
 
       set_height('name', user.name, height);
       set_height('alias', user.alias, height);
@@ -161,10 +157,6 @@
       set_height('phone', user.phone, height);
       set_height('birthday', user.birthday, height);
       
-      // $("#alias").val(user.alias);
-      // $("#area").val(user.area);
-      // $("#email").val(user.email);
-      // $("#phone").val(user.phone);
 
       if(user.sex == 0) {
         $('#secret').attr('checked', 'true');
@@ -178,8 +170,37 @@
     }
   });
 
+  //验证各个字段是否合法
+  $('#name').blur(function(){
+    validate('name', $('#name').val());
+  });
+  $('#alias').blur(function(){
+    validate('alias', $('#alias').val());
+  });
+  $('#area').blur(function(){
+    validate('area', $('#area').val());
+  });
+  $('#phone').blur(function(){
+    validate('phone', $('#phone').val());
+  });
+  $('#email').blur(function(){
+    validate('email', $('#email').val());
+  });
+  $('#birthday').blur(function(){
+    validate('birthday', $('#birthday').val());
+  });
+
   $('#save').click(function(){
-    $('form').submit();
+    var name = validate('name', $('#name').val());
+    var alias = validate('alias', $('#alias').val());
+    var area = validate('area', $('#area').val());
+    var phone = validate('phone', $('#phone').val());
+    var email = validate('email', $('#email').val());
+    var birthday = validate('birthday', $('#birthday').val());
+
+    if( name && alias && area && phone && email && birthday) {
+      $('form').submit();
+    }
   });
 });
 </script>
