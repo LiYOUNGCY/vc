@@ -44,20 +44,18 @@ class Setting extends MY_Controller
 	 */
 	public function change_password()
 	{
+		$error_redirect = array(
+			'script' => 'window.location.href ="'.base_url().'setting/pwd";'
+		);
+		$this->sc->set_error_redirect($error_redirect);
 		$old_pwd = $this->sc->input('old_pwd');
-		$new_pwd = $this->sc->input('new_pwd');
-		$confirm = $this->sc->input('confirm_pwd');
+		$pwd 	 = $this->sc->input('pwd');
+		$this->sc->input('confirm_pwd');
 
-		if(strcmp($new_pwd, $confirm) != 0) {
-			// $this->error->
-			//两次密码不对
-			echo json_encode(array('error' => '两次密码不对'));
-		}
-
-		$result = $this->user_service->change_password($this->user['id'], $old_pwd, $new_pwd);
+		$result = $this->user_service->change_password($this->user['id'], $old_pwd, $pwd);
 		if($result)
 		{
-			echo json_encode(array('success' => 0, 'note' => lang('OPERATE_SUCCESS'), 'script' => ''));		
+			echo "<script>alert('".lang('OPERATE_SUCCESS')."');window.location.href='".base_url()."setting/pwd';</script>";	
 		}
 		else
 		{
@@ -71,6 +69,10 @@ class Setting extends MY_Controller
 	 */
 	public function update_account()
 	{
+		$error_redirect = array(
+			'script' => 'window.location.href ="'.base_url().'setting";'
+		);
+		$this->sc->set_error_redirect($error_redirect);
 		$arr 	= array('name', 'alias', 'sex', 'area', 'email', 'phone', 'birthday');
 		$data = $this->sc->input($arr);
 
@@ -78,11 +80,11 @@ class Setting extends MY_Controller
 		
 		if($result)
 		{
-			echo json_encode(array('success' => 0, 'note' => lang('OPERATE_SUCCESS'), 'script' => ''));	
+			echo "<script>alert('".lang('OPERATE_SUCCESS')."');window.location.href='".base_url()."setting';</script>";	
 		}	
 		else
 		{
-			$this->error->output('INVALID_REQUEST');
+			$this->error->output('INVALID_REQUEST',array('script' => 'window.location.href ="'.base_url().'setting";'));
 		}
 	}
 	

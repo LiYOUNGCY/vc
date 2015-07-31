@@ -20,6 +20,8 @@ class Sc {
 				 'phone'		=> 'exact_length[11]|numeric',		//手机号码的规则
 				 'email' 		=> 'valid_email',
 				 'pwd'			=> 'required|min_length[8]|max_length[36]',
+				 'old_pwd' 		=> 'required|min_length[8]|max_length[36]',				 
+				 'confirm_pwd' 	=> 'matches[pwd]',
 				 'name'			=> 'required|min_length[2]|max_length[30]',
 				 'sex'			=> 'required|min_length[1]|max_length[1]|numeric',
 				 'role' 		=> 'required|numeric',

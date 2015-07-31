@@ -272,7 +272,7 @@ class User_model extends CI_Model
     			return $this->db->affected_rows() === 1;
     		}
     	}
-    	$this->error->output('old_password_error');
+        $this->error->output('old_password_error',array('script' => 'window.location.href = "'.base_url().'setting/pwd";'));
     }
     /**
      * [update_password 更新用户密码]
