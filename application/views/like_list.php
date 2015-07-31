@@ -48,7 +48,18 @@
                 nid: nid
             },
             success: function(data) {
-                $(obj).parent().parent().parent().fadeOut(200);
+                data = eval('('+data+')');
+                if(data.error != null)
+                {
+                    ERROR_OUTPUT(data);
+                    return false;                    
+                }
+                //成功
+                else if(data.success == 0)
+                {
+                    $(obj).parent().parent().parent().fadeOut(200);
+                }
+
             }
         });
     }
@@ -68,7 +79,18 @@
                 success: function(data) {
                     page = page + 1;
                     var obj = eval('(' + data + ')');
-
+                    //错误
+                    if(obj.error != null)
+                    {
+                        ERROR_OUTPUT(obj);
+                        return false;
+                    }
+                    //没数据
+                    else if(obj == null || obj == "")
+                    {
+                        $("#loadmore").unbind();
+                        return false;
+                    }
                     for( i in obj ) {
 
                         var item = obj[i];

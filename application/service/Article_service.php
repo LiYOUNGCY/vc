@@ -195,7 +195,7 @@ class Article_service extends MY_Service{
         $insert_result = $this->article_comment_model->insert_comment($aid, $uid, $comment);
         if($insert_result)
         {
-            echo json_encode(array('success' => 0));
+            echo json_encode(array('success' => 0,'script' => 'location.reload();'));
              //更新消息
             $article = $this->article_model->get_article_by_id($aid);
             $content = json_encode(array('content_id' => $aid, 'content_type' => 'article', 'content_title' => $article['title'], 'comment_content' => $comment));

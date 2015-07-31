@@ -70,7 +70,9 @@
                   <img src="<?=$comment[$i]['user']['pic']?>"></div>
                 <div class="postmeta">
                   <span class="time">
-                    <?=$comment[$i]['publish_time']?></span>
+                      <time class="timeago" title="<?=$comment[$i]['publish_time']?>" datetime="<?=$comment[$i]['publish_time']?>+08:00">                       
+                      </time>
+                  </span>
                 </div>
                 <span class="name">
                   <?=$comment[$i]['user']['name']?></span>
@@ -87,7 +89,9 @@
                     <img src="<?=$comment[$i]['user']['pic']?>"></div>
                   <div class="postmeta">
                     <span class="time">
-                      <?=$comment[$i]['publish_time']?></span>
+                      <time class="timeago" title="<?=$comment[$i]['publish_time']?>" datetime="<?=$comment[$i]['publish_time']?>+08:00">                       
+                      </time>
+                    </span>
                   </div>
                   <span class="name">
                     <?=$comment[$i]['user']['name']?></span>
@@ -160,7 +164,6 @@
 
     $('#submit').click(function(){
       var str = $('#msg').val();
-      alert(str);
       $.ajax({
           type: "POST",
           url: COMMENT_URL,
@@ -170,14 +173,17 @@
           },
           success: function(data) {
               var obj = eval("(" + data + ")");
-              if(data.error != null)
+              if(obj.error != null)
               {
-                ERROR_OUTPUT(data);
+                ERROR_OUTPUT(obj);
                 return false;
               }
               else 
               {
-                 alert('success');
+                 if(obj.script != null)
+                 {
+                   eval(obj.script);
+                 }
               }
           }
       });
@@ -231,6 +237,8 @@
         }
       });
     });
+    
+    $(".timeago").timeago();
   });
 </script>
 </body>
