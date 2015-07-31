@@ -38,10 +38,10 @@
       <?=$article['content']?></div>
 
     <div class="like">
-      <?php if($status == 0) { ?>
-      <div id="mark-like" class="mark-like">
+      <?php if(isset($status) && $status == '1') { ?>
+      <div id="mark-like" class="mark-like active">
         <?php } else { ?>
-        <div id="mark-like" class="mark-like active">
+        <div id="mark-like" class="mark-like">
           <?php } ?>
           <div>
             <i class="fa fa-heart" style="margin-right:2px;"></i>
