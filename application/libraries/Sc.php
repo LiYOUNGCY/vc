@@ -26,7 +26,7 @@ class Sc {
 				 'sex'			=> 'required|min_length[1]|max_length[1]|numeric',
 				 'role' 		=> 'required|numeric',
 				 'pic' 			=> 'max_length[255]',
-				 'alias' 		=> 'min_length[3]|max_length[20]|alpha_dash',
+				 'alias' 		=> 'required|min_length[3]|max_length[20]|alpha_dash',
 				 'intro' 		=> 'max_length[20]',
 				 'area' 		=> 'min_length[2]|max_length[28]',	 
 				 'article_title'=> 'required|min_length[1]|max_length[50]',
@@ -97,6 +97,7 @@ class Sc {
 				if(isset($this->rule[$value])) {
 					$this->CI->form_validation->set_rules($value, $value, $this->rule[$value]);
 					if($this->CI->form_validation->run() == FALSE) {
+						echo $value;
 						$this->CI->error->output("invalid_".$value,$this->error_redirect);
 					}
 				}

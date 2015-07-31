@@ -113,7 +113,7 @@
   $(function(){
     var last_len = 0;
     var BASE_URL = $("#BASE_URL").val();
-
+    var alias_check = true;
     $('#birthday').bind('input propertychange', function() {
       var str = $(this).val();
       var len = str.length;
@@ -140,6 +140,29 @@
       }
     }
     
+    function check_alias(alias)
+    {
+      $.ajax({
+          url:BASE_URL+"account/setting/check_alias",
+          type:'post',
+          data:{
+            alias:alias
+          },
+          success:function(data) {
+             data = eval('('+data+')');
+             if(data.error != null)
+             {
+                alias_check = false;
+                $('#alias_error').html(data.error).css('display','block');
+             }
+             else if(data.success == 0)
+             {
+                alias_check = true;
+             }  
+          }   
+        });
+    }
+
   $.ajax({
     url:BASE_URL+"account/setting/get_msg",
     type:'post',
@@ -149,7 +172,8 @@
 
       var height = $("#name").outerHeight()/2 *-1 + "px";
 
-
+      user.alias = user.alias.split('/');
+      user.alias = user.alias[1];
       set_height('name', user.name, height);
       set_height('alias', user.alias, height);
       set_height('area', user.area, height);
@@ -175,7 +199,11 @@
     validate('name', $('#name').val());
   });
   $('#alias').blur(function(){
-    validate('alias', $('#alias').val());
+    var result = validate('alias', $('#alias').val());
+    if(result)
+    {
+      check_alias($("#alias").val());
+    }
   });
   $('#area').blur(function(){
     validate('area', $('#area').val());
@@ -197,8 +225,7 @@
     var phone = validate('phone', $('#phone').val());
     var email = validate('email', $('#email').val());
     var birthday = validate('birthday', $('#birthday').val());
-
-    if( name && alias && area && phone && email && birthday) {
+    if( name && alias && area && phone && email && birthday && alias_check) {
       $('form').submit();
     }
   });

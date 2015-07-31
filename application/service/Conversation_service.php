@@ -151,7 +151,7 @@ class Conversation_service extends MY_Service{
 			}
 
 			$arr = array(
-				'content'      => json_encode(array('conversation_id' => $cid,'conversation_content' => $content,'count' => $count)),
+				'content'      => json_encode(array('conversation_id' => $cid,'conversation_content' => Common::extract_content($content),'count' => $count)),
 				'read_flag'	   => 0,
 				'publish_time' => date('Y-m-d H-m-s')
 			);

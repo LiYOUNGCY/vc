@@ -209,12 +209,14 @@ class User extends MY_Controller
 	 */
 	public function update_user()
 	{
+
 		$error_redirect = array(
 			'script' => 'window.location.href = "'.base_url().ADMINROUTE.'user/edit/u/'.$this->input->post('uid').'";'
 		);
 		$this->sc->set_error_redirect($error_redirect);
 
 		$user = $this->sc->input(array('uid','name','email','phone','role','pic','sex','intro','alias','area','forbidden'));
+		$user['alias'] = 'home/'.$user['alias'];
 		$pwd  = $this->input->post('pwd',TRUE);
 		$uid  = $user['uid'];
 		$changepwd_result = FALSE;
