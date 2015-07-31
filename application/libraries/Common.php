@@ -130,4 +130,13 @@ class Common{
         $str = preg_replace("[\[em_([0-9]*)\]]","<img src=\"{$face_url}$1.gif\" />",$str); 
         return $str; 
     } 
+    
+    static function is_ajax()
+    {
+	    if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"])=="xmlhttprequest")
+		{
+			return TRUE;
+		}
+		return FALSE;
+    }
 }

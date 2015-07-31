@@ -40,9 +40,9 @@ class Auth_service extends MY_Service{
 			$new_auths = array();
 			foreach ($auths as $k => $v)
 			{
-				if( ! empty($v['route']) && ! empty($v['role']))
+				if( ! empty($v['route']) && ! empty($v['role_group']))
 				{
-					$new_auths[$v['route']] = $v['role'];
+					$new_auths[$v['route']] = $v['role_group'];
 				}
 			}
 			$this->cache->memcached->save('role_auth',$new_auths,60);
@@ -86,9 +86,9 @@ class Auth_service extends MY_Service{
                         $this->error->output('NOTLOGIN_ERROR',array('script' => 'window.location.href ="'.base_url().'login";'));
                     }
                 }
-
-				//没有权限	
+                //没有权限   
                 $this->error->output('NOAUTH_ERROR',array('script' => 'window.location.href ="'.base_url().'";'));
+                		
 			}
 		}
 		//无需权限

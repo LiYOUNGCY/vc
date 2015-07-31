@@ -39,8 +39,7 @@ class Publish extends MY_Controller {
     public function publish_article()
     {
         $error_redirect = array(
-            'script' => "window.location.href='".base_url()."publish/article';",
-            'type'   => 1
+            'script' => "window.location.href='".base_url()."publish/article';"
         );
         $this->sc->set_error_redirect($error_redirect);
 

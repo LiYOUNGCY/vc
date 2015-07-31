@@ -17,7 +17,8 @@ class Main extends MY_Controller
 				'font-awesome/css/font-awesome.min.css'
 			);
 		$head['javascript'] = array(
-				'jquery.js'
+				'jquery.js',
+				'error.js'
 			);
 		$this->load->view('common/head', $head);
 		$user['user'] = $this->user;

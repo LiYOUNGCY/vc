@@ -25,6 +25,7 @@ class Main extends MY_Controller{
 			'jquery.js',
 			'vchome.js',
 			'timeago.js'
+			'error.js'
 		);
 
 		$user['user'] 	= $this->user;

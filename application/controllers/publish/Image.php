@@ -62,7 +62,7 @@ class Image extends MY_Controller{
 		}
 		else
 		{
-			echo "<script>alert('"+lang('error_INVALID_REQUEST')+"');</script>";
+			$this->error->output('INVALID_REQUEST',array('script' => 'window.location.href = "'.base_url().'feed";'));
 		}
 	}
 }
