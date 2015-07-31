@@ -23,8 +23,8 @@ class Main extends MY_Controller{
 		);
 		
         $user['user'] = $this->user;
-        $sidebar = $this->load->view('common/sidebar', $user, TRUE);
-        $body['sidebar'] = $sidebar;
+        $body['sidebar'] = $this->load->view('common/sidebar', $user, TRUE);
+        $body['footer']  = $this->load->view('common/footer', '', TRUE);
         
 		$this->load->view('common/head', $data);
 		$this->load->view('conversation',$body);

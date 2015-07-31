@@ -1954,11 +1954,6 @@ hr.line {
 
 
 @media screen and (max-width: 960px) {
-    .container-960 {
-        margin: 0 auto;
-        width: 100%;
-    }
-
     .container-head {
         text-align: center;
         margin-right: auto;
