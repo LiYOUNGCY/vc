@@ -8,88 +8,13 @@
 		<div id="sbtn" class="sbtn">
 			<div class="icon sidebtn"></div>
 		</div>
-		<div class="homeshowcar">
-			<div class="showcartop">
-				<div class="user">
-					<div class="head">
-						<img src="<?php echo $user['pic']; ?>">
-					</div>
-					<div class="name">
-						<?php echo $user['name']; ?>
-						<span class="icon identity tooplit">
-							<a href=""><div class="i_media"><span>自媒体</span></div></a>
-						</span>
-					</div>
-				</div>
-				<div class="intro">
-					<span class="text">
-						<?php echo $user['intro']; ?>
-					</span>
-					<a class="link" href="javascript:void(0);"><i class="fa fa-edit"></i></a>
-				</div>
-				<?php 
-					if(isset($me['id']) && $me['id'] != $user['id']){
-				?>
-				<div class="option">
-					<div class="gz-btn btn"><i class="fa fa-plus"></i>关注</div>
-					<div class="sx-btn btn"><i class="fa fa-envelope"></i>私信</div>
-				</div>
-				<?php
-					}
-				?>
-				<div class="home-menu">
-					<ul>
-						<a href="<?php echo base_url().'home/'.$user['alias'];?>">
-							<li class="active">
-								<div class="icon home_quanzi"></div>
-								圈子
-							</li>	
-						</a>
-						<a href="<?php echo base_url().'home/'.$user['alias'].'/intro';?>">
-							<li>
-								<div class="icon home_jieshao"></div>
-								介绍
-							</li>	
-						</a>
-						<a href="<?php echo base_url().'account/setting';?>">
-							<li>
-								<div class="icon home_setting"></div>
-								设置
-							</li>	
-						</a>
-					</ul>
-				</div>	
-			</div>
-			<div class="fliter"></div>
-		</div>
+
 		<div id="vi_content" class="content">
 			<div id="vi_main" class="main width-100p">
-				<div id="qzlist" class="qzlist">
-				<div class="title">
-					<?php echo $user['name'];?>的圈子
-				</div>
-				<hr class="line2" />
-				<hr class="line"  />
-				<div class="theqz" id="theqz">
-					<div class="qzinfo" id="qzinfo">
-
-					</div>
-				</div>
-				<div class="title">
-					<?php echo $user['name'];?>关注的圈子
-				</div>
-				<hr class="line2" />
-				<hr class="line" />
-				<div id="list" class="list">
-					
-				</div>
-				<div id="loadmore" class="loadmore">
-					加载更多
-				</div>
-				</div>
 			</div>
 			<?=$footer?>
 		</div>
+
 	</div>
 	<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
 </body>
@@ -101,13 +26,8 @@
 	var is_more = 1;
 
 	window.onload = function() { 
-		loadcommu(0,uid);
 
-		$("#loadmore").click(function(){
-			loadcommu(PAGE,uid);
-			PAGE++;
-		})
-	}; 
+	};
 
 	function loadcommu(pageTemp, id){
 		$.ajax({

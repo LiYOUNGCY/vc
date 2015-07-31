@@ -21,7 +21,7 @@ class Main extends MY_Controller{
 		if($user)
 		{
 			$data['css'] = array('common.css', 'font-awesome/css/font-awesome.min.css');
-	        $data['javascript'] = array('j162.min.js','timeago.js');
+	        $data['javascript'] = array('jquery.js');
 
 	        $this->load->view('common/head', $data);
 	        $u['user']    = $this->user;

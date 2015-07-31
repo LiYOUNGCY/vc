@@ -12,7 +12,14 @@ class Main extends MY_Controller{
 	 */
 	public function index()
 	{
-		/*$this->load->view()*/
+		$data['css'] = array('common.css', 'font-awesome/css/font-awesome.min.css');
+        $data['javascript'] = array('jquery.js');
+        $u['user']    = $this->user;
+        $this->load->view('common/head', $data);
+    	$data['sidebar'] = $this->load->view('common/sidebar', $u, TRUE);
+     	$data['footer'] = $this->load->view('common/footer',"", TRUE);
+
+		$this->load->view('quanzi',$data);
 	}
 
 	/**
