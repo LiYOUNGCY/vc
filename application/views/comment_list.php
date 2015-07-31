@@ -3,8 +3,7 @@
 <div id="vi_container" class="container">
     <div id="shade"></div>
     <div id="sbtn" class="sbtn">
-        <div class="icon sidebtn">
-        </div>
+        <div class="icon sidebtn"></div>
     </div>
     <div class="content">
         <div class="container-head">
@@ -26,14 +25,9 @@
                 </ul>
             </div>
             <div id="comment_list" class="conversation">
-                <div class="message-item">
-                    <div class="message-row">
-                        <div class="avatar av-icon">
-                            <img src="<?=base_url().'public/img/icon/info_icon_com.png'?>" /></div>
-                        <time class="timeago" title="2015-07-29 01:07:10" datetime="2015-07-29 01:07:10" style="float:right;"></time>
-                        <h3>谁谁 评论了你的文章</h3>
-                        <p id="comment"></p>
-                    </div>
+            </div>
+            <div class="loadmore width-100p" style="margin: 0 auto; text-align:center;">
+                <div id="loadmore" class="btn load_btn"> <font id="text">加载更多</font> <i class="fa fa-spinner fa-pulse" style="text-decoration: none;display:none" id="icon"></i>
                 </div>
             </div>
         </div>
@@ -42,31 +36,61 @@
 </div>
 </body>
 <script>
-    $(function(){
-        var BASE_URL = $("#BASE_URL").val();
-        var COMMENT_URL = BASE_URL + 'notification/main/get_notification_list';
-        var page = 0;
+    var BASE_URL = $("#BASE_URL").val();
+    var COMMENT_URL = BASE_URL + 'notification/main/get_notification_list';
+    var DELETE_COMMENT_URL = BASE_URL + 'notification/main/delete'
 
+    function del(nid) {
         $.ajax({
             type: "POST",
-            url: COMMENT_URL,
+            url: DELETE_COMMENT_URL,
             data: {
-                type: 'comment',
-                page: page,
+                type: 2,
+                nid: nid
             },
             success: function(data) {
                 alert(data);
-                // var obj = eval('(' + data + ')');
-
-                // for( i in obj ) {
-                //     var item = obj[i];
-                //     var content = eval('(' + item.content + ')');
-                //     $('#comment_list').append('<div class="message-item"><div class="message-row"><div class="avatar av-icon"><img src="'+ item.sender.pic +'" /></div><time class="timeago" title="'+ content.publish_time +'" datetime="' + content.publish_time + '" style="float:right;"></time><h3>'+item.sender.name+' 评论了你的文章 '+ content.content_title +'</h3><p id="comment">'+content.comment_content+'</p></div></div>');
-                // }
             }
         });
+    }
 
-        $(".timeago").timeago();
+    $(function(){
+        
+        var page = 0;
+
+        function load_comment() {
+            $.ajax({
+                type: "POST",
+                url: COMMENT_URL,
+                data: {
+                    type: 'comment',
+                    page: page,
+                },
+                success: function(data) {
+                    page = page + 1;
+                    var obj = eval('(' + data + ')');
+
+                    for( i in obj ) {
+
+                        var item = obj[i];
+                        var content = eval('(' + item.content + ')');
+                        // alert(item.publish_time);
+                        $('#comment_list').append('<div class="message-item"><div class="message-row"><div class="avatar av-icon"><img src="'+ item.sender.pic +'"></div><div class="delete"><span class="timeago"  title="'+item.publish_time+'" datetime="'+item.publish_time+'"></span><a onclick="del('+item.id+')" class="link" href="javascript:void(0);"><i class="fa fa-close"></i></a></div><h4 class="comment_head">'+item.sender.name+'评论了你的文章<a class="link" href="'+BASE_URL+'article/'+ content.content_id+'">《'+content.content_title+'》</a></h4><p id="comment">'+content.comment_content+'</p></div></div>');
+                    }
+
+                    $(".timeago").timeago();
+                }
+            });
+        }
+
+        load_comment();
+
+        
+        $('#loadmore').click(function(){
+            load_comment();
+        });
+
+        
     });
 </script>
 </html>

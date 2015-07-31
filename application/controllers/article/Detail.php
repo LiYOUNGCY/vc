@@ -61,8 +61,7 @@ class Detail extends MY_Controller
                 'paperfold/modernizr.custom.01022.js',
                 'jquery.flexText.min.js',
                 'jquery.qqFace.js',
-                'error.js',
-                'jquery.timeago.js'
+                'error.js'
             );
         $this->load->view('common/head', $head);
         $this->load->view('article_detail', $data);

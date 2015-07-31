@@ -2039,13 +2039,22 @@ hr.line {
     font-size: 14px;
     text-align: left;
 
-    color: #c9c9c9;
+    color: #CCC;
 }
 
 .conversation h1 {
     margin-bottom: 40px;
     padding: 20px;
 }
+
+.conversation h4 .timeago {
+    font-size: inherit;
+}
+.message-item .message-row .delete {
+    float: right;
+}
+
+
 
 main,
 .flp,
