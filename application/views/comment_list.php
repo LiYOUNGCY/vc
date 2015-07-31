@@ -55,13 +55,14 @@
                 page: page,
             },
             success: function(data) {
-                var obj = eval('(' + data + ')');
+                alert(data);
+                // var obj = eval('(' + data + ')');
 
-                for( i in obj ) {
-                    var item = obj[i];
-                    var content = eval('(' + item.content + ')');
-                    $('#comment_list').append('<div class="message-item"><div class="message-row"><div class="avatar av-icon"><img src="'+ item.sender.pic +'" /></div><time class="timeago" title="'+ content.publish_time +'" datetime="' + content.publish_time + '" style="float:right;"></time><h3>'+item.sender.name+' 评论了你的文章 '+ content.content_title +'</h3><p id="comment">'+content.comment_content+'</p></div></div>');
-                }
+                // for( i in obj ) {
+                //     var item = obj[i];
+                //     var content = eval('(' + item.content + ')');
+                //     $('#comment_list').append('<div class="message-item"><div class="message-row"><div class="avatar av-icon"><img src="'+ item.sender.pic +'" /></div><time class="timeago" title="'+ content.publish_time +'" datetime="' + content.publish_time + '" style="float:right;"></time><h3>'+item.sender.name+' 评论了你的文章 '+ content.content_title +'</h3><p id="comment">'+content.comment_content+'</p></div></div>');
+                // }
             }
         });
 
