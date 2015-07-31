@@ -26,7 +26,8 @@ class Main extends MY_Controller{
 			'jquery.js',
 			'vchome.js',
 			'timeago.js',
-			'error.js'
+			'error.js',
+			'timeago.js'
 		);
 
 		$user['user'] 	= $this->user;
@@ -82,11 +83,11 @@ class Main extends MY_Controller{
 		$result = $this->notification_service->update($this->user['id'],$nid,$type,array('read_flag' => 1));
 		if(!empty($result))
 		{
-			echo "success";
+			echo json_encode(array('success' => 0));
 		}
 		else
 		{
-			echo "failed";
+			$this->error->output('INVALID_REQUEST');
 		}
 	}
 
@@ -101,11 +102,11 @@ class Main extends MY_Controller{
 		$result = $this->notification_service->delete($this->user['id'],$nid,$type);
 		if(!empty($result))
 		{
-			echo "success";
+			echo json_encode(array('success' => 0));
 		}
 		else
 		{
-			echo "failed";
+			$this->error->output('INVALID_REQUEST');
 		}
 	}
 }
