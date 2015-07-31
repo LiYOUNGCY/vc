@@ -32,7 +32,7 @@ class User_service extends MY_Service
 		}
 		
 		//注册成功，设置 session
-		if ( $user_id = $this->user_model->register_action ($name, $register_type, $pwd) != FALSE ) {
+		if ( !empty($user_id = $this->user_model->register_action ($name, $register_type, $pwd))) {
 			$user = $this->user_model->get_user_base_id($user_id);
 			//设置 SESSION
 			$this->auth_service->set_login_session($user);
