@@ -49,7 +49,6 @@ class Main extends MY_Controller
 		$pwd   		= $this->sc->input('pwd');
 		$rememberme = $this->sc->input('rememberme');
 
-
 		$result = $this->user_service->login_action($pwd, $email, NULL, $rememberme);
 		if($result)
 		{
@@ -72,7 +71,6 @@ class Main extends MY_Controller
 		$phone 		= $this->sc->input('phone');
 		$pwd   		= $this->sc->input('pwd');
 		$rememberme = $this->sc->input('rememberme');
-
 
 		$result = $this->user_service->login_action($pwd, NULL, $phone, $rememberme);
 		if($result)
