@@ -156,6 +156,16 @@ class User_service extends MY_Service
     }
 
     /**
+     * [check_alias 查看主页别名是否重复]
+     * @param  [type] $uid   [description]
+     * @param  [type] $alias [description]
+     * @return [type]        [description]
+     */
+    public function check_alias($uid, $alias)
+    {
+        return $this->user_model->have_alias($uid,$alias);
+    }
+    /**
      * [_clear 清除值为空的变量]
      * @param  [array] $data [description]
      * @return [type]       [description]

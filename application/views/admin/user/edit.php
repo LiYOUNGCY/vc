@@ -122,8 +122,12 @@
 					                    <tr>
 					                        <td>
 					                            <div class="form-group">
-					                                <span class="col-sm-4 col-xs-3 control-label">主页别名:</span>
+					                                <span class="col-sm-4 col-xs-3 control-label">主页别名(www.artvc.cc/home/):</span>
 					                                <div class="col-sm-5 col-xs-8">
+					                                	<?php 
+					                                		$arr = explode('/', $user['alias']);
+					                                		$user['alias'] = $arr[1];
+					                                	?>
 					                                    <input class="form-control" name="alias" type="text" value="<?=$user['alias']?>">
 					                                </div>
 					                                <a  class="btn btn-outline btn-primary" style="text-decoration:none;"  href="<?=base_url().'home/'.$user['alias']?>">进入主页</a>

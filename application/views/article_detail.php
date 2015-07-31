@@ -38,7 +38,7 @@
       <?=$article['content']?></div>
 
     <div class="like">
-      <?php if($status == '0') { ?>
+      <?php if($status == 0) { ?>
       <div id="mark-like" class="mark-like">
         <?php } else { ?>
         <div id="mark-like" class="mark-like active">

@@ -93,10 +93,8 @@ $(function(){
 
     var ce = !!username.match("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$");
     var cp = !!username.match("^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$");
-      var is_remember = $("#rememberme").attr("checked");
-    if(is_remember == "checked") is_remember = 1; else is_remember = 0;
-
-    
+    var is_remember = $("#rememberme").prop("checked");
+    if(is_remember == true) is_remember = 1; else is_remember = 0;
     
     if( ce == true ){
         $.post(

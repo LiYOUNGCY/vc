@@ -28,12 +28,14 @@
               <label class="label" for="old_pwd">旧密码</label>
             </div>
             <div class="form-group">
-              <input class="flp-input" type="password" id="new_pwd" name="new_pwd">
-              <label class="label" for="new_pwd">新密码</label>
+              <input class="flp-input" type="password" id="pwd" name="pwd">
+              <label class="label" for="pwd">新密码</label>
+              <div id="pwd_error" class="error_div"></div>              
             </div>
             <div class="form-group">
               <input class="flp-input" type="password" id="confirm_pwd" name="confirm_pwd">
               <label class="label" for="confirm_pwd">确认密码</label>
+              <div id="confirm_error" class="error_div"></div>              
             </div>
             <div class="option">
               <div id="cancel" class="btn cancel">取消</div>
@@ -84,13 +86,22 @@
   })
 
   $(function (){
-    $('#save').click(function (){
-      var new_pwd = $('#new_pwd').val();
-      var confirm_pwd = $('#new_pwd').val();
 
-      if( new_pwd === confirm_pwd ) {
+    $("#pwd").blur(function(){
+      validate('pwd',$(this).val());
+    });
+         
+    $('#save').click(function (){
+      var pwd = $('#pwd').val();
+      var confirm_pwd = $('#confirm_pwd').val();
+      if( pwd === confirm_pwd ) {
+        $("#confirm_error").css('display','none');        
         $('form').submit();
-      } 
+      }else
+      {
+          $("#confirm_error").html(VALIDATE_ERROR["format_confirm_pwd"]);
+          $("#confirm_error").css('display','block');
+      }
     });
   });
 
