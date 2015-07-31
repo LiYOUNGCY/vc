@@ -32,14 +32,19 @@
         </div>
         <div class="form" id="phone_sign">
           <input type="text" id="phone" placeholder="手机号" />
+          <div id="phone_error" class="error_div"></div>          
           <hr style="color:#B3B3B3;" />
-          <input type="password" id="password" placeholder="密码" />
+          <input type="password" id="pwd" placeholder="密码" />
+         
         </div>
         <div class="form" style="display:none;" id="email_sign">
           <input type="text" id="email" placeholder="邮箱地址" />
+          <div id="email_error" class="error_div"></div>          
           <hr style="color:#B3B3B3;" />
-          <input type="password" id="password" placeholder="密码" />
+          <input type="password" id="pwd" placeholder="密码" />
+           
         </div>
+        <div id="pwd_error" class="error_div"></div>  
 
         <div class="width-100p">
           <a class="link" href="javascript:signup();">
@@ -68,8 +73,13 @@
   </div>
 </div>
 <script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
+<script type="text/javascript" src="<?=base_url()?>public/js/validate.js"></script>
 <script type="text/javascript">
-
+  var BASE_URL = $("#BASE_URL").val();
+  var EMAIL_SIGNUP_URL = BASE_URL + "account/main/register_by_email";
+  var PHONE_SIGNUP_URL = BASE_URL + "account/main/register_by_phone";
+  var CHECK_PHONE_URL = BASE_URL + "account/main/check_phone";
+  var CHECK_EMAIL_URL = BASE_URL + "account/main/check_email";      
   $(function() {
     $("#toemail").click(function() {
       $(this).css({"display":"none"});
@@ -95,26 +105,45 @@
     })
   })
     
-    
+    $('#phone').blur(function(){
+      var result = validate('phone', $('#phone').val());
+      if(result)
+      {
+        check_phone();
+      }
+    });
+    $('#email').blur(function(){
+      var result = validate('email', $('#email').val());
+      if(result)
+      {
+        check_email();
+      }
+    });
+    $('#phone_sign #pwd').blur(function(){
+      validate('pwd', $('#phone_sign #pwd').val());
+    });    
+    $('#email_sign #pwd').blur(function(){
+      validate('pwd', $('#email_sign #pwd').val());
+    });    
     function signup(){ 
-        var BASE_URL = $("#BASE_URL").val();
-        var EMAIL_SIGNUP_URL = BASE_URL + "account/main/register_by_email";
-        var PHONE_SIGNUP_URL = BASE_URL + "account/main/register_by_phone";
+
 
         var signup_way = $("#signway").val();
         
         if( signup_way == "phone" ){
 
         var phone = $("#phone_sign #phone").val();
-        var pwd = $("#phone_sign #password").val();
-          var cp = !!phone.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+        var pwd   = $("#phone_sign #pwd").val()
+        var phone_result = validate('phone',phone);
+        var pwd_result =   validate('pwd',pwd);
+        var cp = phone_result && pwd_result && phone_check;
+
           if(cp == true){
 
           $.post(
             PHONE_SIGNUP_URL,{
               phone : phone,
-              pwd   : pwd,
-              name  : phone
+              pwd   : pwd
             },function(data){
               data = eval('('+data+')');
               if(data.error != null)
@@ -128,22 +157,20 @@
               }
             }
           )
-        }else{
-          alert("请填入正确的手机号码");
         }
       }
         else{
         var email = $("#email_sign #email").val();
-        var pwd = $("#email_sign #password").val();
-        var ce = !!email.match("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$");
-          var name = email.split('@');
+        var pwd = $("#email_sign #pwd").val();
+        var email_result = validate('email',email);
+        var pwd_result =   validate('pwd',pwd);
+        var ce = email_result && pwd_result && email_check;
 
           if(ce == true){
           $.post(
             EMAIL_SIGNUP_URL,{
               email : email,
-              pwd   : pwd,
-              name  : name[0]
+              pwd   : pwd
             },function(data){
               data = eval('('+data+')');
               if(data.error != null)
@@ -157,10 +184,45 @@
               }
             }
           )
-        }else{
-          alert("请填入正确的邮箱地址");
         }
       }
+    }
+
+    var phone_check = true;
+    function check_phone()
+    {
+
+      var phone = $("#phone").val();
+      $.post(CHECK_PHONE_URL,{phone:phone},function(data){
+        data = eval('('+data+')');
+        if(data.error != null)
+        {
+          phone_check = false;
+          $('#phone_error').html(data.error);          
+        }
+        else if(data.success == 0)
+        {
+          phone_check = true;
+        }
+      });  
+    } 
+
+    var email_check = true;
+    function check_email()
+    {
+       var email = $("#email").val();
+        $.post(CHECK_EMAIL_URL,{email:email},function(data){
+          data = eval('('+data+')');
+          if(data.error != null)
+          {
+            email_check = false;
+            $('#email_error').html(data.error);          
+          }
+          else if(data.success == 0)
+          {
+            email_check = true;
+          }
+        });         
     }
   </script>
 </body>

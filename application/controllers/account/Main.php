@@ -100,8 +100,8 @@ class Main extends MY_Controller
 	 */
 	public function register_by_email()
 	{
-		$name 	= $this->sc->input('name');
 		$email 	= $this->sc->input('email');
+		$name   = $email;
 		$pwd 	= $this->sc->input('pwd');
 
 
@@ -124,8 +124,8 @@ class Main extends MY_Controller
 	 */
 	public function register_by_phone()
 	{
-		$name 	= $this->sc->input('name');
 		$phone 	= $this->sc->input('phone');
+		$name   = $phone;
 		$pwd 	= $this->sc->input('pwd');
 
 		$result = $this->user_service->register_action($name, $pwd, NULL, $phone);
@@ -150,11 +150,11 @@ class Main extends MY_Controller
 		$result = $this->user_service->check_phone($phone);
 		if($result)
 		{
-			echo json_encode(array('success' => 0));
+			$this->error->output('PHONE_REPEAT');
 		}
 		else
 		{
-			$this->error->output('PHONE_REPEAT');
+			echo json_encode(array('success' => 0));			
 		}
 
 	}
@@ -169,11 +169,11 @@ class Main extends MY_Controller
 		$result = $this->user_service->check_email($email);		
 		if($result)
 		{
-			echo json_encode(array('success' => 0));
+			$this->error->output('EMAIL_REPEAT');			
 		}
 		else
 		{
-			$this->error->output('EMAIL_REPEAT');
+			echo json_encode(array('success' => 0));
 		}
 	}
 }

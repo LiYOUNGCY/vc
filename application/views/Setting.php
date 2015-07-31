@@ -153,7 +153,7 @@
              if(data.error != null)
              {
                 alias_check = false;
-                $('#alias_error').html(data.error).css('display','block');
+                $('#alias_error').html(data.error);
              }
              else if(data.success == 0)
              {
