@@ -18,7 +18,8 @@ class Main extends MY_Controller{
 		}
 
 		$head['css'] = array(
-			'common.css'
+			'common.css',
+			'font-awesome/css/font-awesome.min.css'
 		);
 
 		$head['javascript'] = array(
@@ -96,7 +97,7 @@ class Main extends MY_Controller{
 	public function delete()
 	{
 		$nid = $this->sc->input('nid');
-		$type= $this->sc->input('type');			
+		$type= $this->sc->input('type');
 		$result = $this->notification_service->delete($this->user['id'],$nid,$type);
 		if(!empty($result))
 		{
