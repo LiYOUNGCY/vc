@@ -25,8 +25,11 @@ class Article_comment_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function get_comment_by_aid($aid)
+    public function get_comment_by_aid($aid,$order = 'id DESC')
     {
-        return $this->db->where('aid', $aid)->get('article_comment')->result_array();
+        return $this->db->where('aid', $aid)
+                        ->order_by($order)
+                        ->get('article_comment')
+                        ->result_array();
     }
 }
