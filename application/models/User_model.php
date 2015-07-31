@@ -347,4 +347,30 @@ class User_model extends CI_Model
        $query = $this->db->where('uid',$uid)->get('user_online')->row_array();
        return $query;
     }
+
+    /**
+     * [insert_user 添加用户]
+     * @return [type] [description]
+     */
+    public function insert_user($arr)
+    {
+        if(isset($arr['pwd']))
+        {
+            $arr['pwd'] = $this->passwordhash->HashPassword($arr['pwd']);
+        }
+        $this->db->insert('user',$arr);
+        $uid = $this->db->insert_id();
+        if($uid)
+        {
+             //插入 user_online 表
+            $this->_insert_user_online($uid);
+            //更新默认键值
+            $this->update_account($uid,array('alias' => 'home/uid_'.$uid));     
+            return TRUE;         
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
 }

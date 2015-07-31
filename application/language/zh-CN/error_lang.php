@@ -11,6 +11,7 @@ $lang['error_INVALID_ARTICLE_SUBTITLE']= "文章副标题格式错误";
 $lang['error_INVALID_ARTICLE_TAG']     = "文章标签格式错误";
 $lang['error_INVALID_ARTICLE_CONTENT'] = "文章内容格式错误";
 $lang['error_INVALID_PAGE'] 		= '无效的page';
+$lang['error_INVALID_ID'] 			= '无效的id';
 $lang['error_INVALID_UID'] 			= '无效的id';
 $lang['error_INVALID_CID'] 			= '无效的id';
 $lang['error_INVALID_NID'] 			= '无效的id';

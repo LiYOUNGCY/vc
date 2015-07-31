@@ -6,15 +6,15 @@
                 <div class="col-lg-12"  style="padding:10px 0px;">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            用户管理
+                            权限管理
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs">
-                                <li class="active" ><a href="#list" data-toggle="tab" aria-expanded="true">用户列表</a>
+                                <li class="active" ><a href="#list" data-toggle="tab" aria-expanded="true">权限列表</a>
                                 </li>
-                                <li ><a href="#add" data-toggle="tab" aria-expanded="false">添加用户</a>
+                                <li ><a href="#add" data-toggle="tab" aria-expanded="false">添加权限</a>
                                 </li>
                             </ul>
 
@@ -32,31 +32,17 @@
 													</label>
 												</th>
 												<th>ID</th>
-												<th>用户名</th>
-												<th>角色</th>
+												<th>权限名</th>
+												<th>路由</th>
 												<th>
-													手机
-												</th>
-												<th>
-													邮箱
-												</th>
-												<th>
-													<i class="fa fa-calendar fa-fw"></i>				
-													注册时间
-												</th>							
-												<th>
-													<i class="fa fa-calendar fa-fw"></i>
-													最后活跃时间
-												</th>
-												<th>
-													状态
-												</th>									
+													角色组
+												</th>								
 												<th></th>
 											</tr>
 										</thead>
 
 										<tbody>
-												<?php foreach ($user as $k => $v) {?>
+												<?php foreach ($auth as $k => $v) {?>
 													<tr class="selected">
 														<td class="center">
 															<label>
@@ -71,28 +57,32 @@
 															<?=$v['name']?>
 														</td>
 														<td>
-															<?=$v['role_name']?>
+															<?=$v['route']?>
 														</td>
 														<td>
-															<?=$v['phone']?>
-														</td>
-														<td>
-															<?=$v['email']?>
-														</td>
-														<td>
-															<?=$v['register_time']?>
-														</td>
-														<td>
-															<?=$v['last_active']?>
-														</td>
-														<td>
-															<?php if($v['forbidden'] == 0){echo "正常";}else{echo "被封禁";}?>
-														</td>											
+															<?php 
+																$arr = explode(',',$v['role_group']);
+																$str = "";
+																foreach ($arr as $k1 => $v1) {
+																	for($i = 0; $i < count($role); $i++)
+																	{
+																		if($v1 == "|{$role[$i]['id']}|")
+																		{
+																			$str.=$role[$i]['name'].",";
+																			break;
+																		}
+																	}
+																}
+																if( ! empty($str))
+																{
+																	$str = substr($str,0,strlen($str)-1);																	
+																}
+															?>
+															<?=$str?>
+														</td>										
 														<td class="tooltip-btn">
 															<button data-toggle="tooltip"  title="编辑" effect="edit" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-edit"></i>
-											                </button>
-															<button data-toggle="tooltip"  title="封禁" effect="forbidden" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-ban"></i>
-											                </button>								                				
+											                </button>							               				
 														</td>
 													</tr>																					
 												<?php }?>
@@ -110,7 +100,7 @@
 				                                        <h4 class="modal-title" id="myModalLabel">删除提示</h4>
 				                                    </div>
 				                                    <div class="modal-body">
-													确认删除所勾选的用户?
+													确认删除所勾选的权限?
 				                                    </div>
 				                                    <div class="modal-footer">
 				                                        <button type="button" class="btn btn-default" id="close_modal" data-dismiss="modal">Close</button>
@@ -128,15 +118,15 @@
 			                		<!-- /分页-->                                   
                                 </div>
 
-                                <!--添加用户-->
+                                <!--添加权限-->
                                 <div class="tab-pane fade" id="add">
 									<table class="table table-striped">
-										<form id="add_form" method="post" action="http://127.0.0.1/artvc/admin/user/add_user">
+										<form id="add_form" method="post" action="http://127.0.0.1/artvc/admin/user/add_auth">
 						                    <tbody>
 							                    <tr>
 							                        <td>
 							                            <div class="form-group">
-							                                <span class="col-sm-4 col-xs-3 control-label">用户名:</span>
+							                                <span class="col-sm-4 col-xs-3 control-label">权限名:</span>
 							                                <div class="col-sm-5 col-xs-8">
 							                                    <input class="form-control" name="name" type="text" />
 							                                </div>
@@ -146,9 +136,9 @@
 							                    <tr>
 							                        <td>
 							                            <div class="form-group">
-							                                <span class="col-sm-4 col-xs-3 control-label">邮箱:</span>
+							                                <span class="col-sm-4 col-xs-3 control-label">路由:</span>
 							                                <div class="col-sm-5 col-xs-8">
-							                                    <input class="form-control" name="email" type="text" value="">
+							                                    <input class="form-control" name="route" type="text" value="">
 							                                </div>
 							                            </div>
 							                        </td>
@@ -156,37 +146,27 @@
 							                    <tr>
 							                        <td>
 							                            <div class="form-group">
-							                                <span class="col-sm-4 col-xs-3 control-label">手机:</span>
+							                                <span class="col-sm-4 col-xs-3 control-label">角色组:</span>
 							                                <div class="col-sm-5 col-xs-8">
-							                                    <input class="form-control" name="phone" type="text" value="">
+							                                    <input class="form-control" id="show_role"  type="text" value="" disabled="disabled">
 							                                </div>
-							                            </div>
-							                        </td>
-							                    </tr>
-								                <tr>
-							                        <td>
-							                            <div class="form-group">
-							                                <span class="col-sm-4 col-xs-3 control-label">密码:</span>
-							                                <div class="col-sm-5 col-xs-8">
-							                                    <input class="form-control" name="pwd" type="password" value="">
-							                                </div>
-							                            </div>
-							                        </td>
-							                    </tr>
-												<tr>
-							                        <td>
-							                            <div class="form-group">
-							                                <label class="col-sm-4 col-xs-3 control-label">用户组:</label>
-							                                <div class="col-sm-5 col-xs-8">
-							                                    <select name="role" class="form-control">
+
+															<button type="button" id="clear_group" class="btn btn-warning btn-circle"><i class="fa fa-times"></i></button>							                                    
+						                                    <input type="hidden" name="role_group" id="role_group"/>
+						                                    <div class="col-sm-2 col-xs-8">
+							                                    <select name="group_select" class="form-control">
+							                                    	<option value="" ></option>
 			   														<?php foreach ($role as $k => $v){ ?>
-																			<option value="<?=$v['id']?>"><?=$v['name']?></option>
+																			<option value="|<?=$v['id']?>|">
+																				<?=$v['name']?>
+																			</option>
 			   														<?php }?>
-			                                                    </select>
-							                                </div>
+			                                                    </select>								                                    
+							                               </div>			                               
 							                            </div>
 							                        </td>
-							                    </tr>	                    				                    				                    
+							                    </tr>
+								            
 											</tbody>
 										</form>
 									</table>   
@@ -218,15 +198,13 @@
 <script type="text/javascript">
 var BASE_URL = $("#BASE_URL").val();
 var ADMIN    = $("#ADMIN").val();
-var DELETE_URL= ADMIN+'user/delete_user';
-var FORBID_URL= ADMIN+'user/forbid_user';
+var DELETE_URL= ADMIN+'user/delete_auth';
 $(function()
 {
     $('.tooltip-btn').tooltip({
         selector: "[data-toggle=tooltip]",
         container: "body"
     })
-
 	$("#all_check").click(function()
 	{
 		var child = $("input[tag=child_check]");
@@ -249,7 +227,7 @@ $(function()
 			$("#modal_open").click();			
 		}
 		else{
-			alert('请选择用户！');
+			alert('请选择！');
 			return false;
 		}
 	});	
@@ -296,52 +274,37 @@ $(function()
 			});
 		}
 	});
-	//封禁
-	$("button[effect=forbidden]").click(function()
-	{
-		var uid = $(this).attr('u');
-		if(uid != null && uid != undefined && uid != "")
-		{
-			$.post(FORBID_URL,{uid:uid},function(data)
-			{
-				data = eval('('+data+')');
-				if(data.error != null)
-				{
-					$(".alert-danger").append(data.error);
-					$(".alert-danger").fadeIn(1000,function(){
-						$(this).fadeOut();
-						if(data.script != "")
-						{
-							eval(data.script);							
-						}
-	
-					});
-				}	
-				else if(data.success == 0)
-				{ 
-					$(".alert-success").append(data.note);
-					$(".alert-success").fadeIn(1000,function(){
-						$(this).fadeOut();	
-						eval(data.script);								
-					});
-				}
-			});
-		}
-	});
 	//编辑
 	$("button[effect=edit]").click(function()
 	{
 		var uid = $(this).attr('u');	
 		if(uid != null && uid != "")
 		{
-			window.location.href=ADMIN+"user/edit/u/"+uid;
+			window.location.href=ADMIN+"user/edit/a/"+uid;
 		}
+	});
+	$("select[name=group_select]").change(function(){
+		var op_html = $("option:selected").html();
+		var op_val  = $("option:selected").val();
+		var group_val = $("input[name=role_group]").val();
+		if(group_val.indexOf(op_val,0) == -1)
+		{
+			op_html = op_html.replace(/^\s+|\s+$/g,"");
+			var old_html = $("#show_role").val() == "" ? "" : $("#show_role").val()+",";
+			$("#show_role").val(old_html+op_html);
+			var old_val  = $("input[name=role_group]").val() == "" ? "" : $("input[name=role_group]").val()+",";			
+			$("input[name=role_group]").val(old_val+op_val);
+		}
+
+	});
+	$("#clear_group").click(function(){
+		$("#show_role").val("");
+		$("input[name=role_group]").val("");
 	});
 	$("#add_submit").click(function(){
 		$("#add_form").submit();
 	});
-
-
+	
 });
 </script>
 </body>

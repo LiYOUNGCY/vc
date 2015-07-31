@@ -23,7 +23,8 @@ class Main extends MY_Controller{
 
 		$head['javascript'] = array(
 			'jquery.js',
-			'vchome.js'
+			'vchome.js',
+			'error.js'
 		);
 
 		$user['user'] 	= $this->user;

@@ -31,6 +31,7 @@ class Sc {
 				 'article_subtitle'=> 'max_length[125]',
 				 'article_tag' 	   => 'max_length[255]',
 				 'article_content' => 'required|min_length[1]',
+				 'id' 			=> 'required|numeric',
 				 'page' 		=> 'required|numeric',				 
 				 'uid' 			=> 'required|numeric',
 				 'cid' 			=> 'required|numeric',
