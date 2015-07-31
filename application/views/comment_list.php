@@ -40,7 +40,7 @@
     var COMMENT_URL = BASE_URL + 'notification/main/get_notification_list';
     var DELETE_COMMENT_URL = BASE_URL + 'notification/main/delete'
 
-    function del(nid) {
+    function del(nid, obj) { 
         $.ajax({
             type: "POST",
             url: DELETE_COMMENT_URL,
@@ -49,7 +49,7 @@
                 nid: nid
             },
             success: function(data) {
-                alert(data);
+                $(obj).parent().parent().parent().fadeOut(200);
             }
         });
     }
@@ -75,7 +75,7 @@
                         var item = obj[i];
                         var content = eval('(' + item.content + ')');
                         // alert(item.publish_time);
-                        $('#comment_list').append('<div class="message-item"><div class="message-row"><div class="avatar av-icon"><img src="'+ item.sender.pic +'"></div><div class="delete"><span class="timeago"  title="'+item.publish_time+'" datetime="'+item.publish_time+'"></span><a onclick="del('+item.id+')" class="link" href="javascript:void(0);"><i class="fa fa-close"></i></a></div><h4 class="comment_head">'+item.sender.name+'评论了你的文章<a class="link" href="'+BASE_URL+'article/'+ content.content_id+'">《'+content.content_title+'》</a></h4><p id="comment">'+content.comment_content+'</p></div></div>');
+                        $('#comment_list').append('<div class="message-item"><div class="message-row"><div class="avatar av-icon"><img src="'+ item.sender.pic +'"></div><div class="delete"><span class="timeago"  title="'+item.publish_time+'" datetime="'+item.publish_time+'"></span><a onclick="del('+item.id+', this)" class="link" href="javascript:void(0);"><i class="fa fa-close"></i></a></div><h4 class="comment_head">'+item.sender.name+'评论了你的文章<a class="link" href="'+BASE_URL+'article/'+ content.content_id+'">《'+content.content_title+'》</a></h4><p id="comment">'+content.comment_content+'</p></div></div>');
                     }
 
                     $(".timeago").timeago();
