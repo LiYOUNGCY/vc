@@ -305,7 +305,7 @@ img{
     height: 100%;
     background-color:dimgray;
     opacity: 0.4;
-    z-index: 4;
+    z-index: 1000;
     bottom: 0;
     position: fixed;
     right: 0px;
@@ -331,34 +331,34 @@ img{
 
 
 .sbtn {
-    width: 45px;
-    position: fixed;
-    right: 0;
-    top:0;
-    outline: 0px none;
-    cursor: pointer;
-	z-index: 5;
+	width: 45px;
+	position: fixed;
+	right: 0;
+	top:0;
+	outline: 0px none;
+	cursor: pointer;
+	z-index: 999;
 }
 .content {
-    max-width: 960px;
-    margin: 0 auto;
-    text-align: center;
-    display: inline-block;
-    width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+	text-align: center;
+	display: inline-block;
+	width: 100%;
 }
 
 .vi-user {
-    margin: 5px 0px;
-    margin-top: 45px;
-    width: 100%;
+	margin: 5px 0px;
+	margin-top: 45px;
+	width: 100%;
 }
 .userhead{
-    width: 50px;
-    height: 50px;
-    display: inline-block;
-    border-radius: 50px;
-    float: left;
-    overflow: hidden;
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	border-radius: 50px;
+	float: left;
+	overflow: hidden;
 }
 .main {
 	display: inline-block;
@@ -996,13 +996,25 @@ img{
     background-position: center;
     background-size: cover;    
 }
+
+.homeshowcar .fliter{
+	background: url(../img/home_fliter.png) 0 bottom repeat-x;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+
 .homeshowcar .showcartop{
     width: 100%;
     height: 100%;
     max-width: 960px;
     margin: 0 auto;
     display: inline-block;
-
+    z-index: 100;
+    position: relative;
 }
 .homeshowcar .showcartop .user{
     width: 100%;
@@ -1025,8 +1037,7 @@ img{
 }
 .homeshowcar .showcartop .intro{
     color: #B3B3B3;
-    font-size: 20px;
-    font-style: italic;
+    font-size: 18px;
 }
 .homeshowcar .showcartop .intro .text{
     margin: 0 10px;
@@ -1087,6 +1098,59 @@ img{
 	width: 100%;
 	max-width: 900px;
 }
+.qzlist hr{
+	margin: 20px 10px !important;
+}
+.qzlist .line{
+	display: none;
+}
+.qzlist .title{
+	text-align: left;
+	margin: 0 10px;
+	color: #B3B3B3;
+	font-size: 28px;
+	font-weight: bold;
+}
+.qzlist .list{
+	display: inline-block;
+}
+.qzlist .theqz{
+	margin: 0 10px;
+}
+.qzlist .theqz .qzinfo{
+	border: 1px #eee solid;
+	width: 100%;
+	margin: 0 auto 15px;
+	min-width: 280px;
+	padding: 10px 0;
+}
+.qzlist .theqz .qzinfo .name{
+	height: 52px;
+  	text-align: left;
+  	padding: 15px 0 0;
+}
+
+.qzlist .theqz .qzinfo .intro{
+  	margin: 10px 15px;
+  	  text-align: justify;
+  	color: #B3B3B3;
+}
+.qzlist .theqz .qzinfo .infob{
+	text-align: right;
+	margin: 5px 15px 0px;
+	height: 30px;
+	line-height: 30px;
+}
+.qzlist .theqz .qzinfo .infob .btn{
+  	background: #FCEE21;
+	border-radius: 0;
+	height: 30px;
+	width: 100px;
+	text-align: center;
+	font-size: 14px;
+	margin-left: 10px;
+}
+
 .qzlist .box{
 	display: inline-block;
 	float: left;
@@ -1118,12 +1182,23 @@ img{
 	max-width: 12em;
 	overflow: hidden;
 }
-.qzlist .box:hover,.loadmore:hover{
+
+
+.qzlist .loadmore:hover{
 	background-color: #F0F0F0;
 }
-.qzlist .box:hover,.loadmore:active{
+.qzlist .loadmore:active{
 	background-color: #F9F9F9;
 }
+
+.qzlist .box:hover{
+	background-color: #F0F0F0;
+}
+.qzlist .box:active{
+	background-color: #F9F9F9;
+}
+
+
 .qzlist .loadmore{
 	border: 1px #eee solid;
 	max-width: 900px;
@@ -1135,6 +1210,32 @@ img{
 	text-align: center;
 	cursor: pointer;
 	transition: all 0.1s ease-in-out;
+}
+
+.homeintro .contact{
+	width: 88%;
+	margin: 0 auto;
+	max-width: 700px;
+	margin-bottom: 15px;
+	padding: 0 0 10px;
+	border-bottom: 1px #eee solid;
+	text-align: left;
+}
+
+.homeintro .contact .btn{
+	padding: 0 10px;
+	height: 40px;
+	line-height: 40px;
+	background: #FFF;
+	border: 1px #eee solid;
+	border-radius: 0;
+	transition: all 0.1s ease-in-out;
+}
+.homeintro .contact .btn:hover{
+	background-color: #F0F0F0;
+}
+.homeintro .contact .btn:active{
+	background-color: #F9F9F9;
 }
 
 .qzlist .loadmore.disable{
@@ -1164,15 +1265,76 @@ img{
 .homeintro .intro img{
 	width: 100%;
 }
-.homeintro hr.line{
+
+.homeintro hr{
 	width: 88%;
 	max-width:700px;
-	margin:  20px auto;
-    background: #333;
-    background-image: -webkit-linear-gradient(left, #333, #eee, #fff);
-    background-image: -moz-linear-gradient(left, #333, #eee, #fff);
-    background-image: linear-gradient(left, #333, #eee, #fff);
+	margin:  20px auto !important;
 }
+.homeintro .likeopt{
+	width: 88%;
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+.fave {
+  	width: 107px;
+  	height: 40px;
+	background: #fff url(../img/like-animate.png) no-repeat;
+	background-position: 0 0;
+    	cursor: pointer;
+}
+.fave.focus {
+	-webkit-animation: favefocus .4s steps(9) forwards;
+    	animation: favefocus .4s steps(9) forwards;
+}
+.fave.blur {
+	-webkit-animation: faveblur .3s steps(5) forwards;
+    	animation: faveblur .3s steps(5) forwards;
+}
+
+@-webkit-keyframes favefocus {
+    0% {
+        background-position: 0 0px
+    }
+
+    100% {
+        background-position: -963px 0px
+    }
+}
+
+@keyframes favefocus {
+    0% {
+        background-position: 0 0px
+    }
+
+    100% {
+        background-position: -963px 0px
+    }
+}
+
+@-webkit-keyframes faveblur {
+    0% {
+        background-position: -963px 0px
+    }
+
+    100% {
+        background-position: -1498px 0px
+    }
+}
+
+@keyframes faveblur {
+    0% {
+        background-position: -963px 0px
+    }
+
+    100% {
+        background-position: -1498px 0px
+    }
+}
+
+
+
 @media screen and (max-width: 960px){
 	.logo{
         display: inline-block;
@@ -1276,6 +1438,18 @@ img{
     .vi_footer_right{
     	float:none;
     }
+	.qzlist .line{
+		display: block;
+	}
+	.qzlist .line2{
+		display: none;
+	}
+	.qzlist .title{
+		text-align: center;
+	}
+	.qzlist .theqz .qzinfo {
+		width: 80%;
+	}
 
 }
 
@@ -1420,6 +1594,15 @@ hr.line {
     background-image: -webkit-linear-gradient(left, #fff, #333, #fff);
     background-image: -moz-linear-gradient(left, #fff, #333, #fff);
     background-image: linear-gradient(left, #fff, #333, #fff);
+}
+hr.line2{
+    margin: 20px 0;
+    border: 0;
+    height: 1px;
+    background: #333;
+	background-image: -webkit-linear-gradient(left, #333, #eee, #fff);
+	background-image: -o-linear-gradient(left, #333, #eee, #fff);
+	background-image: linear-gradient(to right, #333, #eee, #fff);
 }
 
 .answer {
