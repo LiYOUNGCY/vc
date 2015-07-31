@@ -74,7 +74,7 @@
                         var item = obj[i];
                         var content = eval('(' + item.content + ')');
 
-                        $('#like_list').append('<div class="message-item"><div class="message-row"><div class="avatar av-icon"><img src="'+ item.sender.pic +'"></div><div class="delete"><div onclick="del('+item.id+', this)" > <i class="fa fa-close" title="删除信息"></i></div></div><h4 class="comment_head">'+item.sender.name+' <span class="timeago" title="'+item.publish_time+'" datetime="'+item.publish_time+'"></span>赞同了您的文章<a class="link" href="'+BASE_URL+'article/'+ content.content_id+'">《'+content.content_title+'》</a></h4></div></div>');
+                        $('#like_list').append('<div class="message-item"><div class="message-row"><div class="avatar av-icon"><img src="'+ item.sender.pic +'"></div><div class="delete"><div onclick="del('+item.id+', this)" > <i class="fa fa-close" title="删除信息"></i></div></div><h4 class="comment_head">'+item.sender.name+' <span class="timeago" title="'+item.publish_time+'" datetime="'+item.publish_time+'+8:00"></span>赞同了您的文章<a class="link" href="'+BASE_URL+'article/'+ content.content_id+'">《'+content.content_title+'》</a></h4></div></div>');
                     }
 
                     $(".timeago").timeago();

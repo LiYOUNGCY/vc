@@ -75,7 +75,7 @@
                         var item = obj[i];
                         var content = eval('(' + item.content + ')');
                         // alert(item.publish_time);
-                        $('#comment_list').append('<div class="message-item"><div class="message-row"><div class="avatar av-icon"><img src="'+ item.sender.pic +'"></div><div class="delete"><div onclick="del('+item.id+', this)"><i class="fa fa-close"></i></div></div><h4 class="comment_head">'+item.sender.name+'<span class="timeago"  title="'+item.publish_time+'" datetime="'+item.publish_time+'"></span>评论了你的文章<a class="link" href="'+BASE_URL+'article/'+ content.content_id+'">《'+content.content_title+'》</a></h4><p id="comment">'+content.comment_content+'</p></div></div>');
+                        $('#comment_list').append('<div class="message-item"><div class="message-row"><div class="avatar av-icon"><img src="'+ item.sender.pic +'"></div><div class="delete"><div onclick="del('+item.id+', this)"><i class="fa fa-close"></i></div></div><h4 class="comment_head">'+item.sender.name+'<span class="timeago"  title="'+item.publish_time+'" datetime="'+item.publish_time+'+8:00"></span>评论了你的文章<a class="link" href="'+BASE_URL+'article/'+ content.content_id+'">《'+content.content_title+'》</a></h4><p id="comment">'+content.comment_content+'</p></div></div>');
                     }
 
                     $(".timeago").timeago();
