@@ -4,8 +4,7 @@
 <div id="vi_container" class="container">
   <div id="shade"></div>
   <div id="sbtn" class="sbtn">
-    <div class="icon">
-      <div class="sidebtn"></div>
+    <div class="icon sidebtn">
     </div>
   </div>
   <div class="content article-detial">
@@ -39,7 +38,7 @@
       <?=$article['content']?></div>
 
     <div class="like">
-      <?php if($status == '0') { ?>
+      <?php if($status == 0) { ?>
       <div id="mark-like" class="mark-like">
         <?php } else { ?>
         <div id="mark-like" class="mark-like active">
@@ -116,8 +115,10 @@
           <div id="submit" class="send btn">发送</div>
         </div>
       </article>
+      <?=$footer?>
     </div>
   </div>
+
 </div>
 <script src="<?=base_url().'/public/js/paperfold/paperfold.js'?>"></script>
 <script>
@@ -182,6 +183,7 @@
       });
     });
 
+
     $("#seeLike").click(function(){
       $("body").addClass("hide-y");
       $('#likeList').removeClass('fadeOut');
@@ -194,7 +196,6 @@
         var item = list[i];
         $("#list").append('<div class="item clearfix"><div class="head"><img src="' + item.user.pic + '"></div><a class="link" href="'+item.user.alias+'"><div class="username">'+item.user.name+'</div></a><div class="time">'+item.update_time+'</div></div>');
       }
-
     });
 
     $("#close").click(function(){

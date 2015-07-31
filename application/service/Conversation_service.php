@@ -134,7 +134,7 @@ class Conversation_service extends MY_Service{
 			$arr = array(
 				'conversation_id' 	   => $cid,
 				'conversation_content' => $content,
-				'count' 			   => 0,
+				'count' 			   => 1,
 				'publish_time' 		   => date('Y-m-d H-m-s')				
 			);
 			$this->notification_model->insert($sender_id,$reciver_id,1,json_encode($arr));			
@@ -142,7 +142,7 @@ class Conversation_service extends MY_Service{
 		else
 		{
 			//更新私信消息
-			$count = 0;
+			$count = 1;
 			if($check_result['read_flag'] == 0)
 			{
 				//增加未读私信个数
@@ -151,7 +151,7 @@ class Conversation_service extends MY_Service{
 			}
 
 			$arr = array(
-				'content'      => json_encode(array('conversation_id' => $cid,'conversation_content' => $content,'count' => $count)),
+				'content'      => json_encode(array('conversation_id' => $cid,'conversation_content' => Common::extract_content($content),'count' => $count)),
 				'read_flag'	   => 0,
 				'publish_time' => date('Y-m-d H-m-s')
 			);

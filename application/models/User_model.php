@@ -47,7 +47,8 @@ class User_model extends CI_Model
         {
             //插入 user_online 表
             $this->_insert_user_online($uid);
-
+            //更新默认键值
+            $this->update_account($uid,array('alias' => 'home/uid_'.$uid));
             return $uid;
 		}
 		else 
@@ -134,7 +135,26 @@ class User_model extends CI_Model
 		return $this->db->where('phone', $phone)->from('user')->count_all_results() !== 0 ? true : false;
 	}
 
-	
+    /**
+     * [have_alias 查看主页别名是否重复]
+     * @param  [type] $uid   [description]
+     * @param  [type] $alias [description]
+     * @return [type]        [description]
+     */
+    public function have_alias($uid = NULL,$alias)
+    {
+        if( ! empty($uid))
+        {
+            $this->db->where('id != ',$uid);
+        }
+        $result = $this->db->where('alias',$alias)->get('user')->row_array() ;        
+        if( ! empty($result))
+        {
+            return TRUE;
+        }
+        return FALSE;
+    }
+
 	/**
 	 * [get_user_base_id 获得用户的基本的信息]
 	 */
@@ -271,7 +291,18 @@ class User_model extends CI_Model
     			return $this->db->affected_rows() === 1;
     		}
     	}
-    	$this->error->output('old_password_error');
+        $this->error->output('old_password_error',array('script' => 'window.location.href = "'.base_url().'setting/pwd";'));
+    }
+    /**
+     * [update_password 更新用户密码]
+     * @param  [type] $uid [用户id]
+     * @param  [type] $pwd [密码]
+     * @return [type]      [description]
+     */
+    public function update_password($uid, $pwd)
+    {
+      $this->db->where('id',$uid)->update('user',array('pwd' => $this->passwordhash->HashPassword($pwd)));
+      return $this->db->affected_rows() === 1;
     }
 
     /**
@@ -290,7 +321,7 @@ class User_model extends CI_Model
       }
       else
       {
-        $this->db->select('user.id,user.name,role,user_role.name as role_name,phone,email,register_time,user_online.last_active');
+        $this->db->select('user.id,user.name,role,user_role.name as role_name,phone,email,forbidden,register_time,user_online.last_active');
       }
       $query = $this->db->join('user_online','user.id = user_online.uid','left')
                         ->join('user_role','user.role = user_role.id','left')
@@ -314,5 +345,51 @@ class User_model extends CI_Model
     {
         $this->db->where_in('id',$uid)->delete('user');
         return $this->db->affected_rows() > 0;
+    }
+
+    /**
+     * [get_role_list 获得角色列表]
+     * @return [type] [description]
+     */
+    public function get_role_list()
+    {
+      $query = $this->db->get('user_role')->result_array();
+      return $query;
+    }
+
+    /**
+     * [get_user_online_by_id 获得用户的登录信息]
+     * @return [type] [description]
+     */
+    public function get_user_online_by_id($uid)
+    {
+       $query = $this->db->where('uid',$uid)->get('user_online')->row_array();
+       return $query;
+    }
+
+    /**
+     * [insert_user 添加用户]
+     * @return [type] [description]
+     */
+    public function insert_user($arr)
+    {
+        if(isset($arr['pwd']))
+        {
+            $arr['pwd'] = $this->passwordhash->HashPassword($arr['pwd']);
+        }
+        $this->db->insert('user',$arr);
+        $uid = $this->db->insert_id();
+        if($uid)
+        {
+             //插入 user_online 表
+            $this->_insert_user_online($uid);
+            //更新默认键值
+            $this->update_account($uid,array('alias' => 'home/uid_'.$uid));     
+            return TRUE;         
+        }
+        else
+        {
+            return FALSE;
+        }
     }
 }

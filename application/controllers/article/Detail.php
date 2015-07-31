@@ -44,6 +44,7 @@ class Detail extends MY_Controller
 
         $user['user']    = $this->user;
         $data['sidebar'] = $this->load->view('common/sidebar', $user, TRUE);
+        $data['footer']  = $this->load->view('common/footer', '', TRUE);
 
         $this->article_service->read_article($aid);
         
@@ -61,7 +62,6 @@ class Detail extends MY_Controller
                 'jquery.flexText.min.js',
                 'jquery.qqFace.js',
                 'error.js'
-                // 'jquery.timeago.js'
             );
         $this->load->view('common/head', $head);
         $this->load->view('article_detail', $data);

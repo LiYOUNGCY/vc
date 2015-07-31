@@ -20,56 +20,71 @@
                         <a href="<?=base_url().'notification/conversation'?>" class="link">私信</a>
                     </li>
                     <li>
-                        <a href="#" class="link">评论</a>
+                        <a href="<?=base_url().'notification/comment'?>" class="link">评论</a>
                     </li>
                     <li>
-                        <a href="#" class="link">赞</a>
+                        <a href="<?=base_url().'notification/like'?>" class="link">赞</a>
                     </li>
                 </ul>
             </div>
             <div id="messgae" class="conversation">
-
-                <div class="message-item">
+            </div>
+            <a href="<?=base_url()?>notification/comment" id="comment" style="display:none;text-decoration:none;">
+                <div class="message-item" >
                     <div class="message-row">
                         <div class="avatar av-icon">
                             <img src="<?=base_url().'public/img/icon/info_icon_com.png'?>" /></div>
                         <h3>评论</h3>
-                        <p id="comment"></p>
+                        <p id="comment_count"></p>
                     </div>
                 </div>
-                <div class="message-item">
+            </a>
+            <a href="<?=base_url()?>notification/like" id="like" style="display:none;text-decoration:none;">            
+                <div class="message-item"  >
                     <div class="message-row">
                         <div class="avatar av-icon">
                             <img src="<?=base_url().'public/img/icon/info_icon_dum.png'?>" /></div>
                         <h3>赞</h3>
-                        <p id="like"></p>
+                        <p id="like_count"></p>
                     </div>
                 </div>
-                <div class="message-item">
+            </a>
+            <a href="<?=base_url()?>contacts" id="follower" style="display:none;text-decoration:none;">            
+                <div class="message-item" >
                     <div class="message-row">
                         <div class="avatar av-icon">
                             <img src="<?=base_url().'public/img/icon/info_icon_follow.png'?>" /></div>
                         <h3>关注</h3>
-                        <p id="follower"></p>
+                        <p id="follower_count"></p>
                     </div>
                 </div>
-            </div>
+            </a>            
         </div>
+        <?=$footer?>
     </div>
 </div>
 </body>
 <script>
-    function insert_message(img, conversation_url, name, content) {
-        $("#messgae").append('<a class="link" href="'+conversation_url+'"><div class="message-item"><div class="message-row"><div class="avatar av-icon"><img src="' + img + '" /></div><h3>'+name+'</h3><p>'+content+'</p></div></div></a>');
+    var notification = Array();
+    function insert_message(nid, img, conversation_url, name, content,count) {
+        var read_flag = notification[nid].read_flag;
+        var time = notification[nid].publish_time;
+        if(read_flag == 0)
+        {
+            $("#messgae").append('<a class="link" href="'+conversation_url+'"><div class="message-item" type="1" nid="'+nid+'"><div class="message-row"><div class="avatar av-icon"><img src="' + img + '" /></div><h3>'+name+'</h3><p>'+content+'（<time class="timeago" title="'+ time +'" datetime="'+time +'+08:00"></time>）</p><p>新消息: '+count+'</p></div></div></a>');            
+        }
+        else
+        {
+            $("#messgae").append('<a class="link" href="'+conversation_url+'"><div class="message-item" type="1" nid="'+nid+'"><div class="message-row"><div class="avatar av-icon"><img src="' + img + '" /></div><h3>'+name+'</h3><p>'+content+'（<time class="timeago" title="'+ time +'" datetime="'+time +'+08:00"></time>）</p></div></div></a>');                        
+        }
     }
 
     $(function (){
         var BASE_URL = $("#BASE_URL").val();
         var GET_NOTIFICATION_URL = BASE_URL + "notification/main/get_notification_list";
         var CONVERSATION_URL = BASE_URL + 'conversation/';
+        var READ_URL = BASE_URL+'notification/main/read';
         var page = 0;
-
-
         $.ajax({
             type: "POST",
             url: GET_NOTIFICATION_URL,
@@ -88,33 +103,65 @@
                 //没数据
                 else if(obj == null || obj == "")
                 {
+                    page = null;
                     return false;
                 }
                 page += 1;
-
                 for(i in obj) {
                     var item = obj[i];
-
+                    notification[item.id] = Array();
+                    notification[item.id] = item;
                     if(item.type == 1) {
                         var data = eval("(" + item.content + ")");
-
-                        var content = data.conversation_content;
+                        var nid = item.id;
+                        var content = data.conversation_content;  
+                        var count=data.count;              
                         var cid = data.conversation_id;
                         var img = item.sender.pic;
                         var name= item.sender.name;
-
-                        insert_message(img, CONVERSATION_URL+cid, name, content);
+                        insert_message(nid,img,CONVERSATION_URL+cid, name, content,count);
                     }
                     else if(item.type == 2) {
-                        $("#comment").html(item.count);
+                        if(item.read_flag == 0)
+                        {
+                            $("#comment_count").html("您新收到"+item.count+"条评论"+'（<time class="timeago" title="'+ item.publish_time +'" datetime="'+ item.publish_time +'+08:00"></time>）'); 
+                        }  
+                        $("#messgae").append($("#comment").clone().css('display','block').attr('nid',item.id));
                     }
                     else if(item.type == 3) {
-                        $("#like").html("您被" + item.count + "人点赞");
+                        if(item.read_flag == 0)
+                        {
+                            $("#like_count").html("您被" + item.count + "人点赞"+'（<time class="timeago" title="'+ item.publish_time +'" datetime="'+ item.publish_time +'+08:00"></time>）'); 
+                        }   
+                        $("#messgae").append($("#like").clone().css('display','block').attr('nid',item.id));                        
                     }
                     else if(item.type == 4) {
-                        $("#follower").html("您被" + item.count + "人关注");
+                        if(item.read_flag == 0)
+                        {
+                            $("#follower_count").html("您被" + item.count + "人关注"+'（<time class="timeago" title="'+ item.publish_time +'" datetime="'+ item.publish_time +'+08:00"></time>）'); 
+                        }   
+                        $("#messgae").append($("#follower").clone().css('display','block').attr('nid',item.id));                        
                     }
                 }
+                $(".timeago").timeago();
+
+                $(".message-item").click(function(){
+                    var nid = $(this).attr('nid');
+                    var type= notification[nid].type;
+                    $.ajax({
+                        type: "POST",
+                        url: READ_URL,
+                        data: {
+                            nid  : nid,
+                            type: type
+                        },
+                        success:function(data){
+
+                        }
+                    });           
+                }); 
+
+
             }
         });
 

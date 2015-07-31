@@ -32,8 +32,7 @@ class Login extends MY_Controller{
 	public function login_action()
 	{
 		$error_redirect = array(
-			'script' => 'window.location.href = "'.base_url().'";',
-			'type'   => 1
+			'script' => 'window.location.href = "'.base_url().'";'
 		);
 		$this->sc->set_error_redirect($error_redirect);
 
@@ -56,8 +55,7 @@ class Login extends MY_Controller{
 		else
 		{
 			$this->error->output('LOGIN_ERROR',array(
-					'script' => 'window.location.href = "'.base_url().'";',
-					'type' 	 => 1
+					'script' => 'window.location.href = "'.base_url().'";'
 			));
 		}
 	}

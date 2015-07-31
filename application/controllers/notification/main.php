@@ -18,39 +18,40 @@ class Main extends MY_Controller{
 		}
 
 		$head['css'] = array(
-			'common.css'
+			'common.css',
+			'font-awesome/css/font-awesome.min.css'
 		);
 
 		$head['javascript'] = array(
 			'jquery.js',
-			'vchome.js'
+			'vchome.js',
+			'timeago.js',
+			'error.js',
+			'timeago.js'
 		);
 
 		$user['user'] 	= $this->user;
         $body['sidebar']= $this->load->view('common/sidebar', $user, TRUE);
+        $body['footer']	= $this->load->view('common/footer', '', TRUE);
 
-		if(strcmp($type, 'all') == 0) 
+		$this->load->view('common/head', $head);
+
+		if (strcmp($type, 'all') == 0) 
 		{
 
-			$this->load->view('common/head', $head);
 			$this->load->view('notification_list', $body);
 		}
-		elseif(strcmp($type, 'conversation') == 0)
+		elseif (strcmp($type, 'conversation') == 0) 
 		{
-			$data['css'] = array(
-				'common.css',
-				'message.css',
-				'message_center.css'
-			);
-
-			$data['javascript'] = array(
-				'jquery.js',
-				'error.js'
-			);
-
-			$this->load->view('common/head', $data);
 			$this->load->view('conversation_list', $body);			
-
+		}
+		elseif (strcmp($type, 'comment') == 0) 
+		{
+			$this->load->view('comment_list', $body);
+		}
+		elseif (strcmp($type, 'like') == 0) 
+		{
+			$this->load->view('like_list', $body);
 		}
 	}
 
@@ -82,11 +83,11 @@ class Main extends MY_Controller{
 		$result = $this->notification_service->update($this->user['id'],$nid,$type,array('read_flag' => 1));
 		if(!empty($result))
 		{
-			echo "success";
+			echo json_encode(array('success' => 0));
 		}
 		else
 		{
-			echo "failed";
+			$this->error->output('INVALID_REQUEST');
 		}
 	}
 
@@ -97,15 +98,15 @@ class Main extends MY_Controller{
 	public function delete()
 	{
 		$nid = $this->sc->input('nid');
-		$type= $this->sc->input('type');			
+		$type= $this->sc->input('type');
 		$result = $this->notification_service->delete($this->user['id'],$nid,$type);
 		if(!empty($result))
 		{
-			echo "success";
+			echo json_encode(array('success' => 0));
 		}
 		else
 		{
-			echo "failed";
+			$this->error->output('INVALID_REQUEST');
 		}
 	}
 }

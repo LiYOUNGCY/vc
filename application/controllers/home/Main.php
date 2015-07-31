@@ -16,7 +16,7 @@ class Main extends MY_Controller{
 	public function index($alias, $type = 'quanzi')
 	{
 		$uid = isset($this->user['id']) ? $this->user['id'] : NULL;
-
+		$alias= 'home/'.$alias;
 		$user = $this->home_service->get_user($uid,$alias);
 		if($user)
 		{

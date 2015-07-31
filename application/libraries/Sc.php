@@ -19,13 +19,21 @@ class Sc {
 		$this->rule = array(
 				 'phone'		=> 'exact_length[11]|numeric',		//手机号码的规则
 				 'email' 		=> 'valid_email',
-				 'pwd'			=> 'required|min_length[8]|max_length[36]|alpha_dash',
+				 'pwd'			=> 'required|min_length[8]|max_length[36]',
+				 'old_pwd' 		=> 'required|min_length[8]|max_length[36]',				 
+				 'confirm_pwd' 	=> 'matches[pwd]',
 				 'name'			=> 'required|min_length[2]|max_length[30]',
 				 'sex'			=> 'required|min_length[1]|max_length[1]|numeric',
+				 'role' 		=> 'required|numeric',
+				 'pic' 			=> 'max_length[255]',
+				 'alias' 		=> 'required|min_length[3]|max_length[20]|alpha_dash',
+				 'intro' 		=> 'max_length[20]',
+				 'area' 		=> 'min_length[2]|max_length[28]',	 
 				 'article_title'=> 'required|min_length[1]|max_length[50]',
 				 'article_subtitle'=> 'max_length[125]',
 				 'article_tag' 	   => 'max_length[255]',
 				 'article_content' => 'required|min_length[1]',
+				 'id' 			=> 'required|numeric',
 				 'page' 		=> 'required|numeric',				 
 				 'uid' 			=> 'required|numeric',
 				 'cid' 			=> 'required|numeric',
@@ -89,6 +97,7 @@ class Sc {
 				if(isset($this->rule[$value])) {
 					$this->CI->form_validation->set_rules($value, $value, $this->rule[$value]);
 					if($this->CI->form_validation->run() == FALSE) {
+						echo $value;
 						$this->CI->error->output("invalid_".$value,$this->error_redirect);
 					}
 				}
