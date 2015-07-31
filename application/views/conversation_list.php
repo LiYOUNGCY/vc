@@ -4,8 +4,7 @@
 <div id="vi_container" class="container">
     <div id="shade"></div>
     <div id="sbtn" class="sbtn">
-        <div class="icon">
-            <div class="sidebtn"></div>
+        <div class="icon sidebtn">
         </div>
     </div>
     <div class="content">
@@ -20,15 +19,16 @@
                         <a href="<?=base_url().'notification/conversation'?>" class="link">私信</a>
                     </li>
                     <li>
-                        <a href="#" class="link">评论</a>
+                        <a href="<?=base_url().'notification/comment'?>" class="link">评论</a>
                     </li>
                     <li>
-                        <a href="#" class="link">赞</a>
+                        <a href="<?=base_url().'notification/like'?>" class="link">赞</a>
                     </li>
                 </ul>
             </div>
             <div id="conversation_list" class="conversation"></div>
         </div>
+        <?=$footer?>
     </div>
 </div>
 </body>

@@ -20,10 +20,10 @@
                         <a href="<?=base_url().'notification/conversation'?>" class="link">私信</a>
                     </li>
                     <li>
-                        <a href="#" class="link">评论</a>
+                        <a href="<?=base_url().'notification/comment'?>" class="link">评论</a>
                     </li>
                     <li>
-                        <a href="#" class="link">赞</a>
+                        <a href="<?=base_url().'notification/like'?>" class="link">赞</a>
                     </li>
                 </ul>
             </div>
@@ -55,6 +55,7 @@
                 </div>
             </div>
         </div>
+        <?=$footer?>
     </div>
 </div>
 </body>

@@ -1,12 +1,11 @@
 <body>
-    <?php 
-    echo $sidebar;
-    ?>
-    <div id="vi_container" class="container-960">
-        <div id="shade"></div>
-        <div id="sbtn" class="sbtn">
-            <div class="icon sidebtn"></div>
-        </div>
+<?=$sidebar?>
+<div id="vi_container" class="container">
+    <div id="shade"></div>
+    <div id="sbtn" class="sbtn">
+        <div class="icon sidebtn"></div>
+    </div>
+    <div class="content">
         <div class="container-head">
             <h1>消息中心</h1>
             <div id="vi_menu" class="vi-menu width-100p">
@@ -30,22 +29,23 @@
             <div class="clearfix" style="position:relative;">
                 <div id="submit" class="send btn">发送</div>
                 <div id="emotion" class="emotion"></div>
-                <div class="msg"><textarea id="msg"  placeholder="想说写什么..."></textarea></div>
+                <div class="msg">
+                    <textarea id="msg"  placeholder="想说写什么..."></textarea>
+                </div>
             </div>
 
-            <div id="message" class="message clearfix">
-            </div>
+            <div id="message" class="message clearfix"></div>
 
             <div class="loadmore width-100p" style="text-align:center;">
-                <div id="loadmore" class="btn load_btn">
-                    <font id="text">加载更多</font>
-                    <i class="fa fa-spinner fa-pulse" style="text-decoration: none;display:none" id="icon"></i>
+                <div id="loadmore" class="btn load_btn"> <font id="text">加载更多</font> <i class="fa fa-spinner fa-pulse" style="text-decoration: none;display:none" id="icon"></i>
                 </div>
             </div>
         </div>
+        <?=$footer?>
     </div>
+</div>
 </body>
-	<script>
+<script>
         function insert_left_msg(img, username, content){
             $("#message").append('<div class="message-box message-left"><div class="message-content"><div class="triangle-left"></div><div class="avatar avatar-left"><img src="'+ img +'"><div class="username">'+ username +'</div></div><p>'+ content +'</p></div></div>');
         }
@@ -83,7 +83,7 @@
                 }
             }
         }
-		$(function(){
+        $(function(){
             var BASE_URL = $("#BASE_URL").val();
             var URL = BASE_URL + "conversation/main/get_conversation_content";
             var SEND_URL = BASE_URL + "conversation/main/publish_conversation";
@@ -96,7 +96,7 @@
             var cid = window.location.href.split("/");
             cid = cid[cid.length-1];
 
-			 $('#msg').flexText();
+             $('#msg').flexText();
              $('#emotion').qqFace({ 
                 assign: 'msg',                          //给输入框赋值 
                 path: BASE_URL + "public/img/face/"     //表情图片存放的路径 
@@ -185,6 +185,6 @@
                     }
                 });
             });
-		});
-	</script>
+        });
+    </script>
 </html>

@@ -1776,8 +1776,6 @@ hr.line {
 }
 
 .container-head {
-    max-width: 960px;
-    width: 80%;
     margin-top: 80px;
 
     text-align: left;
@@ -1794,8 +1792,7 @@ hr.line {
 
 .conversation {
     margin-top: 25px;
-    border: 2px solid #b3b3b3;
-    border-style: solid none;
+    border-top: 1px solid #EEE;
     padding: 15px 5px;
     min-height: 480px;
 }
@@ -1957,11 +1954,6 @@ hr.line {
 
 
 @media screen and (max-width: 960px) {
-    .container-960 {
-        margin: 0 auto;
-        width: 100%;
-    }
-
     .container-head {
         text-align: center;
         margin-right: auto;
@@ -2206,4 +2198,11 @@ height = 24(lineheight) + 10*2(padding) + 2(border)*/
 .conversation .option .save:hover,
 .conversation .option .cancel:hover {
     background-color: #fcee21;
+}
+
+.error_div {
+    text-align: right;
+    width: 100%;
+    color: red;
+    font-size: 14px;
 }

@@ -24,10 +24,12 @@ class Setting extends MY_Controller
 
 		$user['user'] 	= $this->user;
         $data['sidebar']= $this->load->view('common/sidebar', $user, TRUE);
+        $data['footer']	= $this->load->view('common/footer', '', TRUE);
 
 		if($type == 'pwd')
 		{
 			//修改密码
+			$this->load->view('set_pwd_view', $data);
 		}
 		//修改个人信息的页面
 		else if($type == 'user')
@@ -44,6 +46,13 @@ class Setting extends MY_Controller
 	{
 		$old_pwd = $this->sc->input('old_pwd');
 		$new_pwd = $this->sc->input('new_pwd');
+		$confirm = $this->sc->input('confirm_pwd');
+
+		if(strcmp($new_pwd, $confirm) != 0) {
+			// $this->error->
+			//两次密码不对
+			echo json_encode(array('error' => '两次密码不对'));
+		}
 
 		$result = $this->user_service->change_password($this->user['id'], $old_pwd, $new_pwd);
 		if($result)
