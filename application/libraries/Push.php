@@ -9,6 +9,8 @@ class Push
 	
 	public function push_to_topic($uid, $msg)
 	{
+		$uid  = md5(md5("artvc".$uid));
+		
 		$method = 'publish';
 		$appkey = $this->appkey;
 		$seckey = $this->seckey;

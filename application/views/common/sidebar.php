@@ -1,7 +1,8 @@
 <div id="vc_sidebar" class="sidebar">
 	<div class="name">
 		<div class="head">
-			<a class="link" href="<?=$user['alias']?>">
+
+			<a class="link" href="<?=base_url().$user['alias']?>">
 				<img src="<?=$user['pic']?>" />
 			</a>
 		</div>
@@ -82,4 +83,47 @@
 			<?php } ?>
 		</ul>
 	</div>
+	<?php
+		$push_id = NULL; 
+		if(isset($user['id']))
+		{
+			$push_id = md5(md5('artvc'.$user['id']));
+		}
+	?>
+	<input type="hidden" id="PUSH_ID" value="<?=$push_id?>" />	
+	<script type="text/javascript">
+	$(function(){
+	  var push_id = $("#PUSH_ID").val();
+	  if(push_id != null && push_id != "" && push_id != undefined)
+	  {
+		  var yunba = new Yunba({
+		    server: 'sock.yunba.io', port: 3000, appkey: '55bc441c14ec0a7d21a70c5a'});
+	  
+		  yunba.init(function (success) {
+		    if (success) {
+		      yunba.connect_by_customid(push_id, function (success, msg) {
+		        if(success)
+		          {
+
+		              yunba.subscribe({'topic': push_id}, function (success, msg) {
+		              if (success)
+		                console.log('你已成功订阅频道');
+		              else
+		                console.log(msg);
+		              });  
+
+		              
+		              yunba.set_message_cb (function (data) {
+		                  alert('来自频道：' + data.topic + '&nbsp;&nbsp;&nbsp;消息内容：' + data.msg);
+		              });          
+		          }
+		        else
+		          console.log(msg);
+		      });
+		    }
+		  });  	  
+	  }
+	});
+
+	</script>	
 </div>

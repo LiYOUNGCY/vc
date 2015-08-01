@@ -1,5 +1,6 @@
 <html>
 <head>
+  <input type="">
   <script type="text/javascript" src="<?=base_url()?>public/js/jquery.js"></script>  
   <script type="text/javascript" src="<?=base_url()?>public/js/yunba/socket.io-1.3.5.min.js"></script>
   <script type="text/javascript" src="<?=base_url()?>public/js/yunba/yunba-js-sdk.js"></script>
@@ -10,10 +11,9 @@
 <script>
 $(function(){
 
-  <!-- 创建 Yunba 实例 -->
+
   var yunba = new Yunba({
     server: 'sock.yunba.io', port: 3000, appkey: '55bc441c14ec0a7d21a70c5a'});
-  <!-- 初始化并连接服务器 -->
   yunba.init(function (success) {
     if (success) {
       yunba.connect_by_customid('12345', function (success, msg) {
