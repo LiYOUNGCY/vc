@@ -12,7 +12,7 @@ class Publish extends MY_Controller {
     /**
      * 发布文章或更新文章
      */
-    public function index($type = 'publish')
+    public function index($type = 'publish', $aid = NULL)
     {
         $head['css'] = array(
                 'common.css',
@@ -34,10 +34,20 @@ class Publish extends MY_Controller {
             //发布文章界面
             $this->load->view('publish_article', $data);            
         }
-        else if($type == 'update')
+        else if($type == 'update' && ! empty($aid) && is_numeric($aid))
         {
             //更新文章界面
-            
+            $user_id = $this->user['id'];
+            $article = $this->article_service->get_article_by_id($aid);
+            if( empty($article) || $article['uid'] != $user_id) 
+            {
+                show_404();
+            }
+            else
+            {
+                $data['article'] = $article;
+                $this->load->view('update_article', $data);
+            }
         }
     }
 
