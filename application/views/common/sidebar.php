@@ -83,6 +83,7 @@
 			<?php } ?>
 		</ul>
 	</div>
+
 	<?php
 		$push_id = NULL; 
 		if(isset($user['id']))
@@ -93,6 +94,12 @@
 	<input type="hidden" id="PUSH_ID" value="<?=$push_id?>" />	
 	<script type="text/javascript">
 	$(function(){
+	  var count = getcookie('push_msg');
+	  if(count != null && count != "" && count != undefined)
+	  {
+	  	console.log("您有新消息（"+count+"）");
+	  }
+
 	  var push_id = $("#PUSH_ID").val();
 	  if(push_id != null && push_id != "" && push_id != undefined)
 	  {
@@ -105,20 +112,23 @@
 		        if(success)
 		          {
 
-		              yunba.subscribe({'topic': push_id}, function (success, msg) {
-		              if (success)
-		                console.log('你已成功订阅频道');
-		              else
-		                console.log(msg);
-		              });  
+		              yunba.subscribe({'topic': push_id});  
 
 		              
 		              yunba.set_message_cb (function (data) {
-		                  alert('来自频道：' + data.topic + '&nbsp;&nbsp;&nbsp;消息内容：' + data.msg);
+		              	  var count = getcookie('push_msg');
+		                  if(count != null && count != "" && count != undefined)
+		                  {
+		                  	count = count+1;
+		                  }
+		                  else
+		                  {
+		                  	count = 1;
+		                  }
+		                  setcookie('push_msg',count);
+	  					  console.log("您有新消息（"+count+"）");
 		              });          
 		          }
-		        else
-		          console.log(msg);
 		      });
 		    }
 		  });  	  
