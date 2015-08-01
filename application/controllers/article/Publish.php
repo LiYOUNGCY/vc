@@ -10,9 +10,9 @@ class Publish extends MY_Controller {
     }
 
     /**
-     * 发布文章
+     * 发布文章或更新文章
      */
-    public function index()
+    public function index($type = 'publish')
     {
         $head['css'] = array(
                 'common.css',
@@ -29,7 +29,16 @@ class Publish extends MY_Controller {
         $data['sidebar'] = $this->load->view('common/sidebar', $user, TRUE);
 
         $this->load->view('common/head', $head);
-        $this->load->view('publish_article', $data);
+        if($type == 'publish')
+        {
+            //发布文章界面
+            $this->load->view('publish_article', $data);            
+        }
+        else if($type == 'update')
+        {
+            //更新文章界面
+            
+        }
     }
 
     /**

@@ -55,9 +55,11 @@ class Contacts_service extends MY_Service{
 			$result = $this->user_follow_model->update_follow($follow_status['id'],$arr);
 			if($result)
 			{
-				//增加粉丝数				
+				//增加或减少粉丝数				
 				$amount = $follow_status['status'] == 1 ? 1 : -1;
 				$this->user_model->update_count($uid,array('name' => 'follower', 'amount' => $amount));
+				//增加或减少关注数
+				$this->user_model->update_count($myid,array('name' => 'follower', 'amount' => $amount));
 			}
 		}
 		else
@@ -68,7 +70,9 @@ class Contacts_service extends MY_Service{
 				//添加消息
 				$notification_result = $this->notification_model->insert($myid,$uid,4,"");	
 				//增加粉丝数
-				$this->user_model->update_count($uid,array('name' => 'follower', 'amount' => 1));							
+				$this->user_model->update_count($uid,array('name' => 'follower', 'amount' => 1));	
+				//增加关注数
+				$this->user_model->update_count($myid,array('name' => 'follower', 'amount' => 1));										
 			}	
 		}
 		return $result;
