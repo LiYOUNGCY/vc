@@ -19,7 +19,7 @@ class Home_service extends MY_Service{
 	 */
 	public function get_user($uid,$alias)
 	{
-		$user = $this->user_model->get_user_by_alias($alias,array('id', 'name', 'pic', 'alias', 'role','intro','follower','area'));
+		$user = $this->user_model->get_user_by_alias($alias,array('id', 'name', 'pic', 'alias', 'role','intro','follow','follower','area'));
 		if( ! empty($user))
 		{
 			//获取关注状态
