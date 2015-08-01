@@ -39,13 +39,13 @@
 				?>
 				<div class="home-menu">
 					<ul>
-						<a href="<?php echo base_url().'home/'.$user['alias'];?>">
+						<a href="<?php echo base_url().$user['alias'];?>">
 							<li class="active">
 								<div class="icon home_quanzi"></div>
 								圈子
 							</li>	
 						</a>
-						<a href="<?php echo base_url().'home/'.$user['alias'].'/intro';?>">
+						<a href="<?php echo base_url().$user['alias'].'/intro';?>">
 							<li>
 								<div class="icon home_jieshao"></div>
 								介绍
@@ -65,11 +65,6 @@
 		<div id="vi_content" class="content">
 			<div id="vi_main" class="main width-100p">
 				<div id="qzlist" class="qzlist">
-				<div class="title">
-					<?php echo $user['name'];?>的圈子
-				</div>
-				<hr class="line2" />
-				<hr class="line"  />
 				<div class="theqz" id="theqz">
 					<div class="qzinfo" id="qzinfo">
 
@@ -78,8 +73,6 @@
 				<div class="title">
 					<?php echo $user['name'];?>关注的圈子
 				</div>
-				<hr class="line2" />
-				<hr class="line" />
 				<div id="list" class="list">
 					
 				</div>

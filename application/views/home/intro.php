@@ -37,24 +37,24 @@
 				<?php		
 					}
 				?>
+				
+				<div class="contact">
+					<span><a href="javascript:void(0);" class="link">关注123人</a></span>
+					<span><a href="javascript:void(0);" class="link">粉丝23人</a></span>
+				</div>
+
 				<div class="home-menu">
 					<ul>
-						<a href="<?php echo base_url().'home/'.$user['alias'];?>">
+						<a href="<?php echo base_url().$user['alias'];?>">
 							<li>
 								<div class="icon home_quanzi"></div>
 								圈子
 							</li>	
 						</a>
-						<a href="<?php echo base_url().'home/'.$user['alias'].'/intro';?>">
+						<a href="<?php echo base_url().$user['alias'].'/intro';?>">
 							<li class="active">
 								<div class="icon home_jieshao"></div>
 								介绍
-							</li>	
-						</a>
-						<a href="<?php echo base_url().'home/'.$user['alias'].'/cooperate';?>">
-							<li>
-								<div class="icon home_hezuo"></div>
-								合作
 							</li>	
 						</a>
 						<a href="<?php echo base_url().'account/setting';?>">
@@ -71,12 +71,8 @@
 		<div id="vi_content" class="content">
 			<div id="vi_main" class="main width-100p">
 				<div class="homeintro">
-					<div class="contact">
-						<div class="btn follow"><?=$user['name']; ?>的关注</div>
-						<div class="btn follower"><?=$user['name']; ?>的粉丝</div>
-					</div>
 					<div class="title">
-						<h2><?php echo $intro['title'] ;?></h2>
+					<?php echo $user['name'];?>的介绍
 					</div>
 					<hr class="line2" />
 					<div class="intro">
@@ -89,7 +85,7 @@
 			</div>
 			<?=$footer?>
 		</div>
-		
+
 	</div>
 	<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
 </body>

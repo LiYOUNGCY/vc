@@ -260,7 +260,7 @@ img{
 .head{
     width: 50px;
     height: 50px;
-    border-radius: 50px;
+    border-radius: 50%;
     border: 1px #B3B3B3 solid;
     float: left;
     display: inline-block;
@@ -1020,11 +1020,12 @@ img{
     width: 100%;
     margin: 0 auto;
     display: inline-block;
-    margin-top: 90px;
+    margin-top: 70px;
 }
 .homeshowcar .showcartop .user .head{
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
+    border: none;
     float: none;
 }
 .homeshowcar .showcartop .user .name{
@@ -1063,6 +1064,16 @@ img{
 	background-color: #FCEE21;
 }
 
+.homeshowcar .showcartop .contact{
+    margin:10px auto 0;
+}
+.homeshowcar .showcartop .contact span{
+    font-size: 14px;
+    margin: 0 8px;	
+	border-bottom: 1px dotted #B3B3B3;
+}
+
+
 .home-menu{
     position: absolute;
     width: 100%;
@@ -1077,7 +1088,7 @@ img{
 }
 .home-menu ul li{
 	display: block;
-	margin: 0 17px;
+	margin: 0 14px;
 	width: 40px;
 	float: left;
 	height: 100%;
@@ -1212,31 +1223,6 @@ img{
 	transition: all 0.1s ease-in-out;
 }
 
-.homeintro .contact{
-	width: 88%;
-	margin: 0 auto;
-	max-width: 700px;
-	margin-bottom: 15px;
-	padding: 0 0 10px;
-	border-bottom: 1px #eee solid;
-	text-align: left;
-}
-
-.homeintro .contact .btn{
-	padding: 0 10px;
-	height: 40px;
-	line-height: 40px;
-	background: #FFF;
-	border: 1px #eee solid;
-	border-radius: 0;
-	transition: all 0.1s ease-in-out;
-}
-.homeintro .contact .btn:hover{
-	background-color: #F0F0F0;
-}
-.homeintro .contact .btn:active{
-	background-color: #F9F9F9;
-}
 
 .qzlist .loadmore.disable{
 	cursor: default;
@@ -1251,6 +1237,9 @@ img{
 	max-width: 900px;
 }
 .homeintro .title{
+	color: #B3B3B3;
+	font-size: 28px;
+	font-weight: bold;
 	text-align: left;
   	max-width: 700px;
   	margin: 0 auto;
@@ -1277,12 +1266,15 @@ img{
 	margin: 0 auto;
 }
 
+
+.quanzi 
+
 .fave {
   	width: 107px;
   	height: 40px;
 	background: #fff url(../img/like-animate.png) no-repeat;
 	background-position: 0 0;
-    	cursor: pointer;
+    cursor: pointer;
 }
 .fave.focus {
 	-webkit-animation: favefocus .4s steps(9) forwards;
