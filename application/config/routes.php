@@ -63,7 +63,7 @@ $route['article/([a-z]*)'] = 'article/main/index/article/$1';
 //发布文章
 $route['publish/article']  = 'article/publish/index/publish';
 //更新文章
-$route['update/article']   = 'article/publish/index/update';
+$route['update/article/(:num)']   = 'article/publish/index/update/$1';
 
 $route['exhibition'] = 'article/main/index/exhibition';
 $route['exhibition/([a-z]*)'] = 'article/main/index/exhibition/$1';

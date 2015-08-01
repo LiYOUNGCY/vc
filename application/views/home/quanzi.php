@@ -8,6 +8,29 @@
 		<div id="sbtn" class="sbtn">
 			<div class="icon sidebtn"></div>
 		</div>
+		<!-- 头像的编辑框 -->
+	<div id="headpic" class="headpic hidden" style="z-index:10007;">
+        <form action="<?php echo base_url()?>publish/image/save_headpic" method="post" onsubmit="return checkCoords();">
+            <input type="hidden" id="x" name="x" />
+            <input type="hidden" id="y" name="y" />
+            <input type="hidden" id="w" name="w" />
+            <input type="hidden" id="h" name="h" />
+            <input type="hidden" id="img"  name="img" />
+        </form>
+        <div class="box">
+            <div class="pic">
+                <div id="camera_warp" class="camera_warp">
+                    <input type="file" name="upfile" id="upfile" onchange="file_upload()" /> <i class="fa fa-camera fa-5x"></i>
+                    <p style="color:#CCC;">点击修改头像</p>
+                </div>
+                <img id="image" src="" width="400px" height="400px"></div>
+            <div class="option">
+                <div id="cancel" class="btn cancel">取消</div>
+                <div id="save" class="btn save">发布</div>
+            </div>
+        </div>
+    </div>
+	<!-- END 头像的编辑框 -->
 		<div class="homeshowcar">
 			<div class="showcartop">
 				<div class="user">
@@ -91,31 +114,7 @@
 			<?=$footer?>
 		</div>
 	</div>
-	
-	
-	<!-- 头像的编辑框 -->
-	<div id="headpic" class="headpic hidden">
-        <form action="<?php echo base_url()?>publish/image/save_headpic" method="post" onsubmit="return checkCoords();">
-            <input type="hidden" id="x" name="x" />
-            <input type="hidden" id="y" name="y" />
-            <input type="hidden" id="w" name="w" />
-            <input type="hidden" id="h" name="h" />
-            <input type="hidden" id="img"  name="img" />
-        </form>
-        <div class="box">
-            <div class="pic">
-                <div id="camera_warp" class="camera_warp">
-                    <input type="file" name="upfile" id="upfile" onchange="file_upload()" /> <i class="fa fa-camera fa-5x"></i>
-                    <p style="color:#CCC;">点击修改头像</p>
-                </div>
-                <img id="image" src="" width="400px" height="400px"></div>
-            <div class="option">
-                <div id="cancel" class="btn cancel">取消</div>
-                <div id="save" class="btn save">发布</div>
-            </div>
-        </div>
-    </div>
-	<!-- END 头像的编辑框 -->
+
 </body>
 <script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
 <script type="text/javascript">
@@ -144,6 +143,7 @@
 			$('#shadow').fadeOut(200);
 		});
 
+		//点击头像的事件
 		$('#head').click(function(){
 			$('#headpic').css({'display':'block'});
 		});
