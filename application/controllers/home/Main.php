@@ -20,8 +20,16 @@ class Main extends MY_Controller{
 		$user = $this->home_service->get_user($uid,$alias);
 		if($user)
 		{
-			$data['css'] = array('common.css', 'font-awesome/css/font-awesome.min.css');
-	        $data['javascript'] = array('jquery.js');
+			$data['css'] = array(
+				'common.css', 
+				'font-awesome/css/font-awesome.min.css',
+				'jquery.Jcrop.css'
+				);
+	        $data['javascript'] = array(
+	        	'jquery.js',
+	        	'ajaxfileupload.js',
+	        	'jquery.Jcrop.js'
+	        	);
 
 	        $this->load->view('common/head', $data);
 	        $u['user']    = $this->user;
@@ -82,8 +90,6 @@ class Main extends MY_Controller{
 		$page = $this->sc->input('page');
 		$uid  = $this->sc->input('uid');
 		$type = $this->sc->input('type');
-		$uid  = 4;
-		$type = 1;
 		$meid = isset($this->user['id']) ? $this->user['id'] : NULL;
 		$article = $this->home_service->get_user_article($page,$meid,$uid,$type); 
 		echo json_encode($article);

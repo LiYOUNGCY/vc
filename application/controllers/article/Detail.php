@@ -61,7 +61,8 @@ class Detail extends MY_Controller
                 'paperfold/modernizr.custom.01022.js',
                 'jquery.flexText.min.js',
                 'jquery.qqFace.js',
-                'error.js'
+                'error.js',
+                'timeago.js'
             );
         $this->load->view('common/head', $head);
         $this->load->view('article_detail', $data);
@@ -82,7 +83,6 @@ class Detail extends MY_Controller
     {
     	$aid = $this->sc->input('aid');
     	$uid = $this->user['id'];
-
     	$this->article_service->vote_article($aid, $uid);
     }
 

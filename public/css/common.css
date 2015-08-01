@@ -90,6 +90,12 @@ img{
 .hide-y{
     overflow-y: hidden;
 }
+.hidden {
+    display: none;
+}
+.show {
+    display: block;
+}
 .btn{
     display: inline-block;
     background: #F2F2F2;
@@ -1026,6 +1032,21 @@ img{
     height: 90px;
     border: none;
     float: none;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+.homeshowcar .showcartop .user .head .shadow {
+    width: 100%;
+    height: 90px;
+    background-color: rgba(0,0,0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 90px;
+    color: white;
+    font-size: 22px;
+    display: none;
 }
 .homeshowcar .showcartop .user .name{
     color: #B3B3B3;
@@ -1726,6 +1747,8 @@ img{
 	border-top:1px #eee solid; 
     text-align: justify;
     color: #2f2f2f;
+    word-wrap:break-word;
+    word-break:normal;
 }
 
 .article-detial .article-content img {
@@ -2325,6 +2348,7 @@ hr.line2{
     height: 100px;
 
     cursor: pointer;
+    position: relative;
 }
 
 .message-item:hover {
@@ -2355,6 +2379,7 @@ hr.line2{
     padding: 5px 10px 10px 10px;
     width: 100%;
     height: 100%;
+    text-align: left;
 }
 
 .message-item .message-row h3 {
@@ -2379,9 +2404,12 @@ hr.line2{
 
 .conversation h4 .timeago {
     font-size: inherit;
+    color: #B3B3B3;
 }
 .message-item .message-row .delete {
-    float: right;
+    position: absolute;
+    top: -10px;
+    right: 0;
 }
 
 
@@ -2544,4 +2572,108 @@ height = 24(lineheight) + 10*2(padding) + 2(border)*/
     width: 100%;
     color: red;
     font-size: 14px;
+}
+
+.headpic {
+    overflow: auto;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10007;
+
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+
+    background-color: #fff;
+}
+
+.headpic .box {
+    margin: 60px auto 20px auto;
+    width: 400px;
+}
+
+.headpic .box .pic {
+    overflow: hidden;
+
+    width: 400px;
+    height: 400px;
+
+    color: #ccc;
+    background-color: #eee;
+}
+
+.headpic .box .pic:hover {
+    color: #4c4640;
+}
+
+.headpic .box .pic img {
+    border: none;
+    width: 400px;
+    height: 400px;
+}
+
+.headpic .box .pic .camera_warp {
+    position: relative;
+
+    padding-top: 120px;
+
+    text-align: center;
+}
+.headpic .box .pic .camera_warp input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10031;
+
+    width: 1000px;
+    height: 1000px;
+
+    font-size: 100px;
+
+    opacity: 0;
+
+    cursor: pointer;
+}
+
+.headpic .box .option {
+    margin: 20px auto;
+
+    text-align: center;
+}
+
+.headpic .box .option .btn {
+    border: 1px solid #eee;
+    border-radius: 0;
+    width: 120px;
+    height: 40px;
+
+    line-height: 40px;
+    text-align: center;
+
+    transition: all .1s ease-in-out;
+}
+
+.headpic .box .option .save {
+    margin-left: 20px;
+
+    background-color: #ede12b;
+}
+
+.headpic .box .option .save:hover {
+    color: #4c4640 !important;
+    background-color: #fcee21;
+}
+.headpic .box .option .save:active {
+    background-color: #ddd340;
+}
+
+
+.headpic .box .option .cancel:hover {
+    color: #4c4640 !important;
+    background-color: #e04e6b;
+}
+.headpic .box .option .cancel:active {
+    background-color: #c53a55;
 }

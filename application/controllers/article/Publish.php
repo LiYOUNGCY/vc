@@ -10,9 +10,9 @@ class Publish extends MY_Controller {
     }
 
     /**
-     * 发布文章
+     * 发布文章或更新文章
      */
-    public function index()
+    public function index($type = 'publish', $aid = NULL)
     {
         $head['css'] = array(
                 'common.css',
@@ -29,7 +29,26 @@ class Publish extends MY_Controller {
         $data['sidebar'] = $this->load->view('common/sidebar', $user, TRUE);
 
         $this->load->view('common/head', $head);
-        $this->load->view('publish_article', $data);
+        if($type == 'publish')
+        {
+            //发布文章界面
+            $this->load->view('publish_article', $data);            
+        }
+        else if($type == 'update' && ! empty($aid) && is_numeric($aid))
+        {
+            //更新文章界面
+            $user_id = $this->user['id'];
+            $article = $this->article_service->get_article_by_id($aid);
+            if( empty($article) || $article['uid'] != $user_id) 
+            {
+                show_404();
+            }
+            else
+            {
+                $data['article'] = $article;
+                $this->load->view('update_article', $data);
+            }
+        }
     }
 
     /**
@@ -53,11 +72,11 @@ class Publish extends MY_Controller {
         $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_subtitle, 1, $article_tag, $article_content);
         if($result)
         {
-            echo 'success';
+            redirect(base_url().'feed','location');
         }
         else
         {
-            $this->error->output('INVALID_REQUEST');
+            $this->error->output('INVALID_REQUEST',array('script' => base_url().'publish/article'));
         }
     }
 

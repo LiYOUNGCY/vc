@@ -100,8 +100,12 @@ class Notification_model extends CI_Model{
 			$check_result = $this->check_has_notification_group($reciver_id,$type);
 			if($check_result)
 			{
+				$count = 1;
+				if($check_result['read_flag'] == 0)
+				{
+					$count = (int)$check_result['count'] + 1;					
+				}
 				//更新消息组
-				$count = (int)$check_result['count'] + 1;
 				$this->update_notification_group($check_result['id'],array('count' => $count,'read_flag' => 0,'publish_time' => date('Y-m-d H-m-s')));
 			}
 			else

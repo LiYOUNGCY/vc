@@ -4,8 +4,7 @@
 <div id="vi_container" class="container">
     <div id="shade"></div>
     <div id="sbtn" class="sbtn">
-        <div class="icon">
-            <div class="sidebtn"></div>
+        <div class="icon sidebtn">
         </div>
     </div>
     <div class="content">
@@ -29,36 +28,34 @@
             </div>
             <div id="messgae" class="conversation">
             </div>
-            <a href="<?=base_url()?>notification/comment" id="comment" style="display:none;text-decoration:none;">
-                <div class="message-item" >
-                    <div class="message-row">
-                        <div class="avatar av-icon">
-                            <img src="<?=base_url().'public/img/icon/info_icon_com.png'?>" /></div>
-                        <h3>评论</h3>
-                        <p id="comment_count"></p>
-                    </div>
+            
+            <div class="message-item" id="comment" style="display:none;">
+                <div class="message-row">
+                    <div class="avatar av-icon">
+                        <img src="<?=base_url().'public/img/icon/info_icon_com.png'?>" /></div>
+                    <h3>评论</h3>
+                    <p id="comment_count"></p>
                 </div>
-            </a>
-            <a href="<?=base_url()?>notification/like" id="like" style="display:none;text-decoration:none;">            
-                <div class="message-item"  >
-                    <div class="message-row">
-                        <div class="avatar av-icon">
-                            <img src="<?=base_url().'public/img/icon/info_icon_dum.png'?>" /></div>
-                        <h3>赞</h3>
-                        <p id="like_count"></p>
-                    </div>
+            </div>
+           
+            <div class="message-item"  id="like" style="display:none;">
+                <div class="message-row">
+                    <div class="avatar av-icon">
+                        <img src="<?=base_url().'public/img/icon/info_icon_dum.png'?>" /></div>
+                    <h3>赞</h3>
+                    <p id="like_count"></p>
                 </div>
-            </a>
-            <a href="<?=base_url()?>contacts" id="follower" style="display:none;text-decoration:none;">            
-                <div class="message-item" >
-                    <div class="message-row">
-                        <div class="avatar av-icon">
-                            <img src="<?=base_url().'public/img/icon/info_icon_follow.png'?>" /></div>
-                        <h3>关注</h3>
-                        <p id="follower_count"></p>
-                    </div>
+            </div>
+
+            <div class="message-item" id="follower" style="display:none;">
+                <div class="message-row">
+                    <div class="avatar av-icon">
+                        <img src="<?=base_url().'public/img/icon/info_icon_follow.png'?>" /></div>
+                    <h3>关注</h3>
+                    <p id="follower_count"></p>
                 </div>
-            </a>            
+            </div>
+         
         </div>
         <?=$footer?>
     </div>
@@ -148,17 +145,31 @@
                 $(".message-item").click(function(){
                     var nid = $(this).attr('nid');
                     var type= notification[nid].type;
-                    $.ajax({
-                        type: "POST",
-                        url: READ_URL,
-                        data: {
-                            nid  : nid,
-                            type: type
-                        },
-                        success:function(data){
-
-                        }
-                    });           
+                    if(notification[nid].read_flag == 0)
+                    {
+                        $.ajax({
+                            type: "POST",
+                            url: READ_URL,
+                            data: {
+                                nid  : nid,
+                                type: type
+                            },
+                            success:function(data){
+                            }
+                        });                        
+                    }
+                    if(type == 2)
+                    {
+                        window.location.href = BASE_URL+'notification/comment';
+                    }
+                    else if(type == 3)
+                    {
+                        window.location.href = BASE_URL+'notification/like';
+                    }
+                    else if(type == 4)
+                    {
+                        window.location.href = BASE_URL+'contacts';
+                    }
                 }); 
 
 

@@ -74,7 +74,7 @@ class Article_service extends MY_Service{
             $article[$key]['content'] = $this->_extract_article($article[$key]['id'], $article[$key]['title'], $article[$key]['subtitle'], $article[$key]['content']);
             
             //对文章标题字数截取
-            $article[$key]['content']["sort_title"] = mb_strlen($article[$key]['content']["article_title"]) > 10 ? mb_substr($article[$key]['content']["article_title"], 0, 10).'..' : $article[$key]['content']["article_title"];
+            $article[$key]['content']["sort_title"] = mb_strlen($article[$key]['content']["article_title"]) > 9 ? mb_substr($article[$key]['content']["article_title"], 0, 9).'..' : $article[$key]['content']["article_title"];
             
             //查询作者的信息
             $article[$key]['author'] = $this->user_model->get_user_base_id($article[$key]['uid']);
@@ -157,6 +157,9 @@ class Article_service extends MY_Service{
                 //更新消息
                 $content = json_encode(array('content_id' => $article['id'], 'content_title' => $article['title'], 'content_type' => 'article'));
                 $this->notification_model->insert($uid,$article['uid'],3,$content);
+                //推送
+                $this->load->library('push');
+                $this->push->push_to_topic($article['uid'],"");
             }
             else
             {
@@ -195,7 +198,7 @@ class Article_service extends MY_Service{
         $insert_result = $this->article_comment_model->insert_comment($aid, $uid, $comment);
         if($insert_result)
         {
-            echo json_encode(array('success' => 0));
+            echo json_encode(array('success' => 0,'script' => 'location.reload();'));
              //更新消息
             $article = $this->article_model->get_article_by_id($aid);
             $content = json_encode(array('content_id' => $aid, 'content_type' => 'article', 'content_title' => $article['title'], 'comment_content' => $comment));

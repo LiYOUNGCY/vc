@@ -1,12 +1,13 @@
 <div id="vc_sidebar" class="sidebar">
 	<div class="name">
 		<div class="head">
-			<a class="link" href="<?=$user['alias']?>">
+
+			<a class="link" href="<?=base_url().$user['alias']?>">
 				<img src="<?=$user['pic']?>" />
 			</a>
 		</div>
 		<div class="text">
-			<a class="link" href="<?=$user['alias']?>"><?php echo $user['name'];?></a>
+			<a class="link" href="<?=base_url().$user['alias']?>"><?php echo $user['name'];?></a>
 			<div class="icon">
 				<span class="identity"></span>
 			</div>
@@ -41,7 +42,7 @@
 			</a>
 			<?php }?>
 			<?php if($user['role'] != 0) { ?>
-			<a class="link" href="<?=base_url()?>notification/conversation">		
+			<a class="link" href="<?=base_url()?>notification">		
 			<li class="menu-list">
 				<div class="menu-list-item">
 					<div class="icon sixin"></div>
@@ -82,4 +83,57 @@
 			<?php } ?>
 		</ul>
 	</div>
+
+	<?php
+		$push_id = NULL; 
+		if(isset($user['id']))
+		{
+			$push_id = md5(md5('artvc'.$user['id']));
+		}
+	?>
+	<input type="hidden" id="PUSH_ID" value="<?=$push_id?>" />	
+	<script type="text/javascript">
+	$(function(){
+	  var count = getcookie('push_msg');
+	  if(count != null && count != "" && count != undefined)
+	  {
+	  	console.log("您有新消息（"+count+"）");
+	  }
+
+	  var push_id = $("#PUSH_ID").val();
+	  if(push_id != null && push_id != "" && push_id != undefined)
+	  {
+		  var yunba = new Yunba({
+		    server: 'sock.yunba.io', port: 3000, appkey: '55bc441c14ec0a7d21a70c5a'});
+	  
+		  yunba.init(function (success) {
+		    if (success) {
+		      yunba.connect_by_customid(push_id, function (success, msg) {
+		        if(success)
+		          {
+
+		              yunba.subscribe({'topic': push_id});  
+
+		              
+		              yunba.set_message_cb (function (data) {
+		              	  var count = getcookie('push_msg');
+		                  if(count != null && count != "" && count != undefined)
+		                  {
+		                  	count = count+1;
+		                  }
+		                  else
+		                  {
+		                  	count = 1;
+		                  }
+		                  setcookie('push_msg',count);
+	  					  console.log("您有新消息（"+count+"）");
+		              });          
+		          }
+		      });
+		    }
+		  });  	  
+	  }
+	});
+
+	</script>	
 </div>
