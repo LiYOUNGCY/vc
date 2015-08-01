@@ -90,6 +90,12 @@ img{
 .hide-y{
     overflow-y: hidden;
 }
+.hidden {
+    display: none;
+}
+.show {
+    display: block;
+}
 .btn{
     display: inline-block;
     background: #F2F2F2;
@@ -1026,6 +1032,21 @@ img{
     height: 90px;
     border: none;
     float: none;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+.homeshowcar .showcartop .user .head .shadow {
+    width: 100%;
+    height: 90px;
+    background-color: rgba(0,0,0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 90px;
+    color: white;
+    font-size: 22px;
+    display: none;
 }
 .homeshowcar .showcartop .user .name{
     color: #B3B3B3;
@@ -2444,7 +2465,8 @@ height = 24(lineheight) + 10*2(padding) + 2(border)*/
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    overflow-y:auto;
+    overflow:auto;
+    z-index: 100007;
 }
 
 .headpic .box {
@@ -2484,7 +2506,7 @@ height = 24(lineheight) + 10*2(padding) + 2(border)*/
     height: 1000px;
     font-size: 100px;
     cursor: pointer;
-    z-index: 30;
+    z-index: 10031;
 }
 
 .headpic .box .option{

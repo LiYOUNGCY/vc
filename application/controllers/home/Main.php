@@ -20,8 +20,16 @@ class Main extends MY_Controller{
 		$user = $this->home_service->get_user($uid,$alias);
 		if($user)
 		{
-			$data['css'] = array('common.css', 'font-awesome/css/font-awesome.min.css');
-	        $data['javascript'] = array('jquery.js');
+			$data['css'] = array(
+				'common.css', 
+				'font-awesome/css/font-awesome.min.css',
+				'jquery.Jcrop.css'
+				);
+	        $data['javascript'] = array(
+	        	'jquery.js',
+	        	'ajaxfileupload.js',
+	        	'jquery.Jcrop.js'
+	        	);
 
 	        $this->load->view('common/head', $data);
 	        $u['user']    = $this->user;

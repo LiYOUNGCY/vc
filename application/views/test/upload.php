@@ -1,47 +1,40 @@
 <html>
 <head>
-<input type="hidden" name="BASE_URL" id="BASE_URL" value="<?php echo base_url();?>" />
-<link href="<?php echo base_url()?>public/css/jquery.Jcrop.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url()?>public/css/common.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url()?>public/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<script src="<?php echo base_url()?>public/js/jquery.js"></script>
-<script src="<?php echo base_url()?>public/js/ajaxfileupload.js" type="text/javascript"></script>
+    <input type="hidden" name="BASE_URL" id="BASE_URL" value="<?php echo base_url();?>">
+    <link href="<?php echo base_url()?>public/css/jquery.Jcrop.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url()?>public/css/common.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url()?>public/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <script src="<?php echo base_url()?>public/js/jquery.js"></script>
+    <script src="<?php echo base_url()?>public/js/ajaxfileupload.js" type="text/javascript"></script>
 </head>
 
-
 <body>
-<h1>TEST</h1>
-<!-- <img src="" id="img_div" style="width:400px;height:400px;"/> -->
-<form action="<?php echo base_url()?>publish/image/save_headpic" method="post" onsubmit="return checkCoords();">  
-            <input type="hidden" id="x" name="x" />  
-            <input type="hidden" id="y" name="y" />  
-            <input type="hidden" id="w" name="w" />  
+    <div class="headpic">
+        <form action="<?php echo base_url()?>publish/image/save_headpic" method="post" onsubmit="return checkCoords();">
+            <input type="hidden" id="x" name="x" />
+            <input type="hidden" id="y" name="y" />
+            <input type="hidden" id="w" name="w" />
             <input type="hidden" id="h" name="h" />
-            <input type="hidden" id="img"  name="img" /> 
-</form>
-
-<div class="headpic">
-    <div class="box">
-        <div class="pic">
-            <div id="camera_warp" class="camera_warp">
-                <input type="file" name="upfile" id="upfile" onchange="file_upload()" />
-                <i class="fa fa-camera fa-5x"></i>
-                <p style="color:#CCC;">点击修改头像</p>
+            <input type="hidden" id="img"  name="img" />
+        </form>
+        <div class="box">
+            <div class="pic">
+                <div id="camera_warp" class="camera_warp">
+                    <input type="file" name="upfile" id="upfile" onchange="file_upload()" /> <i class="fa fa-camera fa-5x"></i>
+                    <p style="color:#CCC;">点击修改头像</p>
+                </div>
+                <img id="image" src="" width="400px" height="400px"></div>
+            <div class="option">
+                <div class="btn cancel">取消</div>
+                <div id="save" class="btn save">发布</div>
             </div>
-            <img id="image" src="" width="400px" height="400px">
         </div>
-        <div class="option">
-            <div class="btn cancel">取消</div>
-            <div id="save" class="btn save">发布</div>
-        </div>
+
     </div>
 
-</div>
-
-
-<script src="<?php echo base_url()?>public/js/jquery.Jcrop.js" type="text/javascript"></script>
-<script src="<?php echo base_url()?>public/js/jquery.upload.js" type="text/javascript"></script>
-<script type="text/javascript">
+    <script src="<?php echo base_url()?>public/js/jquery.Jcrop.js" type="text/javascript"></script>
+    <script src="<?php echo base_url()?>public/js/jquery.upload.js" type="text/javascript"></script>
+    <script type="text/javascript">
 var img_src = "";
 $(function(){
     $("#image").hide();
@@ -117,6 +110,9 @@ function file_upload()
         }
     });    
 }
+
+
+
 
 </script>
 
