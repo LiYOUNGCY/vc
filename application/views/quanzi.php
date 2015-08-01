@@ -12,14 +12,30 @@
 		<div id="vi_content" class="content">
 			<div id="vi_main" class="main width-100p">
 			<div class="quanzi">
-				<div class="qzname"></div>
-				<div class="qzintro"></div>
-				<div class="qzcreader"></div>
-				<div class="qzopt"></div>
+				<div id="info" class="info">
+					<div class="qzname">
+						<h1>艺术大咖</h1>
+					</div>
+					<div class="qzintro">
+						啊实打啊实打啊实打啊实打啊实打奥术
+					</div>
+					<div class="qzcreater">
+						创建者：
+						<div class="head">
+							<a href="javascript:void();">
+							<img src="<?=base_url()?>public/img/mm1.jpg">
+							</a>
+						</div>
+						<a href="javascript:void();" class="link">啊实打实</a>
+					</div> 
+					<div class="qzopt"></div>	
+				</div>
+				
 				<div class="qzpostlist">
 					<div class="box"></div>
 				</div>
 			</div>
+
 			</div>
 			<?=$footer?>
 		</div>

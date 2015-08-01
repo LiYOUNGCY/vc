@@ -37,6 +37,10 @@
 				<?php
 					}
 				?>
+				<div class="contact">
+					<span><a href="javascript:void(0);" class="link">关注123人</a></span>
+					<span><a href="javascript:void(0);" class="link">粉丝23人</a></span>
+				</div>
 				<div class="home-menu">
 					<ul>
 						<a href="<?php echo base_url().$user['alias'];?>">
