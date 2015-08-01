@@ -261,7 +261,6 @@ img{
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 1px #B3B3B3 solid;
     float: left;
     display: inline-block;
     margin: 0 15px;
@@ -1267,7 +1266,46 @@ img{
 }
 
 
-.quanzi 
+.quanzi {
+	width: 85%;
+	max-width: 700px;
+	min-width: 300px;
+	height: 700px;
+	margin: 0 auto;
+} 
+.quanzi .info{
+	margin-top: 60px;
+}
+
+.quanzi .info .qzname{
+	width: 100%;
+	text-align: left;
+	font-size: 110%;
+	margin: 10px 0;
+}
+.quanzi .info .qzintro{
+	width: 100%;
+	text-align: left;
+	color: #B3B3B3;
+	margin: 10px 0;
+}
+.quanzi .info .qzcreater{
+	color: #B3B3B3;
+	line-height: 52px;
+	border-top:1px solid #eee;
+	border-bottom: 1px solid #eee;
+	text-align: left;
+	margin-top: 20px;
+}
+
+.quanzi .info .qzcreater .head{
+	float: none;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin: 0 2px;
+}
+
 
 .fave {
   	width: 107px;
