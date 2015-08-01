@@ -36,7 +36,7 @@ class Auth_service extends MY_Service{
 		}
 		else
 		{
-			$auths = $this->auth_model->get_user_auth();
+			$auths = $this->auth_model->get_user_auth(0,NULL);
 			$new_auths = array();
 			foreach ($auths as $k => $v)
 			{
@@ -72,6 +72,7 @@ class Auth_service extends MY_Service{
 			}
 			else
 			{
+
 				//有登录权限
 				if(strstr($auths[$route],"|1|"))
                 {

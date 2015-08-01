@@ -83,7 +83,6 @@ class Detail extends MY_Controller
     {
     	$aid = $this->sc->input('aid');
     	$uid = $this->user['id'];
-
     	$this->article_service->vote_article($aid, $uid);
     }
 

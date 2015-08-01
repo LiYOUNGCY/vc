@@ -61,8 +61,8 @@ $autoload['packages'] = array();
 */
 
 $autoload['libraries'] = array(
-					'error', 
 					'common',
+					'error', 
 					'database', 
 					'sc',
 					'session'

@@ -12,9 +12,12 @@ class auth_model extends CI_Model{
 	 */
 	public function get_user_auth($page = 0,$limit = 10, $order = 'id DESC')
 	{
-		$query = $this->db->order_by($order)
-                          ->limit($limit,$page*$limit)
-		                  ->get('user_auth')
+		$this->db->order_by($order);
+		if( ! empty($limit))
+		{
+			$this->db->limit($limit,$page*$limit);
+		}
+		$query = $this->db->get('user_auth')
 				 		  ->result_array();
 		return $query;
 	}

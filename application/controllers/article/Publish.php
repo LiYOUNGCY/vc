@@ -53,11 +53,11 @@ class Publish extends MY_Controller {
         $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_subtitle, 1, $article_tag, $article_content);
         if($result)
         {
-            echo 'success';
+            redirect(base_url().'feed','location');
         }
         else
         {
-            $this->error->output('INVALID_REQUEST');
+            $this->error->output('INVALID_REQUEST',array('script' => base_url().'publish/article'));
         }
     }
 

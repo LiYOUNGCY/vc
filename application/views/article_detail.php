@@ -231,7 +231,7 @@
           }
           else if(status.error != null)
           {
-             ERROR_OUTPUT(data);
+             ERROR_OUTPUT(status);
              return false;
           }
         }
