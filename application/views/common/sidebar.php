@@ -6,7 +6,7 @@
 			</a>
 		</div>
 		<div class="text">
-			<a class="link" href="<?=$user['alias']?>"><?php echo $user['name'];?></a>
+			<a class="link" href="<?=base_url().$user['alias']?>"><?php echo $user['name'];?></a>
 			<div class="icon">
 				<span class="identity"></span>
 			</div>
@@ -41,7 +41,7 @@
 			</a>
 			<?php }?>
 			<?php if($user['role'] != 0) { ?>
-			<a class="link" href="<?=base_url()?>notification/conversation">		
+			<a class="link" href="<?=base_url()?>notification">		
 			<li class="menu-list">
 				<div class="menu-list-item">
 					<div class="icon sixin"></div>
