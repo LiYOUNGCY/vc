@@ -27,12 +27,180 @@
 							</a>
 						</div>
 						<a href="javascript:void();" class="link">啊实打实</a>
+						
 					</div> 
-					<div class="qzopt"></div>	
+					<div class="qzopt">
+						<div class="btn publish">发帖子</div>
+						<div class="btn setting">设置</div>
+					</div>	
 				</div>
 				
 				<div class="qzpostlist">
-					<div class="box"></div>
+					<div class="box">
+						<div class="postuser">
+							<div class="head">
+								<a href="javascript:void(0);">
+								<img src="<?=base_url()?>public/img/mm1.jpg">
+								</a>
+							</div>
+							<div class="name"><a class="link" href="javascript:void(0);">啊实打奥术为</a></div>
+						</div>
+						<div class="postinfo">
+							<div class="posttitle">
+								<div class="title">
+									<a class="link" href="javascript:void(0);">啊实打实啊实打啊实打
+									</a>
+								</div>
+								<i class="fa fa-image"></i>
+							</div>
+							<div class="postcon">
+								<p>啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打...<a href="javascript:void(0);" class="link">[阅读全文]</a></p>
+							</div>
+							<div class="other">
+								<div class="time float-l">
+									<time class="timeago" title="2015-07-23 17:08:08" datetime="2015-07-23 17:08:08+08:00"></time>
+								</div>
+								<div class="comment float-r">
+									<i class="fa fa-comment"></i> 14
+								</div>
+							</div>
+						</div>
+						<div class="delete">
+							<i class="fa fa-close"></i>
+						</div>
+					</div>
+					<div class="box">
+						<div class="postuser">
+							<div class="head">
+								<a href="javascript:void(0);">
+								<img src="<?=base_url()?>public/img/mm1.jpg">
+								</a>
+							</div>
+							<div class="name"><a class="link" href="javascript:void(0);">啊实打奥术为</a></div>
+						</div>
+						<div class="postinfo">
+							<div class="posttitle">
+								<div class="title">
+									<a class="link" href="javascript:void(0);">啊实打实啊实打啊实打
+									</a>
+								</div>
+								<i class="fa fa-image"></i>
+							</div>
+							<div class="postcon">
+								<p>啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打...<a href="javascript:void(0);" class="link">[阅读全文]</a></p>
+							</div>
+							<div class="other">
+								<div class="time float-l">
+									<time class="timeago" title="2015-07-23 17:08:08" datetime="2015-07-23 17:08:08+08:00"></time>
+								</div>
+								<div class="comment float-r">
+									<i class="fa fa-comment"></i> 14
+								</div>
+							</div>
+						</div>
+						<div class="delete">
+							<i class="fa fa-close"></i>
+						</div>
+					</div>
+					<div class="box">
+						<div class="postuser">
+							<div class="head">
+								<a href="javascript:void(0);">
+								<img src="<?=base_url()?>public/img/mm1.jpg">
+								</a>
+							</div>
+							<div class="name"><a class="link" href="javascript:void(0);">啊实打奥术为</a></div>
+						</div>
+						<div class="postinfo">
+							<div class="posttitle">
+								<div class="title">
+									<a class="link" href="javascript:void(0);">啊实打实啊实打啊实打
+									</a>
+								</div>
+								<i class="fa fa-image"></i>
+							</div>
+							<div class="postcon">
+								<p>啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打...<a href="javascript:void(0);" class="link">[阅读全文]</a></p>
+							</div>
+							<div class="other">
+								<div class="time float-l">
+									<time class="timeago" title="2015-07-23 17:08:08" datetime="2015-07-23 17:08:08+08:00"></time>
+								</div>
+								<div class="comment float-r">
+									<i class="fa fa-comment"></i> 14
+								</div>
+							</div>
+						</div>
+						<div class="delete">
+							<i class="fa fa-close"></i>
+						</div>
+					</div>
+					<div class="box">
+						<div class="postuser">
+							<div class="head">
+								<a href="javascript:void(0);">
+								<img src="<?=base_url()?>public/img/mm1.jpg">
+								</a>
+							</div>
+							<div class="name"><a class="link" href="javascript:void(0);">啊实打奥术为</a></div>
+						</div>
+						<div class="postinfo">
+							<div class="posttitle">
+								<div class="title">
+									<a class="link" href="javascript:void(0);">啊实打实啊实打啊实打
+									</a>
+								</div>
+								<i class="fa fa-image"></i>
+							</div>
+							<div class="postcon">
+								<p>啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打...<a href="javascript:void(0);" class="link">[阅读全文]</a></p>
+							</div>
+							<div class="other">
+								<div class="time float-l">
+									<time class="timeago" title="2015-07-23 17:08:08" datetime="2015-07-23 17:08:08+08:00"></time>
+								</div>
+								<div class="comment float-r">
+									<i class="fa fa-comment"></i> 14
+								</div>
+							</div>
+						</div>
+						<div class="delete">
+							<i class="fa fa-close"></i>
+						</div>
+					</div>
+					<div class="box">
+						<div class="postuser">
+							<div class="head">
+								<a href="javascript:void(0);">
+								<img src="<?=base_url()?>public/img/mm1.jpg">
+								</a>
+							</div>
+							<div class="name"><a class="link" href="javascript:void(0);">啊实打奥术为</a></div>
+						</div>
+						<div class="postinfo">
+							<div class="posttitle">
+								<div class="title">
+									<a class="link" href="javascript:void(0);">啊实打实啊实打啊实打
+									</a>
+								</div>
+								<i class="fa fa-image"></i>
+							</div>
+							<div class="postcon">
+								<p>啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打啊实打实啊实打啊实打...<a href="javascript:void(0);" class="link">[阅读全文]</a></p>
+							</div>
+							<div class="other">
+								<div class="time float-l">
+									<time class="timeago" title="2015-07-23 17:08:08" datetime="2015-07-23 17:08:08+08:00"></time>
+								</div>
+								<div class="comment float-r">
+									<i class="fa fa-comment"></i> 14
+								</div>
+							</div>
+						</div>
+						<div class="delete">
+							<i class="fa fa-close"></i>
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -50,8 +218,8 @@
 	var PAGE = 1;
 	var is_more = 1;
 
-	window.onload = function() { 
-
+	window.onload = function() {
+		$(".timeago").timeago();
 	};
 
 	function loadcommu(pageTemp, id){

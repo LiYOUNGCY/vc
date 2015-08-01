@@ -2,13 +2,13 @@
 	<?php 
 	echo $sidebar;
 	?>
+	<div id="sbtn" class="sbtn">
+		<div class="icon sidebtn"></div>
+	</div>
 	<div id="vi_container" class="container">
 		<input type="hidden" name="article_type" value="<?php echo $article_type;?>" />
 		<input type="hidden" name="article_tag"  value="<?php echo $article_tag;?>"/>
 		<div id="shade"></div>
-		<div id="sbtn" class="sbtn">
-			<div class="icon sidebtn"></div>
-		</div>
 		<div id="vi_content" class="content">
 		<?php if( $user['role'] == 0) { ?>
 			<div id="vi_sign" class="vi-sign ">

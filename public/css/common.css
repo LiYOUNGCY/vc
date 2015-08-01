@@ -1286,7 +1286,7 @@ img{
 .quanzi .info .qzintro{
 	width: 100%;
 	text-align: left;
-	color: #B3B3B3;
+	color: #797979;
 	margin: 10px 0;
 }
 .quanzi .info .qzcreater{
@@ -1295,7 +1295,8 @@ img{
 	border-top:1px solid #eee;
 	border-bottom: 1px solid #eee;
 	text-align: left;
-	margin-top: 20px;
+	margin: 20px 0;
+	color: #4b463f;
 }
 
 .quanzi .info .qzcreater .head{
@@ -1304,6 +1305,122 @@ img{
 	width: 40px;
 	height: 40px;
 	margin: 0 2px;
+}
+
+.quanzi .info .qzopt{
+	text-align: left;
+	margin-bottom: 25px;
+}
+
+.quanzi .info .qzopt .btn{
+	width: 100px;
+	height: 35px;
+	margin-right: 20px;
+	background: #F0F0F0;
+	border-radius:0;
+	text-align: center;
+	line-height: 35px; 
+	transition: all .2s ease-in-out;
+}
+
+.quanzi .info .qzopt .btn.publish{
+	background: #FCEE21;
+}
+.quanzi .info .qzopt .publish:hover{
+	background: #FFF671;
+	color: #4b463f;
+}
+
+.quanzi .info .qzopt .setting:hover{
+	background: #DADADA;
+	color: #4b463f;
+}
+
+.quanzi .qzpostlist .box{
+	position: relative;
+	width: 100%;
+	border: 1px solid #eee;
+	display: inline-block;
+	margin-bottom: 20px;
+}
+
+.quanzi .qzpostlist .box .delete{
+	font-size: 14px;
+	color: #B3B3B3;
+	position: absolute;
+	right: 10px;
+	top:5px;
+	cursor: pointer;
+}
+
+.quanzi .qzpostlist .box .postuser{
+	float: left;
+	width: 20%;
+	text-align: center;
+	padding: 10px;
+	box-sizing: border-box;
+}
+.quanzi .qzpostlist .box .postuser .head{
+	float: none;
+	margin: 0 auto;
+}
+.quanzi .qzpostlist .box .postinfo{
+	position: relative;
+	float: left;
+	padding: 10px;
+	color: #4b463f;
+	background: #FFF;
+	width: 80%;
+	min-height: 150px;
+	box-sizing:border-box;
+	transition: all .2s ease-in-out;
+}
+.quanzi .qzpostlist .box .postinfo:hover{
+	background: #F0F0F0;
+}
+
+.quanzi .qzpostlist .box .postinfo .posttitle{
+	width: 100%;
+	text-align: left;
+	position: relative;
+}
+.quanzi .qzpostlist .box .postinfo .posttitle .title{
+	display: inline-block;
+}
+.quanzi .qzpostlist .box .postinfo .link{
+	color: #4b463f;
+}
+
+.quanzi .qzpostlist .box .postinfo .posttitle .title:before{
+	content:"《";
+	color: #FCEE21;
+	margin: 0 5px;
+	font-weight: bold;
+}
+.quanzi .qzpostlist .box .postinfo .posttitle .title:after{
+	content:"》";
+	color: #FCEE21;
+	margin: 0 5px;
+	font-weight: bold;
+}
+.quanzi .qzpostlist .box .postinfo .postcon{
+	width: 100%;
+	text-align: justify;
+	position: relative;
+	color: #B3B3B3;
+	margin:10px 0 35px; 
+	
+}
+.quanzi .qzpostlist .box .postinfo .other{
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	display: inline-block;
+	color:#B3B3B3;
+	font-size: 14px;
+	left: 0;
+	padding: 10px 15px;
+	box-sizing:border-box;
 }
 
 
