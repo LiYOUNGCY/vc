@@ -4,8 +4,7 @@
 <div id="vi_container" class="container">
     <div id="shade"></div>
     <div id="sbtn" class="sbtn">
-        <div class="icon">
-            <div class="sidebtn"></div>
+        <div class="icon sidebtn">
         </div>
     </div>
     <div class="content">

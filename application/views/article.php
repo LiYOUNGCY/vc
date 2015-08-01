@@ -93,7 +93,9 @@
 	window.onload = function() { 
         loadarticel(0);
 		$(window).bind("scroll",function() {
+
         	if($(document).scrollTop() + $(window).height() > $(document).height() - 150 && PAGE < 2){
+                alert(PAGE);
         		$("#loadmore #text").html("加载中");
 				$("#loadmore #icon").css({"display":"inline-block"});
         		loadarticel(PAGE);
@@ -125,6 +127,7 @@
             type: 'POST',
             data:{page : pageTemp, type:type, tag:tag},
             success: function(data) {
+                //alert(data);
                 data = eval("("+data+")");
                 //没有数据
                 if(data == null || data == "")
@@ -151,12 +154,12 @@
 					var author_pic	= data[i].author.pic;
 					var author_alias= data[i].author.alias;
 					var element 	= "<li><div class='article'><div class='article-box'><div id='arimg' class='arimg'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"'><img id='"+id+"'  data-url='"+image+"' class='img-lazyload_"+pageTemp+"' ></a></div><div class='armain width-100p'><div class='clearfix hide-y' style='margin: 10px 10px;'><span class='artitle'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"' class='link'>"+sort_title+"</a></span><div class='arlike float-r'><div class='icon'>"+like;
-					if(status == null){
-						element += "<div class='unlike'></div>"
+					if(status == '1'){
+                        element += "<div class='like'></div>"
 					}else{
-						element += "<div class='like'></div>"
+						element += "<div class='unlike'></div>"
 					}
-					element += "</div></div></div><div class='arcon width-100p clearfix'><div class='name'><a href='javascript:void(0);'><div class='head'><img src='"+author_pic+"'></div></a><div class='username'><a href='javascript:void(0);' class='link'>"+author_name+"</a></div></div><div class='artext'><p>"+content+"</p></div></div><div class='arbtn margintop-10'><a href='"+ARTICLE_DETAIL_URL+id+"' class='link btn'>阅读文章</a></div></div></div></li>";
+					element += "</div></div></div><div class='arcon width-100p clearfix'><div class='name'><a href='javascript:void(0);'><div class='head'><img src='"+author_pic+"'></div></a><div class='username'><a href='"+BASE_URL + author_alias+"' class='link'>"+author_name+"</a></div></div><div class='artext'><p>"+content+"</p></div></div><div class='arbtn margintop-10'><a href='"+ARTICLE_DETAIL_URL+id+"' class='link btn'>阅读文章</a></div></div></div></li>";
 					$("#article_list").append(element);
 				}
 				//图片异步加载

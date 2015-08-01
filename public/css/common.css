@@ -90,6 +90,12 @@ img{
 .hide-y{
     overflow-y: hidden;
 }
+.hidden {
+    display: none;
+}
+.show {
+    display: block;
+}
 .btn{
     display: inline-block;
     background: #F2F2F2;
@@ -260,8 +266,7 @@ img{
 .head{
     width: 50px;
     height: 50px;
-    border-radius: 50px;
-    border: 1px #B3B3B3 solid;
+    border-radius: 50%;
     float: left;
     display: inline-block;
     margin: 0 15px;
@@ -1020,12 +1025,28 @@ img{
     width: 100%;
     margin: 0 auto;
     display: inline-block;
-    margin-top: 90px;
+    margin-top: 70px;
 }
 .homeshowcar .showcartop .user .head{
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
+    border: none;
     float: none;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+.homeshowcar .showcartop .user .head .shadow {
+    width: 100%;
+    height: 90px;
+    background-color: rgba(0,0,0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 90px;
+    color: white;
+    font-size: 22px;
+    display: none;
 }
 .homeshowcar .showcartop .user .name{
     color: #B3B3B3;
@@ -1063,6 +1084,16 @@ img{
 	background-color: #FCEE21;
 }
 
+.homeshowcar .showcartop .contact{
+    margin:10px auto 0;
+}
+.homeshowcar .showcartop .contact span{
+    font-size: 14px;
+    margin: 0 8px;	
+	border-bottom: 1px dotted #B3B3B3;
+}
+
+
 .home-menu{
     position: absolute;
     width: 100%;
@@ -1077,7 +1108,7 @@ img{
 }
 .home-menu ul li{
 	display: block;
-	margin: 0 17px;
+	margin: 0 14px;
 	width: 40px;
 	float: left;
 	height: 100%;
@@ -1212,31 +1243,6 @@ img{
 	transition: all 0.1s ease-in-out;
 }
 
-.homeintro .contact{
-	width: 88%;
-	margin: 0 auto;
-	max-width: 700px;
-	margin-bottom: 15px;
-	padding: 0 0 10px;
-	border-bottom: 1px #eee solid;
-	text-align: left;
-}
-
-.homeintro .contact .btn{
-	padding: 0 10px;
-	height: 40px;
-	line-height: 40px;
-	background: #FFF;
-	border: 1px #eee solid;
-	border-radius: 0;
-	transition: all 0.1s ease-in-out;
-}
-.homeintro .contact .btn:hover{
-	background-color: #F0F0F0;
-}
-.homeintro .contact .btn:active{
-	background-color: #F9F9F9;
-}
 
 .qzlist .loadmore.disable{
 	cursor: default;
@@ -1251,6 +1257,9 @@ img{
 	max-width: 900px;
 }
 .homeintro .title{
+	color: #B3B3B3;
+	font-size: 28px;
+	font-weight: bold;
 	text-align: left;
   	max-width: 700px;
   	margin: 0 auto;
@@ -1277,12 +1286,54 @@ img{
 	margin: 0 auto;
 }
 
+
+.quanzi {
+	width: 85%;
+	max-width: 700px;
+	min-width: 300px;
+	height: 700px;
+	margin: 0 auto;
+} 
+.quanzi .info{
+	margin-top: 60px;
+}
+
+.quanzi .info .qzname{
+	width: 100%;
+	text-align: left;
+	font-size: 110%;
+	margin: 10px 0;
+}
+.quanzi .info .qzintro{
+	width: 100%;
+	text-align: left;
+	color: #B3B3B3;
+	margin: 10px 0;
+}
+.quanzi .info .qzcreater{
+	color: #B3B3B3;
+	line-height: 52px;
+	border-top:1px solid #eee;
+	border-bottom: 1px solid #eee;
+	text-align: left;
+	margin-top: 20px;
+}
+
+.quanzi .info .qzcreater .head{
+	float: none;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin: 0 2px;
+}
+
+
 .fave {
   	width: 107px;
   	height: 40px;
 	background: #fff url(../img/like-animate.png) no-repeat;
 	background-position: 0 0;
-    	cursor: pointer;
+    cursor: pointer;
 }
 .fave.focus {
 	-webkit-animation: favefocus .4s steps(9) forwards;
@@ -1579,6 +1630,8 @@ img{
 	border-top:1px #eee solid; 
     text-align: justify;
     color: #2f2f2f;
+    word-wrap:break-word;
+    word-break:normal;
 }
 
 .article-detial .article-content img {
@@ -2402,4 +2455,93 @@ height = 24(lineheight) + 10*2(padding) + 2(border)*/
     width: 100%;
     color: red;
     font-size: 14px;
+}
+
+.headpic {
+    background-color: #FFF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow:auto;
+    z-index: 100007;
+}
+
+.headpic .box {
+    width: 400px;
+    margin: 60px auto 20px auto;
+}
+
+.headpic .box .pic {
+    width: 400px;
+    height: 400px;
+    background-color: #EEE;
+    color: #CCC;
+    overflow: hidden;
+}
+
+.headpic .box .pic:hover {
+    color: #4C4640;
+}
+
+.headpic .box .pic img {
+    width: 400px;
+    height: 400px;
+    border: none;
+}
+
+.headpic .box .pic .camera_warp {
+    padding-top: 120px;
+    text-align: center;
+    position: relative;
+}
+.headpic .box .pic .camera_warp input{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1000px;
+    height: 1000px;
+    font-size: 100px;
+    cursor: pointer;
+    z-index: 10031;
+}
+
+.headpic .box .option{
+    margin: 20px auto;
+    text-align: center;
+}
+
+.headpic .box .option .btn{
+    width: 120px;
+    height: 40px;
+    border: 1px solid #EEE;
+    line-height: 40px;
+    border-radius: 0;
+    transition: all 0.1s ease-in-out;
+    text-align: center;
+}
+
+.headpic .box .option .save {
+    background-color: #EDE12B;
+    margin-left: 20px;
+}
+
+.headpic .box .option .save:hover {
+    color: #4C4640 !important;
+    background-color: #FCEE21;
+}
+.headpic .box .option .save:active {
+    background-color: #ddd340;
+}
+
+
+.headpic .box .option .cancel:hover {
+    color: #4C4640 !important;
+    background-color: #E04E6B;
+}
+.headpic .box .option .cancel:active {
+    background-color: #C53A55;
 }
