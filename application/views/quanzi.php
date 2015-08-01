@@ -11,6 +11,15 @@
 
 		<div id="vi_content" class="content">
 			<div id="vi_main" class="main width-100p">
+			<div class="quanzi">
+				<div class="qzname"></div>
+				<div class="qzintro"></div>
+				<div class="qzcreader"></div>
+				<div class="qzopt"></div>
+				<div class="qzpostlist">
+					<div class="box"></div>
+				</div>
+			</div>
 			</div>
 			<?=$footer?>
 		</div>
