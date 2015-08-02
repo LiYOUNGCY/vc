@@ -46,6 +46,10 @@ class Contacts_service extends MY_Service{
 	 */
 	public function following($myid,$uid)
 	{
+		if($myid == $uid)
+		{
+			return FALSE;
+		}
 		$follow_status = $this->user_follow_model->check_follow($myid, $uid);
 		if( ! empty($follow_status))
 		{

@@ -53,7 +53,14 @@ class Main extends MY_Controller{
 	{
 		$reciver_id = $this->sc->input('uid');
 		$content    = $this->sc->input('conversation_content');
-		$this->conversation_service->publish_conversation($this->user['id'],$reciver_id,$content);
-
+		$result = $this->conversation_service->publish_conversation($this->user['id'],$reciver_id,$content);
+		if($result)
+		{	
+			echo json_encode(array('success' => 0));
+		}
+		else
+		{
+			$this->error->output('INVALID_REQUEST');
+		}
 	}
 }

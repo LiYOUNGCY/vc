@@ -31,7 +31,7 @@
       <p class="author-info">
         <?=$article['author']['intro']?>
       </p>
-      <?php if($user['id'] == $article['uid']) {?>
+      <?php if(isset($user['id']) && $user['id'] == $article['uid']) {?>
       <div id="menu" class="list"> <i class="fa fa-ellipsis-v"></i></div>
       <div id="menu-list" class="menu-list" style="display:none;">
         <a class="link" href="<?=base_url().'update/article/'.$article['id']?>">

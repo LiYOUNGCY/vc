@@ -94,7 +94,36 @@
 				<div id="qzlist" class="qzlist">
 				<div class="theqz" id="theqz">
 					<div class="qzinfo" id="qzinfo">
-
+						<?php if(isset($media)){ ?>
+							<div class="head">
+								<img src="<?php echo $user['pic']; ?>">
+							</div>
+							<div class="name">
+								<h3><?=$media['name'];?></h3>
+							</div>
+							<div class="intro">
+								<p>
+									<i class="fa fa-quote-left fa-2x pull-left">
+										
+									</i>
+									<?=$media['intro'];?>
+								</p>
+							</div>
+							<div class="infob">
+								<i class="fa fa-comments" title="帖子数">
+									
+								</i>
+								<?=$media['post'];?>
+								<a href="<?=base_url().'community/'.$media['id']?>">
+									<div class="btn">
+										进入圈子
+										<i class="fa fa-arrow-right" style="margin:0 0 0 5px;">
+											
+										</i>
+									</div>
+								</a>
+							</div>	
+						<?php }?>
 					</div>
 				</div>
 				<div class="title">
@@ -184,17 +213,13 @@
             		var id 			= data[i].id;
             		var element = "";
             		var mediaid = data[i].media.id;
-	            	var name 		= data[i].name;
+	            	var name 	= data[i].name;
 	            	var intro   = data[i].intro;
 	            	var pic     = data[i].media.pic;
-	            	var post 		= data[i].post;
-	            	if(uid == mediaid){
-	            		element = '<div class="head"><img src="<?php echo $user['pic']; ?>"></div><div class="name"><h3>'+ name +'</h3></div><div class="intro"><p><i class="fa fa-quote-left fa-2x pull-left"></i>'+ intro +'</p></div><div class="infob"><i class="fa fa-comments" title="帖子数"></i>：'+ post +'<a href="<?=base_url()?>community/'+ id +'"><div class="btn">进入圈子<i class="fa fa-arrow-right" style="margin:0 0 0 5px;"></i></div></a></div>';
-	            		$("#theqz #qzinfo").append(element);
-            		}else{
-	            		element = '<a href="<?=base_url()?>community/'+ id +'"><div class="box"><div class="user"><div class="head"><img src="'+ pic +'"></div><div class="name">'+ name +'</div><div class="intro">'+ intro +'</div></div></div></a>';
-		            	$("#qzlist #list").append(element);	
-            		}
+	            	var post 	= data[i].post;
+            		element = '<a href="<?=base_url()?>community/'+ id +'"><div class="box"><div class="user"><div class="head"><img src="'+ pic +'"></div><div class="name">'+ name +'</div><div class="intro">'+ intro +'</div></div></div></a>';
+	            	$("#qzlist #list").append(element);	
+            		
 	            	
             	}
             }

@@ -38,6 +38,8 @@ class Sc {
 				 'uid' 			=> 'required|numeric',
 				 'cid' 			=> 'required|numeric',
 				 'nid' 			=> 'required|numeric',
+				 'aid' 			=> 'required|numeric',
+				 'pid'			=> 'required|numeric',
 				 'conversation_content' => 'required|min_length[1]|max_length[400]'
 			);
 

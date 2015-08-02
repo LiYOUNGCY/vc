@@ -106,11 +106,13 @@ class Detail extends MY_Controller
     public function delete_article()
     {
         $aid = $this->sc->input('aid');
-        $result = $this->article_model->delete_article($aid,$this->user['id']);
+        $result = $this->article_service->delete_article($aid,$this->user['id']);
         if($result)
         {
             $redirect = base_url().$this->user['alias'].'/article';
             echo json_encode(array('success' => 0, 'note' => lang('OPERATE_SUCCESS') ,'script' => "window.location.href = '{$redirect}';"));
+            //删除文章的点赞和评论
+            $this->article_service->delete_article_like_comment($aid);
         }
         else
         {

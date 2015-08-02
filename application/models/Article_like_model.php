@@ -71,4 +71,10 @@ class Article_like_model extends CI_Model {
     {
         return $this->db->select('uid, update_time')->where(array('aid' => $aid,'status' => 1))->get('article_like')->result_array();
     }
+
+    public function delete_like_by_aid($aid)
+    {
+        $this->db->delete('article_like',array('aid' => $aid));
+        return $this->db->affected_rows() > 0;
+    }
 }
