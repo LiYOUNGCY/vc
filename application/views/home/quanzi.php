@@ -5,9 +5,6 @@
     <input type="hidden" id="userid" value="<?=$user['id']?>">
 	<div id="vi_container" class="container">
 		<div id="shade"></div>
-		<div id="sbtn" class="sbtn">
-			<div class="icon sidebtn"></div>
-		</div>
 		<!-- 头像的编辑框 -->
 	<div id="headpic" class="headpic hidden" style="z-index:10007;">
         <form action="<?php echo base_url()?>publish/image/save_headpic" method="post" onsubmit="return checkCoords();">

@@ -1,13 +1,9 @@
-
 <body>
     <?php 
     echo $sidebar;
     ?>
 	<div id="vi_container" class="container">
 		<div id="shade"></div>
-		<div id="sbtn" class="sbtn">
-			<div class="icon sidebtn"></div>
-		</div>
 		<div id="vi_content" class="content">
 		<div id="vc_logo" class="logo" style="padding-top: 159px;">
 			<div class="icon logo-a"></div>
@@ -45,13 +41,20 @@
 							</div>
 							<inout type="hidden" value="4" id="userid" />
 						</div>
+						<?php 
+							if($user['role'] == 2){
+						?>
 						<div class="public">
-							<a href="" class="link">
+							<a href="<?=base_url()?>publish/article" class="link">
 								<div class="btn">
 									<i class="fa fa-file-text"></i>发布文章
 								</div>
 							</a>
 						</div>
+						<?php 
+							}
+						?>
+						
 					</div>
 				</div>
 				<div class="ac-left">

@@ -2,9 +2,6 @@
 	<?php 
 	echo $sidebar;
 	?>
-	<div id="sbtn" class="sbtn">
-		<div class="icon sidebtn"></div>
-	</div>
 	<div id="vi_container" class="container">
 		<input type="hidden" name="article_type" value="<?php echo $article_type;?>" />
 		<input type="hidden" name="article_tag"  value="<?php echo $article_tag;?>"/>
@@ -30,6 +27,7 @@
 					<a href="<?=base_url()?>article" class="link">文章</a>
 				</li>
 				<li>
+
 					<a href="#" class="link">访谈</a>
 				</li>
 				<li>
@@ -159,7 +157,7 @@
 					}else{
 						element += "<div class='unlike'></div>"
 					}
-					element += "</div></div></div><div class='arcon width-100p clearfix'><div class='name'><a href='javascript:void(0);'><div class='head'><img src='"+author_pic+"'></div></a><div class='username'><a href='"+BASE_URL + author_alias+"' class='link'>"+author_name+"</a></div></div><div class='artext'><p>"+content+"</p></div></div><div class='arbtn margintop-10'><a href='"+ARTICLE_DETAIL_URL+id+"' class='link btn'>阅读文章</a></div></div></div></li>";
+					element += "</div></div></div><div class='arcon width-100p clearfix'><div class='name'><a href='javascript:void(0);'><div class='head'><a href='"+BASE_URL + author_alias+"' class='link'><img src='"+author_pic+"'></a></div></a><div class='username'><a href='"+BASE_URL + author_alias+"' class='link'>"+author_name+"</a></div></div><div class='artext'><p>"+content+"</p></div></div><div class='arbtn margintop-10'><a href='"+ARTICLE_DETAIL_URL+id+"' class='link btn'>阅读文章</a></div></div></div></li>";
 					$("#article_list").append(element);
 				}
 				//图片异步加载

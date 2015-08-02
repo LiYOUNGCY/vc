@@ -293,7 +293,7 @@ img{
 }
 .sidebar .lop .btn{
     background-color: #B3B3B3;
-    width: 139.5px;
+    width: 128.5px;
     text-align: center;
     border-radius: 0;
     float: left;
@@ -303,6 +303,17 @@ img{
 .sidebar .lop .btn:hover{
     background-color: #FCEE21;
     color: #4C4640 !important;
+}
+.numtooplit{
+	float: right;
+	margin:10px;
+	margin-right: 20px;
+	padding: 0 5px;
+	font-size: 12px;
+	border-radius: 30%;
+	background-color: #FCEE21;
+	color: #4b463f;
+	font-weight: 700;
 }
 
 .shade{
@@ -343,6 +354,15 @@ img{
 	outline: 0px none;
 	cursor: pointer;
 	z-index: 999;
+}
+.sbtn .dot{
+	width: 10px;
+	height: 10px;
+	border-radius:100%;
+	background: red ;
+	position: absolute;
+	top: 7px;
+	right: 7px;
 }
 .content {
 	max-width: 960px;

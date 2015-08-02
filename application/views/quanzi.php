@@ -5,10 +5,6 @@
     <input type="hidden" id="userid" value="<?=$user['id']?>">
 	<div id="vi_container" class="container">
 		<div id="shade"></div>
-		<div id="sbtn" class="sbtn">
-			<div class="icon sidebtn"></div>
-		</div>
-
 		<div id="vi_content" class="content">
 			<div id="vi_main" class="main width-100p">
 			<div class="quanzi">

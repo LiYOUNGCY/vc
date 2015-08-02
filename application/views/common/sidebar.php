@@ -47,6 +47,7 @@
 				<div class="menu-list-item">
 					<div class="icon sixin"></div>
 					<span class="menu-list-item-text">消息</span>
+					<div class="numtooplit">12</div>
 				</div>
 			</li>
 			</a>
@@ -83,7 +84,6 @@
 			<?php } ?>
 		</ul>
 	</div>
-
 	<?php
 		$push_id = NULL; 
 		if(isset($user['id']))
@@ -136,4 +136,8 @@
 	});
 
 	</script>	
+</div>
+<div id="sbtn" class="sbtn">
+	<div class="icon sidebtn"></div>
+	<div class="dot"></div>
 </div>
