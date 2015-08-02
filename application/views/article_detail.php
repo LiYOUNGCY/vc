@@ -19,17 +19,24 @@
     <div class="author">
       <div class="head">
         <img src="<?=base_url().'public/img/mm1.jpg'?>"></div>
-      <a class="link" href="<?=$article['author']['alias']?>">
+        <a class="link" href="<?=$article['author']['alias']?>">
         <span class="name">
           <?=$article['author']['name']?>
         </span>
       </a>
       <p class="author-info"><?=$article['author']['intro']?></p>
+      <?php if($user['id'] == $article['uid']) {?>
+      <div id="menu" class="list"><i class="fa fa-ellipsis-v"></i></div>
+      <div id="menu-list" class="menu-list" style="display:none;">
+        <a href="<?=base_url().'update/article/'.$article['id']?>" class="link"><div class="btn edit">编辑文章</div></a>
+        <div id="delete" class="btn delete">删除文章</div>
+      </div>
+      <?php } ?>
     </div>
     <h1 class="article-title">
       <?=$article['title']?></h1>
-    <h2 class="article-subtitle">
-      <?=$article['subtitle']?></h2>
+    <p class="article-subtitle">
+      <?=$article['subtitle']?></p>
     <div class="article-info"> 
       <i class="fa fa-eye"></i>
       <span><?=$article['read']?></span>
@@ -149,6 +156,7 @@
     var COMMENT_URL = BASE_URL + 'article/detail/write_comment';
     var VOTE_URL = BASE_URL + 'article/detail/get_vote_list';
     var ARGEE_URL = BASE_URL + 'article/detail/vote_article';
+    var DELETE_URL = BASE_URL + 'article/detail/delete_article'
 
     //获取文章的id
     var aid = window.location.href.split("/");
@@ -239,6 +247,28 @@
     });
     
     $(".timeago").timeago();
+
+    $('#menu').click(function (){
+      if($('#menu-list').css('display') == 'none') {
+        $('#menu-list').slideDown(200);
+      }
+      else {
+        $('#menu-list').slideUp(200);
+      }
+    });
+
+    $('#delete').click(function(){
+      $.ajax({
+        type: 'POST',
+        url: DELETE_URL,
+        data: {
+          aid: aid
+        },
+        success:function(data){
+          alert(data);
+        }
+      });
+    });
   });
 </script>
 </body>
