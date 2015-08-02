@@ -89,6 +89,7 @@
 	var BASE_URL = document.getElementById("BASE_URL").value;
 	var GET_ARTICLE_URL = document.getElementById("BASE_URL").value+"article/main/get_article_list";
 	var ARTICLE_DETAIL_URL = document.getElementById("BASE_URL").value+"article/";
+    var ARGEE_URL = BASE_URL + 'article/detail/vote_article';
 	var PAGE = 1;
 
 	window.onload = function() { 
@@ -117,6 +118,36 @@
 			$("#loadmore #icon").css({"display":"none"});
 		});
 
+        
+        $('.likebtn2').click(function(){
+            var tar = $(this);
+            var aid = $(this).attr('data_row');
+
+            $.ajax({
+                type: 'POST',
+                url: ARGEE_URL,
+                async: false,
+                data: {
+                  aid: aid
+                },
+                success:function(data){
+                  var status = eval('(' + data + ')');
+                  if(status.success == 0) {
+                    if(tar.hasClass('focus')) {
+                        tar.prev().html(parseInt(tar.prev().html())+1);
+                    }
+                    else {
+                        tar.prev().html(parseInt(tar.prev().html())-1);
+                    }
+                  }
+                  else if(status.error != null)
+                  {
+                     ERROR_OUTPUT(status);
+                     return false;
+                  }
+                }
+              });
+        });
 	}; 
 
 	function loadarticel(pageTemp){
@@ -154,11 +185,11 @@
 					var author_name	= data[i].author.name;
 					var author_pic	= data[i].author.pic;
 					var author_alias= data[i].author.alias;
-					var element 	= "<li><div class='article'><div class='article-box'><div id='arimg' class='arimg'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"'><img id='"+id+"'  data-url='"+image+"' class='img-lazyload_"+pageTemp+"' ></a></div><div class='armain width-100p'><div class='clearfix hide-y' style='margin: 10px 10px;'><span class='artitle'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"' class='link'>"+sort_title+"</a></span><div class='arlike float-r'>"+like;
+					var element 	= "<li><div class='article'><div class='article-box'><div id='arimg' class='arimg'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"'><img id='"+id+"'  data-url='"+image+"' class='img-lazyload_"+pageTemp+"' ></a></div><div class='armain width-100p'><div class='clearfix hide-y' style='margin: 10px 10px;'><span class='artitle'><a title='"+title+"' href='"+ARTICLE_DETAIL_URL+id+"' class='link'>"+sort_title+"</a></span><div class='arlike float-r'><span>"+like + "</span>";
 					if(status == '1'){
-                        element += "<div class='likebtn2 focus' onclick='support(this)'></div>";
+                        element += "<div data_row='"+ id +"' class='likebtn2 focus' onclick='support(this)'></div>";
 					}else{
-						element += "<div class='likebtn2' onclick='support(this)'></div>";
+						element += "<div data_row='"+ id +"' class='likebtn2' onclick='support(this)'></div>";
 					}
 					element += "</div></div><div class='arcon width-100p clearfix'><div class='name'><a href='javascript:void(0);'><div class='head'><a href='"+BASE_URL + author_alias+"' class='link'><img src='"+author_pic+"'></a></div></a><div class='username'><a href='"+BASE_URL + author_alias+"' class='link'>"+author_name+"</a></div></div><div class='artext'><p>"+content+"</p></div></div><div class='arbtn margintop-10'><a href='"+ARTICLE_DETAIL_URL+id+"' class='link btn'>阅读文章</a></div></div></div></li>";
 					$("#article_list").append(element);
