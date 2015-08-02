@@ -37,9 +37,9 @@
 								</div>
 							</div>
 							<div class="text">
-								<a class="link" href="#">YOUNG啥第第六第六六届CY</a>
+								<a class="link" href="<?php echo base_url().'/'.$user['alias']?>"><?=$user['name']?></a>
 							</div>
-							<inout type="hidden" value="4" id="userid" />
+							<input type="hidden" value="<?=$user['id']?>" id="UID" />
 						</div>
 						<?php 
 							if($user['role'] == 2){
@@ -105,11 +105,12 @@
 </body>
 <script type="text/javascript">
 	var BASE_URL = $("#BASE_URL").val();
+	var uid = $("#UID").val();
 	var GET_FEED_LIST_URL = BASE_URL +"feed/main/get_feed_list"; 
 	var PAGE = 1;
 
 	window.onload = function() { 
-    loadfeed(0); 
+    	loadfeed(0); 
 		$(window).bind("scroll",function() {
       	if($(document).scrollTop() + $(window).height() > $(document).height() - 150 && PAGE < 2){
       		$("#loadmore #text").html("加载中");
@@ -131,77 +132,79 @@
 	}; 
 
 	function loadfeed(pageTemp){
-	$.ajax({
-      url: GET_FEED_LIST_URL,
-      async: false, 
-      type: 'POST',
-      data:{page : pageTemp},
-      success: function(data) {
-      	//错误
-      	if(data.error != null)
-      	{
-      		ERROR_OUTPUT(data);
-      		return false;
-      	}
-      	//没数据
-      	else if(data == null || data == "")
-      	{
-      		return false;
-      	}
-        data = eval("("+data+")"); 
-				for(var i = 0; i < data.length; i++)  
-				{
-					var id 					= data[i].id;
-					var feed_type 			= data[i].type;
-					var article 			= eval("(" +data[i].content+ ")");
-					var article_id			= article.article_id;
-					var article_title		= article.article_title;
-					var article_content		= article.article_content;
-					var image 				= article.article_image;					
-					var user_head_src		= data[i].user.pic;
-					var user_name			= data[i].user.name;
-					var user_alias			= data[i].user.alias;
-					var like				= data[i].like;
-					var like_num			= like.length;
-					var time 				= data[i].publish_time;
-					var element 			=	"";
-					if(feed_type == 1){
-						var author			= data[i].author.name;
-						var author_alias	= data[i].author.alias;	
-						var action			= '<a class="link" href="'+BASE_URL+ user_alias +'">'+ user_name +'</a>赞了<a class="link" href="'+BASE_URL+ author_alias +'">'+ author +'</a>的一篇文章';
-					}else{
-						var action			= '<a class="link" href="'+BASE_URL+ user_alias +'">'+ user_name +'</a>发布了一篇文章';
+		$.ajax({
+	      url: GET_FEED_LIST_URL,
+	      async: false, 
+	      type: 'POST',
+	      data:{page : pageTemp},
+	      success: function(data) {
+	      	//错误
+	      	if(data.error != null)
+	      	{
+	      		ERROR_OUTPUT(data);
+	      		return false;
+	      	}
+	      	//没数据
+	      	else if(data == null || data == "")
+	      	{
+	      		return false;
+	      	}
+	        data = eval("("+data+")"); 
+			for(var i = 0; i < data.length; i++)  
+			{
+				var id 					= data[i].id;
+				var feed_type 			= data[i].type;
+				var article 			= eval("(" +data[i].content+ ")");
+				var article_id			= article.article_id;
+				var article_title		= article.article_title;
+				var article_content		= article.article_content;
+				var image 				= article.article_image;					
+				var user_head_src		= data[i].user.pic;
+				var user_name			= data[i].user.name;
+				var user_alias			= data[i].user.alias;
+				var like				= data[i].like;
+				var like_num			= like.length;
+				var time 				= data[i].publish_time;
+				var like_temp			= "";
+				var element 			= "";
+				if(feed_type == 1){
+					var author			= data[i].author.name;
+					var author_alias	= data[i].author.alias;	
+					var action			= '<a class="link" href="'+BASE_URL+ user_alias +'">'+ user_name +'</a>赞了<a class="link" href="'+BASE_URL+ author_alias +'">'+ author +'</a>的一篇文章';
+				}else{
+					var action			= '<a class="link" href="'+BASE_URL+ user_alias +'">'+ user_name +'</a>发布了一篇文章';
+				}
+				for(var y = 0; y < like.length; y++){
+					if(like[y].id == uid){
+						var like_element = '<div class="likebtn2 focus" onclick="support(this)"><div class="num">'+ like.length +'</div></div>';
+						like_temp = 1;
+						break;
 					}
+				}
+				if(like_temp == ""){
+					var like_element = '<div class="likebtn2" onclick="support(this)"><div class="num">'+ like.length +'</div></div>';
+				}
 
-					element = '<div class="box"><div class="boxtop"><div class="name"><div class="head"><a href="#"><img src="'+ user_head_src +'" /></a><div class="identity"><span class="icon identity"></span></div></div><div class="text">'+ action +'</div></div><div class="time"><time class="timeago" title="'+ time +'" datetime="'+ time +'+08:00"></time></div></div><div class="article"><div class="ar_text"><div class="title"><a class="link" href="'+ BASE_URL +'article/'+article_id+'">'+ article_title +'</a></div><div class="con"><p>'+ article_content +'</p></div></div><div class="ar_pic"><a href="'+ BASE_URL +'article/'+article_id+'"><img  id="'+ id +'" data-url="'+image+'" class="img-lazyload_'+pageTemp+'" ></a></div></div><div class="support"><div class="like float-l"><div class="btn"><i class="fa fa-heart"></i> '+ like_num +'</div></div><div class="list">';
-					for(var y = 0; y < like.length; y++){
-						element += '<div class="head"><a href="'+BASE_URL+ like[y].alias+'"><img title="'+ like[y].name +'" src="'+ like[y].pic +'"></a></div>';
-					}
-					element += '</div></div></div>';
-					$(".ac-boxlist").append(element);
-					$(".timeago").timeago();
+				element = '<div class="box"><div class="boxtop"><div class="name"><div class="head"><a href="#"><img src="'+ user_head_src +'" /></a><div class="identity"><span class="icon identity"></span></div></div><div class="text">'+ action +'</div></div><div class="time"><time class="timeago" title="'+ time +'" datetime="'+ time +'+08:00"></time></div></div><div class="article"><div class="ar_text"><div class="title"><a class="link" href="'+ BASE_URL +'article/'+article_id+'">'+ article_title +'</a></div><div class="con"><p>'+ article_content +'</p></div></div><div class="ar_pic"><a href="'+ BASE_URL +'article/'+article_id+'"><img  id="'+ id +'" data-url="'+image+'" class="img-lazyload_'+pageTemp+'" ></a></div></div><div class="support"><div class="like">'+ like_element +'</div><div class="list">';
+				for(var y = 0; y < like.length; y++){
+					element += '<div class="head"><a href="'+BASE_URL+ like[y].alias+'"><img title="'+ like[y].name +'" src="'+ like[y].pic +'"></a></div>';
 				}
+				element += '</div></div></div>';
+				$(".ac-boxlist").append(element);
+				$(".timeago").timeago();
+			}
 			//图片异步加载
-            $(".img-lazyload_"+pageTemp).scrollLoading();				
-      }
-	});
-	/*
-	$.ajax({
-        url: GET_FEED_LIST_URL,
-        type: 'POST',
-        data:{page : pageTemp},
-        success: function(data) {
-          data = eval("("+data+")"); 
-				for(var i = 0; i < data.length; i++)  
-				{  
-					var article 	= eval("(" +data[i].content+ ")");
-					var id 			= data[i].id;
-					var image 		= article.article_image;
-					$(".ar_pic #"+id).attr("src",image);
-				}
-    	}
-    });
-    */
+	        $(".img-lazyload_"+pageTemp).scrollLoading();				
+	      }
+		});
+	}
+
+	function support(obj){
+		if($(obj).hasClass('focus')){
+			$(obj).attr('class','likebtn2 blur');
+		}else{
+			$(obj).attr('class','likebtn2 focus');
+		}
 	}
 
 

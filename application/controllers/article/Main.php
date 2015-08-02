@@ -40,7 +40,7 @@ class Main extends MY_Controller {
             'font-awesome/css/font-awesome.min.css'
         );
         $data['javascript'] = array(
-            'j162.min.js',
+            'jquery.js',
             'jquery.scrollLoading.js',
             'error.js'
         );
