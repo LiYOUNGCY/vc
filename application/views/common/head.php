@@ -25,5 +25,6 @@
 		?>
 	   <script type="text/javascript" src="<?=base_url()?>public/js/yunba/socket.io-1.3.5.min.js"></script>
 	   <script type="text/javascript" src="<?=base_url()?>public/js/yunba/yunba-js-sdk.js"></script>
+	   <script type="text/javascript" src="<?=base_url()?>public/js/cookie.js"></script>	   
 		<input id="BASE_URL" type="hidden" value="<?=base_url()?>">
 	</head>

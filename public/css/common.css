@@ -293,7 +293,7 @@ img{
 }
 .sidebar .lop .btn{
     background-color: #B3B3B3;
-    width: 139.5px;
+    width: 128.5px;
     text-align: center;
     border-radius: 0;
     float: left;
@@ -303,6 +303,17 @@ img{
 .sidebar .lop .btn:hover{
     background-color: #FCEE21;
     color: #4C4640 !important;
+}
+.numtooplit{
+	float: right;
+	margin:10px;
+	margin-right: 20spx;
+	padding: 0 5px;
+	font-size: 12px;
+	border-radius: 30%;
+	background-color: #FCEE21;
+	color: #4b463f;
+	font-weight: 700;
 }
 
 .shade{
@@ -343,6 +354,16 @@ img{
 	outline: 0px none;
 	cursor: pointer;
 	z-index: 999;
+}
+.sbtn .dot{
+	width: 10px;
+	height: 10px;
+	border-radius:100%;
+	background: red ;
+	position: absolute;
+	top: 7px;
+	right: 7px;
+	display: none;
 }
 .content {
 	max-width: 960px;
@@ -1307,7 +1328,7 @@ img{
 .quanzi .info .qzintro{
 	width: 100%;
 	text-align: left;
-	color: #B3B3B3;
+	color: #797979;
 	margin: 10px 0;
 }
 .quanzi .info .qzcreater{
@@ -1316,7 +1337,8 @@ img{
 	border-top:1px solid #eee;
 	border-bottom: 1px solid #eee;
 	text-align: left;
-	margin-top: 20px;
+	margin: 20px 0;
+	color: #4b463f;
 }
 
 .quanzi .info .qzcreater .head{
@@ -1327,24 +1349,176 @@ img{
 	margin: 0 2px;
 }
 
+.quanzi .info .qzopt{
+	text-align: left;
+	margin-bottom: 25px;
+}
 
-.fave {
+.quanzi .info .qzopt .btn{
+	width: 100px;
+	height: 35px;
+	margin-right: 20px;
+	background: #F0F0F0;
+	border-radius:0;
+	text-align: center;
+	line-height: 35px; 
+	transition: all .2s ease-in-out;
+}
+
+.quanzi .info .qzopt .btn.publish{
+	background: #FCEE21;
+}
+.quanzi .info .qzopt .publish:hover{
+	background: #FFF671;
+	color: #4b463f;
+}
+
+.quanzi .info .qzopt .setting:hover{
+	background: #DADADA;
+	color: #4b463f;
+}
+
+.quanzi .qzpostlist .box{
+	position: relative;
+	width: 100%;
+	border: 1px solid #eee;
+	display: inline-block;
+	margin-bottom: 20px;
+}
+
+.quanzi .qzpostlist .box .delete{
+	font-size: 14px;
+	color: #B3B3B3;
+	position: absolute;
+	right: 10px;
+	top:5px;
+	cursor: pointer;
+}
+
+.quanzi .qzpostlist .box .postuser{
+	float: left;
+	width: 20%;
+	text-align: center;
+	padding: 10px;
+	box-sizing: border-box;
+}
+.quanzi .qzpostlist .box .postuser .head{
+	float: none;
+	margin: 0 auto;
+}
+.quanzi .qzpostlist .box .postinfo{
+	position: relative;
+	float: left;
+	padding: 10px;
+	color: #4b463f;
+	background: #FFF;
+	width: 80%;
+	min-height: 150px;
+	box-sizing:border-box;
+	transition: all .2s ease-in-out;
+}
+.quanzi .qzpostlist .box .postinfo:hover{
+	background: #F0F0F0;
+}
+
+.quanzi .qzpostlist .box .postinfo .posttitle{
+	width: 100%;
+	text-align: left;
+	position: relative;
+}
+.quanzi .qzpostlist .box .postinfo .posttitle .title{
+	display: inline-block;
+}
+.quanzi .qzpostlist .box .postinfo .link{
+	color: #4b463f;
+}
+
+.quanzi .qzpostlist .box .postinfo .posttitle .title:before{
+	content:"《";
+	color: #FCEE21;
+	margin: 0 5px;
+	font-weight: bold;
+}
+.quanzi .qzpostlist .box .postinfo .posttitle .title:after{
+	content:"》";
+	color: #FCEE21;
+	margin: 0 5px;
+	font-weight: bold;
+}
+.quanzi .qzpostlist .box .postinfo .postcon{
+	width: 100%;
+	text-align: justify;
+	position: relative;
+	color: #B3B3B3;
+	margin:10px 0 35px; 
+	
+}
+.quanzi .qzpostlist .box .postinfo .other{
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	display: inline-block;
+	color:#B3B3B3;
+	font-size: 14px;
+	left: 0;
+	padding: 10px 15px;
+	box-sizing:border-box;
+}
+
+
+.likebtn1 {
   	width: 107px;
   	height: 40px;
 	background: #fff url(../img/like-animate.png) no-repeat;
 	background-position: 0 0;
-    cursor: pointer;
-}
-.fave.focus {
-	-webkit-animation: favefocus .4s steps(9) forwards;
-    	animation: favefocus .4s steps(9) forwards;
-}
-.fave.blur {
-	-webkit-animation: faveblur .3s steps(5) forwards;
-    	animation: faveblur .3s steps(5) forwards;
+    
+    position: relative;
+	overflow: hidden;
 }
 
-@-webkit-keyframes favefocus {
+.likebtn1 .support{
+	width: 45px;
+	height: 40px;
+	position: absolute;
+	left: 0;
+	cursor: pointer;
+	border-radius: 50% 0 0 50%;
+}
+.likebtn1 .num{
+	width: 57px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #B3B3B3;
+	font-size: 16px;
+	position: absolute;
+	right: 4px;
+	cursor: pointer;
+	transition:all .4s ease-in-out;
+}
+.likebtn1.focus .num{
+	color: #fcee21;
+}
+.likebtn1 .num .link {
+	color: #B3B3B3;
+	transition:all .4s ease-in-out;
+}
+.likebtn1.focus .num .link {
+	color: #fcee21;
+}
+
+
+
+.likebtn1.focus {
+	-webkit-animation: likebtn1focus .4s steps(9) forwards;
+    	animation: likebtn1focus .4s steps(9) forwards;
+}
+.likebtn1.blur {
+	-webkit-animation: likebtn1blur .3s steps(5) forwards;
+    	animation: likebtn1blur .3s steps(5) forwards;
+}
+
+@-webkit-keyframes likebtn1focus {
     0% {
         background-position: 0 0px
     }
@@ -1354,7 +1528,7 @@ img{
     }
 }
 
-@keyframes favefocus {
+@keyframes likebtn1focus {
     0% {
         background-position: 0 0px
     }
@@ -1364,7 +1538,7 @@ img{
     }
 }
 
-@-webkit-keyframes faveblur {
+@-webkit-keyframes likebtn1blur {
     0% {
         background-position: -963px 0px
     }
@@ -1374,7 +1548,7 @@ img{
     }
 }
 
-@keyframes faveblur {
+@keyframes likebtn1blur {
     0% {
         background-position: -963px 0px
     }
@@ -1384,7 +1558,63 @@ img{
     }
 }
 
+.likebtn2 {
+  	width: 23px;
+  	height: 22px;
+	background: #fff url(../img/like-animate2.png) no-repeat;
+	background-position: 0 0;
+    position: relative;
+	overflow: hidden;
+	cursor:pointer;
+}
 
+
+.likebtn2.focus {
+	-webkit-animation: likebtn2focus .4s steps(21) forwards;
+    	animation: likebtn2focus .4s steps(21) forwards;
+}
+.likebtn2.blur {
+	-webkit-animation: likebtn2blur .3s steps(6) forwards;
+    	animation: likebtn2blur .3s steps(6) forwards;
+}
+
+@-webkit-keyframes likebtn2focus {
+    0% {
+        background-position: 0 0px
+    }
+
+    100% {
+        background-position: -485px 0px
+    }
+}
+
+@keyframes likebtn2focus {
+    0% {
+        background-position: 0 0px
+    }
+
+    100% {
+        background-position: -485px 0px
+    }
+}
+
+@-webkit-keyframes likebtn2blur {
+    0% {
+        background-position: -485px 0px
+    }
+    100% {
+        background-position: -623px 0px
+    }
+}
+
+@keyframes likebtn2blur {
+    0% {
+        background-position: -485px 0px
+    }
+    100% {
+        background-position: -623px 0px
+    }
+}
 
 @media screen and (max-width: 960px){
 	.logo{
@@ -1557,7 +1787,7 @@ img{
 .article-detial {
     margin-top: 50px;
     box-sizing: border-box;
-    width: 80%;
+    width: 90%;
     min-width: 300px;
     max-width: 700px;
 

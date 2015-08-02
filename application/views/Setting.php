@@ -2,10 +2,6 @@
 <?=$sidebar?>
 <div id="vi_container" class="container">
   <div id="shade"></div>
-  <div id="sbtn" class="sbtn">
-    <div class="icon sidebtn">
-    </div>
-  </div>
   <div class="content">
     <div class="container-head">
       <h1>设置中心</h1>

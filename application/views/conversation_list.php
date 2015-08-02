@@ -3,10 +3,6 @@
 <?=$sidebar?>
 <div id="vi_container" class="container">
     <div id="shade"></div>
-    <div id="sbtn" class="sbtn">
-        <div class="icon sidebtn">
-        </div>
-    </div>
     <div class="content">
         <div class="container-head">
             <h1>消息中心</h1>
@@ -49,6 +45,7 @@
 
 
     $(function(){
+               
         var BASE_URL = $("#BASE_URL").val();
         var GET_NOTIFICATION_URL = BASE_URL + "notification/main/get_notification_list";
         var CONVERSATION_URL = BASE_URL + 'conversation/';

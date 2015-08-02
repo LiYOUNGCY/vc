@@ -6,9 +6,6 @@
 		<input type="hidden" name="article_type" value="<?php echo $article_type;?>" />
 		<input type="hidden" name="article_tag"  value="<?php echo $article_tag;?>"/>
 		<div id="shade"></div>
-		<div id="sbtn" class="sbtn">
-			<div class="icon sidebtn"></div>
-		</div>
 		<div id="vi_content" class="content">
 		<?php if( $user['role'] == 0) { ?>
 			<div id="vi_sign" class="vi-sign ">
@@ -21,11 +18,18 @@
 		<div id="vc_logo" class="logo">
 			<div class="icon logo-a"></div>
 		</div>
-		<div id="vi_menu" class="vi-menu width-100p">
+		<div id="vi_menu" class="vi-menu width-100p" style="margin: 0 8px;">
 			<ul>
+				<?php 
+					if(isset($user['id'])){
+				?>
 				<li>
 					<a href="<?=base_url()?>feed" class="link">动态</a>
 				</li>
+				<?php 
+					}
+				?>
+				
 				<li class="active">
 					<a href="<?=base_url()?>article" class="link">文章</a>
 				</li>
@@ -41,7 +45,6 @@
 		<div id="vi_main" class="width-100p ">
 			<div class="main width-100p">
 				<ul id="article_list">
-
 					</ul>
 					<div class="loadmore width-100p">
 						<div id="loadmore" class="btn load_btn">
@@ -95,7 +98,7 @@
 		$(window).bind("scroll",function() {
 
         	if($(document).scrollTop() + $(window).height() > $(document).height() - 150 && PAGE < 2){
-                alert(PAGE);
+
         		$("#loadmore #text").html("加载中");
 				$("#loadmore #icon").css({"display":"inline-block"});
         		loadarticel(PAGE);
@@ -159,7 +162,7 @@
 					}else{
 						element += "<div class='unlike'></div>"
 					}
-					element += "</div></div></div><div class='arcon width-100p clearfix'><div class='name'><a href='javascript:void(0);'><div class='head'><img src='"+author_pic+"'></div></a><div class='username'><a href='"+BASE_URL + author_alias+"' class='link'>"+author_name+"</a></div></div><div class='artext'><p>"+content+"</p></div></div><div class='arbtn margintop-10'><a href='"+ARTICLE_DETAIL_URL+id+"' class='link btn'>阅读文章</a></div></div></div></li>";
+					element += "</div></div></div><div class='arcon width-100p clearfix'><div class='name'><a href='javascript:void(0);'><div class='head'><a href='"+BASE_URL + author_alias+"' class='link'><img src='"+author_pic+"'></a></div></a><div class='username'><a href='"+BASE_URL + author_alias+"' class='link'>"+author_name+"</a></div></div><div class='artext'><p>"+content+"</p></div></div><div class='arbtn margintop-10'><a href='"+ARTICLE_DETAIL_URL+id+"' class='link btn'>阅读文章</a></div></div></div></li>";
 					$("#article_list").append(element);
 				}
 				//图片异步加载
