@@ -13,7 +13,7 @@ class Main extends MY_Controller{
 	public function index()
 	{
 		$data['css'] = array('common.css', 'font-awesome/css/font-awesome.min.css');
-        $data['javascript'] = array('jquery.js');
+        $data['javascript'] = array('jquery.js','timeago.js');
         $u['user']    = $this->user;
         $this->load->view('common/head', $data);
     	$data['sidebar'] = $this->load->view('common/sidebar', $u, TRUE);

@@ -4,9 +4,6 @@
     ?>
 	<div id="vi_container" class="container">
 		<div id="shade"></div>
-		<div id="sbtn" class="sbtn">
-			<div class="icon sidebtn"></div>
-		</div>
 		<div class="homeshowcar">
 			<div class="showcartop">
 				<div class="user">

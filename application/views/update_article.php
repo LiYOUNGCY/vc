@@ -2,10 +2,6 @@
     <?=$sidebar?>
     <div id="vi_container" class="container">
         <div id="shade"></div>
-        <div id="sbtn" class="sbtn">
-            <div class="icon sidebtn">
-            </div>
-        </div>
         <div class="content">
             <div class="publish-article">
                 <form id="aform" action="<?=base_url().'article/publish/update_article'?>" method="post">

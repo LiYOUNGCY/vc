@@ -3,10 +3,6 @@
 <input id="aid" type="hidden" value="<?=$article['id']?>">
 <div id="vi_container" class="container">
   <div id="shade"></div>
-  <div id="sbtn" class="sbtn">
-    <div class="icon sidebtn">
-    </div>
-  </div>
   <div class="content article-detial">
     <div id="likeList" class="like-list">
       <div id="close" class="close"> <i class="fa fa-close fa-2x"></i>

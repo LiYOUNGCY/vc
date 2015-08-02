@@ -3,9 +3,6 @@
 <div id="vi_container" class="container">
   <div id="loginbg" class="loginbg"></div>
   <div id="shade"></div>
-  <div id="sbtn" class="sbtn">
-    <div class="icon sidebtn"></div>
-  </div>
   <div id="vl_content" class="content">
     <div class="loginlogo">
       <a class="link" href="javascript:void(0);">
