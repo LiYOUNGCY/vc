@@ -94,6 +94,17 @@ class Common{
     	}
     }
 
+    /**
+     * [has_first_img 是否有图片]
+     * @return boolean [description]
+     */
+    static function has_first_img($content)
+    {
+ 		$match = array();
+        preg_match_all("/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/", $content, $match);
+        return isset( $match[1][0] ) ? $match[1][0] : '';    	
+    }
+    
     static function arr_sort($array,$key,$order="asc")
     {//asc是升序 desc是降序
 

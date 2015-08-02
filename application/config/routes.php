@@ -83,7 +83,7 @@ $route['setting/(([a-z]*))']   = 'account/setting/index/$1';
 /**
  *圈子 
  */
-$route['community/(:num)'] = 'community/main';
+$route['community/(:num)'] = 'community/main/index/$1';
 $route['post/(:num)'] = 'community/post/index/$1';
 $route['publish/community'] = 'community/publish/index/community';
 $route['publish/post'] = 'community/publish/index/post';
