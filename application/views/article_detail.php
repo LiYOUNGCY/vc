@@ -261,7 +261,20 @@
           aid: aid
         },
         success:function(data){
-          alert(data);
+          data = eval('('+data+')');
+          if(data.error != null)
+          {
+             ERROR_OUTPUT(status);
+             return false;            
+          }
+          else if(data.success == 0)
+          {
+             alert(data.note);
+             if(data.script != null)
+             {
+               eval(data.script);
+             }
+          }
         }
       });
     });

@@ -109,6 +109,10 @@ class Conversation_service extends MY_Service{
 			echo json_encode(array('success' => 0));
 			//添加私信消息（异步）
 			$this->insert_conversation_notification($sender_id,$reciver_id,$content,$cid);
+            //推送
+            $this->load->library('push');
+            $this->push->push_to_topic($reciver_id,"");                    
+            
 		}
 		else
 		{

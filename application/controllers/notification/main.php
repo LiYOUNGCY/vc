@@ -29,7 +29,7 @@ class Main extends MY_Controller{
 			'error.js',
 			'timeago.js'
 		);
-
+		setcookie('push_msg',NULL);	
 		$user['user'] 	= $this->user;
         $body['sidebar']= $this->load->view('common/sidebar', $user, TRUE);
         $body['footer']	= $this->load->view('common/footer', '', TRUE);
@@ -41,15 +41,15 @@ class Main extends MY_Controller{
 			$this->load->view('notification_list', $body);
 		}
 		elseif (strcmp($type, 'conversation') == 0) 
-		{		
+		{			
 			$this->load->view('conversation_list', $body);			
 		}
 		elseif (strcmp($type, 'comment') == 0) 
-		{	
+		{				
 			$this->load->view('comment_list', $body);
 		}
 		elseif (strcmp($type, 'like') == 0) 
-		{	
+		{			
 			$this->load->view('like_list', $body);
 		}
 	}

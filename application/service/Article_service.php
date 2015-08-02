@@ -157,7 +157,7 @@ class Article_service extends MY_Service{
                 //更新消息
                 $content = json_encode(array('content_id' => $article['id'], 'content_title' => $article['title'], 'content_type' => 'article'));
                 $this->notification_model->insert($uid,$article['uid'],3,$content);
-                if($this->user['id'] != $article['uid'])
+                if($uid != $article['uid'])
                 {
                     //推送
                     $this->load->library('push');
@@ -207,7 +207,7 @@ class Article_service extends MY_Service{
             $article = $this->article_model->get_article_by_id($aid);
             $content = json_encode(array('content_id' => $aid, 'content_type' => 'article', 'content_title' => $article['title'], 'comment_content' => $comment));
             $this->notification_model->insert($uid,$article['uid'],2,$content);
-            if($this->user['id'] != $article['uid'])
+            if($uid != $article['uid'])
             {
                 //推送
                 $this->load->library('push');

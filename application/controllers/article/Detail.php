@@ -109,8 +109,8 @@ class Detail extends MY_Controller
         $result = $this->article_model->delete_article($aid,$this->user['id']);
         if($result)
         {
-            $redirect = base_url().'home/'.$this->user['alias'].'/article';
-            echo json_encode(array('success' => 0, 'script' => "window.location.href = '{$redirect}';"));
+            $redirect = base_url().$this->user['alias'].'/article';
+            echo json_encode(array('success' => 0, 'note' => lang('OPERATE_SUCCESS') ,'script' => "window.location.href = '{$redirect}';"));
         }
         else
         {

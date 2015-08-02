@@ -119,6 +119,7 @@
 
 		              
 		              yunba.set_message_cb (function (data) {
+		              	alert(data);
 		              	  var count = getcookie('push_msg');
 		                  if(count != null && count != "" && count != undefined)
 		                  {

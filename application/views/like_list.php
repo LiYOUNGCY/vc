@@ -62,10 +62,6 @@
     }
 
     $(function(){
-        
-        delcookie('push_msg');
-        $("#notification_dot").css('display','none');
-
         var page = 0;
 
         function load_comment() {

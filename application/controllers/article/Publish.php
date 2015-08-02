@@ -102,7 +102,7 @@ class Publish extends MY_Controller {
         $result = $this->article_service->update_article($aid,$this->user['id'],$article_title,$article_subtitle,1,$article_tag,$article_content);       
         if($result)
         {
-            redirect(base_url()."update/article/".$aid,'location');
+            redirect(base_url()."article/".$aid,'location');
         }
         else
         {
