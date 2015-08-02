@@ -1,7 +1,5 @@
 <body>
-	<?php 
-	echo $sidebar;
-	?>
+	<?=$sidebar?>
 	<div id="vi_container" class="container">
 		<input type="hidden" name="article_type" value="<?php echo $article_type;?>" />
 		<input type="hidden" name="article_tag"  value="<?php echo $article_tag;?>"/>

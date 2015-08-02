@@ -14,11 +14,11 @@
                     </div>
                     <div class="radio-box">
                     <p>文章分类</p>
-                    <input class="radiocheck" name="article_tag" id="interview" type="radio" <?php if($article['type'] == 1) echo 'checked="true"'; ?>>
+                    <input class="radiocheck" name="article_tag" id="interview" value="1" type="radio" <?php if($article['type'] == 1) echo 'checked="true"'; ?>>
                     <label class="nofull default left" for="interview">访谈</label>
-                    <input class="radiocheck" name="article_tag" id="exhibition" type="radio" <?php if($article['type'] == 2) echo 'checked="true"'; ?>>
+                    <input class="radiocheck" name="article_tag" id="exhibition" value="2" type="radio" <?php if($article['type'] == 2) echo 'checked="true"'; ?>>
                     <label class="nofull default left" for="exhibition">展览</label>
-                    <input class="radiocheck" name="article_tag" id="discuss" type="radio" <?php if($article['type'] == 3) echo 'checked="true"'; ?>>
+                    <input class="radiocheck" name="article_tag" id="discuss" value="3" type="radio" <?php if($article['type'] == 3) echo 'checked="true"'; ?>>
                     <label class="nofull default left" for="discuss">议论</label>
                     </div>
                     <input name="aid" type="hidden" value="<?=$article['id']?>">

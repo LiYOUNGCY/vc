@@ -1,115 +1,130 @@
 <body>
 <?=$sidebar ?>
 <input id="aid" type="hidden" value="<?=$article['id']?>">
+
 <div id="vi_container" class="container">
   <div id="shade"></div>
+
   <div class="content article-detial">
+
+    <!-- 喜欢的人的弹出层 -->
     <div id="likeList" class="like-list">
-      <div id="close" class="close"> <i class="fa fa-close fa-2x"></i>
+      <div id="close" class="close">
+        <i class="fa fa-close fa-2x"></i>
       </div>
       <div id="people" class="people">
         <h1>喜欢的人</h1>
         <div id="list" class="list"></div>
       </div>
     </div>
+    
+    <!-- 作者的信息 -->
     <div class="author">
       <div class="head">
-        <img src="<?=base_url().'public/img/mm1.jpg'?>"></div>
         <a class="link" href="<?=$article['author']['alias']?>">
-        <span class="name">
-          <?=$article['author']['name']?>
-        </span>
+        <img src="<?=base_url().'public/img/mm1.jpg'?>">
+        </a>
+      </div>
+      <a class="link" href="<?=$article['author']['alias']?>">
+        <span class="name"><?=$article['author']['name']?></span>
       </a>
-      <p class="author-info"><?=$article['author']['intro']?></p>
+      <p class="author-info">
+        <?=$article['author']['intro']?>
+      </p>
       <?php if($user['id'] == $article['uid']) {?>
-      <div id="menu" class="list"><i class="fa fa-ellipsis-v"></i></div>
+      <div id="menu" class="list"> <i class="fa fa-ellipsis-v"></i></div>
       <div id="menu-list" class="menu-list" style="display:none;">
-        <a href="<?=base_url().'update/article/'.$article['id']?>" class="link"><div class="btn edit">编辑文章</div></a>
+        <a class="link" href="<?=base_url().'update/article/'.$article['id']?>">
+          <div class="btn edit">编辑文章</div>
+        </a>
         <div id="delete" class="btn delete">删除文章</div>
       </div>
       <?php } ?>
     </div>
-    <h1 class="article-title">
-      <?=$article['title']?></h1>
-    <p class="article-subtitle">
-      <?=$article['subtitle']?></p>
-    <div class="article-info"> 
-      <i class="fa fa-eye"></i>
-      <span><?=$article['read']?></span>
-      </div>
-    <div class="article-content">
-      <?=$article['content']?></div>
-    
 
+    <h1 class="article-title"><?=$article['title']?></h1>
+    <p class="article-subtitle"><?=$article['subtitle']?></p>
+
+    <div class="article-info">
+      <i class="fa fa-eye"></i>
+      <span>
+        <?=$article['read']?></span>
+    </div>
+
+    <div class="article-content"><?=$article['content']?></div>
 
     <?php if(isset($status) && $status == '1') { ?>
-      <div class="likebtn1 focus">
+    <div class="likebtn1 focus">
       <?php } else { ?>
       <div class="likebtn1">
       <?php } ?>
-        <div class="support" id="mark-like"></div>
+      <div class="support" id="mark-like"></div>
 
-        <div class="num" id="seeLike">
-            <?=$article['like']?>
-        </div>
+      <div class="num" id="seeLike">
+        <?=$article['like']?>
       </div>
+    </div>
 
+    <hr class="line">
 
-
-      <hr class="line">
-
-      <?php if(count($comment) == 0) { ?>
-      <div class="no-comment">暂时还没有评论</div>
-      <?php } else { ?>
-      <div class="playground">
-        <div class="box buddycloud">  
-          <div class="stream">
-            <article class="topic">
-              <?php
-          $len = count($comment) < 5 ? count($comment) : 5;
+    <?php if(count($comment) == 0) { ?>
+    <div class="no-comment">暂时还没有评论</div>
+    <?php } else { ?>
+    <div class="playground">
+      <div class="box buddycloud">
+        <div class="stream">
+          <article class="topic">
+          <?php $len = count($comment) < 5 ? count($comment) : 5;
           for($i = 0; $i < $len; $i++) {
           ?>
+            <section class="opener">
+              <div class="avatar">
+                <a href="<?=base_url().$comment[$i]['user']['alias']?>">
+                  <img src="<?=$comment[$i]['user']['pic']?>">
+                </a>
+              </div>
+
+              <div class="postmeta">
+                <span class="time">
+                  <time class="timeago" title="<?=$comment[$i]['publish_time']?>" datetime="<?=$comment[$i]['publish_time']?>+08:00"></time>
+                </span>
+              </div>
+              <a class="link name" href="<?=base_url().$comment[$i]['user']['alias']?>">
+                <?=$comment[$i]['user']['name']?>
+              </a>
+              <p>
+                <?=$comment[$i]['content']?>
+              </p>
+            </section>
+            <?php } ?>
+            <div class="hidden" style="display:block">
+              <?php $len = count($comment);
+               for($i = 5; $i < $len; $i ++) { ?>
               <section class="opener">
                 <div class="avatar">
-                  <img src="<?=$comment[$i]['user']['pic']?>"></div>
+                  <img src="<?=$comment[$i]['user']['pic']?>">
+                </div>
                 <div class="postmeta">
                   <span class="time">
-                      <time class="timeago" title="<?=$comment[$i]['publish_time']?>" datetime="<?=$comment[$i]['publish_time']?>+08:00">                       
-                      </time>
+                    <time class="timeago" title="<?=$comment[$i]['publish_time']?>" datetime="<?=$comment[$i]['publish_time']?>+08:00"></time>
                   </span>
                 </div>
-                <span class="name">
-                  <?=$comment[$i]['user']['name']?></span>
+                <a class="link name" href="<?=base_url().$comment[$i]['user']['alias']?>">
+                  <?=$comment[$i]['user']['name']?>
+                </a>
                 <p>
-                  <?=$comment[$i]['content']?></p>
+                  <?=$comment[$i]['content']?>
+                </p>
               </section>
               <?php } ?>
-              <div class="hidden">
-                <?php $len = count($comment);
-            for($i = 5; $i < $len; $i ++) {
-            ?>
-                <section class="opener">
-                  <div class="avatar">
-                    <img src="<?=$comment[$i]['user']['pic']?>"></div>
-                  <div class="postmeta">
-                    <span class="time">
-                      <time class="timeago" title="<?=$comment[$i]['publish_time']?>" datetime="<?=$comment[$i]['publish_time']?>+08:00">                       
-                      </time>
-                    </span>
-                  </div>
-                  <span class="name">
-                    <?=$comment[$i]['user']['name']?></span>
-                  <p>
-                    <?=$comment[$i]['content']?></p>
-                </section>
-                <?php } ?></div>
-              <!-- /hidden -->
-              <?php if($len >
-              5){ ?>
-              <section class="seeMore">
-                <span>查看全部评论</span>
-              </section>
-              <?php } ?></article>
+            </div>
+            <!-- hidden -->
+            <?php if($len > 5){ ?>
+            <section class="seeMore">
+              <span>查看全部评论</span>
+            </section>
+            <?php } ?>
+          </article>
           </div>
         </div>
       </div>
@@ -123,8 +138,7 @@
           <div id="submit" class="send btn">发送</div>
         </div>
       </article>
-      <?=$footer?>
-    </div>
+      <?=$footer?></div>
   </div>
 
 </div>
