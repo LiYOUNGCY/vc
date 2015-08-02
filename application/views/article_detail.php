@@ -32,22 +32,23 @@
       </div>
     <div class="article-content">
       <?=$article['content']?></div>
+    
 
-    <div class="like">
-      <?php if(isset($status) && $status == '1') { ?>
-      <div id="mark-like" class="mark-like active">
-        <?php } else { ?>
-        <div id="mark-like" class="mark-like">
-          <?php } ?>
-          <div>
-            <i class="fa fa-heart" style="margin-right:2px;"></i>
-            喜欢
-          </div>
+
+    <?php if(isset($status) && $status == '1') { ?>
+      <div class="likebtn1 focus">
+      <?php } else { ?>
+      <div class="likebtn1">
+      <?php } ?>
+        <div class="support" id="mark-like"></div>
+
+        <div class="num" id="seeLike">
+            <?=$article['like']?>
         </div>
-        <div class="hover-line"></div>
-        <div id="seeLike" class="like-num">
-          <?=$article['like']?></div>
       </div>
+
+
+
       <hr class="line">
 
       <?php if(count($comment) == 0) { ?>
@@ -146,6 +147,14 @@
     var VOTE_URL = BASE_URL + 'article/detail/get_vote_list';
     var ARGEE_URL = BASE_URL + 'article/detail/vote_article';
 
+    //点赞按钮动画
+    $(".likebtn1 .support").click(function(){
+      if($(this).parent().hasClass('focus')){
+        $(this).parent().attr('class','likebtn1 blur');
+      }else{
+        $(this).parent().attr('class','likebtn1 focus');
+      }
+    });
     //获取文章的id
     var aid = window.location.href.split("/");
     aid = aid[aid.length-1];
@@ -217,8 +226,7 @@
         success:function(data){
           var status = eval('(' + data + ')');
           if(status.success == 0) {
-            $('#mark-like').toggleClass('active');
-            if($('#mark-like').hasClass('active')) {
+            if($('#mark-like').parent().hasClass('focus')) {
               $('#seeLike').html(parseInt($('#seeLike').html())+1);
             }
             else {

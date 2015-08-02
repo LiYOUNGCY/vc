@@ -168,14 +168,14 @@
 					if(feed_type == 1){
 						var author			= data[i].author.name;
 						var author_alias	= data[i].author.alias;	
-						var action			= '<a class="link" href="#">'+ user_name +'</a>赞了<a class="link" href="#">'+ author +'</a>的一篇文章';
+						var action			= '<a class="link" href="'+BASE_URL+ user_alias +'">'+ user_name +'</a>赞了<a class="link" href="'+BASE_URL+ author_alias +'">'+ author +'</a>的一篇文章';
 					}else{
-						var action			= '<a class="link" href="#">'+ user_name +'</a>发布了一篇文章';
+						var action			= '<a class="link" href="'+BASE_URL+ user_alias +'">'+ user_name +'</a>发布了一篇文章';
 					}
 
 					element = '<div class="box"><div class="boxtop"><div class="name"><div class="head"><a href="#"><img src="'+ user_head_src +'" /></a><div class="identity"><span class="icon identity"></span></div></div><div class="text">'+ action +'</div></div><div class="time"><time class="timeago" title="'+ time +'" datetime="'+ time +'+08:00"></time></div></div><div class="article"><div class="ar_text"><div class="title"><a class="link" href="'+ BASE_URL +'article/'+article_id+'">'+ article_title +'</a></div><div class="con"><p>'+ article_content +'</p></div></div><div class="ar_pic"><a href="'+ BASE_URL +'article/'+article_id+'"><img  id="'+ id +'" data-url="'+image+'" class="img-lazyload_'+pageTemp+'" ></a></div></div><div class="support"><div class="like float-l"><div class="btn"><i class="fa fa-heart"></i> '+ like_num +'</div></div><div class="list">';
 					for(var y = 0; y < like.length; y++){
-						element += '<div class="head"><img title="'+ like[y].name +'" src="'+ like[y].pic +'"></div>';
+						element += '<div class="head"><a href="'+BASE_URL+ like[y].alias+'"><img title="'+ like[y].name +'" src="'+ like[y].pic +'"></a></div>';
 					}
 					element += '</div></div></div>';
 					$(".ac-boxlist").append(element);
