@@ -41,6 +41,11 @@ class Main extends MY_Controller{
 			//载入视图
 			if($type == 'quanzi')
 			{
+				//如果该用户是自媒体
+				if($user['role'] == 2)
+				{
+					$data['media'] = $this->home_service->get_community_by_uid($user['id']); 
+				}
 				$this->load->view('home/quanzi',$data);
 			}
 			elseif($type == 'intro')

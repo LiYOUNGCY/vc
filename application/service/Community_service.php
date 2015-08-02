@@ -6,34 +6,69 @@ class Community_service extends MY_Service{
 		$this->load->model('community_model');
 		$this->load->model('community_post_model');
 		$this->load->model('community_answer_model');			
-		$this->load->model('user_follow_model');			
+		$this->load->model('user_follow_model');
+		$this->load->model('user_model');						
 	}
 
 	/**
-	 * [get_community 获取圈子信息与帖子列表]
+	 * [get_community 获取帖子列表]
 	 * @param  [type] $page [页数]
-	 * @param  [type] $uid  [用户id]
 	 * @param  [type] $cid  [帖子id]
 	 * @return [type]       [description]
 	 */
-	public function get_community($page, $uid, $cid)
+	public function get_community($page, $cid)
 	{
-		$follow_result = $this->check_follow_community($cid,$uid);
+		//$follow_result = $this->check_follow_community($cid,$uid);
 		//已关注该圈子
-		if($follow_result)
-		{
-			//帖子列表
-			$result['post'] 	 = $this->community_post_model->get_post_list($page,$cid);
+		//if($follow_result)
+		//{
 			//圈子基本信息
-			$result['community'] = $follow_result;
-			return $result;
-		}
+			//$result['community'] = $this->community_model->get_community_by_id($cid);
+			//if( ! empty($result['community']))
+			//{
+				//帖子列表
+				$post 	 = $this->community_post_model->get_post_list($page,$cid);
+				foreach ($post as $k => $v) {
+					$has_first_img = Common::has_first_img($post[$k]['content']);
+					if( ! empty($has_first_img))
+					{
+						$post[$k]['has_img'] = 1;
+					}
+					else
+					{
+						$post[$k]['has_img'] = 0;
+					}
+					$post[$k]['content'] = Common::extract_content($post[$k]['content']);
+					$post[$k]['user'] = $this->user_model->get_user_base_id($post[$k]['uid']);
+				}				
+				return $post;							
+			//}		
+			//else
+			//{
+				//$this->error->output('INVALID_REQUEST');
+			//}
+		//}
 		//未关注该圈子
+		//else
+		//{
+			//$this->error->output('INVALID_REQUEST');
+		//}
+	}
+
+	public function get_community_by_id($cid)
+	{
+		$community 			 = $this->community_model->get_community_by_id($cid);
+		if( ! empty($community))
+		{
+			$result['community'] = $community;
+			$result['media'] 	 = $this->user_model->get_user_base_id($community['uid']);
+			return $result;						
+		}
 		else
 		{
-			$this->error->output('INVALID_REQUEST');
+			return FALSE;
 		}
-	}
+	}	
 
 	/**
 	 * [check_follow_community 查看是否关注该圈子]
