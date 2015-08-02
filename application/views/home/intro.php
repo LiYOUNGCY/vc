@@ -85,10 +85,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="likeopt">
-						<div class="likebtn2">
-						</div>
-					</div>
 				</div>
 			</div>
 			<?=$footer?>
@@ -110,13 +106,6 @@
 				$(this).parent().attr('class','likebtn1 blur');
 			}else{
 				$(this).parent().attr('class','likebtn1 focus');
-			}
-		});
-		$(".likebtn2").click(function(){
-			if($(this).hasClass('focus')){
-				$(this).attr('class','likebtn2 blur');
-			}else{
-				$(this).attr('class','likebtn2 focus');
 			}
 		});
 

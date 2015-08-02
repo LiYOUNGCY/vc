@@ -459,11 +459,10 @@ img{
     color: #4C4640;
     font-size: 14px;
 }
-.armain .like,.unlike {
+.armain .likebtn2 {
     float: right;
     margin-right: 10px;
-    margin-top: 3px;
-    cursor: pointer;
+    margin-top: -2px;
 }
 .arcon .name{
     display: inline-block;
@@ -984,19 +983,13 @@ img{
     overflow: hidden;
 }
 
-.ac-boxlist .box .support .like .btn{
+.ac-boxlist .box .support .like{
     background-color: #FFFFFF;
-    border-radius: 5px;
-    border: 1px #B3B3B3 solid;
     width: 40px;
     padding: 2px 5px;
     margin: 7px;
     text-align: left;
-    transition:color 0.1s linear 0s, border 0.1s linear 0s;
-}
-.ac-boxlist .box .support .like .btn:hover{
-    border: 1px #FCEE21 solid;
-    color: #FCEE21 !important;
+    float: left;
 }
 
 .ac-boxlist .box .support .list{
@@ -1559,15 +1552,17 @@ img{
 }
 
 .likebtn2 {
-  	width: 23px;
+  	width: 22px;
   	height: 22px;
 	background: #fff url(../img/like-animate2.png) no-repeat;
 	background-position: 0 0;
     position: relative;
-	overflow: hidden;
 	cursor:pointer;
 }
-
+.likebtn2 .num{
+	position: absolute;
+	right: -15px;
+}
 
 .likebtn2.focus {
 	-webkit-animation: likebtn2focus .4s steps(21) forwards;
@@ -1702,6 +1697,7 @@ img{
 		width: 100%;
 	}
     .ac-boxlist .box .support .like{
+    	margin: 0 auto;
         float: none;
     }
 
