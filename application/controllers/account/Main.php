@@ -53,7 +53,7 @@ class Main extends MY_Controller
 		if($result)
 		{
 			//登陆成功, 重定向首页
-			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));	
+			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));
 		}
 		else
 		{
@@ -76,7 +76,7 @@ class Main extends MY_Controller
 		if($result)
 		{
 			//登陆成功, 重定向首页
-			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));	
+			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));
 		}
 		else
 		{
@@ -132,7 +132,7 @@ class Main extends MY_Controller
 		if($result)
 		{
 			//注册成功, 重定向首页
-			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));					
+			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));
 		}
 		else
 		{
@@ -175,5 +175,11 @@ class Main extends MY_Controller
 		{
 			echo json_encode(array('success' => 0));
 		}
+	}
+
+	public function test() {
+		$this->load->library('phone_validate');
+		
+		echo $this->phone_validate->send_code('15521322924');
 	}
 }
