@@ -307,7 +307,7 @@ img{
 .numtooplit{
 	float: right;
 	margin:10px;
-	margin-right: 20px;
+	margin-right: 20spx;
 	padding: 0 5px;
 	font-size: 12px;
 	border-radius: 30%;
@@ -363,6 +363,7 @@ img{
 	position: absolute;
 	top: 7px;
 	right: 7px;
+	display: none;
 }
 .content {
 	max-width: 960px;
@@ -1465,23 +1466,59 @@ img{
 }
 
 
-.fave {
+.likebtn1 {
   	width: 107px;
   	height: 40px;
 	background: #fff url(../img/like-animate.png) no-repeat;
 	background-position: 0 0;
-    cursor: pointer;
-}
-.fave.focus {
-	-webkit-animation: favefocus .4s steps(9) forwards;
-    	animation: favefocus .4s steps(9) forwards;
-}
-.fave.blur {
-	-webkit-animation: faveblur .3s steps(5) forwards;
-    	animation: faveblur .3s steps(5) forwards;
+    
+    position: relative;
+	overflow: hidden;
 }
 
-@-webkit-keyframes favefocus {
+.likebtn1 .support{
+	width: 45px;
+	height: 40px;
+	position: absolute;
+	left: 0;
+	cursor: pointer;
+	border-radius: 50% 0 0 50%;
+}
+.likebtn1 .num{
+	width: 57px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #B3B3B3;
+	font-size: 16px;
+	position: absolute;
+	right: 4px;
+	cursor: pointer;
+	transition:all .4s ease-in-out;
+}
+.likebtn1.focus .num{
+	color: #fcee21;
+}
+.likebtn1 .num .link {
+	color: #B3B3B3;
+	transition:all .4s ease-in-out;
+}
+.likebtn1.focus .num .link {
+	color: #fcee21;
+}
+
+
+
+.likebtn1.focus {
+	-webkit-animation: likebtn1focus .4s steps(9) forwards;
+    	animation: likebtn1focus .4s steps(9) forwards;
+}
+.likebtn1.blur {
+	-webkit-animation: likebtn1blur .3s steps(5) forwards;
+    	animation: likebtn1blur .3s steps(5) forwards;
+}
+
+@-webkit-keyframes likebtn1focus {
     0% {
         background-position: 0 0px
     }
@@ -1491,7 +1528,7 @@ img{
     }
 }
 
-@keyframes favefocus {
+@keyframes likebtn1focus {
     0% {
         background-position: 0 0px
     }
@@ -1501,7 +1538,7 @@ img{
     }
 }
 
-@-webkit-keyframes faveblur {
+@-webkit-keyframes likebtn1blur {
     0% {
         background-position: -963px 0px
     }
@@ -1511,7 +1548,7 @@ img{
     }
 }
 
-@keyframes faveblur {
+@keyframes likebtn1blur {
     0% {
         background-position: -963px 0px
     }
@@ -1521,7 +1558,63 @@ img{
     }
 }
 
+.likebtn2 {
+  	width: 23px;
+  	height: 22px;
+	background: #fff url(../img/like-animate2.png) no-repeat;
+	background-position: 0 0;
+    position: relative;
+	overflow: hidden;
+	cursor:pointer;
+}
 
+
+.likebtn2.focus {
+	-webkit-animation: likebtn2focus .4s steps(21) forwards;
+    	animation: likebtn2focus .4s steps(21) forwards;
+}
+.likebtn2.blur {
+	-webkit-animation: likebtn2blur .3s steps(6) forwards;
+    	animation: likebtn2blur .3s steps(6) forwards;
+}
+
+@-webkit-keyframes likebtn2focus {
+    0% {
+        background-position: 0 0px
+    }
+
+    100% {
+        background-position: -485px 0px
+    }
+}
+
+@keyframes likebtn2focus {
+    0% {
+        background-position: 0 0px
+    }
+
+    100% {
+        background-position: -485px 0px
+    }
+}
+
+@-webkit-keyframes likebtn2blur {
+    0% {
+        background-position: -485px 0px
+    }
+    100% {
+        background-position: -623px 0px
+    }
+}
+
+@keyframes likebtn2blur {
+    0% {
+        background-position: -485px 0px
+    }
+    100% {
+        background-position: -623px 0px
+    }
+}
 
 @media screen and (max-width: 960px){
 	.logo{
@@ -1694,7 +1787,7 @@ img{
 .article-detial {
     margin-top: 50px;
     box-sizing: border-box;
-    width: 80%;
+    width: 90%;
     min-width: 300px;
     max-width: 700px;
 

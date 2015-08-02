@@ -18,16 +18,22 @@
 		<div id="vc_logo" class="logo">
 			<div class="icon logo-a"></div>
 		</div>
-		<div id="vi_menu" class="vi-menu width-100p">
+		<div id="vi_menu" class="vi-menu width-100p" style="margin: 0 8px;">
 			<ul>
+				<?php 
+					if(isset($user['id'])){
+				?>
 				<li>
 					<a href="<?=base_url()?>feed" class="link">动态</a>
 				</li>
+				<?php 
+					}
+				?>
+				
 				<li class="active">
 					<a href="<?=base_url()?>article" class="link">文章</a>
 				</li>
 				<li>
-
 					<a href="#" class="link">访谈</a>
 				</li>
 				<li>
@@ -39,7 +45,6 @@
 		<div id="vi_main" class="width-100p ">
 			<div class="main width-100p">
 				<ul id="article_list">
-
 					</ul>
 					<div class="loadmore width-100p">
 						<div id="loadmore" class="btn load_btn">

@@ -1,7 +1,6 @@
 <div id="vc_sidebar" class="sidebar">
 	<div class="name">
 		<div class="head">
-
 			<a class="link" href="<?=base_url().$user['alias']?>">
 				<img src="<?=$user['pic']?>" />
 			</a>

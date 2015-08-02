@@ -76,7 +76,18 @@
 						<?php echo $intro['content'] ;?>
 					</div>
 					<div class="likeopt">
-						<section class="fave"></section>
+						<div class="likebtn1">
+							<div class="support">
+								
+							</div>
+							<div class="num">
+								<a href="javascript:void(0);" class="link">12</a>
+							</div>
+						</div>
+					</div>
+					<div class="likeopt">
+						<div class="likebtn2">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -94,14 +105,21 @@
 
 
 	window.onload = function() { 
-		$(".likeopt .fave").click(function(){
-			if($(this).hasClass('focus')){
-				$(this).attr('class','fave blur');
+		$(".likebtn1 .support").click(function(){
+			if($(this).parent().hasClass('focus')){
+				$(this).parent().attr('class','likebtn1 blur');
 			}else{
-				$(this).attr('class','fave focus');
+				$(this).parent().attr('class','likebtn1 focus');
 			}
-			
-		})
+		});
+		$(".likebtn2").click(function(){
+			if($(this).hasClass('focus')){
+				$(this).attr('class','likebtn2 blur');
+			}else{
+				$(this).attr('class','likebtn2 focus');
+			}
+		});
+
 	}; 
 </script>
 </html>
