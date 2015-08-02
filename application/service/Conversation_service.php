@@ -72,6 +72,10 @@ class Conversation_service extends MY_Service{
 	 */
 	public function publish_conversation($sender_id, $reciver_id, $content)
 	{
+		if($sender_id == $reciver_id)
+		{
+			return FALSE;
+		}
 		$content = Common::replace_face_url($content);
 		$aid = "";
 		$bid = "";
@@ -116,7 +120,7 @@ class Conversation_service extends MY_Service{
 		}
 		else
 		{
-			$this->error->output('INVALID_REQUEST');
+			return FALSE;
 		}
 	}
 
