@@ -124,6 +124,16 @@ class User_service extends MY_Service
 
 
     /**
+     * [get_user_base_id 获得用户的基本的信息]
+     */
+    public function get_user_base_id($uid)
+    {
+        
+        return $this->user_model->get_user_base_id($uid);
+    } 
+
+
+    /**
      * [change_password 更改密码]
      */
     public function change_password($uid, $old_pwd, $new_pwd)

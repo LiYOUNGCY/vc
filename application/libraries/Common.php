@@ -139,4 +139,10 @@ class Common{
 		}
 		return FALSE;
     }
+
+
+    static function set_login_session($user_data)
+    {
+        
+    }
 }

@@ -6,6 +6,7 @@ class Setting extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->service('user_service');
+		$this->load->service('auth_service');
 	}
 
 	public function index($type = "user") {
@@ -88,6 +89,10 @@ class Setting extends MY_Controller
 		$result = $this->user_service->update_account($this->user['id'], $data);		
 		if($result)
 		{
+			//更新 session 的信息
+			
+			$this->auth_service->set_login_session($this->user_service->get_user_base_id($this->user['id']));
+
 			echo "<script>alert('".lang('OPERATE_SUCCESS')."');window.location.href='".base_url()."setting';</script>";	
 		}	
 		else
