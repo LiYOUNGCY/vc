@@ -45,6 +45,7 @@ class Detail extends MY_Controller
         $user['user']    = $this->user;
         $data['sidebar'] = $this->load->view('common/sidebar', $user, TRUE);
         $data['footer']  = $this->load->view('common/footer', '', TRUE);
+        $data['user']    = $this->user;
 
         $this->article_service->read_article($aid);
         
