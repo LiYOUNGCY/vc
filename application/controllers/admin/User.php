@@ -184,7 +184,7 @@ class User extends MY_Controller
 			$this->error->output('INVALID_REQUEST');
 		}
 	}
-
+	
 	/**
 	 * [forbid_user 封禁用户]
 	 * @return [type] [description]

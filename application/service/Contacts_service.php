@@ -46,6 +46,10 @@ class Contacts_service extends MY_Service{
 	 */
 	public function following($myid,$uid)
 	{
+		if($myid == $uid)
+		{
+			return FALSE;
+		}
 		$follow_status = $this->user_follow_model->check_follow($myid, $uid);
 		if( ! empty($follow_status))
 		{
@@ -69,6 +73,10 @@ class Contacts_service extends MY_Service{
 			{
 				//添加消息
 				$notification_result = $this->notification_model->insert($myid,$uid,4,"");	
+	            //推送
+	            $this->load->library('push');
+	            $this->push->push_to_topic($uid,"");    	
+	            			
 				//增加粉丝数
 				$this->user_model->update_count($uid,array('name' => 'follower', 'amount' => 1));	
 				//增加关注数

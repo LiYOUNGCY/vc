@@ -160,6 +160,12 @@ class Article_model extends CI_Model {
         return $this->db->affected_rows() === 1;        
     }
 
+    public function delete_article_by_uid($uid)
+    {
+        $this->db->delete('article',array('uid' => $uid));
+        return $this->db->affected_rows() > 0;           
+    }
+
     /**
      * [update_article 更新文章]
      * @param  [type] $aid [文章id]

@@ -32,4 +32,10 @@ class Article_comment_model extends CI_Model
                         ->get('article_comment')
                         ->result_array();
     }
+
+    public function delete_comment_by_aid($aid)
+    {
+        $this->db->delete('article_comment',array('aid' => $aid));
+        return $this->db->affected_rows() > 0;
+    }    
 }

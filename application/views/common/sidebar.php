@@ -46,7 +46,9 @@
 				<div class="menu-list-item">
 					<div class="icon sixin"></div>
 					<span class="menu-list-item-text">消息</span>
-					<div class="numtooplit">12</div>
+					<span id="notification_num">
+
+					</span>
 				</div>
 			</li>
 			</a>
@@ -96,7 +98,8 @@
 	  var count = getcookie('push_msg');
 	  if(count != null && count != "" && count != undefined)
 	  {
-	  	console.log("您有新消息（"+count+"）");
+	  	$("#notification_dot").show();
+	  	$("#notification_num").empty().html('<div class="numtooplit">'+count+'</div>');
 	  }
 
 	  var push_id = $("#PUSH_ID").val();
@@ -118,14 +121,15 @@
 		              	  var count = getcookie('push_msg');
 		                  if(count != null && count != "" && count != undefined)
 		                  {
-		                  	count = count+1;
+		                  	count = parseInt(count)+1;
 		                  }
 		                  else
 		                  {
 		                  	count = 1;
 		                  }
 		                  setcookie('push_msg',count);
-	  					  console.log("您有新消息（"+count+"）");
+					  	  $("#notification_dot").show();
+	  					  $("#notification_num").empty().html('<div class="numtooplit">'+count+'</div>');
 		              });          
 		          }
 		      });
@@ -138,5 +142,5 @@
 </div>
 <div id="sbtn" class="sbtn">
 	<div class="icon sidebtn"></div>
-	<div class="dot"></div>
+	<div class="dot" id="notification_dot"></div>
 </div>

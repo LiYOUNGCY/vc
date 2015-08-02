@@ -154,12 +154,16 @@ class Article_service extends MY_Service{
                 $content = $this->_extract_vote($article['id'], $article['uid'], $article['title'], $article['subtitle'], $article['content']);
                 //更新动态表
                 $this->feed_model->insert_feed($uid, $article['id'], 1, $content);
-                //更新消息
-                $content = json_encode(array('content_id' => $article['id'], 'content_title' => $article['title'], 'content_type' => 'article'));
-                $this->notification_model->insert($uid,$article['uid'],3,$content);
-                //推送
-                $this->load->library('push');
-                $this->push->push_to_topic($article['uid'],"");
+                if($uid != $article['uid'])
+                {
+                    //更新消息
+                    $content = json_encode(array('content_id' => $article['id'], 'content_title' => $article['title'], 'content_type' => 'article'));
+                    $this->notification_model->insert($uid,$article['uid'],3,$content);                    
+                    //推送
+                    $this->load->library('push');
+                    $this->push->push_to_topic($article['uid'],"");                    
+                }
+
             }
             else
             {
@@ -199,10 +203,16 @@ class Article_service extends MY_Service{
         if($insert_result)
         {
             echo json_encode(array('success' => 0,'script' => 'location.reload();'));
-             //更新消息
             $article = $this->article_model->get_article_by_id($aid);
-            $content = json_encode(array('content_id' => $aid, 'content_type' => 'article', 'content_title' => $article['title'], 'comment_content' => $comment));
-            $this->notification_model->insert($uid,$article['uid'],2,$content);
+            if($uid != $article['uid'])
+            {
+                 //更新消息
+                $content = json_encode(array('content_id' => $aid, 'content_type' => 'article', 'content_title' => $article['title'], 'comment_content' => $comment));
+                $this->notification_model->insert($uid,$article['uid'],2,$content);                
+                //推送
+                $this->load->library('push');
+                $this->push->push_to_topic($article['uid'],"");                    
+            }          
         }
         else
         {
@@ -285,6 +295,13 @@ class Article_service extends MY_Service{
      */
     public function delete_article($aid,$uid)
     {
-        return $this->article_model->delete_article($aid,$uid);
+        $result = $this->article_model->delete_article($aid,$uid);
+        return $result;
+    }
+
+    public function delete_article_like_comment($aid)
+    {
+        $this->article_comment_model->delete_comment_by_aid($aid);
+        $this->article_like_model->delete_like_by_aid($aid);
     }
 }

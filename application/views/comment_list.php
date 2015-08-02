@@ -64,7 +64,6 @@
     }
 
     $(function(){
-        
         var page = 0;
 
         function load_comment() {

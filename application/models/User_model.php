@@ -48,7 +48,7 @@ class User_model extends CI_Model
             //插入 user_online 表
             $this->_insert_user_online($uid);
             //更新默认键值
-            $this->update_account($uid,array('alias' => 'home/uid_'.$uid));
+            $this->update_account($uid,array('alias' => 'home/uid_'.$uid,'pic' => base_url().'public/img/pfp7.png'));
             return $uid;
 		}
 		else 
@@ -344,6 +344,7 @@ class User_model extends CI_Model
     public function delete_user($uid)
     {
         $this->db->where_in('id',$uid)->delete('user');
+        $this->db->where_in('uid',$uid)->delete('user_online');
         return $this->db->affected_rows() > 0;
     }
 
@@ -384,7 +385,7 @@ class User_model extends CI_Model
              //插入 user_online 表
             $this->_insert_user_online($uid);
             //更新默认键值
-            $this->update_account($uid,array('alias' => 'home/uid_'.$uid));     
+            $this->update_account($uid,array('alias' => 'home/uid_'.$uid,'pic' => base_url().'public/img/pfp7.png'));     
             return TRUE;         
         }
         else
