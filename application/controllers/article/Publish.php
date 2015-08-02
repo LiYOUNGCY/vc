@@ -86,6 +86,11 @@ class Publish extends MY_Controller {
      */
     public function update_article()
     {
+        $error_redirect = array(
+            'script' => "window.location.href='".base_url()."update/article/".$this->input->post('aid')."';"
+        );
+        $this->sc->set_error_redirect($error_redirect);
+
         $aid                = $this->sc->input('aid');
         $article_title      = $this->sc->input('article_title');
         $article_subtitle   = $this->sc->input('article_subtitle');
@@ -97,7 +102,7 @@ class Publish extends MY_Controller {
         $result = $this->article_service->update_article($aid,$this->user['id'],$article_title,$article_subtitle,1,$article_tag,$article_content);       
         if($result)
         {
-            echo "success";
+            redirect(base_url()."update/article/".$aid,'location');
         }
         else
         {

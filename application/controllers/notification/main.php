@@ -38,19 +38,18 @@ class Main extends MY_Controller{
 
 		if (strcmp($type, 'all') == 0) 
 		{
-
 			$this->load->view('notification_list', $body);
 		}
 		elseif (strcmp($type, 'conversation') == 0) 
-		{
+		{		
 			$this->load->view('conversation_list', $body);			
 		}
 		elseif (strcmp($type, 'comment') == 0) 
-		{
+		{	
 			$this->load->view('comment_list', $body);
 		}
 		elseif (strcmp($type, 'like') == 0) 
-		{
+		{	
 			$this->load->view('like_list', $body);
 		}
 	}
