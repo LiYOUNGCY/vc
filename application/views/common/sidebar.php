@@ -98,7 +98,7 @@
 	  var count = getcookie('push_msg');
 	  if(count != null && count != "" && count != undefined)
 	  {
-	  	$("dot").show();
+	  	$("#notification_dot").show();
 	  	$("#notification_num").empty().html('<div class="numtooplit">'+count+'</div>');
 	  }
 
@@ -118,7 +118,6 @@
 
 		              
 		              yunba.set_message_cb (function (data) {
-		              	alert(data);
 		              	  var count = getcookie('push_msg');
 		                  if(count != null && count != "" && count != undefined)
 		                  {
@@ -129,7 +128,7 @@
 		                  	count = 1;
 		                  }
 		                  setcookie('push_msg',count);
-					  	  $("dot").show();
+					  	  $("#notification_dot").show();
 	  					  $("#notification_num").empty().html('<div class="numtooplit">'+count+'</div>');
 		              });          
 		          }
