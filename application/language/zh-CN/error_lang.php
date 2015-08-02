@@ -18,6 +18,8 @@ $lang['error_INVALID_ID'] 			= '无效的id';
 $lang['error_INVALID_UID'] 			= '无效的id';
 $lang['error_INVALID_CID'] 			= '无效的id';
 $lang['error_INVALID_NID'] 			= '无效的id';
+$lang['error_INVALID_AID'] 			= '无效的id';
+$lang['error_INVALID_PID'] 			= '无效的id';
 $lang['error_INVALID_CONVERSATION_CONTENT'] = '私信内容格式错误';
 
 

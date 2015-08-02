@@ -295,6 +295,13 @@ class Article_service extends MY_Service{
      */
     public function delete_article($aid,$uid)
     {
-        return $this->article_model->delete_article($aid,$uid);
+        $result = $this->article_model->delete_article($aid,$uid);
+        return $result;
+    }
+
+    public function delete_article_like_comment($aid)
+    {
+        $this->article_comment_model->delete_comment_by_aid($aid);
+        $this->article_like_model->delete_like_by_aid($aid);
     }
 }

@@ -89,7 +89,8 @@ class Common{
     	}
     	else
     	{
-    		return "";
+    		$default_img = base_url().'public/img/defaultBG.jpg';
+    		return $default_img;
     	}
     }
 
