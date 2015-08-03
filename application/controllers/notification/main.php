@@ -29,7 +29,9 @@ class Main extends MY_Controller{
 			'error.js',
 			'timeago.js'
 		);
-		setcookie('push_msg',NULL);	
+
+		setcookie('push_msg','',time()-1,'/artvc');	
+		setcookie('push_msg',NULL);		
 		$user['user'] 	= $this->user;
         $body['sidebar']= $this->load->view('common/sidebar', $user, TRUE);
         $body['footer']	= $this->load->view('common/footer', '', TRUE);
