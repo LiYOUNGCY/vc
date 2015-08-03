@@ -97,7 +97,7 @@
         
 		$(window).bind("scroll",function() {
         	if($(document).scrollTop() + $(window).height() > $(document).height() - 150 && PAGE < 2){
-
+                $(window).unbind();
         		$("#loadmore #text").html("加载中");
 				$("#loadmore #icon").css({"display":"inline-block"});
         		loadarticel(PAGE);
@@ -105,7 +105,6 @@
         		$("#loadmore #text").html("加载更多");
 				$("#loadmore #icon").css({"display":"none"});
         	}
-
     	});
 		
 

@@ -8,6 +8,7 @@ class User_service extends MY_Service
 		parent::__construct();
 		$this->load->model('user_model');
 		$this->load->service('auth_service');
+        $this->load->model('email_model');
 	}
 
 
@@ -32,14 +33,37 @@ class User_service extends MY_Service
 		}
 		
 		//注册成功，设置 session
-		if ( !empty($user_id = $this->user_model->register_action ($name, $register_type, $pwd))) {
+		if ( !empty($user_id = $this->user_model->register_action ($name, $register_type, $pwd))) 
+        {
 			$user = $this->user_model->get_user_base_id($user_id);
-			//设置 SESSION
-			$this->auth_service->set_login_session($user);
+			
+            //邮箱注册，验证邮箱
+            if( !empty($email) )
+            {
+                $this->validate_email($user['id'], $email);
+            }
+            else
+            {
+                //设置 SESSION
+                $this->auth_service->set_login_session($user);
+            }
             return TRUE;
 		}
         return FALSE;
 	}
+
+    public function active_email($token)
+    {
+        $result = $this->email_model->active_email($token);
+
+        if( $result != FALSE && is_numeric($result) )
+        {
+            //到 user 表更新 email_status 字段
+            $this->user_model->active_email_status($result);
+            return TRUE;
+        }
+        return FALSE;
+    }
 
 
 	/**
@@ -196,5 +220,35 @@ class User_service extends MY_Service
     		}
     	}
     	return $data;
+    }
+
+    public function validate_email($uid, $email) {
+        //生成 token
+        $factory = new RandomLib\Factory();
+        $generator = $factory->getGenerator(new SecurityLib\Strength(SecurityLib\Strength::MEDIUM));
+        $token = md5(md5($generator->generate(128)).time());
+
+        //发邮件
+        $this->send_email($email, $token);
+
+
+        $this->email_model->insert_token($uid, $token);
+    }
+
+    private function send_email($email, $token)
+    {
+        
+
+        $this->load->library('email');
+
+        $this->email->from('rachechenmu@163.com', 'Artvc');
+        $this->email->to($email);
+
+        $url = base_url().'account/email/active?token=';
+
+        $this->email->subject('Artvc账号激活邮件');
+        $this->email->message("你可以通过下面的链接激活您的账号。\n {$url}{$token}");
+
+        $this->email->send();
     }
 }
