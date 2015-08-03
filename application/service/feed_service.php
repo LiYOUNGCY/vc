@@ -21,14 +21,14 @@ class Feed_service extends MY_Service {
     {
        //获取用户关注列表
        $uids = $this->user_follow_model->get_user_follow(0,$uid,NULL);
-       $count= empty($uids) ? 0 : count($uids);
-       $uids[$count]['follow'] = $uid;      
 
+       $count= empty($uids) ? 0 : count($uids);
+       $uids[$count]['uid'] = $uid;      
        $new_uids = array();
        if( ! empty($uids))
        {
            foreach ($uids as $k => $v) {
-                array_push($new_uids,$v['follow']);
+                array_push($new_uids,$v['uid']);
            }
        }
 

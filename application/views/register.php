@@ -69,7 +69,7 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
+<script type="text/javascript" src="<?=base_url().'public/'?>js/vc.js"></script>
 <script type="text/javascript" src="<?=base_url()?>public/js/validate.js"></script>
 <script type="text/javascript">
   var BASE_URL = $("#BASE_URL").val();

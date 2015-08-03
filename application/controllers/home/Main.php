@@ -20,24 +20,26 @@ class Main extends MY_Controller{
 		$user = $this->home_service->get_user($uid,$alias);
 		if($user)
 		{
-			$data['css'] = array(
+			$head['css'] = array(
 				'common.css', 
 				'font-awesome/css/font-awesome.min.css',
-				'jquery.Jcrop.css'
+				'jquery.Jcrop.css',
+				'alert.css'
 				);
-	        $data['javascript'] = array(
+	        $head['javascript'] = array(
 	        	'jquery.js',
 	        	'ajaxfileupload.js',
-	        	'jquery.Jcrop.js'
+	        	'jquery.Jcrop.js',
+	        	'alert.min.js'
 	        	);
 
-	        $this->load->view('common/head', $data);
+	        $this->load->view('common/head', $head);
 	        $u['user']    = $this->user;
-
+	        $data['people'] = $user;
+			$data['type'] = $type;
         	$data['sidebar'] = $this->load->view('common/sidebar', $u, TRUE);
+        	$data['showcard'] = $this->load->view('common/home_showcard',$data,TRUE);
          	$data['footer'] = $this->load->view('common/footer',"", TRUE);       	
-			$data['user'] = $user;
-			$data['me'] = $this->user;
 			//载入视图
 			if($type == 'quanzi')
 			{

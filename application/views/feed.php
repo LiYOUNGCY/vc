@@ -30,11 +30,18 @@
 					<div class="box ac-user">
 						<div class="name">
 							<div class="head">
-								<a href="#">
-									<img src="<?=base_url().'public/'?>img/mm1.jpg" /></a>
-							<div class="identity">
-									<span class="icon identity"></span>
-								</div>
+								<a href="<?php echo base_url().'/'.$user['alias']?>">
+									<img src="<?=$user['pic']?>" />
+								</a>
+									<?php
+										if($user['role'] == 2){
+									?>
+									<span class="icon identity tooplit">
+										<a href=""><div class="i_media"><span>自媒体</span></div></a>
+									</span>
+									<?php  
+										}
+									?>
 							</div>
 							<div class="text">
 								<a class="link" href="<?php echo base_url().'/'.$user['alias']?>"><?=$user['name']?></a>
@@ -55,6 +62,9 @@
 							}
 						?>
 						
+					</div>
+					<div class="box ad">
+						你的时间非常值钱.快来天书世界吧!几把白!
 					</div>
 				</div>
 				<div class="ac-left">
@@ -101,7 +111,7 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
+	<script type="text/javascript" src="<?=base_url().'public/'?>js/vc.js"></script>
 </body>
 <script type="text/javascript">
 	var BASE_URL = $("#BASE_URL").val();
@@ -161,12 +171,20 @@
 				var image 				= article.article_image;					
 				var user_head_src		= data[i].user.pic;
 				var user_name			= data[i].user.name;
+				var user_role			= data[i].user.role; 
 				var user_alias			= data[i].user.alias;
 				var like				= data[i].like;
 				var like_num			= like.length;
 				var time 				= data[i].publish_time;
 				var like_temp			= "";
 				var element 			= "";
+
+				if(user_role == 2){
+					var identity = '<span class="icon identity tooplit"><a href=""><div class="i_media"><span>自媒体</span></div></a></span>';
+				}else{
+					var identity = '';
+				}
+
 				if(feed_type == 1){
 					var author			= data[i].author.name;
 					var author_alias	= data[i].author.alias;	
@@ -181,11 +199,12 @@
 						break;
 					}
 				}
+
 				if(like_temp == ""){
 					var like_element = '<div class="likebtn2" onclick="support(this)"><div class="num">'+ like.length +'</div></div>';
 				}
 
-				element = '<div class="box"><div class="boxtop"><div class="name"><div class="head"><a href="#"><img src="'+ user_head_src +'" /></a><div class="identity"><span class="icon identity"></span></div></div><div class="text">'+ action +'</div></div><div class="time"><time class="timeago" title="'+ time +'" datetime="'+ time +'+08:00"></time></div></div><div class="article"><div class="ar_text"><div class="title"><a class="link" href="'+ BASE_URL +'article/'+article_id+'">'+ article_title +'</a></div><div class="con"><p>'+ article_content +'</p></div></div><div class="ar_pic"><a href="'+ BASE_URL +'article/'+article_id+'"><img  id="'+ id +'" data-url="'+image+'" class="img-lazyload_'+pageTemp+'" ></a></div></div><div class="support"><div class="like">'+ like_element +'</div><div class="list">';
+				element = '<div class="box"><div class="boxtop"><div class="name"><div class="head"><a href="'+ BASE_URL+user_alias +'"><img src="'+ user_head_src +'" /></a>'+ identity +'<div class="identity"><span class="icon identity"></span></div></div><div class="text">'+ action +'</div></div><div class="time"><time class="timeago" title="'+ time +'" datetime="'+ time +'+08:00"></time></div></div><div class="article"><div class="ar_text"><div class="title"><a class="link" href="'+ BASE_URL +'article/'+article_id+'">'+ article_title +'</a></div><div class="con"><p>'+ article_content +'</p></div></div><div class="ar_pic"><a href="'+ BASE_URL +'article/'+article_id+'"><img  id="'+ id +'" data-url="'+image+'" class="img-lazyload_'+pageTemp+'" ></a></div></div><div class="support"><div class="like">'+ like_element +'</div><div class="list">';
 				for(var y = 0; y < like.length; y++){
 					element += '<div class="head"><a href="'+BASE_URL+ like[y].alias+'"><img title="'+ like[y].name +'" src="'+ like[y].pic +'"></a></div>';
 				}

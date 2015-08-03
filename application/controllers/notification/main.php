@@ -24,7 +24,7 @@ class Main extends MY_Controller{
 
 		$head['javascript'] = array(
 			'jquery.js',
-			'vchome.js',
+			'vc.js',
 			'timeago.js',
 			'error.js',
 			'timeago.js'

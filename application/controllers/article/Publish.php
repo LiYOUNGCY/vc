@@ -23,7 +23,7 @@ class Publish extends MY_Controller {
             );
         $head['javascript'] = array(
                 'jquery.js',
-                'vchome.js'
+                'vc.js'
             );
         $user['user']    = $this->user;
         $data['sidebar'] = $this->load->view('common/sidebar', $user, TRUE);

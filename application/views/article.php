@@ -9,14 +9,14 @@
 			<div id="vi_sign" class="vi-sign ">
 				<div class="float-r">
 					<a href="<?=base_url()?>login" class="link sign">登陆</a>
-					<a href="<?=base_url()?>register" class="link">注册</a>
+					<a href="<?=base_url()?>signup" class="link">注册</a>
 				</div>
 			</div>
 		<?php }  ?>
 		<div id="vc_logo" class="logo">
 			<div class="icon logo-a"></div>
 		</div>
-		<div id="vi_menu" class="vi-menu width-100p" style="margin: 0 8px;">
+		<div id="vi_menu" class="vi-menu width-100p">
 			<ul>
 				<?php 
 					if(isset($user['id'])){
@@ -83,7 +83,7 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="<?=base_url().'public/'?>js/vchome.js"></script>
+	<script type="text/javascript" src="<?=base_url().'public/'?>js/vc.js"></script>
 </body>
 <script type="text/javascript">
 	var BASE_URL = document.getElementById("BASE_URL").value;
