@@ -97,12 +97,12 @@ class Publish extends MY_Controller {
         $article_content    = $this->sc->input('article_content');
         //过滤富文本
         $article_content    = $this->htmlpurifier->purify($article_content);        
-        $article_tag        = $this->sc->input('article_tag'); 
+        $article_tag        = $this->sc->input('article_tag');
 
         $result = $this->article_service->update_article($aid,$this->user['id'],$article_title,$article_subtitle,1,$article_tag,$article_content);       
         if($result)
         {
-            redirect(base_url()."article/".$aid,'location');
+            // redirect(base_url()."article/".$aid,'location');
         }
         else
         {

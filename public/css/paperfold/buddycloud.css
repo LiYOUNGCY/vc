@@ -172,6 +172,11 @@ button.checkbox {
     text-overflow: ellipsis;
 
     color: black;
+
+    cursor: pointer;
+}
+.buddycloud .name:hover {
+    color: #fcee21;
 }
 .buddycloud .name + .location {
     margin-left: 5px;
@@ -286,11 +291,4 @@ button.checkbox {
     height: 50px;
 
     text-align: center;
-}
-
-.avatar img {
-    border: 1px #b3b3b3 solid;
-    border-radius: 100%;
-    width: 100%;
-    height: 100%;
 }
