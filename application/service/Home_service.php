@@ -25,7 +25,9 @@ class Home_service extends MY_Service{
 			//获取关注状态
 			if( ! empty($uid) && $uid != $user['id'])
 			{
-				$user['follow_status'] = $this->user_follow_model->check_follow($uid,$user['id']);				
+				$follow = $this->user_follow_model->check_follow($uid,$user['id']);				
+				$follow = ! empty($follow) ?  $follow['status'] : 0;
+				$user['follow_status'] = $follow;
 			}
 			return $user;
 		}

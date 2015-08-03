@@ -7,8 +7,18 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" > 
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" > 
 		<meta name="format-detection" content="telephone=yes" > 
-		<meta name="msapplication-tap-highlight" content="no" > 
+		<meta name="msapplication-tap-highlight" content="no" >
+
+		<!-- 导入 Javascript -->
+		<?php
+		foreach ($javascript as $value) {
+			echo "<script src=".base_url().'public/js/'.$value."></script>";
+		}
+		?>
 		
+		<script type="text/javascript" src="<?=base_url()?>public/js/yunba/socket.io-1.3.5.min.js"></script>
+	    <script type="text/javascript" src="<?=base_url()?>public/js/yunba/yunba-js-sdk.js"></script>
+	    <script type="text/javascript" src="<?=base_url()?>public/js/cookie.js"></script>
 
 		<!-- 导入 CSS -->
 		<?php 
@@ -17,14 +27,7 @@
 		}
 		?>
 
-		<!-- 导入 Javascript -->
-		<?php
-		foreach ($javascript as $value) {
-			echo "<script src=".base_url().'public/js/'.$value."></script>";
-		}
-		?>
-	   <script type="text/javascript" src="<?=base_url()?>public/js/yunba/socket.io-1.3.5.min.js"></script>
-	   <script type="text/javascript" src="<?=base_url()?>public/js/yunba/yunba-js-sdk.js"></script>
-	   <script type="text/javascript" src="<?=base_url()?>public/js/cookie.js"></script>	   
+		
+	   	   
 		<input id="BASE_URL" type="hidden" value="<?=base_url()?>">
 	</head>

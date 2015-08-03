@@ -1,7 +1,7 @@
 var ERROR_OUTPUT = function(error)
 {
 	//这里加入提示框
-	alert(error.error);
+	sweetAlert(error.error, "error");
 
 	if(error.script != null)
 	{

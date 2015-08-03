@@ -14,6 +14,9 @@ h1,h2,h3,h4,h5,h6{
 body a{ 
     outline: none;
 }
+a{
+	text-decoration: none;
+}
 a:visited{
 	color: #B3B3B3;
 }
@@ -934,6 +937,12 @@ img{
 	overflow: hidden;
 }
 
+.ac-right .ad{
+	height: 400px;
+
+}
+
+
 .ac-right .ac-user .name{
 	width: 100%;
 	display: inline-block;
@@ -987,7 +996,7 @@ img{
     background-color: #FFFFFF;
     width: 40px;
     padding: 2px 5px;
-    margin: 7px;
+    margin: 5px;
     text-align: left;
     float: left;
 }
@@ -999,8 +1008,8 @@ img{
     height: 38px;
 }
 .ac-boxlist .box .support .list .head{
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     margin: 0 10px;
 }
 
@@ -1095,6 +1104,7 @@ img{
 	background-color: #DDD340;
 }
 .homeshowcar .showcartop .option .gz-btn{
+	position: relative;
 	background-color: #FCEE21;
 }
 
@@ -1726,6 +1736,9 @@ img{
 	}
 	.qzlist .theqz .qzinfo {
 		width: 80%;
+	}
+	.ac-right .ad{
+		display: none;
 	}
 
 }

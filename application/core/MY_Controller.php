@@ -27,7 +27,7 @@ class MY_Controller extends CI_Controller{
         {
             $user['name'] = '请登录';
             $user['pic']  = base_url().'public/img/icon/question_icon.png';
-            $user['alias']= base_url().'login';
+            $user['alias']= 'login';
             $user['role'] = 0;
             $this->user = $user;
         }
