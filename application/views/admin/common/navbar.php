@@ -76,7 +76,7 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="tables.html"><i class="fa fa-file fa-fw"></i>文章管理</a>
+                    <a href="<?=base_url().ADMINROUTE?>article"><i class="fa fa-file fa-fw"></i>文章管理</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-circle fa-fw"></i>圈子管理<span class="fa arrow"></span></a>

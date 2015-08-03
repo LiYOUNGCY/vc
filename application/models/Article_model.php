@@ -182,5 +182,24 @@ class Article_model extends CI_Model {
       $this->db->where('id', $aid)
                ->update('article',$arr);
       return $this->db->affected_rows() === 1;                  
+    }   
+
+
+
+
+    public function admin_get_article_list($page = 0,$limit = 10,$order = 'id DESC')
+    {
+      $article = $this->db->select('article.id,article.uid,article.type,article_type.name as type_name,article.title,article.publish_time,article.read,article.like,article.tag')
+                          ->join('article_type','article.type = article_type.id','left')
+                          ->order_by($order)
+                          ->limit($limit,$page * $limit)
+                          ->get('article')
+                          ->result_array();
+      return $article;
+    }
+
+    public function get_article_count()
+    {
+      return $this->db->count_all('article');
     }
 }
