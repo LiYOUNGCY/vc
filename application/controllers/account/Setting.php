@@ -19,7 +19,7 @@ class Setting extends MY_Controller
 			);
 		$head['javascript'] = array(
 				'jquery.js',
-				'vchome.js',
+				'vc.js',
 				'error.js'
 			);
 		$this->load->view('common/head', $head);

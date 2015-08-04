@@ -58,7 +58,7 @@ class Detail extends MY_Controller
             );
         $head['javascript'] = array(
                 'jquery.js',
-                'vchome.js',
+                'vc.js',
                 'paperfold/modernizr.custom.01022.js',
                 'jquery.flexText.min.js',
                 'jquery.qqFace.js',

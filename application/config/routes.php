@@ -128,3 +128,9 @@ $route['admin/user/u'] = 'admin/user/index/u';
 $route['admin/user/u/(:num)'] = 'admin/user/index/u/$1';
 $route['admin/user/a'] = 'admin/user/index/a';
 $route['admin/user/a/(:num)'] = 'admin/user/index/a/$1';
+
+/**
+ * 管理员文章管理
+ */
+$route['admin/article/a'] = 'admin/article/index/a';
+$route['admin/article/a/(:num)'] = 'admin/article/index/a/$1';

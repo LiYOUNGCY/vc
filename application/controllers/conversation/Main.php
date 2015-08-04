@@ -18,7 +18,7 @@ class Main extends MY_Controller{
 			'jquery.js', 
 			'jquery.flexText.min.js', 
 			'jquery.qqFace.js',
-			'vchome.js',
+			'vc.js',
 			'error.js'
 		);
 		
