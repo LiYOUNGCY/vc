@@ -2,14 +2,14 @@
 require_once(APPPATH.'third_party/ucpass/Ucpaas.class.php');
 
 
-class phone_validate 
+class phone_validate
 {
     private $appId;
     private $templateId;
     private $param;
     private $options;
 
-    public function __construct() 
+    public function __construct()
     {
         $this->CI = & get_instance();
         $this->CI->config->load('third_config');
@@ -24,10 +24,10 @@ class phone_validate
     /**
      * [send_code 发送手机验证码， 成功返回验证码， 失败返回 NULL]
      */
-    public function send_code($phone) 
+    public function send_code($phone, $code)
     {
         $ucpass = new Ucpaas($this->options);
-        
-        return $ucpass->templateSMS($this->appId, $phone, $this->templateId, $this->param);
+
+        return $ucpass->templateSMS($this->appId, $phone, $this->templateId, $code);
     }
 }

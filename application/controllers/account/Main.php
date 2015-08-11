@@ -5,7 +5,7 @@ class Main extends MY_Controller
 {
 	public function __construct()
 	{
-		parent::__construct();	
+		parent::__construct();
 		$this->load->service('user_service');
 	}
 
@@ -32,11 +32,11 @@ class Main extends MY_Controller
 			{
 				redirect(base_url(),'location');
 			}
-			$this->load->view('login', $body);			
+			$this->load->view('login', $body);
 		}
 		else if($type == 'signup')
 		{
-			$this->load->view('register', $body);			
+			$this->load->view('register', $body);
 		}
 	}
 
@@ -59,7 +59,7 @@ class Main extends MY_Controller
 		{
 			$this->error->output('LOGIN_ERROR');
 		}
-		
+
 	}
 
 
@@ -109,7 +109,7 @@ class Main extends MY_Controller
 		if($result)
 		{
 			//注册成功, 重定向首页
-			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));			
+			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));
 		}
 		else
 		{
@@ -154,7 +154,7 @@ class Main extends MY_Controller
 		}
 		else
 		{
-			echo json_encode(array('success' => 0));			
+			echo json_encode(array('success' => 0));
 		}
 
 	}
@@ -166,10 +166,10 @@ class Main extends MY_Controller
 	public function check_email()
 	{
 		$email  = $this->sc->input('email');
-		$result = $this->user_service->check_email($email);		
+		$result = $this->user_service->check_email($email);
 		if($result)
 		{
-			$this->error->output('EMAIL_REPEAT');			
+			$this->error->output('EMAIL_REPEAT');
 		}
 		else
 		{
@@ -177,9 +177,10 @@ class Main extends MY_Controller
 		}
 	}
 
-	public function test() {
-		$this->load->library('phone_validate');
-		
-		echo $this->phone_validate->send_code('15521322924');
+	public function validate_phone() {
+        $phone = $this->sc->input('phone');
+        // $phone = '15521322924';
+
+		echo $this->user_service->validate_phone($phone);
 	}
 }

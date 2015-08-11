@@ -26,17 +26,17 @@ class User_service extends MY_Service
 		{
 			$register_type['email'] = $email;
 		}
-		else 
+		else
 		{
 			//错误
 			return FALSE;
 		}
-		
+
 		//注册成功，设置 session
-		if ( !empty($user_id = $this->user_model->register_action ($name, $register_type, $pwd))) 
+		if ( !empty($user_id = $this->user_model->register_action ($name, $register_type, $pwd)))
         {
 			$user = $this->user_model->get_user_base_id($user_id);
-			
+
             //邮箱注册，验证邮箱
             if( !empty($email) )
             {
@@ -83,20 +83,20 @@ class User_service extends MY_Service
 		}
 		else
 		{
-            return FALSE;  
+            return FALSE;
 		}
 
 		$user = $this->user_model->login_action($login_type, $pwd);
         if( ! empty($user))
         {
-            if($rememberme) 
+            if($rememberme)
             {
                 //设置 cookie
                 $this->auth_service->set_remember_me_cookie($user);
             }
             //设置 SESSION
-            $this->auth_service->set_login_session($user); 
-            return $user;          
+            $this->auth_service->set_login_session($user);
+            return $user;
         }
         else
         {
@@ -152,9 +152,9 @@ class User_service extends MY_Service
      */
     public function get_user_base_id($uid)
     {
-        
+
         return $this->user_model->get_user_base_id($uid);
-    } 
+    }
 
 
     /**
@@ -162,7 +162,7 @@ class User_service extends MY_Service
      */
     public function change_password($uid, $old_pwd, $new_pwd)
     {
-    	if(isset($old_pwd, $new_pwd)) 
+    	if(isset($old_pwd, $new_pwd))
     	{
     		return $this->user_model->change_password($uid, $old_pwd, $new_pwd);
     	}
@@ -189,6 +189,7 @@ class User_service extends MY_Service
     	return $this->user_model->have_phone($phone);
     }
 
+
     /**
      * [check_alias 查看主页别名是否重复]
      * @param  [type] $uid   [description]
@@ -199,30 +200,26 @@ class User_service extends MY_Service
     {
         return $this->user_model->have_alias($uid,$alias);
     }
-    /**
-     * [_clear 清除值为空的变量]
-     * @param  [array] $data [description]
-     * @return [type]       [description]
-     */
-    private function _clear($data)
+
+
+    public function validate_phone($phone)
     {
-    	foreach ($data as $key => $value) 
-    	{
-    		if(is_string($data[$key])) 
-    		{
-    			//去除字符串两端的空格
-    			$data[$key] = trim($data[$key]);
-    		}
-    		//unset 空的变量
-    		if(empty($data[$key]))
-    		{
-    			unset($data[$key]);
-    		}
-    	}
-    	return $data;
+        //生成 token
+        $factory    = new RandomLib\Factory();
+        $generator  = $factory->getGenerator(new SecurityLib\Strength(SecurityLib\Strength::MEDIUM));
+        $code       = $generator->generateString(4, '1234567890');
+
+        $this->load->library('phone_validate');
+        $result = json_decode($this->phone_validate->send_code($phone, $code));
+        // var_dump($result);
+        $result->code = $code;
+
+        return json_encode($result);
     }
 
-    public function validate_email($uid, $email) {
+
+    public function validate_email($uid, $email)
+    {
         //生成 token
         $factory = new RandomLib\Factory();
         $generator = $factory->getGenerator(new SecurityLib\Strength(SecurityLib\Strength::MEDIUM));
@@ -237,7 +234,7 @@ class User_service extends MY_Service
 
     private function send_email($email, $token)
     {
-        
+
 
         $this->load->library('email');
 
@@ -250,5 +247,29 @@ class User_service extends MY_Service
         $this->email->message("你可以通过下面的链接激活您的账号。\n {$url}{$token}");
 
         $this->email->send();
+    }
+
+
+    /**
+     * [_clear 清除值为空的变量]
+     * @param  [array] $data [description]
+     * @return [type]       [description]
+     */
+    private function _clear($data)
+    {
+        foreach ($data as $key => $value)
+        {
+            if(is_string($data[$key]))
+            {
+                //去除字符串两端的空格
+                $data[$key] = trim($data[$key]);
+            }
+            //unset 空的变量
+            if(empty($data[$key]))
+            {
+                unset($data[$key]);
+            }
+        }
+        return $data;
     }
 }
