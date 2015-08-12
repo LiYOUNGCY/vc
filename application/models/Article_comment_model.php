@@ -31,7 +31,8 @@ class Article_comment_model extends CI_Model
      */
     public function get_comment_by_id($id)
     {
-        return $this->db->get('article_comment')
+        return $this->db->where('id',$id)
+                        ->get('article_comment')
                         ->row_array();
     }   
 
