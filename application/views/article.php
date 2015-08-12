@@ -5,6 +5,10 @@
 		<input type="hidden" name="article_tag"  value="<?php echo $article_tag;?>"/>
 		<div id="shade"></div>
 		<div id="vi_content" class="content">
+		<div class="tops">
+			
+		</div>
+		<!-- 
 		<?php if( $user['role'] == 0) { ?>
 			<div id="vi_sign" class="vi-sign ">
 				<div class="float-r">
@@ -81,6 +85,7 @@
 						<img src="<?=base_url().'public/'?>img/QRCode.png" /></div>
 				</div>
 			</div>
+			-->
 		</div>
 	</div>
 	<script type="text/javascript" src="<?=base_url().'public/'?>js/vc.js"></script>
