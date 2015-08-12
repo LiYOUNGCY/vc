@@ -25,6 +25,16 @@ class Article_comment_model extends CI_Model
         return $this->db->insert_id();
     }
     
+    /**
+     * 根据id获取评论详情
+     * @return [type]
+     */
+    public function get_comment_by_id($id)
+    {
+        return $this->db->get('article_comment')
+                        ->row_array();
+    }   
+
     public function get_comment_by_aid($aid,$order = 'id DESC')
     {
         return $this->db->where('aid', $aid)
