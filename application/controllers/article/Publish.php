@@ -39,7 +39,7 @@ class Publish extends MY_Controller {
             //更新文章界面
             $user_id = $this->user['id'];
             $article = $this->article_service->get_article_by_id($aid);
-            if( empty($article) || $article['uid'] != $user_id) 
+            if( empty($article)) 
             {
                 show_404();
             }
@@ -63,16 +63,14 @@ class Publish extends MY_Controller {
         $this->sc->set_error_redirect($error_redirect);
 
         $article_title      = $this->sc->input('article_title');
-        $article_subtitle   = $this->sc->input('article_subtitle');
         $article_content    = $this->sc->input('article_content','post',FALSE);
         //过滤富文本
         $article_content    = $this->htmlpurifier->purify($article_content);
-        $article_tag        = $this->sc->input('article_tag');
         //把文章插入到数据库
-        $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_subtitle, 1, $article_tag, $article_content);
+        $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, 1, $article_content);
         if($result)
         {
-            redirect(base_url().'feed','location');
+            redirect(base_url(),'location');
         }
         else
         {
@@ -93,16 +91,14 @@ class Publish extends MY_Controller {
 
         $aid                = $this->sc->input('aid');
         $article_title      = $this->sc->input('article_title');
-        $article_subtitle   = $this->sc->input('article_subtitle');
         $article_content    = $this->sc->input('article_content');
         //过滤富文本
         $article_content    = $this->htmlpurifier->purify($article_content);        
-        $article_tag        = $this->sc->input('article_tag');
 
-        $result = $this->article_service->update_article($aid,$this->user['id'],$article_title,$article_subtitle,1,$article_tag,$article_content);       
+        $result = $this->article_service->update_article($aid,$this->user['id'],$article_title,1,$article_content);       
         if($result)
         {
-            // redirect(base_url()."article/".$aid,'location');
+            redirect(base_url()."article/".$aid,'location');
         }
         else
         {
