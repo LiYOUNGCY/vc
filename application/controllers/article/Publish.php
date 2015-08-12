@@ -37,7 +37,6 @@ class Publish extends MY_Controller {
         else if($type == 'update' && ! empty($aid) && is_numeric($aid))
         {
             //更新文章界面
-            $user_id = $this->user['id'];
             $article = $this->article_service->get_article_by_id($aid);
             if( empty($article)) 
             {
@@ -63,11 +62,13 @@ class Publish extends MY_Controller {
         $this->sc->set_error_redirect($error_redirect);
 
         $article_title      = $this->sc->input('article_title');
+        $article_type       = $this->sc->input('article_type');
+        $pids               = $this->sc->input('pids');
         $article_content    = $this->sc->input('article_content','post',FALSE);
         //过滤富文本
         $article_content    = $this->htmlpurifier->purify($article_content);
         //把文章插入到数据库
-        $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, 1, $article_content);
+        $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_type, $article_content);
         if($result)
         {
             redirect(base_url(),'location');
@@ -91,11 +92,13 @@ class Publish extends MY_Controller {
 
         $aid                = $this->sc->input('aid');
         $article_title      = $this->sc->input('article_title');
+        $article_type       = $this->sc->input('article_type');    
+        $pids               = $this->sc->input('pids');            
         $article_content    = $this->sc->input('article_content');
         //过滤富文本
         $article_content    = $this->htmlpurifier->purify($article_content);        
 
-        $result = $this->article_service->update_article($aid,$this->user['id'],$article_title,1,$article_content);       
+        $result = $this->article_service->update_article($aid,$this->user['id'],$article_title,$article_type,$article_content);       
         if($result)
         {
             redirect(base_url()."article/".$aid,'location');

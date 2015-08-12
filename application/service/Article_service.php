@@ -17,10 +17,10 @@ class Article_service extends MY_Service{
     /**
      * 发表文章
      */
-    public function publish_article($user_id, $article_title, $article_type, $article_content)
+    public function publish_article($user_id, $article_title, $article_type, $pids, $article_content)
     {
         //将文章插入到数据库
-        $article_id = $this->article_model->publish_article($user_id, $article_title, $article_type, $article_content);
+        $article_id = $this->article_model->publish_article($user_id, $article_title, $article_type, $pids,$article_content);
         if( ! empty($article_id))
         {
             return TRUE;
@@ -183,6 +183,17 @@ class Article_service extends MY_Service{
         if($insert_result)
         {
             echo json_encode(array('success' => 0,'script' => 'location.reload();'));       
+            //如果是回复评论
+            if( ! empty($pid))
+            {
+                //添加评论消息
+                $c = $this->article_comment_model->get_comment_by_id($pid);
+                if( ! empty($c) && $c['uid'] != $uid)
+                {
+                    $this->notification_model->insert($uid, $c['uid'],2,json_encode(array('content_id' => $aid, 'comment_content' => $comment)));               
+                }                
+            }
+
         }
         else
         {
@@ -254,11 +265,12 @@ class Article_service extends MY_Service{
      * @param  [type] $uid [用户id]
      * @return [type]      [description]
      */
-    public function update_article($aid, $uid, $article_title, $article_type, $article_content)
+    public function update_article($aid, $uid, $article_title, $article_type, $pids, $article_content)
     {
         $arr = array(
             'title'    => $article_title,
             'type'     => $article_type,
+            'pids'     => $pids,  
             'content'  => $article_content
         );
         return $this->article_model->update_article($aid,$arr,$uid);
