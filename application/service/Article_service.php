@@ -8,8 +8,8 @@ class Article_service extends MY_Service{
         $this->load->model('article_model');
         $this->load->model('article_comment_model');   
         $this->load->model('article_like_model');
+        $this->load->model('article_collection_model');
         $this->load->model('user_model');
-        $this->load->model('feed_model');
         $this->load->model('notification_model');
     }
     
@@ -17,14 +17,12 @@ class Article_service extends MY_Service{
     /**
      * 发表文章
      */
-    public function publish_article($user_id, $article_title, $article_subtitle, $article_type,  $article_tag, $article_content)
+    public function publish_article($user_id, $article_title, $article_type, $pids, $article_content)
     {
         //将文章插入到数据库
-        $article_id = $this->article_model->publish_article($user_id, $article_title, $article_subtitle, $article_type, $article_tag, $article_content);
+        $article_id = $this->article_model->publish_article($user_id, $article_title, $article_type, $pids,$article_content);
         if( ! empty($article_id))
         {
-            //更新动态表 
-            $this->feed_model->insert_feed($user_id, $article_id, 2, $this->_extract_article($article_id, $article_title, $article_subtitle, $article_content));
             return TRUE;
         }
         else
@@ -37,13 +35,13 @@ class Article_service extends MY_Service{
     /**
      * [get_article_list 获取文章列表]
      */
-    public function get_article_list($page, $uid, $type,$tag)
+    public function get_article_list($page, $uid, $type)
     {
         switch ($type) {
             case 'article':
                 $type = 1;
                 break;
-            case 'exhibition':
+            case 'topic':
                 $type = 2;
                 break;
             default:
@@ -51,36 +49,22 @@ class Article_service extends MY_Service{
                 break;
         }
 
-        switch ($tag) {
-            case 'interview':
-                $tag = '|1|';
-                break;
-            case 'discuss':
-                $tag = '|2|';
-                break;
-            case 'consult':
-                $tag = '|3|';
-                break;
-            default:
-                $tag = '';
-                break;
-        }
-        $article = $this->article_model->get_article_list($page, $uid, NULL,$type,$tag);
+        $article = $this->article_model->get_article_list($page, $uid, NULL,$type);
         foreach( $article as $key => $value )
         {        
             
                
             //对每篇文章内容进行字数截取
-            $article[$key]['content'] = $this->_extract_article($article[$key]['id'], $article[$key]['title'], $article[$key]['subtitle'], $article[$key]['content']);
+            $article[$key]['content'] = $this->_extract_article($article[$key]['id'], $article[$key]['title'], $article[$key]['content']);
             
             //对文章标题字数截取
             $article[$key]['content']["sort_title"] = mb_strlen($article[$key]['content']["article_title"]) > 9 ? mb_substr($article[$key]['content']["article_title"], 0, 9).'..' : $article[$key]['content']["article_title"];
             
             //查询作者的信息
-            $article[$key]['author'] = $this->user_model->get_user_base_id($article[$key]['uid']);
+            //$article[$key]['author'] = $this->user_model->get_user_base_id($article[$key]['uid']);
             unset($article[$key]['id']);
             unset($article[$key]['title']); 
-            unset($article[$key]['uid']);
+            //unset($article[$key]['uid']);
         }
         return $article;
     }
@@ -92,22 +76,17 @@ class Article_service extends MY_Service{
     public function get_article_by_id($aid)
     {
         $query = $this->article_model->get_article_by_id($aid);
-        if( ! empty($query))
-        {
-            $query['author'] = $this->user_model->get_user_base_id($query['uid']);
-            return $query;            
-        }
-        else
-        {
-            return FALSE;
-        }
+        return $query;
     }
 
     public function get_article_vote_by_both($aid, $uid) {
         return $this->article_like_model->get_article_vote_by_both($aid, $uid)['status'];
     }
 
-
+    public function check_article_collection($uid, $aid)
+    {
+        return $this->article_collection_model->check_article_collection($uid, $aid);
+    }
     /**
      * [get_comment_by_aid 获取文章评论]
      */
@@ -134,11 +113,13 @@ class Article_service extends MY_Service{
      */
     public function vote_article($aid, $uid)
     {
-    	$article = $this->article_model->get_article_by_id($aid);
-    	if(empty($article))
-    	{
-    		$this->error->output('ARTICLE_NOT_EXIST');
-    	}
+        //文章存在检查
+        $article = $this->article_model->get_article_by_id($aid);
+        if(empty($article))
+        {
+            $this->error->output('INVALID_REQUEST');
+        }
+
     	$status = $this->article_like_model->article_vote($aid, $uid);
         //成功
     	if($status)
@@ -149,21 +130,6 @@ class Article_service extends MY_Service{
             {
                 //更新文章的 like 数加一
                 $this->article_model->argee_article($aid);
-                
-                //解析文章
-                $content = $this->_extract_vote($article['id'], $article['uid'], $article['title'], $article['subtitle'], $article['content']);
-                //更新动态表
-                $this->feed_model->insert_feed($uid, $article['id'], 1, $content);
-                if($uid != $article['uid'])
-                {
-                    //更新消息
-                    $content = json_encode(array('content_id' => $article['id'], 'content_title' => $article['title'], 'content_type' => 'article'));
-                    $this->notification_model->insert($uid,$article['uid'],3,$content);                    
-                    //推送
-                    $this->load->library('push');
-                    $this->push->push_to_topic($article['uid'],"");                    
-                }
-
             }
             else
             {
@@ -171,8 +137,6 @@ class Article_service extends MY_Service{
                 {
                     //文章的 like 数减一
                     $this->article_model->disargee_article($aid);                   
-                    //删除动态表的动态
-                    //$this->feed_model->delete_feed($uid, $article['id'], 1);
                 }
                 else
                 {
@@ -192,27 +156,36 @@ class Article_service extends MY_Service{
     /**
      * [write_comment 发表评论]
      * @param  [type] $aid     [文章id]
-     * @param  [type] $uid     [用户id]
+     * @param  [type] $uid     [用户id]]
+     * @param  [type] $pid     [评论父id]
      * @param  [type] $comment [评论内容]
      * @return [type]          [description]
      */
-    public function write_comment($aid, $uid, $comment)
+    public function write_comment($aid, $uid, $pid, $comment)
     {
+        //文章存在检查
+        $article = $this->article_model->get_article_by_id($aid);
+        if(empty($article))
+        {
+            $this->error->output('INVALID_REQUEST');
+        }
+
         $comment = Common::replace_face_url($comment);
-        $insert_result = $this->article_comment_model->insert_comment($aid, $uid, $comment);
+        $insert_result = $this->article_comment_model->insert_comment($aid, $uid, $pid, $comment);
         if($insert_result)
         {
-            echo json_encode(array('success' => 0,'script' => 'location.reload();'));
-            $article = $this->article_model->get_article_by_id($aid);
-            if($uid != $article['uid'])
+            echo json_encode(array('success' => 0,'script' => 'location.reload();'));       
+            //如果是回复评论
+            if( ! empty($pid))
             {
-                 //更新消息
-                $content = json_encode(array('content_id' => $aid, 'content_type' => 'article', 'content_title' => $article['title'], 'comment_content' => $comment));
-                $this->notification_model->insert($uid,$article['uid'],2,$content);                
-                //推送
-                $this->load->library('push');
-                $this->push->push_to_topic($article['uid'],"");                    
-            }          
+                //添加评论消息
+                $c = $this->article_comment_model->get_comment_by_id($pid);
+                if( ! empty($c) && $c['uid'] != $uid)
+                {
+                    $this->notification_model->insert($uid, $c['uid'],2,json_encode(array('content_id' => $aid, 'comment_content' => $comment)));               
+                }                
+            }
+
         }
         else
         {
@@ -220,6 +193,33 @@ class Article_service extends MY_Service{
         }
     }
 
+    /**
+     * 收藏文章
+     * @param  aid 文章id[int]
+     * @param  uid 用户id[int]
+     * @return [type]
+     */
+    public function collect_article($aid, $uid)
+    {
+        //文章存在检查
+        $article = $this->article_model->get_article_by_id($aid);
+        if(empty($article))
+        {
+            $this->error->output('INVALID_REQUEST');
+        }
+
+        $result = $this->article_collection_model->insert_collection($aid,$uid);
+        if( ! empty($result))
+        {
+            echo json_encode(array('success' => 0));
+            //更新文章收藏数
+            $this->article_model->update_count($aid, array('name' => 'collection','amount' => 1));            
+        }
+        else
+        {
+            $this->error->output('INVALID_REQUEST');
+        }
+    }
 
     /**
      * 获取文章点过赞的人
@@ -240,29 +240,11 @@ class Article_service extends MY_Service{
     /**
      * 将文章的信息转换为动态表的格式
      */
-    private function _extract_article($article_id, $article_title, $article_subtitle, $article_content)
+    private function _extract_article($article_id, $article_title, $article_content)
     {
         $content = array(
             'article_id'        => $article_id,
             'article_title'     => $article_title,
-            'article_subtitle'  => $article_subtitle,
-            'article_content'   => Common::extract_content($article_content),
-            'article_image'     => Common::extract_first_img($article_content)
-        );
-        return $content;
-    }
-
-
-    /**
-     * 解析文章点赞的 content
-     */
-    private function _extract_vote($article_id, $article_uid, $article_title, $article_subtitle, $article_content)
-    {
-        $content = array(
-            'article_id'        => $article_id,
-            'article_uid'       => $article_uid,
-            'article_title'     => $article_title,
-            'article_subtitle'  => $article_subtitle,
             'article_content'   => Common::extract_content($article_content),
             'article_image'     => Common::extract_first_img($article_content)
         );
@@ -275,16 +257,16 @@ class Article_service extends MY_Service{
      * @param  [type] $uid [用户id]
      * @return [type]      [description]
      */
-    public function update_article($aid, $uid, $article_title, $article_subtitle, $article_type, $article_tag, $article_content)
+    public function update_article($aid, $uid, $article_title, $article_type, $pids, $article_content)
     {
         $arr = array(
             'title'    => $article_title,
-            'subtitle' => $article_subtitle,
             'type'     => $article_type,
-            'tag'      => $article_tag,
-            'content'  => $article_content
+            'pids'     => $pids,  
+            'content'  => $article_content,
+            'modify_by'=> $uid
         );
-        return $this->article_model->update_article($aid,$arr,$uid);
+        return $this->article_model->update_article($aid,$arr);
     }
 
     /**
@@ -304,4 +286,6 @@ class Article_service extends MY_Service{
         $this->article_comment_model->delete_comment_by_aid($aid);
         $this->article_like_model->delete_like_by_aid($aid);
     }
+
+
 }

@@ -94,7 +94,7 @@ class Notification_model extends CI_Model{
 		/**
 		 * 日后修改,不规范
 		 */
-		if($result)
+		if($result && $type != 1)
 		{
 			//查看是否已有消息组
 			$check_result = $this->check_has_notification_group($reciver_id,$type);

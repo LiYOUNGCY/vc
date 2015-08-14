@@ -8,15 +8,15 @@ class Article_comment_model extends CI_Model
         parent::__construct();
     }
 
-
     /**
      * 新增评论
      */
-    public function insert_comment($aid, $uid, $content)
+    public function insert_comment($aid, $uid, $pid, $content)
     {
         $data = array(
             'aid'           => $aid,
             'uid'           => $uid,
+            'pid'           => $pid,
             'content'       => $content,
             'publish_time'  => date("Y-m-d H:i:s", time())
         );
@@ -24,6 +24,17 @@ class Article_comment_model extends CI_Model
         $this->db->insert('article_comment', $data);
         return $this->db->insert_id();
     }
+    
+    /**
+     * 根据id获取评论详情
+     * @return [type]
+     */
+    public function get_comment_by_id($id)
+    {
+        return $this->db->where('id',$id)
+                        ->get('article_comment')
+                        ->row_array();
+    }   
 
     public function get_comment_by_aid($aid,$order = 'id DESC')
     {

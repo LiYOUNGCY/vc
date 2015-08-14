@@ -10,16 +10,16 @@ class Article_model extends CI_Model {
     /**
      * 把文章的信息插入到数据库
      */
-    public function publish_article($user_id, $article_title, $article_subtitle, $article_type, $article_tag, $article_content)
+    public function publish_article($user_id, $article_title, $article_type,$pids,$article_content)
     {
         $data = array(
             'uid'           => $user_id,
             'type'          => $article_type,
-            'tag'           => $article_tag,
             'title'         => $article_title,
-            'subtitle'      => $article_subtitle,
+            'pids'          => $pids,
             'content'       => $article_content,
-            'publish_time'  => date("Y-m-d H:i:s", time())
+            'publish_time'  => date("Y-m-d H:i:s", time()),
+            'creat_by'      => $user_id
         );
 
         $this->db->insert('article', $data);
@@ -56,20 +56,19 @@ class Article_model extends CI_Model {
      * @param  [type]  $meid  [我的id]
      * @param  [type]  $uid   [用户id]
      * @param  [type]  $type  [文章类型]
-     * @param  [type]  $tag   [文章标签]
      * @param  integer $limit [页面个数限制]
      * @param  string  $order [排序]
      * @return [type]         [description]
      */
-    public function get_article_list($page = 0, $meid = NULL, $uid = NULL, $type = NULL, $tag = NULL, $limit = 6, $order = "id DESC")
+    public function get_article_list($page = 0, $meid = NULL, $uid = NULL, $type = NULL, $pid = NULL, $limit = 6, $order = "id DESC")
     {
         $query = $this->db
-            ->select('article.id, article.uid, article.title, article.subtitle, article.content, article.like')
+            ->select('article.id, article.uid, article.title, article.content, article.like, article.read')
             ->from('article');
 
         if( is_numeric($meid))
         {
-            $query = $query->select('article_like.status');
+            $query = $query->select('article_like.status as like_status');
             $query = $query->join('article_like', "article_like.aid = article.id AND article_like.uid = {$meid}", 'left');
         }
         if( ! empty($uid))
@@ -80,15 +79,10 @@ class Article_model extends CI_Model {
         {
             $query->where('article.type',$type);
         }
-        if(! empty($tag))
+        if( ! empty($pid))
         {
-            $this->db->like('article.tag',$tag); 
+          $query->like('pids',"|{$pid}|");
         }
-        // else
-        // {
-        //     //$query = $query->join('article_like', 'article_like.aid = article.id', 'left');
-        // }
-
         $query =$query->order_by($order)->limit($limit, $page*$limit)->get()->result_array();
         return $query;
     }
@@ -175,6 +169,7 @@ class Article_model extends CI_Model {
      */
     public function update_article($aid, $arr, $uid = NULL)
     {
+      $arr['modify_time'] = date("Y-m-d H:i:s", time());
       if( ! empty($uid))
       {
         $this->db->where('uid',$uid);
@@ -189,7 +184,7 @@ class Article_model extends CI_Model {
 
     public function admin_get_article_list($page = 0,$limit = 10,$order = 'id DESC')
     {
-      $article = $this->db->select('article.id,article.uid,article.type,article_type.name as type_name,article.title,article.publish_time,article.read,article.like,article.tag')
+      $article = $this->db->select('article.id,article.uid,article.type,article_type.name as type_name,article.title,article.publish_time,article.read,article.like')
                           ->join('article_type','article.type = article_type.id','left')
                           ->order_by($order)
                           ->limit($limit,$page * $limit)

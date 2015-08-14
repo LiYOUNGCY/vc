@@ -65,4 +65,16 @@ class Image extends MY_Controller{
 			$this->error->output('INVALID_REQUEST',array('script' => 'window.location.href = "'.base_url().'feed";'));
 		}
 	}
+
+	/**
+	 * [upload_production description]
+	 * @return [type] [description]
+	 */
+	public function upload_production()
+	{
+		$uid = $this->user['id'];
+		$result = $this->image_service->upload_production('upfile',$uid);
+		header('Content-Type:application/json');
+		echo json_encode($result);			
+	}
 }

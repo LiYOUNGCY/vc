@@ -85,25 +85,6 @@ class Image_service extends MY_Service{
 	}	
 
 	/**
-	 * [upload_file 上传图片]
-	 * @param  [type] $form_name [description]
-	 * @param  [type] $config    [description]
-	 * @return [type]            [description]
-	 */
-	public function upload_img($form_name, $config)
-	{
-		$imgname = $this->security->sanitize_filename($_FILES[$form_name]["name"]); //获取上传的文件名称
-		$filetype = pathinfo($imgname, PATHINFO_EXTENSION);//获取后缀
-		$config['file_name']=time().".".$filetype;
-		//图片新路径
-		$pic_path=substr($config['upload_path'],2).$config['file_name'];
-		//上传成功
-		$this->load->library('upload', $config);
-		$result = $this->upload->do_upload('upfile');
-		return $result;				
-	}
-
-	/**
 	 * [upload_headpic 上传头像]
 	 * @param  [type] $form_name [表单名]
 	 * @return [type]            [description]
@@ -142,7 +123,7 @@ class Image_service extends MY_Service{
 				{
 					//删除原图并输出错误
 					@unlink("./{$pic_path}");
-					$this->error->output('INVALID_REQUEST');
+					$result['error'] = lang('error_INVALID_REQUEST');
 				}			
 			}
 			//上传失败
@@ -200,5 +181,113 @@ class Image_service extends MY_Service{
 		//删除原图并输出错误
 		@unlink("./{$filename}");
 		return FALSE;		
+	}
+
+	/**
+	 * [upload_production 上传图片(保存缩略图与原图)]
+	 * @param  [type] $form_name [description]
+	 * @param  [type] $uid       [description]
+	 * @return [type]            [description]
+	 */
+	public function upload_production($form_name, $uid)
+	{
+
+		$config['upload_path'] = './public/production/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size'] = '5000';
+		$config['remove_spaces']=TRUE;
+		if( isset($_FILES[$form_name]))
+		{
+			$imgname = $this->security->sanitize_filename($_FILES[$form_name]["name"]); //获取上传的文件名称
+			$filetype = pathinfo($imgname, PATHINFO_EXTENSION);//获取后缀
+			$config['file_name']=time()."_{$uid}.".$filetype;
+			//图片新路径
+			$pic_path=substr($config['upload_path'],2).$config['file_name'];
+
+			$this->load->library('upload', $config);
+			$upload_result = $this->upload->do_upload($form_name);
+
+			//判断宽高是否超出限制
+			$src_w 		= $this->upload->data('image_width');  
+			$src_h 	    = $this->upload->data('image_height');
+			if($src_w < 400)
+			{
+				@unlink("./{$pic_path}");
+				$result['error'] = lang('error_OVER_SIZE');
+				return $result;
+			}
+			//最小宽
+			$min_width  = 400;
+			$min_height = $src_h * ($min_width / $src_w);  
+
+			//上传成功		
+			if($upload_result)
+			{
+				/**
+				 * [生成缩略图]
+				 * $tofile [缩略图本地保存路径]
+				 * $osspath[原图本地保存路径]
+				 */
+				$arr = explode('/',$pic_path);
+				$toFile = "thumb1_".$arr[count($arr)-1];
+				$arr[count($arr)-1] = $toFile;
+				$toFile = implode('/', $arr);
+				$thumb_result = $this->cimage->img2thumb("./{$pic_path}","./{$toFile}",$min_width,$min_height,1);	
+
+				//生成缩略图成功
+				if($thumb_result)
+				{
+					//上传缩略图到oss
+					$oss_result = $this->oss->upload_by_file($toFile);
+					//缩略图上传成功
+					if($oss_result)
+					{
+						/**
+						 * [上传原图到oss]
+						 * $oss_result [type]
+						 */		
+						$oss_result = $this->oss->upload_by_file($pic_path);		
+						//设置上传结果
+						$result = $oss_result;
+						
+						//上传原图成功
+						if($oss_result)
+						{	
+							//设置图片url
+							$result = array();
+							$result['success']  = 0;
+							$result['pic']   = OSS_URL."/{$pic_path}";
+							$result['thumb'] = OSS_URL."/{$toFile}" ;										
+						}
+						//失败
+						else
+						{
+							//删除oss上缩略图
+							$this->oss->delete_object($toFile);
+						}				
+					}
+					//删除本地缩略图
+					@unlink($toFile);					
+				}
+				else
+				{
+					$result['error'] = lang('error_INVALID_REQUEST');
+				}	
+				//删除原图
+				@unlink("./{$pic_path}");						
+			}	
+			//上传失败
+			else
+			{
+				$result = array();	
+				$result['error'] = $this->upload->display_errors();
+			}					
+		}
+		else
+		{
+			$result = array();	
+			$result['error'] = lang('error_INVALID_REQUEST');			
+		}
+		return $result;				
 	}
 }
