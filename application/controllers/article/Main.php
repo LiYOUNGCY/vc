@@ -17,6 +17,7 @@ class Main extends MY_Controller {
     {
         //获得页数
         $page = $this->sc->input('page');
+        // $page = 0;
 
         $uid  = isset($this->user['id']) ? $this->user['id'] : NULL;
         //文章类型
@@ -33,13 +34,14 @@ class Main extends MY_Controller {
     public function index($type = 'article')
     {
         $data['css'] = array(
-            'common.css',
+            'base.css',
             'font-awesome/css/font-awesome.min.css'
         );
         $data['javascript'] = array(
             'jquery.js',
-            'jquery.scrollLoading.js',
-            'error.js'
+            'masonry.pkgd.min.js',
+            'jquery.imageloader.js',
+            'jquery.scrollLoading.js'
         );
 
         $user['user'] = $this->user;
