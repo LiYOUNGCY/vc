@@ -34,19 +34,21 @@ class Publish extends MY_Controller {
             //发布文章界面
             $this->load->view('publish_article', $data);            
         }
-        else if($type == 'update' && ! empty($aid) && is_numeric($aid))
+        else if($type == 'update')
         {
+            if( ! is_numeric($aid))
+            {
+                show_404();
+            }
             //更新文章界面
             $article = $this->article_service->get_article_by_id($aid);
             if( empty($article)) 
             {
                 show_404();
             }
-            else
-            {
-                $data['article'] = $article;
-                $this->load->view('update_article', $data);
-            }
+            $data['article'] = $article;
+            $this->load->view('update_article', $data);
+            
         }
     }
 
@@ -75,7 +77,7 @@ class Publish extends MY_Controller {
         }
         else
         {
-            $this->error->output('INVALID_REQUEST',array('script' => base_url().'publish/article'));
+            $this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().'publish/article";'));
         }
     }
 
@@ -85,8 +87,14 @@ class Publish extends MY_Controller {
      */
     public function update_article()
     {
+        $aid = $this->input->post('aid');
+        if( ! is_numeric($aid))
+        {
+            show_404();
+        }
+        
         $error_redirect = array(
-            'script' => "window.location.href='".base_url()."update/article/".$this->input->post('aid')."';"
+            'script' => "window.location.href='".base_url()."update/article/".$aid."';"
         );
         $this->sc->set_error_redirect($error_redirect);
 
@@ -105,7 +113,7 @@ class Publish extends MY_Controller {
         }
         else
         {
-            $this->error->output('INVALID_REQUEST');
+            $this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().'update/article/'.$aid.'";'));
         } 
     }
 

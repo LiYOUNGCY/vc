@@ -107,9 +107,9 @@ handleError: function( s, xhr, status, e )    {
                     status = isTimeout != "timeout" ? "success" : "error";
                     // Make sure that the request was successful or notmodified
                     if( status != "error" )
-     {
+     {                    
                         // process the data (runs the xml through httpData regardless of callback)
-                        var data = jQuery.uploadHttpData( xml, s.dataType );                        
+                        var data = jQuery.uploadHttpData( xml, s.dataType );                    
                         if( s.success )
                         {
        // ifa local callback was specified, fire it and pass it the data

@@ -61,10 +61,10 @@ class Article_service extends MY_Service{
             $article[$key]['content']["sort_title"] = mb_strlen($article[$key]['content']["article_title"]) > 9 ? mb_substr($article[$key]['content']["article_title"], 0, 9).'..' : $article[$key]['content']["article_title"];
             
             //查询作者的信息
-            $article[$key]['author'] = $this->user_model->get_user_base_id($article[$key]['uid']);
+            //$article[$key]['author'] = $this->user_model->get_user_base_id($article[$key]['uid']);
             unset($article[$key]['id']);
             unset($article[$key]['title']); 
-            unset($article[$key]['uid']);
+            //unset($article[$key]['uid']);
         }
         return $article;
     }
@@ -76,15 +76,7 @@ class Article_service extends MY_Service{
     public function get_article_by_id($aid)
     {
         $query = $this->article_model->get_article_by_id($aid);
-        if( ! empty($query))
-        {
-            $query['author'] = $this->user_model->get_user_base_id($query['uid']);
-            return $query;            
-        }
-        else
-        {
-            return FALSE;
-        }
+        return $query;
     }
 
     public function get_article_vote_by_both($aid, $uid) {
@@ -225,7 +217,7 @@ class Article_service extends MY_Service{
         }
         else
         {
-            $this->error->ouput('INVALID_REQUEST');
+            $this->error->output('INVALID_REQUEST');
         }
     }
 
@@ -271,9 +263,10 @@ class Article_service extends MY_Service{
             'title'    => $article_title,
             'type'     => $article_type,
             'pids'     => $pids,  
-            'content'  => $article_content
+            'content'  => $article_content,
+            'modify_by'=> $uid
         );
-        return $this->article_model->update_article($aid,$arr,$uid);
+        return $this->article_model->update_article($aid,$arr);
     }
 
     /**

@@ -14,7 +14,7 @@ class Article_collection_model extends CI_Model{
 	 */
 	public function check_article_collection($uid, $aid)
 	{
-		$query = $this->db->where(array('uid' => $uid, 'aid' => $aid, 'status' => 1)) 
+		$query = $this->db->where(array('uid' => $uid, 'aid' => $aid)) 
 				 		  ->get('article_collection')
 				 		  ->row_array();
 
@@ -31,7 +31,7 @@ class Article_collection_model extends CI_Model{
 	public function insert_collection($aid, $uid)
 	{
 		$has_collect = $this->check_article_collection($uid, $aid);
-		if( ! empty($has_collect))
+		if(empty($has_collect))
 		{
 			$data  = array(
 				'aid'         => $aid,

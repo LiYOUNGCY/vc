@@ -21,7 +21,7 @@ $lang['error_INVALID_NID'] 			= '无效的id';
 $lang['error_INVALID_AID'] 			= '无效的id';
 $lang['error_INVALID_PID'] 			= '无效的id';
 $lang['error_INVALID_CONVERSATION_CONTENT'] = '私信内容格式错误';
-
+$lang['error_OVER_SIZE']			= '宽高超出限制';
 
 
 $lang['error_PASSWORD_ERROR']		= '密码错误，请重新输入';

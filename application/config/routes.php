@@ -59,19 +59,30 @@ $route['default_controller'] = 'index';
 
 $route['article/(:num)'] = 'article/detail/index/$1';
 $route['article'] = 'article/main';
-$route['article/([a-z]*)'] = 'article/main/index/article/$1';
 //发布文章
 $route['publish/article']  = 'article/publish/index/publish';
 //更新文章
 $route['update/article/(:num)']   = 'article/publish/index/update/$1';
 
-$route['exhibition'] = 'article/main/index/exhibition';
-$route['exhibition/([a-z]*)'] = 'article/main/index/exhibition/$1';
-/**
- *联系人
- */
-$route['contacts']  = 'contacts/main';
+$route['topic'] = 'article/main/index/topic';
+$route['topic/([a-z]*)'] = 'article/main/index/topic/$1';
 
+
+/**
+ * 艺术品
+ */
+$route['production/(:num)'] = 'production/detail/index/$1';
+$route['production'] = 'production/main';
+//发布艺术品
+$route['publish/production']  = 'production/publish/index/publish';
+//更新艺术品
+$route['update/production/(:num)']   = 'production/publish/index/update/$1';
+
+/**
+ * 艺术家
+ */
+$route['artist'] 		= 'artist/main';
+$route['artist/(:num)'] = 'artist/detail/index/$1';
 /**
  * 用户
  */
@@ -81,45 +92,15 @@ $route['setting']   = 'account/setting/index/user';
 $route['setting/(([a-z]*))']   = 'account/setting/index/$1';
 
 /**
- *圈子 
- */
-$route['community/(:num)'] = 'community/main/index/$1';
-$route['post/(:num)'] = 'community/post/index/$1';
-$route['publish/community'] = 'community/publish/index/community';
-$route['publish/post'] = 'community/publish/index/post';
-
-/**
- * 联系人
- */
-$route['contacts'] = 'contacts/main';
-$route['contacts/([a-z]*)'] = 'contacts/main';
-
-/**
  * 私信
  */
 $route['conversation/(:num)'] = 'conversation/main/index/$1';
-
-/**
- * 动态
- */
-$route['feed'] = 'feed/main';
 
 /**
  *消息 
  */
 $route['notification']  = 'notification/main';
 $route['notification/([a-z]*)'] = 'notification/main/index/$1';
-
-/**
- * 用户主页
- */
-$route['home/([a-z0-9_]*)'] = 'home/main/index/$1';
-$route['home/([a-z0-9_]*)/community'] = 'home/main/index/$1/community';
-$route['home/([a-z0-9_]*)/intro'] = 'home/main/index/$1/intro';
-$route['home/([a-z0-9_]*)/article'] = 'home/main/index/$1/article';
-$route['home/([a-z0-9_]*)/cooperate'] = 'home/main/index/$1/cooperate';
-
-
 
 /**
  * 管理员用户管理

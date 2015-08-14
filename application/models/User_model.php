@@ -10,7 +10,7 @@ class User_model extends CI_Model
 		$this->load->library('passwordhash');
 		$this->passwordhash->setPasswordHash(8, FALSE);
 
-    $this->base_field = array('id', 'name', 'pic', 'alias', 'role', 'intro');
+        $this->base_field = array('id', 'name', 'pic', 'role', 'honour');
 	}
 
 
@@ -48,7 +48,7 @@ class User_model extends CI_Model
             //插入 user_online 表
             $this->_insert_user_online($uid);
             //更新默认键值
-            $this->update_account($uid,array('alias' => 'home/uid_'.$uid,'pic' => base_url().'public/img/pfp7.png'));
+            $this->update_account($uid,array('pic' => base_url().'public/img/pfp7.png'));
             return $uid;
 		}
 		else 

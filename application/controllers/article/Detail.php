@@ -32,7 +32,7 @@ class Detail extends MY_Controller
             $like_status    = $this->article_service->get_article_vote_by_both($aid, $this->user['id']);            
             //获取收藏状态
             $collect_status = $this->article_service->check_article_collection($this->user['id'], $aid);
-            $collect_status = !empty($collect_status) ? 1 : 0;
+            $collect_status = !empty($collect_status) ? $collect_status['status'] : 0;
         }
         else
         {
@@ -50,7 +50,7 @@ class Detail extends MY_Controller
         $data['sidebar'] = $this->load->view('common/sidebar', $user, TRUE);
         $data['footer']  = $this->load->view('common/footer', '', TRUE);
         $data['user']    = $this->user;
-
+        //增加浏览数
         $this->article_service->read_article($aid);
         
         $head['css'] = array(

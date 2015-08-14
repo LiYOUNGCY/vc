@@ -21,7 +21,7 @@ class Main extends MY_Controller {
         $uid  = isset($this->user['id']) ? $this->user['id'] : NULL;
         //文章类型
         $type= $this->sc->input('type');
-        $article = $this->article_service->get_article_list($page,$uid,$typeg);
+        $article = $this->article_service->get_article_list($page,$uid,$type);
         echo json_encode($article);
     }
 

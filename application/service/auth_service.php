@@ -30,12 +30,12 @@ class Auth_service extends MY_Service{
 	public function check_user_auth()
 	{
 
-		if(!empty($auths = $this->cache->memcached->get('role_auth')))
-        {
-			return $this->_is_auth_success($auths);
-		}
-		else
-		{
+		//if(!empty($auths = $this->cache->memcached->get('role_auth')))
+        //{
+		//	return $this->_is_auth_success($auths);
+		//}
+		//else
+		//{
 			$auths = $this->auth_model->get_user_auth(0,NULL);
 			$new_auths = array();
 			foreach ($auths as $k => $v)
@@ -45,9 +45,9 @@ class Auth_service extends MY_Service{
 					$new_auths[$v['route']] = $v['role_group'];
 				}
 			}
-			$this->cache->memcached->save('role_auth',$new_auths,60);
+			//$this->cache->memcached->save('role_auth',$new_auths,60);
 			return $this->_is_auth_success($new_auths);
-		}
+		//}
 
 	}
 

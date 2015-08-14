@@ -10,14 +10,16 @@ class Article_model extends CI_Model {
     /**
      * 把文章的信息插入到数据库
      */
-    public function publish_article($user_id, $article_title, $article_type,$article_content)
+    public function publish_article($user_id, $article_title, $article_type,$pids,$article_content)
     {
         $data = array(
             'uid'           => $user_id,
             'type'          => $article_type,
             'title'         => $article_title,
+            'pids'          => $pids,
             'content'       => $article_content,
-            'publish_time'  => date("Y-m-d H:i:s", time())
+            'publish_time'  => date("Y-m-d H:i:s", time()),
+            'creat_by'      => $user_id
         );
 
         $this->db->insert('article', $data);
@@ -58,7 +60,7 @@ class Article_model extends CI_Model {
      * @param  string  $order [排序]
      * @return [type]         [description]
      */
-    public function get_article_list($page = 0, $meid = NULL, $uid = NULL, $type = NULL,$limit = 6, $order = "id DESC")
+    public function get_article_list($page = 0, $meid = NULL, $uid = NULL, $type = NULL, $pid = NULL, $limit = 6, $order = "id DESC")
     {
         $query = $this->db
             ->select('article.id, article.uid, article.title, article.content, article.like, article.read')
@@ -66,7 +68,7 @@ class Article_model extends CI_Model {
 
         if( is_numeric($meid))
         {
-            $query = $query->select('article_like.status');
+            $query = $query->select('article_like.status as like_status');
             $query = $query->join('article_like', "article_like.aid = article.id AND article_like.uid = {$meid}", 'left');
         }
         if( ! empty($uid))
@@ -77,7 +79,10 @@ class Article_model extends CI_Model {
         {
             $query->where('article.type',$type);
         }
-
+        if( ! empty($pid))
+        {
+          $query->like('pids',"|{$pid}|");
+        }
         $query =$query->order_by($order)->limit($limit, $page*$limit)->get()->result_array();
         return $query;
     }
@@ -164,6 +169,7 @@ class Article_model extends CI_Model {
      */
     public function update_article($aid, $arr, $uid = NULL)
     {
+      $arr['modify_time'] = date("Y-m-d H:i:s", time());
       if( ! empty($uid))
       {
         $this->db->where('uid',$uid);
