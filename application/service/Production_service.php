@@ -19,6 +19,14 @@ class Production_service extends MY_Service{
 	{
 		$production = $this->production_model->get_production_list($page,$uid);
 		foreach ($production as $k => $v) {	
+			//显示缩略图
+			$arr   = explode('/',$production[$k]['pic']);
+			if( ! empty($arr))
+			{
+				$arr[count($arr)-1] = "thumb1_".$arr[count($arr)-1];
+				$production[$k]['pic'] = implode('/', $arr);				
+			}
+
 			//获取艺术家信息
 			if( ! empty($v['aid']))
 			{
@@ -78,7 +86,11 @@ class Production_service extends MY_Service{
 	 */
 	public function get_topic_by_production($pid, $uid)
 	{
-		return $this->article_model->get_article_list(0,$uid,NULL,NULL,$pid);
+		$topic = $this->article_model->get_article_list(0,$uid,NULL,NULL,$pid);
+		foreach ($topic as $k => $v) {
+			$topic[$k]['article_img'] = Common::extract_first_img($topic[$k]['content']);
+		}
+		return $topic;
 	}
 	/**
 	 * 收藏艺术品

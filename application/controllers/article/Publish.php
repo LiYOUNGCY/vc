@@ -62,7 +62,6 @@ class Publish extends MY_Controller {
             'script' => "window.location.href='".base_url()."publish/article';"
         );
         $this->sc->set_error_redirect($error_redirect);
-        $this->user['id'] = 23;
         $article_title      = $this->sc->input('article_title');
         $article_type       = $this->sc->input('article_type');
         $pids               = $this->sc->input('pids');

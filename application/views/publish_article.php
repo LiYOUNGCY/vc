@@ -13,9 +13,9 @@
                     </div>
                     <div class="radio-box">
                     <p>文章分类</p>
-                    <input class="radiocheck" name="article_type" id="article" type="radio" value="1">
+                    <input class="radiocheck" name="article_type" id="article" type="radio" value="1" checked>
                     <label class="nofull default left" for="article">资讯</label>
-                    <input class="radiocheck" name="article_tag" id="topic" type="radio" value="2">
+                    <input class="radiocheck" name="article_type" id="topic" type="radio" value="2">
                     <label class="nofull default left" for="topic" >专题</label>
                     </div>
                     <div class="option">

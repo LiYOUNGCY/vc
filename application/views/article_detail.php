@@ -78,9 +78,7 @@
           ?>
             <section class="opener">
               <div class="avatar">
-                <a href="<?=base_url().$comment[$i]['user']['alias']?>">
                   <img src="<?=$comment[$i]['user']['pic']?>">
-                </a>
               </div>
 
               <div class="postmeta">
@@ -88,9 +86,7 @@
                   <time class="timeago" title="<?=$comment[$i]['publish_time']?>" datetime="<?=$comment[$i]['publish_time']?>+08:00"></time>
                 </span>
               </div>
-              <a class="link name" href="<?=base_url().$comment[$i]['user']['alias']?>">
-                <?=$comment[$i]['user']['name']?>
-              </a>
+               <?=$comment[$i]['user']['name']?>
               <p>
                 <?=$comment[$i]['content']?>
               </p>
