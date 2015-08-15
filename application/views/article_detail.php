@@ -42,8 +42,6 @@
     </div>
 
     <hr class="line">
-
-
       <?=$footer?></div>
   </div>
 

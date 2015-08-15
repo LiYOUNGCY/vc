@@ -111,7 +111,7 @@ class User_service extends MY_Service
      */
     public function logout()
     {
-        $this->auth_service->logout();
+        session_destroy();
     }
 
     /**

@@ -62,7 +62,6 @@ class Publish extends MY_Controller {
             'script' => "window.location.href='".base_url()."publish/article';"
         );
         $this->sc->set_error_redirect($error_redirect);
-
         $article_title      = $this->sc->input('article_title');
         $article_type       = $this->sc->input('article_type');
         $pids               = $this->sc->input('pids');
@@ -70,7 +69,7 @@ class Publish extends MY_Controller {
         //过滤富文本
         $article_content    = $this->htmlpurifier->purify($article_content);
         //把文章插入到数据库
-        $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_type, $article_content);
+        $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_type, $pids, $article_content);
         if($result)
         {
             redirect(base_url(),'location');

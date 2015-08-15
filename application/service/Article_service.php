@@ -52,8 +52,7 @@ class Article_service extends MY_Service{
         $article = $this->article_model->get_article_list($page, $uid, NULL,$type);
         foreach( $article as $key => $value )
         {        
-            
-               
+                         
             //对每篇文章内容进行字数截取
             $article[$key]['content'] = $this->_extract_article($article[$key]['id'], $article[$key]['title'], $article[$key]['content']);
             
