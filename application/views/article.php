@@ -1,40 +1,46 @@
 <body>
-<div class="container">
-    <div class="article-list" id="article-list">
-        <div class="menu">
-            <div class="btn select">全部</div>
-            <div class="btn select">风格</div>
-            <div class="btn select">目的</div>
-            <div class="btn select">价格</div>
+
+<div class="container" id="vi_container">
+
+    <div class="content">
+        <div class="article-list" id="article-list">
+            <div class="menu">
+                <div class="btn select">全部</div>
+                <div class="btn select">风格</div>
+                <div class="btn select">目的</div>
+                <div class="btn select">价格</div>
+            </div>
+            <!-- <div class="box">
+                <div class="ishadow">
+                    <img class="image" src="<?=base_url()?>public/img/load.gif" data-src="img/1 (1).jpg" alt=""/>
+                    <div class="shadow"><i class="fa fa-eye"></i></div>
+                </div>
+                <p class="title">标题：我的世界</p>
+                <p class="content">这是一段介绍因为爱爱爱爱爱爱爱爱啊啊这是
+                    一段介绍因为爱爱爱爱爱爱爱爱啊啊这是一段介绍因为爱爱爱爱爱爱爱爱啊啊
+                    这是一段介绍因为爱爱爱爱爱爱爱爱啊啊dasfdasfdasfdasfdasfda
+                    sfdasfssfffffffffffffdsafdasfdasfdasfdasfdasfdasfdasf
+                </p>
+                <div class="bottom clearfix">
+                    <div class="like">
+                        <i class="fa fa-heart"></i>
+                        <span>199</span>
+                    </div>
+                    <div class="read">
+                        <i class="fa fa-eye"></i>
+                        <span>2000</span>
+                    </div>
+                    <div class="btn read" onclick="readArticle(id)">阅读详情</div>
+                </div>
+            </div> -->
         </div>
-        <!-- <div class="box">
-            <div class="ishadow">
-                <img class="image" src="<?=base_url()?>public/img/load.gif" data-src="img/1 (1).jpg" alt=""/>
-                <div class="shadow"><i class="fa fa-eye"></i></div>
-            </div>
-            <p class="title">标题：我的世界</p>
-            <p class="content">这是一段介绍因为爱爱爱爱爱爱爱爱啊啊这是
-                一段介绍因为爱爱爱爱爱爱爱爱啊啊这是一段介绍因为爱爱爱爱爱爱爱爱啊啊
-                这是一段介绍因为爱爱爱爱爱爱爱爱啊啊dasfdasfdasfdasfdasfda
-                sfdasfssfffffffffffffdsafdasfdasfdasfdasfdasfdasfdasf
-            </p>
-            <div class="bottom clearfix">
-                <div class="like">
-                    <i class="fa fa-heart"></i>
-                    <span>199</span>
-                </div>
-                <div class="read">
-                    <i class="fa fa-eye"></i>
-                    <span>2000</span>
-                </div>
-                <a class="link" href=""><div class="btn read">阅读详情</div></a>
-            </div>
-        </div> -->
     </div>
 </div>
 </body>
 <script>
-
+function readArticle(id) {
+    window.location.href = BASE_URL + 'article/' + id;
+}
 
 
     $(function(){
@@ -86,7 +92,7 @@
                     for(var i = 0; i < items.length; i++) {
                         // var items[i].content = items[i].content;
 
-                        var article_url = BASE_URL + 'article/' + items[i].content.article_id;
+                        var article_id = items[i].content.article_id;
                         var article_title = items[i].content.sort_title;
                         var article_content = items[i].content.article_content;
                         var img = items[i].content.article_image;
@@ -94,7 +100,7 @@
                         var read = items[i].read;
 
 
-                        var box = $('<div class="box"><div class="ishadow"><img class="image" id="img_load_'+page+'" src="<?=base_url()?>public/img/load.gif" data-src="'+img+'" data-url="'+ img +'"/><div class="shadow"><i class="fa fa-eye"></i></div></div><p class="title">'+article_title+'</p><p class="content">'+article_content+'</p><div class="bottom clearfix"><div class="like"><i class="fa fa-heart"></i><span>'+like+'</span></div><div class="read"><i class="fa fa-eye"></i><span>'+ read +'</span></div><a class="link" href="'+article_url+'"><div class="btn read">阅读详情</div></a></div></div>');
+                        var box = $('<div class="box"><div class="ishadow" onclick="readArticle(' + article_id + ')"><img class="image" id="img_load_'+page+'" src="<?=base_url()?>public/img/load.gif" data-src="'+img+'" data-url="'+ img +'"/><div class="shadow"><i class="fa fa-eye"></i></div></div><p class="title">'+article_title+'</p><p class="content">'+article_content+'</p><div class="bottom clearfix"><div class="like"><i class="fa fa-heart"></i><span>'+like+'</span></div><div class="read"><i class="fa fa-eye"></i><span>'+ read +'</span></div><div class="btn read" onclick="readArticle(' + article_id + ')">阅读详情</div></div></div>');
                         $container.append(box);
                         masonry.appended(box);
 

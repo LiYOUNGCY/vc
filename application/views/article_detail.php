@@ -18,125 +18,32 @@
       </div>
     </div>
 
-    <!-- 作者的信息 -->
-<!--     <div class="author">
-      <div class="head">
-        <a class="link" href="<?=$article['author']['alias']?>">
-        <img src="<?=base_url().'public/img/mm1.jpg'?>">
-        </a>
-      </div>
-      <a class="link" href="<?=$article['author']['alias']?>">
-        <span class="name"><?=$article['author']['name']?></span>
-      </a>
-      <p class="author-info">
-        <?=$article['author']['intro']?>
-      </p>
-      <?php if(isset($user['id']) && $user['id'] == $article['uid']) {?>
-      <div id="menu" class="list"> <i class="fa fa-ellipsis-v"></i></div>
-      <div id="menu-list" class="menu-list" style="display:none;">
-        <a class="link" href="<?=base_url().'update/article/'.$article['id']?>">
-          <div class="btn edit">编辑文章</div>
-        </a>
-        <div id="delete" class="btn delete">删除文章</div>
-      </div>
-      <?php } ?>
-    </div> -->
-
     <h1 class="article-title"><?=$article['title']?></h1>
-
-    <div class="article-info">
-      <i class="fa fa-eye"></i>
-      <span>
-        <?=$article['read']?></span>
-    </div>
 
     <div class="article-content"><?=$article['content']?></div>
 
-    <?php if(isset($status) && $status == '1') { ?>
-    <div class="likebtn1 focus">
-      <?php } else { ?>
-      <div class="likebtn1">
-      <?php } ?>
-      <div class="support" id="mark-like"></div>
+    <div>
+        <?php if(isset($status) && $status == '1') { ?>
+        <div class="likebtn1 focus" style="display:inline-block;">
+          <?php } else { ?>
+          <div class="likebtn1">
+          <?php } ?>
+          <div class="support" id="mark-like"></div>
 
-      <div class="num" id="seeLike">
-        <?=$article['like']?>
-      </div>
+          <div class="num" id="seeLike">
+            <?=$article['like']?>
+          </div>
+        </div>
+
+        <div class="article-info" style="float:right; display:inline-block;">
+            <i class="fa fa-eye"></i>
+            <span><?=$article['read']?></span>
+        </div>
     </div>
 
     <hr class="line">
 
-    <?php if(count($comment) == 0) { ?>
-    <div class="no-comment">暂时还没有评论</div>
-    <?php } else { ?>
-    <div class="playground">
-      <div class="box buddycloud">
-        <div class="stream">
-          <article class="topic">
-          <?php $len = count($comment) < 5 ? count($comment) : 5;
-          for($i = 0; $i < $len; $i++) {
-          ?>
-            <section class="opener">
-              <div class="avatar">
-                <a href="<?=base_url().$comment[$i]['user']['alias']?>">
-                  <img src="<?=$comment[$i]['user']['pic']?>">
-                </a>
-              </div>
 
-              <div class="postmeta">
-                <span class="time">
-                  <time class="timeago" title="<?=$comment[$i]['publish_time']?>" datetime="<?=$comment[$i]['publish_time']?>+08:00"></time>
-                </span>
-              </div>
-              <a class="link name" href="<?=base_url().$comment[$i]['user']['alias']?>">
-                <?=$comment[$i]['user']['name']?>
-              </a>
-              <p>
-                <?=$comment[$i]['content']?>
-              </p>
-            </section>
-            <?php } ?>
-            <div class="hidden" style="display:block">
-              <?php $len = count($comment);
-               for($i = 5; $i < $len; $i ++) { ?>
-              <section class="opener">
-                <div class="avatar">
-                  <img src="<?=$comment[$i]['user']['pic']?>">
-                </div>
-                <div class="postmeta">
-                  <span class="time">
-                    <time class="timeago" title="<?=$comment[$i]['publish_time']?>" datetime="<?=$comment[$i]['publish_time']?>+08:00"></time>
-                  </span>
-                </div>
-                <a class="link name" href="<?=base_url().$comment[$i]['user']['alias']?>">
-                  <?=$comment[$i]['user']['name']?>
-                </a>
-                <p>
-                  <?=$comment[$i]['content']?>
-                </p>
-              </section>
-              <?php } ?>
-            </div>
-            <!-- hidden -->
-            <?php if($len > 5){ ?>
-            <section class="seeMore">
-              <span>查看全部评论</span>
-            </section>
-            <?php } ?>
-          </article>
-          </div>
-        </div>
-      </div>
-      <?php } ?>
-      <article class="topic">
-        <div class="answer clearfix" style="position:relative;">
-          <div id="emotion" class="emotion"></div>
-          <div class="msg">
-            <textarea id="msg"  placeholder="想说写什么..."></textarea>
-          </div>
-          <div id="submit" class="send btn">发送</div>
-        </div>
-      </article>
       <?=$footer?></div>
   </div>
 
@@ -162,12 +69,6 @@
     return ret;
   }
   $(function (){
-    var BASE_URL = $('#BASE_URL').val();
-    var COMMENT_URL = BASE_URL + 'article/detail/write_comment';
-    var VOTE_URL = BASE_URL + 'article/detail/get_vote_list';
-    var ARGEE_URL = BASE_URL + 'article/detail/vote_article';
-    var DELETE_URL = BASE_URL + 'article/detail/delete_article'
-
     //点赞按钮动画
     $(".likebtn1 .support").click(function(){
       if($(this).parent().hasClass('focus')){
