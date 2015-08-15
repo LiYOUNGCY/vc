@@ -7,6 +7,6 @@ class Index extends CI_Controller{
 	}
 	public function index()
 	{	 
-		redirect(base_url().'article', 'location');
+		redirect(base_url().'home', 'location');
 	}
 }

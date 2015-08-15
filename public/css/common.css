@@ -233,7 +233,7 @@ img{
     height: 38px;
     background: transparent url("../img/icon/profile_icon_jieshao.png") no-repeat scroll;
 }
-
+ 
 .vi-menu ul{
     display: block;
     overflow:auto;
@@ -310,7 +310,7 @@ img{
 .numtooplit{
 	float: right;
 	margin:10px;
-	margin-right: 20spx;
+	margin-right: 20px;
 	padding: 0 5px;
 	font-size: 12px;
 	border-radius: 30%;
