@@ -1,25 +1,59 @@
-/*! hello 2015-08-14 */
 * {
     margin: 0;
     padding: 0;
 }
+
 body {
+    overflow-x: hidden;
+
+    width: 100%;
+
+    font-family: "微软雅黑",tahoma,arial,simhei,"宋体";
     font-size: 16px;
+
+    background: #fff;
+}
+
+a {
+    text-decoration: none;
+}
+
+a.link {
+    color: #b3b3b3;
+
+    transition: color .1s linear 0s;
+}
+
+a.link:hover {
+    color: #fcee21;
+}
+
+img {
+    vertical-align: middle;
 }
 
 .container {
+    position: relative;
+
     margin: 0 auto;
-    max-width: 960px;
 
     text-align: center;
 }
 
+.content {
+    margin: 0 auto;
+    max-width: 960px;
+}
+
+
 .btn {
-    cursor: pointer;
-    background-color: #eee;
     text-align: center;
 
+    background-color: #eee;
+
     transition: all .2s ease;
+
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -70,6 +104,7 @@ hr.line {
     margin-left: 10px;
     width: 100px;
     height: 40px;
+
     line-height: 40px;
 }
 
@@ -187,6 +222,11 @@ hr.line {
     display: inline-block;
 
     margin-left: 8px;
+}
+
+.article-list .box .bottom .like i,
+.article-list .box .bottom .read i {
+    margin-right: 5px;
 }
 
 .article-list .box .bottom .like i {
