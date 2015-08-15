@@ -17,9 +17,9 @@
         <div id="list" class="list"></div>
       </div>
     </div>
-    
+
     <!-- 作者的信息 -->
-    <div class="author">
+<!--     <div class="author">
       <div class="head">
         <a class="link" href="<?=$article['author']['alias']?>">
         <img src="<?=base_url().'public/img/mm1.jpg'?>">
@@ -40,10 +40,9 @@
         <div id="delete" class="btn delete">删除文章</div>
       </div>
       <?php } ?>
-    </div>
+    </div> -->
 
     <h1 class="article-title"><?=$article['title']?></h1>
-    <p class="article-subtitle"><?=$article['subtitle']?></p>
 
     <div class="article-info">
       <i class="fa fa-eye"></i>
@@ -79,9 +78,7 @@
           ?>
             <section class="opener">
               <div class="avatar">
-                <a href="<?=base_url().$comment[$i]['user']['alias']?>">
                   <img src="<?=$comment[$i]['user']['pic']?>">
-                </a>
               </div>
 
               <div class="postmeta">
@@ -89,9 +86,7 @@
                   <time class="timeago" title="<?=$comment[$i]['publish_time']?>" datetime="<?=$comment[$i]['publish_time']?>+08:00"></time>
                 </span>
               </div>
-              <a class="link name" href="<?=base_url().$comment[$i]['user']['alias']?>">
-                <?=$comment[$i]['user']['name']?>
-              </a>
+               <?=$comment[$i]['user']['name']?>
               <p>
                 <?=$comment[$i]['content']?>
               </p>
@@ -184,9 +179,9 @@
 
 
     $('#msg').flexText();
-    $('#emotion').qqFace({ 
-        assign: 'msg',                          //给输入框赋值 
-        path: BASE_URL + "public/img/face/"     //表情图片存放的路径 
+    $('#emotion').qqFace({
+        assign: 'msg',                          //给输入框赋值
+        path: BASE_URL + "public/img/face/"     //表情图片存放的路径
     });
 
     $('#submit').click(function(){
@@ -205,7 +200,7 @@
                 ERROR_OUTPUT(obj);
                 return false;
               }
-              else 
+              else
               {
                  if(obj.script != null)
                  {
@@ -263,7 +258,7 @@
         }
       });
     });
-    
+
     $(".timeago").timeago();
 
     $('#menu').click(function (){
@@ -287,7 +282,7 @@
           if(data.error != null)
           {
              ERROR_OUTPUT(status);
-             return false;            
+             return false;
           }
           else if(data.success == 0)
           {

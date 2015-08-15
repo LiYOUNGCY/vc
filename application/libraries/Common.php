@@ -38,8 +38,23 @@ class Common{
 	}
 
 
-
-
+    /**
+     * [extract_article 格式化文章至列表]
+     * @param  [type] $article_id      [文章id]
+     * @param  [type] $article_title   [文章标题]
+     * @param  [type] $article_content [文章内容]
+     * @return [type]                  [description]
+     */
+    static function extract_article($article_id, $article_title, $article_content)
+    {
+        $content = array(
+            'article_id'        => $article_id,
+            'article_title'     => $article_title,
+            'article_content'   => Common::extract_content($article_content),
+            'article_image'     => Common::extract_first_img($article_content)
+        );
+        return $content;
+    }
 
     /**
      * 删除文章的格式，空格
@@ -92,6 +107,18 @@ class Common{
     		$default_img = base_url().'public/img/defaultBG.jpg';
     		return $default_img;
     	}
+    }
+
+    static function get_thumb_url($pic,$pre = "thumb1_")
+    {
+        $arr   = explode('/',$pic);
+        if( ! empty($arr))
+        {
+            $arr[count($arr)-1] = $pre.$arr[count($arr)-1];
+            $pic = implode('/', $arr);    
+            return $pic;            
+        }        
+        return "";
     }
 
     /**

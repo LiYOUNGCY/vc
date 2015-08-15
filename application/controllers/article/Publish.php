@@ -34,20 +34,21 @@ class Publish extends MY_Controller {
             //发布文章界面
             $this->load->view('publish_article', $data);            
         }
-        else if($type == 'update' && ! empty($aid) && is_numeric($aid))
+        else if($type == 'update')
         {
-            //更新文章界面
-            $user_id = $this->user['id'];
-            $article = $this->article_service->get_article_by_id($aid);
-            if( empty($article) || $article['uid'] != $user_id) 
+            if( ! is_numeric($aid))
             {
                 show_404();
             }
-            else
+            //更新文章界面
+            $article = $this->article_service->get_article_by_id($aid);
+            if( empty($article)) 
             {
-                $data['article'] = $article;
-                $this->load->view('update_article', $data);
+                show_404();
             }
+            $data['article'] = $article;
+            $this->load->view('update_article', $data);
+            
         }
     }
 
@@ -61,22 +62,21 @@ class Publish extends MY_Controller {
             'script' => "window.location.href='".base_url()."publish/article';"
         );
         $this->sc->set_error_redirect($error_redirect);
-
         $article_title      = $this->sc->input('article_title');
-        $article_subtitle   = $this->sc->input('article_subtitle');
+        $article_type       = $this->sc->input('article_type');
+        $pids               = $this->sc->input('pids');
         $article_content    = $this->sc->input('article_content','post',FALSE);
         //过滤富文本
         $article_content    = $this->htmlpurifier->purify($article_content);
-        $article_tag        = $this->sc->input('article_tag');
         //把文章插入到数据库
-        $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_subtitle, 1, $article_tag, $article_content);
+        $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_type, $pids, $article_content);
         if($result)
         {
-            redirect(base_url().'feed','location');
+            redirect(base_url(),'location');
         }
         else
         {
-            $this->error->output('INVALID_REQUEST',array('script' => base_url().'publish/article'));
+            $this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().'publish/article";'));
         }
     }
 
@@ -86,27 +86,33 @@ class Publish extends MY_Controller {
      */
     public function update_article()
     {
+        $aid = $this->input->post('aid');
+        if( ! is_numeric($aid))
+        {
+            show_404();
+        }
+        
         $error_redirect = array(
-            'script' => "window.location.href='".base_url()."update/article/".$this->input->post('aid')."';"
+            'script' => "window.location.href='".base_url()."update/article/".$aid."';"
         );
         $this->sc->set_error_redirect($error_redirect);
 
         $aid                = $this->sc->input('aid');
         $article_title      = $this->sc->input('article_title');
-        $article_subtitle   = $this->sc->input('article_subtitle');
+        $article_type       = $this->sc->input('article_type');    
+        $pids               = $this->sc->input('pids');            
         $article_content    = $this->sc->input('article_content');
         //过滤富文本
         $article_content    = $this->htmlpurifier->purify($article_content);        
-        $article_tag        = $this->sc->input('article_tag');
 
-        $result = $this->article_service->update_article($aid,$this->user['id'],$article_title,$article_subtitle,1,$article_tag,$article_content);       
+        $result = $this->article_service->update_article($aid,$this->user['id'],$article_title,$article_type,$article_content);       
         if($result)
         {
-            // redirect(base_url()."article/".$aid,'location');
+            redirect(base_url()."article/".$aid,'location');
         }
         else
         {
-            $this->error->output('INVALID_REQUEST');
+            $this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().'update/article/'.$aid.'";'));
         } 
     }
 
