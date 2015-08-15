@@ -48,4 +48,22 @@ class Article_collection_model extends CI_Model{
 		}
 		return $this->db->affected_rows() === 1;		
 	}	
+
+	/**
+	 * [get_collection_list 获取收藏列表]
+	 * @param  integer $page  [页数]
+	 * @param  [type]  $uid   [用户id]
+	 * @param  integer $limit [页面个数限制]
+	 * @param  string  $order [排序]
+	 * @return [type]         [description]
+	 */
+	public function get_collection_list($page  = 0, $uid, $limit = 10, $order = 'id DESC')
+	{
+		$query = $this->db->where(array('uid' => $uid, 'status' => 1))
+						  ->order_by($order)
+						  ->limit($limit, $page * $limit)
+						  ->get('article_collection')
+						  ->result_array();
+		return $query;
+	}
 }
