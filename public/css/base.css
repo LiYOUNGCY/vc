@@ -2,16 +2,12 @@
     margin: 0;
     padding: 0;
 }
-
-body {
-    overflow-x: hidden;
-
+body{
     width: 100%;
-
-    font-family: "微软雅黑",tahoma,arial,simhei,"宋体";
+    background: #FFFFFF;
     font-size: 16px;
-
-    background: #fff;
+    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    overflow-x: hidden;
 }
 
 a {
@@ -19,41 +15,31 @@ a {
 }
 
 a.link {
-    color: #b3b3b3;
-
-    transition: color .1s linear 0s;
+    color: #B3B3B3;
+    transition: color 0.1s linear 0s;
 }
 
-a.link:hover {
-    color: #fcee21;
+a.link:hover{
+    color:#FCEE21;
 }
 
-img {
+img{
     vertical-align: middle;
 }
 
 .container {
-    position: relative;
-
-    margin: 0 auto;
-
-    text-align: center;
-}
-
-.content {
     margin: 0 auto;
     max-width: 960px;
+
+    text-align: center;
 }
 
-
 .btn {
+    cursor: pointer;
+    background-color: #eee;
     text-align: center;
 
-    background-color: #eee;
-
     transition: all .2s ease;
-
-    cursor: pointer;
 }
 
 .btn:hover {
@@ -82,6 +68,97 @@ hr.line {
     background-image:         linear-gradient(left, #fff, #333, #fff);
 }
 
+
+.likebtn {
+    width: 107px;
+    height: 40px;
+    background: #fff url(../img/like-animate.png) no-repeat;
+    background-position: 0 0;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.likebtn .support{
+    width: 45px;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+    border-radius: 50% 0 0 50%;
+}
+.likebtn .num{
+    width: 57px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #B3B3B3;
+    font-size: 16px;
+    position: absolute;
+    right: 4px;
+    cursor: pointer;
+    transition:all .4s ease-in-out;
+}
+.likebtn.focus .num{
+    color: #fcee21;
+}
+.likebtn .num .link {
+    color: #B3B3B3;
+    transition:all .4s ease-in-out;
+}
+.likebtn.focus .num .link {
+    color: #fcee21;
+}
+
+.likebtn.focus {
+    -webkit-animation: likebtnfocus .4s steps(9) forwards;
+    animation: likebtnfocus .4s steps(9) forwards;
+}
+.likebtn.blur {
+    -webkit-animation: likebtnblur .3s steps(5) forwards;
+    animation: likebtnblur .3s steps(5) forwards;
+}
+
+@-webkit-keyframes likebtnfocus {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -963px 0;
+    }
+}
+
+@keyframes likebtnfocus {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -963px 0;
+    }
+}
+
+@-webkit-keyframes likebtnblur {
+    0% {
+        background-position: -963px 0;
+    }
+
+    100% {
+        background-position: -1498px 0;
+    }
+}
+
+@keyframes likebtnblur {
+    0% {
+        background-position: -963px 0;
+    }
+
+    100% {
+        background-position: -1498px 0;
+    }
+}
+
 .article-list {
     margin: 0 auto;
 
@@ -104,7 +181,6 @@ hr.line {
     margin-left: 10px;
     width: 100px;
     height: 40px;
-
     line-height: 40px;
 }
 
@@ -222,11 +298,6 @@ hr.line {
     display: inline-block;
 
     margin-left: 8px;
-}
-
-.article-list .box .bottom .like i,
-.article-list .box .bottom .read i {
-    margin-right: 5px;
 }
 
 .article-list .box .bottom .like i {
