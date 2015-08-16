@@ -1,3 +1,4 @@
+/*! hello 2015-08-15 */
 * {
     margin: 0;
     padding: 0;
@@ -12,6 +13,7 @@ body{
 
 a {
     text-decoration: none;
+    color: #000000;
 }
 
 a.link {
@@ -109,6 +111,8 @@ hr.line {
 .likebtn.focus .num .link {
     color: #fcee21;
 }
+
+
 
 .likebtn.focus {
     -webkit-animation: likebtnfocus .4s steps(9) forwards;
@@ -339,3 +343,56 @@ hr.line {
     width: 300px;
     min-height: 1px;
 }
+
+.article {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    max-width: 700px;
+}
+
+.article .title {
+    text-align: left;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    word-break: break-all;
+    font-size: 32px;
+    font-weight: bold;
+    color: #555;
+}
+
+.article .info {
+    text-align: left;
+    font-size: 14px;
+    color: #bbb;
+}
+
+.article .detail {
+    margin: 15px 0 40px;
+    text-align: justify;
+    line-height: 1.5;
+    word-break: break-all;
+    color: #2f2f2f;
+}
+
+.article .share  .likebtn {
+    float: left;
+}
+
+.article .share span {
+    font-size: 16px;
+}
+
+@media screen and (max-width: 767px) {
+    .article .share .jiathis_share {
+        display: none;
+    }
+
+    .article .share  .likebtn {
+        float: none;
+        margin: 0 auto;
+    }
+}
+
+
+

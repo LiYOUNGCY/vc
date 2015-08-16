@@ -50,25 +50,25 @@ class Detail extends MY_Controller
         $data['sidebar'] = $this->load->view('common/sidebar', $user, TRUE);
         $data['footer']  = $this->load->view('common/footer', '', TRUE);
         $data['user']    = $this->user;
+        $head['title']   = $article['title'];
+
         //增加浏览数
         $this->article_service->read_article($aid);
         
         $head['css'] = array(
-                'common.css',
-                'paperfold/buddycloud.css',
-                'paperfold/paperfold.css',
-                'flex-style.css',
-                'font-awesome/css/font-awesome.min.css'
-            );
+            'base.css',
+            'paperfold/buddycloud.css',
+            'paperfold/paperfold.css',
+            'font-awesome/css/font-awesome.min.css',
+            'alert.css'
+        );
+
         $head['javascript'] = array(
-                'jquery.js',
-                'vc.js',
-                'paperfold/modernizr.custom.01022.js',
-                'jquery.flexText.min.js',
-                'jquery.qqFace.js',
-                'error.js',
-                'timeago.js'
-            );
+            'jquery.js',
+            'error.js',
+            'timeago.js',
+            'alert.min.js'
+        );
         $this->load->view('common/head', $head);
         $this->load->view('article_detail', $data);
     }
@@ -87,7 +87,12 @@ class Detail extends MY_Controller
     public function vote_article()
     {
     	$aid = $this->sc->input('aid');
-    	$uid = $this->user['id'];
+    	$uid = isset($this->user['id']) ? $this->user['id'] : null;
+
+        if(empty($uid)) {
+            $this->error->output('NOAUTH_ERROR');
+        }
+
     	$this->article_service->vote_article($aid, $uid);
     }
 
