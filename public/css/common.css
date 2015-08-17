@@ -2,7 +2,7 @@
 body{
     width: 100%;
     background: #FFFFFF;
-    font-family:"微软雅黑",tahoma,arial,simhei,"宋体";
+    font-family:"微软雅黑",tahoma,arial,simhei,"宋体",sans-serif;
     overflow-x: hidden;
 }
 ul,ol,li{

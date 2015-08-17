@@ -9,6 +9,8 @@
 		<meta name="format-detection" content="telephone=yes" >
 		<meta name="msapplication-tap-highlight" content="no" >
 
+		<title>Artvc - <?=$title?></title>
+
 		<!-- 导入 Javascript -->
 		<?php
 		foreach ($javascript as $value) {
