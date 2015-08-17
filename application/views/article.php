@@ -1,52 +1,54 @@
 <body>
-
-<div class="container">
-    <div class="article-list" id="article-list">
-        <div class="menu" id="nav">
-            <div class="btn select">全部</div>
-            <div class="btn select">风格</div>
-            <div class="btn select">目的</div>
-            <div class="btn select">价格</div>
-        </div>
-        <!-- <div class="box">
-            <div class="ishadow">
-                <img class="image" src="<?=base_url()?>public/img/load.gif" data-src="img/1 (1).jpg" alt=""/>
-                <div class="shadow"><i class="fa fa-eye"></i></div>
-
-<div class="container" id="vi_container">
-
-    <div class="content">
+<div class="main-wrapper">
+    <?php echo $top;?>
+    <div class="container">
         <div class="article-list" id="article-list">
-            <div class="menu">
+            <div class="menu" id="nav">
                 <div class="btn select">全部</div>
                 <div class="btn select">风格</div>
                 <div class="btn select">目的</div>
                 <div class="btn select">价格</div>
-
             </div>
             <!-- <div class="box">
                 <div class="ishadow">
                     <img class="image" src="<?=base_url()?>public/img/load.gif" data-src="img/1 (1).jpg" alt=""/>
                     <div class="shadow"><i class="fa fa-eye"></i></div>
+
+    <div class="container" id="vi_container">
+
+        <div class="content">
+            <div class="article-list" id="article-list">
+                <div class="menu">
+                    <div class="btn select">全部</div>
+                    <div class="btn select">风格</div>
+                    <div class="btn select">目的</div>
+                    <div class="btn select">价格</div>
+
                 </div>
-                <p class="title">标题：我的世界</p>
-                <p class="content">这是一段介绍因为爱爱爱爱爱爱爱爱啊啊这是
-                    一段介绍因为爱爱爱爱爱爱爱爱啊啊这是一段介绍因为爱爱爱爱爱爱爱爱啊啊
-                    这是一段介绍因为爱爱爱爱爱爱爱爱啊啊dasfdasfdasfdasfdasfda
-                    sfdasfssfffffffffffffdsafdasfdasfdasfdasfdasfdasfdasf
-                </p>
-                <div class="bottom clearfix">
-                    <div class="like">
-                        <i class="fa fa-heart"></i>
-                        <span>199</span>
+                <!-- <div class="box">
+                    <div class="ishadow">
+                        <img class="image" src="<?=base_url()?>public/img/load.gif" data-src="img/1 (1).jpg" alt=""/>
+                        <div class="shadow"><i class="fa fa-eye"></i></div>
                     </div>
-                    <div class="read">
-                        <i class="fa fa-eye"></i>
-                        <span>2000</span>
+                    <p class="title">标题：我的世界</p>
+                    <p class="content">这是一段介绍因为爱爱爱爱爱爱爱爱啊啊这是
+                        一段介绍因为爱爱爱爱爱爱爱爱啊啊这是一段介绍因为爱爱爱爱爱爱爱爱啊啊
+                        这是一段介绍因为爱爱爱爱爱爱爱爱啊啊dasfdasfdasfdasfdasfda
+                        sfdasfssfffffffffffffdsafdasfdasfdasfdasfdasfdasfdasf
+                    </p>
+                    <div class="bottom clearfix">
+                        <div class="like">
+                            <i class="fa fa-heart"></i>
+                            <span>199</span>
+                        </div>
+                        <div class="read">
+                            <i class="fa fa-eye"></i>
+                            <span>2000</span>
+                        </div>
+                        <div class="btn read" onclick="readArticle(id)">阅读详情</div>
                     </div>
-                    <div class="btn read" onclick="readArticle(id)">阅读详情</div>
-                </div>
-            </div> -->
+                </div> -->
+        </div>
     </div>
 </div>
 </body>

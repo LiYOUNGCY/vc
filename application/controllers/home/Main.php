@@ -26,9 +26,9 @@ class Main extends MY_Controller {
         );
 
         $user['user'] = $this->user;
-        $sidebar = $this->load->view('common/sidebar', $user, TRUE);
-
-        $body['sidebar']      = $sidebar;
+        $top = $this->load->view('common/top', $user, TRUE);
+        $data['title']        = "最专业的艺术导购";
+        $body['top']          = $top;
         $body['user']         = $this->user;
 
         $this->load->view('common/head', $data);
