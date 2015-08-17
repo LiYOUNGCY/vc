@@ -1,9 +1,9 @@
-/*! hello 2015-08-15 */
 * {
     margin: 0;
     padding: 0;
 }
-body{
+
+body {
     width: 100%;
     background: #FFFFFF;
     font-size: 16px;
@@ -21,11 +21,11 @@ a.link {
     transition: color 0.1s linear 0s;
 }
 
-a.link:hover{
-    color:#FCEE21;
+a.link:hover {
+    color: #FCEE21;
 }
 
-img{
+img {
     vertical-align: middle;
 }
 
@@ -66,10 +66,9 @@ hr.line {
 
     background: #333;
     background-image: -webkit-linear-gradient(left, #fff, #333, #fff);
-    background-image:    -moz-linear-gradient(left, #fff, #333, #fff);
-    background-image:         linear-gradient(left, #fff, #333, #fff);
+    background-image: -moz-linear-gradient(left, #fff, #333, #fff);
+    background-image: linear-gradient(left, #fff, #333, #fff);
 }
-
 
 .likebtn {
     width: 107px;
@@ -81,7 +80,7 @@ hr.line {
     overflow: hidden;
 }
 
-.likebtn .support{
+.likebtn .support {
     width: 45px;
     height: 40px;
     position: absolute;
@@ -89,7 +88,8 @@ hr.line {
     cursor: pointer;
     border-radius: 50% 0 0 50%;
 }
-.likebtn .num{
+
+.likebtn .num {
     width: 57px;
     height: 40px;
     line-height: 40px;
@@ -99,25 +99,27 @@ hr.line {
     position: absolute;
     right: 4px;
     cursor: pointer;
-    transition:all .4s ease-in-out;
+    transition: all .4s ease-in-out;
 }
-.likebtn.focus .num{
+
+.likebtn.focus .num {
     color: #fcee21;
 }
+
 .likebtn .num .link {
     color: #B3B3B3;
-    transition:all .4s ease-in-out;
+    transition: all .4s ease-in-out;
 }
+
 .likebtn.focus .num .link {
     color: #fcee21;
 }
-
-
 
 .likebtn.focus {
     -webkit-animation: likebtnfocus .4s steps(9) forwards;
     animation: likebtnfocus .4s steps(9) forwards;
 }
+
 .likebtn.blur {
     -webkit-animation: likebtnblur .3s steps(5) forwards;
     animation: likebtnblur .3s steps(5) forwards;
@@ -243,7 +245,6 @@ hr.line {
 
     color: lightyellow;
 }
-
 
 .article-list .box .title {
     box-sizing: border-box;
@@ -375,7 +376,7 @@ hr.line {
     color: #2f2f2f;
 }
 
-.article .share  .likebtn {
+.article .share .likebtn {
     float: left;
 }
 
@@ -388,11 +389,183 @@ hr.line {
         display: none;
     }
 
-    .article .share  .likebtn {
+    .article .share .likebtn {
         float: none;
         margin: 0 auto;
     }
 }
 
+.avatar {
+    border-radius: 3px;
+    width: 50px;
+    height: 50px;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.article .stream {
+    width: 100%;
+    margin: 15px 0 20px;
+    text-align: left;
+    font-size: 13px;
+    border-left: 1px solid rgba(0, 0, 0, 0.13);
+    border-right: 1px solid rgba(0, 0, 0, 0.13);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+
+}
+
+.article .stream .avatar {
+    position: absolute;
+    top: 13px;
+    left: 14px;
+
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+}
+
+.article .stream .time {
+    float: right;
+    color: rgba(0, 0, 0, 0.34);
+    font-size: 12px;
+}
+
+.article .stream .sub_comment,
+.article .stream .comment {
+    position: relative;
+}
+
+.article .stream .comment {
+    border-top: 1px solid rgba(0, 0, 0, 0.13);
+    padding: 13px 13px 13px 76px;
+    min-height: 50px;
+}
+
+.article .stream .comment .avatar {
+    position: absolute;
+    top: 13px;
+    left: 14px;
+
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+}
+
+.article .stream .sub_comment {
+    padding: 5px 13px 5px 90px;
+    min-height: 40px;
+}
+
+.article .stream .sub_comment .avatar{
+    position: absolute;
+    top: 5px;
+    left: 35px;
+
+    width: 40px;
+    height: 40px;
+
+    background-repeat: no-repeat;
+    background-size: 40px 40px;
+}
+
+.article .stream .name {
+    /*font-size: 12px;*/
+    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    color: black;
+}
+
+.article .stream .name + .location {
+    margin-left: 5px;
+    font-size: 11px;
+    line-height: 19px;
+    color: rgba(0, 0, 0, 0.34);
+}
 
 
+.stream .options {
+    width: 100%;
+    margin-top: 4px;
+}
+
+.stream .options div {
+    display: inline-block;
+    font-size: 14px;
+    color: #555555;
+}
+
+
+.stream .options .reply {
+    cursor: pointer;
+}
+
+.stream .options .reply:hover {
+    color: #FCEE21;
+}
+
+.stream .ft-comment {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.stream .ft-comment textarea {
+    width: 60%;
+    float: right;
+}
+
+.stream .ft-comment .write,
+.stream .ft-comment .cancel {
+    margin: 10px 0px;
+    line-height: 30px;
+    height: 30px;
+    float: right;
+    width: 75px;
+    border-radius: 5px;
+}
+
+.stream .ft-comment .cancel {
+    margin-right: 10px;
+}
+
+.stream .answer {
+    border-top: 1px solid rgba(0, 0, 0, 0.13);
+    width: 100%;
+    padding: 15px 10px 15px 0;
+    box-sizing: border-box;
+}
+
+.stream .answer textarea {
+    width: 60%;
+    float: right;
+    display: block;
+}
+
+.stream .answer .btn.send {
+    float: right;
+    width: 60px;
+    height: 28px;
+    line-height: 28px;
+    margin-left: 20px;
+}
+
+textarea {
+    padding: 4px 5px;
+    line-height: 20px;
+    min-height: 20px;
+    max-height: 140px;
+    font-size: 14px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, .3);
+
+    color: #808080;
+    resize: none;
+
+    transition: border .2s ease;
+}
+
+textarea:focus {
+    border: 1px solid #fcee21;
+}

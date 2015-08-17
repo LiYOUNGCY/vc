@@ -44,126 +44,70 @@
                 </div> <!-- JiaThis Button END -->
             </div>
 
-                <div class="buddycloud">
-                    <div class="stream">
-                        <article class="topic">
-                            <section class="opener">
-                                <div class="avatar user2"></div>
-                                <div class="postmeta">
-                                    <span class="time"></span>
-                                </div>
-                                <span class="name">Vera</span><span class="location">from Campus Library</span>
-                                <p>Pretend. You pretend the feelings are there, for the world, for the people around you.</p>
-                                <div class="options clearfix">
-                                    <div class="time">刚刚</div>
-                                    <div class="reply">评论</div>
-                                </div>
-                                <div class="ft-comment clearfix" style="display: none;">
-                                    <div class="clearfix">
-                                        <textarea placeholder="post a comment..." style="float: right"></textarea>
+            <!-- 评论部分 -->
+            <div class="stream">
+                <?php
+                    function find_subcomment($comment, $i) {
+                        $len = count($comment);
+
+                        for($j = 0; $j < $len; $j ++) {
+                            if($comment[$j]['pid'] == $comment[$i]['id']) {
+                                ?>
+                                <div class="sub_comment" data-id="<?=$comment[$j]['id']?>">
+                                    <div class="avatar"><img src="<?=$comment[$j]['user']['pic']?>"></div>
+                                    <div class="time"><?=$comment[$j]['publish_time']?></div>
+                                    <span class="name"><?=$comment[$j]['user']['name']?></span>
+                                    <span class="location">回复了<?=$comment[$i]['user']['name']?></span>
+                                    <p><?=$comment[$j]['content']?></p>
+                                    <div class="options clearfix">
+                                        <div class="reply">回复</div>
                                     </div>
-                                    <div class="btn write">评论</div>
-                                    <div class="btn cancel">取消</div>
-                                </div>
-                            </section>
-                            <div class="hidden">
-                                <section class="comment">
-                                    <div class="avatar user6"></div>
-                                    <div class="postmeta">
-                                        <span class="time">3 days</span>
+                                    <div class="ft-comment clearfix" style="display: none;">
+                                        <div class="clearfix">
+                                            <textarea placeholder="post a comment..." style="float: right"></textarea>
+                                        </div>
+                                        <div class="btn write">回复</div>
+                                        <div class="btn cancel">取消</div>
                                     </div>
-                                    <span class="name">Mona</span><span class="location">from Cafe Extra</span>
-                                    <p>Who knows? Maybe one day they will be. I like seafood.</p>
-                                </section>
-                                <section class="comment">
-                                    <div class="avatar user7"></div>
-                                    <div class="postmeta">
-                                        <span class="time">3 days</span>
-                                    </div>
-                                    <span class="name">Verena</span><span class="location">from Home</span>
-                                    <p>Finding a needle in a haystack isn't hard when every straw is computerized. I'm really more an apartment person.</p>
-                                </section>
-                                <section class="comment">
-                                    <div class="avatar user12"></div>
-                                    <div class="postmeta">
-                                        <span class="time">3 days</span>
-                                    </div>
-                                    <span class="name">Sebastian</span><span class="location">from Passau</span>
-                                    <p>I feel like a jigsaw puzzle missing a piece. And I'm not even sure what the picture should be.</p>
-                                </section>
-                                <section class="comment">
-                                    <div class="avatar user3"></div>
-                                    <div class="postmeta">
-                                        <span class="time">3 days</span>
-                                    </div>
-                                    <span class="name">Tom</span><span class="location">from Island</span>
-                                    <p>Who knows? Maybe one day they will be. I like seafood.</p>
-                                </section>
-                                <section class="comment">
-                                    <div class="avatar user2"></div>
-                                    <div class="postmeta">
-                                        <span class="time">3 days</span>
-                                    </div>
-                                    <span class="name">Vera</span><span class="location">from Munich</span>
-                                    <p>Finding a needle in a haystack isn't hard when every straw is computerized. I'm really more an apartment person.</p>
-                                </section>
-                            </div><!-- /hidden -->
-                            <section class="seeMore">
-                                <span>See <span>5</span> More Posts</span>
-                            </section>
-                            <section class="comment">
-                                <div class="avatar user5"></div>
-                                <div class="postmeta">
-                                    <span class="time">3 days</span>
                                 </div>
-                                <span class="name">Gero</span><span class="location">from Regensburg</span>
-                                <p>I feel like a jigsaw puzzle missing a piece. And I'm not even sure what the picture should be.</p>
-                            </section>
-                            <section class="comment">
-                                <div class="avatar user11"></div>
-                                <div class="postmeta">
-                                    <span class="time">3 days</span>
+                                <?php
+                                find_subcomment($comment, $j);
+                                return ;
+                            }
+                        }
+                    }
+                    $len = count($comment);
+                    for($i = 0; $i < $len; $i ++) if($comment[$i]['pid'] == 0) { ?>
+                        <div class="comment" data-id="<?=$comment[$i]['id']?>">
+                            <div class="avatar"><img src="<?=$comment[$i]['user']['pic']?>"></div>
+                            <div class="time"><?=$comment[$i]['publish_time']?></div>
+                            <span class="name"><?=$comment[$i]['user']['name']?></span>
+                            <span class="location">评论了该文章</span>
+                            <p><?=$comment[$i]['content']?></p>
+                            <div class="options clearfix">
+                                <div class="reply">回复</div>
+                            </div>
+                            <div class="ft-comment clearfix" style="display: none;">
+                                <div class="clearfix">
+                                    <textarea placeholder="post a comment..."></textarea>
                                 </div>
-                                <span class="name">Betty</span><span class="location">from Deggendorf</span>
-                                <p>I'm going to tell you something that I've never told anyone before.</p>
-                            </section>
-                            <section class="answer">
-                                <div class="avatar user1"></div>
-                                <textarea placeholder="post a comment..."></textarea>
-                                <div class="controls">
-                                    <div class="button small prominent">Post</div>
-                                </div>
-                            </section>
-                        </article>
-                        <article class="topic">
-                            <section class="opener">
-                                <div class="avatar user2"></div>
-                                <div class="postmeta">
-                                    <span class="time" title="5:06pm 06.06.2011">5 days</span>
-                                </div>
-                                <span class="name">Vera</span><span class="location">from Home</span>
-                                <p>
-                                    Night time - sympathize - I've been working on white lies.
-                                    So I'll tell the truth - I'll give it up to you.
-                                    And when the day come, it will have all been fun. We'll talk about it soon.
-                                </p>
-                            </section>
-                            <section class="answer">
-                                <div class="avatar user1"></div>
-                                <textarea placeholder="post a comment..."></textarea>
-                                <div class="controls">
-                                    <div class="button small prominent">Post</div>
-                                </div>
-                            </section>
-                        </article>
-                    </div>
+                                <div class="btn write">回复</div>
+                                <div class="btn cancel">取消</div>
+                            </div>
+                        </div>
+                <?php
+                        find_subcomment($comment, $i);
+                    } ?>
+                <div class="answer clearfix">
+                    <div class="btn send" id="wcomment">评论</div>
+                    <textarea name="" id="" tabindex="0" rows='1' placeholder="写下你的评论"></textarea>
                 </div>
+            </div>
+            <!-- END 评论部分 -->
             </div>
         </div>
     </div>
 </body>
-<script src="<?=base_url()?>public/js/paperfold/modernizr.custom.01022.js"></script>
-<script src="<?=base_url()?>public/js/paperfold/paperfold.js"></script>
 <script>
     $(function(){
         var aid = $('#aid').val();
@@ -229,6 +173,64 @@
             self.slideUp(200, function(){
                 self.prev().fadeIn(100);
             });
+        });
+
+        //发评论
+        $('#wcomment').click(function(){
+            var str = $(this).next().val();
+            var pid = 0;
+
+            send_comment(str, pid);
+        });
+
+        $('.write').click(function(){
+            var str = $(this).prev().children('textarea').val();
+            var pid = $(this).parent().parent().attr('data-id');
+            console.log(str + " " + pid);
+
+            send_comment(str, pid);
+        });
+
+        //发送评论的ajax
+        function send_comment(str, pid) {
+            $.ajax({
+                type: 'post',
+                url: COMMENT_URL,
+                data: {
+                    aid: aid,
+                    comment: str,
+                    parent_id: pid
+                },
+                dataType: 'json',
+                success:function(data) {
+//                    alert(data);
+                    console.log(data);
+                    if(data.success == 0) {
+                        //成功的操作
+                    }
+                    else if(data.error != null)
+                    {
+                        swal({
+                                title: "请登录后再进行操作",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "注册/登录",
+                                closeOnConfirm: false
+                            },
+                            function(){
+                                window.location.href = LOGIN_URL;
+                            });
+                        return false;
+                    }
+                }
+            });
+        }
+
+        autosize($('textarea'));
+        var ta = document.querySelector('textarea');
+        ta.addEventListener('focus', function(){
+            autosize(ta);
         });
     });
 </script>

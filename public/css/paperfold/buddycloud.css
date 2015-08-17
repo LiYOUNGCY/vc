@@ -411,7 +411,7 @@ button.checkbox {
 
 .buddycloud .stream .ft-comment .write,
 .buddycloud .stream .ft-comment .cancel{
-    margin: 10px 0px;
+    margin: 10px 0;
     line-height: 30px;
     height: 30px;
     float: right;

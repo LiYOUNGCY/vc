@@ -57,8 +57,6 @@ class Detail extends MY_Controller
         
         $head['css'] = array(
             'base.css',
-            'paperfold/buddycloud.css',
-            'paperfold/paperfold.css',
             'font-awesome/css/font-awesome.min.css',
             'alert.css'
         );
@@ -67,7 +65,8 @@ class Detail extends MY_Controller
             'jquery.js',
             'error.js',
             'timeago.js',
-            'alert.min.js'
+            'alert.min.js',
+            'autosize.js'
         );
         $this->load->view('common/head', $head);
         $this->load->view('article_detail', $data);
@@ -104,8 +103,14 @@ class Detail extends MY_Controller
     {
         $aid = $this->sc->input('aid');
         $pid = $this->sc->input('parent_id');
-        $uid = $this->user['id'];
         $comment = $this->sc->input('comment');
+        $uid = isset($this->user['id']) ? $this->user['id'] : null;
+
+        if( empty($uid) ) {
+            $this->error->output('NOAUTH_ERROR');
+//            echo 'dasfadsfdasf';
+        }
+
         $this->article_service->write_comment($aid, $uid, $pid, $comment);
     }
 
