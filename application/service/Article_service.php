@@ -54,7 +54,7 @@ class Article_service extends MY_Service{
         {        
                          
             //对每篇文章内容进行字数截取
-            $article[$key]['content'] = $this->_extract_article($article[$key]['id'], $article[$key]['title'], $article[$key]['content']);
+            $article[$key]['content'] = Common::extract_article($article[$key]['id'], $article[$key]['title'], $article[$key]['content']);
             
             //对文章标题字数截取
             $article[$key]['content']["sort_title"] = mb_strlen($article[$key]['content']["article_title"]) > 9 ? mb_substr($article[$key]['content']["article_title"], 0, 9).'..' : $article[$key]['content']["article_title"];
@@ -235,21 +235,6 @@ class Article_service extends MY_Service{
         return $users;
     }
     
-    
-    /**
-     * 将文章的信息转换为动态表的格式
-     */
-    private function _extract_article($article_id, $article_title, $article_content)
-    {
-        $content = array(
-            'article_id'        => $article_id,
-            'article_title'     => $article_title,
-            'article_content'   => Common::extract_content($article_content),
-            'article_image'     => Common::extract_first_img($article_content)
-        );
-        return $content;
-    }
-
     /**
      * [update_article 更新文章]
      * @param  [type] $aid [文章id]

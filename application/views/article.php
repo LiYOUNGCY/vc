@@ -1,5 +1,18 @@
 <body>
 
+<div class="container">
+    <div class="article-list" id="article-list">
+        <div class="menu" id="nav">
+            <div class="btn select">全部</div>
+            <div class="btn select">风格</div>
+            <div class="btn select">目的</div>
+            <div class="btn select">价格</div>
+        </div>
+        <!-- <div class="box">
+            <div class="ishadow">
+                <img class="image" src="<?=base_url()?>public/img/load.gif" data-src="img/1 (1).jpg" alt=""/>
+                <div class="shadow"><i class="fa fa-eye"></i></div>
+
 <div class="container" id="vi_container">
 
     <div class="content">
@@ -9,6 +22,7 @@
                 <div class="btn select">风格</div>
                 <div class="btn select">目的</div>
                 <div class="btn select">价格</div>
+
             </div>
             <!-- <div class="box">
                 <div class="ishadow">
@@ -33,11 +47,11 @@
                     <div class="btn read" onclick="readArticle(id)">阅读详情</div>
                 </div>
             </div> -->
-        </div>
     </div>
 </div>
 </body>
 <script>
+
 function readArticle(id) {
     window.location.href = BASE_URL + 'article/' + id;
 }
@@ -54,7 +68,7 @@ function readArticle(id) {
             stamp: '.menu',
             itemSelector: '.box',
             columnWidth: 300,
-            gutter: 8,
+            gutter: 30,
             isFitWidth: true,
             isAnimate: true
         });
