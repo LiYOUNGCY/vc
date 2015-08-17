@@ -41,7 +41,8 @@ class Main extends MY_Controller {
             'jquery.js',
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
-            'jquery.scrollLoading.js'
+            'jquery.scrollLoading.js',
+            'jquery.pageslide.min.js'
         );
 
         $user['user'] = $this->user;

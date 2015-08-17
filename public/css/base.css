@@ -72,7 +72,7 @@ img{
 }
 .icon.logo-w{
     width: 61px;
-    height: 71px;
+    height: 35px;
     background: transparent url("../img/icon/logo_writh.png") no-repeat scroll;
     display: inline-block;
 }
@@ -82,7 +82,12 @@ img{
     background: transparent url("../img/icon/logo_gray.png") no-repeat scroll;
     display: inline-block;
 }
-
+.icon.toplogo{
+    width: 50px;
+    height: 50px;
+    background: transparent url("../img/icon/toplogo.png") no-repeat scroll;
+    display: inline-block;
+}
 .icon.sidebtn{
     width: 45px;
     height: 45px;
@@ -188,28 +193,46 @@ img{
 
 
 /*SIDEBAR START*/
-.sidebar {
-    height: 100%;
-    background-color: #4C4640;
-    width: 260px;
+.sbtn {
+    width: 45px;
     position: fixed;
-    right: -260px;
+    right: 0;
+    top:0;
+    outline: 0px none;
+    cursor: pointer;
+    z-index: 999;
+}
+.sbtn .dot{
+    width: 10px;
+    height: 10px;
+    border-radius:100%;
+    background: red ;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    display: none;
+}
+#pageslide {
+    /* These styles MUST be included. Do not change. */
+    display: none;
+    position: absolute;
+    position: fixed;
     top: 0;
+    height: 100%;
+    z-index: 999999;
+    
+    /* Specify the width of your pageslide here */
+    width: 260px;
+    padding: 20px;
+    
+    /* These styles are optional, and describe how the pageslide will look */
+    background-color: #333;
+    color: #FFF;
+    -webkit-box-shadow: inset 0 0 5px 5px #222;
+    -moz-shadow: inset 0 0 5px 5px #222;
+    box-shadow: inset 0 0 5px 5px #222;
 }
-.sidebar .name{
-    width:100%;
-    margin-top: 50px;
-    clear: both;
-    display: inline-block;
-}
-.sidebar .name .text{
-    font-size: 110%;
-    font-weight: bolder;
-    height: 50px;
-    float: left;
-    display: inline-block;
-    padding: 20px 10px 0;
-}
+
 .sidebar .lop{
     width:100%;
     height:0px;
@@ -230,10 +253,9 @@ img{
 }
 .numtooplit{
     float: right;
-    margin:10px;
-    margin-right: 20px;
+    margin: 4px;
     padding: 0 5px;
-    font-size: 12px;
+    font-size: 10px !important;
     border-radius: 30%;
     background-color: #FCEE21;
     color: #4b463f;
@@ -251,6 +273,7 @@ img{
     right: 0px;
     top: 0;
 }
+
 .sidebar .search {
     width: 80%;
     margin: 0 auto;
@@ -364,6 +387,12 @@ img{
     font-weight:900;
 }
 /*SIDEBAR END*/
+
+.main-wrapper{
+    position: relative;
+    height: 100%;
+    height: 100%;
+}
 
 .container {
     margin: 0 auto;
@@ -502,6 +531,204 @@ hr.line {
     }
 }
 
+/*top start*/
+.main-wrapper .top{
+    width: 100%;
+    height: 45px;
+    background-color: #666;
+    position: relative;
+}
+.main-wrapper .top .wrapper{
+    width: 960px;
+    margin: 0 auto;
+    height: 100%;
+    position: relative;
+}
+.main-wrapper .top .wrapper .logo{
+    float: left;
+    margin-top: 5px;
+}
+.main-wrapper .top .wrapper .topcon{
+    position: absolute;
+    right: 0;
+    width: 90%;
+}
+.main-wrapper .top .wrapper .topcon .nav{
+    display: inline-block;
+    float: left;
+    margin-top:17px; 
+}
+.main-wrapper .top .wrapper .topcon .nav li{
+    float: left;
+    display: block;
+    width: 72px;
+    height: 25px;
+    color: #B3B3B3;
+    text-align: center;
+}
+.main-wrapper .top .wrapper .topcon .nav li:hover{
+    border-bottom: 3px #FCEE21 solid;
+}
+.main-wrapper .top .wrapper .topcon .nav li.active{
+    font-weight: 800;
+    border-bottom: 3px #FCEE21 solid;
+}
+
+.main-wrapper .top .wrapper .topcon .userarea{
+    display: inline-block;
+    float: right;
+    margin-top:17px;
+}
+
+.main-wrapper .top .wrapper .topcon .userarea .useropt{
+    color:#B3B3B3;
+}
+.main-wrapper .top .wrapper .topcon .userarea .useropt .user{
+    margin-right:15px; 
+    position: relative;
+}
+.main-wrapper .top .wrapper .topcon .userarea .useropt .user .dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background: red;
+    position: absolute;
+    top: -2px;
+    right: -6px;
+}
+.main-wrapper .top .wrapper .topcon .userarea .useropt .cart{
+    font-size: 14px;
+}
+.main-wrapper .top .wrapper .topcon .userarea .useropt .cart i{
+    font-size: 16px;
+    margin-right:3px;     
+}
+
+/*top end*/
+
+/*swiper start*/
+.swiper-container {
+    margin-top: 25px;
+    width: 960px;
+    height: 470px;
+    cursor: -webkit-grab;
+}
+.swiper-container:active{
+    cursor:-webkit-grabbing;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #000;
+}
+.swiper-slide img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+/*swiper end*/
+
+/*subject start*/
+.new-subject{
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 40px;
+}
+.new-subject .wrapper{
+    margin: 0 auto;
+    color: #B3B3B3;
+}
+.new-subject .wrapper .title{
+    float: left;
+    font-size: 32px;
+    font-weight: 800;
+}
+.new-subject .wrapper .more{
+    float: right;
+    font-size: 14px;
+    margin-top: 20px;
+}
+.new-subject .list{
+    margin: 0 auto; 
+}
+.new-subject .list .item{
+    margin-top: 30px;
+    width: 300px;
+    height: 384px;
+    background-color: #FFF;
+    position: relative;
+    overflow: hidden;
+    transition:all .2s ease-in-out;
+}
+.new-subject .list .item:hover{
+    box-shadow: 0 0 10px #666;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+
+.new-subject .list .item .sub-image{
+    width: 100%;
+    height: 200px;
+    position: relative;
+}
+.new-subject .list .item .sub-title{
+    width: 100%;
+    margin:10px auto;
+    font-size: 18px;
+    text-align: left;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+.new-subject .list .item .sub-title:before{
+    content: "《 ";
+    font-size: 18px;
+    color: #FCEE21;
+    font-weight: 800;
+}
+.new-subject .list .item .sub-title:after{
+    content: " 》";
+    font-size: 18px;
+    color: #FCEE21;
+    font-weight: 800;
+}
+.new-subject .list .item .sub-content{
+    color: #B3B3B3;
+    text-align: left;
+    margin: 0 3px;
+    font-size: 15px;
+    text-align: justify;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+.new-subject .list .item .sub-info{
+    margin-top: 10px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+.new-subject .list .item .sub-info li{
+    display: inline-block;
+    font-size: 14px;
+    color: #B3B3B3;
+    margin-right: 10px;
+}
+.new-subject .list .item .sub-info .fa{
+    color: #f1e203;
+}
+
+
+/*subject end*/
+
+/*article start*/
 .article-list {
     margin: 0 auto;
 
@@ -540,7 +767,7 @@ hr.line {
 .article-list .box {
     margin-top: 10px;
     box-sizing: border-box;
-    border: 1px solid #666;
+    border: 1px solid #eee;
     width: 302px;
 }
 
@@ -682,3 +909,4 @@ hr.line {
     width: 300px;
     min-height: 1px;
 }
+/*article end*/

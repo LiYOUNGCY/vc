@@ -15,14 +15,14 @@ class Main extends MY_Controller {
     public function index()
     {
         $data['css'] = array(
-            'base.css',
-            'font-awesome/css/font-awesome.min.css'
+            'swiper.min.css',
+            'font-awesome/css/font-awesome.min.css',
+            'base.css'
         );
         $data['javascript'] = array(
             'jquery.js',
             'masonry.pkgd.min.js',
-            'jquery.imageloader.js',
-            'jquery.scrollLoading.js'
+            'jquery.imageloader.js'
         );
 
         $user['user'] = $this->user;

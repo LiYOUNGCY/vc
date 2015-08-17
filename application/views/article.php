@@ -1,9 +1,8 @@
 <body>
 
-
 <div class="container">
     <div class="article-list" id="article-list">
-        <div class="menu">
+        <div class="menu" id="nav">
             <div class="btn select">全部</div>
             <div class="btn select">风格</div>
             <div class="btn select">目的</div>
@@ -48,11 +47,11 @@
                     <div class="btn read" onclick="readArticle(id)">阅读详情</div>
                 </div>
             </div> -->
-        </div>
     </div>
 </div>
 </body>
 <script>
+
 function readArticle(id) {
     window.location.href = BASE_URL + 'article/' + id;
 }
@@ -69,7 +68,7 @@ function readArticle(id) {
             stamp: '.menu',
             itemSelector: '.box',
             columnWidth: 300,
-            gutter: 8,
+            gutter: 30,
             isFitWidth: true,
             isAnimate: true
         });
