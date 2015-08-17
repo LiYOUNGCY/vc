@@ -46,9 +46,10 @@ class Main extends MY_Controller {
         );
 
         $user['user'] = $this->user;
-        $sidebar = $this->load->view('common/sidebar', $user, TRUE);
 
-        $body['sidebar']      = $sidebar;
+        $top = $this->load->view('common/top', $user, TRUE);
+        $data['title']        = "资讯";
+        $body['top']          = $top;
         $body['user']         = $this->user;
         //文章类型与标签
         $body['article_type'] = $type;
