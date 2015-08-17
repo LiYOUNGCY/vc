@@ -6,6 +6,11 @@ class Publish extends MY_Controller{
 		$this->load->service('artist_service');
 	}
 
+	/**
+	 * @param string $type
+	 * @param null $aid
+	 * 添加/修改艺术家的页面
+	 */
 	public function index($type = 'publish', $aid = NULL)
 	{
 		if($type == 'publish')
