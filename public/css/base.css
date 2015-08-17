@@ -4,28 +4,25 @@
 }
 
 body {
-    overflow-x: hidden;
-
     width: 100%;
-    font-family: "Microsoft YaHei", "微软雅黑",tahoma, arial, simhei, "宋体", sans-serif;
+    background: #FFFFFF;
     font-size: 16px;
-    background: #fff;
+    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    overflow-x: hidden;
 }
 
 a {
     text-decoration: none;
-
-    color: #000;
+    color: #000000;
 }
 
 a.link {
-    color: #b3b3b3;
-
-    transition: color .1s linear 0s;
+    color: #B3B3B3;
+    transition: color 0.1s linear 0s;
 }
 
 a.link:hover {
-    color: #fcee21;
+    color: #FCEE21;
 }
 
 img {
@@ -40,13 +37,11 @@ img {
 }
 
 .btn {
+    cursor: pointer;
+    background-color: #eee;
     text-align: center;
 
-    background-color: #eee;
-
-    transition: all .2s ease;
-
-    cursor: pointer;
+    transition: all .2s ease-in-out;
 }
 
 .btn:hover {
@@ -71,49 +66,40 @@ hr.line {
 
     background: #333;
     background-image: -webkit-linear-gradient(left, #fff, #333, #fff);
-    background-image:    -moz-linear-gradient(left, #fff, #333, #fff);
-    background-image:         linear-gradient(left, #fff, #333, #fff);
+    background-image: -moz-linear-gradient(left, #fff, #333, #fff);
+    background-image: linear-gradient(left, #fff, #333, #fff);
 }
 
 .likebtn {
-    overflow: hidden;
-
-    position: relative;
-
     width: 107px;
     height: 40px;
-
     background: #fff url(../img/like-animate.png) no-repeat;
     background-position: 0 0;
+
+    position: relative;
+    overflow: hidden;
 }
 
 .likebtn .support {
-    position: absolute;
-    left: 0;
-
-    border-radius: 50% 0 0 50%;
     width: 45px;
     height: 40px;
-
+    position: absolute;
+    left: 0;
     cursor: pointer;
+    border-radius: 50% 0 0 50%;
 }
 
 .likebtn .num {
-    position: absolute;
-    right: 4px;
-
     width: 57px;
     height: 40px;
-
-    font-size: 16px;
     line-height: 40px;
     text-align: center;
-
-    color: #b3b3b3;
-
-    transition: all .4s ease-in-out;
-
+    color: #B3B3B3;
+    font-size: 16px;
+    position: absolute;
+    right: 4px;
     cursor: pointer;
+    transition: all .4s ease-in-out;
 }
 
 .likebtn.focus .num {
@@ -121,8 +107,7 @@ hr.line {
 }
 
 .likebtn .num .link {
-    color: #b3b3b3;
-
+    color: #B3B3B3;
     transition: all .4s ease-in-out;
 }
 
@@ -132,12 +117,12 @@ hr.line {
 
 .likebtn.focus {
     -webkit-animation: likebtnfocus .4s steps(9) forwards;
-            animation: likebtnfocus .4s steps(9) forwards;
+    animation: likebtnfocus .4s steps(9) forwards;
 }
 
 .likebtn.blur {
     -webkit-animation: likebtnblur .3s steps(5) forwards;
-            animation: likebtnblur .3s steps(5) forwards;
+    animation: likebtnblur .3s steps(5) forwards;
 }
 
 @-webkit-keyframes likebtnfocus {
@@ -202,7 +187,6 @@ hr.line {
     margin-left: 10px;
     width: 100px;
     height: 40px;
-
     line-height: 40px;
 }
 
@@ -244,7 +228,7 @@ hr.line {
 
     opacity: 0;
 
-    transition: all .2s ease;
+    transition: all .2s ease-in-out;
 
     cursor: pointer;
 }
@@ -256,16 +240,14 @@ hr.line {
 }
 
 .article-list .box .ishadow .shadow i {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
     font-size: 128px;
     line-height: 1;
 
     color: lightyellow;
-
     transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
 
 .article-list .box .title {
@@ -331,11 +313,6 @@ hr.line {
     color: brown;
 }
 
-.article-list .box .bottom .like i,
-.article-list .box .bottom .read i{
-    margin-right: 5px;
-}
-
 .article-list .box .bottom .btn.read {
     float: right;
 
@@ -348,7 +325,7 @@ hr.line {
 
     background-color: #eee;
 
-    transition: background-color .2s ease;
+    transition: background-color .2s ease-in-out;
 
     cursor: pointer;
 }
@@ -373,38 +350,33 @@ hr.line {
 }
 
 .article {
-    margin-top: 60px;
-    margin-right: auto;
     margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
     max-width: 700px;
 }
 
 .article .title {
+    text-align: left;
+    line-height: 1.5;
     margin-bottom: 20px;
-
+    word-break: break-all;
     font-size: 32px;
     font-weight: bold;
-    line-height: 1.5;
-    text-align: left;
-    word-break: break-all;
-
     color: #555;
 }
 
 .article .info {
-    font-size: 14px;
     text-align: left;
-
+    font-size: 14px;
     color: #bbb;
 }
 
 .article .detail {
     margin: 15px 0 40px;
-
-    line-height: 1.5;
     text-align: justify;
+    line-height: 1.5;
     word-break: break-all;
-
     color: #2f2f2f;
 }
 
@@ -427,7 +399,6 @@ hr.line {
 
     .article .share .likebtn {
         float: none;
-
         margin: 0 auto;
     }
 }
@@ -444,14 +415,14 @@ hr.line {
 }
 
 .article .stream {
-    margin: 15px 0 20px;
-    border-right: 1px solid rgba(0, 0, 0, .13);
-    border-bottom: 1px solid rgba(0, 0, 0, .13);
-    border-left: 1px solid rgba(0, 0, 0, .13);
     width: 100%;
-
-    font-size: 13px;
+    margin: 15px 0 20px;
     text-align: left;
+    font-size: 13px;
+    border-left: 1px solid rgba(0, 0, 0, 0.13);
+    border-right: 1px solid rgba(0, 0, 0, 0.13);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+
 }
 
 .article .stream .avatar {
@@ -465,10 +436,8 @@ hr.line {
 
 .article .stream .time {
     float: right;
-
+    color: rgba(0, 0, 0, 0.34);
     font-size: 12px;
-
-    color: rgba(0, 0, 0, .34);
 }
 
 .article .stream .sub_comment,
@@ -477,7 +446,7 @@ hr.line {
 }
 
 .article .stream .comment {
-    border-top: 1px solid rgba(0, 0, 0, .13);
+    border-top: 1px solid rgba(0, 0, 0, 0.13);
     padding: 13px 13px 13px 76px;
     min-height: 50px;
 }
@@ -496,7 +465,7 @@ hr.line {
     min-height: 40px;
 }
 
-.article .stream .sub_comment .avatar {
+.article .stream .sub_comment .avatar{
     position: absolute;
     top: 5px;
     left: 35px;
@@ -519,25 +488,21 @@ hr.line {
 
 .article .stream .name + .location {
     margin-left: 5px;
-
     font-size: 11px;
     line-height: 19px;
-
-    color: rgba(0, 0, 0, .34);
+    color: rgba(0, 0, 0, 0.34);
 }
 
 
 .stream .options {
-    margin-top: 4px;
     width: 100%;
+    margin-top: 4px;
 }
 
 .stream .options div {
     display: inline-block;
-
     font-size: 14px;
-
-    color: #555;
+    color: #555555;
 }
 
 
@@ -546,30 +511,27 @@ hr.line {
 }
 
 .stream .options .reply:hover {
-    color: #fcee21;
+    color: #FCEE21;
 }
 
 .stream .ft-comment {
-    margin-top: 10px;
     width: 100%;
+    margin-top: 10px;
 }
 
 .stream .ft-comment textarea {
-    float: right;
-
     width: 60%;
+    float: right;
 }
 
 .stream .ft-comment .write,
 .stream .ft-comment .cancel {
-    float: right;
-
-    margin: 10px 0;
-    border-radius: 5px;
-    width: 75px;
-    height: 30px;
-
+    margin: 10px 0px;
     line-height: 30px;
+    height: 30px;
+    float: right;
+    width: 75px;
+    border-radius: 5px;
 }
 
 .stream .ft-comment .cancel {
@@ -577,44 +539,39 @@ hr.line {
 }
 
 .stream .answer {
-    box-sizing: border-box;
-    border-top: 1px solid rgba(0, 0, 0, .13);
-    padding: 15px 10px 15px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.13);
     width: 100%;
+    padding: 15px 10px 15px 0;
+    box-sizing: border-box;
 }
 
 .stream .answer textarea {
-    display: block;
-    float: right;
-
     width: 60%;
+    float: right;
+    display: block;
 }
 
 .stream .answer .btn.send {
     float: right;
-
-    margin-left: 20px;
     width: 60px;
     height: 28px;
-
     line-height: 28px;
+    margin-left: 20px;
 }
 
 textarea {
-    border: 1px solid rgba(0, 0, 0, .3);
-    border-radius: 3px;
     padding: 4px 5px;
+    line-height: 20px;
     min-height: 20px;
     max-height: 140px;
-
     font-size: 14px;
-    line-height: 20px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, .3);
 
     color: #808080;
-
-    transition: border .2s ease;
-
     resize: none;
+
+    transition: border .2s ease-in-out;
 }
 
 textarea:focus {

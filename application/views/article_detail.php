@@ -21,7 +21,6 @@
                 </div> <!-- JiaThis Button END -->
             </div>
             <div class="detail"><?=$article['content']?></div>
-            <hr class="line"/>
             <div class="share clearfix">
                 <div class="likebtn" id="vote">
                     <div class="support" id="mark-like"></div>
