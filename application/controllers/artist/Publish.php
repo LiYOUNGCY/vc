@@ -36,9 +36,9 @@ class Publish extends MY_Controller{
 
 		if($type == 'publish')
 		{
-			$head['title'] = '艺术家';
+			$head['title'] = '添加艺术家';
 			$this->load->view('common/head', $head);
-			$this->load->view('add_artist', $data);
+			$this->load->view('publish_artist', $data);
 		}
 		else if($type == 'update')
 		{

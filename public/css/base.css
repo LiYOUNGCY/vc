@@ -992,7 +992,7 @@ hr.line {
 }
 
 .artist-list {
-    margin: 0 auto;
+    margin: 30px auto;
 }
 
 .artist-list .artist {
@@ -1000,6 +1000,13 @@ hr.line {
     padding: 0 15px;
     width: 300px;
     min-height: 1px;
+}
+
+.artist-list .artist .mc-footer .read {
+    width: 180px;
+    margin: 0 auto;
+    height: 50px;
+    line-height: 50px;
 }
 
 .article {
