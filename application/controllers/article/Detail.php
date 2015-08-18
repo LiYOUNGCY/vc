@@ -72,14 +72,14 @@ class Detail extends MY_Controller
         $this->load->view('common/head', $head);
         $this->load->view('article_detail', $data);
     }
-
+    /*
     public function get_vote_list()
     {
         $aid = $this->sc->input('aid');
         $data = $this->article_service->get_vote_person_by_aid($aid);
         echo json_encode($data);
     }
-    
+    */
     /**
      * [vote_article 文章点赞]
      * @return [type] [description]

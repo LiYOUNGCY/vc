@@ -183,25 +183,7 @@ class User_model extends CI_Model
 
       return ! empty($query) ? $query[0] : NULL;
     }
-
-    /**
-     * [get_user_by_alias 通过别名获取用户信息]
-     * @param  [type] $alias  [别名]
-     * @param  string $custom [自定义查询条件]
-     * @return [type]         [description]
-     */
-    public function get_user_by_alias($alias,$custom =''){
-      if( ! empty($custom))
-      {
-        $this->db->select($custom);
-      }
-      $query = $this->db->where('alias', $alias)->get('user')->row_array();
-
-      //删除敏感信息
-      unset($query['pwd']);
-
-      return ! empty($query) ? $query : NULL;        
-    }
+    
     /**
      * [_update_user_online_by_id 登陆时，更新用户的登陆时间和 ip ]
      */

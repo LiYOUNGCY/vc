@@ -49,7 +49,7 @@ class Main extends MY_Controller {
 
         $body['sidebar']      = $sidebar;
         $body['user']         = $this->user;
-        //文章类型与标签
+        //文章类型
         $body['article_type'] = $type;
         $this->load->view('common/head', $data);
         $this->load->view('article', $body);

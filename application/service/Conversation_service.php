@@ -5,6 +5,7 @@ class Conversation_service extends MY_Service{
 		parent::__construct();
 		$this->load->model('conversation_model');
 		$this->load->model('conversation_content_model');
+		$this->load->model('conversation_custom_model');
 		$this->load->model('notification_model');
 		$this->load->model('user_model');
 	}
@@ -113,6 +114,8 @@ class Conversation_service extends MY_Service{
 			echo json_encode(array('success' => 0));
 			//添加私信消息（异步）
 			$this->insert_conversation_notification($sender_id,$reciver_id,$content,$cid);
+			
+			$this->insert_conversation_notification($reciver_id,$sender_id,$content,$cid,1);
             //推送
             $this->load->library('push');
             $this->push->push_to_topic($reciver_id,"");                    
@@ -132,7 +135,7 @@ class Conversation_service extends MY_Service{
 	 * @param  [type] $cid        [description]
 	 * @return [type]             [description]
 	 */
-	public function insert_conversation_notification($sender_id, $reciver_id, $content, $cid)
+	public function insert_conversation_notification($sender_id, $reciver_id, $content, $cid, $read_flag = 0)
 	{
 		$check_result = $this->notification_model->check_conversation_notification($sender_id,$reciver_id);
 
@@ -145,7 +148,7 @@ class Conversation_service extends MY_Service{
 				'count' 			   => 1,
 				'publish_time' 		   => date('Y-m-d H-m-s')				
 			);
-			$this->notification_model->insert($sender_id,$reciver_id,1,json_encode($arr));			
+			$this->notification_model->insert($sender_id,$reciver_id,1,json_encode($arr),$read_flag);			
 		}
 		else
 		{
@@ -160,13 +163,55 @@ class Conversation_service extends MY_Service{
 
 			$arr = array(
 				'content'      => json_encode(array('conversation_id' => $cid,'conversation_content' => Common::extract_content($content),'count' => $count)),
-				'read_flag'	   => 0,
+				'read_flag'	   => $read_flag,
 				'publish_time' => date('Y-m-d H-m-s')
 			);
 			$nid = $check_result['id'];
 			$this->notification_model->update_notification($nid,$arr);			
 		}
 	}
+ 	
 
-	
-}
+ 	/**
+ 	 * [get_custom_service_list 获取客服列表]
+ 	 * @return [type] [description]
+ 	 */
+	public function get_custom_service_list()
+	{
+		$custom = $this->conversation_custom_model->get_conversation_custom_list();
+		foreach ($custom as $k => $v) {
+			$user = $this->user_model->get_user_base_id($v['uid']);
+			if( ! empty($user))
+			{
+				$custom[$k]['info'] = $user;		
+				unset($custom['id']);			
+				unset($custom[$k]['info']['id']);
+			}
+		}
+		return $custom;
+	}
+
+	/**
+	 * [get_latest_list 获取最近消息]
+	 * @param  [type] $page [description]
+	 * @param  [type] $uid  [description]
+	 * @return [type]       [description]
+	 */
+	public function get_latest_list($page,$uid)
+	{
+		$notification = $this->notification_model->get_notification_list($page,$uid,1);		
+		foreach ($notification as $k => $v) {
+			//获取对方的信息
+			$he = $notification[$k]['sender_id'] == $uid ? $notification[$k]['reciver_id'] : $uid;
+			$user = $this->user_model->get_user_base_id($he);
+			if( ! empty($user))
+			{
+				$notification[$k]['user'] = $user;
+				unset($notification[$k]['reciver_id']);
+				unset($notification[$k]['sender_id']);
+				unset($notification[$k]['type']);
+			}
+		}		
+		return $notification;
+	}
+}	

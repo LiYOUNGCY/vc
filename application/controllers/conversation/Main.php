@@ -29,6 +29,7 @@ class Main extends MY_Controller{
 		$this->load->view('common/head', $data);
 		$this->load->view('conversation',$body);
 	}
+	
 	/**
 	 * [get_conversation_content 获取对话内容]
 	 * @param  [type] $cid [对话id]

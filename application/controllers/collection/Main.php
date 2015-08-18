@@ -8,8 +8,8 @@ class Main extends MY_Controller{
 	
 	public function index($type = 'article')
 	{
-
-	}
+		
+	}	
 
 	/**
 	 * [get_article_collection_list 获取文章收藏列表]
