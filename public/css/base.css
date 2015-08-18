@@ -1336,7 +1336,7 @@ textarea:focus {
 }
 
 
-input[type="text"] {
+.item input[type="text"] {
     font-size: 16px;
     padding: 5px 5px;
 
@@ -1344,7 +1344,7 @@ input[type="text"] {
     transition: border-color .2s ease-in-out;
 }
 
-input[type="text"]:hover,
-input[type="text"]:focus {
+.item input[type="text"]:hover,
+.item input[type="text"]:focus {
     border: 1px solid #fcee21;
 }
