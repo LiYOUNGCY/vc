@@ -36,7 +36,7 @@ class Article_comment_model extends CI_Model
                         ->row_array();
     }   
 
-    public function get_comment_by_aid($aid,$order = 'id DESC')
+    public function get_comment_by_aid($aid,$order = 'publish_time DESC')
     {
         return $this->db->where('aid', $aid)
                         ->order_by($order)

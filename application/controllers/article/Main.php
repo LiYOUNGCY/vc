@@ -41,13 +41,15 @@ class Main extends MY_Controller {
             'jquery.js',
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
-            'jquery.scrollLoading.js'
+            'jquery.scrollLoading.js',
+            'jquery.pageslide.min.js'
         );
 
         $user['user'] = $this->user;
-        $sidebar = $this->load->view('common/sidebar', $user, TRUE);
 
-        $body['sidebar']      = $sidebar;
+        $top = $this->load->view('common/top', $user, TRUE);
+        $data['title']        = "资讯";
+        $body['top']          = $top;
         $body['user']         = $this->user;
         //文章类型与标签
         $body['article_type'] = $type;

@@ -20,7 +20,17 @@ class Production_service extends MY_Service{
 		$production = $this->production_model->get_production_list($page,$uid);
 		foreach ($production as $k => $v) {	
 			//显示缩略图
+
 			$production[$k]['pic'] = Common::get_thumb_url($production[$k]['pic']);
+
+			$arr   = explode('/',$production[$k]['pic']);
+			if( ! empty($arr))
+			{
+				$arr[count($arr)-1] = "thumb1_".$arr[count($arr)-1];
+				$production[$k]['pic'] = implode('/', $arr);				
+			}
+
+
 			//获取艺术家信息
 			if( ! empty($v['aid']))
 			{
