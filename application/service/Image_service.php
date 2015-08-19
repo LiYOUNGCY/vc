@@ -20,21 +20,27 @@ class Image_service extends MY_Service{
 						));
 
 		$up_result = $this->um_upload->upFile();
-
 		//上传到本服务器成功
 		if($up_result)
 		{
 			$osspath = $this->um_upload->getFileInfo();
 
 			$osspath = !empty($osspath['url']) ? $osspath['url'] : NULL;
-
+			$arr = getimagesize($osspath);
+			$min_width = 300;
+			$min_height = 230;
+			if( ! empty($arr))
+			{
+				$min_height = $arr[1] * ($min_width/$arr[0]);
+				$min_height = $min_height > 230 ? $min_height : 230;			
+			}
 			/**
 			 * [生成缩略图]
 			 * $tofile [缩略图本地保存路径]
 			 * $osspath[原图本地保存路径]
 			 */
-			$toFile = Common::get_thumb_url($pic_path,'thumb1_');
-			$thumb_result = $this->cimage->img2thumb($osspath,$toFile,300,230,1);
+			$toFile = Common::get_thumb_url($osspath,'thumb1_');
+			$thumb_result = $this->cimage->img2thumb($osspath,$toFile,$min_width,$min_height,1);
 
 			//生成缩略图成功
 			if($thumb_result)
@@ -238,12 +244,14 @@ class Image_service extends MY_Service{
 			//判断宽高是否超出限制
 			$src_w 		= $this->upload->data('image_width');
 			$src_h 	    = $this->upload->data('image_height');
+			/*
 			if($src_w < 600)
 			{
 				@unlink("./{$pic_path}");
 				$result['error'] = lang('error_OVER_SIZE');
 				return $result;
 			}
+			*/
 			//最小宽
 			$min_width  = 300;
 			$min_width1 = 600;
@@ -346,7 +354,7 @@ class Image_service extends MY_Service{
 
 			//最小宽
 			$min_width  = 960;
-			$min_width1 = 470;
+			$min_height = 470;
 			//上传成功
 			if($upload_result)
 			{

@@ -161,8 +161,10 @@
 							                            <div class="form-group">
 							                                <span class="col-sm-4 col-xs-3 control-label">轮播图片:</span>
 							                                <div class="col-sm-5 col-xs-8">
-							                                	<input class="form-control" name="pic" type="text" />
-							                                    <input class="form-control" type="file" />
+							                                	<input class="form-control" style="float:left;width:85%;" name="pic" type="text"/>
+							                                	<button type="button" id="check_newpic" style="float:left;" class="btn btn-outline btn-primary">预览</button>
+                                								<input type="file" name="upfile" id="upfile" style="float:left;" onchange="file_upload()">
+                                								
 							                                </div>
 							                            </div>
 							                        </td>
@@ -205,6 +207,7 @@
     <!-- /#page-wrapper -->
 
 <?php echo $foot;?>
+<script src="<?=base_url()?>public/js/ajaxfileupload.js"></script>
 <script type="text/javascript">
 var BASE_URL = $("#BASE_URL").val();
 var ADMIN    = $("#ADMIN").val();
@@ -320,8 +323,52 @@ $(function()
 		$("#add_form").submit();
 	});
 
+	$("#check_newpic").click(function(){
+		var pic = $('input[name=pic]').val();
+		if(pic != null && pic != undefined && pic != "")
+		{
+			$("#bigthum").append('<img width="960px" height="470px" src="'+pic+'" />');
+			$("#bscreen").show();			
+			$("#bigthum").show();			
+		}
+	});
 
 });
+
+function file_upload()
+{
+    var BASE_URL  = $("#BASE_URL").val();
+    var UPLOAD_URL= BASE_URL+'publish/image/upload_slider';
+    $.ajaxFileUpload({
+        url: UPLOAD_URL,
+        fileElementId: 'upfile',
+        dataType: 'JSON',
+        type:'post',
+        success: function (data) {
+            if(data.error != null)
+            {
+				$(".alert-danger").html(data.error);
+				$(".alert-danger").fadeIn(1000,function(){
+					$(this).fadeOut();	
+				});
+            }
+            else
+            {
+				$(".alert-success").html('上传成功');
+				$(".alert-success").fadeIn(1000,function(){
+					$(this).fadeOut();						
+				});
+                var path = data.pic;
+                $('input[name=pic]').attr('value',path);
+            }
+
+        },
+        error: function (data) {
+            alert('error');
+        }
+    });
+}	
+
 </script>
 </body>
 </html>
