@@ -10,7 +10,7 @@ body{
 
     width: 100%;
     background: #FFFFFF;
-    font-family:"微软雅黑",tahoma,arial,simhei,"宋体";
+    font-family:"微软雅黑",tahoma,arial,simhei,"宋体", sans-serif;
     overflow-x: hidden;
 }
 ul,ol,li{
@@ -42,7 +42,7 @@ a:visited{
     color: #B3B3B3;
 }
 input,textarea{
-    font-family: "微软雅黑",tahoma,arial,simhei,"宋体";
+    font-family: "微软雅黑",tahoma,arial,simhei,"宋体", sans-serif;
     outline: none;
 }
 img{
@@ -1240,68 +1240,145 @@ textarea:focus {
 /*article end*/
 
 /* add artist */
-.container .content.artist {
+.container .content.edit {
     text-align: left;
 }
 
-.artist .list {
+.edit .list {
     margin-top: 50px;
 }
 
-.artist .list .item {
+.edit .list .item {
     margin-top: 20px;
     width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.artist .list .item label {
+ .list .item label {
     display: block;
     text-align: left;
     margin-bottom: 5px;
 }
 
-.artist .list .item input[type="text"] {
+ .list .item input[type="text"] {
     margin: 0 auto;
     width: 586px;
     height: 30px;
     line-height: 30px;
 }
+.list .item.size label {
+    margin-left: 10px;
+    display: inline-block;
+}
 
-.artist .list .item .text {
+ .list .item.size input[type="text"] {
+     width: 100px;
+     display: inline-block;
+ }
+
+ .container .content.edit {
+     width: 600px;
+     margin-left: auto;
+     margin-right: auto;
+ }
+
+.edit .list .item .text {
     width: 100%;
     height: 100%;
     display: block;
 }
 
-.artist .list .item textarea {
+.edit .list .item textarea {
     width: 586px;
     min-height: 30px;
     line-height: 30px;
 }
 
-.artist .list .options {
+.edit .list .options {
     margin: 20px auto;
     line-height: 40px;
     height: 40px;
-    width: 400px;
+    text-align: center;
 }
 
-.artist .list .options .btn {
+.edit .list .options .btn {
     margin-left: 10px;
     width: 180px;
     height: 100%;
     display: inline-block;
 }
 
-.artist .list .headpic {
+.edit .list .headpic {
     width: 100%;
     height: 400px;
 }
 
-.artist .list .headpic .box {
+.edit .list .headpic .box {
     width: 100%;
     height: 100%;
+}
+
+
+.edit .list .item i {
+    padding: 5px;
+    font-size: 64px;
+    border: 1px dashed #555;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+    color: #888888;
+}
+.edit .list i:hover {
+    color: #666666;
+}
+
+.edit .list .item h3 {
+    text-align: center;
+}
+.edit .list .item .image {
+    width: 600px;
+    margin-top: 20px;
+}
+.edit .list .item img {
+    width: 100%;
+}
+
+.edit .list .item .production {
+    padding: 20px 0;
+}
+
+.edit .list .item .production .group {
+    float: right;
+}
+
+.edit .list .item .production .group i{
+    font-size: 16px;
+    padding: 2px;
+    border: none;
+    color: #888888;
+    transition: color .2s ease-in-out;
+}
+
+.edit .list .item .production .group i:hover {
+    color: #666666;
+}
+
+.edit .production_list {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.4);
+}
+
+.edit .production_list .list{
+    width: 800px;
+    margin: 50px auto;
+    height: 100px;
+    background-color: #ffffff;
+    padding: 10px;
 }
 
 .headpic .box .camera_warp {

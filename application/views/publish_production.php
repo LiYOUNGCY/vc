@@ -3,7 +3,7 @@
     <!-- 顶部 -->
     <?php echo $top;?>
     <div class="container">
-        <div class="content artist">
+        <div class="content edit">
             <form class="list" method="post" action="<?=base_url()?>artist/publish/publish_artist">
                 <div class="item">
                     <label>艺术品的展示图：</label>
@@ -42,16 +42,15 @@
                     <label for="">材质：</label>
                     <input type="text">
                 </div>
-                <div class="item">
+                <div class="item size">
                     <label for="">长：</label><input type="text">
                     <label for="">宽：</label><input type="text">
                     <label for="">高：</label><input type="text">
+                    CM（厘米）
                 </div>
                 <div class="item">
                     <label for="evaluation">创作日期：</label>
-                    <div class="text">
-                        <textarea id="evaluation" name="evaluation" rows="5"></textarea>
-                    </div>
+                    <input type="text">
                 </div>
                 <div class="options">
                     <div class="btn cancel" onclick="">取消</div>
