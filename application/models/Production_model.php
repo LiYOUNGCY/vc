@@ -47,20 +47,34 @@ class Production_model extends CI_Model{
 
 	/**
 	 * [insert_production 添加艺术品]
-	 * @param  [type] $name  [名称]
-	 * @param  [type] $uid   [用户id]
-	 * @param  [type] $aid   [艺术家id]
-	 * @param  [type] $price [价格]
-	 * @param  [type] $pic   [图片]
-	 * @return [type]        [description]
+	 * @param  [type] $name       [description]
+	 * @param  [type] $uid        [description]
+	 * @param  [type] $intro      [description]
+	 * @param  [type] $aid        [description]
+	 * @param  [type] $price      [description]
+	 * @param  [type] $pic        [description]
+	 * @param  [type] $l          [description]
+	 * @param  [type] $w          [description]
+	 * @param  [type] $h          [description]
+	 * @param  [type] $type       [description]
+	 * @param  [type] $marterial  [description]
+	 * @param  [type] $creat_time [description]
+	 * @return [type]             [description]
 	 */
-	public function insert_production($name, $uid, $aid, $price, $pic)
+	public function insert_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $type, $marterial, $creat_time)
 	{
 		$data = array(
 			'name' 		   => $name,
+			'intro' 	   => $intro,
 			'aid'  		   => $aid,
 			'price'		   => $price,
 			'pic'  		   => $pic,
+			'l' 		   => $l,
+			'w' 		   => $w,
+			'h' 		   => $h,
+			'type' 		   => $type,
+			'marterial'    => $marterial,
+			'creat_time'   => $creat_time, 
 			'publish_time' => date("Y-m-d H:i:s", time()),
 			'creat_by'     => $uid
  		);
