@@ -320,4 +320,82 @@ class Image_service extends MY_Service{
 		}
 		return $result;
 	}
+
+	/**
+	 * [upload_slider 上传轮播图]
+	 * @param  [type] $form_name [description]
+	 * @param  [type] $uid       [description]
+	 * @return [type]            [description]
+	 */
+	public function upload_slider($form_name, $uid)
+	{
+		$config['upload_path'] = './public/slider/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size'] = '5000';
+		$config['remove_spaces']=TRUE;
+		if( isset($_FILES[$form_name]))
+		{
+			$imgname = $this->security->sanitize_filename($_FILES[$form_name]["name"]); //获取上传的文件名称
+			$filetype = pathinfo($imgname, PATHINFO_EXTENSION);//获取后缀
+			$config['file_name']=time()."_{$uid}.".$filetype;
+			//图片新路径
+			$pic_path=substr($config['upload_path'],2).$config['file_name'];
+
+			$this->load->library('upload', $config);
+			$upload_result = $this->upload->do_upload($form_name);
+
+			//最小宽
+			$min_width  = 960;
+			$min_width1 = 470;
+			//上传成功
+			if($upload_result)
+			{
+				/**
+				 * [生成缩略图]
+				 * $tofile [缩略图本地保存路径]
+				 * $osspath[原图本地保存路径]
+				 */
+				$thumb_result = $this->cimage->img2thumb("./{$pic_path}","./{$pic_path}",$min_width,$min_height,1);
+				//生成缩略图成功
+				if($thumb_result)
+				{
+					/**
+					 * [上传缩略图到oss]
+					 * $oss_result [type]
+					 */
+					$oss_result = $this->oss->upload_by_file($pic_path);
+					//设置上传结果
+					$result = $oss_result;
+
+					//上传原图成功
+					if($oss_result)
+					{
+						//设置图片url
+						$result = array();
+						$result['success']  = 0;
+						$result['pic']   = OSS_URL."/{$pic_path}";
+					}
+				
+				}
+				else
+				{
+					$result['error'] = lang('error_INVALID_REQUEST');
+				}
+				//删除原图
+				@unlink("./{$pic_path}");
+			}
+			//上传失败
+			else
+			{
+				$result = array();
+				$result['error'] = $this->upload->display_errors();
+			}
+		}
+		else
+		{
+			$result = array();
+			$result['error'] = lang('error_INVALID_REQUEST');
+		}
+		return $result;		
+	}
 }

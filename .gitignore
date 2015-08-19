@@ -48,3 +48,4 @@ Temporary Items
 .htaccess
 public/upload/*
 public/headpic/*
+public/production/*
