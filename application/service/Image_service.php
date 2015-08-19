@@ -3,14 +3,14 @@ class Image_service extends MY_Service{
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('CImage');	
-		$this->load->library('Oss');			
+		$this->load->library('CImage');
+		$this->load->library('Oss');
 	}
 
 	/**
 	 * [up_um_img UMeditor上传图片]
 	 * @return [type] [description]
-	 */	
+	 */
 	public function up_um_img($fileField, $config)
 	{
 		$result = FALSE;
@@ -52,37 +52,37 @@ class Image_service extends MY_Service{
 					 * [上传原图到oss]
 					 * $oss_result [type]
 					 */
-					$osspath = substr($osspath, 2);			
-					$oss_result = $this->oss->upload_by_file($osspath);		
+					$osspath = substr($osspath, 2);
+					$oss_result = $this->oss->upload_by_file($osspath);
 
 					//设置上传结果
 					$result = $oss_result;
-					
+
 					//上传原图成功
 					if($oss_result)
-					{	
+					{
 						//设置图片url
-						$this->um_upload->setFullName(OSS_URL."/{$osspath}");	
+						$this->um_upload->setFullName(OSS_URL."/{$osspath}");
 					}
 					//失败
 					else
 					{
 						//删除oss上缩略图
 						$this->oss->delete_object($toFile);
-					}				
+					}
 				}
 
 				//删除本地缩略图
-				@unlink($toFile);					
+				@unlink($toFile);
 			}
-			//删除本地服务器图片		
-			@unlink($osspath);	
+			//删除本地服务器图片
+			@unlink($osspath);
 		}
 		//设置上传结果
-		$this->um_upload->setStateInfo($result);		
+		$this->um_upload->setStateInfo($result);
 		$info = $this->um_upload->getFileInfo();
-		return $info;	
-	}	
+		return $info;
+	}
 
 	/**
 	 * [upload_headpic 上传头像]
@@ -107,7 +107,7 @@ class Image_service extends MY_Service{
 
 			$this->load->library('upload', $config);
 			$upload_result = $this->upload->do_upload($form_name);
-			//上传成功		
+			//上传成功
 			if($upload_result)
 			{
 				//裁剪图片
@@ -117,28 +117,28 @@ class Image_service extends MY_Service{
 					//裁剪成功
 					$result = array();
 					$result['success']  = 0;
-					$result['filepath'] = $pic_path;			
+					$result['filepath'] = $pic_path;
 				}
 				else
 				{
 					//删除原图并输出错误
 					@unlink("./{$pic_path}");
 					$result['error'] = lang('error_INVALID_REQUEST');
-				}			
+				}
 			}
 			//上传失败
 			else
 			{
-				$result = array();	
+				$result = array();
 				$result['error'] = $this->upload->display_errors();
-			}					
+			}
 		}
 		else
 		{
-			$result = array();	
-			$result['error'] = lang('error_INVALID_REQUEST');			
+			$result = array();
+			$result['error'] = lang('error_INVALID_REQUEST');
 		}
-		return $result;			
+		return $result;
 	}
 
 	/**
@@ -156,7 +156,7 @@ class Image_service extends MY_Service{
 		//生成裁剪后的图
 		$this->load->library('Img_shot');
 		$this->img_shot->initialize($filename,$x,$y,$w,$h);
-		$shot_name = $this->img_shot->generate_shot($filename);		
+		$shot_name = $this->img_shot->generate_shot($filename);
 		//成功
 		if( ! empty($shot_name))
 		{
@@ -180,9 +180,40 @@ class Image_service extends MY_Service{
 		}
 		//删除原图并输出错误
 		@unlink("./{$filename}");
-		return FALSE;		
+		return FALSE;
 	}
 
+
+    /**
+     * [save_headpic 保存裁剪后的头像]
+     * @param  [type] $filename [文件路径]
+     * @param  [type] $x        [目标x坐标]
+     * @param  [type] $y        [目标y坐标]
+     * @param  [type] $w        [目标宽度]
+     * @param  [type] $h        [目标高度]
+     * @return [type]           [description]
+     */
+    public function save_artist_pic($filename, $x, $y, $w, $h)
+    {
+        //生成裁剪后的图
+        $this->load->library('Img_shot');
+        $this->img_shot->initialize($filename,$x,$y,$w,$h);
+        $shot_name = $this->img_shot->generate_shot($filename);
+        //成功
+        if( ! empty($shot_name))
+        {
+            $upload_result = $this->oss->upload_by_file($shot_name);
+            if($upload_result)
+            {
+                $osspath = OSS_URL."/{$shot_name}";
+                @unlink("./{$filename}");
+                return $osspath;
+            }
+        }
+        //删除原图并输出错误
+        @unlink("./{$filename}");
+        return FALSE;
+    }
 	/**
 	 * [upload_production 上传图片(保存缩略图与原图)]
 	 * @param  [type] $form_name [description]
@@ -208,7 +239,7 @@ class Image_service extends MY_Service{
 			$upload_result = $this->upload->do_upload($form_name);
 
 			//判断宽高是否超出限制
-			$src_w 		= $this->upload->data('image_width');  
+			$src_w 		= $this->upload->data('image_width');
 			$src_h 	    = $this->upload->data('image_height');
 			if($src_w < 400)
 			{
@@ -218,9 +249,9 @@ class Image_service extends MY_Service{
 			}
 			//最小宽
 			$min_width  = 400;
-			$min_height = $src_h * ($min_width / $src_w);  
+			$min_height = $src_h * ($min_width / $src_w);
 
-			//上传成功		
+			//上传成功
 			if($upload_result)
 			{
 				/**
@@ -232,7 +263,7 @@ class Image_service extends MY_Service{
 				$toFile = "thumb1_".$arr[count($arr)-1];
 				$arr[count($arr)-1] = $toFile;
 				$toFile = implode('/', $arr);
-				$thumb_result = $this->cimage->img2thumb("./{$pic_path}","./{$toFile}",$min_width,$min_height,1);	
+				$thumb_result = $this->cimage->img2thumb("./{$pic_path}","./{$toFile}",$min_width,$min_height,1);
 
 				//生成缩略图成功
 				if($thumb_result)
@@ -245,49 +276,49 @@ class Image_service extends MY_Service{
 						/**
 						 * [上传原图到oss]
 						 * $oss_result [type]
-						 */		
-						$oss_result = $this->oss->upload_by_file($pic_path);		
+						 */
+						$oss_result = $this->oss->upload_by_file($pic_path);
 						//设置上传结果
 						$result = $oss_result;
-						
+
 						//上传原图成功
 						if($oss_result)
-						{	
+						{
 							//设置图片url
 							$result = array();
 							$result['success']  = 0;
 							$result['pic']   = OSS_URL."/{$pic_path}";
-							$result['thumb'] = OSS_URL."/{$toFile}" ;										
+							$result['thumb'] = OSS_URL."/{$toFile}" ;
 						}
 						//失败
 						else
 						{
 							//删除oss上缩略图
 							$this->oss->delete_object($toFile);
-						}				
+						}
 					}
 					//删除本地缩略图
-					@unlink($toFile);					
+					@unlink($toFile);
 				}
 				else
 				{
 					$result['error'] = lang('error_INVALID_REQUEST');
-				}	
+				}
 				//删除原图
-				@unlink("./{$pic_path}");						
-			}	
+				@unlink("./{$pic_path}");
+			}
 			//上传失败
 			else
 			{
-				$result = array();	
+				$result = array();
 				$result['error'] = $this->upload->display_errors();
-			}					
+			}
 		}
 		else
 		{
-			$result = array();	
-			$result['error'] = lang('error_INVALID_REQUEST');			
+			$result = array();
+			$result['error'] = lang('error_INVALID_REQUEST');
 		}
-		return $result;				
+		return $result;
 	}
 }

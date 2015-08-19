@@ -8,9 +8,30 @@ class Publish extends MY_Controller{
 
 	public function index($type = 'publish', $pid = NULL)
 	{
+		$head['css'] = array(
+			'base.css',
+			'font-awesome/css/font-awesome.min.css',
+			'alert.css',
+			'jquery.Jcrop.css'
+		);
+
+		$head['javascript'] = array(
+			'jquery.js',
+			'error.js',
+			'timeago.js',
+			'alert.min.js',
+			'autosize.js',
+			'ajaxfileupload.js'
+		);
+
+		$user['user']= $this->user;
+		$data['top'] = $this->load->view('common/top', $user, TRUE);
+
 		if($type == 'publish')
 		{
-			$this->load->view('test/publish_production');
+			$head['title'] = '发布艺术品';
+			$this->load->view('common/head', $head);
+			$this->load->view('publish_production', $data);
 		}
 		else if($type == 'update')
 		{
