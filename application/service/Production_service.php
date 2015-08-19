@@ -188,11 +188,12 @@ class Production_service extends MY_Service{
 
 			//删除缩略图
 			$toFile = Common::get_thumb_url($pic,'thumb1_');
-			$toFile1= Common::get_thumb_url($pic,'thumb2_');		
-			
-			$this->oss->delete_object($toFile);		
-			$this->oss->delete_object($toFile1);				
-			return TRUE;		
+			$toFile1= Common::get_thumb_url($pic,'thumb2_');
+
+			$this->oss->delete_object($toFile);
+			$this->oss->delete_object($toFile1);
+			return TRUE;
+
 		}
 		catch(Exception $e)
 		{
