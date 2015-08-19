@@ -1,24 +1,9 @@
-<body style="height:100%;overflow: hidden;">
-<?=$sidebar ?>
-<div id="vi_container" class="container">
-  <div id="loginbg" class="loginbg"></div>
-  <div id="shade"></div>
-  <div id="vl_content" class="content">
-    <div class="loginlogo">
-      <a class="link" href="<?=base_url()?>">
-        <div class="icon logo-w"></div>
-      </a>
-      <span class="text">
-        <a href="" class="link"> <b>艺术维C</b>
-        </a>
-        <br />
-        affecting the life in a mysterious way
-      </span>
-    </div>
-    <div class="logtext">
-      <div class="float-l"> <font class="big">欢迎登陆</font> <font style="font-size:70%;text-decoration: underline;font-weight:bold;"><a class="link" href="<?=base_url()?>signup">注册账号</a></font> 
-      </div>
-    </div>
+<body>
+<div class="main-wrapper">
+    <!-- 顶部 -->
+    <?php echo $top;?>
+    <!-- 主体 -->
+    <div class="container">
     <div id="login" class="logform width-100p ">
       <div class="formcon">
         <div class="form">
@@ -46,26 +31,12 @@
 
       </div>
     </div>
-    <div id="vi_footer" class="width-100p logfooter">
-      <div class="vi_footer" style="margin-top:130px">
-        <div class="vi_footer_left">
-          <div>
-            &copy;&nbsp;artvc.cc&nbsp;京ICP备09025489号-4&nbsp;
-            <a class="link" href="#">用户协议</a>
-            &nbsp;-&nbsp;
-            <a class="link" href="#">隐私政策</a>
-            &nbsp;-&nbsp;
-            <a class="link" href="#">联系我们</a>
-            &nbsp;-&nbsp;
-            <a class="link" href="#">意见反馈</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <?php echo $footer;?>
+    </div> 
 </div>
-<script type="text/javascript" src="<?=base_url().'public/'?>js/vc.js"></script>
-<script type="text/javascript">
+
+</body>
+<script>
 $(function(){
   
 
@@ -135,6 +106,5 @@ $(function(){
     }
 
   }
-  </script>
-</body>
+</script>
 </html>
