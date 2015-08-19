@@ -80,71 +80,6 @@
 					                            </div>
 					                        </td>
 					                    </tr>
-										<tr>
-					                        <td>
-					                            <div class="form-group">
-					                                <span class="col-sm-4 col-xs-3 control-label">性别:</span>
-					                                <div class="col-sm-8 col-xs-8">
-
-			                                            <label class="radio-inline">
-			                                                <input type="radio" name="sex" id="optionsRadiosInline1" value="0" <?php if($user['sex'] == 0){echo "checked";}?>>保密
-			                                            </label>
-			                                            <label class="radio-inline">
-			                                                <input type="radio" name="sex" id="optionsRadiosInline2" value="1" <?php if($user['sex'] == 1){echo "checked";}?>>男
-			                                            </label>
-			                                            <label class="radio-inline">
-			                                                <input type="radio" name="sex" id="optionsRadiosInline3" value="2" <?php if($user['sex'] == 2){echo "checked";}?>>女
-			                                            </label>												
-					                                </div>
-					                            </div>
-					                        </td>
-					                    </tr>
-					                    <tr>
-					                        <td>
-					                            <div class="form-group">
-					                                <span class="col-sm-4 col-xs-3 control-label">生日:</span>
-					                                <div class="col-sm-5 col-xs-8">
-					                                    <input class="form-control" name="birthday" type="text" value="<?=$user['birthday']?>">
-					                                </div>
-					                            </div>
-					                        </td>
-					                    </tr>				                    		
-					                    <tr>
-					                        <td>
-					                            <div class="form-group">
-					                                <span class="col-sm-4 col-xs-3 control-label">个性签名:</span>
-					                                <div class="col-sm-5 col-xs-8">
-					                                    <input class="form-control" name="intro" type="text" value="<?=$user['intro']?>">
-					                                </div>
-					                            </div>
-					                        </td>
-					                    </tr>
-					                    <tr>
-					                        <td>
-					                            <div class="form-group">
-					                                <span class="col-sm-4 col-xs-3 control-label">主页别名(www.artvc.cc/home/):</span>
-					                                <div class="col-sm-5 col-xs-8">
-					                                	<?php 
-					                                		$arr = explode('/', $user['alias']);
-					                                		$user['alias'] = $arr[1];
-					                                	?>
-					                                    <input class="form-control" name="alias" type="text" value="<?=$user['alias']?>">
-					                                </div>
-					                                <a  class="btn btn-outline btn-primary" style="text-decoration:none;"  href="<?=base_url().'home/'.$user['alias']?>">进入主页</a>
-					                            </div>
-					                        </td>
-					                    </tr>
-					                    <tr>
-					                        <td>
-					                            <div class="form-group">
-					                                <span class="col-sm-4 col-xs-3 control-label">地区:</span>
-					                                <div class="col-sm-5 col-xs-8">
-					                                    <input class="form-control" name="area" type="text" value="<?=$user['area']?>">
-					                                </div>
-					                            </div>
-					                        </td>
-					                    </tr>
-
 					                    <tr>
 					                        <td>
 					                            <div class="form-group">
@@ -171,31 +106,7 @@
 					                                </div>
 					                            </div>
 					                        </td>
-					                    </tr>
-										<tr>
-					                        <td>
-					                            <div class="form-group">
-					                                <span class="col-sm-4 col-xs-3 control-label">粉丝数:</span>
-					                                <div class="col-sm-6 col-xs-8">
-					                                    <div class="btn-group mod-btn">
-					                                        <?=$user['follower']?>
-					                                    </div>
-					                                </div>
-					                            </div>
-					                        </td>
-					                    </tr>	
-										<tr>
-					                        <td>
-					                            <div class="form-group">
-					                                <span class="col-sm-4 col-xs-3 control-label">获赞数:</span>
-					                                <div class="col-sm-6 col-xs-8">
-					                                    <div class="btn-group mod-btn">
-					                                        <?=$user['like']?>
-					                                    </div>
-					                                </div>
-					                            </div>
-					                        </td>
-					                    </tr>					                    				                    
+					                    </tr>									                  				                    
 										<tr>
 					                        <td>
 					                            <div class="form-group">
