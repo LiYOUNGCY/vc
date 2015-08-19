@@ -22,15 +22,6 @@ class Production_service extends MY_Service{
 			//显示缩略图
 
 			$production[$k]['pic'] = Common::get_thumb_url($production[$k]['pic']);
-
-			$arr   = explode('/',$production[$k]['pic']);
-			if( ! empty($arr))
-			{
-				$arr[count($arr)-1] = "thumb1_".$arr[count($arr)-1];
-				$production[$k]['pic'] = implode('/', $arr);
-			}
-
-
 			//获取艺术家信息
 			if( ! empty($v['aid']))
 			{
@@ -188,7 +179,7 @@ class Production_service extends MY_Service{
 			$this->load->library('oss');
 			//删除原图
 			$arr   = explode('/',$pic);
-			$count = count($arr);
+			//$count = count($arr);
 			unset($arr[0]);
 			unset($arr[1]);
 			unset($arr[2]);
@@ -196,11 +187,13 @@ class Production_service extends MY_Service{
 			$this->oss->delete_object($pic);
 
 			//删除缩略图
-			$toFile = "thumb1_".$arr[$count-1];
-			$arr[$count-1] = $toFile;
-			$toFile = implode('/', $arr);
+			$toFile = Common::get_thumb_url($pic,'thumb1_');
+			$toFile1= Common::get_thumb_url($pic,'thumb2_');
+
 			$this->oss->delete_object($toFile);
+			$this->oss->delete_object($toFile1);
 			return TRUE;
+
 		}
 		catch(Exception $e)
 		{

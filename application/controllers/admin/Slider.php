@@ -9,7 +9,7 @@ class Slider extends MY_Controller{
 	
 	public function index()
 	{
-		//获取文章列表
+		//获取轮播列表
 		$slider  = $this->slider_model->get_slider_list();		
 		$navbar  = $this->load->view('admin/common/navbar',"",TRUE);
 
