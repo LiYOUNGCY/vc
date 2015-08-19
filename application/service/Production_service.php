@@ -22,8 +22,6 @@ class Production_service extends MY_Service{
 			//显示缩略图
 
 			$production[$k]['pic'] = Common::get_thumb_url($production[$k]['pic']);
-
-			$arr   = explode('/',$production[$k]['pic']);			
 			//获取艺术家信息
 			if( ! empty($v['aid']))
 			{
@@ -189,7 +187,6 @@ class Production_service extends MY_Service{
 			$this->oss->delete_object($pic);
 
 			//删除缩略图
-
 			$toFile = Common::get_thumb_url($pic,'thumb1_');
 			$toFile1= Common::get_thumb_url($pic,'thumb2_');		
 			
