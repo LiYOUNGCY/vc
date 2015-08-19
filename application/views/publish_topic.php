@@ -29,13 +29,12 @@
                         </div>
                         <div class="item">
 
-                            <label>作品的介绍语：</label>
+                            <label>作品的介绍：</label>
                             <textarea rows="5"></textarea>
                         </div>
                         <div class="image">
                             <img src="<?= base_url() ?>public/img/nrjpinzl4.jpg-w720.jpg">
                         </div>
-
                     </div>
                 </div>
 
@@ -51,9 +50,11 @@
 
 
             <div id="production" class="production_list hidden">
-
                 <div class="list">
                     <i id="close" class="fa fa-close" style="font-size: 24px; float:right; cursor: pointer;"></i>
+                </div>
+                <div class="production">
+                    div.intro
                 </div>
             </div>
         </div>
