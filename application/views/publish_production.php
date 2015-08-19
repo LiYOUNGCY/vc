@@ -4,16 +4,12 @@
     <?php echo $top;?>
     <div class="container">
         <div class="content edit">
-            <form class="list" method="post" action="<?=base_url()?>artist/publish/publish_artist">
+            <form class="list" method="post" action="<?=base_url()?>production/publish/publish_production">
                 <div class="item">
                     <label>艺术品的展示图：</label>
                     <div class="headpic">
                         <!-- <form action="<?php echo base_url()?>publish/image/save_headpic" method="post" onsubmit="return checkCoords();"> -->
-                        <input type="hidden" id="x" name="x" />
-                        <input type="hidden" id="y" name="y" />
-                        <input type="hidden" id="w" name="w" />
-                        <input type="hidden" id="h" name="h" />
-                        <input type="hidden" id="img"  name="img" />
+                        <input type="hidden" id="img"  name="pic" />
                         <!-- </form> -->
                         <div class="box">
                             <div id="camera_warp" class="camera_warp">
@@ -26,31 +22,39 @@
                 </div>
                 <div class="item">
                     <label for="name">艺术品的标题：</label>
-                    <input id="name" name="artist_name" type="text">
+                    <input id="name" name="production_name" type="text">
                 </div>
                 <div class="item">
                     <label for="intro">艺术品的介绍：</label>
                     <div class="text">
-                        <textarea id="intro" name="intro" rows="5"></textarea>
+                        <textarea id="intro" name="production_intro" rows="5"></textarea>
                     </div>
                 </div>
                 <div class="item">
+                    <label for="aid">作者：</label>
+                    <input type="text" name="aid" id="aid">
+                </div>
+                <div class="item">
                     <label for="">类型：</label>
-                    <input type="text">
+                    <input type="text" name="type">
                 </div>
                 <div class="item">
                     <label for="">材质：</label>
-                    <input type="text">
+                    <input type="text" name="marterial">
                 </div>
                 <div class="item size">
-                    <label for="">长：</label><input type="text">
-                    <label for="">宽：</label><input type="text">
-                    <label for="">高：</label><input type="text">
+                    <label for="">长：</label><input type="text" name="l">
+                    <label for="">宽：</label><input type="text" name="w">
+                    <label for="">高：</label><input type="text" name="h">
                     CM（厘米）
                 </div>
                 <div class="item">
-                    <label for="evaluation">创作日期：</label>
-                    <input type="text">
+                    <label for="">价格：</label>
+                    <input type="text" name="price">
+                </div>
+                <div class="item">
+                    <label for="creat_time">创作日期：</label>
+                    <input id="creat_time" type="text" name="creat_time">
                 </div>
                 <div class="options">
                     <div class="btn cancel" onclick="">取消</div>
@@ -61,88 +65,59 @@
     </div>
 </div>
 </body>
-<script src="<?php echo base_url()?>public/js/jquery.Jcrop.js"></script>
-<script src="<?php echo base_url()?>public/js/jquery.upload.js"></script>
 <script>
+function file_upload()
+{
+    var BASE_URL  = $("#BASE_URL").val();
+    var UPLOAD_URL= BASE_URL+'publish/image/upload_production';
+    $.ajaxFileUpload({
+        url: UPLOAD_URL,
+        fileElementId: 'upfile',
+        dataType: 'JSON',
+        type:'post',
+        success: function (data) {
+            // alert(data);
+            console.log(data);
+            $("#error_div").html("");
+            if(data.error != null)
+            {
+                $("#error_div").html(data.error);
+            }
+            else
+            {
+                var path = data.pic;
+                var thumb= data.thumb;
+                img_src  = path;
+                $("#image").attr('src',thumb);
+                $('#img').attr('value',path);
+                $('#image').show();
+                $("#camera_warp").hide();
+            }
+
+        },
+        error: function (data) {
+            alert('error');
+        }
+    });
+}
+
     $(function(){
         autosize($('textarea'));
-    });
 
     var img_src = "";
-    $(function(){
-        $("#image").hide();
-        //取消
-        $("#cancel").click(function()
-        {
-            //重定向
-        });
-
-        $("#save").click(function(){
-            $('form').submit();
-        });
+    $("#image").hide();
+    //取消
+    $("#cancel").click(function()
+    {
+        //重定向
     });
-    function jcrop_init(tar)
-    {
-        $(tar).Jcrop({
-            bgColor: 'black',
-            bgOpacity: 0.4,
-            boundary:2,
-            setSelect: [100, 100, 300 ,300],  //设定4个角的初始位置
-            aspectRatio: 1 / 1,
-            onSelect: showCoords   //当选择完成时执行的函数
-        });
-    }
-    function showCoords(c)
-    {
-        $("#x").val(c.x);
-        $("#y").val(c.y);
-        $("#w").val(c.w);
-        $("#h").val(c.h);
-    }
-    //检查裁剪宽度
-    function checkCoords()
-    {
-        if (parseInt($('#w').val())){
-            $("#img").val(img_src);
-            return true;
-        }
-        alert('Please select a crop region then press submit.');
-        return false;
-    }
-    function file_upload()
-    {
-        var BASE_URL  = $("#BASE_URL").val();
-        var UPLOAD_URL= BASE_URL+'publish/image/upload_headpic';
-        $.ajaxFileUpload({
-            url: UPLOAD_URL,
-            fileElementId: 'upfile',
-            dataType: 'JSON',
-            type:'post',
-            success: function (data) {
-                // alert(data);
-                $("#error_div").html("");
-                if(data.error != null)
-                {
-                    $("#error_div").html(data.error);
-                }
-                else
-                {
-                    var path = data.filepath
-                    img_src  = path;
-                    $("#image").attr('src',BASE_URL+path);
-                    $('#img').attr('value',path);
-                    $('#image').show();
-                    $("#camera_warp").hide();
-                    // $("form").show();
-                    jcrop_init('#image');
-                }
 
-            },
-            error: function (data) {
-                alert('error');
-            }
-        });
-    }
+    $("#save").click(function(){
+        $('form').submit();
+    });
+
+
+});
 </script>
 </script>
 </html>
