@@ -109,13 +109,21 @@ class Production_service extends MY_Service{
 
 	/**
 	 * [publish_production 发布艺术品]
-	 * @param  [type] $name  [艺术品名称]
-	 * @param  [type] $aid   [艺术家id]
-	 * @param  [type] $price [价格]
-	 * @param  [type] $pic   [图片地址]
-	 * @return [type]        [description]
+	 * @param  [type] $name       [description]
+	 * @param  [type] $uid        [description]
+	 * @param  [type] $intro      [description]
+	 * @param  [type] $aid        [description]
+	 * @param  [type] $price      [description]
+	 * @param  [type] $pic        [description]
+	 * @param  [type] $l          [description]
+	 * @param  [type] $w          [description]
+	 * @param  [type] $h          [description]
+	 * @param  [type] $type       [description]
+	 * @param  [type] $marterial  [description]
+	 * @param  [type] $creat_time [description]
+	 * @return [type]             [description]
 	 */
-	public function publish_production($name, $uid, $aid, $price, $pic)
+	public function publish_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $type, $marterial, $creat_time)
 	{
 		$insert_result = $this->production_model->insert_production($name,$uid,$aid,$price,$pic);
 		if($insert_result)
@@ -143,13 +151,20 @@ class Production_service extends MY_Service{
 	 * @param  [type] $status [艺术品状态]
 	 * @return [type]         [description]
 	 */
-	public function update_production($pid, $uid, $name,$aid,$price,$pic,$status)
+	public function update_production($pid, $uid, $name, $intro, $aid, $price, $pic, $l, $w, $h, $type, $marterial, $creat_time, $status)
 	{
 		$data = array(
 			'name'   	=> $name,
+			'intro' 	=> $intro,
 			'aid'    	=> $aid,
 			'price'  	=> $price,
 			'pic'  	 	=> $pic,
+			'l'			=> $l,
+			'w' 		=> $w,
+			'h' 		=> $h,
+			'type' 		=> $type,
+			'marterial' => $marterial,
+			'creat_time'=> $creat_time,
 			'status' 	=> $status,
 			'modify_by' => $uid
 		);
