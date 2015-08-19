@@ -116,7 +116,7 @@ class Production_service extends MY_Service{
 	 */
 	public function publish_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $type, $marterial, $creat_time)
 	{
-		$insert_result = $this->production_model->insert_production($name,$uid,$aid,$price,$pic);
+		$insert_result = $this->production_model->insert_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $type, $marterial, $creat_time);
 		if($insert_result)
 		{
 			//更新艺术家作品数
