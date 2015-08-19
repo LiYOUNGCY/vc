@@ -1371,15 +1371,39 @@ textarea:focus {
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,.4);
-    padding: 10px;
+    overflow: auto;
 }
 
 .edit .production_list .list{
     width: 800px;
     margin: 50px auto;
-    height: 100px;
     background-color: #ffffff;
     padding: 10px;
+    padding-top: 5px;
+}
+
+.edit .production_list .list .production {
+    position: relative;
+    margin: 10px 10px;
+    transition: background-color .2s ease-in-out;
+    cursor: pointer;
+}
+
+.edit .production_list .list .production:hover {
+    background-color: #EEEEEE;
+}
+
+.edit .production_list .list .production .intro {
+    padding: 10px 10px 10px 320px;
+    height: 300px;
+}
+
+.edit .production_list .list .production .intro + img {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 300px;
+    height: 300px;
 }
 
 .headpic .box .camera_warp {

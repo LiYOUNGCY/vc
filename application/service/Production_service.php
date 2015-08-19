@@ -5,7 +5,7 @@ class Production_service extends MY_Service{
 		parent::__construct();
 		$this->load->model('production_model');
 		$this->load->model('production_collection_model');
-		$this->load->model('article_model');		
+		$this->load->model('article_model');
 		$this->load->model('artist_model');
 	}
 
@@ -17,8 +17,8 @@ class Production_service extends MY_Service{
 	 */
 	public function get_production_list($page,$uid)
 	{
-		$production = $this->production_model->get_production_list($page,$uid);
-		foreach ($production as $k => $v) {	
+		$production = $this->production_model->get_production_list($page, $uid, '0');
+		foreach ($production as $k => $v) {
 			//显示缩略图
 
 			$production[$k]['pic'] = Common::get_thumb_url($production[$k]['pic']);
@@ -27,14 +27,14 @@ class Production_service extends MY_Service{
 			if( ! empty($arr))
 			{
 				$arr[count($arr)-1] = "thumb1_".$arr[count($arr)-1];
-				$production[$k]['pic'] = implode('/', $arr);				
+				$production[$k]['pic'] = implode('/', $arr);
 			}
 
 
 			//获取艺术家信息
 			if( ! empty($v['aid']))
 			{
-				$production[$k]['artist'] = $this->artist_model->get_artist_by_id($v['aid']);				
+				$production[$k]['artist'] = $this->artist_model->get_artist_by_id($v['aid']);
 			}
 			else
 			{
@@ -56,7 +56,7 @@ class Production_service extends MY_Service{
 		return $this->production_collection_model->check_production_collection($uid,$pid);
 	}
 	/**
-	 * 根据id获取艺术品详情 
+	 * 根据id获取艺术品详情
 	 * @param  [type]
 	 * @return [type]
 	 */
@@ -68,14 +68,14 @@ class Production_service extends MY_Service{
 			//获取艺术家信息
 			if( ! empty($p['aid']))
 			{
-				$p['artist'] = $this->artist_model->get_artist_by_id($p['aid']);			
+				$p['artist'] = $this->artist_model->get_artist_by_id($p['aid']);
 			}
 			else
 			{
 				$p['artist'] = NULL;
 			}
 			unset($p['aid']);
-			return $p;				
+			return $p;
 		}
 		else
 		{
@@ -134,7 +134,7 @@ class Production_service extends MY_Service{
 		}
 		else
 		{
-			//删除oss上图片		
+			//删除oss上图片
 			$this->_delete_oss_pic($pic);
 			return FALSE;
 		}
@@ -175,7 +175,7 @@ class Production_service extends MY_Service{
 		}
 		else
 		{
-			//删除oss上图片		
+			//删除oss上图片
 			$this->_delete_oss_pic($pic);
 			return FALSE;
 		}
@@ -183,7 +183,7 @@ class Production_service extends MY_Service{
 
 	private function _delete_oss_pic($pic)
 	{
-		try 
+		try
 		{
 			$this->load->library('oss');
 			//删除原图
@@ -192,20 +192,20 @@ class Production_service extends MY_Service{
 			unset($arr[0]);
 			unset($arr[1]);
 			unset($arr[2]);
-			$pic = implode('/', $arr);	
+			$pic = implode('/', $arr);
 			$this->oss->delete_object($pic);
 
 			//删除缩略图
 			$toFile = "thumb1_".$arr[$count-1];
 			$arr[$count-1] = $toFile;
 			$toFile = implode('/', $arr);
-			$this->oss->delete_object($toFile);		
-			return TRUE;		
+			$this->oss->delete_object($toFile);
+			return TRUE;
 		}
-		catch(Exception $e) 
+		catch(Exception $e)
 		{
 			return FALSE;
 		}
-		
+
 	}
 }

@@ -50,11 +50,32 @@
 
 
             <div id="production" class="production_list hidden">
-                <div class="list">
-                    <i id="close" class="fa fa-close" style="font-size: 24px; float:right; cursor: pointer;"></i>
-                </div>
-                <div class="production">
-                    div.intro
+                <div class="list" id="production_list">
+                    <i id="close" class="fa fa-close" style="font-size: 24px; float:right; cursor: pointer;z-index: 999;"></i>
+
+                    <div class="production">
+                        <div class="intro">
+                            <h3 class="title">八宝茶</h3>
+                            <div class="content">宫廷秘制八宝茶，含有红枣干、葡萄干、枸杞、桂圆、冰糖、金桔干、芝麻、菊花，功效也是棒棒哒：改善血脂、降低胆固醇、降血压、美容养颜、调理气血</div>
+                        </div>
+                        <img src="<?= base_url() ?>public/img/nrjpinzl4.jpg-w720.jpg">
+                    </div>
+
+                    <div class="production">
+                        <div class="intro">
+                            <h3 class="title">八宝茶</h3>
+                            <div class="content">宫廷秘制八宝茶，含有红枣干、葡萄干、枸杞、桂圆、冰糖、金桔干、芝麻、菊花，功效也是棒棒哒：改善血脂、降低胆固醇、降血压、美容养颜、调理气血</div>
+                        </div>
+                        <img src="<?= base_url() ?>public/img/nrjpinzl4.jpg-w720.jpg">
+                    </div>
+
+                    <div class="production">
+                        <div class="intro">
+                            <h3 class="title">八宝茶</h3>
+                            <div class="content">宫廷秘制八宝茶，含有红枣干、葡萄干、枸杞、桂圆、冰糖、金桔干、芝麻、菊花，功效也是棒棒哒：改善血脂、降低胆固醇、降血压、美容养颜、调理气血</div>
+                        </div>
+                        <img src="<?= base_url() ?>public/img/nrjpinzl4.jpg-w720.jpg">
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,12 +84,36 @@
 </body>
 <script>
     $(function () {
+        var page = 0;
+
         $('#show_list').click(function () {
             $('#production').removeClass('hidden');
+            $('body').css('overflow','hidden');
         });
 
         $('#close').click(function () {
+            $('body').css('overflow','');
             $('#production').addClass('hidden');
+        });
+
+        $.ajax({
+            type: 'post',
+            url:GET_PRODUCTION_URL,
+            data: {
+                page
+            },
+            dataType: 'json',
+            success: function(data) {
+                for(var i = 0; i < data.length; i++) {
+                    var title = data[i].name;
+                    var img = data[i].pic;
+                    var content = data[i].intro;
+
+                    var $box = $('<div class="production"> <div class="intro"> <h3 class="title">'+title+'</h3> <div class="content">'+content+'</div> </div> <img src="'+img+'"> </div>');
+
+                    $('#production_list').append($box);
+                }
+            }
         });
     });
 </script>
