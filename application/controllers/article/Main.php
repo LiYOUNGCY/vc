@@ -51,7 +51,7 @@ class Main extends MY_Controller {
         $data['title']        = "资讯";
         $body['top']          = $top;
         $body['user']         = $this->user;
-        //文章类型与标签
+        //文章类型
         $body['article_type'] = $type;
         $this->load->view('common/head', $data);
         $this->load->view('article', $body);
