@@ -285,19 +285,19 @@ class Image_service extends MY_Service{
 							$result = array();
 							$result['success']  = 0;
 							$result['pic']   = OSS_URL."/{$pic_path}";
-							$result['thumb'] = OSS_URL."/{$toFile}" ;
+							$result['thumb'] = OSS_URL."/{$toFile1}" ;
 						}
 						//失败
 						else
 						{
 							//删除oss上缩略图
 							$this->oss->delete_object($toFile);
-							$this->oss->delete_object($toFile1);							
+							$this->oss->delete_object($toFile1);
 						}
 					}
 					//删除本地缩略图
 					@unlink($toFile);
-					@unlink($toFile1);					
+					@unlink($toFile1);
 				}
 				else
 				{
