@@ -23,7 +23,9 @@ class Main extends MY_Controller {
         $data['javascript'] = array(
             'jquery.js',
             'masonry.pkgd.min.js',
-            'jquery.imageloader.js'
+            'jquery.imageloader.js',
+            'error.js',
+            'validate.js'
         );
 
         $user['user'] = $this->user;

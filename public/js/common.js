@@ -8,3 +8,7 @@ var DELETE_URL = BASE_URL + 'article/detail/delete_article';
 var LOGIN_URL = BASE_URL + 'login';
 var PHONE_LOGIN_URL = BASE_URL + "account/main/login_by_phone";
 var EMAIL_LOGIN_URL = BASE_URL + "account/main/login_by_email";
+var EMAIL_SIGNUP_URL = BASE_URL + "account/main/register_by_email";
+var PHONE_SIGNUP_URL = BASE_URL + "account/main/register_by_phone";
+var CHECK_PHONE_URL = BASE_URL + "account/main/check_phone";
+var CHECK_EMAIL_URL = BASE_URL + "account/main/check_email";   
