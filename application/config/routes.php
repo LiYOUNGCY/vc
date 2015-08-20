@@ -72,8 +72,8 @@ $route['update/article/(:num)']   = 'article/publish/index/update/$1';
 
 //$route['topic'] = 'article/main/index/topic';
 //$route['topic/([a-z]*)'] = 'article/main/index/topic/$1';
-
-
+$route['publish/topic'] = 'topic/publish/index/publish';
+$route['update/topic/(:num)'] = 'topic/publish/index/update/$1';
 /**
  * 艺术品
  */

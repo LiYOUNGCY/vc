@@ -35,6 +35,20 @@ class Production_service extends MY_Service{
 		}
 		return $production;
 	}
+	
+	public function get_type_list($page,$limit)
+	{
+		$this->load->model('production_type_model');	
+		$type = $this->production_type_model->get_type_list($page,$limit);
+		return $type;		
+	}
+
+	public function get_marterial_list($page,$limit)
+	{
+		$this->load->model('production_marterial_model');
+		$marterial = $this->production_marterial_model->get_marterial_list($page,$limit);
+		return $marterial;
+	}
 
 	/**
 	 * 查看是否收藏该艺术品
