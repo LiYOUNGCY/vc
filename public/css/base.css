@@ -1016,6 +1016,12 @@ hr.line {
     max-width: 700px;
 }
 
+@media screen and (max-width: 767px) {
+    .article {
+        width: 90%;
+    }
+}
+
 .article .title {
     text-align: left;
     line-height: 1.5;
@@ -1382,23 +1388,23 @@ textarea:focus {
     padding-top: 5px;
 }
 
-.edit .production_list .list .production {
+.edit .production_list .list .pro {
     position: relative;
     margin: 10px 10px;
     transition: background-color .2s ease-in-out;
     cursor: pointer;
 }
 
-.edit .production_list .list .production:hover {
+.edit .production_list .list .pro:hover {
     background-color: #EEEEEE;
 }
 
-.edit .production_list .list .production .intro {
+.edit .production_list .list .pro .intro {
     padding: 10px 10px 10px 320px;
     height: 300px;
 }
 
-.edit .production_list .list .production .intro + img {
+.edit .production_list .list .pro .intro + img {
     position: absolute;
     left: 10px;
     top: 10px;
