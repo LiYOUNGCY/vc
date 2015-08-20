@@ -184,7 +184,7 @@ class Article_model extends CI_Model {
 
     public function admin_get_article_list($page = 0,$limit = 10,$order = 'id DESC')
     {
-      $article = $this->db->select('article.id,article.uid,article.type,article_type.name as type_name,article.title,article.publish_time,article.read,article.like')
+      $article = $this->db->select('article.id,article.uid,article.type,article_type.name as type_name,article.title,article.publish_time,article.read,article.like,article.collection')
                           ->join('article_type','article.type = article_type.id','left')
                           ->order_by($order)
                           ->limit($limit,$page * $limit)

@@ -33,10 +33,7 @@ class Image_service extends MY_Service{
 			 * $tofile [缩略图本地保存路径]
 			 * $osspath[原图本地保存路径]
 			 */
-			$arr = explode('/',$osspath);
-			$toFile = "thumb1_".$arr[count($arr)-1];
-			$arr[count($arr)-1] = $toFile;
-			$toFile = implode('/', $arr);
+			$toFile = Common::get_thumb_url($pic_path,'thumb1_');
 			$thumb_result = $this->cimage->img2thumb($osspath,$toFile,300,230,1);
 
 			//生成缩略图成功
@@ -241,16 +238,17 @@ class Image_service extends MY_Service{
 			//判断宽高是否超出限制
 			$src_w 		= $this->upload->data('image_width');
 			$src_h 	    = $this->upload->data('image_height');
-			if($src_w < 400)
+			if($src_w < 600)
 			{
 				@unlink("./{$pic_path}");
 				$result['error'] = lang('error_OVER_SIZE');
 				return $result;
 			}
 			//最小宽
-			$min_width  = 400;
+			$min_width  = 300;
+			$min_width1 = 600;
 			$min_height = $src_h * ($min_width / $src_w);
-
+			$min_height1= $src_h * ($min_width1 / $src_w);
 			//上传成功
 			if($upload_result)
 			{
@@ -259,19 +257,18 @@ class Image_service extends MY_Service{
 				 * $tofile [缩略图本地保存路径]
 				 * $osspath[原图本地保存路径]
 				 */
-				$arr = explode('/',$pic_path);
-				$toFile = "thumb1_".$arr[count($arr)-1];
-				$arr[count($arr)-1] = $toFile;
-				$toFile = implode('/', $arr);
+				$toFile = Common::get_thumb_url($pic_path,'thumb1_');
+				$toFile1= Common::get_thumb_url($pic_path,'thumb2_');
 				$thumb_result = $this->cimage->img2thumb("./{$pic_path}","./{$toFile}",$min_width,$min_height,1);
-
+				$thumb_result1= $this->cimage->img2thumb("./{$pic_path}","./{$toFile1}",$min_width1,$min_height1,1);
 				//生成缩略图成功
-				if($thumb_result)
+				if($thumb_result && $thumb_result1)
 				{
 					//上传缩略图到oss
 					$oss_result = $this->oss->upload_by_file($toFile);
+					$oss_result1= $this->oss->upload_by_file($toFile1);
 					//缩略图上传成功
-					if($oss_result)
+					if($oss_result && $oss_result1)
 					{
 						/**
 						 * [上传原图到oss]
@@ -288,17 +285,19 @@ class Image_service extends MY_Service{
 							$result = array();
 							$result['success']  = 0;
 							$result['pic']   = OSS_URL."/{$pic_path}";
-							$result['thumb'] = OSS_URL."/{$toFile}" ;
+							$result['thumb'] = OSS_URL."/{$toFile1}" ;
 						}
 						//失败
 						else
 						{
 							//删除oss上缩略图
 							$this->oss->delete_object($toFile);
+							$this->oss->delete_object($toFile1);
 						}
 					}
 					//删除本地缩略图
 					@unlink($toFile);
+					@unlink($toFile1);
 				}
 				else
 				{

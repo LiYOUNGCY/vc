@@ -75,7 +75,7 @@ class User_model extends CI_Model
 		else if( isset( $login_type['email'] ) )
 		{
 			$query = $query->where('email', $login_type['email']);
-            $query = $query->where('email_status', 1);
+            //$query = $query->where('email_status', 1);
 		}
 		//调用错误
 		else

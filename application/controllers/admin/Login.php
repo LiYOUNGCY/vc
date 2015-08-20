@@ -54,6 +54,7 @@ class Login extends MY_Controller{
 		}
 		else
 		{
+
 			$this->error->output('LOGIN_ERROR',array(
 					'script' => 'window.location.href = "'.base_url().'";'
 			));

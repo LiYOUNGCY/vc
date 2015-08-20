@@ -30,7 +30,7 @@ class Detail extends MY_Controller{
 		{
 			$collect_status = 0;		
 		}
-
+		$production['pic'] 		= Common::get_thumb_url($production['pic'],'thumb2_');
         $data['production'] 	= $production;
         $data['collect_status'] = $collect_status;
         //获取相关联的专题
