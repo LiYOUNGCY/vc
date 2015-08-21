@@ -4,7 +4,8 @@
     <?php echo $top; ?>
     <div class="container">
         <div class="content edit">
-            <form class="list" method="post" action="<?= base_url() ?>artist/publish/publish_artist">
+            <form class="list" method="post" action="<?= base_url() ?>artist/publish/update_artist">
+                <input type="hidden" name="aid" value="<?=$artist['id']?>" />
                 <div class="item">
                     <label>艺术家的照片：</label>
 
@@ -15,7 +16,7 @@
                         <input type="hidden" id="h" name="h"/>
                         <input type="hidden" id="img" name="img"/>
                         <div class="box">
-                            <div id="camera_warp" class="camera_warp">
+                            <div id="camera_warp" class="camera_warp" style="background-image: url(<?=$artist['pic']?>) ;background-position: 50% 50%; -moz-background-size:100% 100%; background-size:100% 100%;">
                                 <input type="file" name="upfile" id="upfile" onchange="file_upload()">
                                 <i class="fa fa-camera fa-5x"></i>
                             </div>
@@ -25,20 +26,20 @@
                 </div>
                 <div class="item">
                     <label for="name">艺术家的姓名：</label>
-                    <input id="name" name="artist_name" type="text">
+                    <input id="name" name="artist_name" type="text" value="<?=$artist['name']?>">
                 </div>
                 <div class="item">
                     <label for="intro">艺术家的简介：</label>
 
                     <div class="text">
-                        <textarea id="intro" name="intro" rows="5"></textarea>
+                        <textarea id="intro" name="intro" rows="5"><?=$artist['intro']?></textarea>
                     </div>
                 </div>
                 <div class="item">
                     <label for="evaluation">评价：</label>
 
                     <div class="text">
-                        <textarea id="evaluation" name="evaluation" rows="5"></textarea>
+                        <textarea id="evaluation" name="evaluation" rows="5"><?=$artist['evaluation']?></textarea>
                     </div>
                 </div>
                 <div class="options">
