@@ -44,12 +44,17 @@ class Publish extends MY_Controller{
 				show_404();
 			}
 			$production = $this->production_service->get_production_by_id($pid);
+//			echo json_encode($production);
+
 			if(empty($production))
 			{
 				show_404();
 			}
 
-			echo var_dump($production);
+			$data['production'] = $production;
+			$head['title'] = '修改艺术品信息';
+			$this->load->view('common/head', $head);
+			$this->load->view('update_production', $data);
 		}
 	}
 
@@ -101,7 +106,7 @@ class Publish extends MY_Controller{
 
 		$arr = $this->sc->input(array('pid','production_name','production_intro','aid','price','pic','l','w','h','type','marterial','creat_time','status'));
 		$result = $this->production_service->update_production(
-			$arr['pid'],$this->user['id'],$arr['name'],$arr['intro'],
+			$arr['pid'],$this->user['id'],$arr['production_name'],$arr['production_intro'],
 			$arr['aid'],$arr['price'],$arr['pic'],$arr['l'],$arr['w'],
 			$arr['h'],$arr['type'],$arr['marterial'],$arr['creat_time'],$arr['status']);
 		if($result)

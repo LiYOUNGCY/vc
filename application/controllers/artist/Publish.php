@@ -47,7 +47,11 @@ class Publish extends MY_Controller{
                 show_404();
             }
             $artist = $this->artist_service->get_artist_by_id($aid);
-
+//			echo json_encode($artist);
+			$data['artist'] = $artist;
+			$head['title'] = '修改艺术家信息';
+			$this->load->view('common/head', $head);
+			$this->load->view('update_artist', $data);
 		}
 	}
 
@@ -97,22 +101,25 @@ class Publish extends MY_Controller{
         $error_redirect = array(
             'script' => "window.location.href='".base_url()."update/artist/".$aid."';"
         );
-        $this->sc->set_error_redirect($error_redirect);
+		$this->sc->set_error_redirect($error_redirect);
 
-		$aid 		= $this->sc->input('aid');
-		$name 		= $this->sc->input('artist_name');
-		$intro		= $this->sc->input('intro');
-		$evaluation = $this->sc->input('evaluation');
-		$pic 		= $this->sc->input('pic');
+		$this->load->service('image_service');
+		$img = $this->sc->input(array('img','x','y','w','h'));
+		$pic = $this->image_service->save_artist_pic($img['img'],$img['x'],$img['y'],$img['w'],$img['h']);
+		if($pic)
+		{
+			$aid 		= $this->sc->input('aid');
+			$name 		= $this->sc->input('artist_name');
+			$intro		= $this->sc->input('intro');
+			$evaluation = $this->sc->input('evaluation');
 
-		$result = $this->artist_service->update_artist($aid,$this->user['id'],$name,$intro,$evaluation,$pic);
-		if($result)
-		{
-            redirect(base_url()."artist/".$aid,'location');
+			$result = $this->artist_service->update_artist($aid,$this->user['id'],$name,$intro,$evaluation,$pic);
+			if($result)
+			{
+				redirect(base_url()."artist/".$aid,'location');
+			}
 		}
-		else
-		{
-			$this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().'update/artist/'.$aid.'";'));
-		}
+		$this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().'update/artist/'.$aid.'";'));
+
 	}
 }
