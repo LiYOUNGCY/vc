@@ -12,6 +12,14 @@ var GET_ARTIST_LIST = BASE_URL + 'artist/main/get_artist_list';
 //登录
 var LOGIN_URL = BASE_URL + 'login';
 
+
+var PHONE_LOGIN_URL = BASE_URL + "account/main/login_by_phone";
+var EMAIL_LOGIN_URL = BASE_URL + "account/main/login_by_email";
+var EMAIL_SIGNUP_URL = BASE_URL + "account/main/register_by_email";
+var PHONE_SIGNUP_URL = BASE_URL + "account/main/register_by_phone";
+var CHECK_PHONE_URL = BASE_URL + "account/main/check_phone";
+var CHECK_EMAIL_URL = BASE_URL + "account/main/check_email";
+
 //艺术品列表
 var GET_PRODUCTION_URL = BASE_URL + 'production/main/get_production_list';
 

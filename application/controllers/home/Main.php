@@ -20,11 +20,14 @@ class Main extends MY_Controller {
             'swiper.min.css',
             'font-awesome/css/font-awesome.min.css',
             'base.css'
+            
         );
         $data['javascript'] = array(
             'jquery.js',
             'masonry.pkgd.min.js',
-            'jquery.imageloader.js'
+            'jquery.imageloader.js',
+            'error.js',
+            'validate.js'
         );
 
         $all = $this->home_service->enter_index();
@@ -33,6 +36,8 @@ class Main extends MY_Controller {
         $top = $this->load->view('common/top', $user, TRUE);
         $data['title']        = "最专业的艺术导购";
         $body['top']          = $top;
+        $body['sign']         = $this->load->view('common/sign', '', TRUE);
+        $body['footer']       = $this->load->view('common/footer', '', TRUE);
         $body['user']         = $this->user;
 
         $this->load->view('common/head', $data);
