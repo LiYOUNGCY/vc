@@ -28,7 +28,6 @@
 
 <script>
     $(function() {
-        var page = 0;
         'use strict';
 
         var $container = $('.margin-top');
@@ -53,17 +52,6 @@
             }
         });
 
-        $.ajax({
-            type: 'post',
-            url: GET_PRODUCTION_URL,
-            data: {
-                page: page
-            }
-            dataType: 'json',
-            success: function(data) {
-
-            }
-        });
 
         function LoadMore() {
             $.ajax({
@@ -87,12 +75,10 @@
                     for(var i = 0; i < items.length; i++) {
                         // var items[i].content = items[i].content;
 
-                        var article_id = items[i].content.article_id;
-                        var article_title = items[i].content.sort_title;
-                        var article_content = items[i].content.article_content;
-                        var img = items[i].content.article_image;
-                        var like = items[i].like;
-                        var read = items[i].read;
+                        var title = data[i].name;
+                        var author = data[i].artist.name;
+                        var price = data[i].price;
+                        var img = data[i].pic;
 
 
                         var box = $('<div class="production"> <div > <img class="image" src="<?=base_url()?>public/img/load.gif" data-src="'+img+'" alt=""> </div> <div class="wrap"> <div class="title">'+title+'</div> <div class="author"><span>作者：</span><span>'+author+'</span></div> <div class="price">售价：<span>'+price+'</span></div> <div class="footer clearfix"> <div class="btn">赞</div> <div class="btn">作品详情</div> </div> </div> </div>');
@@ -111,12 +97,33 @@
                             }
                         });
 
-                        $('#img_load_'+ page).scrollLoading();
                         //Add Event
                         WindowEvent();
 
                         // -------------- End -------------
                     }
+                }
+            });
+        }
+        // END LoadMore
+
+        LoadMore();
+
+        $(document).click(function(){
+            console.log('click');
+            LoadMore();
+        });
+
+        WindowEvent();
+
+
+        function WindowEvent () {
+            $(window).scroll(function(){
+                // 当滚动到最底部以上100像素时， 加载新内容
+                if ($(document).height() - $(this).scrollTop() - $(this).height() < 100) {
+                    $(window).unbind('scroll');
+                    console.log(page);
+                    LoadMore();
                 }
             });
         }
