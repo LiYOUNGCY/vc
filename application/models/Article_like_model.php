@@ -50,6 +50,20 @@ class Article_like_model extends CI_Model {
                 return FALSE;
             }
         }
+    }   
+
+    public function get_like_list($page = 0, $uid, $limit = 10, $order = 'id DESC')
+    {
+        $this->db->where(array('uid' => $uid,'status' => 1));
+        if( ! empty($limit))
+        {
+
+            $this->db->limit($limit,$page * $limit);
+        }
+        $query  = $this->db->order_by($order)
+                           ->get('article_like')
+                           ->result_array();
+        return $query;
     }
 
     /**

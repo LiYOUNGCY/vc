@@ -32,13 +32,10 @@ class Production_model extends CI_Model
                                     production.like,
                                     production.intro,
                                     production.price,
-                                    production.creat_time,
-                                    production.collection
+                                    production.creat_time
 		');
 
         if (is_numeric($meid)) {
-            $query->select('production_collection.status as collect_status');
-            $query = $query->join('production_collection', 'production.id = production_collection.pid', 'left');
         }
         if ( ! empty($uid)) {
             $query = $query->where('uid', $uid);
@@ -101,7 +98,6 @@ class Production_model extends CI_Model
         $this->db->insert('production', $data);
         return $this->db->insert_id();
     }
-
     /**
      * [update_production 更新]
      * @param  [type] $pid [description]
@@ -113,6 +109,25 @@ class Production_model extends CI_Model
         $arr['modify_time'] = date("Y-m-d H:i:s", time());
         $this->db->where('id', $pid)->update('production', $arr);
         return $this->db->affected_rows() === 1;
+    }
+
+
+    /**
+     * 点赞时，艺术品的 like 加一
+     */
+    public function argee_production($pid)
+    {
+        $table_name = $this->db->protect_identifiers('production', TRUE);
+        $this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` + 1 WHERE {$table_name}.id = {$pid}");
+    }
+    
+    /**
+     * 取消点赞时，艺术品的 like 减一
+     */
+    public function disargee_production($pid)
+    {
+        $table_name = $this->db->protect_identifiers('production', TRUE);
+        $this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` - 1 WHERE {$table_name}.id = {$pid} and {$table_name}.`like` > 0");
     }
 
     public function get_production_count()
@@ -134,4 +149,5 @@ class Production_model extends CI_Model
                           ->result_array();
         return $query;
     }
+
 } 

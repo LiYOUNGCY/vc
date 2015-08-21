@@ -30,9 +30,6 @@
 											状态
 										</th>										
 										<th>
-											收藏量
-										</th>
-										<th>
 											喜欢数
 										</th>										
 										<th>
@@ -76,9 +73,6 @@
 												<td>
 													<?=$status[$v['status']]?>
 												</td>												
-												<td>
-													<?=$v['collection']?>
-												</td>
 												<td>
 													<?=$v['like']?>
 												</td>

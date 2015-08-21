@@ -8,7 +8,6 @@ class Article_service extends MY_Service{
         $this->load->model('article_model');
         $this->load->model('article_comment_model');   
         $this->load->model('article_like_model');
-        $this->load->model('article_collection_model');
         $this->load->model('user_model');
         $this->load->model('notification_model');
     }
@@ -82,10 +81,6 @@ class Article_service extends MY_Service{
         return $this->article_like_model->get_article_vote_by_both($aid, $uid)['status'];
     }
 
-    public function check_article_collection($uid, $aid)
-    {
-        return $this->article_collection_model->check_article_collection($uid, $aid);
-    }
     /**
      * [get_comment_by_aid 获取文章评论]
      */
@@ -191,35 +186,6 @@ class Article_service extends MY_Service{
             $this->error->output('INVALID_REQUEST');
         }
     }
-
-    /**
-     * 收藏文章
-     * @param  aid 文章id[int]
-     * @param  uid 用户id[int]
-     * @return [type]
-     */
-    public function collect_article($aid, $uid)
-    {
-        //文章存在检查
-        $article = $this->article_model->get_article_by_id($aid);
-        if(empty($article))
-        {
-            $this->error->output('INVALID_REQUEST');
-        }
-
-        $result = $this->article_collection_model->insert_collection($aid,$uid);
-        if( ! empty($result))
-        {
-            echo json_encode(array('success' => 0));
-            //更新文章收藏数
-            $this->article_model->update_count($aid, array('name' => 'collection','amount' => 1));            
-        }
-        else
-        {
-            $this->error->output('INVALID_REQUEST');
-        }
-    }
-
     /**
      * 获取文章点过赞的人
      */
