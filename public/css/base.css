@@ -1283,6 +1283,17 @@ textarea:focus {
      display: inline-block;
  }
 
+.edit .list .item .author-image {
+    width: 80px;
+    height: 80px;
+    display: none;
+}
+
+.edit .list .item .author-image img{
+    width: 100%;
+    height: 100%;
+}
+
  .container .content.edit {
      width: 600px;
      margin-left: auto;
@@ -1339,6 +1350,13 @@ textarea:focus {
     color: #666666;
 }
 
+.edit .list .item label[for="aid"],
+.edit .list .item label[for="aid"] + i {
+    display: inline-block;
+    font-size: 16px;
+    border: none;
+}
+
 .edit .list .item h3 {
     text-align: center;
 }
@@ -1378,6 +1396,7 @@ textarea:focus {
     height: 100%;
     background-color: rgba(0,0,0,.4);
     overflow: auto;
+    z-index: 900;
 }
 
 .edit .production_list .list{
@@ -1386,6 +1405,19 @@ textarea:focus {
     background-color: #ffffff;
     padding: 10px;
     padding-top: 5px;
+}
+
+.edit .production_list .list .top{
+    height: 24px;
+    width: 100%;
+    background-color: #EEEEEE;
+}
+
+.edit .production_list .list .top i {
+    font-size: 24px;
+    float:right;
+    cursor: pointer;
+    z-index: 999;
 }
 
 .edit .production_list .list .pro {
@@ -1399,9 +1431,27 @@ textarea:focus {
     background-color: #EEEEEE;
 }
 
+.edit .production_list .author .pro {
+     display: inline-block;
+     padding: 10px;
+ }
+
+.edit .production_list .author .pro:hover {
+    background-color: #fcee21;
+}
+
 .edit .production_list .list .pro .intro {
     padding: 10px 10px 10px 320px;
     height: 300px;
+}
+
+.edit .production_list .author .pro .avatar {
+    width: 80px;
+    height: 80px;
+}
+
+.edit .production_list .author .pro .name {
+    text-align: center;
 }
 
 .edit .production_list .list .pro .intro + img {
