@@ -80,13 +80,14 @@ class Notification_model extends CI_Model{
 	 * @param  [type] $content    [description]
 	 * @return [type]             [description]
 	 */
-	public function insert($sender_id,$reciver_id,$type,$content)
+	public function insert($sender_id,$reciver_id,$type,$content,$read_flag = 0)
 	{
 		$data = array(
 			'sender_id'   => $sender_id,
 			'reciver_id'  => $reciver_id,
 			'type' 	      => $type,
 			'content' 	  => $content,
+			'read_flag'   => $read_flag,
 			'publish_time'=> date('Y-m-d H-m-s')
  		);
  		$this->db->insert('notification',$data);

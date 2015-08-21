@@ -43,6 +43,7 @@ class Article extends MY_Controller{
 		}
 	}
 
+	/*
 	public function edit($type = 'a',$id = NULL)
 	{
         $navbar  = $this->load->view('admin/common/navbar',"",TRUE);   	
@@ -68,7 +69,7 @@ class Article extends MY_Controller{
 
 	}	
 
-
+	*/
 	public function delete_article()
 	{
 		$aid = $this->sc->input('aids');
@@ -87,10 +88,14 @@ class Article extends MY_Controller{
 			$this->error->output('INVALID_REQUEST');
 		}		
 	}
+
 	/**
 	 * [update_article 更新文章]
 	 * @return [type] [description]
 	 */
+
+	/*
+
 	public function update_article()
 	{
 
@@ -122,4 +127,6 @@ class Article extends MY_Controller{
 			$this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().ADMINROUTE.'article/edit/a/'.$aid.'";'));				
 		}
 	}
+
+	*/	
 }

@@ -70,8 +70,8 @@ $route['publish/article']  = 'article/publish/index/publish';
 //更新文章
 $route['update/article/(:num)']   = 'article/publish/index/update/$1';
 
-$route['topic'] = 'article/main/index/topic';
-$route['topic/([a-z]*)'] = 'article/main/index/topic/$1';
+//$route['topic'] = 'article/main/index/topic';
+//$route['topic/([a-z]*)'] = 'article/main/index/topic/$1';
 
 
 /**

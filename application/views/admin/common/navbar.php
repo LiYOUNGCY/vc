@@ -79,16 +79,7 @@
                     <a href="<?=base_url().ADMINROUTE?>article"><i class="fa fa-file fa-fw"></i>文章管理</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-circle fa-fw"></i>圈子管理<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="panels-wells.html">圈子</a>
-                        </li>
-                        <li>
-                            <a href="buttons.html">帖子</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
+                    <a href="<?=base_url().ADMINROUTE?>slider"><i class="fa fa-file fa-fw"></i>轮播管理</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i>网站设置<span class="fa arrow"></span></a>

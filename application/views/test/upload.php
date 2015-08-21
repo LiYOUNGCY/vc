@@ -41,7 +41,7 @@ $(function(){
     $("form").hide();
     //取消
     $("#cancel").click(function()
-    {   
+    {
         //重定向
     });
 
@@ -58,7 +58,7 @@ function jcrop_init(tar)
         setSelect: [100, 100, 300 ,300],  //设定4个角的初始位置
         aspectRatio: 1 / 1,
         onSelect: showCoords   //当选择完成时执行的函数
-    });    
+    });
 }
 function showCoords(c)
 {
@@ -99,16 +99,16 @@ function file_upload()
                 img_src  = path;
                 $("#image").attr('src',BASE_URL+path);
                 $('#image').show();
-                $("#camera_warp").hide();      
-                // $("form").show();                      
-                jcrop_init('#image');   
+                $("#camera_warp").hide();
+                // $("form").show();
+                jcrop_init('#image');
             }
 
         },
         error: function (data) {
             alert('error');
         }
-    });    
+    });
 }
 
 

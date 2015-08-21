@@ -67,7 +67,7 @@ class Image extends MY_Controller{
 	}
 
 	/**
-	 * [upload_production description]
+	 * [upload_production 上传艺术品图]
 	 * @return [type] [description]
 	 */
 	public function upload_production()
@@ -76,5 +76,16 @@ class Image extends MY_Controller{
 		$result = $this->image_service->upload_production('upfile',$uid);
 		header('Content-Type:application/json');
 		echo json_encode($result);			
+	}
+	/**
+	 * [upload_slider 上传轮播图]
+	 * @return [type] [description]
+	 */
+	public function upload_slider()
+	{
+		$uid = $this->user['id'];
+		$result = $this->image_service->upload_slider('upfile',$uid);
+		header('Content-Type:application/json');
+		echo json_encode($result);					
 	}
 }

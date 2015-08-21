@@ -8,9 +8,30 @@ class Publish extends MY_Controller{
 
 	public function index($type = 'publish', $pid = NULL)
 	{
+		$head['css'] = array(
+			'base.css',
+			'font-awesome/css/font-awesome.min.css',
+			'alert.css',
+			'jquery.Jcrop.css'
+		);
+
+		$head['javascript'] = array(
+			'jquery.js',
+			'error.js',
+			'timeago.js',
+			'alert.min.js',
+			'autosize.js',
+			'ajaxfileupload.js'
+		);
+
+		$user['user']= $this->user;
+		$data['top'] = $this->load->view('common/top', $user, TRUE);
+
 		if($type == 'publish')
 		{
-			$this->load->view('test/publish_production');
+			$head['title'] = '发布艺术品';
+			$this->load->view('common/head', $head);
+			$this->load->view('publish_production', $data);
 		}
 		else if($type == 'update')
 		{
@@ -38,16 +59,17 @@ class Publish extends MY_Controller{
             'script' => "window.location.href='".base_url()."publish/production';"
         );
         $this->sc->set_error_redirect($error_redirect);
-		$name = $this->sc->input('production_name');
-		$aid  = $this->sc->input('aid');
-		$price= $this->sc->input('price');
-		$pic  = $this->sc->input('pic');
-	
-		$result = $this->production_service->publish_production($name,$this->user['id'],$aid,$price,$pic);
+
+        $arr = $this->sc->input(array('production_name','production_intro','aid','price','pic','l','w','h','type','marterial','creat_time'));
+
+		$result = $this->production_service->publish_production(
+			$arr['production_name'],$this->user['id'],$arr['production_intro'],$arr['aid'],
+			$arr['price'],$arr['pic'],$arr['l'],$arr['w'],$arr['h'],
+			$arr['type'],$arr['marterial'],$arr['creat_time']);
 		if($result)
 		{
 
-			redirect(base_url().'production/'.$result,'location');			
+			redirect(base_url().'production/'.$result,'location');
 		}
 		else
 		{
@@ -72,14 +94,12 @@ class Publish extends MY_Controller{
         );
         $this->sc->set_error_redirect($error_redirect);
 
-		$pid    = $this->sc->input('pid');
-		$name   = $this->sc->input('production_name');
-		$aid    = $this->sc->input('aid');
-		$price  = $this->sc->input('price');
-		$pic    = $this->sc->input('pic');		
-		$status = $this->sc->input('status');
 
-		$result = $this->production_service->update_production($pid,$this->user['id'],$name,$aid,$price,$pic,$status);
+		$arr = $this->sc->input(array('pid','production_name','production_intro','aid','price','pic','l','w','h','type','marterial','creat_time','status'));
+		$result = $this->production_service->update_production(
+			$arr['pid'],$this->user['id'],$arr['name'],$arr['intro'],
+			$arr['aid'],$arr['price'],$arr['pic'],$arr['l'],$arr['w'],
+			$arr['h'],$arr['type'],$arr['marterial'],$arr['creat_time'],$arr['status']);
 		if($result)
 		{
 			redirect(base_url().'production/'.$pid,'location');

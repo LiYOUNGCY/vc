@@ -5,6 +5,8 @@ class Main extends MY_Controller {
     public function __construct()
     {
         parent::__construct();
+
+        $this->load->service('home_service');
     }
 
 
@@ -27,6 +29,8 @@ class Main extends MY_Controller {
             'error.js',
             'validate.js'
         );
+
+        $all = $this->home_service->enter_index();
 
         $user['user'] = $this->user;
         $top = $this->load->view('common/top', $user, TRUE);
