@@ -27,12 +27,10 @@ class Publish extends MY_Controller{
 		$user['user']= $this->user;
 		$data['top'] = $this->load->view('common/top', $user, TRUE);
 
-
-		$production_type 			  = $this->production_service->get_type_list(0,NULL);
+		$production_type              = $this->production_service->get_type_list(0,NULL);
 		$production_marterial 		  = $this->production_service->get_marterial_list(0,NULL);
 		$data['production_type'] 	  = $production_type;
 		$data['production_marterial'] = $production_marterial;
-
 		if($type == 'publish')
 		{
 			$head['title'] = '发布艺术品';

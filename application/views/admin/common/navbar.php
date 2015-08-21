@@ -78,6 +78,22 @@
                 <li>
                     <a href="<?=base_url().ADMINROUTE?>article"><i class="fa fa-file fa-fw"></i>文章管理</a>
                 </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-sitemap fa-fw"></i>艺术品管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="<?=base_url().ADMINROUTE?>production/p">艺术品</a>
+                        </li>
+                        <li>
+                            <a href="<?=base_url().ADMINROUTE?>production/t">类别</a>
+                        </li>
+                        <li>
+                            <a href="<?=base_url().ADMINROUTE?>production/m">材质</a>
+                        </li>                        
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>                 
                 <li>
                     <a href="<?=base_url().ADMINROUTE?>slider"><i class="fa fa-file fa-fw"></i>轮播管理</a>
                 </li>

@@ -25,7 +25,7 @@ class Production_service extends MY_Service{
 			//获取艺术家信息
 			if( ! empty($v['aid']))
 			{
-				$production[$k]['artist'] = $this->artist_model->get_artist_by_id($v['aid']);
+				$production[$k]['artist'] = $this->artist_model->get_artist_base_id($v['aid']);
 			}
 			else
 			{
