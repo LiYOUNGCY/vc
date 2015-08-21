@@ -20,7 +20,9 @@ class Detail extends MY_Controller{
 		}
 
 		$uid = isset($this->user['id']) ? $this->user['id'] : NULL;
+
 		$production['pic_thumb'] 		= Common::get_thumb_url($production['pic'],'thumb2_');
+
         $data['production'] 	= $production;
         //获取相关联的专题
         //$data['topic'] 			= $this->production_service->get_topic_by_production($pid,$uid);

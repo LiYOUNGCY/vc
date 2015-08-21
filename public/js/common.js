@@ -13,7 +13,9 @@ var GET_ARTIST_LIST = BASE_URL + 'artist/main/get_artist_list';
 var LOGIN_URL = BASE_URL + 'login';
 
 
+
 //艺术品列表
+
 
 var PHONE_LOGIN_URL = BASE_URL + "account/main/login_by_phone";
 var EMAIL_LOGIN_URL = BASE_URL + "account/main/login_by_email";
