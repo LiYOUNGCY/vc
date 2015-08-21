@@ -91,131 +91,157 @@ img {
 }
 
 /*ICON START*/
-.icon{
+.icon {
     clear: both;
 }
 
-.icon.logo-a{
+.icon.logo-a {
     width: 509px;
     height: 168px;
+
     background: transparent url("../img/icon/logo_big.png") no-repeat scroll;
 }
-.icon.logo-w{
+.icon.logo-w {
+    display: inline-block;
+
     width: 61px;
     height: 35px;
+
     background: transparent url("../img/icon/logo_writh.png") no-repeat scroll;
-    display: inline-block;
 }
-.icon.logo-f{
+.icon.logo-f {
+    display: inline-block;
+
     width: 61px;
     height: 71px;
+
     background: transparent url("../img/icon/logo_gray.png") no-repeat scroll;
-    display: inline-block;
 }
-.icon.toplogo{
+.icon.toplogo {
+    display: inline-block;
+
     width: 278px;
     height: 52px;
+
     background: transparent url("../img/icon/VC_logo_small.png") no-repeat scroll;
-    display: inline-block;
 }
-.icon.sidebtn{
+.icon.sidebtn {
+    display: inline-block;
+
     width: 45px;
     height: 45px;
+
     background: transparent url("../img/icon/slidBar_Btn_over.png") no-repeat scroll;
-    display: inline-block;
 }
-.icon.sidebtn:hover{
-    opacity: 0.7;
+.icon.sidebtn:hover {
+    opacity: .7;
 }
 
-.icon .i_media{
+.icon .i_media {
+    display: inline-block;
+
     width: 18px;
     height: 18px;
+
     background: transparent url("../img/icon/i_media.png") no-repeat scroll;
-    display: inline-block;
 }
 
 .icon.home {
     width: 22px;
     height: 22px;
+
     background: transparent url("../img/icon/slidBar_home_normal.png") no-repeat scroll;
 }
 
 .icon.logout {
     width: 22px;
     height: 22px;
+
     background: transparent url("../img/icon/slidBar_logout_normal.png") no-repeat scroll;
 }
 
 .icon.guanzhu {
     width: 22px;
     height: 22px;
+
     background: transparent url("../img/icon/slidBar_guanzhu_normal.png") no-repeat scroll;
 }
 
 .icon.tongji {
     width: 22px;
     height: 22px;
+
     background: transparent url("../img/icon/slidBar_tongji_normal.png") no-repeat scroll;
 }
 
 .icon.sixin {
     width: 22px;
     height: 22px;
+
     background: transparent url("../img/icon/slidBar_sixin_normal.png") no-repeat scroll;
 }
 
 .icon.setting {
     width: 22px;
     height: 22px;
+
     background: transparent url("../img/icon/slidBar_setting_normal.png") no-repeat scroll;
 }
-.icon.language{
+.icon.language {
     width: 22px;
     height: 22px;
+
     background: transparent url("../img/icon/slidBar_yuyan_normal.png") no-repeat scroll;
 }
-.icon.login{
+.icon.login {
     width: 22px;
     height: 22px;
+
     background: transparent url("../img/icon/sb_login_normal.png") no-repeat scroll;
 }
-.icon.signup{
+.icon.signup {
     width: 22px;
     height: 22px;
+
     background: transparent url("../img/icon/sb_signup_normal.png") no-repeat scroll;
 }
 
 .icon .like {
     width: 16px;
     height: 16px;
+
     background: transparent url("../img/icon/like.png") no-repeat scroll;
 }
 
 .icon .unlike {
     width: 16px;
     height: 16px;
+
     background: transparent url("../img/icon/unlike.png") no-repeat scroll;
 }
 
-.icon.home_setting{
+.icon.home_setting {
     width: 38px;
     height: 38px;
+
     background: transparent url("../img/icon/profile_icon_shezhi.png") no-repeat scroll;
 }
-.icon.home_quanzi{
+.icon.home_quanzi {
     width: 38px;
     height: 38px;
+
     background: transparent url("../img/icon/profile_icon_quanzi.png") no-repeat scroll;
 }
-.icon.home_hezuo{
+.icon.home_hezuo {
     width: 38px;
     height: 38px;
+
     background: transparent url("../img/icon/profile_icon_hezuo.png") no-repeat scroll;
 }
-.icon.home_jieshao{
+.icon.home_jieshao {
     width: 38px;
     height: 38px;
+
     background: transparent url("../img/icon/profile_icon_jieshao.png") no-repeat scroll;
 }
 
@@ -247,30 +273,6 @@ img {
     height: 10px;
 
     background: red;
-}
-
-#pageslide {
-    /* These styles MUST be included. Do not change. */
-    display: none;
-
-    position: absolute;
-    position: fixed;
-    top: 0;
-    z-index: 999999;
-
-    padding: 20px;
-    /* Specify the width of your pageslide here */
-    width: 260px;
-    height: 100%;
-
-    color: #fff;
-    /* These styles are optional, and describe how the pageslide will look */
-    background-color: #333;
-
-    -webkit-box-shadow: inset 0 0 5px 5px #222;
-            box-shadow: inset 0 0 5px 5px #222;
-
-    -moz-shadow: inset 0 0 5px 5px #222;
 }
 
 .sidebar .lop {
