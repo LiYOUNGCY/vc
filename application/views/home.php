@@ -45,7 +45,7 @@
         <div class="list" id="subject-list">
             <div class="item">
                 <div class="sub-image" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg);background-size:cover;background-position:50% 50%;"></div>
-                <div class="sub-title">撒斯顿奥术奥术阿奥术阿奥术阿阿斯顿</di    v>
+                <div class="sub-title">撒斯顿奥术奥术阿奥术阿奥术阿阿斯顿</div>
                 <div class="sub-content">sadas阿斯顿阿斯顿阿沙文电饭锅下次代收代付为注册色为二位手续费水电费为二位水电费需的风格威尔为为房产税V型水...</div>
                 <ul class="sub-info">
                     <li><i class="fa fa-heart-o"></i> 124154</li>
