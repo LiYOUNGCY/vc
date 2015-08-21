@@ -25,9 +25,6 @@
 										<th>文章类型</th>
 										<th>
 											文章标题
-										</th>
-										<th>
-											收藏量
 										</th>										
 										<th>
 											阅读量
@@ -63,10 +60,7 @@
 												</td>
 												<td>
 													<?=$v['title']?>
-												</td>
-												<td>
-													<?=$v['collection']?>
-												</td>												
+												</td>											
 												<td>
 													<?=$v['read']?>
 												</td>

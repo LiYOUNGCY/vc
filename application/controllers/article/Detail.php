@@ -30,19 +30,14 @@ class Detail extends MY_Controller
         {
             //获取点赞状态
             $like_status    = $this->article_service->get_article_vote_by_both($aid, $this->user['id']);            
-            //获取收藏状态
-            $collect_status = $this->article_service->check_article_collection($this->user['id'], $aid);
-            $collect_status = !empty($collect_status) ? $collect_status['status'] : 0;
         }
         else
         {
             $like_status    = 0;
-            $collect_status = 0;
         }
         
         $data['article'] = $article;
         $data['like_status']    = $like_status;
-        $data['collect_status'] = $collect_status;
         $data['comment'] = $comment;
 
 
@@ -112,17 +107,6 @@ class Detail extends MY_Controller
         }
 
         $this->article_service->write_comment($aid, $uid, $pid, $comment);
-    }
-
-    /**
-     * 收藏文章
-     * @return [type]
-     */
-    public function collect_article()
-    {
-        $aid = $this->sc->input('aid');
-        $uid = $this->user['id'];
-        $this->article_service->collect_article($aid, $uid);
     }
 
     /**
