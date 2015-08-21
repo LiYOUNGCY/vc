@@ -20,11 +20,37 @@ class Detail extends MY_Controller{
 		}
 
 		$uid = isset($this->user['id']) ? $this->user['id'] : NULL;
-
-		$production['pic'] 		= Common::get_thumb_url($production['pic'],'thumb2_');
+		$production['pic_thumb'] 		= Common::get_thumb_url($production['pic'],'thumb2_');
         $data['production'] 	= $production;
         //获取相关联的专题
-        $data['topic'] 			= $this->production_service->get_topic_by_production($pid,$uid);	     
+        //$data['topic'] 			= $this->production_service->get_topic_by_production($pid,$uid);
+
+        $data['css'] = array(
+            'font-awesome/css/font-awesome.min.css',
+            'base.css'
+        );
+        $data['javascript'] = array(
+            'jquery.js',
+            'masonry.pkgd.min.js',
+            'jquery.imageloader.js',
+            'error.js',
+            'validate.js',
+            'zoomtoo.js',
+            'zoom.js'
+        );
+
+
+        $user['user'] = $this->user;
+        $data['title']        = $production['name'];
+        $body['top']          = $this->load->view('common/top', $user, TRUE);
+        $body['sign']         = $this->load->view('common/sign', '', TRUE);
+        $body['footer']       = $this->load->view('common/footer', '', TRUE);
+        $body['user']         = $this->user;
+
+        $this->load->view('common/head', $data);
+        $this->load->view('production_detail', $body);
+
+
 	}
 
 	/**
