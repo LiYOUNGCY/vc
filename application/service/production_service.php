@@ -25,7 +25,7 @@ class Production_service extends MY_Service{
 			//获取艺术家信息
 			if( ! empty($v['aid']))
 			{
-				$production[$k]['artist'] = $this->artist_model->get_artist_by_id($v['aid']);
+				$production[$k]['artist'] = $this->artist_model->get_artist_base_id($v['aid']);
 			}
 			else
 			{
@@ -34,6 +34,20 @@ class Production_service extends MY_Service{
 			unset($production[$k]['aid']);
 		}
 		return $production;
+	}
+	
+	public function get_type_list($page,$limit)
+	{
+		$this->load->model('production_type_model');	
+		$type = $this->production_type_model->get_type_list($page,$limit);
+		return $type;		
+	}
+
+	public function get_marterial_list($page,$limit)
+	{
+		$this->load->model('production_marterial_model');
+		$marterial = $this->production_marterial_model->get_marterial_list($page,$limit);
+		return $marterial;
 	}
 
 	/**

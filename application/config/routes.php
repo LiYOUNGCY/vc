@@ -72,8 +72,8 @@ $route['update/article/(:num)']   = 'article/publish/index/update/$1';
 
 //$route['topic'] = 'article/main/index/topic';
 //$route['topic/([a-z]*)'] = 'article/main/index/topic/$1';
-
-
+$route['publish/topic'] = 'topic/publish/index/publish';
+$route['update/topic/(:num)'] = 'topic/publish/index/update/$1';
 /**
  * 艺术品
  */
@@ -125,3 +125,13 @@ $route['admin/user/a/(:num)'] = 'admin/user/index/a/$1';
  */
 $route['admin/article/a'] = 'admin/article/index/a';
 $route['admin/article/a/(:num)'] = 'admin/article/index/a/$1';
+
+/**
+ * 管理员艺术品管理
+ */
+$route['admin/production/p'] = 'admin/production/index/p';
+$route['admin/production/p/(:num)'] = 'admin/production/index/p/$1';
+$route['admin/production/t'] = 'admin/production/index/t';
+$route['admin/production/t/(:num)'] = 'admin/production/index/t/$1';
+$route['admin/production/m'] = 'admin/production/index/m';
+$route['admin/production/m/(:num)'] = 'admin/production/index/m/$1';

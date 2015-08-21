@@ -73,15 +73,15 @@ class Article_model extends CI_Model {
         }
         if( ! empty($uid))
         {
-            $query->where('article.uid',$uid);
+            $query = $query->where('article.uid',$uid);
         }
         if( ! empty($type))
         {
-            $query->where('article.type',$type);
+            $query = $query->where('article.type',$type);
         }
         if( ! empty($pid))
         {
-          $query->like('pids',"|{$pid}|");
+          $query = $query->like('pids',"|{$pid}|");
         }
         $query =$query->order_by($order)->limit($limit, $page*$limit)->get()->result_array();
         return $query;

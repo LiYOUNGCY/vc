@@ -5,6 +5,23 @@ class Artist_model extends CI_Model{
 		parent::__construct();
 	}
 
+	public function get_artist_base_id($id,$base = array('id','pic','name'))
+	{
+		$artist = $this->get_artist_by_id($id);
+		if( ! empty($artist))
+		{
+			$arr = array();
+			foreach ($base as $k => $v) {
+				$arr[$v] = $artist[$v];
+			}
+			return $arr;
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+
 	/**
 	 * 根据id获取艺术家信息
 	 * @param  [type]

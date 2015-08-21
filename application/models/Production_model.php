@@ -17,7 +17,7 @@ class Production_model extends CI_Model
      * @param  order 排序          string
      * @return [type]
      */
-    public function get_production_list($page = 0, $meid = NULL, $status = '0', $uid = NULL, $limit = 6, $order = 'id DESC')
+    public function get_production_list($page = 0, $meid = NULL, $status = NULL, $uid = NULL, $limit = 6, $order = 'id DESC')
     {
         $status = explode(',', $status);
         $query = $this->db->select('
@@ -38,15 +38,15 @@ class Production_model extends CI_Model
 
         if (is_numeric($meid)) {
             $query->select('production_collection.status as collect_status');
-            $query->join('production_collection', 'production.id = production_collection.pid', 'left');
+            $query = $query->join('production_collection', 'production.id = production_collection.pid', 'left');
         }
-        if (!empty($uid)) {
-            $query->where('uid', $uid);
+        if ( ! empty($uid)) {
+            $query = $query->where('uid', $uid);
         }
-
-        $query = $query->where_in('production.status', $status);
-
-
+        if( ! empty($status))
+        {
+            $query = $query->where_in('production.status', $status);           
+        }
 
         $query = $query->order_by($order)->limit($limit, $page * $limit)->get('production')->result_array();
         return $query;
@@ -115,4 +115,23 @@ class Production_model extends CI_Model
         return $this->db->affected_rows() === 1;
     }
 
+    public function get_production_count()
+    {
+        return $this->db->count_all('production');
+    }
+
+    public function delete_production($pid)
+    {
+        $this->db->delete('production',array('id' => $pid));
+        return $this->db->affected_rows() === 1;
+    }
+
+    public function admin_get_production_list($page = 0, $limit = 10, $order = 'id DESC')
+    {
+        $query = $this->db->order_by($order)
+                          ->limit($limit, $page * $limit)
+                          ->get('production')
+                          ->result_array();
+        return $query;
+    }
 } 
