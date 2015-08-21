@@ -9,11 +9,7 @@
                 <div class="btn select">目的</div>
                 <div class="btn select">价格</div>
             </div>
-            <!-- <div class="box">
-                <div class="ishadow">
-                    <img class="image" src="<?=base_url()?>public/img/load.gif" data-src="img/1 (1).jpg" alt=""/>
-                    <div class="shadow"><i class="fa fa-eye"></i></div>
-
+            <!--
     <div class="container" id="vi_container">
 
         <div class="content">

@@ -3,7 +3,7 @@
 <div class="main-wrapper">
     <?php echo $top;?>
 <div class="container">
-    <div class="artist-list">
+    <div class="margin-top">
 <!--        <div class="artist">
             <article class="material-card Yellow">
                 <h2>
@@ -32,7 +32,7 @@
     $(function() {
         var page = 0;
 
-        var container = document.querySelector('.artist-list');
+        var container = document.querySelector('.margin-top');
 
         var masonry = new Masonry(container, {
             itemSelector: '.artist',
@@ -65,7 +65,7 @@
                     // Add Event
                     box.find('.mc-btn-action').click(clickEvent);
 
-                    $('.artist-list').append(box);
+                    $('.margin-top').append(box);
                     masonry.appended(box);
                 }
 
