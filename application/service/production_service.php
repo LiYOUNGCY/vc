@@ -4,7 +4,7 @@ class Production_service extends MY_Service{
 	{
 		parent::__construct();
 		$this->load->model('production_model');
-		$this->load->model('production_collection_model');
+		$this->load->model('production_like_model');		
 		$this->load->model('article_model');
 		$this->load->model('artist_model');
 	}
@@ -25,7 +25,7 @@ class Production_service extends MY_Service{
 			//获取艺术家信息
 			if( ! empty($v['aid']))
 			{
-				$production[$k]['artist'] = $this->artist_model->get_artist_by_id($v['aid']);
+				$production[$k]['artist'] = $this->artist_model->get_artist_base_id($v['aid']);
 			}
 			else
 			{
@@ -35,17 +35,21 @@ class Production_service extends MY_Service{
 		}
 		return $production;
 	}
-
-	/**
-	 * 查看是否收藏该艺术品
-	 * @param  uid 用户id   [int]
-	 * @param  pid 艺术品id [int]
-	 * @return [type]
-	 */
-	public function check_production_collection($uid, $pid)
+	
+	public function get_type_list($page,$limit)
 	{
-		return $this->production_collection_model->check_production_collection($uid,$pid);
+		$this->load->model('production_type_model');	
+		$type = $this->production_type_model->get_type_list($page,$limit);
+		return $type;		
 	}
+
+	public function get_marterial_list($page,$limit)
+	{
+		$this->load->model('production_marterial_model');
+		$marterial = $this->production_marterial_model->get_marterial_list($page,$limit);
+		return $marterial;
+	}
+
 	/**
 	 * 根据id获取艺术品详情
 	 * @param  [type]
@@ -75,6 +79,52 @@ class Production_service extends MY_Service{
 	}
 
 	/**
+	 * [like_production 艺术品点赞]
+	 * @return [type] [description]
+	 */
+	public function like_production($pid, $uid)
+	{
+        //艺术品存在检查
+        $production = $this->production_model->get_production_by_id($pid);
+        if(empty($production))
+        {
+            $this->error->output('INVALID_REQUEST');
+        }
+
+    	$status = $this->production_like_model->insert_like($pid, $uid);
+        //成功
+    	if($status)
+    	{
+            echo json_encode(array('success' => 0));
+            //首次点赞
+            if( ! isset($status['status']))
+            {
+                //更新艺术品的 like 数加一
+                $this->production_model->argee_production($pid);
+            }
+            else
+            {
+                if($status['status'] == 0)
+                {
+                    //文章的 like 数减一
+                    $this->production_model->disargee_production($pid);                   
+                }
+                else
+                {
+                     //更新文章的 like 数加一
+                    $this->production_model->argee_production($pid);                   
+                }
+            }
+
+    	}
+        //失败
+    	else 
+    	{
+            $this->error->output('INVALID_REQUEST');
+    	}
+	}
+
+	/**
 	 * 获取艺术品相关联的专题
 	 * @param  pid 艺术品id [int]
 	 * @return [type]
@@ -86,16 +136,6 @@ class Production_service extends MY_Service{
 			$topic[$k]['article_img'] = Common::extract_first_img($topic[$k]['content']);
 		}
 		return $topic;
-	}
-	/**
-	 * 收藏艺术品
-	 * @param  pid 艺术品id [int]
-	 * @param  uid 用户id   [int]
-	 * @return [type]
-	 */
-	public function collect_production($pid, $uid)
-	{
-		return $this->production_collection_model->insert_collection($pid,$uid);
 	}
 
 	/**

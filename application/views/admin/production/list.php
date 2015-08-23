@@ -6,7 +6,7 @@
                 <div class="col-lg-12"  style="padding:10px 0px;">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            文章管理
+                            艺术品管理
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">                       
@@ -21,27 +21,36 @@
 											</label>
 										</th>
 										<th>ID</th>
-										<th>发布者id</th>
-										<th>文章类型</th>
+										<th>名称</th>
+										<th>艺术家</th>
 										<th>
-											文章标题
-										</th>										
-										<th>
-											阅读量
+											价格
 										</th>
+										<th>
+											状态
+										</th>										
 										<th>
 											喜欢数
 										</th>										
 										<th>
 											<i class="fa fa-calendar fa-fw"></i>				
 											发布时间
+										</th>
+										<th>
+											创建者ID
+										</th>	
+										<th>
+											修改者ID
+										</th>
+										<th>
+											最后修改时间
 										</th>																
 										<th></th>
 									</tr>
 								</thead>
 
 								<tbody>
-										<?php foreach ($article as $k => $v) {?>
+										<?php foreach ($production as $k => $v) {?>
 											<tr class="selected">
 												<td class="center">
 													<label>
@@ -53,25 +62,34 @@
 													<?=$v['id']?>
 												</td>				
 												<td>
-													<?=$v['uid']?>
+													<?=$v['name']?>
 												</td>
 												<td>
-													<?=$v['type_name']?>
+													<a href="<?=base_url().'artist/'.$v['aid']?>"><?=$v['artist']?></a>
 												</td>
 												<td>
-													<?=$v['title']?>
-												</td>											
-												<td>
-													<?=$v['read']?>
+													<?=$v['price']?>
 												</td>
+												<td>
+													<?=$status[$v['status']]?>
+												</td>												
 												<td>
 													<?=$v['like']?>
 												</td>
 												<td>
 													<?=$v['publish_time']?>
-												</td>											
+												</td>
+												<td>
+													<?=$v['creat_by']?>
+												</td>	
+												<td>
+													<?=$v['modify_by']?>
+												</td>	
+												<td>
+													<?=$v['modify_time']?>
+												</td>																																																
 												<td class="tooltip-btn">
-													<button data-toggle="tooltip"  title="查看文章" effect="check" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-eye"></i>
+													<button data-toggle="tooltip"  title="查看艺术品" effect="check" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-eye"></i>
 									                </button>														
 													<button data-toggle="tooltip"  title="编辑" effect="edit" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-edit"></i>
 									                </button>									                							                				
@@ -92,7 +110,7 @@
 		                                        <h4 class="modal-title" id="myModalLabel">删除提示</h4>
 		                                    </div>
 		                                    <div class="modal-body">
-											确认删除所勾选的文章?
+											确认删除所勾选的艺术品?
 		                                    </div>
 		                                    <div class="modal-footer">
 		                                        <button type="button" class="btn btn-default" id="close_modal" data-dismiss="modal">Close</button>
@@ -125,7 +143,7 @@
 <script type="text/javascript">
 var BASE_URL = $("#BASE_URL").val();
 var ADMIN    = $("#ADMIN").val();
-var DELETE_URL= ADMIN+'article/delete_article';
+var DELETE_URL= ADMIN+'production/delete_production';
 $(function()
 {
     $('.tooltip-btn').tooltip({
@@ -155,7 +173,7 @@ $(function()
 			$("#modal_open").click();			
 		}
 		else{
-			alert('请选择文章！');
+			alert('请选择艺术品！');
 			return false;
 		}
 	});	
@@ -206,19 +224,19 @@ $(function()
 	//查看
 	$("button[effect=check]").click(function()
 	{
-		var aid = $(this).attr('u');	
-		if(aid != null && aid != "")
+		var pid = $(this).attr('u');	
+		if(pid != null && pid != "")
 		{
-			window.location.href=BASE_URL+'article/'+aid;
+			window.location.href=BASE_URL+'production/'+pid;
 		}
 	});	
 	//编辑
 	$("button[effect=edit]").click(function()
 	{
-		var aid = $(this).attr('u');	
-		if(aid != null && aid != "")
+		var pid = $(this).attr('u');	
+		if(pid != null && pid != "")
 		{
-			window.location.href=BASE_URL+'update/article/'+aid;
+			window.location.href=BASE_URL+'update/production/'+pid;
 		}
 	});
 });

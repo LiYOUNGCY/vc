@@ -20,20 +20,9 @@ class Detail extends MY_Controller{
 		}
 
 		$uid = isset($this->user['id']) ? $this->user['id'] : NULL;
-		if( ! empty($uid))
-		{
-            //获取收藏状态
-            $collect_status = $this->production_service->check_production_collection($uid, $pid);
-            $collect_status = !empty($collect_status) ? $collect_status['status'] : 0;          
-		}
-		else
-		{
-			$collect_status = 0;
-		}
 		$production['pic_thumb'] 		= Common::get_thumb_url($production['pic'],'thumb2_');
 
         $data['production'] 	= $production;
-        $data['collect_status'] = $collect_status;
         //获取相关联的专题
         //$data['topic'] 			= $this->production_service->get_topic_by_production($pid,$uid);
 
@@ -66,15 +55,12 @@ class Detail extends MY_Controller{
 	}
 
 	/**
-	 * 收藏艺术品
-	 * @return [type]
+	 * [like_production 点赞作品]
+	 * @return [type] [description]
 	 */
-	public function collect_production()
+	public function like_production()
 	{
-        $pid = $this->sc->input('pid');
-        $uid = $this->user['id'];
-        $this->production_service->collect_production($pid, $uid);		
+		$pid = $this->sc->input('pid');
+		$this->production_service->like_production($pid,$this->user['id']);
 	}
-
-
 }

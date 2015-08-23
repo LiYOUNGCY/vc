@@ -73,15 +73,15 @@ class Article_model extends CI_Model {
         }
         if( ! empty($uid))
         {
-            $query->where('article.uid',$uid);
+            $query = $query->where('article.uid',$uid);
         }
         if( ! empty($type))
         {
-            $query->where('article.type',$type);
+            $query = $query->where('article.type',$type);
         }
         if( ! empty($pid))
         {
-          $query->like('pids',"|{$pid}|");
+          $query = $query->like('pids',"|{$pid}|");
         }
         $query =$query->order_by($order)->limit($limit, $page*$limit)->get()->result_array();
         return $query;
@@ -184,7 +184,7 @@ class Article_model extends CI_Model {
 
     public function admin_get_article_list($page = 0,$limit = 10,$order = 'id DESC')
     {
-      $article = $this->db->select('article.id,article.uid,article.type,article_type.name as type_name,article.title,article.publish_time,article.read,article.like,article.collection')
+      $article = $this->db->select('article.id,article.uid,article.type,article_type.name as type_name,article.title,article.publish_time,article.read,article.like')
                           ->join('article_type','article.type = article_type.id','left')
                           ->order_by($order)
                           ->limit($limit,$page * $limit)

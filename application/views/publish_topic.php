@@ -88,49 +88,39 @@
                 </div>
             </form>
 
-
+            <!--            弹出层  -->
             <div id="production" class="production_list hidden">
                 <div class="list" id="production_list">
-                    <i id="close" class="fa fa-close" style="font-size: 24px; float:right; cursor: pointer;z-index: 999;"></i>
+                    <i id="close" class="fa fa-close"
+                       style="font-size: 24px; float:right; cursor: pointer;z-index: 999;"></i>
 
-                    <div class="pro">
-                        <div class="intro">
-                            <h3 class="title">八宝茶</h3>
-                            <div class="content">宫廷秘制八宝茶，含有红枣干、葡萄干、枸杞、桂圆、冰糖、金桔干、芝麻、菊花，功效也是棒棒哒：改善血脂、降低胆固醇、降血压、美容养颜、调理气血</div>
-                        </div>
-                        <img src="<?= base_url() ?>public/img/nrjpinzl4.jpg-w720.jpg">
-                    </div>
+<!--                    <div class="pro">-->
+<!--                        <div class="intro">-->
+<!--                            <h3 class="title">八宝茶</h3>-->
+<!---->
+<!--                            <div class="content">宫廷秘制八宝茶，含有红枣干、葡萄干、枸杞、桂圆、冰糖、金桔干、芝麻、菊花，功效也是棒棒哒：改善血脂、降低胆固醇、降血压、美容养颜、调理气血-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <img src="--><?//= base_url() ?><!--public/img/nrjpinzl4.jpg-w720.jpg">-->
+<!--                    </div>-->
 
-                    <div class="pro">
-                        <div class="intro">
-                            <h3 class="title">八宝茶</h3>
-                            <div class="content">宫廷秘制八宝茶，含有红枣干、葡萄干、枸杞、桂圆、冰糖、金桔干、芝麻、菊花，功效也是棒棒哒：改善血脂、降低胆固醇、降血压、美容养颜、调理气血</div>
-                        </div>
-                        <img src="<?= base_url() ?>public/img/nrjpinzl4.jpg-w720.jpg">
-                    </div>
 
-                    <div class="pro">
-                        <div class="intro">
-                            <h3 class="title">八宝茶</h3>
-                            <div class="content">宫廷秘制八宝茶，含有红枣干、葡萄干、枸杞、桂圆、冰糖、金桔干、芝麻、菊花，功效也是棒棒哒：改善血脂、降低胆固醇、降血压、美容养颜、调理气血</div>
-                        </div>
-                        <img src="<?= base_url() ?>public/img/nrjpinzl4.jpg-w720.jpg">
-                    </div>
                 </div>
             </div>
+            <!--            END 弹出层  -->
         </div>
     </div>
 </div>
 </body>
 <script>
     function close() {
-        $('body').css('overflow','');
+        $('body').css('overflow', '');
         $('#production').addClass('hidden');
     }
 
     function open() {
         $('#production').removeClass('hidden');
-        $('body').css('overflow','hidden');
+        $('body').css('overflow', 'hidden');
     }
     $(function () {
         var page = 0;
@@ -145,19 +135,19 @@
 
         $.ajax({
             type: 'post',
-            url:GET_PRODUCTION_URL,
+            url: GET_PRODUCTION_URL,
             data: {
                 page
             },
             dataType: 'json',
-            success: function(data) {
-                page ++;
-                for(var i = 0; i < data.length; i++) {
+            success: function (data) {
+                page++;
+                for (var i = 0; i < data.length; i++) {
                     var title = data[i].name;
                     var img = data[i].pic;
                     var content = data[i].intro;
 
-                    var $box = $('<div class="pro"> <div class="intro"> <h3 class="title">'+title+'</h3> <div class="content">'+content+'</div> </div> <img src="'+img+'"> </div>');
+                    var $box = $('<div class="pro"> <div class="intro"> <h3 class="title">' + title + '</h3> <div class="content">' + content + '</div> </div> <img src="' + img + '"> </div>');
 
                     //注册事件
                     $box.click(AddProduction);
@@ -177,15 +167,15 @@
         //下移事件
         $('.fa-angle-down').click(moveDown);
 
-        function moveUp(){
+        function moveUp() {
             console.log('up');
             var $item = $(this).parent().parent();
 
             var $prevItem = $item.prev();
             console.log($prevItem);
             //该元素不是第一个
-            if($prevItem.length == 1) {
-                $production = $('<div class="production">'+$item.html()+'</div>');
+            if ($prevItem.length == 1) {
+                $production = $('<div class="production">' + $item.html() + '</div>');
                 $prevItem.before($production);
                 $production.find('.fa-angle-up').click(moveUp);
                 $production.find('.fa-angle-down').click(moveDown);
@@ -199,8 +189,8 @@
             var $item = $(this).parent().parent();
             var $afterItem = $item.next();
 
-            if($afterItem.length == 1) {
-                $production = $('<div class="production">'+$item.html()+'</div>');
+            if ($afterItem.length == 1) {
+                $production = $('<div class="production">' + $item.html() + '</div>');
                 $afterItem.after($production);
                 $production.find('.fa-angle-up').click(moveUp);
                 $production.find('.fa-angle-down').click(moveDown);
@@ -215,13 +205,13 @@
             $item.remove();
         }
 
-        function AddProduction(){
+        function AddProduction() {
             console.log('add production');
             var img = $(this).children('img').attr('src');
             img = img.replace(/thumb1/g, "thumb2");
 
             console.log(img);
-            $box = $('<div class="production"> <div class="group"> <i class="fa fa-trash-o fa-fw" title="删除"></i> <i class="fa fa-angle-up" title="上移"></i> <i class="fa fa-angle-down" title="下移"></i> </div> <div class="item"> <label for="">作品标题：</label> <input type="text"> </div> <div class="item"> <label>作品的介绍：</label> <textarea rows="5"></textarea> </div> <div class="image"> <img src="'+img+'"> </div> </div>');
+            $box = $('<div class="production"> <div class="group"> <i class="fa fa-trash-o fa-fw" title="删除"></i> <i class="fa fa-angle-up" title="上移"></i> <i class="fa fa-angle-down" title="下移"></i> </div> <div class="item"> <label for="">作品标题：</label> <input type="text"> </div> <div class="item"> <label>作品的介绍：</label> <textarea rows="5"></textarea> </div> <div class="image"> <img src="' + img + '"> </div> </div>');
             $box.find('.fa-angle-up').click(moveUp);
             $box.find('.fa-angle-down').click(moveDown);
             $box.find('.fa-trash-o').click(remove);
