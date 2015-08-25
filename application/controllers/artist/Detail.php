@@ -17,7 +17,32 @@ class Detail extends MY_Controller{
 		{
 			show_404();
 		}
-		echo json_encode($artist);
+		//echo json_encode($artist);
+		
+        $data['css'] = array(
+            'font-awesome/css/font-awesome.min.css',
+            'base.css'
+        );
+        $data['javascript'] = array(
+            'jquery.js',
+            'masonry.pkgd.min.js',
+            'jquery.imageloader.js',
+            'error.js',
+            'validate.js',
+            'masonry.pkgd.min.js'
+        );
+
+
+        $user['user'] 		  = $this->user;
+        $data['title']        = $artist['name'];
+        $body['top']          = $this->load->view('common/top', $user, TRUE);
+        $body['sign']         = $this->load->view('common/sign', '', TRUE);
+        $body['footer']       = $this->load->view('common/footer', '', TRUE);
+        $body['user']         = $this->user;
+        $body['artist']		  = $artist;
+
+        $this->load->view('common/head', $data);
+        $this->load->view('artist_detail', $body);
 	}
 	
 	
