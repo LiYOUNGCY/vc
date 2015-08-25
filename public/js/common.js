@@ -23,6 +23,9 @@ var CHECK_EMAIL_URL = BASE_URL + "account/main/check_email";
 //艺术品列表
 var GET_PRODUCTION_URL = BASE_URL + 'production/main/get_production_list';
 
+//提交文章
+var POST_ARTICLE_URL = BASE_URL + 'article/publish/publish_article';
+
 /**
  * [trim 去掉字符串前后两端的空格]
  */
