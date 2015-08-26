@@ -108,9 +108,8 @@ class Cart_service extends MY_Service{
 			{
 				return NULL;
 			}
-			//分页输出
-			$arr = array_slice($_SESSION['cart'], $page * $limit, $limit);
-			return $arr;
+			return $_SESSION['cart'];
+
 		}	
 		else
 		{
@@ -119,11 +118,10 @@ class Cart_service extends MY_Service{
 
 			//添加到session
 			$this->session->set_userdata('cart',$goods);
-			//分页输出
-			$arr = array_slice($goods, 0, $limit);
-			return $arr;
+			return $goods;
 		}
 	}
+
 
 	/**
 	 * [_get_all_good_list 获取用户的所有购物车物品]
