@@ -470,6 +470,7 @@ img {
     max-width: 960px;
 
     text-align: center;
+    position: relative;
 }
 
 .btn {
@@ -953,7 +954,8 @@ hr.line {
 
     opacity: 0;
 
-    transition: all .2s ease-in-out;
+    transition: all .3s ease-in-out;
+    transform: scale(0.8);
 
     cursor: pointer;
 }
@@ -962,6 +964,7 @@ hr.line {
     background-color: rgba(0, 0, 0, .4);
 
     opacity: 1;
+    transform: scale(1);
 }
 
 .article-list .box .ishadow .shadow i {
@@ -969,7 +972,7 @@ hr.line {
     top: 50%;
     left: 50%;
 
-    font-size: 128px;
+    font-size: 112px;
     line-height: 1;
 
     color: lightyellow;
@@ -1141,15 +1144,48 @@ hr.line {
 
     width: 151px;
     height: 40px;
+	text-align: center;
+	display: block;
+
+	border: 1px solid #BBB;
+	border-style: solid none none solid;
 
     line-height: 40px;
+	box-sizing: border-box;
+}
+.margin-top .production .wrap .footer a {
+    float: left;
+
+    width: 151px;
+    height: 40px;
+	text-align: center;
+	display: block;
+
+	border: 1px solid #BBB;
+	border-style: solid none none solid;
+    line-height: 40px;
+	box-sizing: border-box;
 }
 
+.margin-top .production .wrap .footer .like i {
+		font-size: 20px;
+		color: #FF0000;
+		margin-right: 10px;
+}
+.margin-top .production .wrap .footer .more i {
+		margin-right: 10px;
+}
+.content .adv {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 300px;
+    height: 400px;
+    background-color: #EEEEEE;
+}
 .article {
     margin-top: 60px;
-    margin-right: auto;
-    margin-left: auto;
-    max-width: 700px;
+    max-width: 620px;
 }
 
 @media screen and (max-width: 767px) {
@@ -1235,7 +1271,7 @@ hr.line {
 
 .article .detail .item .tcimage {
     margin: 10px 0;
-    width: 700px;
+    width: 100%;
 }
 
 
@@ -2164,170 +2200,6 @@ textarea:focus {
     background-color: #b3b3b3;
 
     cursor: pointer;
-}
-
-/*sign end*/
-.main-wrapper {
-    position: relative;
-
-    height: 100%;
-    height: 100%;
-}
-
-.container {
-    margin: 0 auto;
-    max-width: 960px;
-
-    text-align: center;
-}
-
-.btn {
-    text-align: center;
-
-    background-color: #eee;
-
-    transition: all .2s ease-in-out;
-
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #fcee21;
-}
-
-.head {
-    display: inline-block;
-    float: left;
-
-    position: relative;
-
-    margin: 0 15px;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-}
-.head img {
-    display: inline-block;
-
-    border-radius: 100%;
-    width: 100%;
-    height: 100%;
-}
-
-hr.line {
-    margin: 20px 0;
-    border: 0;
-    height: 1px;
-
-    background: #333;
-    background-image: -webkit-linear-gradient(left, #fff, #333, #fff);
-    background-image:    -moz-linear-gradient(left, #fff, #333, #fff);
-    background-image:         linear-gradient(left, #fff, #333, #fff);
-}
-
-.likebtn {
-    overflow: hidden;
-
-    position: relative;
-
-    width: 107px;
-    height: 40px;
-
-    background: #fff url(../img/like-animate.png) no-repeat;
-    background-position: 0 0;
-}
-
-.likebtn .support {
-    position: absolute;
-    left: 0;
-
-    border-radius: 50% 0 0 50%;
-    width: 45px;
-    height: 40px;
-
-    cursor: pointer;
-}
-
-.likebtn .num {
-    position: absolute;
-    right: 4px;
-
-    width: 57px;
-    height: 40px;
-
-    font-size: 16px;
-    line-height: 40px;
-    text-align: center;
-
-    color: #b3b3b3;
-
-    transition: all .4s ease-in-out;
-
-    cursor: pointer;
-}
-
-.likebtn.focus .num {
-    color: #fcee21;
-}
-
-.likebtn .num .link {
-    color: #b3b3b3;
-
-    transition: all .4s ease-in-out;
-}
-
-.likebtn.focus .num .link {
-    color: #fcee21;
-}
-
-.likebtn.focus {
-    -webkit-animation: likebtnfocus .4s steps(9) forwards;
-            animation: likebtnfocus .4s steps(9) forwards;
-}
-
-.likebtn.blur {
-    -webkit-animation: likebtnblur .3s steps(5) forwards;
-            animation: likebtnblur .3s steps(5) forwards;
-}
-
-@-webkit-keyframes likebtnfocus {
-    0% {
-        background-position: 0 0;
-    }
-
-    100% {
-        background-position: -963px 0;
-    }
-}
-
-@keyframes likebtnfocus {
-    0% {
-        background-position: 0 0;
-    }
-
-    100% {
-        background-position: -963px 0;
-    }
-}
-
-@-webkit-keyframes likebtnblur {
-    0% {
-        background-position: -963px 0;
-    }
-
-    100% {
-        background-position: -1498px 0;
-    }
-}
-
-@keyframes likebtnblur {
-    0% {
-        background-position: -963px 0;
-    }
-
-    100% {
-        background-position: -1498px 0;
-    }
 }
 
 /*top start*/

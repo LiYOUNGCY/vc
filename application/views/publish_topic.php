@@ -10,8 +10,8 @@
                     <input id="title" type="text" name="article_title" />
                 </div>
                 <input type="hidden" name="article_type" value="2"/>
-                <input type="hidden" name="pids" />                    
-                <input id="title" type="hidden" type="text" name="article_content" />                
+                <input type="hidden" name="pids" />
+                <input id="title" type="hidden" type="text" name="article_content" />
                 <div class="item">
                     <label for="introduction">专题导语：</label>
                     <textarea id="introduction" rows="5"></textarea>
@@ -117,7 +117,7 @@
             type: 'post',
             url: GET_PRODUCTION_URL,
             data: {
-                page:page
+                page: page
             },
             dataType: 'json',
             success: function (data) {
