@@ -29,6 +29,9 @@
 </div>
 </div>
 <script>
+function a(id) {
+            window.location.href = BASE_URL + 'artist/' + id;
+        }
     $(function() {
         var page = 0;
 
@@ -41,6 +44,8 @@
             isFitWidth: true,
             isAnimate: true
         });
+
+
 
         $.ajax({
             type: 'post',
@@ -57,10 +62,11 @@
                 }
 
                 for(var i = 0; i < data.length; i++) {
+                    var id = data[i].id;
                     var name = data[i].name;
                     var content = data[i].intro;
                     var img = data[i].pic;
-                    var box = $('<div class="artist"> <article class="material-card Yellow"> <h2> <span>'+name+'</span> </h2> <div class="mc-content"> <div class="img-container"> <img class="img-responsive" src="'+img+'"> </div> <div class="mc-description">'+content+' </div> </div> <a class="mc-btn-action"> <i class="fa fa-bars"></i> </a> <div class="mc-footer"> <div class="btn read">See More</div> </div> </article> </div>');
+                    var box = $('<div class="artist"> <article class="material-card Yellow"> <h2> <span>'+name+'</span> </h2> <div class="mc-content"> <div class="img-container"> <img class="img-responsive" src="'+img+'"> </div> <div class="mc-description">'+content+' </div> </div> <a class="mc-btn-action"> <i class="fa fa-bars"></i> </a> <div class="mc-footer"> <div class="btn read" onclick="a('+id+')">See More</div> </div> </article> </div>');
 
                     // Add Event
                     box.find('.mc-btn-action').click(clickEvent);
