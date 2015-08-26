@@ -5,11 +5,16 @@
     <?php echo $top; ?>
     <div class="container">
         <div class="content edit">
-            <form class="list" method="post" action="<?= base_url() ?>artist/publish/publish_artist">
+            <form class="list" method="post" action="<?= base_url() ?>article/publish/update_article">
                 <div class="item">
                     <label for="title">专题标题：</label>
-                    <input id="title" type="text">
+                    <input id="title" type="text" name="article_title">
                 </div>
+                <input type="hidden" name="aid" />
+                <input type="hidden" name="article_type" value="2"/>
+                <input type="hidden" name="pids" />                    
+                <input id="title" type="hidden" type="text" name="article_content" />    
+
                 <div class="item">
                     <label for="introduction">专题导语：</label>
                     <textarea id="introduction" rows="5"></textarea>
@@ -150,6 +155,11 @@
 
         function get_number(str) {
             var ret = '';
+            
+            if(typeof str == "undefined") {
+                return 0;
+            }
+
             for(i = str.length - 1; i >= 0; i--) {
                 if(( str[i] >= '0' && str[i] <= '9') || str[i] == '.') {
                     ret += str[i];
@@ -235,14 +245,13 @@
             var pids = ReadProduction();
             console.log(pids);
             pids=pids.substring(0,pids.length-1);
-
-
-            var title = $('#title').val();
-            var content = $('#content').html();
-            console.log(content);
+            $("input[name=aid]").val(pid);
+            $("input[name=article_content]").val($("#content").html());
+            $("input[name=pids]").val(pids);
+            $("form").submit();
 
 //            console.log(POST_ARTICLE_URL);
-
+            /*
             $.ajax({
                 type: 'post',
                 url:UPDATE_ARTICLE,
@@ -258,6 +267,7 @@
                     console.log(data);
                 }
             });
+            */
         });
 
         //预览事件
