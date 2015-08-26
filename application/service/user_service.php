@@ -30,10 +30,10 @@ class User_service extends MY_Service
 		{
 			//错误
 			return FALSE;
-		}
-
+		} 
+        $user_id = $this->user_model->register_action($name, $register_type, $pwd);
 		//注册成功，设置 session
-		if ( !empty($user_id = $this->user_model->register_action ($name, $register_type, $pwd)))
+		if ( !empty($user_id))
         {
 			$user = $this->user_model->get_user_base_id($user_id);
 

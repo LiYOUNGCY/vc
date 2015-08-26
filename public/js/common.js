@@ -27,7 +27,7 @@ var GET_PRODUCTION_URL = BASE_URL + 'production/main/get_production_list';
 var POST_ARTICLE_URL = BASE_URL + 'article/publish/publish_article';
 
 //获取文章
-var GET_ARTICLE_BY_ID = BASE_URL + 'article/main/get_article/';
+var GET_ARTICLE_BY_ID = BASE_URL + 'topic/publish/get_article/';
 
 //更新文章
 var UPDATE_ARTICLE = BASE_URL + 'article/publish/update_article';

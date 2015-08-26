@@ -64,11 +64,4 @@ class Main extends MY_Controller {
         }
 
     }
-
-    public function get_article($aid) {
-        if(is_numeric($aid)) {
-            $article = $this->article_service->get_article_by_id($aid);
-            echo json_encode($article);
-        }
-    }
 }
