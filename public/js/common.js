@@ -26,6 +26,9 @@ var GET_PRODUCTION_URL = BASE_URL + 'production/main/get_production_list';
 //提交文章
 var POST_ARTICLE_URL = BASE_URL + 'article/publish/publish_article';
 
+//获取文章
+var GET_ARTICLE_BY_ID = BASE_URL + 'article/main/get_article/';
+
 /**
  * [trim 去掉字符串前后两端的空格]
  */
