@@ -5,8 +5,7 @@
     <div class="container">
         <div class="margin-top">
 
-            <?php for($i = 0; $i < 8; $i++) { ?>
-            <div class="production">
+<!--             <div class="production">
                 <div >
                     <img class="image" src="<?=base_url()?>public/img/load.gif" data-src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/production/1439471082_5.jpg" alt="">
                 </div>
@@ -19,14 +18,16 @@
                         <div class="btn">作品详情</div>
                     </div>
                 </div>
-            </div>
-            <?php } ?>
+            </div> -->
 
         </div>
     </div>
 </div>
 
 <script>
+function a(id) {
+    window.location.href = BASE_URL + 'production/' + id;
+}
     $(function() {
         'use strict';
 
@@ -73,15 +74,16 @@
                     page ++;
 
                     for(var i = 0; i < items.length; i++) {
+                        console.log(items[i]);
                         // var items[i].content = items[i].content;
-
+                        var id = data[i].id;
                         var title = data[i].name;
                         var author = data[i].artist.name;
                         var price = data[i].price;
                         var img = data[i].pic;
 
 
-                        var box = $('<div class="production"> <div > <img class="image" src="<?=base_url()?>public/img/load.gif" data-src="'+img+'" alt=""> </div> <div class="wrap"> <div class="title">'+title+'</div> <div class="author"><span>作者：</span><span>'+author+'</span></div> <div class="price">售价：<span>'+price+'</span></div> <div class="footer clearfix"> <div class="btn">赞</div> <div class="btn">作品详情</div> </div> </div> </div>');
+                        var box = $('<div class="production"> <div > <img class="image" src="<?=base_url()?>public/img/load.gif" data-src="'+img+'" alt=""> </div> <div class="wrap"> <div class="title">'+title+'</div> <div class="author"><span>作者：</span><span>'+author+'</span></div> <div class="price">售价：<span>'+price+'</span></div> <div class="footer clearfix"> <div class="btn">赞</div> <div class="btn" onclick="a('+id+')">作品详情</div> </div> </div> </div>');
                         $container.append(box);
                         masonry.appended(box);
 

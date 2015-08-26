@@ -1,4 +1,3 @@
-<?php print_r($artist)?>
 <body>
 <div class="main-wrapper">
     <!-- 顶部 -->
@@ -35,7 +34,7 @@
 
 
     <?php echo $footer;?>
-    </div> 
+    </div>
 </div>
 
 <?php echo $sign;?>
