@@ -35,5 +35,14 @@ class Publish extends MY_Controller
             $this->load->view('common/head', $head);
             $this->load->view('publish_topic', $data);
         }
+        else if($type == 'update' && is_numeric($pid)){
+            $head['title'] = '修改专题';
+            $this->load->view('common/head', $head);
+            $data['pid'] = $pid;
+            $this->load->view('update_topic', $data);
+        }
+        else {
+            show_404();
+        }
     }
 }
