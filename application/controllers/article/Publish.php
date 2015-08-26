@@ -58,9 +58,21 @@ class Publish extends MY_Controller {
      */
     public function publish_article()
     {
+        /**
+         * [日后修改]
+         * @var [type]
+         */
+        $type = $this->input->post('article_type');       
+        switch($type)
+        {
+            case 1:$type = 'article';break;
+            case 2:$type = 'topic';break;
+        }
         $error_redirect = array(
-            'script' => "window.location.href='".base_url()."publish/article';"
-        );
+            'script' => "window.location.href='".base_url()."publish/{$type}';"
+        );            
+        
+
         $this->sc->set_error_redirect($error_redirect);
         $article_title      = $this->sc->input('article_title');
         $article_type       = $this->sc->input('article_type');
@@ -91,10 +103,21 @@ class Publish extends MY_Controller {
         {
             show_404();
         }
-        
+
+        /**
+         * [日后修改]
+         * @var [type]
+         */
+        $type = $this->input->post('article_type');       
+        switch($type)
+        {
+            case 1:$type = 'article';break;
+            case 2:$type = 'topic';break;
+        }
         $error_redirect = array(
-            'script' => "window.location.href='".base_url()."update/article/".$aid."';"
-        );
+            'script' => "window.location.href='".base_url()."update/{$type}/".$aid."';"
+        );  
+            
         $this->sc->set_error_redirect($error_redirect);
 
         $aid                = $this->sc->input('aid');
@@ -112,7 +135,7 @@ class Publish extends MY_Controller {
         }
         else
         {
-            $this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().'update/article/'.$aid.'";'));
+            $this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().'update/{$type}/'.$aid.'";'));
         } 
     }
 
