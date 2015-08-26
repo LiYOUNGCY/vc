@@ -51,7 +51,7 @@
                     <figure class="effect-bubba">
                         <div class="art-image" style="background: url(<?=$v['pic']?>);background-size:cover;background-position:50% 50%;"></div>
                         <figcaption>
-                            <p>类型：<?=$v['type_name']?><br>尺寸：<?=$v['l']?> * <?=$v['h']?> cm</p>
+                            <p>类型：<?=$v['type_name']?><br>尺寸：<?=$v['l']?> * <?=$v['h']?>cm</p>
                         </figcaption>           
                     </figure>
                     <div class="art-title"><?=$v['name']?></div>
@@ -71,108 +71,20 @@
         <div class="title">最新艺术家</div>
         <div class="artist-swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide new-artlist-list swiper-no-swiping">
-                    <ul>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="swiper-slide new-artlist-list swiper-no-swiping">
-                    <ul>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="swiper-slide new-artlist-list swiper-no-swiping">
-                    <ul>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                    </ul>
-                </div>
+                <?php for($i = 0; $i < count($artist); $i+=5) { ?>
+                    <div class="swiper-slide new-artlist-list swiper-no-swiping">
+                        <ul>
+                             <?php for($j = $i; $j < count($artist) && $j <= $i+4; $j++){?>
+                                 <li>
+                                    <div class="head">
+                                        <img src="<?=$artist[$j]['pic']?>">
+                                    </div>
+                                    <div class="name"><?=$artist[$j]['name']?></div>
+                                </li>                           
+                            <?php }?>                       
+                        </ul>
+                    </div>                    
+                <?php }?>          
             </div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
