@@ -80,10 +80,25 @@ function a(id) {
                         var title = data[i].name;
                         var author = data[i].artist.name;
                         var price = data[i].price;
-                        var img = data[i].pic;
+						var img = data[i].pic;
+						var like = 100;
 
 
-                        var box = $('<div class="production"> <div > <img class="image" src="<?=base_url()?>public/img/load.gif" data-src="'+img+'" alt=""> </div> <div class="wrap"> <div class="title">'+title+'</div> <div class="author"><span>作者：</span><span>'+author+'</span></div> <div class="price">售价：<span>'+price+'</span></div> <div class="footer clearfix"> <div class="btn">赞</div> <div class="btn" onclick="a('+id+')">作品详情</div> </div> </div> </div>');
+                        var box = $('<div class="production">' +
+                '<div >' +
+                    '<img class="image" src="'+ img +'" alt="">' +
+                '</div>' +
+                '<div class="wrap">' +
+                    '<div class="title">'+ title +'</div>' +
+                    '<div class="author"><span>'+ author +'</span><span>鸡巴白</span></div>' +
+                    '<div class="price">售价：<span>'+ price +'</span></div>' +
+                    '<div class="footer clearfix">' +
+                        '<div class="like"><i class="fa fa-heart"></i><span>'+like+'</span></div>' +
+                        '<a class="link" href="'+BASE_URL + 'production/' + id +
+'"><i class="fa fa-hand-o-right"></i>作品详情</a>' +
+                    '</div>' +
+                '</div>' +
+            '</div>');
                         $container.append(box);
                         masonry.appended(box);
 
@@ -120,7 +135,7 @@ function a(id) {
 
 
         function WindowEvent () {
-            
+
             $(window).scroll(function(){
                 // 当滚动到最底部以上100像素时， 加载新内容
                 if ($(document).height() - $(this).scrollTop() - $(this).height() < 100) {

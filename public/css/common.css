@@ -369,6 +369,7 @@ img{
 	display: none;
 }
 .content {
+    position: relative;
 	max-width: 960px;
 	margin: 0 auto;
 	text-align: center;
