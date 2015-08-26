@@ -15,13 +15,50 @@ class Home_service extends MY_Service{
 	 */
 	public function enter_index()
 	{
-		$latest_article    = $this->article_model->get_article_list();
+		//专题
+		$latest_topic      = $this->article_model->get_article_list(0,NULL,NULL,2);
+        foreach($latest_topic as $key => $value )
+        {                                 
+            //对每篇文章内容进行字数截取
+            $latest_topic[$key]['content'] = Common::extract_article($latest_topic[$key]['id'], $latest_topic[$key]['title'], $latest_topic[$key]['content']);
+            
+            //对文章标题字数截取
+            $latest_topic[$key]['content']["sort_title"] = mb_strlen($latest_topic[$key]['content']["article_title"]) > 9 ? mb_substr($latest_topic[$key]['content']["article_title"], 0, 9).'..' : $latest_topic[$key]['content']["article_title"];
+            
+            unset($latest_topic[$key]['id']);
+            unset($latest_topic[$key]['title']); 
+        }		
+        //艺术品
 		$latest_production = $this->production_model->get_production_list();
+		//获取艺术品类型信息
+		$this->load->model('production_type_model');
+		$production_type   = $this->production_type_model->get_type_arr();
+
+		foreach ($latest_production as $k => $v) {
+			//显示缩略图
+			$latest_production[$k]['pic'] = Common::get_thumb_url($latest_production[$k]['pic']);
+			//获取艺术家信息
+			if( ! empty($v['aid']))
+			{
+				$latest_production[$k]['artist'] = $this->artist_model->get_artist_base_id($v['aid']);
+			}
+			else
+			{
+				$latest_production[$k]['artist'] = NULL;
+			}
+			unset($latest_production[$k]['aid']);
+			//艺术品信息
+			if( ! empty($v['type']))
+			{
+				$latest_production[$k]['type_name'] = isset($production_type[$v['type']]) ?  $production_type[$v['type']] : "";				
+			}
+		}		
+
 		$latest_artist     = $this->artist_model->get_artist_list(0,6,'id DESC');
 		$slider 		   = $this->slider_model->get_slider_list();
 
 		$result = array(
-			'article' 	 => $latest_article,
+			'topic' 	 => $latest_topic,
 			'production' => $latest_production,
 			'artist'	 => $latest_artist,
 			'slider' 	 => $slider

@@ -16,5 +16,13 @@ class Production_type_model extends CI_Model{
 		return $query;
 	}
 
-
+	public function get_type_arr()
+	{
+		$result = $this->get_type_list(0,NULL);
+		$arr    = array();
+		foreach ($result as $k => $v) {
+			$arr[$v['id']] = $v['name'];
+		}
+		return $arr;
+	}	
 }

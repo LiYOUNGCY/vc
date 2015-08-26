@@ -120,6 +120,7 @@ function a(id) {
 
 
         function WindowEvent () {
+            
             $(window).scroll(function(){
                 // 当滚动到最底部以上100像素时， 加载新内容
                 if ($(document).height() - $(this).scrollTop() - $(this).height() < 100) {
