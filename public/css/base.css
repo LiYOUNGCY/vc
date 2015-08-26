@@ -39,7 +39,7 @@ a {
 }
 
 a.link {
-    color: #b3b3b3;
+    color: #f7cc1e;
 
     transition: color .1s linear 0s;
 }
@@ -49,7 +49,18 @@ a.link:hover {
 }
 
 a:visited {
-    color: #b3b3b3;
+    color: #f7cc1e;
+}
+
+input,
+textarea {
+    font-family: "微软雅黑", tahoma, arial, simhei, "宋体", sans-serif;
+
+    outline: none;
+}
+
+img {
+    vertical-align: middle;
 }
 
 .hide-x {
@@ -78,159 +89,135 @@ a:visited {
 .clearfix:after {
     clear: both;
 }
-
+.noborder{
+    border: none !important;
+}
 /*ICON START*/
-.icon {
+.icon{
     clear: both;
 }
 
-.icon.logo-a {
+.icon.logo-a{
     width: 509px;
     height: 168px;
-
     background: transparent url("../img/icon/logo_big.png") no-repeat scroll;
 }
-.icon.logo-w {
-    display: inline-block;
-
+.icon.logo-w{
     width: 61px;
     height: 35px;
-
     background: transparent url("../img/icon/logo_writh.png") no-repeat scroll;
-}
-.icon.logo-f {
     display: inline-block;
-
+}
+.icon.logo-f{
     width: 61px;
     height: 71px;
-
     background: transparent url("../img/icon/logo_gray.png") no-repeat scroll;
-}
-.icon.toplogo {
     display: inline-block;
-
+}
+.icon.toplogo{
     width: 278px;
     height: 52px;
-
     background: transparent url("../img/icon/VC_logo_small.png") no-repeat scroll;
-}
-.icon.sidebtn {
     display: inline-block;
-
+}
+.icon.sidebtn{
     width: 45px;
     height: 45px;
-
     background: transparent url("../img/icon/slidBar_Btn_over.png") no-repeat scroll;
-}
-.icon.sidebtn:hover {
-    opacity: .7;
-}
-
-.icon .i_media {
     display: inline-block;
+}
+.icon.sidebtn:hover{
+    opacity: 0.7;
+}
 
+.icon .i_media{
     width: 18px;
     height: 18px;
-
     background: transparent url("../img/icon/i_media.png") no-repeat scroll;
+    display: inline-block;
 }
 
 .icon.home {
     width: 22px;
     height: 22px;
-
     background: transparent url("../img/icon/slidBar_home_normal.png") no-repeat scroll;
 }
 
 .icon.logout {
     width: 22px;
     height: 22px;
-
     background: transparent url("../img/icon/slidBar_logout_normal.png") no-repeat scroll;
 }
 
 .icon.guanzhu {
     width: 22px;
     height: 22px;
-
     background: transparent url("../img/icon/slidBar_guanzhu_normal.png") no-repeat scroll;
 }
 
 .icon.tongji {
     width: 22px;
     height: 22px;
-
     background: transparent url("../img/icon/slidBar_tongji_normal.png") no-repeat scroll;
 }
 
 .icon.sixin {
     width: 22px;
     height: 22px;
-
     background: transparent url("../img/icon/slidBar_sixin_normal.png") no-repeat scroll;
 }
 
 .icon.setting {
     width: 22px;
     height: 22px;
-
     background: transparent url("../img/icon/slidBar_setting_normal.png") no-repeat scroll;
 }
-.icon.language {
+.icon.language{
     width: 22px;
     height: 22px;
-
     background: transparent url("../img/icon/slidBar_yuyan_normal.png") no-repeat scroll;
 }
-.icon.login {
+.icon.login{
     width: 22px;
     height: 22px;
-
     background: transparent url("../img/icon/sb_login_normal.png") no-repeat scroll;
 }
-.icon.signup {
+.icon.signup{
     width: 22px;
     height: 22px;
-
     background: transparent url("../img/icon/sb_signup_normal.png") no-repeat scroll;
 }
 
 .icon .like {
     width: 16px;
     height: 16px;
-
     background: transparent url("../img/icon/like.png") no-repeat scroll;
 }
 
 .icon .unlike {
     width: 16px;
     height: 16px;
-
     background: transparent url("../img/icon/unlike.png") no-repeat scroll;
 }
 
-.icon.home_setting {
+.icon.home_setting{
     width: 38px;
     height: 38px;
-
     background: transparent url("../img/icon/profile_icon_shezhi.png") no-repeat scroll;
 }
-.icon.home_quanzi {
+.icon.home_quanzi{
     width: 38px;
     height: 38px;
-
     background: transparent url("../img/icon/profile_icon_quanzi.png") no-repeat scroll;
 }
-.icon.home_hezuo {
+.icon.home_hezuo{
     width: 38px;
     height: 38px;
-
     background: transparent url("../img/icon/profile_icon_hezuo.png") no-repeat scroll;
 }
-.icon.home_jieshao {
+.icon.home_jieshao{
     width: 38px;
     height: 38px;
-
     background: transparent url("../img/icon/profile_icon_jieshao.png") no-repeat scroll;
 }
 
@@ -262,6 +249,30 @@ a:visited {
     height: 10px;
 
     background: red;
+}
+
+#pageslide {
+    /* These styles MUST be included. Do not change. */
+    display: none;
+
+    position: absolute;
+    position: fixed;
+    top: 0;
+    z-index: 999999;
+
+    padding: 20px;
+    /* Specify the width of your pageslide here */
+    width: 260px;
+    height: 100%;
+
+    color: #fff;
+    /* These styles are optional, and describe how the pageslide will look */
+    background-color: #333;
+
+    -webkit-box-shadow: inset 0 0 5px 5px #222;
+            box-shadow: inset 0 0 5px 5px #222;
+
+    -moz-shadow: inset 0 0 5px 5px #222;
 }
 
 .sidebar .lop {
@@ -495,6 +506,287 @@ a:visited {
     height: 100%;
 }
 
+hr.line {
+    margin: 20px 0;
+    border: 0;
+    height: 1px;
+
+    background: #333;
+    background-image: -webkit-linear-gradient(left, #fff, #333, #fff);
+    background-image:    -moz-linear-gradient(left, #fff, #333, #fff);
+    background-image:         linear-gradient(left, #fff, #333, #fff);
+}
+
+.likebtn {
+    overflow: hidden;
+
+    position: relative;
+
+    width: 107px;
+    height: 40px;
+
+    background: #fff url(../img/like-animate.png) no-repeat;
+    background-position: 0 0;
+}
+
+.likebtn .support {
+    position: absolute;
+    left: 0;
+
+    border-radius: 50% 0 0 50%;
+    width: 45px;
+    height: 40px;
+
+    cursor: pointer;
+}
+
+.likebtn .num {
+    position: absolute;
+    right: 4px;
+
+    width: 57px;
+    height: 40px;
+
+    font-size: 16px;
+    line-height: 40px;
+    text-align: center;
+
+    color: #b3b3b3;
+
+    transition: all .4s ease-in-out;
+
+    cursor: pointer;
+}
+
+.likebtn.focus .num {
+    color: #fcee21;
+}
+
+.likebtn .num .link {
+    color: #b3b3b3;
+
+    transition: all .4s ease-in-out;
+}
+
+.likebtn.focus .num .link {
+    color: #fcee21;
+}
+
+.likebtn.focus {
+    -webkit-animation: likebtnfocus .4s steps(9) forwards;
+            animation: likebtnfocus .4s steps(9) forwards;
+}
+
+.likebtn.blur {
+    -webkit-animation: likebtnblur .3s steps(5) forwards;
+            animation: likebtnblur .3s steps(5) forwards;
+}
+
+@-webkit-keyframes likebtnfocus {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -963px 0;
+    }
+}
+
+@keyframes likebtnfocus {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -963px 0;
+    }
+}
+
+@-webkit-keyframes likebtnblur {
+    0% {
+        background-position: -963px 0;
+    }
+
+    100% {
+        background-position: -1498px 0;
+    }
+}
+
+@keyframes likebtnblur {
+    0% {
+        background-position: -963px 0;
+    }
+
+    100% {
+        background-position: -1498px 0;
+    }
+}
+
+
+/*swiper start*/
+/*.swiper-container {
+    margin-top: 25px;
+    width: 960px;
+    height: 470px;
+
+    cursor: -webkit-grab;
+    cursor:    -moz-grab;
+}
+
+.swiper-container:active {
+    cursor: -webkit-grabbing;
+    cursor:    -moz-grabbing;
+}
+
+.swiper-slide {
+    font-size: 18px;
+    text-align: center;
+
+    background: #000;
+}
+
+.swiper-slide img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+}*/
+
+/*swiper end*/
+
+/*subject start*/
+.new-subject {
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 100%;
+    max-width: 960px;
+}
+
+.new-subject .wrapper {
+    margin: 0 auto;
+
+    color: #b3b3b3;
+}
+
+.new-subject .wrapper .title {
+    float: left;
+
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.new-subject .wrapper .more {
+    float: right;
+
+    margin-top: 20px;
+
+    font-size: 14px;
+}
+
+.new-subject .list {
+    margin: 0 auto;
+}
+
+.new-subject .list .item {
+    overflow: hidden;
+
+    position: relative;
+
+    margin-top: 30px;
+    width: 300px;
+    height: 384px;
+
+    background-color: #fff;
+
+    transition: all .2s ease-in-out;
+}
+
+.new-subject .list .item:hover {
+    border-radius: 5px;
+
+    box-shadow: 0 0 10px #666;
+
+    cursor: pointer;
+}
+
+.new-subject .list .item .sub-image {
+    position: relative;
+
+    width: 100%;
+    height: 200px;
+}
+
+.new-subject .list .item .sub-title {
+    margin: 10px auto;
+    box-sizing: border-box;
+    padding: 0 10px;
+    width: 100%;
+
+    font-size: 18px;
+    text-align: left;
+}
+
+.new-subject .list .item .sub-title:before {
+    font-size: 18px;
+    font-weight: 800;
+
+    color: #fcee21;
+
+    content: "《 ";
+}
+
+.new-subject .list .item .sub-title:after {
+    font-size: 18px;
+    font-weight: 800;
+
+    color: #fcee21;
+
+    content: " 》";
+}
+
+.new-subject .list .item .sub-content {
+    margin: 0 3px;
+    box-sizing: border-box;
+    padding: 0 10px;
+
+    font-size: 15px;
+    text-align: left;
+    text-align: justify;
+
+    color: #b3b3b3;
+}
+
+.new-subject .list .item .sub-info {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+
+    margin-top: 10px;
+}
+
+.new-subject .list .item .sub-info li {
+    display: inline-block;
+
+    margin-right: 10px;
+
+    font-size: 14px;
+
+    color: #b3b3b3;
+}
+
+.new-subject .list .item .sub-info .fa {
+    color: #f1e203;
+}
+
+/*subject end*/
 
 /*art start*/
 .new-art {
@@ -892,6 +1184,10 @@ a:visited {
     word-break: break-all;
 
     color: #2f2f2f;
+}
+
+.article .detail img {
+    max-width: 100%;
 }
 
 .article .detail .introduction {
@@ -1337,7 +1633,7 @@ textarea:focus {
     width: 100%;
     height: 100%;
 
-    background-color: #ffffff;
+    background-color: rgba(0, 0, 0, .4);
 }
 
 .edit .production_list .list {
@@ -3004,10 +3300,83 @@ img.zoom-img {
 }
 /*zoom end*/
 
+/*artist detail start*/
 
-/* Topic detail */
-.width-700 {
-    margin: 0 auto;
-    width: 90%;
-    max-width: 700px;
+.artist_detail{
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    margin-top: 40px;
 }
+.artist_detail .pic{
+    width: 280px;
+    height: 280px;
+    float: left;
+    margin-right: 30px;
+}
+.artist_detail .pic img{
+    width: 280px;
+    height: 280px;
+    float: left;
+}
+
+.artist_detail .detail{
+    width: 650px;
+    float: left;
+    position: relative;
+    color: #888888;
+    text-align: left;
+}
+.artist_detail .detail .name{
+    font-weight: bold;
+    font-size: 28px;
+    width: 100%;
+    margin-bottom: 20px;
+    color: #666666;
+}
+
+.artist_detail .detail .intro{
+    width: 100%;
+    position: relative;
+}
+
+
+.artist_detail .detail .intro .more{
+    width: 100%;
+    font-size: 14px;
+    text-align: right;
+    position: relative;
+}
+
+.artistevaluate{
+    width: 100%;
+    position: relative;
+    border-top: 1px #B3B3B3 dashed;
+    border-bottom: 1px #B3B3B3 dashed;
+    padding: 40px 0;
+    color: #888888;
+    margin-top: 40px;
+
+}
+.artistevaluate .title{
+    font-weight: bold;
+    font-size: 22px;
+    width: 100%;
+    color: #666666;
+    text-align: left;
+
+}
+.artistevaluate .detail{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.artistevaluate .detail p{
+    text-align: justify;
+    text-indent: 2em;
+    text-align: left;
+}
+
+
+
+/*artist detail end*/
