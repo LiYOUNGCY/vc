@@ -1,4 +1,5 @@
 <body>
+<input type="hidden" id="pid" value="<?=$pid?>">
 <div class="main-wrapper">
     <!-- 顶部 -->
     <?php echo $top; ?>
@@ -19,28 +20,28 @@
                 </div>
 
                 <div class="item" id="art_item">
-<!--                    <div class="production">-->
-<!--                        <div class="group">-->
-<!--                            <i class="fa fa-trash-o fa-fw" title="删除"></i>-->
-<!--                            <i class="fa fa-angle-up" title="上移"></i>-->
-<!--                            <i class="fa fa-angle-down" title="下移"></i>-->
-<!--                        </div>-->
-<!--                        <div class="item">-->
-<!--                            <label for="ptitle">作品标题：</label>-->
-<!--                            <input type="text" id="ptitle">-->
-<!--                        </div>-->
-<!--                        <div class="item">-->
-<!--                            <label>作品的介绍：</label>-->
-<!--                            <textarea rows="5" id="pintro"></textarea>-->
-<!--                        </div>-->
-<!--                        <input type="hidden" id="pprice" value="99.00">-->
-<!--                        <input type="hidden" id="pvote" value="58">-->
-<!--                        <input type="hidden" id="pid" value="1">-->
-<!---->
-<!--                        <div class="image">-->
-<!--                            <img src="--><?//= base_url() ?><!--public/img/nrjpinzl4.jpg-w720.jpg">-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <!--                    <div class="production">-->
+                    <!--                        <div class="group">-->
+                    <!--                            <i class="fa fa-trash-o fa-fw" title="删除"></i>-->
+                    <!--                            <i class="fa fa-angle-up" title="上移"></i>-->
+                    <!--                            <i class="fa fa-angle-down" title="下移"></i>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="item">-->
+                    <!--                            <label for="ptitle">作品标题：</label>-->
+                    <!--                            <input type="text" id="ptitle">-->
+                    <!--                        </div>-->
+                    <!--                        <div class="item">-->
+                    <!--                            <label>作品的介绍：</label>-->
+                    <!--                            <textarea rows="5" id="pintro"></textarea>-->
+                    <!--                        </div>-->
+                    <!--                        <input type="hidden" id="pprice" value="99.00">-->
+                    <!--                        <input type="hidden" id="pvote" value="58">-->
+                    <!--                        <input type="hidden" id="pid" value="1">-->
+                    <!---->
+                    <!--                        <div class="image">-->
+                    <!--                            <img src="--><?//= base_url() ?><!--public/img/nrjpinzl4.jpg-w720.jpg">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </div>
 
                 <!--                    按钮-->
@@ -100,6 +101,7 @@
         $('body').css('overflow', 'hidden');
     }
     $(function () {
+        var pid = $('#pid').val();
         var page = 0;
 
         $('#show_list').click(function () {
@@ -143,6 +145,16 @@
                     $box.click(AddProduction);
                     $('#production_list').append($box);
                 }
+            }
+        });
+
+        //获取该专题的信息
+        $.ajax({
+            type: 'post',
+            url: GET_ARTICLE_BY_ID + pid,
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
             }
         });
 

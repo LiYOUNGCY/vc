@@ -44,6 +44,16 @@ class Detail extends MY_Controller{
         $this->load->view('common/head', $data);
         $this->load->view('artist_detail', $body);
 	}
-	
-	
+
+	/**
+	 * [get_artist_production 获取艺术家作品列表]
+	 * @return [type] [description]
+	 */
+	public function get_artist_production()
+	{
+		$page = $this->sc->input('page');
+		$aid  = $this->sc->input('aid');
+		$production = $this->artist_service->get_artist_production($page,$aid);
+		echo json_encode($production);
+	}
 }

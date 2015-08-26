@@ -12,12 +12,12 @@ class Production_model extends CI_Model
      * 获取作品列表
      * @param  page 页数          integer
      * @param  meid 我的id      [int]
-     * @param  uid  艺术家id      [int]
+     * @param  aid  艺术家id      [int]
      * @param  limit页面个数限制  integer
      * @param  order 排序          string
      * @return [type]
      */
-    public function get_production_list($page = 0, $meid = NULL, $status = NULL, $uid = NULL, $limit = 6, $order = 'id DESC')
+    public function get_production_list($page = 0, $meid = NULL, $status = NULL, $aid = NULL, $limit = 6, $order = 'id DESC')
     {
         $status = explode(',', $status);
         $query = $this->db->select('
@@ -37,8 +37,8 @@ class Production_model extends CI_Model
 
         if (is_numeric($meid)) {
         }
-        if ( ! empty($uid)) {
-            $query = $query->where('uid', $uid);
+        if ( ! empty($aid)) {
+            $query = $query->where('aid', $aid);
         }
         if( ! empty($status))
         {

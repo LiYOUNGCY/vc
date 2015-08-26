@@ -4,6 +4,7 @@ class Artist_service extends MY_Service{
 	{
 		parent::__construct();
 		$this->load->model('artist_model');
+		$this->load->model('production_model');
 	}
 
 	/**
@@ -30,6 +31,20 @@ class Artist_service extends MY_Service{
 		return $this->artist_model->get_artist_by_id($aid);
 	}
 
+	/**
+	 * [get_artist_production 获取艺术家作品列表]
+	 * @param  [type] $page [description]
+	 * @param  [type] $aid  [description]
+	 * @return [type]       [description]
+	 */
+	public function get_artist_production($page, $aid)
+	{
+		$production = $this->production_model->get_production_list($page,NULL,NULL,$aid);
+		foreach ($production as $k => $v) {
+			$production[$k]['pic'] = Common::get_thumb_url($production[$k]['pic']);
+		}
+		return $production;
+	}
 	/**
 	 * [insert_artist 添加艺术家]
 	 * @param  [type] $uid        [用户id]

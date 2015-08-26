@@ -12,7 +12,7 @@ class Detail extends MY_Controller{
 		if( ! is_numeric($pid))
 		{
 			show_404();
-		}	
+		}
 		$production = $this->production_service->get_production_by_id($pid);
 		if(empty($production))
 		{
@@ -20,6 +20,7 @@ class Detail extends MY_Controller{
 		}
 
 		$uid = isset($this->user['id']) ? $this->user['id'] : NULL;
+
 		$production['pic_thumb'] 		= Common::get_thumb_url($production['pic'],'thumb2_');
 
         $data['production'] 	= $production;
