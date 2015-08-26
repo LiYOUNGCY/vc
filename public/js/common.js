@@ -18,9 +18,16 @@ var EMAIL_LOGIN_URL = BASE_URL + "account/main/login_by_email";
 var EMAIL_SIGNUP_URL = BASE_URL + "account/main/register_by_email";
 var PHONE_SIGNUP_URL = BASE_URL + "account/main/register_by_phone";
 var CHECK_PHONE_URL = BASE_URL + "account/main/check_phone";
-var CHECK_EMAIL_URL = BASE_URL + "account/main/check_email";   
+var CHECK_EMAIL_URL = BASE_URL + "account/main/check_email";
+
 //艺术品列表
 var GET_PRODUCTION_URL = BASE_URL + 'production/main/get_production_list';
+
+//提交文章
+var POST_ARTICLE_URL = BASE_URL + 'article/publish/publish_article';
+
+//获取文章
+var GET_ARTICLE_BY_ID = BASE_URL + 'article/main/get_article/';
 
 /**
  * [trim 去掉字符串前后两端的空格]
