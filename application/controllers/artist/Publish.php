@@ -105,7 +105,16 @@ class Publish extends MY_Controller{
 
 		$this->load->service('image_service');
 		$img = $this->sc->input(array('img','x','y','w','h'));
-		$pic = $this->image_service->save_artist_pic($img['img'],$img['x'],$img['y'],$img['w'],$img['h']);
+
+		//如果未上传新图
+		if(empty($img['w']) || empty($img['h']))
+		{
+			$pic = $img['img'];
+		}
+		else
+		{
+			$pic = $this->image_service->save_artist_pic($img['img'],$img['x'],$img['y'],$img['w'],$img['h']);
+		}
 		if($pic)
 		{
 			$aid 		= $this->sc->input('aid');
