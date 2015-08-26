@@ -114,7 +114,7 @@
             type: 'post',
             url: GET_PRODUCTION_URL,
             data: {
-                page
+                page: page
             },
             dataType: 'json',
             success: function (data) {
