@@ -21,7 +21,7 @@
                 <p><?=$artist['evaluation']?></p>
             </div>
         </div>
-        <div class="artlist">
+        <div class="arts" id="arts">
             <div class="item">
                 <div class="pic"></div>
                 <div class="info">
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="item"></div>
-            <div class="item"></div>
+            <div class="item"></div>    
         </div>
 
 
@@ -44,7 +44,14 @@
 
 <script>
 $(function() {
-
+    var arts = document.querySelector('#arts');
+    var masonry = new Masonry(arts, {
+        itemSelector: '.item',
+        columnWidth: 300,
+        gutter: 30,
+        isFitWidth: true,
+        isAnimate: true
+    });
 });
 </script>
 </html>
