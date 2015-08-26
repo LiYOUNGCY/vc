@@ -101,11 +101,11 @@ class Publish extends MY_Controller {
         $article_title      = $this->sc->input('article_title');
         $article_type       = $this->sc->input('article_type');    
         $pids               = $this->sc->input('pids');            
-        $article_content    = $this->sc->input('article_content');
+        $article_content    = $this->sc->input('article_content', 'post', FALSE);
         //过滤富文本
         $article_content    = $this->htmlpurifier->purify($article_content);        
 
-        $result = $this->article_service->update_article($aid,$this->user['id'],$article_title,$article_type,$article_content);       
+        $result = $this->article_service->update_article($aid,$this->user['id'],$article_title,$article_type,$pids,$article_content);
         if($result)
         {
             redirect(base_url()."article/".$aid,'location');
