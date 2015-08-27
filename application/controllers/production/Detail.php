@@ -19,11 +19,19 @@ class Detail extends MY_Controller{
 			show_404();
 		}
 
-		$uid = isset($this->user['id']) ? $this->user['id'] : NULL;
-
 		$production['pic_thumb'] 		= Common::get_thumb_url($production['pic'],'thumb2_');
+		if(isset($this->user['id']))
+		{
+			$production['like_status'] 	= $this->production_service->check_has_like($pid,$this->user['id']);
+		}
+		else
+		{
+			$production['like_status'] 	= 0;
+		}
 
         $body['production'] 	= $production;
+
+		$uid = isset($this->user['id']) ? $this->user['id'] : NULL;
         //获取相关联的专题
         //$data['topic'] 			= $this->production_service->get_topic_by_production($pid,$uid);
 
@@ -44,7 +52,7 @@ class Detail extends MY_Controller{
         );
 
 
-        $user['user'] = $this->user;
+        $user['user']         = $this->user;
         $data['title']        = $production['name'];
         $body['top']          = $this->load->view('common/top', $user, TRUE);
         $body['sign']         = $this->load->view('common/sign', '', TRUE);

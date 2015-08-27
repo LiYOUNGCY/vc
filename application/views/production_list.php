@@ -118,6 +118,7 @@
                             '<div class="price">' + price + ' RMB</div>' +
                             '</div>' +
                             '</div>');
+
                         $container.append(box);
                         masonry.appended(box);
 
