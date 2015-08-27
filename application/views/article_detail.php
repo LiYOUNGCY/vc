@@ -30,7 +30,7 @@
                 </div>
 
                 <!-- 文章内容 -->
-                <div class="detail"><?=$article['content']?></div>
+                <div class="detail"><?= $article['content'] ?></div>
 
                 <!-- END 文章内容-->
                 <div class="share clearfix">
@@ -126,6 +126,7 @@
                 <!-- END 评论部分 -->
             </div>
         </div>
+        <?php echo $footer; ?>
     </div>
 </div>
 </body>

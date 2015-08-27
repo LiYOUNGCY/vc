@@ -1,15 +1,16 @@
 <body>
 <div class="main-wrapper">
     <!-- 顶部 -->
-    <?php echo $top;?>
+    <?php echo $top; ?>
     <!-- 主体 -->
     <div class="container">
         <div class="artist_detail">
-            <div class="pic"><img src="<?=$artist['pic']?>"></div>
+            <div class="pic"><img src="<?= $artist['pic'] ?>"></div>
             <div class="detail">
-                <div class="name"><?=$artist['name']?></div>
+                <div class="name"><?= $artist['name'] ?></div>
                 <div class="intro">
-                    <p><?=$artist['intro']?></p>
+                    <p><?= $artist['intro'] ?></p>
+
                     <div class="more"><a href="" class="link">[阅读更多+]</a></div>
                 </div>
             </div>
@@ -17,7 +18,7 @@
         <div class="artistevaluate">
             <div class="title">维C推荐</div>
             <div class="detail">
-                <p><?=$artist['evaluation']?></p>
+                <p><?= $artist['evaluation'] ?></p>
             </div>
         </div>
         <div class="artlist">
@@ -33,17 +34,17 @@
         </div>
 
 
-    <?php echo $footer;?>
+        <?php echo $footer; ?>
     </div>
 </div>
 
-<?php echo $sign;?>
+<?php echo $sign; ?>
 
 </body>
 
 <script>
-$(function() {
+    $(function () {
 
-});
+    });
 </script>
 </html>

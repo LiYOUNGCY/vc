@@ -1,43 +1,53 @@
 <body>
 
 <div class="main-wrapper">
-    <?php echo $top;?>
+    <?php echo $top; ?>
     <div class="container">
-        <div class="margin-top">
+        <!--        <div class="margin-top">-->
 
-<!--             <div class="production">
-                <div >
-                    <img class="image" src="<?=base_url()?>public/img/load.gif" data-src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/production/1439471082_5.jpg" alt="">
-                </div>
-                <div class="wrap">
-                    <div class="title">作品标题</div>
-                    <div class="author"><span>作者：</span><span>鸡巴白</span></div>
-                    <div class="price">售价：<span>450</span></div>
-                    <div class="footer clearfix">
-                        <div class="btn">赞</div>
-                        <div class="btn">作品详情</div>
-                    </div>
-                </div>
-            </div> -->
+        <div class="new-art">
+            <div class="list" id="art-list">
 
+                <!--                        <div class="item">-->
+                <!--                            <figure class="effect-bubba">-->
+                <!--                                <div class="art-image">-->
+                <!--                                    <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/production/thumb1_1440593600_1.jpg" alt="" class="image" style="width: 298px">-->
+                <!--                                </div>-->
+                <!--                                <figcaption>-->
+                <!--                                    <p>类型：油画<br>尺寸：20 * 30 cm</p>-->
+                <!--                                </figcaption>-->
+                <!--                            </figure>-->
+                <!--                            <div class="art-title">我的世界</div>-->
+                <!--                            <div class="author">作者：鸡巴白</div>-->
+                <!--                            <ul class="art-info">-->
+                <!--                                <li><i class="fa fa-heart-o"></i> 999</li>-->
+                <!--                                <!--<li><i class="fa fa-eye"></i></li>-->
+                <!--                                <div class="price">20000 RMB</div>-->
+                <!--                            </ul>-->
+                <!--                        </div>-->
+
+            </div>
         </div>
+
+        <!--        </div>-->
+        <?php echo $footer; ?>
     </div>
 </div>
 
 <script>
-function a(id) {
-    window.location.href = BASE_URL + 'production/' + id;
-}
-    $(function() {
+    function a(id) {
+        window.location.href = BASE_URL + 'production/' + id;
+    }
+    $(function () {
         'use strict';
 
-        var $container = $('.margin-top');
-        var container = document.querySelector('.margin-top');
+        var $container = $('.list');
+        var container = document.querySelector('.list');
         var page = 0;
 
         var masonry = new Masonry(container, {
-            itemSelector: '.production',
-            columnWidth: 302,
+            itemSelector: '.item',
+            columnWidth: 300,
             gutter: 25,
             isFitWidth: true,
             isAnimate: true
@@ -48,10 +58,13 @@ function a(id) {
             each: function (elm) {
                 console.log("load done");
                 console.log(elm.width + " " + elm.height);
-                $(elm).parent().css({'height':elm.height, 'width':elm.width});
+                $(elm).parent().css({'height': elm.height, 'width': elm.width});
                 masonry.layout();
             }
         });
+
+        var count = 0;
+        var sum = 0; //
 
 
         function LoadMore() {
@@ -62,71 +75,84 @@ function a(id) {
                     page: page
                 },
                 dataType: 'json',
-                success: function(data) {
+                success: function (data) {
                     // var items = eval('(' + data + ')');
                     var items = data;
 
-                    if(items.error != null || items.length === 0) {
+                    if (items.error != null || items.length === 0) {
                         console.log('Error');
-                        return ;
+                        return;
                     }
 
-                    page ++;
+                    page++;
+                    sum = items.length;
+                    console.log(sum);
 
-                    for(var i = 0; i < items.length; i++) {
+                    for (var i = 0; i < items.length; i++) {
                         console.log(items[i]);
                         // var items[i].content = items[i].content;
                         var id = data[i].id;
                         var title = data[i].name;
                         var author = data[i].artist.name;
                         var price = data[i].price;
-						var img = data[i].pic;
-						var like = 100;
+                        var img = data[i].pic;
+                        var like = data[i].like;
+                        var type = data[i].type;
+                        var l = data[i].l;
+                        var w = data[i].w;
 
 
-                        var box = $('<div class="production">' +
-                '<div >' +
-                    '<img class="image" src="'+ img +'" alt="">' +
-                '</div>' +
-                '<div class="wrap">' +
-                    '<div class="title">'+ title +'</div>' +
-                    '<div class="author"><span>'+ author +'</span><span>鸡巴白</span></div>' +
-                    '<div class="price">售价：<span>'+ price +'</span></div>' +
-                    '<div class="footer clearfix">' +
-                        '<div class="like"><i class="fa fa-heart"></i><span>'+like+'</span></div>' +
-                        '<a class="link" href="'+BASE_URL + 'production/' + id +
-'"><i class="fa fa-hand-o-right"></i>作品详情</a>' +
-                    '</div>' +
-                '</div>' +
-            '</div>');
+                        var box = $('<div class="item" onclick="a(' + id + ')">' +
+                            '<figure class="effect-bubba">' +
+                            '<div class="art-image" style="height: auto;">' +
+                            '<img src="' + img + '" alt="" class="image" style="width: 300px; border: none;">' +
+                            '</div>' +
+                            '<figcaption>' +
+                            '<p>类型：' + type + '<br>尺寸：' + l + ' * ' + w + ' cm</p>' +
+                            '</figcaption>' +
+                            '</figure>' +
+                            '<div class="art-title">' + title + '</div>' +
+                            '<div class="author">作者：' + author + '</div>' +
+                            '<div class="art-info clearfix">' +
+                            '<div class="vote"><i class="fa fa-heart-o"></i> ' + like + '</div>' +
+                            '<div class="price">' + price + ' RMB</div>' +
+                            '</div>' +
+                            '</div>');
                         $container.append(box);
                         masonry.appended(box);
 
                         $(box).imageloader({
-                            each: function(elm){
+                            each: function (elm) {
                                 masonry.layout();
                                 console.log(elm.width + " " + elm.height);
-                                $(elm).parent().css({'height':elm.height, 'width':elm.width});
+                                $(elm).parent().css({'height': elm.height, 'width': elm.width});
+
+                                count++;
+                                if (count == sum) {
+                                    //Add Event
+                                    WindowEvent();
+                                    count = 0;
+                                }
                             },
                             callback: function (elm) {
                                 console.log('loadding');
                                 masonry.layout();
+
                             }
                         });
 
-                        //Add Event
-                        WindowEvent();
 
                         // -------------- End -------------
                     }
                 }
             });
         }
-        // END LoadMore
+
+//         END LoadMore
 
         LoadMore();
 
-        $(document).click(function(){
+        $(document).click(function () {
             console.log('click');
             LoadMore();
         });
@@ -134,9 +160,9 @@ function a(id) {
         WindowEvent();
 
 
-        function WindowEvent () {
+        function WindowEvent() {
 
-            $(window).scroll(function(){
+            $(window).scroll(function () {
                 // 当滚动到最底部以上100像素时， 加载新内容
                 if ($(document).height() - $(this).scrollTop() - $(this).height() < 100) {
                     $(window).unbind('scroll');

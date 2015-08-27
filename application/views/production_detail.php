@@ -7,9 +7,9 @@
         <div class="art wrapper">
             <div class="artarea">
                 <div class="title"><?=$production['name']?></div>
-                
+
                 <div class="artpic" id="picture-frame">
-                    <img src="<?=$production['pic_thumb']?>" class="thumb" data-src="<?=$production['pic']?>"/>    
+                    <img src="<?=$production['pic_thumb']?>" class="thumb" data-src="<?=$production['pic']?>"/>
                 </div>
                 <div class="artinfo">
                     <div class="likebtn">
@@ -46,9 +46,9 @@
             </div>
         </div>
 
-    
+
     <?php echo $footer;?>
-    </div> 
+    </div>
 </div>
 
 <?php echo $sign;?>
@@ -60,7 +60,7 @@ $(function() {
     $("#picture-frame").zoomToo({
         magnify: 1
     });
-    
+
 });
 </script>
 </html>
