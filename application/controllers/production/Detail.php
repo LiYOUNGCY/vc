@@ -29,7 +29,7 @@ class Detail extends MY_Controller{
 			$production['like_status'] 	= 0;
 		}
 
-        $data['production'] 	= $production;
+        $body['production'] 	= $production;
         
 		$uid = isset($this->user['id']) ? $this->user['id'] : NULL;
         //获取相关联的专题

@@ -136,26 +136,6 @@ class User_model extends CI_Model
 		return $this->db->where('phone', $phone)->from('user')->count_all_results() !== 0 ? true : false;
 	}
 
-    /**
-     * [have_alias 查看主页别名是否重复]
-     * @param  [type] $uid   [description]
-     * @param  [type] $alias [description]
-     * @return [type]        [description]
-     */
-    public function have_alias($uid = NULL,$alias)
-    {
-        if( ! empty($uid))
-        {
-            $this->db->where('id != ',$uid);
-        }
-        $result = $this->db->where('alias',$alias)->get('user')->row_array() ;        
-        if( ! empty($result))
-        {
-            return TRUE;
-        }
-        return FALSE;
-    }
-
 	/**
 	 * [get_user_base_id 获得用户的基本的信息]
 	 */
