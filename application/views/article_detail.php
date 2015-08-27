@@ -10,7 +10,7 @@
             <div class="article">
                 <h1 class="title"><?= $article['title'] ?></h1>
 
-                <div class="info">字数2753 阅读113840 评论153 喜欢116</div>
+                <div class="info">阅读<?=$article['read']?> 喜欢<?=$article['like']?></div>
                 <div class="share clearfix"><!-- JiaThis Button BEGIN -->
                     <div id="ckepop" class="jiathis_share">
                         <span class="jiathis_txt">分享到：</span>
@@ -34,9 +34,9 @@
 
                 <!-- END 文章内容-->
                 <div class="share clearfix">
-                    <div class="likebtn" id="vote">
+                    <div class="likebtn <?php if($like_status) echo 'focus'; ?>" id="vote">
                         <div class="support" id="mark-like"></div>
-                        <div class="num" id="seeLike">12</div>
+                        <div class="num" id="seeLike"><?=$article['like']?></div>
                     </div>
 
                     <!-- 分享按钮-->
