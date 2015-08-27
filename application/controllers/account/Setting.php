@@ -10,33 +10,41 @@ class Setting extends MY_Controller
 	}
 
 	public function index($type = "user") {
-		$head['css'] = array(
-				'common.css',
-				'normalize.css',
-				'default.css',
-				'radiocheck.min.css',
-				'font-awesome/css/font-awesome.min.css'
-			);
-		$head['javascript'] = array(
-				'jquery.js',
-				'vc.js',
-				'error.js'
-			);
-		$this->load->view('common/head', $head);
+        $data['css'] = array(
+            'font-awesome/css/font-awesome.min.css',
+            'base.css',
+            'alert.css'
+        );
 
-		$user['user'] 	= $this->user;
-        $data['sidebar']= $this->load->view('common/sidebar', $user, TRUE);
-        $data['footer']	= $this->load->view('common/footer', '', TRUE);
+        $data['javascript'] = array(
+            'jquery.js',
+            'alert.min.js',
+            'error.js'
+        );
+
+
+        $user['user']         = $this->user;
+
+        $body['top']          = $this->load->view('common/top', $user, TRUE);
+        $body['sign']         = $this->load->view('common/sign', '', TRUE);
+        $body['footer']       = $this->load->view('common/footer', '', TRUE);
+        $body['user']         = $this->user;
+
+
 
 		if($type == 'pwd')
 		{
 			//修改密码
-			$this->load->view('set_pwd_view', $data);
+            $data['title'] = '修改密码';
+            $this->load->view('common/head', $data);
+			$this->load->view('set_pwd_view', $body);
 		}
 		//修改个人信息的页面
 		else if($type == 'user')
 		{
-			$this->load->view('setting', $data);			
+            $data['title'] = '修改个人信息';
+            $this->load->view('common/head', $data);
+			$this->load->view('setting', $body);
 		}
 	}
 
@@ -57,7 +65,7 @@ class Setting extends MY_Controller
 		$result = $this->user_service->change_password($this->user['id'], $old_pwd, $pwd);
 		if($result)
 		{
-			echo "<script>alert('".lang('OPERATE_SUCCESS')."');window.location.href='".base_url()."setting/pwd';</script>";	
+			echo "<script>alert('".lang('OPERATE_SUCCESS')."');window.location.href='".base_url()."setting/pwd';</script>";
 		}
 		else
 		{
@@ -86,21 +94,21 @@ class Setting extends MY_Controller
 			$this->error->output('ALIAS_REPEAT',array('script' => 'window.location.href ="'.base_url().'setting";'));
 		}
 		//更新用户资料
-		$result = $this->user_service->update_account($this->user['id'], $data);		
+		$result = $this->user_service->update_account($this->user['id'], $data);
 		if($result)
 		{
 			//更新 session 的信息
-			
+
 			$this->auth_service->set_login_session($this->user_service->get_user_base_id($this->user['id']));
 
-			echo "<script>alert('".lang('OPERATE_SUCCESS')."');window.location.href='".base_url()."setting';</script>";	
-		}	
+			echo "<script>alert('".lang('OPERATE_SUCCESS')."');window.location.href='".base_url()."setting';</script>";
+		}
 		else
 		{
 			$this->error->output('INVALID_REQUEST',array('script' => 'window.location.href ="'.base_url().'setting";'));
 		}
 	}
-	
+
 	public function get_msg()
 	{
 		$uid = $this->user['id'];
@@ -125,7 +133,7 @@ class Setting extends MY_Controller
 		}
 		else
 		{
-			echo json_encode(array('success' => 0));			
+			echo json_encode(array('success' => 0));
 
 		}
 	}
