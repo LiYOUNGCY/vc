@@ -54,13 +54,14 @@ class Main extends MY_Controller {
         //文章类型
         $body['article_type'] = $type;
         $this->load->view('common/head', $data);
-        $this->load->view('article', $body);
-    }
-
-    public function get_article($aid) {
-        if(is_numeric($aid)) {
-            $article = $this->article_service->get_article_by_id($aid);
-            echo json_encode($article);
+        if($type == 'article')
+        {
+            $this->load->view('article', $body);
         }
+        else if($type == 'topic')
+        {
+             $this->load->view('topic_list', $body);
+        }
+
     }
 }

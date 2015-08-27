@@ -4,11 +4,14 @@
     <?php echo $top; ?>
     <div class="container">
         <div class="content edit">
-            <form class="list" method="post" action="<?= base_url() ?>artist/publish/publish_artist">
+            <form class="list" method="post" action="<?= base_url() ?>article/publish/publish_article">
                 <div class="item">
                     <label for="title">专题标题：</label>
-                    <input id="title" type="text">
+                    <input id="title" type="text" name="article_title" />
                 </div>
+                <input type="hidden" name="article_type" value="2"/>
+                <input type="hidden" name="pids" />
+                <input id="title" type="hidden" type="text" name="article_content" />
                 <div class="item">
                     <label for="introduction">专题导语：</label>
                     <textarea id="introduction" rows="5"></textarea>
@@ -114,7 +117,7 @@
             type: 'post',
             url: GET_PRODUCTION_URL,
             data: {
-                page
+                page: page
             },
             dataType: 'json',
             success: function (data) {
@@ -163,12 +166,10 @@
             console.log(pids);
             pids=pids.substring(0,pids.length-1)
 
-
-            var title = $('#title').val();
-            var content = $('#content').html();
-
-//            console.log(POST_ARTICLE_URL);
-
+            $("input[name=article_content]").val($("#content").html());
+            $("input[name=pids]").val(pids);
+            $("form").submit();
+            /*
             $.ajax({
                 type: 'post',
                 url:POST_ARTICLE_URL,
@@ -183,6 +184,7 @@
                     console.log(data);
                 }
             });
+            */
         });
 
         //预览事件

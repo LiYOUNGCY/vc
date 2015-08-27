@@ -5,11 +5,16 @@
     <?php echo $top; ?>
     <div class="container">
         <div class="content edit">
-            <form class="list" method="post" action="<?= base_url() ?>artist/publish/publish_artist">
+            <form class="list" method="post" action="<?= base_url() ?>article/publish/update_article">
                 <div class="item">
                     <label for="title">专题标题：</label>
-                    <input id="title" type="text">
+                    <input id="title" type="text" name="article_title">
                 </div>
+                <input type="hidden" name="aid" />
+                <input type="hidden" name="article_type" value="2"/>
+                <input type="hidden" name="pids" />                    
+                <input id="title" type="hidden" type="text" name="article_content" />    
+
                 <div class="item">
                     <label for="introduction">专题导语：</label>
                     <textarea id="introduction" rows="5"></textarea>
@@ -116,7 +121,7 @@
             type: 'post',
             url: GET_PRODUCTION_URL,
             data: {
-                page
+					page: page
             },
             dataType: 'json',
             success: function (data) {
@@ -148,13 +153,79 @@
             }
         });
 
+        function get_number(str) {
+            var ret = '';
+            
+            if(typeof str == "undefined") {
+                return 0;
+            }
+
+            for(i = str.length - 1; i >= 0; i--) {
+                if(( str[i] >= '0' && str[i] <= '9') || str[i] == '.') {
+                    ret += str[i];
+                }
+                else {
+                    return ret.split("").reverse().join("")
+                }
+            }
+            return ret.split("").reverse().join("")
+        }
+
         //获取该专题的信息
         $.ajax({
             type: 'post',
             url: GET_ARTICLE_BY_ID + pid,
             dataType: 'json',
             success: function(data) {
-                console.log(data);
+                $('#title').val(data.title);
+
+                $content = $(data.content);
+                $('#introduction').val($($content[0]).html());
+
+                //对 content 遍历
+                for(var i = 1; i < $content.length; i++) {
+                    var $item = $($content[i]);
+
+                    console.log($item.html());
+
+                    var img = $item.find('img').attr('src');
+                    var title = $item.find('.tctitle').html();
+                    var intro = $item.find('.tccontent').html();
+                    var like = get_number($item.find('.vote').html());
+                    var price = get_number($item.find('.tcprice').html());
+                    var id = get_number($item.find('a').attr('href'));
+
+                    console.log(id);
+
+                    $box = $('<div class="production">' +
+                        '<div class="group">' +
+                        '<i class="fa fa-trash-o fa-fw" title="删除"></i>' +
+                        '<i class="fa fa-angle-up" title="上移"></i>' +
+                        '<i class="fa fa-angle-down" title="下移"></i>' +
+                        '</div>' +
+                        '<div class="item">' +
+                        '<label for="ptitle">作品标题：</label>' +
+                        '<input type="text" id="ptitle" value="'+title+'">' +
+                        '</div>' +
+                        '<div class="item">' +
+                        '<label>作品的介绍：</label>' +
+                        '<textarea rows="5" id="pintro">'+intro+'</textarea>' +
+                        '</div>' +
+                        '<input type="hidden" id="pprice" value="' + price + '">' +
+                        '<input type="hidden" id="pvote" value="' + like + '">' +
+                        '<input type="hidden" id="pid" value="' + id + '">' +
+
+                        '<div class="image">' +
+                        '<img src="' + img + '">' +
+                        '</div>' +
+                        '</div>');
+
+                    $box.find('.fa-angle-up').click(moveUp);
+                    $box.find('.fa-angle-down').click(moveDown);
+                    $box.find('.fa-trash-o').click(remove);
+
+                    $('#art_item').append($box);
+                }
             }
         });
 
@@ -173,18 +244,19 @@
         $('#save').click(function(){
             var pids = ReadProduction();
             console.log(pids);
-            pids=pids.substring(0,pids.length-1)
-
-
-            var title = $('#title').val();
-            var content = $('#content').html();
+            pids=pids.substring(0,pids.length-1);
+            $("input[name=aid]").val(pid);
+            $("input[name=article_content]").val($("#content").html());
+            $("input[name=pids]").val(pids);
+            $("form").submit();
 
 //            console.log(POST_ARTICLE_URL);
-
+            /*
             $.ajax({
                 type: 'post',
-                url:POST_ARTICLE_URL,
+                url:UPDATE_ARTICLE,
                 data: {
+                    aid: pid,
                     article_title: title,
                     article_type: 2,
                     pids: pids,
@@ -195,6 +267,7 @@
                     console.log(data);
                 }
             });
+            */
         });
 
         //预览事件

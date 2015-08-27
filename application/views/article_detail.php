@@ -6,6 +6,7 @@
     <?php echo $top; ?>
     <div class="container">
         <div class="content">
+            <div class="adv">AD</div>
             <div class="article">
                 <h1 class="title"><?= $article['title'] ?></h1>
 
@@ -30,6 +31,7 @@
 
                 <!-- 文章内容 -->
                 <div class="detail"><?=$article['content']?></div>
+
                 <!-- END 文章内容-->
                 <div class="share clearfix">
                     <div class="likebtn" id="vote">
@@ -155,17 +157,7 @@
                         }
                     }
                     else if (status.error != null) {
-                        swal({
-                                title: "请登录后再进行操作",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "注册/登录",
-                                closeOnConfirm: false
-                            },
-                            function () {
-                                window.location.href = LOGIN_URL;
-                            });
+                        ERROR_OUTPUT(data);
                         return false;
                     }
                 },
@@ -232,17 +224,7 @@
                         swal("Good job!", "You clicked the button!", "success")
                     }
                     else if (data.error != null) {
-                        swal({
-                                title: "请登录后再进行操作",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "注册/登录",
-                                closeOnConfirm: false
-                            },
-                            function () {
-                                window.location.href = LOGIN_URL;
-                            });
+                        ERROR_OUTPUT(data);
                         return false;
                     }
                 }

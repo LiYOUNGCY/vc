@@ -74,9 +74,9 @@ class Common{
 
 		if(mb_strlen($article_content) > 70)
 		{
-       		$article_content = mb_substr($article_content, 0, 70);	
-       		$article_content.="...";		
-		}        
+       		$article_content = mb_substr($article_content, 0, 70);
+       		$article_content.="...";
+		}
 
         return $article_content;
     }
@@ -97,6 +97,10 @@ class Common{
     		$path = $match[1][0];
     		$path = explode('/', $path);
     		$count= count($path);
+            if(strstr($path[$count-1],'thumb2_'))
+            {
+                $path[$count-1] = str_replace('thumb2_','',$path[$count-1]);
+            }
     		$filename = "thumb1_".$path[$count-1];
     		$path[$count-1] = $filename;
     		$path = implode('/',$path);
@@ -115,9 +119,9 @@ class Common{
         if( ! empty($arr))
         {
             $arr[count($arr)-1] = $pre.$arr[count($arr)-1];
-            $pic = implode('/', $arr);    
-            return $pic;            
-        }        
+            $pic = implode('/', $arr);
+            return $pic;
+        }
         return "";
     }
 
@@ -129,9 +133,9 @@ class Common{
     {
  		$match = array();
         preg_match_all("/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/", $content, $match);
-        return isset( $match[1][0] ) ? $match[1][0] : '';    	
+        return isset( $match[1][0] ) ? $match[1][0] : '';
     }
-    
+
     static function arr_sort($array,$key,$order="asc")
     {//asc是升序 desc是降序
 
@@ -163,15 +167,15 @@ class Common{
 
     static function replace_face_url($str){
         $face_url = base_url().'public/img/face/';
-        $str = str_replace(">",'<；',$str); 
-        $str = str_replace(">",'>；',$str); 
-        $str = str_replace("\n",'<br/>',$str); 
-        $str = preg_replace("[\[em_([0-9]*)\]]","<img src=\"{$face_url}$1.gif\" />",$str); 
-        return $str; 
-    } 
-    
+        $str = str_replace(">",'<；',$str);
+        $str = str_replace(">",'>；',$str);
+        $str = str_replace("\n",'<br/>',$str);
+        $str = preg_replace("[\[em_([0-9]*)\]]","<img src=\"{$face_url}$1.gif\" />",$str);
+        return $str;
+    }
+
     static function is_ajax()
-    {	
+    {
 	    if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"])=="xmlhttprequest")
 		{
 			return TRUE;

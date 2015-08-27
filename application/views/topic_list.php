@@ -88,7 +88,7 @@ function readArticle(id) {
                 async:false,
                 data: {
                     page: page,
-                    type: 'article'
+                    type: 'topic'
                 },
                 dataType: 'json',
                 success: function(data) {
@@ -109,6 +109,7 @@ function readArticle(id) {
                         var article_title = items[i].content.sort_title;
                         var article_content = items[i].content.article_content;
                         var img = items[i].content.article_image;
+                        console.log(img);
                         var like = items[i].like;
                         var read = items[i].read;
 

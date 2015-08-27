@@ -18,7 +18,12 @@ class Main extends MY_Controller{
 		$page = $this->sc->input('page');
 		$limit= 10;
 		$goods = $this->cart_service->get_good_list($this->user['id'],$page,$limit);
-		echo json_encode($goods);
+		//分页输出
+		$arr['goods'] = array_slice($goods, $page * $limit, $limit);
+		//购物车总数量
+		$arr['count'] = count($goods);
+		
+		echo json_encode($arr);
 	}
 
 	/**

@@ -124,6 +124,19 @@ class Production_service extends MY_Service{
     	}
 	}
 
+	public function check_has_like($pid, $uid)
+	{
+		$result = $this->production_like_model->check_like($pid,$uid);
+		if(empty($result))
+		{
+			return FALSE;
+		}
+		else
+		{
+			return $result['status'];
+		}
+	}
+
 	/**
 	 * 获取艺术品相关联的专题
 	 * @param  pid 艺术品id [int]

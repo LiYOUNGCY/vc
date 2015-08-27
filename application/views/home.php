@@ -8,30 +8,12 @@
     <!-- 轮播 -->
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img data-src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395424528186.jpg" class="swiper-lazy">
-                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-            </div>
-            <div class="swiper-slide">
-                <img data-src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg" class="swiper-lazy">
-                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-            </div>
-            <div class="swiper-slide">
-                <img data-src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395424528186.jpg" class="swiper-lazy">
-                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-            </div>
-            <div class="swiper-slide">
-                <img data-src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg" class="swiper-lazy">
-                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-            </div>
-            <div class="swiper-slide">
-                <img data-src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395424528186.jpg" class="swiper-lazy">
-                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-            </div>
-            <div class="swiper-slide">
-                <img data-src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg" class="swiper-lazy">
-                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-            </div>
+            <?php foreach ($slider as $k => $v):?>
+                <div class="swiper-slide">
+                    <img data-src="<?=$v['pic']?>" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>                                     
+            <?php endforeach;?>
         </div>
         <!-- 轮播位置 -->
         <div class="swiper-pagination swiper-pagination-white"></div>
@@ -40,163 +22,47 @@
     <div class="new-subject">
         <div class="wrapper clearfix">
             <div class="title">最新专题</div>
-            <div class="more"><a href="" class="link">more</a></div>
+            <div class="more"><a href="<?=base_url()?>topic" class="link">more</a></div>
         </div>
         <div class="list" id="subject-list">
-            <div class="item">
-                <div class="sub-image" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg);background-size:cover;background-position:50% 50%;"></div>
-                <div class="sub-title">撒斯顿奥术奥术阿奥术阿奥术阿阿斯顿</div>
-                <div class="sub-content">sadas阿斯顿阿斯顿阿沙文电饭锅下次代收代付为注册色为二位手续费水电费为二位水电费需的风格威尔为为房产税V型水...</div>
-                <ul class="sub-info">
-                    <li><i class="fa fa-heart-o"></i> 124154</li>
-                    <li><i class="fa fa-eye"></i> 12551548</li>
-                </ul>
-            </div>
-            <div class="item">
-                <div class="sub-image" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg);background-size:cover;background-position:50% 50%;"></div>
-                <div class="sub-title">撒斯顿奥术奥术阿奥术阿奥术阿阿斯顿</div>
-                <div class="sub-content">sadas阿斯顿阿斯顿阿沙文电饭锅下次代收代付为注册色为二位手续费水电费为二位水电费需的风格威尔为为房产税V型水...</div>
-                <ul class="sub-info">
-                    <li><i class="fa fa-heart-o"></i> 124154</li>
-                    <li><i class="fa fa-eye"></i> 12551548</li>
-                </ul>
-            </div>
-            <div class="item">
-                <div class="sub-image" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg);background-size:cover;background-position:50% 50%;"></div>
-                <div class="sub-title">撒斯顿奥术奥术阿奥术阿奥术阿阿斯顿</div>
-                <div class="sub-content">sadas阿斯顿阿斯顿阿沙文电饭锅下次代收代付为注册色为二位手续费水电费为二位水电费需的风格威尔为为房产税V型水...</div>
-                <ul class="sub-info">
-                    <li><i class="fa fa-heart-o"></i> 124154</li>
-                    <li><i class="fa fa-eye"></i> 12551548</li>
-                </ul>
-            </div>
-            <div class="item">
-                <div class="sub-image" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg);background-size:cover;background-position:50% 50%;"></div>
-                <div class="sub-title">撒斯顿奥术奥术阿奥术阿奥术阿阿斯顿</div>
-                <div class="sub-content">sadas阿斯顿阿斯顿阿沙文电饭锅下次代收代付为注册色为二位手续费水电费为二位水电费需的风格威尔为为房产税V型水...</div>
-                <ul class="sub-info">
-                    <li><i class="fa fa-heart-o"></i> 124154</li>
-                    <li><i class="fa fa-eye"></i> 12551548</li>
-                </ul>
-            </div>
-            <div class="item">
-                <div class="sub-image" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg);background-size:cover;background-position:50% 50%;"></div>
-                <div class="sub-title">撒斯顿奥术奥术阿奥术阿奥术阿阿斯顿</div>
-                <div class="sub-content">sadas阿斯顿阿斯顿阿沙文电饭锅下次代收代付为注册色为二位手续费水电费为二位水电费需的风格威尔为为房产税V型水...</div>
-                <ul class="sub-info">
-                    <li><i class="fa fa-heart-o"></i> 124154</li>
-                    <li><i class="fa fa-eye"></i> 12551548</li>
-                </ul>
-            </div>
-            <div class="item">
-                <div class="sub-image" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg);background-size:cover;background-position:50% 50%;"></div>
-                <div class="sub-title">撒斯顿奥术奥术阿奥术阿奥术阿阿斯顿</div>
-                <div class="sub-content">sadas阿斯顿阿斯顿阿沙文电饭锅下次代收代付为注册色为二位手续费水电费为二位水电费需的风格威尔为为房产税V型水...</div>
-                <ul class="sub-info">
-                    <li><i class="fa fa-heart-o"></i> 124154</li>
-                    <li><i class="fa fa-eye"></i> 12551548</li>
-                </ul>
-            </div>
+            <?php foreach ($topic as $k => $v):?>
+
+                <div class="item">
+                    <div class="sub-image" style="background: url(<?=$v['content']['article_image']?>);background-size:cover;background-position:50% 50%;"></div>
+                    <div class="sub-title"><?=$v['content']['sort_title']?></div>
+                    <div class="sub-content"><?=$v['content']['article_content']?></div>
+                    <ul class="sub-info">
+                        <li><i class="fa fa-heart-o"></i><?=$v['like']?></li>
+                        <li><i class="fa fa-eye"></i><?=$v['read']?></li>
+                    </ul>
+                </div>                
+            <?php endforeach;?>
         </div>
     </div>
     <!-- 最新上架 -->
     <div class="new-art">
         <div class="wrapper clearfix">
             <div class="title">最新上架</div>
-            <div class="more"><a href="" class="link">more</a></div>
+            <div class="more"><a href="<?=base_url()?>production" class="link">more</a></div>
         </div>
         <div class="list" id="art-list">
-            <div class="item">
-                <figure class="effect-bubba">
-                    <div class="art-image" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg);background-size:cover;background-position:50% 50%;"></div>
-                    <figcaption>
-                        <p>类型：大波<br>尺寸：G罩杯</p>
-                    </figcaption>           
-                </figure>
-                <div class="art-title">撒斯顿奥阿阿斯顿</div>
-                <div class="author">作者：鸡巴白</div>
-                <ul class="art-info">
-                    <li><i class="fa fa-heart-o"></i> 1241</li>
-                    <li><i class="fa fa-eye"></i> 1255</li>
-                    <div class="price">5200RMB</div>
-                </ul>
-            </div>
-            <div class="item">
-                <figure class="effect-bubba">
-                    <div class="art-image" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg);background-size:cover;background-position:50% 50%;"></div>
-                    <figcaption>
-                        <p>类型：大波<br>尺寸：G罩杯</p>
-                    </figcaption>           
-                </figure>
-                <div class="art-title">撒斯顿奥阿阿斯顿</div>
-                <div class="author">作者：鸡巴白</div>
-                <ul class="art-info">
-                    <li><i class="fa fa-heart-o"></i> 1241</li>
-                    <li><i class="fa fa-eye"></i> 1255</li>
-                    <div class="price">5200RMB</div>
-                </ul>
-            </div>
-            <div class="item">
-                <figure class="effect-bubba">
-                    <div class="art-image" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg);background-size:cover;background-position:50% 50%;"></div>
-                    <figcaption>
-                        <p>类型：大波<br>尺寸：G罩杯</p>
-                    </figcaption>           
-                </figure>
-                <div class="art-title">撒斯顿奥阿阿斯顿</div>
-                <div class="author">作者：鸡巴白</div>
-                <ul class="art-info">
-                    <li><i class="fa fa-heart-o"></i> 1241</li>
-                    <li><i class="fa fa-eye"></i> 1255</li>
-                    <div class="price">5200RMB</div>
-                </ul>
-            </div>
-            <div class="item">
-                <figure class="effect-bubba">
-                    <div class="art-image" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg);background-size:cover;background-position:50% 50%;"></div>
-                    <figcaption>
-                        <p>类型：大波<br>尺寸：G罩杯</p>
-                    </figcaption>           
-                </figure>
-                <div class="art-title">撒斯顿奥阿阿斯顿</div>
-                <div class="author">作者：鸡巴白</div>
-                <ul class="art-info">
-                    <li><i class="fa fa-heart-o"></i> 1241</li>
-                    <li><i class="fa fa-eye"></i> 1255</li>
-                    <div class="price">5200RMB</div>
-                </ul>
-            </div>
-            <div class="item">
-                <figure class="effect-bubba">
-                    <div class="art-image" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg);background-size:cover;background-position:50% 50%;"></div>
-                    <figcaption>
-                        <p>类型：大波<br>尺寸：G罩杯</p>
-                    </figcaption>           
-                </figure>
-                <div class="art-title">撒斯顿奥阿阿斯顿</div>
-                <div class="author">作者：鸡巴白</div>
-                <ul class="art-info">
-                    <li><i class="fa fa-heart-o"></i> 1241</li>
-                    <li><i class="fa fa-eye"></i> 1255</li>
-                    <div class="price">5200RMB</div>
-                </ul>
-            </div>
-            <div class="item">
-                <figure class="effect-bubba">
-                    <div class="art-image" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg);background-size:cover;background-position:50% 50%;"></div>
-                    <figcaption>
-                        <p>类型：大波<br>尺寸：G罩杯</p>
-                    </figcaption>           
-                </figure>
-                <div class="art-title">撒斯顿奥阿阿斯顿</div>
-                <div class="author">作者：鸡巴白</div>
-                <ul class="art-info">
-                    <li><i class="fa fa-heart-o"></i> 1241</li>
-                    <li><i class="fa fa-eye"></i> 1255</li>
-                    <div class="price">5200RMB</div>
-                </ul>
-            </div>
-
+            <?php foreach ($production as $k => $v):?>
+                <div class="item">
+                    <figure class="effect-bubba">
+                        <div class="art-image" style="background: url(<?=$v['pic']?>);background-size:cover;background-position:50% 50%;"></div>
+                        <figcaption>
+                            <p>类型：<?=$v['type_name']?><br>尺寸：<?=$v['l']?> * <?=$v['h']?>cm</p>
+                        </figcaption>           
+                    </figure>
+                    <div class="art-title"><?=$v['name']?></div>
+                    <div class="author">作者：<?=$v['artist']['name']?></div>
+                    <ul class="art-info">
+                        <li><i class="fa fa-heart-o"></i> <?=$v['like']?></li>
+                        <!--<li><i class="fa fa-eye"></i></li>-->
+                        <div class="price"><?=$v['price']?>RMB</div>
+                    </ul>
+                </div>                
+            <?php endforeach;?>           
         </div>
     </div>
     <div class="advbanner">ADV</div>
@@ -205,108 +71,20 @@
         <div class="title">最新艺术家</div>
         <div class="artist-swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide new-artlist-list swiper-no-swiping">
-                    <ul>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="swiper-slide new-artlist-list swiper-no-swiping">
-                    <ul>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="swiper-slide new-artlist-list swiper-no-swiping">
-                    <ul>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                        <li>
-                            <div class="head">
-                                <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150814/14395425281750.jpg">
-                            </div>
-                            <div class="name">鸡巴白</div>
-                        </li>
-                    </ul>
-                </div>
+                <?php for($i = 0; $i < count($artist); $i+=5) { ?>
+                    <div class="swiper-slide new-artlist-list swiper-no-swiping">
+                        <ul>
+                             <?php for($j = $i; $j < count($artist) && $j <= $i+4; $j++){?>
+                                 <li>
+                                    <div class="head">
+                                        <img src="<?=$artist[$j]['pic']?>">
+                                    </div>
+                                    <div class="name"><?=$artist[$j]['name']?></div>
+                                </li>                           
+                            <?php }?>                       
+                        </ul>
+                    </div>                    
+                <?php }?>          
             </div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
