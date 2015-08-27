@@ -32,6 +32,9 @@ var GET_ARTICLE_BY_ID = BASE_URL + 'topic/publish/get_article/';
 //更新文章
 var UPDATE_ARTICLE = BASE_URL + 'article/publish/update_article';
 
+//艺术品点赞
+var VOTE_PRODUCTION = BASE_URL + 'production/detail/like_production';
+
 /**
  * [trim 去掉字符串前后两端的空格]
  */

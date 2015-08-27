@@ -23,16 +23,18 @@ class Detail extends MY_Controller{
 
 		$production['pic_thumb'] 		= Common::get_thumb_url($production['pic'],'thumb2_');
 
-        $data['production'] 	= $production;
+        $body['production'] 	= $production;
         //获取相关联的专题
         //$data['topic'] 			= $this->production_service->get_topic_by_production($pid,$uid);
 
         $data['css'] = array(
             'font-awesome/css/font-awesome.min.css',
-            'base.css'
+            'base.css',
+			'alert.css'
         );
         $data['javascript'] = array(
             'jquery.js',
+			'alert.min.js',
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
             'error.js',

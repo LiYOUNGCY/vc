@@ -2715,6 +2715,9 @@ figure.effect-bubba p {
 }
 .artistarea .artintro .intro {
     font-size: 14px;
+    word-break: break-all;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
     text-align: justify;
 
     color: #b3b3b3;
