@@ -158,17 +158,7 @@
                         }
                     }
                     else if (status.error != null) {
-                        swal({
-                                title: "请登录后再进行操作",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "注册/登录",
-                                closeOnConfirm: false
-                            },
-                            function () {
-                                window.location.href = LOGIN_URL;
-                            });
+                        ERROR_OUTPUT(data);
                         return false;
                     }
                 },
@@ -235,17 +225,7 @@
                         swal("Good job!", "You clicked the button!", "success")
                     }
                     else if (data.error != null) {
-                        swal({
-                                title: "请登录后再进行操作",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "注册/登录",
-                                closeOnConfirm: false
-                            },
-                            function () {
-                                window.location.href = LOGIN_URL;
-                            });
+                        ERROR_OUTPUT(data);
                         return false;
                     }
                 }
