@@ -127,7 +127,14 @@ class Production_service extends MY_Service{
 	public function check_has_like($pid, $uid)
 	{
 		$result = $this->production_like_model->check_like($pid,$uid);
-		return ! empty($result) ? TRUE : FALSE;
+		if(empty($result))
+		{
+			return FALSE;
+		}
+		else
+		{
+			return $result['status'];
+		}
 	}
 
 	/**

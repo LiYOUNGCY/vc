@@ -189,19 +189,6 @@ class User_service extends MY_Service
     	return $this->user_model->have_phone($phone);
     }
 
-
-    /**
-     * [check_alias 查看主页别名是否重复]
-     * @param  [type] $uid   [description]
-     * @param  [type] $alias [description]
-     * @return [type]        [description]
-     */
-    public function check_alias($uid, $alias)
-    {
-        return $this->user_model->have_alias($uid,$alias);
-    }
-
-
     public function validate_phone($phone)
     {
         //生成 token

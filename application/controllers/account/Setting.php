@@ -13,13 +13,16 @@ class Setting extends MY_Controller
         $data['css'] = array(
             'font-awesome/css/font-awesome.min.css',
             'base.css',
-            'alert.css'
+            'alert.css',
+            'radiocheck.min.css'
         );
 
         $data['javascript'] = array(
             'jquery.js',
             'alert.min.js',
-            'error.js'
+            'validate.js',
+            'error.js',
+            'geo.js'
         );
 
 
@@ -83,16 +86,9 @@ class Setting extends MY_Controller
 			'script' => 'window.location.href ="'.base_url().'setting";'
 		);
 		$this->sc->set_error_redirect($error_redirect);
-		$arr 	= array('name', 'alias', 'sex', 'area', 'email', 'phone', 'birthday');
+		$arr 	= array('name', 'sex', 'address', 'tel', 'email', 'phone');
 		$data = $this->sc->input($arr);
 
-		//查看别名是否重复
-		$data['alias'] = 'home/'.$data['alias'];
-		$check_alias = $this->user_service->check_alias($this->user['id'],$data['alias']);
-		if($check_alias)
-		{
-			$this->error->output('ALIAS_REPEAT',array('script' => 'window.location.href ="'.base_url().'setting";'));
-		}
 		//更新用户资料
 		$result = $this->user_service->update_account($this->user['id'], $data);
 		if($result)
@@ -118,25 +114,5 @@ class Setting extends MY_Controller
 		echo json_encode($data);
 	}
 
-	/**
-	 * [check_alias 查看主页别名是否重复]
-	 * @return [type] [description]
-	 */
-	public function check_alias()
-	{
-		$alias  = $this->sc->input('alias');
-		$alias  = 'home/'.$alias;
-		$result = $this->user_service->check_alias($this->user['id'], $alias);
-		if($result)
-		{
-			$this->error->output('alias_repeat');
-		}
-		else
-		{
-			echo json_encode(array('success' => 0));
-
-		}
-	}
-
-
 }
+
