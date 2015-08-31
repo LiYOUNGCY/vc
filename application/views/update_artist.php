@@ -15,7 +15,7 @@
                         <input type="hidden" id="w" name="w"/>
                         <input type="hidden" id="h" name="h"/>
                         <input type="hidden" id="img" name="img" value="<?=$artist['pic']?>"/>
-                        <div class="box">
+                        <div class="box" style="width: 400px; height=400px;">
                             <div id="camera_warp" class="camera_warp" style="background-image: url(<?=$artist['pic']?>) ;background-position: 50% 50%; -moz-background-size:100% 100%; background-size:100% 100%;">
                                 <input type="file" name="upfile" id="upfile" onchange="file_upload()">
                                 <i class="fa fa-camera fa-5x"></i>

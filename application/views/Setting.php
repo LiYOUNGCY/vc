@@ -1,230 +1,184 @@
-<body>
-<?=$sidebar?>
-<div id="vi_container" class="container">
-  <div id="shade"></div>
-  <div class="content">
-    <div class="container-head">
-      <h1>设置中心</h1>
-      <div id="vi_menu" class="vi-menu width-100p">
-        <ul>
-          <li class="active">
-            <a href="<?=base_url().'setting';?>" class="link">基本信息</a>
-          </li>
-          <li>
-            <a href="<?=base_url().'setting/pwd'?>" class="link">修改密码</a>
-          </li> 
-        </ul>
-      </div>
+<body onload="setup();preselect('北京市');promptinfo();">
+<div class="main-wrapper">
+    <!-- 顶部 -->
+    <?= $top ?>
+    <div class="container">
+        <div class="content edit">
+            <form class="list" method="post" action="<?= base_url() ?>artist/publish/publish_artist">
 
-      <div class="conversation">
-        <main>
-          <form id="setting" class="flp" action="<?=base_url().'account/setting/update_account' ?>" method='post'>
-            <div class="form-group">
-              <input class="flp-input" type="text" id="name" name="name">
-              <label class="label" for="name">昵称</label>
-              <div id="name_error" class="error_div"></div>
-            </div>
-            <div class="form-group">
-              <input class="flp-input" type="text" id="alias" name="alias">
-              <label class="label" for="alias">主页地址(www.artvc.cc/home)</label>
-              <div id="alias_error" class="error_div"></div>
-            </div>
-            <div class="radio-box">
-              <p>性别</p>
-              <input class="radiocheck" name="sex" id="male" type="radio" value="1">
-              <label class="nofull default left" for="male">男</label>
-              <input class="radiocheck" name="sex" id="female" type="radio" value="2">
-              <label class="nofull default left" for="female">女</label>
-              <input class="radiocheck" name="sex" id="secret" type="radio" value="0">
-              <label class="nofull default left" for="secret">保密</label>
-            </div>
-            <div class="form-group">
-              <input class="flp-input" type="text" id="phone" name="phone">
-              <label class="label" for="phone">手机</label>
-              <div id="phone_error" class="error_div"></div>
-            </div>
-            <div class="form-group">
-              <input class="flp-input" type="text" id="email" name="email">
-              <label class="label" for="email">邮箱</label>
-              <div id="email_error" class="error_div"></div>
-            </div>
-            <div class="form-group">
-              <input class="flp-input" type="text" id="area" name="area">
-              <label class="label" for="area">地区</label>
-              <div id="area_error" class="error_div"></div>
-            </div>
-            <div class="form-group">
-              <input class="flp-input" type="text" id="birthday" name="birthday">
-              <label class="label" for="birthday">生日(YYYY-MM-DD)</label>
-              <div id="birthday_error" class="error_div"></div>
-            </div>
-            <div class="option">
-              <div id="cancel" class="btn cancel">取消</div>
-              <div id="save" class="btn save">保存</div>
-            </div>
-          </form>
-        </main>
-      </div>
-      
+                <div class="item">
+                    <p><a class="link" href="#">鸡巴白</a> » 修改个人信息</p>
+                </div>
+
+                <div class="item line-block">
+                    <label for="name">昵称：</label>
+                    <input id="name" name="name" type="text">
+
+                    <div class="error_box" id="name_error" style="display:none;"></div>
+                </div>
+
+                <div class="item">
+                    <div class="radio-box">
+                        <p style="display:inline-block; margin-right:10px;">性别：</p>
+                        <input class="radiocheck" name="article_type" id="article" type="radio" value="1" checked>
+                        <label class="nofull default left" for="article">男</label>
+                        <input class="radiocheck" name="article_type" id="topic" type="radio" value="2">
+                        <label class="nofull default left" for="topic">女</label>
+                    </div>
+                </div>
+
+                <div class="item line-block">
+                    <label for="evaluation">收货地址：</label>
+                    <span>广东省广州市从化区太平镇广从13号华软</span>
+                    <a id="edit_address" href="javascript:void(0)" style="display:inline-block;">[ 编辑收货地址 ]</a>
+                </div>
+
+                <div class="item line-block">
+                    <label for="evaluation">Email：</label>
+                    <span>981533089@qq.com</span>
+                    <a href="javascript:void(0)" style="display:inline-block;" id="change_email">[ 更换邮箱 ]</a>
+                    <span class="introduction">当邮箱改变时，登录的账号也会改变</span>
+
+                    <input class="width-280" type="text" name="email" id="email" style="display:none;">
+
+                    <div class="btn code" style="display:none;">验证邮箱</div>
+                    <div class="error_box" id="email_error" style="display:none;"></div>
+                </div>
+
+                <div class="item line-block">
+                    <label for="evaluation">手机：</label>
+                    <span id="phone_msg">15521322924</span>
+                    <a id="change_phone" href="javascript:void(0)" style="display:inline-block;">[ 更换手机 ]</a>
+                    <span class="introduction">当手机改变时，登录的账号也会改变</span>
+
+                    <input class="width-280" type="text" name="phone" id="phone" style="display:none;">
+
+                    <div class="btn code" style="display:none;" id="phone_code">获取验证码</div>
+                    <div class="error_box" id="phone_error" style="display:none;"></div>
+                </div>
+
+                <div class="options">
+                    <div class="btn cancel" onclick="">取消</div>
+                    <div id="save" class="btn save" onclick="alert(document.getElementById('address').value);">保存</div>
+                </div>
+        </div>
+        <?= $footer ?>
     </div>
-    <?=$footer?>
-  </div>
+</div>
+<div class="hidediv" style="display:none;" id="phone_div">
+    <div class="msg_box">
+        <div class="msg_close"><i class="fa fa-close"></i></div>
+        <div class="msg_content item">
+            <h3 class="title">绑定手机</h3>
+            <input type="text" name="phone_validate_code" id="phone_validate_code" placeholder="请输入短信验证码">
+
+            <div class="error_box" id="phone_validate_code_error"></div>
+
+            <p class="message">验证码将在xxx秒后过期</p>
+
+            <div class="options">
+                <div id="save" class="btn save">确定</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hidediv" style="display:none;" id="address_div">
+    <div class="msg_box">
+        <div class="msg_close"><i class="fa fa-close"></i></div>
+        <div class="msg_content item">
+            <h3 class="title">编辑收货地址</h3>
+
+            <div style="margin: 10px 0;">
+                <select class="select" name="province" id="s1">
+                    <option></option>
+                </select>
+                <select class="select" name="city" id="s2">
+                    <option></option>
+                </select>
+                <select class="select" name="town" id="s3">
+                    <option></option>
+                </select>
+                <input id="address" name="address" type="hidden" value=""/>
+            </div>
+            <input type="text" name="detail_address" id="detail_address" placeholder="输入详细地址">
+
+            <div class="options">
+                <div id="address_save" class="btn save">保存</div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
-<script type="text/javascript" src="<?=base_url()?>public/js/jquery.easing.min.js"></script>
-<script type="text/javascript" src="<?=base_url()?>public/js/validate.js"></script>
 <script type="text/javascript">
-  $(".label").each(function(){
-    var sop = '<span class="ch">'; //span opening
-    var scl = '</span>'; //span closing
-    //split the label into single letters and inject span tags around them
-    $(this).html(sop + $(this).html().split("").join(scl+sop) + scl);
-    //to prevent space-only spans from collapsing
-    $(".ch:contains(' ')").html("&nbsp;");
-  })
-
-  var d;
-  //animation time
-  $(".flp-input").focus(function(){
-    //calculate movement for .ch = half of flp-input height
-    var tm = $(this).outerHeight()/2 *-1 + "px";
-    //label = next sibling of flp-input
-    //to prevent multiple animation trigger by mistake we will use .stop() before animating any character and clear any animation queued by .delay()
-    $(this).next().addClass("focussed").children().stop(true).each(function(i){
-      d = i*50;//delay
-      $(this).delay(d).animate({top: tm}, 200, 'easeOutBack');
-    })
-  })
-  $(".flp-input").blur(function(){
-    //animate the label down if content of the input is empty
-    if($(this).val() == "")
-    {
-      $(this).next().removeClass("focussed").children().stop(true).each(function(i){
-        d = i*50;
-        $(this).delay(d).animate({top: 0}, 500, 'easeInOutBack');
-      })
+    function promptinfo() {
+        var address = document.getElementById('address');
+        var s1 = document.getElementById('s1');
+        var s2 = document.getElementById('s2');
+        var s3 = document.getElementById('s3');
+        address.value = s1.value + s2.value + s3.value;
+        console.log(address.value);
     }
-  })
 
-  $(function(){
-    var last_len = 0;
-    var BASE_URL = $("#BASE_URL").val();
-    var alias_check = true;
-    $('#birthday').bind('input propertychange', function() {
-      var str = $(this).val();
-      var len = str.length;
+    $(function () {
+        function hidediv_open(self) {
+            $(self).css('display', 'block');
+            // $('body').css('overflow-y', 'hidden');
+        }
 
-      if(len == 4 && len == last_len + 1) {
-        $(this).val(str+'-');
-      }
-      else if(len == 7 && len == last_len + 1) {
-        $(this).val(str + '-');
-      }
-      last_len = len;
+        function hidediv_close(self) {
+            $(self).parent().parent().css('display', 'none');
+            // $('body').css('overflow-y', 'auto');
+        }
 
-      if(len >= 10) {
-        $(this).val(str.substr(0, 10));
-      }
-    });
-
-    function set_height(input_id, data, height) {
-      if(data != '') {
-        $("#" + input_id).val(data);
-        $("#" + input_id).next().addClass("focussed").children().stop(true).each(function(i){
-            $(this).css('top', height);
-        })
-      }
-    }
-    
-    function check_alias(alias)
-    {
-      $.ajax({
-          url:BASE_URL+"account/setting/check_alias",
-          type:'post',
-          data:{
-            alias:alias
-          },
-          success:function(data) {
-             data = eval('('+data+')');
-             if(data.error != null)
-             {
-                alias_check = false;
-                $('#alias_error').html(data.error);
-             }
-             else if(data.success == 0)
-             {
-                alias_check = true;
-             }  
-          }   
+        $('.msg_close').each(function () {
+            $(this).click(function () {
+                hidediv_close($(this));
+            });
         });
-    }
 
-  $.ajax({
-    url:BASE_URL+"account/setting/get_msg",
-    type:'post',
-    dataType:'text',
-    success:function(data) {
-      var user = eval("(" + data + ")");
+        //点击[ 更换手机 ]
+        $('#change_phone').click(function () {
+            ShowAll($(this));
+        });
+        //点击[ 更换邮箱 ]
+        $('#change_email').click(function () {
+            ShowAll($(this));
+        });
 
-      var height = $("#name").outerHeight()/2 *-1 + "px";
+        //点击获取验证码的事件
+        $('#phone_code').click(function () {
+            hidediv_open('#phone_div');
+        });
 
-      user.alias = user.alias.split('/');
-      user.alias = user.alias[1];
-      set_height('name', user.name, height);
-      set_height('alias', user.alias, height);
-      set_height('area', user.area, height);
-      set_height('email', user.email, height);
-      set_height('phone', user.phone, height);
-      set_height('birthday', user.birthday, height);
-      
+        $('#edit_address').click(function () {
+            hidediv_open('#address_div');
+        });
 
-      if(user.sex == 0) {
-        $('#secret').attr('checked', 'true');
-      }
-      else if( user.sex == 1) {
-        $('#male').attr('checked', 'true');
-      }
-      else if( user.sex == 2) {
-        $('#female').attr('checked', 'true');
-      }
-    }
-  });
 
-  //验证各个字段是否合法
-  $('#name').blur(function(){
-    validate('name', $('#name').val());
-  });
-  $('#alias').blur(function(){
-    var result = validate('alias', $('#alias').val());
-    if(result)
-    {
-      check_alias($("#alias").val());
-    }
-  });
-  $('#area').blur(function(){
-    validate('area', $('#area').val());
-  });
-  $('#phone').blur(function(){
-    validate('phone', $('#phone').val());
-  });
-  $('#email').blur(function(){
-    validate('email', $('#email').val());
-  });
-  $('#birthday').blur(function(){
-    validate('birthday', $('#birthday').val());
-  });
+        //当 input 框失去焦点时
+        $('input').each(function () {
+            var input = $(this);
+            $(this).blur(function () {
+                var key = input.attr('name');
+                var value = input.val();
+                if (key != "" && value != "") {
+                    validate(key, value);
+                }
+                else {
+                    console.log("key or value are null");
+                }
+            });
+        });
 
-  $('#save').click(function(){
-    var name = validate('name', $('#name').val());
-    var alias = validate('alias', $('#alias').val());
-    var area = validate('area', $('#area').val());
-    var phone = validate('phone', $('#phone').val());
-    var email = validate('email', $('#email').val());
-    var birthday = validate('birthday', $('#birthday').val());
-    if( name && alias && area && phone && email && birthday && alias_check) {
-      $('form').submit();
-    }
-  });
-});
+
+        function ShowAll($self) {
+            var tar = $self.parent();
+            tar.find('span').hide();
+            tar.find('a').hide();
+            tar.find('input').show();
+            tar.find('.code').show();
+        }
+    });
 </script>
 </html>

@@ -1,16 +1,17 @@
 <body>
 <div class="main-wrapper">
     <!-- 顶部 -->
-    <?php echo $top;?>
+    <?php echo $top; ?>
     <!-- 主体 -->
     <div class="container">
         <div class="artist_detail">
-            <div class="pic"><img src="<?=$artist['pic']?>"></div>
+            <div class="pic"><img src="<?= $artist['pic'] ?>"></div>
             <div class="detail">
                 <div class="name"><?=$artist['name']?></div>
                 <input type="hidden" value="<?=$artist['id']?>" id="aid">
                 <div class="intro">
-                    <p><?=$artist['intro']?></p>
+                    <p><?= $artist['intro'] ?></p>
+
                     <div class="more"><a href="" class="link">[阅读更多+]</a></div>
                 </div>
             </div>
@@ -18,7 +19,7 @@
         <div class="artistevaluate">
             <div class="title">维C推荐</div>
             <div class="detail">
-                <p><?=$artist['evaluation']?></p>
+                <p><?= $artist['evaluation'] ?></p>
             </div>
         </div>
         <div class="arts" id="arts">
@@ -38,15 +39,16 @@
         </div>
         <div class="loadmore" id="loadmore">加载更多</div>
 
-    <?php echo $footer;?>
+        <?php echo $footer; ?>
     </div>
 </div>
 
-<?php echo $sign;?>
+<?php echo $sign; ?>
 
 </body>
 
 <script>
+<<<<<<< HEAD
 
 $(function() {
     var page = 0;
@@ -104,9 +106,6 @@ $(function() {
     }
 
 });
-
-
-
 
 </script>
 </html>

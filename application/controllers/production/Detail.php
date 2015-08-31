@@ -22,25 +22,27 @@ class Detail extends MY_Controller{
 		$production['pic_thumb'] 		= Common::get_thumb_url($production['pic'],'thumb2_');
 		if(isset($this->user['id']))
 		{
-			$production['like_status'] 	= $this->production_service->check_has_like($pid,$this->user['id']);			
+			$production['like_status'] 	= $this->production_service->check_has_like($pid,$this->user['id']);
 		}
 		else
 		{
 			$production['like_status'] 	= 0;
 		}
 
-        $data['production'] 	= $production;
-        
+        $body['production'] 	= $production;
+
 		$uid = isset($this->user['id']) ? $this->user['id'] : NULL;
         //获取相关联的专题
         //$data['topic'] 			= $this->production_service->get_topic_by_production($pid,$uid);
 
         $data['css'] = array(
             'font-awesome/css/font-awesome.min.css',
-            'base.css'
+            'base.css',
+			'alert.css'
         );
         $data['javascript'] = array(
             'jquery.js',
+			'alert.min.js',
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
             'error.js',
@@ -50,7 +52,7 @@ class Detail extends MY_Controller{
         );
 
 
-        $user['user'] = $this->user;
+        $user['user']         = $this->user;
         $data['title']        = $production['name'];
         $body['top']          = $this->load->view('common/top', $user, TRUE);
         $body['sign']         = $this->load->view('common/sign', '', TRUE);

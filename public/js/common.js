@@ -38,6 +38,9 @@ var GET_ARTIST_ARTS = BASE_URL + 'artist/detail/get_artist_production';
 //购物车列表
 var GET_CART_GOODS = BASE_URL + 'cart/main/get_good_list';
 
+//艺术品点赞
+var VOTE_PRODUCTION = BASE_URL + 'production/detail/like_production';
+
 /**
  * [trim 去掉字符串前后两端的空格]
  */

@@ -51,6 +51,7 @@ class Main extends MY_Controller {
         $data['title']        = "资讯";
         $body['top']          = $top;
         $body['user']         = $this->user;
+        $body['footer'] = $this->load->view('common/footer', '', TRUE);
         //文章类型
         $body['article_type'] = $type;
         $this->load->view('common/head', $data);

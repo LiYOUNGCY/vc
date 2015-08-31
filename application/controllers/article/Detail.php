@@ -37,7 +37,7 @@ class Detail extends MY_Controller
         }
         
         $data['article'] = $article;
-        $data['like_status']    = $like_status;
+        $data['like_status'] = $like_status;
         $data['comment'] = $comment;
 
 
@@ -65,6 +65,8 @@ class Detail extends MY_Controller
         );
         $this->load->view('common/head', $head);
         $this->load->view('article_detail', $data);
+
+//        echo json_encode($like_status);
     }
     /*
     public function get_vote_list()

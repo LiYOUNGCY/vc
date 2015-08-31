@@ -7,14 +7,14 @@
         <div class="art wrapper">
             <div class="artarea">
                 <div class="title"><?=$production['name']?></div>
-                
+
                 <div class="artpic" id="picture-frame">
-                    <img src="<?=$production['pic_thumb']?>" class="thumb" data-src="<?=$production['pic']?>"/>    
+                    <img src="<?=$production['pic_thumb']?>" class="thumb" data-src="<?=$production['pic']?>"/>
                 </div>
                 <div class="artinfo">
-                    <div class="likebtn">
+                    <div class="likebtn" id="vote">
                         <div class="support"></div>
-                        <div class="num">12</div>
+                        <div class="num" id="seeLike"><?=$production['like']?></div>
                     </div>
                     <div class="info"><?=$production['type']?>，<?=$production['marterial']?>，<?php echo $production['w']." x ".$production['h'];?>cm，<?=$production['creat_time']?></div>
                 </div>
@@ -46,9 +46,9 @@
             </div>
         </div>
 
-    
+
     <?php echo $footer;?>
-    </div> 
+    </div>
 </div>
 
 <?php echo $sign;?>
@@ -60,7 +60,53 @@ $(function() {
     $("#picture-frame").zoomToo({
         magnify: 1
     });
-    
+
+    //点赞
+    var aid = $('#aid').val();
+    $("#vote").click(function () {
+        $.ajax({
+            type: 'POST',
+            url: VOTE_PRODUCTION,
+            async: false,
+            data: {
+                aid: aid
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                var status = data;
+                if (status.success == 0) {
+                    if ($('#vote').hasClass('focus')) {
+                        $('#vote').attr('class', 'likebtn blur');
+                        $('#seeLike').html(parseInt($('#seeLike').html()) - 1);
+                    }
+                    else {
+                        $('#vote').attr('class', 'likebtn focus');
+                        $('#seeLike').html(parseInt($('#seeLike').html()) + 1);
+                    }
+                }
+                else if (status.error != null) {
+                    swal({
+                            title: "请登录后再进行操作",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "注册/登录",
+                            closeOnConfirm: false
+                        },
+                        function () {
+                            window.location.href = LOGIN_URL;
+                        });
+                    return false;
+                }
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });
+    // END vote click event
+
 });
 </script>
 </html>

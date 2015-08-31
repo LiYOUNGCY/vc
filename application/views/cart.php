@@ -88,7 +88,7 @@ $(function(){
                 $("#artnum").html(count);
             }
         });    
-    }
+    }   
 
 })
 

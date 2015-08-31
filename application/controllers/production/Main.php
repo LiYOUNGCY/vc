@@ -23,7 +23,8 @@ class Main extends MY_Controller{
         );
 
         $user['user']= $this->user;
-        $data['top'] = $this->load->view('common/top', $user, TRUE);
+        $data['top']            = $this->load->view('common/top', $user, TRUE);
+        $data['footer']         = $this->load->view('common/footer', '', TRUE);
         $head['title'] = '艺术品';
         $this->load->view('common/head', $head);
         $this->load->view('production_list', $data);
