@@ -27,7 +27,16 @@ var GET_PRODUCTION_URL = BASE_URL + 'production/main/get_production_list';
 var POST_ARTICLE_URL = BASE_URL + 'article/publish/publish_article';
 
 //获取文章
-var GET_ARTICLE_BY_ID = BASE_URL + 'article/main/get_article/';
+var GET_ARTICLE_BY_ID = BASE_URL + 'topic/publish/get_article/';
+
+//更新文章
+var UPDATE_ARTICLE = BASE_URL + 'article/publish/update_article';
+
+//艺术作品
+var GET_ARTIST_ARTS = BASE_URL + 'artist/detail/get_artist_production';
+
+//购物车列表
+var GET_CART_GOODS = BASE_URL + 'cart/main/get_good_list';
 
 /**
  * [trim 去掉字符串前后两端的空格]

@@ -56,7 +56,7 @@ $route['default_controller'] = 'index';
 
 /**
  * 首页
- * 
+ *
  */
 $route['home'] = 'home/main';
 /**
@@ -65,6 +65,7 @@ $route['home'] = 'home/main';
 
 $route['article/(:num)'] = 'article/detail/index/$1';
 $route['article'] = 'article/main';
+$route['topic'] = 'article/main/index/topic';
 //发布文章
 $route['publish/article']  = 'article/publish/index/publish';
 //更新文章
@@ -93,6 +94,8 @@ $route['artist/(:num)'] = 'artist/detail/index/$1';
 $route['publish/artist']  = 'artist/publish/index/publish';
 //更新艺术品
 $route['update/artist/(:num)']   = 'artist/publish/index/update/$1';
+//购物车
+$route['cart']  = 'cart/main';
 /**
  * 用户
  */
@@ -102,7 +105,7 @@ $route['setting']   = 'account/setting/index/user';
 $route['setting/(([a-z]*))']   = 'account/setting/index/$1';
 
 /**
- * 收藏列表 
+ * 收藏列表
  */
 $route['like'] = 'like/main';
 $route['like/([a-z]*)'] = 'like/main/index/$1';
@@ -112,7 +115,7 @@ $route['like/([a-z]*)'] = 'like/main/index/$1';
 $route['conversation/(:num)'] = 'conversation/main/index/$1';
 
 /**
- *消息 
+ *消息
  */
 $route['notification']  = 'notification/main';
 $route['notification/([a-z]*)'] = 'notification/main/index/$1';

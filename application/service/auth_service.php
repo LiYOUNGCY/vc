@@ -84,7 +84,7 @@ class Auth_service extends MY_Service{
                     //未登录
                     else
                     {
-                        $this->error->output('NOTLOGIN_ERROR',array('script' => 'window.location.href ="'.base_url().'login";'));
+                        $this->error->output('NOTLOGIN_ERROR',array('script' => 'swal({title: "请登录后再进行操作",type: "warning",showCancelButton: true,confirmButtonColor: "#DD6B55",confirmButtonText: "注册/登录",closeOnConfirm: false},function () {showsign();});'));
                     }
                 }
                 //没有权限   

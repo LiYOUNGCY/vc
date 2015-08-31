@@ -3,7 +3,7 @@ class Image_service extends MY_Service{
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('CImage');
+		$this->load->library('Cimage');
 		$this->load->library('Oss');
 	}
 
