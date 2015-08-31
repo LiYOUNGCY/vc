@@ -41,6 +41,7 @@
                 <?php endforeach; ?>
             </div>
         </div>
+
         <!-- 最新上架 -->
         <div class="new-art">
             <div class="wrapper clearfix">

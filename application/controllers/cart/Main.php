@@ -7,7 +7,27 @@ class Main extends MY_Controller{
 	}
 	public function index()
 	{
-		
+		$head['css'] = array(
+			'base.css',
+			'font-awesome/css/font-awesome.min.css',
+			'alert.css',
+		);
+
+		$head['javascript'] = array(
+			'jquery.js',
+			'error.js',
+			'alert.min.js',
+		);
+
+		$user['user'] 		  = $this->user;
+        $head['title']        = "购物车";
+        $body['top']          = $this->load->view('common/top', $user, TRUE);
+        $body['sign']         = $this->load->view('common/sign', '', TRUE);
+        $body['footer']       = $this->load->view('common/footer', '', TRUE);
+        $body['user']         = $this->user;
+
+		$this->load->view('common/head', $head);
+		$this->load->view('cart', $body);
 	}
 	/**
 	 * [get_good_list 获取购物车物品列表]
@@ -16,6 +36,7 @@ class Main extends MY_Controller{
 	public function get_good_list()
 	{
 		$page = $this->sc->input('page');
+		// $page = 0;
 		$limit= 10;
 		$goods = $this->cart_service->get_good_list($this->user['id'],$page,$limit);
 		//分页输出

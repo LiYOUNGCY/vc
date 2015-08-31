@@ -32,6 +32,12 @@ var GET_ARTICLE_BY_ID = BASE_URL + 'topic/publish/get_article/';
 //更新文章
 var UPDATE_ARTICLE = BASE_URL + 'article/publish/update_article';
 
+//艺术作品
+var GET_ARTIST_ARTS = BASE_URL + 'artist/detail/get_artist_production';
+
+//购物车列表
+var GET_CART_GOODS = BASE_URL + 'cart/main/get_good_list';
+
 //艺术品点赞
 var VOTE_PRODUCTION = BASE_URL + 'production/detail/like_production';
 

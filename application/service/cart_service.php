@@ -33,7 +33,8 @@ class Cart_service extends MY_Service{
 		//购物车还未有该物品
 		if( ! $set)
 		{
-			$production = $this->production_model->get_production_by_id($pid);
+			$production 	   = $this->production_model->get_production_by_id($pid);
+			$production['pic'] = Common::get_thumb_url($production['pic']);			
 			if(empty($production))
 			{
 				$this->error->output('INVALID_REQUEST');
@@ -115,7 +116,6 @@ class Cart_service extends MY_Service{
 		{
 			//获取购物车物品列表
 			$goods = $this->_get_all_good_list($uid);
-
 			//添加到session
 			$this->session->set_userdata('cart',$goods);
 			return $goods;
@@ -134,9 +134,19 @@ class Cart_service extends MY_Service{
 		foreach ($goods as $k => $v) {
 			//获取物品详情
 			$p = $this->production_model->get_production_by_id($goods[$k]['pid']);
-			unset($goods[$k]['pid']);
+			$p['pic'] = Common::get_thumb_url($p['pic']);
+			unset($goods[$k]['pid']);	
 			unset($goods[$k]['uid']);
 			$goods[$k]['production'] = $p;
+			$this->load->model('artist_model');
+			if( ! empty($p['aid']))
+			{
+				$goods[$k]['artist'] = $this->artist_model->get_artist_base_id($p['aid']);				
+			}
+			else
+			{
+				$goods[$k]['artist'] = NULL;
+			}
 		}
 		return $goods;	
 	}
