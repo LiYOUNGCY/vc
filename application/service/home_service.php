@@ -36,7 +36,8 @@ class Home_service extends MY_Service{
 
 		foreach ($latest_production as $k => $v) {
 			//显示缩略图
-			$latest_production[$k]['pic'] = Common::get_thumb_url($latest_production[$k]['pic']);
+			$latest_production[$k]['pic']   = Common::get_thumb_url($latest_production[$k]['pic']);
+			$latest_production[$k]['intro'] = Common::extract_content($latest_production[$k]['intro']); 
 			//获取艺术家信息
 			if( ! empty($v['aid']))
 			{
@@ -54,13 +55,13 @@ class Home_service extends MY_Service{
 			}
 		}		
 
-		$latest_artist     = $this->artist_model->get_artist_list(0,6,'id DESC');
+		//$latest_artist     = $this->artist_model->get_artist_list(0,6,'id DESC');
 		$slider 		   = $this->slider_model->get_slider_list();
 
 		$result = array(
 			'topic' 	 => $latest_topic,
 			'production' => $latest_production,
-			'artist'	 => $latest_artist,
+			//'artist'	 => $latest_artist,
 			'slider' 	 => $slider
 		);
 		return $result;

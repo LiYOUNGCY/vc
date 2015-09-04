@@ -21,6 +21,9 @@ $lang['error_INVALID_PID'] 			= '无效的id';
 $lang['error_INVALID_PARENT_ID']	= '无效的id';
 $lang['error_INVALID_CONVERSATION_CONTENT'] = '私信内容格式错误';
 $lang['error_INVALID_COMMENT'] 		= '评论内容格式错误';
+$lang['error_INVALID_AMOUNT'] 		= '支付金额格式错误';
+$lang['error_INVALID_TEL'] 			= '联系方式格式错误';
+$lang['error_INVALID_COMMENT'] 		= '评论内容格式错误';
 $lang['error_OVER_SIZE']			= '宽高超出限制';
 
 
@@ -35,3 +38,6 @@ $lang['error_ARTICLE_NOT_EXIST']	= "文章不存在";
 $lang['error_INVALID_REQUEST']		= "无效的请求";
 $lang['error_NOTLOGIN_ERROR']		= "请登录后再操作";
 $lang['error_NOAUTH_ERROR']			= "抱歉,您没有当前操作的权限";
+$lang['error_TRANSACT_DATA']		= "非法篡改业务数据";
+$lang['error_NO_GOOD']				= "商品不存在,已售出或者下架";
+$lang['error_TRANSACT_FAILED']		= "交易失败";
