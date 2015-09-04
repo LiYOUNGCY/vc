@@ -40,15 +40,15 @@
                         if($i == 0)
                         {
                             $i=1;
-                            echo '<div class="item big"> ';
+                            echo '<div class="item big"><div class="box" style="background:url('.$v['content']['article_bigimage'].');background-size:cover;background-position:50% 50%;">';
                         }
                         else
                         {
-                            echo '<div class="item">';
+                            echo '<div class="item"><div class="box" style="background: url('.$v['content']['article_image'].');background-size:cover;background-position:50% 50%;">';
                         }
                     ?>
                            
-                        <div class="box" style="background: url(<?=$v['content']['article_image']?>);background-size:cover;background-position:50% 50%;">
+                        
                             <div class="info">
                                 <p><?=$v['content']['article_content']?></p>
                             </div>
@@ -79,15 +79,13 @@
                         if($i == 0)
                         {
                             $i=1;
-                            echo '<div class="item big"> ';
+                            echo '<div class="item big"><div class="box" style="background:url('.$v['bigpic'].');background-size:cover;background-position:50% 50%;">';
                         }
                         else
                         {
-                            echo '<div class="item">';
+                            echo '<div class="item"><div class="box" style="background: url('.$v['pic'].');background-size:cover;background-position:50% 50%;">';
                         }
                     ?>
-                           
-                        <div class="box" style="background: url(<?=$v['pic']?>);background-size:cover;background-position:50% 50%;">
                             <div class="info">
                                 <p><?=$v['intro']?></p>
                             </div>
