@@ -116,7 +116,12 @@ $(function(){
 
 })
 
-function showsign(){
+function showsign(type){
+    if(type == 1){
+      $(".sign .position").css({"top":0});
+    }else if(type == 2){
+      $(".sign .position").css({"top":"-340px"});
+    }
     $(".shade").fadeIn(200);
     $(".sign").fadeIn(200);
 }
