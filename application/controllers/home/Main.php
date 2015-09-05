@@ -33,7 +33,7 @@ class Main extends MY_Controller {
         $all = $this->home_service->enter_index();
         $data['topic']      = $all['topic'];
         $data['production'] = $all['production'];
-        $data['artist']     = $all['artist'];
+        //$data['artist']     = $all['artist'];
         $data['slider']     = $all['slider'];
 
         $user['user'] = $this->user;

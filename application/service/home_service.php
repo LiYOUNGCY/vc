@@ -21,7 +21,7 @@ class Home_service extends MY_Service{
         {                                 
             //对每篇文章内容进行字数截取
             $latest_topic[$key]['content'] = Common::extract_article($latest_topic[$key]['id'], $latest_topic[$key]['title'], $latest_topic[$key]['content']);
-            
+            $latest_topic[$key]['content']['article_bigimage'] = str_replace('thumb1_','thumb2_', $latest_topic[$key]['content']['article_image']);
             //对文章标题字数截取
             $latest_topic[$key]['content']["sort_title"] = mb_strlen($latest_topic[$key]['content']["article_title"]) > 9 ? mb_substr($latest_topic[$key]['content']["article_title"], 0, 9).'..' : $latest_topic[$key]['content']["article_title"];
             
@@ -36,7 +36,9 @@ class Home_service extends MY_Service{
 
 		foreach ($latest_production as $k => $v) {
 			//显示缩略图
-			$latest_production[$k]['pic'] = Common::get_thumb_url($latest_production[$k]['pic']);
+			$latest_production[$k]['pic']   = Common::get_thumb_url($v['pic']);
+			$latest_production[$k]['bigpic']= $v['pic'];
+			$latest_production[$k]['intro'] = Common::extract_content($latest_production[$k]['intro']); 
 			//获取艺术家信息
 			if( ! empty($v['aid']))
 			{
@@ -54,13 +56,13 @@ class Home_service extends MY_Service{
 			}
 		}		
 
-		$latest_artist     = $this->artist_model->get_artist_list(0,6,'id DESC');
+		//$latest_artist     = $this->artist_model->get_artist_list(0,6,'id DESC');
 		$slider 		   = $this->slider_model->get_slider_list();
 
 		$result = array(
 			'topic' 	 => $latest_topic,
 			'production' => $latest_production,
-			'artist'	 => $latest_artist,
+			//'artist'	 => $latest_artist,
 			'slider' 	 => $slider
 		);
 		return $result;

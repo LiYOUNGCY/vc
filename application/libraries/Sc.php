@@ -38,7 +38,9 @@ class Sc {
 				 'pid'			=> 'required|numeric',
 				 'parent_id' 	=> 'numeric',
 				 'conversation_content' => 'required|min_length[1]|max_length[400]',
-				 'comment' 		=> 'max_length[255]'
+				 'comment' 		=> 'max_length[255]',
+				 'tel'			=> 'max_length[22]',
+				 'amount'		=> 'required|numeric'
 			);
 
 		//验证错误重定向
