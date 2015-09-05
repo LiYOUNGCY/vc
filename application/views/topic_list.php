@@ -47,8 +47,14 @@
     </div>
     <?php echo $footer; ?>
 </div>
+<div class="no-more">没有更多内容了 </div>
 </body>
 <script>
+
+    function alertNoMore() {
+        var $box = $('.no-more');
+        $box.addClass('focus');
+    }
 
     function readArticle(id) {
         window.location.href = BASE_URL + 'article/' + id;
@@ -113,6 +119,7 @@
 
                     if (items.error != null || items.length === 0) {
                         console.log('Error');
+                        alertNoMore();
                         return;
                     }
 
