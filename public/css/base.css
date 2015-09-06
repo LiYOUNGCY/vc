@@ -64,33 +64,6 @@ img {
     vertical-align: middle;
 }
 
-.no-more {
-    position: fixed;
-    padding: 15px;
-    background-color: #666;
-    font-size: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    top: calc(100% - 61px);
-    border-radius: 5px;
-    opacity: 0;
-}
-.no-more.focus {
-    -webkit-animation: noMoreAnimate 1.5s;
-    -o-animation: noMoreAnimate 1.5s;
-    animation: noMoreAnimate 1.5s;
-}
-
-@keyframes noMoreAnimate {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        top: 80%;
-        opacity: 0;
-    }
-}
-
 .hide-x {
     overflow-x: hidden;
 }
@@ -126,11 +99,11 @@ img {
     display: inline-block;
 }
 
-/*.icon.logo-a{*/
-    /*width: 509px;*/
-    /*height: 168px;*/
-    /*background: transparent url("../img/icon/logo_big.png") no-repeat scroll;*/
-/*}*/
+.icon.logo-a{
+    width: 509px;
+    height: 168px;
+    background: transparent url("../img/icon/logo_big.png") no-repeat scroll;
+}
 .icon.logo-w{
     width: 61px;
     height: 35px;
@@ -181,11 +154,11 @@ img {
 
 
 /*article start*/
-.item-list {
+.article-list {
     margin: 0 auto;
 }
 
-.item-list .menu {
+.article-list .menu {
     box-sizing: border-box;
     padding: 8px 8px 8px 0;
     width: 100%;
@@ -193,7 +166,7 @@ img {
     text-align: left;
 }
 
-.item-list .menu .btn.select {
+.article-list .menu .btn.select {
     display: inline-block;
 
     margin-left: 10px;
@@ -203,83 +176,113 @@ img {
     line-height: 40px;
 }
 
-.item-list .menu .btn.select:first-child {
+.article-list .menu .btn.select:first-child {
     margin-left: 0;
 }
 
 @media screen and (max-width: 960px) {
-    .item-list .menu .btn.select:first-child {
+    .article-list .menu .btn.select:first-child {
         margin-left: 10px;
     }
 }
 
-.item-list .box {
-    margin-top: 30px;
+.article-list .box {
+    margin-top: 10px;
+    box-sizing: border-box;
     border: 1px solid #eee;
-    width: 300px;
-    height: 360px;
-    cursor: pointer;
-    overflow: hidden;
-    transition-property: box-shadow, border-radius;
-    transition-duration: .4s;
+    width: 302px;
 }
 
-.item-list .box:hover {
-    box-shadow: 0 0 10px rgba(67, 72, 84, 0.3);
-    border-radius: 10px;
+.article-list .box .ishadow {
+    position: relative;
 }
 
-.item-list .box .image {
+.article-list .box .ishadow img {
     display: block;
 
     width: 100%;
-    height: 188px;
 }
 
-.item-list .box .title {
-    margin-top: 15px;
+.article-list .box .ishadow .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    transition: all .2s ease-in-out;
+
+    cursor: pointer;
+}
+
+.article-list .box .ishadow .shadow:hover {
+    background-color: rgba(0, 0, 0, .4);
+
+    opacity: 1;
+}
+
+.article-list .box .ishadow .shadow i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    font-size: 128px;
+    line-height: 1;
+
+    color: lightyellow;
+
+    transform: translate(-50%, -50%);
+}
+
+.article-list .box .title {
+    box-sizing: border-box;
+    padding-top: 5px;
+    width: 100%;
+
     font-size: 16px;
     font-weight: 600;
     line-height: 100%;
     text-align: left;
     word-wrap: break-word;
     word-break: break-all;
-    color: #565656;
+
+    color: #666;
 }
 
-.item-list .box .title:before,
-.item-list .box .title:after {
+.article-list .box .title:before,
+.article-list .box .title:after {
     font-size: 16px;
-    color: #BFBFBF;
 }
 
-.item-list .box .title:before {
-    content: "（";
+.article-list .box .title:before {
+    content: "《";
 }
 
-.item-list .box .title:after {
-    content: "）";
+.article-list .box .title:after {
+    content: "》";
 }
 
-.item-list .box .content {
-    margin-top: 15px;
-    margin-bottom: 45px;
-    padding: 0 8px;
+.article-list .box .content {
+    box-sizing: border-box;
+    padding: 4px 8px;
+    width: 100%;
 
     font-size: 14px;
     text-align: justify;
     word-wrap: break-word;
     word-break: break-all;
 
-    color: #9B9B9B;
+    color: #666;
 }
 
-.item-list .box .bottom {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-
-    padding: 0 10px;
+.article-list .box .bottom {
+    /*padding-left: 8px;*/
+    box-sizing: border-box;
+    width: 100%;
     height: 30px;
 
     font-size: 14px;
@@ -287,154 +290,120 @@ img {
     text-align: left;
 }
 
-.item-list .box .bottom .icon {
-    margin-bottom: -2px;
-}
-
-.item-list .box .bottom .like,
-.item-list .box .bottom .read {
+.article-list .box .bottom .like,
+.article-list .box .bottom .read {
     display: inline-block;
 
-    margin-left: 10px;
+    margin-left: 8px;
 }
 
-.item-list .box .bottom  i {
-    font-size: 16px;
-    margin-left: 5px;
+.article-list .box .bottom .like i {
+    color: brown;
 }
 
-
-/* 专题的分类样式 */
-.filter-warp {
-    margin-top: 30px;
-}
-
-.filter-warp .filter {
-    border-width: 1px;
-    border-style: none solid solid solid;
-    border-color: #EEEEEE;
-    height: 45px;
-    line-height: 45px;
-}
-
-.filter-warp .filter:first-child {
-    border-style: solid;
-}
-
-.filter-warp .filter .fc-target {
-
-}
-
-.filter-warp .filter .fc-target li{
-    float: left;
-    padding: 0 20px;
-}
-
-.filter-warp .filter .fc-target li.active{
-
-}
-
-/* 艺术家列表 */
-.item-list .artist {
-    width: 300px;
-}
-
-.item-list .artist .btn.read {
-    margin: 10px auto;
-    width: 80%;
-    height: 40px;
-    line-height: 40px;
-}
-
-/* 艺术品列表 */
-.item-list .production {
-    width: 300px;
-    border: 1px solid #EEEEEE;
-    text-align: left;
-    color: #9B9B9B;
-    margin-top: 30px;
-}
-
-.item-list .production img {
-    width: 300px;
-    height: auto;
-}
-
-.item-list .production .title {
-    font-weight: 600;
-    line-height: 1.5;
-    padding: 0 10px;
-    margin-top: 10px;
-    color: #565656;
-}
-.item-list .production .title:before,
-.item-list .production .title:after {
-    display: inline-block;
-    color: #BFBFBF;
-}
-.item-list .production .title:before{
-    content: '（';
-}
-.item-list .production .title:after {
-    content: '）';
-}
-
-.item-list .production .author {
-    padding: 0 10px;
-    margin-top: 10px;
-}
-
-.item-list .production .info {
-    margin-top: 10px;
-    padding: 0 10px;
-}
-
-.item-list .production .bottom {
-    margin-top: 10px;
-}
-
-.item-list .production .bottom div {
+.article-list .box .bottom .btn.read {
     float: right;
-    /*width: 150px;*/
-    height: 30px;
-    line-height: 30px;
-    /*text-align: center;*/
-    font-size: 16px;
-}
 
-.item-list .production .bottom .price {
-    font-size: 24px;
-    font-weight: bold;
-    color: #B3B3B3;
-    font-family:  Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",monospace;
-}
-
-
-.item-list .production .bottom .vote {
     margin-right: 10px;
-    color: #B3B3B3;
+    margin-bottom: 5px;
+    width: 100px;
+    height: 30px;
+
+    text-align: center;
+
+    background-color: #eee;
+
+    transition: background-color .2s ease-in-out;
+
+    cursor: pointer;
 }
 
-.item-list .production .bottom .vote .icon{
-    margin-left: 5px;
-    margin-bottom: -16px;
-    float: none;
-    display: inline-block;
+.article-list .box .bottom .btn.read:hover {
+    background-color: #fcee21;
 }
-/*.item-list .production .type {*/
-    /*padding-left: 10px;*/
-    /*margin-top: 10px;*/
-    /*display: inline-block;*/
-/*}*/
-
-/*.item-list .production .size {*/
-    /*/!*padding: 0 10px;*!/*/
-    /*margin-top: 10px;*/
-    /*display: inline-block;*/
-/*}*/
 
 .visitable {
     opacity: 1;
+}
+
+
+{
+    margin: 30px auto;
+}
+
+.margin-top .artist {
+    box-sizing: border-box;
+    padding: 0 15px;
+    width: 300px;
+    min-height: 1px;
+}
+
+.margin-top .artist .mc-footer .read {
+    margin: 0 auto;
+    width: 180px;
+    height: 50px;
+
+    line-height: 50px;
+}
+
+/** 艺术品列表  **/
+.margin-top .production {
+    margin-top: 20px;
+    border: 1px solid #bbb;
+    width: 302px;
+}
+
+.margin-top .production .image {
+    width: 300px;
+}
+
+.margin-top .production .wrap {
+    box-sizing: border-box;
+    width: 100%;
+
+    text-align: center;
+
+    color: #b3b3b3;
+}
+
+.margin-top .production .wrap .title {
+    padding: 10px 0 5px;
+}
+
+.margin-top .production .wrap .title:before {
+    content: "《";
+}
+
+.margin-top .production .wrap .title:after {
+    content: "》";
+}
+
+.margin-top .production .wrap .author {
+    padding: 5px 0;
+}
+
+.margin-top .production .wrap .price {
+    padding: 5px 0 15px;
+}
+
+.margin-top .production .wrap .price span {
+    font-size: 24px;
+    font-weight: 900;
+
+    color: #878087;
+}
+.margin-top .production .wrap .footer {
+    height: 40px;
+
+    text-align: left;
+}
+.margin-top .production .wrap .footer div {
+    float: left;
+
+    width: 151px;
+    height: 40px;
+
+    line-height: 40px;
 }
 
 .article {
@@ -771,8 +740,7 @@ textarea:focus {
     margin-left: auto;
     padding: 24px 12px;
     width: 600px;
-    border-width: 1px;
-    border-color: #EEEEEE;
+    border: 1px solid #EEE;
     border-style: none solid solid solid;
 }
 
@@ -1087,7 +1055,8 @@ textarea:focus {
 
 .edit .production_list .list {
     margin: 50px auto;
-    padding: 5px 10px 0;
+    padding: 10px;
+    padding-top: 5px;
     width: 800px;
 
     background-color: #fff;
@@ -1227,9 +1196,10 @@ textarea:focus {
     /* These styles are optional, and describe how the pageslide will look */
     background-color: #333;
 
-    -webkit-box-shadow: inset 0 0 5px 5px #222222;
-    -moz-box-shadow: inset 0 0 5px 5px #222222;
-    box-shadow: inset 0 0 5px 5px #222222;
+    -webkit-box-shadow: inset 0 0 5px 5px #222;
+            box-shadow: inset 0 0 5px 5px #222;
+
+    -moz-shadow: inset 0 0 5px 5px #222;
 }
 
 
@@ -1402,7 +1372,7 @@ textarea:focus {
 .sign .title {
     text-align: left;
 
-    /*color: #888;*/
+    color: #888;
     color: #b3b3b3;
 }
 .sign .title font {
@@ -1617,10 +1587,12 @@ textarea:focus {
     position: relative;
 
     height: 100%;
+    height: 100%;
+    
 }
 
 .container {
-    margin: 80px auto 0 auto;
+    margin: 0 auto;
     max-width: 960px;
 
     text-align: center;
@@ -1777,14 +1749,14 @@ hr.line {
 
 /*top start*/
 .main-wrapper .top {
-    position: fixed;
-    left: 0;
-    top: 0;
+    display: inline-block;
+
+    position: relative;
 
     width: 100%;
-
+    
     background-color: #0C0F08;
-    display: inline-block;
+    position: fixed;
     z-index: 999;
 }
 .main-wrapper .top .wrapper {
@@ -1866,13 +1838,13 @@ hr.line {
 }
 .main-wrapper .top .topright .userarea .search {
     position: relative;
-
+    
     margin: 5px 0;
     width: 26px;
     height: 26px;
-
+    
     display: inline-block;
-
+    
     float: right;
     border-radius: 13px;
     background-color: #0C0F08;
@@ -1895,13 +1867,13 @@ hr.line {
 .main-wrapper .top .topright .userarea .search .s_ipt {
     box-sizing: border-box;
     border: none;
-
+    
     padding: 5px;
     width: 148px;
     height: 100%;
 
     color: #888;
-    background-color: #FFF;
+    background-color: ##FFF;
     margin-left: 15px;
     display: none;
     transition: all .2s ease-in-out;
@@ -2016,8 +1988,8 @@ hr.line {
 
 /*new-subject start*/
 .new-subject {
-    margin: 40px auto 0;
-    /*margin-top: 40px;*/
+    margin: 0 auto;
+    margin-top: 40px;
     width: 100%;
     max-width: 960px;
 }
@@ -2107,14 +2079,14 @@ hr.line {
 }
 
 @media screen and (max-width:960px) {
-
+    
 }
 /*new-subject end*/
 
 /*new-art start*/
 .new-art {
-    margin: 40px auto 0;
-    /*margin-top: 40px;*/
+    margin: 0 auto;
+    margin-top: 40px;
     width: 100%;
     max-width: 960px;
 }
@@ -2254,7 +2226,7 @@ hr.line {
 .new-artist .artist-swiper .swiper-slide ul li .name {
     display: inline-block;
 
-    margin-top: 10px;
+    margin-top: 10px 0;
 
     color: #b3b3b3;
 }
@@ -2283,7 +2255,7 @@ hr.line {
     margin-top: 50px;
 
     color: #ccc;
-    background-color: #0C0F08;
+    background-color: #0C0F08; 
 }
 .vi_footer .footer_t{
     background-color: #EFEFEF;
@@ -2299,8 +2271,8 @@ hr.line {
 .vi_footer .footer_b .vi_footer_right {
     float: right;
 
-    margin: 20px 10px 20px 0;
-    /*margin-right: 10px;*/
+    margin: 20px 0;
+    margin-right: 10px;
 }
 
 
@@ -2642,7 +2614,7 @@ img.zoom-img {
 }
 
 .artistevaluate .detail p{
-    /*text-align: justify;*/
+    text-align: justify;
     text-indent: 2em;
     text-align: left;
 }
@@ -2872,7 +2844,7 @@ img.zoom-img {
 }
 .cart .artlist .art .info .detail{
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
     left: 2px;
 }
 .cart .artlist .art .price{
@@ -2915,7 +2887,7 @@ img.zoom-img {
 }
 .cart .topay{
     position: relative;
-    margin-top: 20px;
+    margin-top: 20px; 
     height: 50px;
 }
 .cart .topay .btn{
@@ -2930,5 +2902,42 @@ img.zoom-img {
     border-radius: 5px;
 }
 .cart .topay .btn:hover{
-    background-color: #f7cc1e;
+    background-color: #f7cc1e; 
+}
+.personal .userinfo{
+    margin:30px 0;
+}
+.personal .userinfo .uhead{
+    float: left;
+    width: 200px;
+    height: 200px;
+    border:1px solid #eee;
+}
+.personal .userinfo .uhead img{
+    width: 100%;
+    height: 100%;
+}
+.personal .userinfo .info{
+    float: left;
+    height: 300px;
+    text-align: left;
+    margin-left: 50px;
+}
+.personal .userinfo .info li{
+    height: 35px;
+    color: #0C0F08;
+}
+.personal .userinfo .info li label{
+    width: 70px;
+    display: inline-block;
+}
+.personal .userinfo .info .editinfo{
+    background-color: #E5E5E5;
+    color: #0C0F08;
+    height: 40px;
+    line-height: 40px;
+    width: 150px;
+}
+.personal .userinfo .info .editinfo:hover{
+    background-color: #F8E901;
 }
