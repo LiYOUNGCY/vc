@@ -28,7 +28,7 @@
                 </ul>
             </div>
         </div>
-        <div class="article-list" id="article-list">
+        <div class="item-list" id="item-list">
 <!--                <div class="box">-->
 <!--                    <img class="image" src="http://img02.liwushuo.com/image/150409/gu40pimlg.jpg-w720" alt=""/>-->
 <!--                    <p class="title">标题：我的世界</p>-->
@@ -79,8 +79,8 @@
 
         console.log(url);
 
-        var $container = $('.article-list');
-        var container = document.querySelector('.article-list');
+        var $container = $('.item-list');
+        var container = document.querySelector('.item-list');
         var page = 0;
 
         var masonry = new Masonry(container, {

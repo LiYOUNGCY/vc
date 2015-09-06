@@ -2,9 +2,9 @@
 <div class="main-wrapper">
     <?php echo $top; ?>
     <div class="container">
-        <div class="article-list" id="article-list">
+        <div class="item-list" id="item-list">
 
-<!--            <div class="box">-->
+<!--            <div class="box" onclick="readArticle(1)">-->
 <!--                <img class="image"-->
 <!--                     src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150820/thumb1_14400058514902.jpg"-->
 <!--                     alt=""/>-->
@@ -44,8 +44,8 @@
     $(function () {
         'use strict';
 
-        var $container = $('.article-list');
-        var container = document.querySelector('#article-list');
+        var $container = $('.item-list');
+        var container = document.querySelector('#item-list');
         var page = 0;
 
         var masonry = new Masonry(container, {
@@ -103,7 +103,7 @@
                         var read = items[i].read;
 
 
-                        var box = $('<div class="box">' +
+                        var box = $('<div class="box" onclick="readArticle('+article_id+')">' +
                             '<img class="image"' +
                         'src="'+ img +'"' +
                         'alt=""/>' +
