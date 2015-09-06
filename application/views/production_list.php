@@ -1,39 +1,28 @@
 <body>
-
 <div class="main-wrapper">
     <?php echo $top; ?>
     <div class="container">
-        <!--        <div class="margin-top">-->
+        <div class="item-list">
 
-        <div class="new-art">
-            <div class="list" id="art-list">
+<!--            <div class="production">-->
+<!--                <img class="image" src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/production/thumb1_1440593600_1.jpg">-->
+<!--                <p class="title">天梯</p>-->
+<!--                <p class="author">作者：条野太郎</p>-->
+<!--                <div class="info">-->
+<!--                    <span class="type">油画</span>，-->
+<!--                    <span class="size">120cm X 90cm</span>-->
+<!--                </div>-->
+<!--                <div class="bottom clearfix">-->
+<!--                    <div class="vote" title="收藏"><i class="fa fa-heart"></i>99</div>-->
+<!--                    <div class="price" title="价格">￥199</div>-->
+<!--                </div>-->
+<!--            </div>-->
 
-                <!--                        <div class="item">-->
-                <!--                            <figure class="effect-bubba">-->
-                <!--                                <div class="art-image">-->
-                <!--                                    <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/production/thumb1_1440593600_1.jpg" alt="" class="image" style="width: 298px">-->
-                <!--                                </div>-->
-                <!--                                <figcaption>-->
-                <!--                                    <p>类型：油画<br>尺寸：20 * 30 cm</p>-->
-                <!--                                </figcaption>-->
-                <!--                            </figure>-->
-                <!--                            <div class="art-title">我的世界</div>-->
-                <!--                            <div class="author">作者：鸡巴白</div>-->
-                <!--                            <ul class="art-info">-->
-                <!--                                <li><i class="fa fa-heart-o"></i> 999</li>-->
-                <!--                                <!--<li><i class="fa fa-eye"></i></li>-->
-                <!--                                <div class="price">20000 RMB</div>-->
-                <!--                            </ul>-->
-                <!--                        </div>-->
-
-            </div>
         </div>
-
-        <!--        </div>-->
-        <?php echo $footer; ?>
     </div>
+    <?php echo $footer; ?>
 </div>
-
+</body>
 <script>
     function a(id) {
         window.location.href = BASE_URL + 'production/' + id;
@@ -41,12 +30,12 @@
     $(function () {
         'use strict';
 
-        var $container = $('.list');
-        var container = document.querySelector('.list');
+        var $container = $('.item-list');
+        var container = document.querySelector('.item-list');
         var page = 0;
 
         var masonry = new Masonry(container, {
-            itemSelector: '.item',
+            itemSelector: '.production',
             columnWidth: 300,
             gutter: 25,
             isFitWidth: true,
@@ -56,9 +45,9 @@
         $container.imageloader({
             selector: '.image',
             each: function (elm) {
-                console.log("load done");
-                console.log(elm.width + " " + elm.height);
-                $(elm).parent().css({'height': elm.height, 'width': elm.width});
+//                console.log("load done");
+//                console.log(elm.width + " " + elm.height);
+//                $(elm).parent().css({'height': elm.height, 'width': elm.width});
                 masonry.layout();
             }
         });
@@ -76,7 +65,7 @@
                 },
                 dataType: 'json',
                 success: function (data) {
-                    // var items = eval('(' + data + ')');
+                    console.log(data);
                     var items = data;
 
                     if (items.error != null || items.length === 0) {
@@ -102,31 +91,29 @@
                         var w = data[i].w;
 
 
-                        var box = $('<div class="item" onclick="a(' + id + ')">' +
-                            '<figure class="effect-bubba">' +
-                            '<div class="art-image" style="height: auto;">' +
-                            '<img src="' + img + '" alt="" class="image" style="width: 300px; border: none;">' +
-                            '</div>' +
-                            '<figcaption>' +
-                            '<p>类型：' + type + '<br>尺寸：' + l + ' * ' + w + ' cm</p>' +
-                            '</figcaption>' +
-                            '</figure>' +
-                            '<div class="art-title">' + title + '</div>' +
-                            '<div class="author">作者：' + author + '</div>' +
-                            '<div class="art-info clearfix">' +
-                            '<div class="vote"><i class="fa fa-heart-o"></i> ' + like + '</div>' +
-                            '<div class="price">' + price + ' RMB</div>' +
-                            '</div>' +
+                        var box = $('<div class="production">' +
+                            '<img class="image" src="'+img+'">' +
+                            '<p class="title">'+title+'</p>' +
+                            '<p class="author">作者：'+author+'</p>' +
+                        '<div class="info">' + 
+                            '<span class="type">'+type+'</span>，' +
+                    '<span class="size">'+w+'cm X '+l+'cm</span>' +
+                        '</div>' + 
+                        '<div class="bottom clearfix">' +
+                            '<div class="price" title="价格">'+price+'￥</div>' +
+                            '<div class="vote" title="收藏">'+like+'<div class="icon like"></div></div>' +
+                            '</div>' + 
                             '</div>');
 
                         $container.append(box);
                         masonry.appended(box);
 
                         $(box).imageloader({
+                            selector: '.image',
                             each: function (elm) {
                                 masonry.layout();
-                                console.log(elm.width + " " + elm.height);
-                                $(elm).parent().css({'height': elm.height, 'width': elm.width});
+//                                console.log(elm.width + " " + elm.height);
+//                                $(elm).parent().css({'height': elm.height, 'width': elm.width});
 
                                 count++;
                                 if (count == sum) {

@@ -18,10 +18,8 @@ class Main extends MY_Controller{
 		$head['javascript'] = array(
 			'jquery.js',
 			'error.js',
-			'timeago.js',
 			'alert.min.js',
-			'autosize.js',
-			'ajaxfileupload.js',
+			'jquery.imageloader.js',
 			'masonry.pkgd.min.js'
 		);
 
@@ -39,8 +37,7 @@ class Main extends MY_Controller{
 	 */
 	public function get_artist_list()
 	{
-//		$page = $this->sc->input('page');
-		$page = 0;
+		$page = $this->sc->input('page');
 		$artist = $this->artist_service->get_artist_list($page);
 		echo json_encode($artist);
 	}
