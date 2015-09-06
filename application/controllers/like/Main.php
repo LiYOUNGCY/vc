@@ -6,9 +6,32 @@ class Main extends MY_Controller{
 		$this->load->service('like_service');
 	}
 	
-	public function index($type = 'article')
+	public function index()
 	{
-		
+		$data['css'] = array(
+            'swiper.min.css',
+            'font-awesome/css/font-awesome.min.css',
+            'base.css'
+            
+        );
+        $data['javascript'] = array(
+            'jquery.js',
+            'masonry.pkgd.min.js',
+            'jquery.imageloader.js',
+            'error.js',
+            'validate.js'
+        );
+
+        $user['user'] = $this->user;
+        $top = $this->load->view('common/top', $user, TRUE);
+        $data['title']        = "我的喜欢 - 用户中心";
+        $body['top']          = $top;
+        $body['sign']         = $this->load->view('common/sign', '', TRUE);
+        $body['footer']       = $this->load->view('common/footer', '', TRUE);
+        $body['user']         = $this->user;
+
+        $this->load->view('common/head', $data);
+        $this->load->view('like_list', $body);
 	}	
 
 	/**

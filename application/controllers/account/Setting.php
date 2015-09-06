@@ -35,10 +35,10 @@ class Setting extends MY_Controller
 
 
 
-		if($type == 'pwd')
+		if($type == 'safe')
 		{
 			//修改密码
-            $data['title'] = '修改密码';
+            $data['title'] = '安全设置';
             $this->load->view('common/head', $data);
 			$this->load->view('set_pwd_view', $body);
 		}

@@ -108,7 +108,6 @@ $route['setting/(([a-z]*))']   = 'account/setting/index/$1';
  * 收藏列表
  */
 $route['like'] = 'like/main';
-$route['like/([a-z]*)'] = 'like/main/index/$1';
 /**
  * 私信
  */
