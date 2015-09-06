@@ -48,7 +48,7 @@
 </body>
 
 <script>
-<<<<<<< HEAD
+
 
 $(function() {
     var page = 0;
