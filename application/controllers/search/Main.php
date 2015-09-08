@@ -40,14 +40,31 @@ class Main extends MY_Controller {
         $data['top']            = $this->load->view('common/top', $user, TRUE);
 
         $data['footer']         = $this->load->view('common/footer', '', TRUE);
+
+        $queue = array();
+
+
+        foreach($query as $key => $value) {
+            if(! empty($value) ) {
+                array_unshift($queue, $key);
+            }
+            else {
+                array_push($queue, $key);
+            }
+        }
+
+
+
         $data['query']          = $query;
+        $data['queue']          = $queue;
         $head['title']          = '搜索结果';
 
-        $query = 
+
 
         $this->load->view('common/head', $head);
         $this->load->view('search_list', $data);
 
 //        echo json_encode($query);
+//        var_dump($queue);
     }
 }
