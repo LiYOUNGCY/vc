@@ -43,6 +43,8 @@ class Main extends MY_Controller {
         $data['query']          = $query;
         $head['title']          = '搜索结果';
 
+        $query = 
+
         $this->load->view('common/head', $head);
         $this->load->view('search_list', $data);
 
