@@ -164,7 +164,8 @@ class Production_model extends CI_Model
                                     production.pic,
                                     production.like,
                                     production.intro,
-                                    production.price
+                                    production.price,
+                                    production.publish_time
 		')
             ->from('production')
             ->like('production.name', $keyword)

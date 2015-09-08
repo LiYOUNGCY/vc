@@ -27,16 +27,21 @@ class Search_service extends MY_Service {
         {
             //对每篇文章内容进行字数截取
             $article[$key]['content'] = Common::extract_article($article[$key]['id'], $article[$key]['title'], $article[$key]['content']);
+
+            //对时间的截取
+            $article[$key]['publish_time'] = substr($article[$key]['publish_time'], 0, 10);
         }
 
         foreach( $production as $key => $value)
         {
             $production[$key]['intro'] = Common::extract_content($production[$key]['intro']);
+            $production[$key]['publish_time'] = substr($production[$key]['publish_time'], 0, 10);
         }
 
         foreach( $artist as $key => $value)
         {
             $artist[$key]['intro']  = Common::extract_content($artist[$key]['intro']);
+            $artist[$key]['creat_time'] = substr($artist[$key]['creat_time'], 0, 10);
         }
 
         $query['article']       = $article;

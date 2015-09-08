@@ -4,42 +4,82 @@
     <div class="container">
         <div class="item-list search">
 
+
             <h2 class="theme">艺术品</h2>
-
-            <div class="item clearfix">
-                <div class="image-warp">
-                    <img class="image"
-                         src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/production/thumb1_1440130089_2.jpg"
-                         alt="">
+            <?php if (empty($query['production'])) { ?>
+                <div class="item clearfix">
+                    <p class="empty">没有搜索结果</p>
                 </div>
-                <p class="title">我的世界</p>
-                <p class="time">2015-09-08</p>
-                <p class="content">
-                    Web前端开发:[1]高质量CSS-base.css,前端开发工程师是一个很新的职业,在国内乃至国际上真正受到重视的时间不超过五年。但是随着we2.0概念的普及和W3C组织de推广,...</p>
-                <div class="price">23000￥</div>
-            </div>
+            <?php } else { ?>
+                <?php foreach ($query['production'] as $key => $value) { ?>
+                    <div class="item clearfix">
+                        <div class="image-warp">
+                            <img class="image"
+                                 src="<?= $value['pic'] ?>"
+                                 alt="">
+                        </div>
+                        <p class="title"><?= $value['name'] ?></p>
 
-            <h2 class="theme">专题</h2>
+                        <p class="time"><?= $value['publish_time'] ?></p>
 
-            <?php for($i = 0; $i < 5; $i ++) {?>
-            <div class="item clearfix">
-                <div class="image-warp">
-                    <img class="image"
-                         src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/production/thumb1_1440130089_2.jpg"
-                         alt="">
+                        <p class="content">
+                            <?= $value['intro'] ?>
+                        </p>
+
+                        <div class="price"><?= $value['price'] ?>￥</div>
+                    </div>
+                <?php }
+            } ?>
+
+
+            <h2 class="theme">专题和资讯</h2>
+            <?php if (empty($query['article'])) { ?>
+                <div class="item clearfix">
+                    <p class="empty">没有搜索结果</p>
                 </div>
-                <p class="title">我的世界</p>
-                <p class="time">2015-09-08</p>
-                <p class="content">
-                    Web前端开发:[1]高质量CSS-base.css,前端开发工程师是一个很新的职业,在国内乃至国际上真正受到重视的时间不超过五年。但是随着we2.0概念的普及和W3C组织de推广,...</p>
-            </div>
-            <?php } ?>
+            <?php } else { ?>
+                <?php foreach ($query['article'] as $key => $value) { ?>
+                    <div class="item clearfix">
+                        <div class="image-warp">
+                            <img class="image"
+                                 src="<?= $query['article'][$key]['content']['article_image'] ?>"
+                                 alt="">
+                        </div>
+                        <p class="title"><?= $query['article'][$key]['content']['article_title'] ?></p>
 
-            <h2 class="theme">资讯</h2>
+                        <p class="time"><?= $query['article'][$key]['publish_time'] ?></p>
 
-            <div class="item clearfix">
-                <p class="empty">没有搜索结果</p>
-            </div>
+                        <p class="content">
+                            <?= $query['article'][$key]['content']['article_content'] ?>
+                        </p>
+                    </div>
+                <?php }
+            } ?>
+
+
+            <h2 class="theme">艺术家</h2>
+            <?php if (empty($query['artist'])) { ?>
+                <div class="item clearfix">
+                    <p class="empty">没有搜索结果</p>
+                </div>
+            <?php } else { ?>
+                <?php foreach ($query['artist'] as $key => $value) { ?>
+                    <div class="item clearfix">
+                        <div class="image-warp">
+                            <img class="image"
+                                 src="<?= $value['pic'] ?>"
+                                 alt="">
+                        </div>
+                        <p class="title"><?= $value['name'] ?></p>
+
+                        <p class="time"><?= $value['creat_time'] ?></p>
+
+                        <p class="content">
+                            <?= $value['intro'] ?>
+                        </p>
+                    </div>
+                <?php }
+            } ?>
 
         </div>
     </div>

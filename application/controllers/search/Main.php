@@ -40,10 +40,12 @@ class Main extends MY_Controller {
         $data['top']            = $this->load->view('common/top', $user, TRUE);
 
         $data['footer']         = $this->load->view('common/footer', '', TRUE);
-//        $data['query']          = $query;
+        $data['query']          = $query;
         $head['title']          = '搜索结果';
 
         $this->load->view('common/head', $head);
         $this->load->view('search_list', $data);
+
+//        echo json_encode($query);
     }
 }

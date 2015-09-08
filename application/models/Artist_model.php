@@ -98,7 +98,13 @@ class Artist_model extends CI_Model{
 	public function get_artist_by_keyword($keyword)
     {
         $query = $this->db
-            ->select('artist.id, artist.name, artist.pic, artist.intro')
+            ->select('
+					artist.id,
+					artist.name,
+					artist.pic,
+					artist.intro,
+					artist.creat_time
+					')
             ->from('artist')
             ->like('artist.name', $keyword)
             ->get()

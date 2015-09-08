@@ -210,7 +210,15 @@ class Article_model extends CI_Model {
     public function get_article_by_keyword($keyword)
     {
         $query = $this->db
-            ->select('article.id, article.uid, article.title, article.content, article.like, article.read')
+            ->select(
+                'article.id,
+                article.uid,
+                article.title,
+                article.content,
+                article.like,
+                article.read,
+                article.publish_time
+                ')
             ->from('article')
             ->like('article.title', $keyword)
             ->get()
