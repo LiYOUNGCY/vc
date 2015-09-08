@@ -12,7 +12,6 @@ class Main extends MY_Controller{
             'swiper.min.css',
             'font-awesome/css/font-awesome.min.css',
             'base.css'
-            
         );
         $data['javascript'] = array(
             'jquery.js',

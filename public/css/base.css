@@ -3037,7 +3037,7 @@ img.zoom-img {
     margin-left: 50px;
 }
 .personal .userinfo .info li{
-    height: 35px;
+    height: 30px;
     color: #0C0F08;
 }
 .personal .userinfo .info li label{
@@ -3064,20 +3064,54 @@ img.zoom-img {
     width: 100%;
     margin: 0 auto;
     margin:30px auto;
+    display: inline-block;
 }
 .pmenu ul{
     display: inline-block;
-    height: 50px;
+    height: 86px;
     min-width: 100%;
 }
 .pmenu ul li{
     display: block;
     float: left;
     height: 50px;
-    width: 25%;
+    width: 20%;
     opacity: 0.3;
+    transition:all .2s ease-in-out;
+    color: #4C4640;
 }
 .pmenu ul li.active,
 .pmenu ul li:hover{
     opacity: 1;
+    font-weight: bold;
+}
+.pmenu ul li .mt{
+    margin-top: 10px;
+}
+.liketype{
+    text-align: left;
+    margin: 20px 0;
+}
+.liketype div{
+    color: #4C4640;
+    font-weight: bold;
+    opacity: 0.3;
+    transition: all .2s ease-in-out;
+    display: inline-block;
+}
+.liketype div.active,
+.liketype div:hover{
+    opacity: 1;
+}
+.liketype a{
+    color: #4C4640;
+}
+
+@media screen and (max-width:960px) {
+    .tc{
+        display: none !important;
+    }
+    .pmenu ul li{
+        width: 25%;
+    }
 }
