@@ -37,12 +37,11 @@ class Production_model extends CI_Model
 
         if (is_numeric($meid)) {
         }
-        if ( ! empty($aid)) {
+        if (!empty($aid)) {
             $query = $query->where('aid', $aid);
         }
-        if( ! empty($status))
-        {
-            $query = $query->where_in('production.status', $status);           
+        if (!empty($status)) {
+            $query = $query->where_in('production.status', $status);
         }
 
         $query = $query->order_by($order)->limit($limit, $page * $limit)->get('production')->result_array();
@@ -98,6 +97,7 @@ class Production_model extends CI_Model
         $this->db->insert('production', $data);
         return $this->db->insert_id();
     }
+
     /**
      * [update_production 更新]
      * @param  [type] $pid [description]
@@ -120,7 +120,7 @@ class Production_model extends CI_Model
         $table_name = $this->db->protect_identifiers('production', TRUE);
         $this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` + 1 WHERE {$table_name}.id = {$pid}");
     }
-    
+
     /**
      * 取消点赞时，艺术品的 like 减一
      */
@@ -137,17 +137,41 @@ class Production_model extends CI_Model
 
     public function delete_production($pid)
     {
-        $this->db->delete('production',array('id' => $pid));
+        $this->db->delete('production', array('id' => $pid));
         return $this->db->affected_rows() === 1;
     }
 
     public function admin_get_production_list($page = 0, $limit = 10, $order = 'id DESC')
     {
         $query = $this->db->order_by($order)
-                          ->limit($limit, $page * $limit)
-                          ->get('production')
-                          ->result_array();
+            ->limit($limit, $page * $limit)
+            ->get('production')
+            ->result_array();
         return $query;
     }
 
+
+    /**
+     * 对艺术品进行模糊搜索
+     * @param $keyword
+     * @return mixed
+     */
+    public function get_production_by_keyword($keyword)
+    {
+        $query  = $this->db->select('
+                                    production.id,
+                                    production.name,
+                                    production.pic,
+                                    production.like,
+                                    production.intro,
+                                    production.price,
+                                    production.publish_time
+		')
+            ->from('production')
+            ->like('production.name', $keyword)
+            ->get()
+            ->result_array();
+
+        return $query;
+    }
 } 
