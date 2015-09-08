@@ -390,6 +390,18 @@ img {
     text-align: left;
     color: #9B9B9B;
     margin-top: 30px;
+    cursor: pointer;
+    overflow: hidden;
+    transition-property: box-shadow, border-radius;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out;
+}
+
+.item-list .production:hover {
+    -webkit-box-shadow: 0 0 5px #666;
+    -moz-box-shadow: 0 0 5px #666;
+    box-shadow: 0 0 5px #666;
+    border-radius: 10px;
 }
 
 .item-list .production img {
@@ -440,10 +452,12 @@ img {
 }
 
 .item-list .production .bottom .price {
+    margin-left: 10px;
+    float: left;
     font-size: 24px;
     font-weight: bold;
-    color: #B3B3B3;
-    font-family:  Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",monospace;
+    color: #F7CC1E;
+    font-family: "Times New Roman",monospace;
 }
 
 

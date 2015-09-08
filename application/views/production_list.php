@@ -95,14 +95,14 @@
                             '<img class="image" src="'+img+'">' +
                             '<p class="title">'+title+'</p>' +
                             '<p class="author">作者：'+author+'</p>' +
-                        '<div class="info">' + 
+                        '<div class="info">' +
                             '<span class="type">'+type+'</span>，' +
                     '<span class="size">'+w+'cm X '+l+'cm</span>' +
-                        '</div>' + 
+                        '</div>' +
                         '<div class="bottom clearfix">' +
-                            '<div class="price" title="价格">'+price+'￥</div>' +
+                            '<div class="price" title="价格">'+price+' RMB</div>' +
                             '<div class="vote" title="收藏">'+like+'<div class="icon like"></div></div>' +
-                            '</div>' + 
+                            '</div>' +
                             '</div>');
 
                         $container.append(box);
