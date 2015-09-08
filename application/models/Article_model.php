@@ -201,4 +201,21 @@ class Article_model extends CI_Model {
     {
       return $this->db->count_all('article');
     }
+
+
+    /**
+     * 根据关键字进行模糊搜索文章和专题
+     * @param $keyword
+     */
+    public function get_article_by_keyword($keyword)
+    {
+        $query = $this->db
+            ->select('article.id, article.uid, article.title, article.content, article.like, article.read')
+            ->from('article')
+            ->like('article.title', $keyword)
+            ->get()
+            ->result_array();
+
+        return $query;
+    }
 }
