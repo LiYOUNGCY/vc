@@ -93,6 +93,23 @@ class Artist_model extends CI_Model{
 		);
 		$this->db->insert('artist',$data);
 		return $this->db->insert_id();
-	}	
+	}
 
+	public function get_artist_by_keyword($keyword)
+    {
+        $query = $this->db
+            ->select('
+					artist.id,
+					artist.name,
+					artist.pic,
+					artist.intro,
+					artist.creat_time
+					')
+            ->from('artist')
+            ->like('artist.name', $keyword)
+            ->get()
+            ->result_array();
+
+        return $query;
+    }
 }
