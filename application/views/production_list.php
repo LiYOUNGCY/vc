@@ -45,9 +45,6 @@
         $container.imageloader({
             selector: '.image',
             each: function (elm) {
-//                console.log("load done");
-//                console.log(elm.width + " " + elm.height);
-//                $(elm).parent().css({'height': elm.height, 'width': elm.width});
                 masonry.layout();
             }
         });
@@ -112,8 +109,6 @@
                             selector: '.image',
                             each: function (elm) {
                                 masonry.layout();
-//                                console.log(elm.width + " " + elm.height);
-//                                $(elm).parent().css({'height': elm.height, 'width': elm.width});
 
                                 count++;
                                 if (count == sum) {

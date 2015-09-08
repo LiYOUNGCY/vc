@@ -553,14 +553,18 @@ img {
     text-align: right;
     font-size: 24px;
     font-weight: bold;
-    color: #B3B3B3;
-    font-family:  Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black",monospace;
+    color: #F7CC1E;
+    font-family: "Times New Roman",monospace;
 }
 
 .search .item .empty {
     padding: 15px;
     text-align: center;
     color: #000000;
+}
+
+.search .heightlight {
+    background-color: #F7CC1E;
 }
 
 .visitable {

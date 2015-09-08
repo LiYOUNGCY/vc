@@ -95,4 +95,33 @@
     <?= $footer ?>
 </div>
 </body>
+<script>
+    $(function () {
+
+        function decode(s){
+  return s.replace(/\\([\\\.\*\[\]\(\)\$\^])/g,"$1").replace(/>/g,">").replace(/</g,"<").replace(/&/g,"&");
+}
+
+function encode(s){
+  return s.replace(/&/g,"&").replace(/</g,"<").replace(/>/g,">").replace(/([\\\.\*\[\]\(\)\$\^])/g,"\\$1");
+}
+
+        function heightLight(keyword) {
+        $('.title').each(function(i, value){
+            // var keyword = '的2';
+            var str = value.innerHTML;
+            var reg = new RegExp(keyword, 'gi');
+            var result = str.replace(reg, '<span class="heightlight">'+keyword+'</span>');
+            $(this).html(result);
+        });
+        }
+
+        var keyword = getQueryString('search');
+        if(typeof keyword != 'undefined' && keyword != null) {
+            keyword = encode(keyword);
+            console.log(keyword);
+            heightLight(keyword);
+        }
+    });
+</script>
 </html>
