@@ -33,7 +33,7 @@
                 ?>
                 <div class="useropt">
                     <span class="cart"><a href="" class="link"><i class="fa fa-shopping-cart" style="font-size: 16px;"></i> （ <font color="#f7cc1e">2</font> ）</a></span>
-                    <span class="user">Hi，<a href="" class="link"><?=$user["name"]?></a><div class="dot" style="display:none;"></div></span>
+                    <span class="user">Hi，<a href="<?=base_url()?>like" class="link"><?=$user["name"]?></a><div class="dot" style="display:none;"></div></span>
                     
                 </div>
                 <?php
@@ -67,6 +67,7 @@
             $(".s_ipt").css({"display":"block"});
             $(".s_ipt").focus();
         });
-    
+        
+        
     })
 </script>

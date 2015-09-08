@@ -4,7 +4,7 @@
     <!-- 顶部 -->
     <?php echo $top; ?>
     <!-- 轮播 -->
-    <div class="swiper-container">
+    <div class="swiper-container" id="swiper">
         <div class="swiper-wrapper">
             <?php foreach ($slider as $k => $v): ?>
                 <div class="swiper-slide">
@@ -28,8 +28,10 @@
         <div class="new-subject">
             <div class="wrapper clearfix">
                 <div class="hd clearfix">
-                    <div class="title">最新专题</div>
-                    <div class="tran"></div>
+                    <div class="title">
+                        最新专题
+                        <div class="tran"></div>
+                    </div>
                 </div>
                 <div class="more"><a href="<?= base_url() ?>topic" class="link">more</a></div>
             </div>
@@ -47,8 +49,6 @@
                             echo '<div class="item"><div class="box" style="background: url('.$v['content']['article_image'].');background-size:cover;background-position:50% 50%;">';
                         }
                     ?>
-                           
-                        
                             <div class="info">
                                 <p><?=$v['content']['article_content']?></p>
                             </div>
@@ -67,8 +67,10 @@
         <div class="new-art">
             <div class="wrapper clearfix">
                 <div class="hd clearfix">
-                    <div class="title">最新作品</div>
-                    <div class="tran"></div>
+                    <div class="title">
+                        最新作品
+                        <div class="tran"></div>
+                    </div>
                 </div>
                 <div class="more"><a href="<?= base_url() ?>topic" class="link">more</a></div>
             </div>
@@ -97,13 +99,8 @@
                         <div class="price icon pricebg">￥<?=$v['price']?></div>                        
                     </div>
                 <?php endforeach;?>
-
             </div>
         </div>
-        
-
-
-        
     </div>
     <?php echo $footer; ?>
 </div>
@@ -133,6 +130,12 @@
     $(function () {
         var subject = document.querySelector('#subject-list');
         var art = document.querySelector('#art-list');
+        var swiper_w = $("#swiper").width();
+        var swiper_h = $(window).width() > 960 ? swiper_w*0.3 : swiper_w*0.47;
+
+
+        $("#swiper").height(swiper_h);
+
         var masonry = new Masonry(subject, {
             itemSelector: '.item',
             columnWidth: 300,
