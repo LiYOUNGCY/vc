@@ -29,39 +29,34 @@
             </div>
         </div>
         <div class="item-list" id="item-list">
-<!--                <div class="box">-->
-<!--                    <img class="image" src="http://img02.liwushuo.com/image/150409/gu40pimlg.jpg-w720" alt=""/>-->
-<!--                    <p class="title">标题：我的世界</p>-->
-<!--                    <p class="content">-->
-<!--                        这是一段介绍因为爱爱爱爱爱爱爱爱啊啊这是一段介绍因为爱爱爱爱爱爱爱爱啊啊这是一段介绍因为爱爱爱爱爱爱爱啊啊这是一段介绍因为爱爱爱爱爱爱爱爱啊啊dasfdasfdasfdasfdasfdasfdasfssfffffffffffffdsafdasfdasfdasfdasfdasfdasfdasf-->
-<!--                    </p>-->
-<!--                    <div class="bottom clearfix">-->
-<!--                        <div class="like" style="float: right;">-->
-<!--                            <span>199</span>-->
-<!--                            <div class="icon like"></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+            <!--                <div class="box">-->
+            <!--                    <img class="image" src="http://img02.liwushuo.com/image/150409/gu40pimlg.jpg-w720" alt=""/>-->
+            <!--                    <p class="title">标题：我的世界</p>-->
+            <!--                    <p class="content">-->
+            <!--                        这是一段介绍因为爱爱爱爱爱爱爱爱啊啊这是一段介绍因为爱爱爱爱爱爱爱爱啊啊这是一段介绍因为爱爱爱爱爱爱爱啊啊这是一段介绍因为爱爱爱爱爱爱爱爱啊啊dasfdasfdasfdasfdasfdasfdasfssfffffffffffffdsafdasfdasfdasfdasfdasfdasfdasf-->
+            <!--                    </p>-->
+            <!--                    <div class="bottom clearfix">-->
+            <!--                        <div class="like" style="float: right;">-->
+            <!--                            <span>199</span>-->
+            <!--                            <div class="icon like"></div>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
 
         </div>
     </div>
     <?php echo $footer; ?>
 </div>
-<div class="no-more">没有更多内容了 </div>
 </body>
 <script>
 
-    function alertNoMore() {
-        var $box = $('.no-more');
-        $box.addClass('focus');
-    }
 
     function readArticle(id) {
         window.location.href = BASE_URL + 'article/' + id;
     }
 
     function getArticleListBYtag(tag_id) {
-        window.location.href = TOPIC_URL+'?tag=' + tag_id;
+        window.location.href = TOPIC_URL + '?tag=' + tag_id;
     }
 
     $(function () {
@@ -70,11 +65,11 @@
         var tag = getQueryString('tag');
         var url = '';
 
-        if(tag != null) {
-             url = GET_ARTICLE_URL+'?tag=' + tag;
+        if (tag != null) {
+            url = GET_ARTICLE_URL + '?tag=' + tag;
         }
         else {
-             url = GET_ARTICLE_URL;
+            url = GET_ARTICLE_URL;
         }
 
         console.log(url);
@@ -108,6 +103,7 @@
             $.ajax({
                 type: 'POST',
                 url: url,
+                async: false,
                 data: {
                     page: page,
                     type: 'topic'
@@ -135,13 +131,13 @@
                         var read = items[i].read;
 
 
-                        var box = $('<div class="box" onclick="readArticle('+article_id+')" style="height:360px;">' +
-                            '<img class="image" src="'+BASE_URL+'public/img/load.gif" data-src="'+img+'" alt=""/>' +
-                            '<p class="title">'+article_title+'</p>' +
-                        '<p class="content">'+article_content+'</p>' +
+                        var box = $('<div class="box" onclick="readArticle(' + article_id + ')" style="height:360px;">' +
+                            '<img class="image" src="' + BASE_URL + 'public/img/load.gif" data-src="' + img + '" alt=""/>' +
+                            '<p class="title">' + article_title + '</p>' +
+                            '<p class="content">' + article_content + '</p>' +
                             '<div class="bottom clearfix">' +
                             '<div class="like" style="float: right;">' +
-                            '<span>'+like+'</span>' +
+                            '<span>' + like + '</span>' +
                             '<div class="icon like"></div>' +
                             '</div>' +
                             '</div>' +

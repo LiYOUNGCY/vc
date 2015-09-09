@@ -114,6 +114,7 @@
             $.ajax({
                 type: 'post',
                 url: GET_ARTIST_LIST,
+                async: false,
                 data: {
                     'page': page
                 },

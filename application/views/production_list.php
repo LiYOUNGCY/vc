@@ -45,9 +45,6 @@
         $container.imageloader({
             selector: '.image',
             each: function (elm) {
-//                console.log("load done");
-//                console.log(elm.width + " " + elm.height);
-//                $(elm).parent().css({'height': elm.height, 'width': elm.width});
                 masonry.layout();
             }
         });
@@ -60,6 +57,7 @@
             $.ajax({
                 type: 'POST',
                 url: GET_PRODUCTION_URL,
+                async: false,
                 data: {
                     page: page
                 },
@@ -112,8 +110,6 @@
                             selector: '.image',
                             each: function (elm) {
                                 masonry.layout();
-//                                console.log(elm.width + " " + elm.height);
-//                                $(elm).parent().css({'height': elm.height, 'width': elm.width});
 
                                 count++;
                                 if (count == sum) {
