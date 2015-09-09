@@ -118,7 +118,7 @@ function encode(s){
 
         var keyword = getQueryString('search');
         if(typeof keyword != 'undefined' && keyword != null) {
-            keyword = encode(keyword);
+            keyword = decodeURIComponent(keyword);
             console.log(keyword);
             heightLight(keyword);
         }
