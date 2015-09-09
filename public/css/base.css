@@ -64,32 +64,6 @@ img {
     vertical-align: middle;
 }
 
-.no-more {
-    position: fixed;
-    padding: 15px;
-    background-color: #666;
-    font-size: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    top: calc(100% - 61px);
-    border-radius: 5px;
-    opacity: 0;
-}
-.no-more.focus {
-    -webkit-animation: noMoreAnimate 1.5s;
-    -o-animation: noMoreAnimate 1.5s;
-    animation: noMoreAnimate 1.5s;
-}
-
-@keyframes noMoreAnimate {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        top: 80%;
-        opacity: 0;
-    }
-}
 
 .hide-x {
     overflow-x: hidden;

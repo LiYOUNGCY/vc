@@ -57,6 +57,7 @@
             $.ajax({
                 type: 'POST',
                 url: GET_PRODUCTION_URL,
+                async: false,
                 data: {
                     page: page
                 },
