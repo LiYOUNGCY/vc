@@ -1322,7 +1322,7 @@ textarea:focus {
     /* These styles MUST be included. Do not change. */
     display: none;
 
-    position: absolute;
+    position: fixed;
     top: 0;
     z-index: 999999;
 
@@ -3008,6 +3008,9 @@ img.zoom-img {
 }
 .liketype a{
     color: #4C4640;
+}
+.personal .production{
+    height: auto;
 }
 
 @media screen and (max-width:960px) {
