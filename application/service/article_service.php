@@ -237,5 +237,17 @@ class Article_service extends MY_Service{
         $this->article_like_model->delete_like_by_aid($aid);
     }
 
+    /**
+     * 获得专题的标签
+     * @return mixed
+     */
+    public function get_topic_tag() {
+        $query = $this->article_model->get_topic_tag();
+        return $query;
+    }
 
+    public function get_article_tag() {
+        $query = $this->article_model->get_article_tag();
+        return $query;
+    }
 }

@@ -6,27 +6,13 @@
             <div class="filter">
                 <ul class="fc-target">
                     <li>标签1的类型：</li>
-                    <li><a href="javascript:void(0)" onclick="getArticleListBYtag(1)" class="link active">小清新</a></li>
-                    <li><a href="" class="link">惊喜</a></li>
-                    <li><a href="" class="link">乱七八糟</a></li>
+                    <?php foreach ($tag as $key => $value) { ?>
+                        <li><a href="javascript:void(0)" class="link <?php if($get_tag == $value['id']) echo 'active'; ?>"
+                               onclick="getArticleListBYtag(<?= $value['id'] ?>)"><?= $value['name'] ?></a></li>
+                    <?php } ?>
                 </ul>
             </div>
-            <div class="filter">
-                <ul class="fc-target">
-                    <li>标签2的类型：</li>
-                    <li><a href="" class="link">小清新</a></li>
-                    <li><a href="" class="link">惊喜</a></li>
-                    <li><a href="" class="link">乱七八糟</a></li>
-                </ul>
-            </div>
-            <div class="filter">
-                <ul class="fc-target">
-                    <li>标签3的类型：</li>
-                    <li><a href="" class="link">小清新</a></li>
-                    <li><a href="" class="link">惊喜</a></li>
-                    <li><a href="" class="link">乱七八糟</a></li>
-                </ul>
-            </div>
+
         </div>
         <div class="item-list" id="item-list">
             <!--                <div class="box">-->
@@ -115,7 +101,6 @@
 
                     if (items.error != null || items.length === 0) {
                         console.log('Error');
-                        alertNoMore();
                         return;
                     }
 

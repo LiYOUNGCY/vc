@@ -341,8 +341,14 @@ img {
     padding: 0 20px;
 }
 
-.filter-warp .filter .fc-target li.active{
+.filter-warp .filter .fc-target li a {
+    padding: 5px;
+}
 
+.filter-warp .filter .fc-target li a.active{
+    background-color: #F7CC1E;
+    color: white;
+    border-radius: 5px;
 }
 
 /* 艺术家列表 */

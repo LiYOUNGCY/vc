@@ -1,7 +1,8 @@
 <?php
 
 
-class Main extends MY_Controller {
+class Main extends MY_Controller
+{
     public function __construct()
     {
         parent::__construct();
@@ -21,9 +22,9 @@ class Main extends MY_Controller {
 
         $tag = $this->sc->input('tag', 'get');
 
-        $uid  = isset($this->user['id']) ? $this->user['id'] : NULL;
+        $uid = isset($this->user['id']) ? $this->user['id'] : NULL;
         //文章类型
-        $type= $this->sc->input('type');
+        $type = $this->sc->input('type');
         $article = $this->article_service->get_article_list($page, $uid, $type, $tag);
         echo json_encode($article);
     }
@@ -35,6 +36,9 @@ class Main extends MY_Controller {
      */
     public function index($type = 'article')
     {
+
+        $get_tag = $this->sc->input('tag', 'get');
+        $get_tag = isset($get_tag) && is_numeric($get_tag) ? $get_tag : 0;
         $data['css'] = array(
             'base.css',
             'font-awesome/css/font-awesome.min.css'
@@ -47,22 +51,23 @@ class Main extends MY_Controller {
         );
 
         $user['user'] = $this->user;
+        $body['top'] = $this->load->view('common/top', $user, TRUE);
 
-        $top = $this->load->view('common/top', $user, TRUE);
-        $data['title']        = "资讯";
-        $body['top']          = $top;
-        $body['user']         = $this->user;
+        $body['get_tag'] = $get_tag;
+        $body['user'] = $this->user;
         $body['footer'] = $this->load->view('common/footer', '', TRUE);
         //文章类型
         $body['article_type'] = $type;
-        $this->load->view('common/head', $data);
-        if($type == 'article')
-        {
+        if ($type == 'article') {
+            $data['title'] = "资讯";
+            $this->load->view('common/head', $data);
+            $body['tag'] = $this->article_service->get_article_tag();
             $this->load->view('article', $body);
-        }
-        else if($type == 'topic')
-        {
-             $this->load->view('topic_list', $body);
+        } else if ($type == 'topic') {
+            $data['title'] = "专题";
+            $this->load->view('common/head', $data);
+            $body['tag'] = $this->article_service->get_topic_tag();
+            $this->load->view('topic_list', $body);
         }
 
     }
