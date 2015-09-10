@@ -79,112 +79,111 @@
 <script type="text/javascript" src="<?= base_url() ?>public/js/swiper.min.js"></script>
 </body>
 <script>
-$(function(){
-  var $container = $('.item-list');
-  var container = document.querySelector('.item-list');
-  var page = 0;
-  var url = GET_PERSONAL_LIKE_PRODUCTION;
-
-  var masonry = new Masonry(container, {
-      itemSelector: '.production',
-      columnWidth: 300,
-      gutter: 30,
-      isFitWidth: true,
-      isAnimate: false
-  });
-
-  $container.imageloader({
-      selector: '.image',
-      each: function (elm) {
-          console.log("load done");
-          console.log(elm.width + " " + elm.height);
-//                $(elm).parent().css({'height': elm.height, 'width': elm.width});
-          masonry.layout();
-      }
-  });
-
-  var count = 0;
-  var sum = 0;
-  
-  function LoadMore() {
-      $.ajax({
-          type: 'POST',
-          url: GET_PERSONAL_LIKE_PRODUCTION,
-          async: false,
-          data: {
-              page: page
-          },
-          dataType: 'json',
-          success: function (data) {
-              console.log(data);
-              var items = data;
-
-              if (items.error != null || items.length === 0) {
-                  console.log('Error');
-                  return;
-              }
-
-              page++;
-              sum = items.length;
-              console.log(sum);
-
-              for (var i = 0; i < items.length; i++) {
-                  console.log(items[i]);
-                  // var items[i].content = items[i].content;
-                  var id = data[i].production.id;
-                  var title = data[i].production.name;
-                  var price = data[i].production.price;
-                  var img = data[i].production.pic;
-                  var like = data[i].production.like;
-                  var type = data[i].production.type;
-                  var l = data[i].production.l;
-                  var w = data[i].production.w;
 
 
-                  var box = $('<div class="production">' +
-                      '<img class="image" src="'+img+'">' +
-                      '<p class="title">'+title+'</p>' +
-                  '<div class="info">' +
-                      '<span class="type">'+type+'</span>，' +
-              '<span class="size">'+w+'cm X '+l+'cm</span>' +
-                  '</div>' +
-                  '<div class="bottom clearfix">' +
-                      '<div class="price" title="价格">'+price+' RMB</div>' +
-                      '<div class="vote" title="收藏">'+like+'<div class="icon like"></div></div>' +
-                      '</div>' +
-                      '</div>');
+function a(id) {
+    window.location.href = BASE_URL + 'production/' + id;
+}
 
-                  $container.append(box);
-                  masonry.appended(box);
+$(function () {
+    'use strict';
 
-                  $(box).imageloader({
-                      selector: '.image',
-                      each: function (elm) {
-                          masonry.layout();
+    var $container = $('.item-list');
+    var container = document.querySelector('.item-list');
+    var page = 0;
 
-                          count++;
-                          if (count == sum) {
-                              //Add Event
-                              WindowEvent();
-                              count = 0;
-                          }
-                      },
-                      callback: function (elm) {
-                          console.log('loadding');
-                          masonry.layout();
+    var masonry = new Masonry(container, {
+        itemSelector: '.production',
+        columnWidth: 300,
+        gutter: 25,
+        isFitWidth: true,
+        isAnimate: true
+    });
 
-                      }
-                  });
+    $container.imageloader({
+        selector: '.image',
+        each: function (elm) {
+            masonry.layout();
+        }
+    });
 
 
-                  // -------------- End -------------
-              }
-          }
-      });
-  }
+    function LoadMore() {
+        $.ajax({
+            type: 'POST',
+            url: GET_PERSONAL_LIKE_PRODUCTION,
+            async: false,
+            data: {
+                page: page
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                var items = data;
 
-  LoadMore();
-})
+                if (items.error != null || items.length === 0) {
+                    console.log('Error');
+                    return;
+                }
 
+                page++;
+
+
+                for (var i = 0; i < items.length; i++) {
+                    console.log(items[i]);
+                    // var items[i].content = items[i].content;
+                    var id = data[i].production.id;
+                    var title = data[i].production.name;
+                    var author = data[i].production.aid;
+                    var price = data[i].production.price;
+                    var img = data[i].production.pic;
+                    var like = data[i].production.like;
+                    var type = data[i].production.type;
+                    var l = data[i].production.l;
+                    var w = data[i].production.w;
+
+
+                    var box = $('<div class="production">' +
+                        '<img class="image" src="'+img+'">' +
+                        '<p class="title">'+title+'</p>' +
+                        '<p class="author">作者：'+author+'</p>' +
+                    '<div class="info">' +
+                        '<span class="type">'+type+'</span>，' +
+                '<span class="size">'+w+'cm X '+l+'cm</span>' +
+                    '</div>' +
+                    '<div class="bottom clearfix">' +
+                        '<div class="price" title="价格">'+price+' RMB</div>' +
+                        '<div class="vote" title="收藏">'+like+'<div class="icon like"></div></div>' +
+                        '</div>' +
+                        '</div>');
+
+                    $container.append(box);
+                    masonry.appended(box);
+
+                    $(box).imageloader({
+                        selector: '.image',
+                        each: function (elm) {
+                            masonry.layout();
+                        },
+                        callback: function (elm) {
+                            console.log('loadding');
+                            masonry.layout();
+                        }
+                    });
+
+
+                    // -------------- End -------------
+                }
+            }
+        });
+    }
+
+//         END LoadMore
+
+    LoadMore();
+
+
+
+});
 </script>
 </html>

@@ -99,9 +99,6 @@ $(function(){
           masonry.layout();
       }
   });
-
-  var count = 0;
-  var sum = 0;
   
   function LoadMore() {
       $.ajax({
@@ -152,13 +149,6 @@ $(function(){
                           masonry.layout();
                           console.log(elm.width + " " + elm.height);
 //                                $(elm).parent().css({'height': elm.height, 'width': elm.width});
-
-                          count++;
-                          if (count == sum) {
-                              //Add Event
-                              WindowEvent();
-                              count = 0;
-                          }
                       },
                       callback: function (elm) {
                           console.log('loadding');
