@@ -26,16 +26,16 @@
         </div>
         <!-- 最新专题 -->
         <div class="new-subject">
-            <div class="wrapper clearfix">
-                <div class="hd clearfix">
-                    <div class="title">
-                        最新专题
-                        <div class="tran"></div>
-                    </div>
-                </div>
-                <div class="more"><a href="<?= base_url() ?>topic" class="link">more</a></div>
-            </div>
             <div class="list" id="subject-list">
+                <div id="stamp" class="wrapper clearfix">
+                    <div class="hd clearfix">
+                        <div class="title">
+                            最新专题
+                            <div class="tran"></div>
+                        </div>
+                    </div>
+                    <div class="more"><a href="<?= base_url() ?>topic" class="link">more</a></div>
+                </div>
                 <?php $i=0; 
                 foreach ($topic as $k => $v): ?>
                     <?php 
@@ -65,16 +65,17 @@
 
         <!-- 最新上架 -->
         <div class="new-art">
-            <div class="wrapper clearfix">
-                <div class="hd clearfix">
-                    <div class="title">
-                        最新作品
-                        <div class="tran"></div>
-                    </div>
-                </div>
-                <div class="more"><a href="<?= base_url() ?>topic" class="link">more</a></div>
-            </div>
+
             <div class="list" id="art-list">
+                <div class="wrapper clearfix">
+                    <div class="hd clearfix">
+                        <div class="title">
+                            最新作品
+                            <div class="tran"></div>
+                        </div>
+                    </div>
+                    <div class="more"><a href="<?= base_url() ?>topic" class="link">more</a></div>
+                </div>
                 <?php $i=0; 
                 foreach ($production as $k => $v): ?>
                     <?php 
@@ -138,6 +139,7 @@
 
         var masonry = new Masonry(subject, {
             itemSelector: '.item',
+            stamp: '.wrapper',
             columnWidth: 300,
             gutter: 30,
             isFitWidth: true,
@@ -145,6 +147,7 @@
         });
         var masonry2 = new Masonry(art, {
             itemSelector: '.item',
+            stamp: '.wrapper',
             columnWidth: 300,
             gutter: 30,
             isFitWidth: true,

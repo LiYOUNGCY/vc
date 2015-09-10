@@ -2149,7 +2149,7 @@ hr.line {
     max-width: 960px;
 }
 .new-subject .wrapper {
-    margin: 0 auto;
+    width: 100%;
 
     color: #b3b3b3;
 }
@@ -2336,13 +2336,13 @@ hr.line {
 /*new-art end*/
 
 @media screen and (max-width:960px) {
-    .hd,
-    .hd .title{
-        float: none;
-    }
-    .wrapper .more{
-        float: none;
-    }
+    /*.hd,*/
+    /*.hd .title{*/
+        /*float: none;*/
+    /*}*/
+    /*.wrapper .more{*/
+        /*float: none;*/
+    /*}*/
     .item.big{
         width: 300px !important;
         height: 260px !important;
