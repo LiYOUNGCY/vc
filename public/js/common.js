@@ -41,6 +41,9 @@ var GET_CART_GOODS = BASE_URL + 'cart/main/get_good_list';
 //艺术品点赞
 var VOTE_PRODUCTION = BASE_URL + 'production/detail/like_production';
 
+//手机验证码
+var SEND_PHONE_CODE_URL = BASE_URL + 'account/main/validate_phone';
+
 //专题页面
 var TOPIC_URL = BASE_URL + 'topic';
 

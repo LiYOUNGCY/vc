@@ -187,7 +187,10 @@ img {
     margin: 50px auto;
 }
 
-
+.error_div {
+    font-size: .8em;
+    color:darkred;
+}
 
 /*article start*/
 .item-list {

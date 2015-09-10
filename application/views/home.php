@@ -143,7 +143,7 @@
             isFitWidth: true,
             isAnimate: true
         });
-        var masonry = new Masonry(art, {
+        var masonry2 = new Masonry(art, {
             itemSelector: '.item',
             columnWidth: 300,
             gutter: 30,

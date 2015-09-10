@@ -59,6 +59,7 @@
 </div>
 <script>
 $(function(){
+    var phone_code = '';
 	$("#toemail").click(function() {
 		$(this).css({"display":"none"});
 		$("#phonesign").css({"display":"none"});
@@ -68,7 +69,7 @@ $(function(){
 		$("#signway").val("email");
 		$("#emailsign").css({"display":"block"});
 		$("#tophone").css({"display":"block"});
-	})
+	});
 
 	$("#tophone").click(function() {
 		$(this).css({"display":"none"});
@@ -79,18 +80,18 @@ $(function(){
 		$("#signway").val("phone");
 		$("#emailsign").css({"display":"none"});
 		$("#toemail").css({"display":"block"});
-	})
+	});
 
 	$("#tosignin").click(function(){
 	    $("#position").animate({
-	        top:"0px",
+	        top:"0px"
 	    },200);
-	})
+	});
 	$("#tosignup").click(function(){
 	    $("#position").animate({
-	        top:"-348px",
+	        top:"-348px"
 	    },200);
-	})
+	});
 
 	$('#phone').blur(function(){
       	var result = validate('phone', $('#phone').val());
@@ -114,7 +115,7 @@ $(function(){
     });
 
 
-})
+});
 
 function showsign(type){
     if(type == 1){
@@ -129,7 +130,33 @@ function hidesign(){
     $(".shade").fadeOut(200);
     $(".sign").fadeOut(200);
 }
+
+/**
+ * 接受验证码
+ */
 function sendvailidata(){
+    var phone = $('#phonesign #phone').val();
+    if(phone == '' || phone == null) {
+        //输出错误
+        return -1;
+    }
+
+    //ajax 获取验证码
+    $.ajax({
+        type: 'POST',
+        url: SEND_PHONE_CODE_URL,
+        async: false,
+        data: {
+            phone: phone
+        },
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            phone_code = data.code;
+            console.log('phone_code: ' + phone_code);
+        }
+    });
+
     if(!$("#sendvelidata").hasClass("sending")){
         $("#sendvelidata").addClass("sending");
         var waitTime = 10;
@@ -145,7 +172,7 @@ function sendvailidata(){
             ,1000);
 
     }else{
-        return;
+        return ;
     }    
 }
 var phone_check = true;
@@ -237,14 +264,29 @@ function signin(){
 
 function signup(){
 	var signup_way = $("#signway").val();
+    console.log(signup_way);
 
     if( signup_way == "phone" ){
 	    var phone = $("#phonesign #phone").val();
 	    var pwd   = $("#phonesign #password").val();
+
+//        console.log(phone_result + '  ' + pwd_result);
 	    var phone_result = validate('phone',phone);
 	    var pwd_result =   validate('pwd',password);
+
 	    var cp = phone_result && pwd_result && phone_check;
+//        cp = true;
 	    if(cp == true){
+            console.log(1);
+            //检验手机验证码
+            var input_phone_code = $('#velidata').val();
+            console.log(input_phone_code);
+            //验证码不对
+            if(phone_code == '' || input_phone_code != phone_code) {
+                //输出错误
+                console.log('验证码错误');
+                return -1;
+            }
 			$.post(PHONE_SIGNUP_URL,{
 				phone : phone,
 				pwd   : pwd
@@ -270,21 +312,36 @@ function signup(){
 	    var ce = email_result && pwd_result && email_check;
 
       	if(ce == true){
-	      	$.post(EMAIL_SIGNUP_URL,{
-	    	  	email : email,
-	          	pwd   : pwd
-	        },function(data){
-	          	data = eval('('+data+')');
-	          	if(data.error != null)
-	          	{
-	          	  	//ERROR_OUTPUT(data);
-			    	$('.error_div').html(data.error);
-	          		return false;                 
-	          	}else if(data.success == 0)
-	          	{
-	          	   eval(data.script);
-	          	}
-	        })
+            $.ajax({
+                url: EMAIL_SIGNUP_URL,
+                type: 'post',
+                data: {
+                    email: email,
+                    pwd: pwd
+                },
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+//	      	$.post(EMAIL_SIGNUP_URL,{
+//	    	  	email : email,
+//	          	pwd   : pwd
+//	        },function(data){
+//                console.log(data);
+//	          	data = eval('('+data+')');
+//	          	if(data.error != null)
+//	          	{
+//	          	  	//ERROR_OUTPUT(data);
+//			    	$('.error_div').html(data.error);
+//	          		return false;
+//	          	}else if(data.success == 0)
+//	          	{
+//	          	   eval(data.script);
+//	          	}
+//	        })
     	}
   	}
 }
