@@ -6,13 +6,12 @@ class Main extends MY_Controller{
 		$this->load->service('like_service');
 	}
 	
-	public function index()
+	public function index($type = "article")
 	{
 		$data['css'] = array(
             'swiper.min.css',
             'font-awesome/css/font-awesome.min.css',
             'base.css'
-            
         );
         $data['javascript'] = array(
             'jquery.js',
@@ -31,7 +30,12 @@ class Main extends MY_Controller{
         $body['user']         = $this->user;
 
         $this->load->view('common/head', $data);
-        $this->load->view('like_list', $body);
+        if($type == "article"){
+        	$this->load->view('like_list_article', $body);
+        }else if($type == "production"){
+        	$this->load->view('like_list_production', $body);
+        }
+        
 	}	
 
 	/**
@@ -41,6 +45,7 @@ class Main extends MY_Controller{
 	public function get_article_like_list()
 	{	
 		$page = $this->sc->input('page');
+		//$page = 0;
 		$like = $this->like_service->get_article_like_list($page,$this->user['id']);
 		echo json_encode($like);
 	}
@@ -52,6 +57,7 @@ class Main extends MY_Controller{
 	public function get_production_like_list()
 	{	
 		$page = $this->sc->input('page');
+		//$page = 0;
 		$like = $this->like_service->get_production_like_list($page,$this->user['id']);
 		echo json_encode($like);		
 	}	
