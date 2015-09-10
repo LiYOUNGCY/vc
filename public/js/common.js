@@ -47,6 +47,12 @@ var SEND_PHONE_CODE_URL = BASE_URL + 'account/main/validate_phone';
 //专题页面
 var TOPIC_URL = BASE_URL + 'topic';
 
+//个人中心 - 喜欢列表(文章)
+var GET_PERSONAL_LIKE_ARTICLE = BASE_URL + 'like/main/get_article_like_list';
+
+//个人中心 - 喜欢列表(艺术品)
+var GET_PERSONAL_LIKE_PRODUCTION = BASE_URL + 'like/main/get_production_like_list';
+
 /**
  * [trim 去掉字符串前后两端的空格]
  */

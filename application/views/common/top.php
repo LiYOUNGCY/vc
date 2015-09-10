@@ -20,25 +20,19 @@
         </div>
         <div class="topright">
             <div class="userarea clearfix">
-                <?php
-                    if($user['role']==0){
-                ?>
+                <?php if($user['role']==0){ ?>
                 <div class="showsign">
                     <a href="javascript:void(0)" onclick="showsign(1)">登陆</a>
                     <font style="color:#F8E901;font-weight: bold;margin:0 3px;">/</font>
                     <a href="javascript:void(0)" onclick="showsign(2)">注册</a>
                 </div>
-                <?php
-                    }else{
-                ?>
+                <?php }else{ ?>
                 <div class="useropt">
                     <span class="cart"><a href="" class="link"><i class="fa fa-shopping-cart" style="font-size: 16px;"></i> （ <font color="#f7cc1e">2</font> ）</a></span>
                     <span class="user">Hi，<a href="<?=base_url()?>like" class="link"><?=$user["name"]?></a><div class="dot" style="display:none;"></div></span>
                     
                 </div>
-                <?php
-                    }
-                ?>
+                <?php } ?>
                 <div class="search" id="search">
                     <input type="text" placeholder="搜索艺术品、艺术家..." class="s_ipt" id="s_ipt">
                     <i class="fa fa-search" id="s_sipt"></i>
