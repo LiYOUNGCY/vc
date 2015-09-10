@@ -177,9 +177,13 @@ class Main extends MY_Controller
 		}
 	}
 
+
+    /**
+     * 发送手机验证码
+     * @return [type] [description]
+     */
 	public function validate_phone() {
         $phone = $this->sc->input('phone');
-        // $phone = '15521322924';
 
 		echo $this->user_service->validate_phone($phone);
 	}

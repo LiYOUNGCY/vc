@@ -37,16 +37,9 @@ class User_service extends MY_Service
         {
 			$user = $this->user_model->get_user_base_id($user_id);
 
-            //邮箱注册，验证邮箱
-            if( !empty($email) )
-            {
-                $this->validate_email($user['id'], $email);
-            }
-            else
-            {
-                //设置 SESSION
-                $this->auth_service->set_login_session($user);
-            }
+            $this->validate_email($user_id, $email);
+            //设置 SESSION
+            $this->auth_service->set_login_session($user);
             return TRUE;
 		}
         return FALSE;
@@ -205,6 +198,9 @@ class User_service extends MY_Service
     }
 
 
+    /**
+     * 发送注册邮件
+     */
     public function validate_email($uid, $email)
     {
         //生成 token
