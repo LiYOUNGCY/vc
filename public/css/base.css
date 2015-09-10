@@ -1999,9 +1999,9 @@ hr.line {
 
 /*swiper start*/
 .swiper-container {
-    width: 102%;
+    width: 100%;
     height: 570px;
-    margin: -4px 0 0 -1px;
+    margin: -5px 0 0 -1px;
 }
 
 .swiper-slide {
@@ -3023,6 +3023,7 @@ img.zoom-img {
 }
 
 @media screen and (max-width:960px) {
+
     .tc{
         display: none !important;
     }
