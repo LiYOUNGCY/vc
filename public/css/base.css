@@ -237,9 +237,9 @@ img {
 }
 
 .item-list .box:hover {
-    -webkit-box-shadow: 0 0 10px rgba(67, 72 84, .3);
-    -moz-box-shadow: 0 0 10px rgba(67, 72 84, .3);
-    box-shadow: 0 0 10px rgba(67, 72 84, .3);
+    -webkit-box-shadow: 0 0 10px #666;
+    -moz-box-shadow: 0 0 10px #666;
+    box-shadow: 0 0 10px #666;
     border-radius: 10px;
 }
 

@@ -2,19 +2,23 @@
 <div class="main-wrapper">
     <?php echo $top; ?>
     <div class="container">
-        <div class="filter-warp">
-            <div class="filter">
-                <ul class="fc-target">
-                    <li>标签1的类型：</li>
-                    <?php foreach ($tag as $key => $value) { ?>
-                        <li><a href="javascript:void(0)" class="link <?php if($get_tag == $value['id']) echo 'active'; ?>"
-                               onclick="getArticleListBYtag(<?= $value['id'] ?>)"><?= $value['name'] ?></a></li>
-                    <?php } ?>
-                </ul>
+
+        <div class="item-list" id="item-list">
+            <!--标签-->
+            <div id="stamp" class="filter-warp">
+                <div class="filter">
+                    <ul class="fc-target">
+                        <li>标签1的类型：</li>
+                        <?php foreach ($tag as $key => $value) { ?>
+                            <li><a href="javascript:void(0)" class="link <?php if($get_tag == $value['id']) echo 'active'; ?>"
+                                   onclick="getArticleListBYtag(<?= $value['id'] ?>)"><?= $value['name'] ?></a></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+
             </div>
 
-        </div>
-        <div class="item-list" id="item-list">
+
             <!--                <div class="box">-->
             <!--                    <img class="image" src="http://img02.liwushuo.com/image/150409/gu40pimlg.jpg-w720" alt=""/>-->
             <!--                    <p class="title">标题：我的世界</p>-->
@@ -66,6 +70,7 @@
 
         var masonry = new Masonry(container, {
             itemSelector: '.box',
+            stamp: '.filter-warp',
             columnWidth: 300,
             gutter: 30,
             isFitWidth: true,
