@@ -96,6 +96,8 @@ $route['publish/artist']  = 'artist/publish/index/publish';
 $route['update/artist/(:num)']   = 'artist/publish/index/update/$1';
 //购物车
 $route['cart']  = 'cart/main';
+//购买记录
+
 /**
  * 用户
  */

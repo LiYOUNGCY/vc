@@ -58,10 +58,10 @@
                </li>
            </ul>
         </div>
-        <div class="liketype">
+        <div class="psubmenu">
           <div class="active">赞过的文章</div>
           &nbsp; / &nbsp;
-          <div><a href="">赞过的作品</a></div>
+          <div class="active"><a href="">赞过的作品</a></div>
         </div>
         <div class="item-list" id="item-list">
 
