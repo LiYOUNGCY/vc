@@ -18,7 +18,7 @@ class User_model extends CI_Model
 	 * [register_action description]
 	 * @param  [array] $register_type [array('phone' => xxx), array('email'	=> xxx)]
 	 */
-	public function register_action ($name, $register_type, $pwd) 
+	public function register_action ($name, $register_type, $pwd)
 	{
 		if(! ( isset($register_type['email']) || isset($register_type['phone']) ) )
 		{
@@ -43,7 +43,7 @@ class User_model extends CI_Model
         $uid = $this->db->insert_id();
 
 		//注册成功
-		if($this->db->affected_rows() === 1) 
+		if($this->db->affected_rows() === 1)
         {
             //插入 user_online 表
             $this->_insert_user_online($uid);
@@ -51,7 +51,7 @@ class User_model extends CI_Model
             $this->update_account($uid,array('pic' => base_url().'public/img/pfp7.png'));
             return $uid;
 		}
-		else 
+		else
         {
 			$this->error->output('register_error');
 		}
@@ -80,7 +80,7 @@ class User_model extends CI_Model
 		//调用错误
 		else
 		{
-        return FALSE; 
+        return FALSE;
 		}
 
 		$data = $query->get('user')->result_array();
@@ -100,12 +100,12 @@ class User_model extends CI_Model
 			}
       else
       {
-        return FALSE;  
+        return FALSE;
       }
 		}
     else
     {
-        return FALSE;  
+        return FALSE;
     }
 	}
 
@@ -141,7 +141,7 @@ class User_model extends CI_Model
 	 */
 	public function get_user_base_id($uid)
 	{
-		
+
 		return $this->get_user_by_id($uid, $this->base_field);
 	}
 
@@ -163,7 +163,7 @@ class User_model extends CI_Model
 
       return ! empty($query) ? $query[0] : NULL;
     }
-    
+
     /**
      * [_update_user_online_by_id 登陆时，更新用户的登陆时间和 ip ]
      */
@@ -177,7 +177,7 @@ class User_model extends CI_Model
     }
 
 
-    
+
     /**
      * [_insert_user_online 用户注册时，插入一条信息]
      */
@@ -204,9 +204,9 @@ class User_model extends CI_Model
                           ->where($where)
                           ->get()
                           ->row_array();
-                          
+
         if(!empty($query)){
-            $query[$field['name']]=(int)$query[$field['name']]+(int)$field['amount'];     
+            $query[$field['name']]=(int)$query[$field['name']]+(int)$field['amount'];
             $this->db->where($where)->update('user',$query);
             return $this->db->affected_rows() === 1;
         }
@@ -321,6 +321,42 @@ class User_model extends CI_Model
       return $query;
     }
 
+
+    public function get_role_count()
+    {
+        $query = $this->db->count_all('user_role');
+        return $query;
+    }
+
+    public function delete_role($roles)
+    {
+        $this->db->where_in('id',$roles)->delete('user_role');
+        return $this->db->affected_rows() > 0;
+    }
+
+    public function add_role($name)
+    {
+        $data = array(
+            'name'  => $name
+        );
+
+        $this->db->insert('user_role', $data);
+        return $this->db->affected_rows() > 0;
+    }
+
+    public function get_role_by_id($id)
+    {
+        $query = $this->db->where('id', $id)->get('user_role')->row_array();
+        return $query;
+    }
+
+    public function update_role_by_id($id, $data)
+    {
+        unset($data['id']);
+        $this->db->where('id', $id)->update('user_role', $data);
+        return $this->db->affected_rows() === 1;
+    }
+
     /**
      * [get_user_online_by_id 获得用户的登录信息]
      * @return [type] [description]
@@ -330,6 +366,7 @@ class User_model extends CI_Model
        $query = $this->db->where('uid',$uid)->get('user_online')->row_array();
        return $query;
     }
+
 
     /**
      * [insert_user 添加用户]
@@ -348,8 +385,8 @@ class User_model extends CI_Model
              //插入 user_online 表
             $this->_insert_user_online($uid);
             //更新默认键值
-            $this->update_account($uid,array('alias' => 'home/uid_'.$uid,'pic' => base_url().'public/img/pfp7.png'));     
-            return TRUE;         
+            $this->update_account($uid,array('alias' => 'home/uid_'.$uid,'pic' => base_url().'public/img/pfp7.png'));
+            return TRUE;
         }
         else
         {

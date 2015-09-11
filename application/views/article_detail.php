@@ -6,7 +6,6 @@
     <?php echo $top; ?>
     <div class="container">
         <div class="content">
-            <div class="adv">AD</div>
             <div class="article">
                 <h1 class="title"><?= $article['title'] ?></h1>
 

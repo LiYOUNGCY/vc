@@ -104,9 +104,7 @@
 
 
                         var box = $('<div class="box" onclick="readArticle('+article_id+')">' +
-                            '<img class="image"' +
-                        'src="'+ img +'"' +
-                        'alt=""/>' +
+                            '<div class="image" style="background-image:url('+img+')"></div>' +
 
                             '<p class="title">'+article_title+'</p>' +
 
