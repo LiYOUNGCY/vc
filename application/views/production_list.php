@@ -49,6 +49,8 @@
             }
         });
 
+        var sum = 0;
+        var count = 0;
 
         function LoadMore() {
             $.ajax({

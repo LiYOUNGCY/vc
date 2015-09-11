@@ -26,19 +26,19 @@
         </div>
         <!-- 最新专题 -->
         <div class="new-subject">
-            <div class="wrapper clearfix">
-                <div class="hd clearfix">
-                    <div class="title">
-                        最新专题
-                        <div class="tran"></div>
-                    </div>
-                </div>
-                <div class="more"><a href="<?= base_url() ?>topic" class="link">more</a></div>
-            </div>
             <div class="list" id="subject-list">
-                <?php $i=0; 
+                <div id="stamp" class="wrapper clearfix">
+                    <div class="hd clearfix">
+                        <div class="title">
+                            最新专题
+                            <div class="tran"></div>
+                        </div>
+                    </div>
+                    <div class="more"><a href="<?= base_url() ?>topic" class="link">more</a></div>
+                </div>
+                <?php $i=0;
                 foreach ($topic as $k => $v): ?>
-                    <?php 
+                    <?php
                         if($i == 0)
                         {
                             $i=1;
@@ -64,28 +64,32 @@
 
         <!-- 最新上架 -->
         <div class="new-art">
-            <div class="wrapper clearfix">
-                <div class="hd clearfix">
-                    <div class="title">
-                        最新作品
-                        <div class="tran"></div>
-                    </div>
-                </div>
-                <div class="more"><a href="<?= base_url() ?>topic" class="link">more</a></div>
-            </div>
+
             <div class="list" id="art-list">
-                <?php $i=0; 
+                <div class="wrapper clearfix">
+                    <div class="hd clearfix">
+                        <div class="title">
+                            最新作品
+                            <div class="tran"></div>
+                        </div>
+                    </div>
+                    <div class="more"><a href="<?= base_url() ?>topic" class="link">more</a></div>
+                </div>
+                <?php $i=0;
                 foreach ($production as $k => $v): ?>
-                    <?php 
+                    <?php
+                        if($i > 3) {
+                            break;
+                        }
                         if($i == 0)
                         {
-                            $i=1;
                             echo '<div class="item big"><div class="box" style="background:url('.$v['bigpic'].');background-size:cover;background-position:50% 50%;">';
                         }
                         else
                         {
                             echo '<div class="item"><div class="box" style="background: url('.$v['pic'].');background-size:cover;background-position:50% 50%;">';
                         }
+                        $i++;
                     ?>
                             <div class="info">
                                 <p><?=$v['intro']?></p>
@@ -95,7 +99,7 @@
                                 <div class="collect"><?=$v['like']?><div class="icon like"></div></div>
                             </div>
                         </div>
-                        <div class="price icon pricebg">￥<?=$v['price']?></div>                        
+                        <div class="price icon pricebg">￥<?=$v['price']?></div>
                     </div>
                 <?php endforeach;?>
             </div>
@@ -103,7 +107,7 @@
     </div>
     <?php echo $footer; ?>
 </div>
-<?php 
+<?php
   if($user['role']==0){
     echo $sign;
   }
@@ -141,6 +145,7 @@
 
         var masonry = new Masonry(subject, {
             itemSelector: '.item',
+            stamp: '.wrapper',
             columnWidth: 300,
             gutter: 30,
             isFitWidth: true,
@@ -148,6 +153,7 @@
         });
         var masonry2 = new Masonry(art, {
             itemSelector: '.item',
+            stamp: '.wrapper',
             columnWidth: 300,
             gutter: 30,
             isFitWidth: true,

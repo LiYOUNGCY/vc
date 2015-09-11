@@ -238,9 +238,19 @@ class Article_model extends CI_Model {
         return $query;
     }
 
+    public function get_topic_tag_count()
+    {
+        return $this->db->where('type', 2)->count_all('article_tag');
+    }
+
     public function get_article_tag()
     {
         $query = $this->db->where('type', 1)->get('article_tag')->result_array();
         return $query;
+    }
+
+    public function get_article_tag_count()
+    {
+        return $this->db->where('type', 1)->count_all('article_tag');
     }
 }
