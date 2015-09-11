@@ -24,6 +24,10 @@ class Transaction_service extends MY_Service{
 				$p = $this->production_model->get_production_by_id($v1);
 				if( ! empty($p))
 				{
+					if( ! empty($p['pic']))
+					{
+						$p['pic'] = Common::get_thumb_url($p['pic']);
+					}					
 					array_push($t[$k]['production'],$p);					
 				}
 			}
