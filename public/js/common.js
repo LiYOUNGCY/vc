@@ -53,6 +53,9 @@ var GET_PERSONAL_LIKE_ARTICLE = BASE_URL + 'like/main/get_article_like_list';
 //个人中心 - 喜欢列表(艺术品)
 var GET_PERSONAL_LIKE_PRODUCTION = BASE_URL + 'like/main/get_production_like_list';
 
+//个人中心 - 获取购买列表
+var GET_PERSONAL_TRANSACTION = BASE_URL + 'transaction/main/get_transaction_list';
+
 /**
  * [trim 去掉字符串前后两端的空格]
  */

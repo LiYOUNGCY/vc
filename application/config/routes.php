@@ -97,7 +97,7 @@ $route['update/artist/(:num)']   = 'artist/publish/index/update/$1';
 //购物车
 $route['cart']  = 'cart/main';
 //购买记录
-
+$route['transaction']  = 'transaction/main';
 /**
  * 用户
  */
@@ -119,8 +119,8 @@ $route['conversation/(:num)'] = 'conversation/main/index/$1';
 /**
  *消息
  */
-$route['notification']  = 'notification/main';
-$route['notification/([a-z]*)'] = 'notification/main/index/$1';
+$route['msg']  = 'notification/main';
+$route['msg/([a-z]*)'] = 'notification/main/index/$1';
 
 /**
  * 管理员用户管理
