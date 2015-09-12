@@ -81,16 +81,10 @@
                     <a href="#"><i class="fa fa-qwer fa-fw"></i>文章管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?= base_url() . ADMINROUTE ?>article">资讯管理</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>article">文章管理</a>
                         </li>
                         <li>
-                            <a href="<?= base_url() . ADMINROUTE ?>article/index/article_tag">资讯标签管理</a>
-                        </li>
-                        <li>
-                            <a href="#">专题管理</a>
-                        </li>
-                        <li>
-                            <a href="#">专题标签管理</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>article/index/article_tag">标签管理</a>
                         </li>
                     </ul>
                 </li>
