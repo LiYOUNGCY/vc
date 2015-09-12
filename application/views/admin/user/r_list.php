@@ -6,15 +6,15 @@
             <div class="col-lg-12" style="padding:10px 0px;">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        权限管理
+                        用户组管理
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#list" data-toggle="tab" aria-expanded="true">权限列表</a>
+                            <li class="active"><a href="#list" data-toggle="tab" aria-expanded="true">用户组列表</a>
                             </li>
-                            <li><a href="#add" data-toggle="tab" aria-expanded="false">添加权限</a>
+                            <li><a href="#add" data-toggle="tab" aria-expanded="false">添加用户组</a>
                             </li>
                         </ul>
 
@@ -33,17 +33,13 @@
                                             </label>
                                         </th>
                                         <th>ID</th>
-                                        <th>权限名</th>
-                                        <th>路由</th>
-                                        <th>
-                                            角色组
-                                        </th>
+                                        <th>组名</th>
                                         <th></th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
-                                    <?php foreach ($auth as $k => $v) { ?>
+                                    <?php foreach ($role as $k => $v) { ?>
                                         <tr class="selected">
                                             <td class="center">
                                                 <label>
@@ -57,27 +53,6 @@
                                             </td>
                                             <td>
                                                 <?= $v['name'] ?>
-                                            </td>
-                                            <td>
-                                                <?= $v['route'] ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                $arr = explode(',', $v['role_group']);
-                                                $str = "";
-                                                foreach ($arr as $k1 => $v1) {
-                                                    for ($i = 0; $i < count($role); $i++) {
-                                                        if ($v1 == "|{$role[$i]['id']}|") {
-                                                            $str .= $role[$i]['name'] . ",";
-                                                            break;
-                                                        }
-                                                    }
-                                                }
-                                                if (!empty($str)) {
-                                                    $str = substr($str, 0, strlen($str) - 1);
-                                                }
-                                                ?>
-                                                <?= $str ?>
                                             </td>
                                             <td class="tooltip-btn">
                                                 <button data-toggle="tooltip" title="编辑" effect="edit"
@@ -103,7 +78,7 @@
                                                 <h4 class="modal-title" id="myModalLabel">删除提示</h4>
                                             </div>
                                             <div class="modal-body">
-                                                确认删除所勾选的权限?
+                                                确认删除所勾选的用户?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" id="close_modal"
@@ -124,58 +99,19 @@
                                 <!-- /分页-->
                             </div>
 
-                            <!--添加权限-->
+                            <!--添加用户-->
                             <div class="tab-pane fade" id="add">
                                 <table class="table table-striped">
                                     <form id="add_form" method="post"
-                                          action="http://127.0.0.1/artvc/admin/user/add_auth">
+                                          action="http://127.0.0.1/artvc/admin/user/add_role">
                                         <tbody>
                                         <tr>
                                             <td>
                                                 <div class="form-group">
-                                                    <span class="col-sm-4 col-xs-3 control-label">权限名:</span>
+                                                    <span class="col-sm-4 col-xs-3 control-label">组名:</span>
 
                                                     <div class="col-sm-5 col-xs-8">
                                                         <input class="form-control" name="name" type="text"/>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-group">
-                                                    <span class="col-sm-4 col-xs-3 control-label">路由:</span>
-
-                                                    <div class="col-sm-5 col-xs-8">
-                                                        <input class="form-control" name="route" type="text" value="">
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-group">
-                                                    <span class="col-sm-4 col-xs-3 control-label">角色组:</span>
-
-                                                    <div class="col-sm-5 col-xs-8">
-                                                        <input class="form-control" id="show_role" type="text" value=""
-                                                               disabled="disabled">
-                                                    </div>
-
-                                                    <button type="button" id="clear_group"
-                                                            class="btn btn-warning btn-circle"><i
-                                                            class="fa fa-times"></i></button>
-                                                    <input type="hidden" name="role_group" id="role_group"/>
-
-                                                    <div class="col-sm-2 col-xs-8">
-                                                        <select name="group_select" class="form-control">
-                                                            <option value=""></option>
-                                                            <?php foreach ($role as $k => $v) { ?>
-                                                                <option value="|<?= $v['id'] ?>|">
-                                                                    <?= $v['name'] ?>
-                                                                </option>
-                                                            <?php } ?>
-                                                        </select>
                                                     </div>
                                                 </div>
                                             </td>
@@ -211,12 +147,13 @@
 <script type="text/javascript">
     var BASE_URL = $("#BASE_URL").val();
     var ADMIN = $("#ADMIN").val();
-    var DELETE_URL = ADMIN + 'user/delete_auth';
+    var DELETE_URL = ADMIN + 'user/delete_role';
     $(function () {
         $('.tooltip-btn').tooltip({
             selector: "[data-toggle=tooltip]",
             container: "body"
-        })
+        });
+
         $("#all_check").click(function () {
             var child = $("input[tag=child_check]");
             if (child.prop('checked') == true) {
@@ -235,7 +172,7 @@
                 $("#modal_open").click();
             }
             else {
-                alert('请选择！');
+                alert('请选择用户组！');
                 return false;
             }
         });
@@ -279,29 +216,13 @@
         $("button[effect=edit]").click(function () {
             var uid = $(this).attr('u');
             if (uid != null && uid != "") {
-                window.location.href = ADMIN + "user/edit/a/" + uid;
+                window.location.href = ADMIN + "user/edit/r/" + uid;
             }
-        });
-        $("select[name=group_select]").change(function () {
-            var op_html = $("option:selected").html();
-            var op_val = $("option:selected").val();
-            var group_val = $("input[name=role_group]").val();
-            if (group_val.indexOf(op_val, 0) == -1) {
-                op_html = op_html.replace(/^\s+|\s+$/g, "");
-                var old_html = $("#show_role").val() == "" ? "" : $("#show_role").val() + ",";
-                $("#show_role").val(old_html + op_html);
-                var old_val = $("input[name=role_group]").val() == "" ? "" : $("input[name=role_group]").val() + ",";
-                $("input[name=role_group]").val(old_val + op_val);
-            }
-
-        });
-        $("#clear_group").click(function () {
-            $("#show_role").val("");
-            $("input[name=role_group]").val("");
         });
         $("#add_submit").click(function () {
             $("#add_form").submit();
         });
+
 
     });
 </script>

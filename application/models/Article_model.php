@@ -227,6 +227,16 @@ class Article_model extends CI_Model {
         return $query;
     }
 
+    public function get_all_tag()
+    {
+        $query = $this->db->get('article_tag')->result_array();
+        return $query;
+    }
+
+    public function get_tag_count()
+    {
+        return $this->db->count_all('article_tag');
+    }
 
     /**
      * 取得专题的标签
@@ -238,9 +248,54 @@ class Article_model extends CI_Model {
         return $query;
     }
 
+    public function get_topic_tag_count()
+    {
+        return $this->db->where('type', 2)->count_all_results('article_tag');
+    }
+
     public function get_article_tag()
     {
         $query = $this->db->where('type', 1)->get('article_tag')->result_array();
         return $query;
+    }
+
+    public function get_article_tag_count()
+    {
+        return $this->db->where('type', 1)->count_all_results('article_tag');
+    }
+
+    public function get_tag_by_id($id)
+    {
+        $query = $this->db->where('id', $id)->get('article_tag')->row_array();
+        return $query;
+    }
+
+    public function add_tag($name, $type)
+    {
+        $data = array(
+            'name'  => $name,
+            'type'  => $type
+        );
+
+        $this->db->insert('article_tag', $data);
+        return $this->db->insert_id();
+    }
+
+    public function update_tag($id, $name, $type)
+    {
+        $data = array(
+            'name'  => $name,
+            'type'  => $type
+            );
+        $this->db->where('id', $id);
+        $this->db->update('article_tag', $data);
+
+        return $this->db->affected_rows();
+    }
+
+    public function delete_tag($id)
+    {
+        $this->db->delete('article_tag', array('id' => $id));
+        return $this->db->affected_rows() === 1;
     }
 }

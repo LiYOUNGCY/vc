@@ -1,4 +1,4 @@
-<?php 
+<?php
 class Article extends MY_Controller{
 	public function __construct()
 	{
@@ -8,7 +8,7 @@ class Article extends MY_Controller{
 		$this->load->model('article_comment_model');
 
 	}
-	
+
 	public function index($type = 'a',$page = 0)
 	{
 		if($type == 'a')
@@ -18,7 +18,7 @@ class Article extends MY_Controller{
 			//获取文章列表
 			$article = $this->article_model->admin_get_article_list($page,$limit);
 			$count   = $this->article_model->get_article_count();
-			
+
 			$navbar  = $this->load->view('admin/common/navbar',"",TRUE);
 
 			//分页数据
@@ -28,9 +28,9 @@ class Article extends MY_Controller{
 				'limit'   => $limit,
 				'pageurl' => base_url().ADMINROUTE.'article/a/'
 			);
-			
+
 			$pagination = $this->load->view('admin/common/pagination',$p,TRUE);
-			$foot 		= $this->load->view('admin/common/foot',"",TRUE);		
+			$foot 		= $this->load->view('admin/common/foot',"",TRUE);
 			//页面数据
 			$body = array(
 				'navbar' 	 => $navbar,
@@ -38,44 +38,80 @@ class Article extends MY_Controller{
 				'pagination' => $pagination,
 				'article'    => $article
 			);
- 			$this->load->view('admin/common/head');	
-			$this->load->view('admin/article/list',$body);			
+ 			$this->load->view('admin/common/head');
+			$this->load->view('admin/article/list',$body);
 		}
+        else if($type == 'article_tag')
+        {
+            //获取文章标签列表
+            $tag     = $this->article_model->get_all_tag();
+            $count   = $this->article_model->get_tag_count();
+
+            $navbar  = $this->load->view('admin/common/navbar',"",TRUE);
+
+            //分页数据
+            $p = array(
+                'count'   => $count,
+                'page'    => 0,
+                'limit'   => $count,
+                'pageurl' => base_url().ADMINROUTE.'article/article_tag/'
+            );
+
+            $pagination = $this->load->view('admin/common/pagination',$p,TRUE);
+            $foot       = $this->load->view('admin/common/foot',"",TRUE);
+            //页面数据
+            $body = array(
+                'navbar'        => $navbar,
+                'foot'          => $foot,
+                'pagination'    => $pagination,
+                'tag'           => $tag
+            );
+            $this->load->view('admin/common/head');
+            $this->load->view('admin/article/tag_list', $body);
+        }
 	}
 
-	/*
-	public function edit($type = 'a',$id = NULL)
-	{
-        $navbar  = $this->load->view('admin/common/navbar',"",TRUE);   	
-        $foot 	 = $this->load->view('admin/common/foot',"",TRUE);		
 
-        $this->load->view('admin/common/head');	
-		$article = $this->article_model->get_article_by_id($id);
+	public function edit($type = 'tag',$id = NULL)
+	{
+        if(empty($id) || ! is_numeric($id)) {
+            show_404();
+        }
+
+        $navbar  = $this->load->view('admin/common/navbar',"",TRUE);
+        $foot 	 = $this->load->view('admin/common/foot',"",TRUE);
+
+        $this->load->view('admin/common/head');
+		$tag = $this->article_model->get_tag_by_id($id);
 
 		//页面数据
 		$body = array(
 			'navbar' 	 => $navbar,
 			'foot' 	 	 => $foot,
-			'article'    => $article
-		);        		
-        if( empty($article)) 
+			'tag'        => $tag
+		);
+        if( empty($tag))
         {
             show_404();
         }
         else
         {
-            $this->load->view('admin/article/edit', $body);
-        }  
+            $this->load->view('admin/article/tag_edit', $body);
+        }
+	}
 
-	}	
 
-	*/
+
+
+	/**
+	 * 删除文章
+	 */
 	public function delete_article()
 	{
 		$aid = $this->sc->input('aids');
 		$aid = explode(",",$aid);
 		foreach ($aid as $k => $v) {
-			$result = $this->article_model->delete_article($v);			 
+			$result = $this->article_model->delete_article($v);
 			$this->article_like_model->delete_like_by_aid($v);
 			$this->article_comment_model->delete_comment_by_aid($v);
 		}
@@ -86,47 +122,59 @@ class Article extends MY_Controller{
 		else
 		{
 			$this->error->output('INVALID_REQUEST');
-		}		
+		}
 	}
+
 
 	/**
-	 * [update_article 更新文章]
-	 * @return [type] [description]
+	 * 添加标签
 	 */
-
-	/*
-
-	public function update_article()
+	public function add_tag()
 	{
+        $type = $this->sc->input('type');
+		$name = $this->sc->input('name');
 
-		$error_redirect = array(
-            'script' => "window.location.href='".base_url()."update/article/".$this->input->post('aid')."';"
-        );
-        $this->sc->set_error_redirect($error_redirect);
+		$result = $this->article_model->add_tag($name, $type);
 
-        $aid                = $this->sc->input('aid');
-        $article_title      = $this->sc->input('article_title');
-        $article_subtitle   = $this->sc->input('article_subtitle');
-        $article_content    = $this->sc->input('article_content');
-        //过滤富文本
-        $this->load->library('htmlpurifier');        
-        $article_content    = $this->htmlpurifier->purify($article_content);        
-        //$article_tag        = $this->sc->input('article_tag');	
-        $arr = array(
-        	'title'    => $article_title,
-        	'subtitle' => $article_subtitle,
-        	'content'  => $article_content
-        );
-        $result = $this->article_model->update_article($aid,$arr);
-		if($result)
-		{
-			echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'article/edit/a/'.$aid.'";</script>';
-		}
-		else
-		{
-			$this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().ADMINROUTE.'article/edit/a/'.$aid.'";'));				
+		if ($result) {
+			echo '<script>alert("操作成功!");window.location.href="' . base_url() . ADMINROUTE . 'article/index/article_tag";</script>';
+		} else {
+			echo '<script>alert("操作失败!");window.location.href="' . base_url() . ADMINROUTE . 'article/index/article_tag";</script>';
 		}
 	}
 
-	*/	
+
+    public function update_tag()
+    {
+        $id = $this->sc->input('id');
+        $type = $this->sc->input('type');
+        $name = $this->sc->input('name');
+
+        $result = $this->article_model->update_tag($id, $name, $type);
+
+        if ($result) {
+            echo '<script>alert("操作成功!");window.location.href="' . base_url() . ADMINROUTE . 'article/index/article_tag";</script>';
+        } else {
+            echo '<script>alert("操作失败!");window.location.href="' . base_url() . ADMINROUTE . 'article/index/article_tag";</script>';
+        }
+    }
+
+
+    /**
+     * 删除标签
+     */
+    public function delete_tag()
+    {
+        $id = $this->sc->input('aids');
+        $id = explode(",",$id);
+        foreach ($id as $key => $value) {
+            $result = $this->article_model->delete_tag($value);
+        }
+
+        if ($result) {
+            echo json_encode(array('success' => 0,'note' => lang('OPERATE_SUCCESS'),'script' => 'window.location.href="' . base_url() . ADMINROUTE . 'article/index/article_tag";'));
+        } else {
+            $this->error->output('INVALID_REQUEST');
+        }
+    }
 }
