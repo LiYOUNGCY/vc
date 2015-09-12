@@ -79,7 +79,8 @@
                                 <input id="modal_open" type="hidden" data-toggle="modal" data-target="#myModal"/>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="myModalLabel"
                                      aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -95,7 +96,8 @@
                                                 <button type="button" class="btn btn-default" id="close_modal"
                                                         data-dismiss="modal">Close
                                                 </button>
-                                                <button type="button" id="delete_confirm" class="btn btn-primary">确认</button>
+                                                <button type="button" id="delete_confirm" class="btn btn-primary">确认
+                                                </button>
                                             </div>
                                         </div>
                                         <!-- /.modal-content -->
@@ -106,7 +108,7 @@
                             </div>
                             <div class="tab-pane fade" id="add">
                                 <table class="table table-striped">
-                                    <form id="add_form" method="post" action="<?=base_url()?>admin/article/add_tag">
+                                    <form id="add_form" method="post" action="<?= base_url() ?>admin/article/add_tag">
                                         <tbody>
                                         <tr>
                                             <td>
@@ -138,7 +140,8 @@
                                 </table>
                                 <div class="panel-footer">
                                     <center>
-                                        <button id="submit" type="button" class="btn btn-outline btn-primary">保存设置</button>
+                                        <button id="submit" type="button" class="btn btn-outline btn-primary">保存设置
+                                        </button>
                                     </center>
                                 </div>
                             </div>
@@ -181,7 +184,7 @@
         });
 
         //提交事件
-        $('#submit').click(function(){
+        $('#submit').click(function () {
             $('#add_form').submit();
         });
 
