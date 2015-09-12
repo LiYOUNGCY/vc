@@ -28,9 +28,9 @@
                 </div>
                 <?php }else{ ?>
                 <div class="useropt">
-                    <span class="cart"><a href="" class="link"><i class="fa fa-shopping-cart" style="font-size: 16px;"></i> （ <font color="#f7cc1e">2</font> ）</a></span>
-                    <span class="user">Hi，<a href="<?=base_url()?>like" class="link"><?=$user["name"]?></a><div class="dot" style="display:none;"></div></span>
-                    
+                    <span class="cart"><a href="<?=base_url()?>cart" class="link" title="购物车"><i class="fa fa-shopping-cart" style="font-size: 16px;"></i> （ <font color="#f7cc1e" id="cartcount"></font> ）</a></span>
+                    <span class="user">Hi，<a href="<?=base_url()?>like" class="link"><?=$user["name"]?></a><div class="dot" style="display:block;"></div></span>
+                    <span class="logout"><a href="<?=base_url()?>account/main/logout" class="link">退出</a></span>
                 </div>
                 <?php } ?>
                 <div class="search" id="search">
@@ -62,6 +62,26 @@
             $(".s_ipt").focus();
         });
         
+        $.ajax({
+            type: 'POST',
+            url: GET_CART_GOODS,
+            async: false,
+            data: {
+                page : 0
+            },
+            dataType: 'json',
+            success: function(data) {
+                var good = data;
+                if(good.error != null || good.length === 0) {
+                    console.log('Error');
+                    return false;
+                }
+
+                var count =  good.count;
+                $("#cartcount").html(count);
+            }
+        });    
+
         
     })
 </script>

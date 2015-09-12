@@ -9,8 +9,8 @@
             <?php foreach ($slider as $k => $v): ?>
                 <div class="swiper-slide">
                     <img data-src="<?= $v['pic'] ?>" class="swiper-lazy">
-
-                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                    <div class="swiper-shadow" ></div>
+                    <div class="swiper-lazy-preloader"></div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -79,10 +79,10 @@
                     <?php 
                         if($i == 0)
                         {
-                            $i=1;
+                            $i++;
                             echo '<div class="item big"><div class="box" style="background:url('.$v['bigpic'].');background-size:cover;background-position:50% 50%;">';
                         }
-                        else
+                        else if($i < 4)
                         {
                             echo '<div class="item"><div class="box" style="background: url('.$v['pic'].');background-size:cover;background-position:50% 50%;">';
                         }
@@ -120,8 +120,7 @@
         loop: true,
         autoplay: 5000,
         autoplayDisableOnInteraction: false,
-        speed: 500,
-        grabCursor: true
+        speed: 500
     });
     var swiper = new Swiper('.artist-swiper', {
         autoplayDisableOnInteraction: false,
