@@ -1,7 +1,8 @@
 <?php
 
 
-class Article_model extends CI_Model {
+class Article_model extends CI_Model
+{
     public function __construct()
     {
         parent::__construct();
@@ -10,22 +11,21 @@ class Article_model extends CI_Model {
     /**
      * 把文章的信息插入到数据库
      */
-    public function publish_article($user_id, $article_title, $article_type,$pids,$article_content)
+    public function publish_article($user_id, $article_title, $article_type, $pids, $article_content)
     {
         $data = array(
-            'uid'           => $user_id,
-            'type'          => $article_type,
-            'title'         => $article_title,
-            'pids'          => $pids,
-            'content'       => $article_content,
-            'publish_time'  => date("Y-m-d H:i:s", time()),
-            'creat_by'      => $user_id
+            'uid' => $user_id,
+            'type' => $article_type,
+            'title' => $article_title,
+            'pids' => $pids,
+            'content' => $article_content,
+            'publish_time' => date("Y-m-d H:i:s", time()),
+            'creat_by' => $user_id
         );
 
         $this->db->insert('article', $data);
 
-        if( $this->db->affected_rows() !== 1 )
-        {
+        if ($this->db->affected_rows() !== 1) {
             return FALSE;
         }
 
@@ -42,22 +42,22 @@ class Article_model extends CI_Model {
      * @param  [type] $uid [用户id]
      * @return [type]      [description]
      */
-	public function get_intro_by_uid($uid)
+    public function get_intro_by_uid($uid)
     {
-        $query = $this->db->where(array('uid' => $uid,'type' => 3))
-                          ->get('article')
-                          ->row_array();
+        $query = $this->db->where(array('uid' => $uid, 'type' => 3))
+            ->get('article')
+            ->row_array();
         return $query;
     }
 
     /**
      * [get_article_list 获取文章列表]
-     * @param  integer $page  [页数]
+     * @param  integer $page [页数]
      * @param  [type]  $meid  [我的id]
      * @param  [type]  $uid   [用户id]
      * @param  [type]  $type  [文章类型]
      * @param  integer $limit [页面个数限制]
-     * @param  string  $order [排序]
+     * @param  string $order [排序]
      * @return [type]         [description]
      */
     public function get_article_list($page = 0, $meid = NULL, $uid = NULL, $type = NULL, $pid = NULL, $tag = NULL, $limit = 6, $order = "id DESC")
@@ -66,45 +66,40 @@ class Article_model extends CI_Model {
             ->select('article.id, article.uid, article.title, article.content, article.like, article.read')
             ->from('article');
 
-        if( is_numeric($meid))
-        {
+        if (is_numeric($meid)) {
             $query = $query->select('article_like.status as like_status');
             $query = $query->join('article_like', "article_like.aid = article.id AND article_like.uid = {$meid}", 'left');
         }
-        if( ! empty($uid))
-        {
+        if (!empty($uid)) {
             $query = $query->where('article.uid', $uid);
         }
-        if( ! empty($type))
-        {
+        if (!empty($type)) {
             $query = $query->where('article.type', $type);
         }
-        if( ! empty($pid))
-        {
-          $query = $query->like('pids', "|{$pid}|");
+        if (!empty($pid)) {
+            $query = $query->like('pids', "|{$pid}|");
         }
-        if( ! empty($tag))
-        {
+        if (!empty($tag)) {
             $query = $query->like('tag', "|{$tag}|");
         }
-        $query =$query->order_by($order)->limit($limit, $page*$limit)->get()->result_array();
+        $query = $query->order_by($order)->limit($limit, $page * $limit)->get()->result_array();
         return $query;
     }
 
-    public function update_count($aid,$field = array()){
+    public function update_count($aid, $field = array())
+    {
         $where = array('id' => $aid);
         $query = $this->db->select($field['name'])
-                          ->from('article')
-                          ->where($where)
-                          ->get()
-                          ->row_array();
+            ->from('article')
+            ->where($where)
+            ->get()
+            ->row_array();
 
-        if(!empty($query)){
-            $query[$field['name']]=(int)$query[$field['name']]+(int)$field['amount'];
-            $this->db->where($where)->update('article',$query);
+        if (!empty($query)) {
+            $query[$field['name']] = (int)$query[$field['name']] + (int)$field['amount'];
+            $this->db->where($where)->update('article', $query);
             return $this->db->affected_rows() === 1;
-        }
-        else{
+        } else {
             return FALSE;
         }
     }
@@ -120,8 +115,8 @@ class Article_model extends CI_Model {
      */
     public function argee_article($aid)
     {
-    	$table_name = $this->db->protect_identifiers('article', TRUE);
-    	$this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` + 1 WHERE {$table_name}.id = {$aid}");
+        $table_name = $this->db->protect_identifiers('article', TRUE);
+        $this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` + 1 WHERE {$table_name}.id = {$aid}");
     }
 
     /**
@@ -129,8 +124,8 @@ class Article_model extends CI_Model {
      */
     public function disargee_article($aid)
     {
-    	$table_name = $this->db->protect_identifiers('article', TRUE);
-    	$this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` - 1 WHERE {$table_name}.id = {$aid} and {$table_name}.`like` > 0");
+        $table_name = $this->db->protect_identifiers('article', TRUE);
+        $this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` - 1 WHERE {$table_name}.id = {$aid} and {$table_name}.`like` > 0");
     }
 
 
@@ -150,17 +145,16 @@ class Article_model extends CI_Model {
     {
         $where = array();
         $where['id'] = $aid;
-        if( ! empty($uid))
-        {
+        if (!empty($uid)) {
             $where['uid'] = $uid;
         }
-        $this->db->delete('article',$where);
+        $this->db->delete('article', $where);
         return $this->db->affected_rows() === 1;
     }
 
     public function delete_article_by_uid($uid)
     {
-        $this->db->delete('article',array('uid' => $uid));
+        $this->db->delete('article', array('uid' => $uid));
         return $this->db->affected_rows() > 0;
     }
 
@@ -173,33 +167,40 @@ class Article_model extends CI_Model {
      */
     public function update_article($aid, $arr, $uid = NULL)
     {
-      $arr['modify_time'] = date("Y-m-d H:i:s", time());
-      if( ! empty($uid))
-      {
-        $this->db->where('uid',$uid);
-      }
-      $this->db->where('id', $aid)
-               ->update('article',$arr);
-      return $this->db->affected_rows() === 1;
+        $arr['modify_time'] = date("Y-m-d H:i:s", time());
+        if (!empty($uid)) {
+            $this->db->where('uid', $uid);
+        }
+        $this->db->where('id', $aid)
+            ->update('article', $arr);
+        return $this->db->affected_rows() === 1;
     }
 
 
-
-
-    public function admin_get_article_list($page = 0,$limit = 10,$order = 'id DESC')
+    public function admin_get_article_list($page = 0, $limit = 10, $order = 'id DESC')
     {
-      $article = $this->db->select('article.id,article.uid,article.type,article_type.name as type_name,article.title,article.publish_time,article.read,article.like')
-                          ->join('article_type','article.type = article_type.id','left')
-                          ->order_by($order)
-                          ->limit($limit,$page * $limit)
-                          ->get('article')
-                          ->result_array();
-      return $article;
+        $article = $this->db->select('
+      article.id,
+      user.name as author,
+      article.type,
+      article_type.name as type_name,
+      article.title,
+      article.publish_time,
+      article.read,
+      article.like
+      ')
+            ->join('article_type', 'article.type = article_type.id', 'left')
+            ->join('user', 'user.id = article.uid')
+            ->order_by($order)
+            ->limit($limit, $page * $limit)
+            ->get('article')
+            ->result_array();
+        return $article;
     }
 
     public function get_article_count()
     {
-      return $this->db->count_all('article');
+        return $this->db->count_all('article');
     }
 
 
@@ -273,8 +274,8 @@ class Article_model extends CI_Model {
     public function add_tag($name, $type)
     {
         $data = array(
-            'name'  => $name,
-            'type'  => $type
+            'name' => $name,
+            'type' => $type
         );
 
         $this->db->insert('article_tag', $data);
@@ -284,9 +285,9 @@ class Article_model extends CI_Model {
     public function update_tag($id, $name, $type)
     {
         $data = array(
-            'name'  => $name,
-            'type'  => $type
-            );
+            'name' => $name,
+            'type' => $type
+        );
         $this->db->where('id', $id);
         $this->db->update('article_tag', $data);
 

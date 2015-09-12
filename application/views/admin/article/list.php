@@ -10,7 +10,7 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <div class="margin">
+                        <div style="margin-bottom: 10px;">
                             <button id="publish_article" type="button" class="btn btn-outline btn-default">发布文章</button>
                             <button id="publish_topic" type="button" class="btn btn-outline btn-default">发布专题</button>
                         </div>
@@ -25,7 +25,7 @@
                                     </label>
                                 </th>
                                 <th>ID</th>
-                                <th>发布者id</th>
+                                <th>作者</th>
                                 <th>文章类型</th>
                                 <th>
                                     文章标题
@@ -57,7 +57,7 @@
                                         <?= $v['id'] ?>
                                     </td>
                                     <td>
-                                        <?= $v['uid'] ?>
+                                        <?= $v['author'] ?>
                                     </td>
                                     <td>
                                         <?= $v['type_name'] ?>
@@ -72,7 +72,7 @@
                                         <?= $v['like'] ?>
                                     </td>
                                     <td>
-                                        <?= $v['publish_time'] ?>
+                                        <?= substr($v['publish_time'], 0, 10) ?>
                                     </td>
                                     <td class="tooltip-btn">
                                         <button data-toggle="tooltip" title="查看文章" effect="check" u="<?= $v['id'] ?>"
@@ -216,6 +216,16 @@
             if (aid != null && aid != "") {
                 window.location.href = BASE_URL + 'update/article/' + aid;
             }
+        });
+
+        //发布文章按钮
+        $('#publish_article').click(function () {
+            window.location.href = BASE_URL + 'publish/article';
+        });
+
+        //发布专题按钮
+        $('#publish_topic').click(function () {
+            window.location.href = BASE_URL + 'publish/topic';
         });
     });
 </script>
