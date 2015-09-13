@@ -16,10 +16,10 @@ class Article_service extends MY_Service{
     /**
      * 发表文章
      */
-    public function publish_article($user_id, $article_title, $article_type, $pids, $article_content)
+    public function publish_article($user_id, $article_title, $article_type, $pids, $article_content, $tags)
     {
         //将文章插入到数据库
-        $article_id = $this->article_model->publish_article($user_id, $article_title, $article_type, $pids,$article_content);
+        $article_id = $this->article_model->publish_article($user_id, $article_title, $article_type, $pids,$article_content, $tags);
         if( ! empty($article_id))
         {
             return TRUE;

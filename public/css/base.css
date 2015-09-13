@@ -1010,7 +1010,7 @@ textarea:focus {
 }
 
 .edit .list .options {
-    margin: 20px auto;
+    margin: 0 auto;
     height: 40px;
 
     line-height: 40px;
