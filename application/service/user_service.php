@@ -104,6 +104,10 @@ class User_service extends MY_Service
      */
     public function logout()
     {
+        $this->load->helper('cookie');
+        // $this->load->library('session');
+        delete_cookie('rmcn');
+
         session_destroy();
     }
 

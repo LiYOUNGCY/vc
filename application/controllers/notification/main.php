@@ -76,6 +76,7 @@ class Main extends MY_Controller{
 	 * [read 阅读消息]
 	 * @return [type] [description]
 	 */
+	/*
 	public function read()
 	{
 		$nid = $this->sc->input('nid');
@@ -91,7 +92,7 @@ class Main extends MY_Controller{
 			$this->error->output('INVALID_REQUEST');
 		}
 	}
-
+	*/
 	/**
 	 * [delete 删除消息]
 	 * @return [type] [description]
