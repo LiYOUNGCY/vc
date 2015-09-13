@@ -29,6 +29,7 @@ class Publish extends MY_Controller
         $user['user'] = $this->user;
         $body['top'] = $this->load->view('common/top', $user, TRUE);
         $body['footer'] = $this->load->view('common/footer', '', TRUE);
+        $body['tag']    = $this->article_service->get_article_tag();
 
 
         if ($type == 'publish') {
@@ -81,11 +82,12 @@ class Publish extends MY_Controller
         $article_title = $this->sc->input('article_title');
         $article_type = $this->sc->input('article_type');
         $pids = $this->sc->input('pids');
+        $tags = $this->sc->input('tags');
         $article_content = $this->sc->input('article_content', 'post', FALSE);
         //过滤富文本
         $article_content = $this->htmlpurifier->purify($article_content);
         //把文章插入到数据库
-        $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_type, $pids, $article_content);
+        $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_type, $pids, $article_content, $tags);
         if ($result) {
             redirect(base_url(), 'location');
         } else {

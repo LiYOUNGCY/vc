@@ -11,16 +11,17 @@ class Article_model extends CI_Model
     /**
      * 把文章的信息插入到数据库
      */
-    public function publish_article($user_id, $article_title, $article_type, $pids, $article_content)
+    public function publish_article($user_id, $article_title, $article_type, $pids, $article_content, $tags)
     {
         $data = array(
-            'uid' => $user_id,
-            'type' => $article_type,
-            'title' => $article_title,
-            'pids' => $pids,
-            'content' => $article_content,
-            'publish_time' => date("Y-m-d H:i:s", time()),
-            'creat_by' => $user_id
+            'uid'           => $user_id,
+            'type'          => $article_type,
+            'title'         => $article_title,
+            'pids'          => $pids,
+            'content'       => $article_content,
+            'publish_time'  => date("Y-m-d H:i:s", time()),
+            'creat_by'      => $user_id,
+            'tag'           => $tags
         );
 
         $this->db->insert('article', $data);
