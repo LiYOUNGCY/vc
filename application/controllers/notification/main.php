@@ -11,48 +11,45 @@ class Main extends MY_Controller{
 	 * [index 显示消息列表]
 	 * @return [type] [description]
 	 */
-	public function index($type = 'all')
+	public function index($type = 'systemmsg')
 	{
 		if( !is_string($type) ) {
 			show_404();
 		}
 
-		$head['css'] = array(
-			'common.css',
-			'font-awesome/css/font-awesome.min.css'
-		);
+		$data['css'] = array(
+            'swiper.min.css',
+            'font-awesome/css/font-awesome.min.css',
+            'base.css'
+        );
+        $data['javascript'] = array(
+            'jquery.js',
+            'masonry.pkgd.min.js',
+            'jquery.imageloader.js',
+            'error.js',
+            'validate.js'
+        );
 
-		$head['javascript'] = array(
-			'jquery.js',
-			'vc.js',
-			'timeago.js',
-			'error.js',
-			'timeago.js'
-		);
+        $user['user'] = $this->user;
+        $top = $this->load->view('common/top', $user, TRUE);
+        $data['title']        = "我的消息 - 用户中心";
+        $body['top']          = $top;
+        $body['sign']         = $this->load->view('common/sign', '', TRUE);
+        $body['footer']       = $this->load->view('common/footer', '', TRUE);
+        $body['user']         = $this->user;
 
-		setcookie('push_msg','',time()-1,'/artvc');	
-		setcookie('push_msg',NULL);		
-		$user['user'] 	= $this->user;
-        $body['sidebar']= $this->load->view('common/sidebar', $user, TRUE);
-        $body['footer']	= $this->load->view('common/footer', '', TRUE);
-
-		$this->load->view('common/head', $head);
-
-		if (strcmp($type, 'all') == 0) 
+        $this->load->view('common/head', $data);
+		if (strcmp($type, 'systemmsg') == 0) 
 		{
-			$this->load->view('notification_list', $body);
+			$this->load->view('systemmsg', $body);
 		}
-		elseif (strcmp($type, 'conversation') == 0) 
+		elseif (strcmp($type, 'goodsmsg') == 0) 
 		{			
-			$this->load->view('conversation_list', $body);			
+			$this->load->view('goodsmsg', $body);			
 		}
-		elseif (strcmp($type, 'comment') == 0) 
+		elseif (strcmp($type, 'csmsg') == 0) 
 		{				
 			$this->load->view('comment_list', $body);
-		}
-		elseif (strcmp($type, 'like') == 0) 
-		{			
-			$this->load->view('like_list', $body);
 		}
 	}
 
@@ -62,9 +59,11 @@ class Main extends MY_Controller{
 	 */
 	public function get_notification_list()
 	{
-		$page = $this->sc->input('page');
+		// $page = $this->sc->input('page');
+		$page = 0;
 		//消息类型
-		$type = $this->sc->input('type');
+		// $type = $this->sc->input('type');
+		$type = 1;
 		$type = ! empty($type) ? $type : 'all';
 
 		$notification = $this->notification_service->get_notification_list($page,$this->user['id'],$type);

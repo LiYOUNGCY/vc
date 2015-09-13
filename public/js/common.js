@@ -56,6 +56,8 @@ var GET_PERSONAL_LIKE_PRODUCTION = BASE_URL + 'like/main/get_production_like_lis
 //个人中心 - 获取购买列表
 var GET_PERSONAL_TRANSACTION = BASE_URL + 'transaction/main/get_transaction_list';
 
+//个人中心 - 获取消息
+var GET_NOTIFICATION = BASE_URL + 'notification/main/get_notification_list';
 /**
  * [trim 去掉字符串前后两端的空格]
  */

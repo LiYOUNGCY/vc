@@ -76,9 +76,7 @@
                     console.log('Error');
                     return false;
                 }
-                alert(1);
                 var count =  good.count;
-                alert(count);
                 $("#cartcount").html(count);
             }
         });    

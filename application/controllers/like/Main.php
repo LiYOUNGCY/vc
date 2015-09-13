@@ -11,14 +11,16 @@ class Main extends MY_Controller{
 		$data['css'] = array(
             'swiper.min.css',
             'font-awesome/css/font-awesome.min.css',
-            'base.css'
+            'base.css',
+            'alert.css'
         );
         $data['javascript'] = array(
             'jquery.js',
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
             'error.js',
-            'validate.js'
+            'validate.js',
+            'alert.min.js'
         );
 
         $user['user'] = $this->user;

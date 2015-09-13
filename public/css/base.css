@@ -216,6 +216,17 @@ img {
     height: 54px;
     background: transparent url("../img/icon/info_goods_label_waitSending.png") no-repeat scroll;
 }
+.icon.psysmsg{
+    width: 60px;
+    height: 60px;
+    background: transparent url("../img/icon/info_systemmsg.png") no-repeat scroll;
+}
+.icon.pshopmsg{
+    width: 60px;
+    height: 60px;
+    background: transparent url("../img/icon/info_shopmsg.png") no-repeat scroll;
+}
+
 .icon.qrcode{
     width: 209px;
     height: 99px;
@@ -2010,7 +2021,7 @@ hr.line {
 .main-wrapper .top .topright .userarea .useropt .user {
     position: relative;
 }
-.main-wrapper .top .topright .userarea .useropt .user .dot {
+.dot {
     position: absolute;
     top: -2px;
     right: -6px;
@@ -2019,7 +2030,7 @@ hr.line {
     width: 10px;
     height: 10px;
 
-    background: #F8E901;
+    background: #f7cc1e;
 }
 .main-wrapper .top .topright .userarea .useropt .logout{
     margin-left:15px;
@@ -3112,8 +3123,10 @@ img.zoom-img {
     opacity: 0.3;
     transition: all .2s ease-in-out;
     display: inline-block;
+    position: relative;
 }
 .psubmenu div.active,
+.psubmenu div.dot,
 .psubmenu div:hover{
     opacity: 1;
 }
@@ -3195,6 +3208,36 @@ img.zoom-img {
 }
 .transaction .box .boxbottom .status.psending{
     color:#FFFFFF;
+}
+.msglist{
+}
+.msglist .col{
+    background-color: #EEEEEE;
+    color: #534741;
+    padding: 15px 15px 40px 0px;
+    position: relative; 
+    margin-bottom: 20px;
+}
+.msglist .col .type{
+    float: left;
+    width: 130px;
+}
+.msglist .col .content{
+    float: left;
+    max-width: 810px;
+    width: 100%;
+    text-align:justify;
+}
+.msglist .col .opt{
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+}
+.msglist .col .opt .link{
+    color: #B3B3B3;
+}
+.msglist .col .opt .link:hover{
+    color: #F7CC1E;
 }
 
 
