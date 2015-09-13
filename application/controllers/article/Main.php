@@ -18,9 +18,8 @@ class Main extends MY_Controller
     {
         //获得页数
         $page = $this->sc->input('page');
-//         $page = 0;
-
         $tag = $this->sc->input('tag', 'get');
+        $tag = is_numeric($tag) ? $tag : 0;
 
         $uid = isset($this->user['id']) ? $this->user['id'] : NULL;
         //文章类型
