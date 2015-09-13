@@ -3,6 +3,17 @@
     <?php echo $top; ?>
     <div class="container">
         <div class="item-list" id="item-list">
+            <div class="filter-warp" id="filter">
+                <div class="filter">
+                    <ul class="fc-target">
+                        <li>热门分类：</li>
+                        <li><a href="javascript:void(0)" class="link <?php if($get_tag == 0) echo 'active'; ?>" onclick="getArticleListBYtag('all')">全部</a></li>
+                        <?php foreach($tag as $key => $value) { ?>
+                            <li><a href="javascript:void(0)" class="link <?php if($get_tag == $value['id']) echo 'active'; ?>" onclick="getArticleListBYtag(<?= $value['id'] ?>)"><?= $value['name'] ?></a></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
 
 <!--            <div class="box" onclick="readArticle(1)">-->
 <!--                <img class="image"-->
@@ -41,15 +52,33 @@
     }
 
 
+    function getArticleListBYtag(tag_id) {
+        if(tag_id == 'all') {
+            window.location.href = BASE_URL + 'article';
+        }
+        else {
+            window.location.href = BASE_URL + 'article?tag=' + tag_id;
+        }
+    }
+
     $(function () {
         'use strict';
 
         var $container = $('.item-list');
         var container = document.querySelector('#item-list');
         var page = 0;
+        var tag = getQueryString('tag');
+        var url = '';
+
+        if (tag != null) {
+            url = GET_ARTICLE_URL + '?tag=' + tag;
+        }
+        else {
+            url = GET_ARTICLE_URL;
+        }
 
         var masonry = new Masonry(container, {
-            stamp: '.menu',
+            stamp: '#filter',
             itemSelector: '.box',
             columnWidth: 300,
             gutter: 30,
@@ -62,7 +91,7 @@
             each: function (elm) {
                 console.log("load done");
                 console.log(elm.width + " " + elm.height);
-                $(elm).parent().css({'height': elm.height, 'width': elm.width});
+//                $(elm).parent().css({'height': elm.height, 'width': elm.width});
                 masonry.layout();
             }
         });
@@ -73,7 +102,7 @@
                 function LoadMore() {
             $.ajax({
                 type: 'POST',
-                url: GET_ARTICLE_URL,
+                url: url,
                 async: false,
                 data: {
                     page: page,

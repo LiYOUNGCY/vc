@@ -207,14 +207,15 @@ class Article_service extends MY_Service{
      * @param  [type] $uid [用户id]
      * @return [type]      [description]
      */
-    public function update_article($aid, $uid, $article_title, $article_type, $pids, $article_content)
+    public function update_article($aid, $uid, $article_title, $article_type, $pids, $article_content, $tags)
     {
         $arr = array(
             'title'    => $article_title,
             'type'     => $article_type,
             'pids'     => $pids,
             'content'  => $article_content,
-            'modify_by'=> $uid
+            'modify_by'=> $uid,
+            'tag'      => $tags
         );
         return $this->article_model->update_article($aid,$arr);
     }

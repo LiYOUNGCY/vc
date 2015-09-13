@@ -49,6 +49,7 @@ class Publish extends MY_Controller
 
             $head['title'] = '修改文章';
             $body['article'] = $article;
+            $body['tag']    = $this->article_service->get_article_tag();
             $this->load->view('common/head', $head);
             $this->load->view('update_article', $body);
         }
@@ -129,11 +130,12 @@ class Publish extends MY_Controller
         $article_title = $this->sc->input('article_title');
         $article_type = $this->sc->input('article_type');
         $pids = $this->sc->input('pids');
+        $tags = $this->sc->input('tags');
         $article_content = $this->sc->input('article_content', 'post', FALSE);
         //过滤富文本
         $article_content = $this->htmlpurifier->purify($article_content);
 
-        $result = $this->article_service->update_article($aid, $this->user['id'], $article_title, $article_type, $pids, $article_content);
+        $result = $this->article_service->update_article($aid, $this->user['id'], $article_title, $article_type, $pids, $article_content, $tags);
         if ($result) {
             redirect(base_url() . "article/" . $aid, 'location');
         } else {
