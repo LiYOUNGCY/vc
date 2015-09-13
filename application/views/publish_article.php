@@ -20,7 +20,7 @@
                     <label for="">文章标签：</label>
 
                     <?php foreach ($tag as $key => $value) { ?>
-                        <input type="checkbox" class="radiocheck" id="tag_<?= $value['id'] ?>" checked>
+                        <input type="checkbox" class="radiocheck" id="tag_<?= $value['id'] ?>">
                         <label class="nofull default left" for="tag_<?= $value['id'] ?>"><?= $value['name'] ?></label>
                     <?php } ?>
 
@@ -45,20 +45,16 @@
     $(function () {
         //实例化编辑器
         var um = UM.getEditor('editor');
-//        $('#submit').click(function () {
-//            $('#aform').submit();
-//        });
-
         $('#submit').click(function () {
-            var tags = '';
+            var tags = '|';
             $('input[type=checkbox]').each(function () {
                 if ($(this).is(':checked') === true) {
                     var tag_id = $(this).attr('id');
                     tag_id = tag_id.substr(4, tag_id.length - 4);
-                    tags = tags + tag_id + ',';
+                    tags = tags + tag_id + '|';
                 }
             });
-            tags = tags.substr(0, tags.length - 1);
+//            tags = tags.substr(0, tags.length - 1);
             $('#tags').val(tags);
             $('#aform').submit();
         });

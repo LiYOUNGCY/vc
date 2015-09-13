@@ -18,7 +18,7 @@ class Main extends MY_Controller
     {
         //获得页数
         $page = $this->sc->input('page');
-        // $page = 0;
+//         $page = 0;
 
         $tag = $this->sc->input('tag', 'get');
 
@@ -53,20 +53,23 @@ class Main extends MY_Controller
         $user['user'] = $this->user;
         $body['top'] = $this->load->view('common/top', $user, TRUE);
 
-        $body['get_tag'] = $get_tag;
-        $body['user'] = $this->user;
-        $body['footer'] = $this->load->view('common/footer', '', TRUE);
+        $body['get_tag']    = $get_tag;
+        $body['user']       = $this->user;
+        $body['footer']     = $this->load->view('common/footer', '', TRUE);
+
         //文章类型
         $body['article_type'] = $type;
         if ($type == 'article') {
-            $data['title'] = "资讯";
+            $data['title']  = "资讯";
+            $body['tag']    = $this->article_service->get_article_tag();
+
             $this->load->view('common/head', $data);
-            $body['tag'] = $this->article_service->get_article_tag();
             $this->load->view('article', $body);
         } else if ($type == 'topic') {
             $data['title'] = "专题";
-            $this->load->view('common/head', $data);
             $body['tag'] = $this->article_service->get_topic_tag();
+
+            $this->load->view('common/head', $data);
             $this->load->view('topic_list', $body);
         }
 
