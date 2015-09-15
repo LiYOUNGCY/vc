@@ -10,6 +10,7 @@
     <meta name="author" content="">
 
     <title>Artvc</title>
+    <script src="<?=base_url()?>/public/js/jquery.js"></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?=base_url()?>public/admin/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
