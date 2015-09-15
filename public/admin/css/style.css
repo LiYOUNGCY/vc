@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a h3 {
+    display: inline-block;
+}
+
+a.link {
+    color: #534741;
+
+    transition: color .25s linear 0s;
+}
+
+a.link:hover {
+    color: #f7cc1e;
+}
+
+a:visited {
+    color: #534741;
+}
+
+.container {
+    position: relative;
+    height: 100%;
+
+    background: #ffffff;
+}
+
+.wrap {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    height: 80%;
+    width: 80%;
+
+}
+
+.wrap .contacts {
+
+    height: 100%;
+    width: 30%;
+
+    margin-right: 20px;
+
+    border: 1px solid #888;
+    border-radius: 8px;
+    overflow: hidden;;
+    /*background-color: #888888;*/
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.wrap .contacts:before {
+    content: '联系人';
+    /*width: 100%;*/
+    padding: 10px 20px;
+    line-height: 20px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+    display: block;
+    background-color: #F7CC1E;
+}
+
+.wrap .contacts .list {
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+
+.wrap .dialog {
+    position: relative;
+
+    width: calc(100% - 40% - 20px);
+    height: 100%;
+
+    background-color: yellowgreen;
+    display: inline-block;
+}
+
+.contacts .avatar {
+    position: relative;
+
+    padding: 10px 20px;
+    padding-left: 140px;
+
+    height: 100px;
+
+    cursor: pointer;
+    -webkit-transition: background .25s ease-in-out;
+    -moz-transition: background .25s ease-in-out;
+    -ms-transition: background .25s ease-in-out;
+    -o-transition: background .25s ease-in-out;
+    transition: background .25s ease-in-out;;
+}
+
+.contacts .avatar:hover {
+    background-color: #EEE;
+}
+
+.contacts .avatar img {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+
+    width: 80px;
+    height: 80px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.contacts .avatar .name {
+    height: 80px;
+    line-height: 80px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+}
