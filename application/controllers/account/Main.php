@@ -187,4 +187,22 @@ class Main extends MY_Controller
 
 		echo $this->user_service->validate_phone($phone);
 	}
+
+	public function get_info_by_id()
+    {
+        $id = $this->sc->input('id');
+
+        $result = $this->user_service->get_user_by_id($id);
+        echo json_encode($result);
+    }
+
+    public function get_time()
+    {
+        $currentTime = array();
+
+        $currentTime['success'] = 0;
+        $currentTime['time'] = date('Y-m-d H:i:s');
+
+        echo json_encode($currentTime);
+    }
 }
