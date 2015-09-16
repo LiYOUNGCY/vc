@@ -1733,6 +1733,7 @@ textarea:focus {
 
 .btn:hover {
     background-color: #fcee21;
+    color: #534741;
 }
 
 .head {
@@ -3239,8 +3240,74 @@ img.zoom-img {
 .msglist .col .opt .link:hover{
     color: #F7CC1E;
 }
+.safesettig{
+    text-align: left;
+    color: #B3B3B3;
+}
+.safesettig input[type="text"] {
+    padding: 5px;
+    width: 200px;
+    border-radius: 5px;
+    color: #888888;
+    border:1px #B3B3B3 solid ;
+    transition: border-color .2s ease-in-out 0s;
+}
+.safesettig input[type="text"]:hover,
+.safesettig input[type="text"]:focus {
+    border-color:#FCEE21;
+}
 
-
+.safesettig .type {
+    color: #8C8C8C;
+    font-weight: bold;
+    margin: 10px 0;
+    width: 200px;
+}
+.safesettig .btn{
+    width: 100px;
+    height: 36px;
+    line-height: 36px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+.safesettig label{
+    display: block;
+    margin:10px 0 7px;
+    color: #B3B3B3;
+}
+.safesettig .setpwd{
+    float: left;
+    width: 40%;
+}
+.safesettig .setaccount{
+    float: left;
+    width: 40%;
+}
+.safesettig .setaccount .phone,
+.safesettig .setaccount .email{
+    color:#534741;
+}
+.safesettig .pinarea{
+    margin-top: 10px;
+}
+.safesettig .pinarea .pin{
+    width: 90px !important;
+}
+.safesettig .pinarea .getpin{
+    display: inline-block;
+    width: 106px;
+    height: 29px;
+    line-height: 29px;
+    margin-top: 0px;
+    font-size: 14px;
+    margin-left:4px; 
+}
+.safesettig .submitphone{
+    width: 212px;
+}
+.safesettig .sendpin{
+    width: 212px;
+}
 @media screen and (max-width:960px) {
 
     .tc{
