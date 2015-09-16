@@ -9,9 +9,9 @@
                 <div class="filter">
                     <ul class="fc-target">
                         <li>标签1的类型：</li>
+                        <li><a href="javascript:void(0)" class="link <?php if($get_tag == 0) echo 'active'; ?>" onclick="getArticleListBYtag('all')">全部</a></li>
                         <?php foreach ($tag as $key => $value) { ?>
-                            <li><a href="javascript:void(0)" class="link <?php if($get_tag == $value['id']) echo 'active'; ?>"
-                                   onclick="getArticleListBYtag(<?= $value['id'] ?>)"><?= $value['name'] ?></a></li>
+                            <li><a href="javascript:void(0)" class="link <?php if($get_tag == $value['id']) echo 'active'; ?>" onclick="getArticleListBYtag(<?= $value['id'] ?>)"><?= $value['name'] ?></a></li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -46,7 +46,12 @@
     }
 
     function getArticleListBYtag(tag_id) {
-        window.location.href = TOPIC_URL + '?tag=' + tag_id;
+        if(tag_id == 'all') {
+            window.location.href = TOPIC_URL;
+        }
+        else {
+            window.location.href = TOPIC_URL + '?tag=' + tag_id;
+        }
     }
 
     $(function () {
@@ -62,7 +67,6 @@
             url = GET_ARTICLE_URL;
         }
 
-        console.log(url);
 
         var $container = $('.item-list');
         var container = document.querySelector('.item-list');
@@ -80,9 +84,6 @@
         $container.imageloader({
             selector: '.image',
             each: function (elm) {
-                console.log("load done");
-                console.log(elm.width + " " + elm.height);
-//                $(elm).parent().css({'height': elm.height, 'width': elm.width});
                 masonry.layout();
             }
         });
@@ -100,8 +101,7 @@
                     type: 'topic'
                 },
                 dataType: 'json',
-                success: function (data) {
-                    var items = data;
+                success: function (items) {
                     sum = items.length;
 
                     if (items.error != null || items.length === 0) {
@@ -122,7 +122,7 @@
 
 
                         var box = $('<div class="box" onclick="readArticle(' + article_id + ')" style="height:360px;">' +
-                            '<img class="image" src="' + BASE_URL + 'public/img/load.gif" data-src="' + img + '" alt=""/>' +
+                            '<div class="image" style="background-image:url(' + img + ')"></div>' +
                             '<p class="title">' + article_title + '</p>' +
                             '<p class="content">' + article_content + '</p>' +
                             '<div class="bottom clearfix">' +
@@ -138,19 +138,12 @@
                         $(box).imageloader({
                             each: function (elm) {
                                 masonry.layout();
-                                console.log(elm.width + " " + elm.height);
-//                                $(elm).parent().css({'height': elm.height, 'width': elm.width});
-
                                 count++;
                                 if (count == sum) {
                                     //Add Event
                                     WindowEvent();
                                     count = 0;
                                 }
-                            },
-                            callback: function (elm) {
-                                console.log('loadding');
-                                masonry.layout();
                             }
                         });
                         // -------------- End -------------
@@ -161,10 +154,10 @@
 
         LoadMore();
 
-        $(document).click(function () {
-            console.log('click');
-            LoadMore();
-        });
+//        $(document).click(function () {
+//            console.log('click');
+//            LoadMore();
+//        });
 
         WindowEvent();
 

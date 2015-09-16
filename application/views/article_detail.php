@@ -4,7 +4,6 @@
 <div class="main-wrapper">
     <!-- 顶部 -->
     <?php echo $top; ?>
-    <div class="container">
         <div class="content">
             <div class="article">
                 <h1 class="title"><?= $article['title'] ?></h1>
@@ -125,7 +124,6 @@
                 <!-- END 评论部分 -->
             </div>
         </div>
-    </div>
     <?php echo $footer; ?>
 </div>
 </body>
@@ -232,10 +230,10 @@
         }
 
         autosize($('textarea'));
-        var ta = document.querySelector('textarea');
-        ta.addEventListener('focus', function () {
-            autosize(ta);
-        });
+//        var ta = document.querySelector('textarea');
+//        ta.addEventListener('focus', function () {
+//            autosize(ta);
+//        });
     });
 </script>
 </html>

@@ -3317,3 +3317,104 @@ img.zoom-img {
         width: 25%;
     }
 }
+
+.conversation-list {
+    margin: 20px auto 0 auto;
+    padding: 10px 20px 10px 10px;
+
+    max-width: 730px;
+    width: 80%;
+
+    border: 1px solid #EEEEEE;
+    -webkit-box-shadow: 10px 10px 5px #888888;
+    -moz-box-shadow: 10px 10px 5px #888888;
+    box-shadow: 10px 10px 5px #888888;
+}
+
+.conversation-list .message {
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.conversation-list .message .content {
+    position: relative;
+    min-height: 100px;
+    padding: 10px;
+    padding-bottom: 25px;
+
+    color: #888;
+
+    border: 1px solid #EEEEEE;
+}
+
+.conversation-list .message .content .time {
+    position: absolute;
+
+    left: 10px;
+    bottom: 5px;
+
+    color: #888;
+    font-size: .8em;
+}
+
+.conversation-list .message.left {
+    padding-left: 120px;
+    padding-right: 10px;
+}
+
+.conversation-list .message .avatar {
+    position: absolute;
+
+    width: 80px;
+    height: auto;
+}
+
+.conversation-list .message .avatar img {
+    width: 100%;
+    height: 80px;
+}
+
+.conversation-list .message .avatar .name {
+    margin-top: 5px;
+    text-align: center;
+
+    font-size: 14px;
+    color: #888888;
+    text-overflow:ellipsis;
+    overflow: hidden;
+}
+
+.conversation-list .message.left .avatar {
+    left: 15px;
+    top: 10px;
+}
+
+.conversation-list .message.right .avatar {
+    right: 15px;
+    top: 10px;
+}
+
+.conversation-list .message.right {
+    padding-right: 120px;
+    padding-left: 10px;
+}
+
+.conversation-list .input-box {
+    padding: 10px;
+
+    border: 1px solid #EEEEEE;
+}
+
+.conversation-list .input-box .send {
+    float: right;
+
+    height: 20px;
+    padding: 5px 20px;
+}
+
+.conversation-list .input-box textarea {
+    width: 80%;
+    
+    max-width: calc(90% - 72px);
+}

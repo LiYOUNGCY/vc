@@ -8,26 +8,27 @@ class Main extends MY_Controller{
 	
 	public function index()
 	{
-		$data['css'] = array(
-			'common.css',
-			'flex-style.css', 
-			'qqFace.css'
+		$head['css'] = array(
+			'base.css',
+            'alert.css',
+            'qqFace.css'
 		);
+		$head['javascript'] = array(
+			'jquery.js',
+            'alert.min.js',
+            'autosize.js',
+            'jquery.qqFace.js'
+		);
+        $head['title']   = '在线客服';
 
-		$data['javascript'] = array(
-			'jquery.js', 
-			'jquery.flexText.min.js', 
-			'jquery.qqFace.js',
-			'vc.js',
-			'error.js'
-		);
-		
         $user['user'] = $this->user;
-        $body['sidebar'] = $this->load->view('common/sidebar', $user, TRUE);
+
+        $body['top']     = $this->load->view('common/top', $user, TRUE);
         $body['footer']  = $this->load->view('common/footer', '', TRUE);
+		$body['customer_id']	= 15;
         
-		$this->load->view('common/head', $data);
-		$this->load->view('conversation',$body);
+		$this->load->view('common/head', $head);
+		$this->load->view('customer', $body);
 	}
 	
 	/**
