@@ -1415,11 +1415,78 @@ textarea:focus {
 #pageslide .useropt{
     position: absolute;
     top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
 }
-#pageslide .useropt .user{
-    float: left;
+#pageslide .useropt span{
+    display: block;
+    position: absolute;
 }
 
+
+#pageslide .logout{
+    bottom: 70px;
+    left: 0px;
+    width: 100%;
+    text-align: center;
+    background: #2C2922;
+    height: 60px;
+    line-height: 60px;
+    color: #FFFFFF;
+}
+#pageslide .user{
+    top: 30px;
+    left: 20px;
+}
+#pageslide .cart{
+    bottom: 70px;
+    width: 100%;
+}
+#pageslide .nav{
+    position:absolute;
+    top: 140px;
+    z-index: 10;
+    width: 100%;
+    left: 0px;
+}
+#pageslide .nav li{
+    display: block;
+    height: 65px;
+    line-height: 65px;
+    color: #FFFFFF;
+    font-size: 16px;
+    margin-left: 20px;
+}
+#pageslide .search{
+    position:absolute;
+    top: 70px;
+    width: 100%;
+    left: 0px;
+    background:#080806;
+    height: 45px;
+}
+#pageslide .search input[type="text"]{
+    background: #080806;
+    color: #B3B3B3;
+    height: 45px;
+    padding:5px 5px 5px 20px;
+    box-sizing:border-box;
+    width: 80%;
+    border: none;
+}
+#pageslide .search i{
+    position: absolute;
+    right: 0;
+    display: block;
+    top: 0px;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    box-sizing: border-box;
+    padding: 12px;
+    cursor: pointer;
+}
 /*slide end*/
 .numtooplit {
     float: right;

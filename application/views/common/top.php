@@ -28,9 +28,9 @@
                 </div>
                 <?php }else{ ?>
                 <div class="useropt">
-                    <span class="cart"><a href="<?=base_url()?>cart" class="link" title="购物车"><i class="fa fa-shopping-cart" style="font-size: 16px;"></i> （ <font color="#f7cc1e" id="cartcount"></font> ）</a></span>
+                    <a href="<?=base_url()?>cart" class="link" title="购物车"><span class="cart"><i class="fa fa-shopping-cart" style="font-size: 16px;"></i> （ <font color="#f7cc1e" id="cartcount"></font> ）</span></a>
                     <span class="user">Hi，<a href="<?=base_url()?>like" class="link"><?=$user["name"]?></a><div class="dot" style="display:block;"></div></span>
-                    <span class="logout"><a href="<?=base_url()?>account/main/logout" class="link">退出</a></span>
+                    <a href="<?=base_url()?>account/main/logout" class="link"><span class="logout">退出</span></a>
                 </div>
                 <?php } ?>
                 <div class="search" id="search">
@@ -49,18 +49,21 @@
     $(function(){
         $(".openslider a").pageslide({direction: "left"});
 
-        $("#s_sipt").bind("click",function(){
-            if($("#search").hasClass('active')){
-                $("#search").css({"width" : "26px"});
-                $("#search").removeClass('active');
-                $(".s_ipt").css({"display":"none"});
-                return ;
-            }
-            $("#search").css({"width": "185px"});
-            $("#search").addClass('active');
-            $(".s_ipt").css({"display":"block"});
-            $(".s_ipt").focus();
-        });
+        if($(window).width() > 960){
+            $("#s_sipt").bind("click",function(){
+                if($("#search").hasClass('active')){
+                    $("#search").css({"width" : "26px"});
+                    $("#search").removeClass('active');
+                    $(".s_ipt").css({"display":"none"});
+                    return ;
+                }
+                $("#search").css({"width": "185px"});
+                $("#search").addClass('active');
+                $(".s_ipt").css({"display":"block"});
+                $(".s_ipt").focus();
+            });
+        }
+        
         
         $.ajax({
             type: 'POST',
