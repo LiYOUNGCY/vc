@@ -18,7 +18,7 @@
                     <label for="rememberme" style="color:#B3B3B3;font-size:14px;cursor:pointer;">下次自动登录</label>
                 </div>
                 <div class="fogetpwd">
-                    <a href="" class="link">忘记密码?</a>
+                    <a href="<?=base_url()?>account/forget" class="link">找回密码?</a>
                 </div>
             </div>
             <div class="thirdparty">

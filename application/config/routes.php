@@ -98,11 +98,13 @@ $route['update/artist/(:num)']   = 'artist/publish/index/update/$1';
 $route['cart']  = 'cart/main';
 //购买记录
 $route['transaction']  = 'transaction/main';
+//支付
+$route['pay']  = 'transaction/pay';
+
 /**
  * 用户
  */
-$route['login'] = 'account/main/index/login';
-$route['signup'] = 'account/main/index/signup';
+$route['account/forget'] = 'account/main/index/forget';
 $route['setting']   = 'account/setting/index/user';
 $route['setting/(([a-z]*))']   = 'account/setting/index/$1';
 
@@ -121,6 +123,8 @@ $route['conversation/(:num)'] = 'conversation/main/index/$1';
  */
 $route['msg']  = 'notification/main';
 $route['msg/([a-z]*)'] = 'notification/main/index/$1';
+
+
 
 /**
  * 管理员用户管理

@@ -35,8 +35,8 @@ class Main extends MY_Controller{
 	 */
 	public function get_good_list()
 	{
-		$page = $this->sc->input('page');
-		// $page = 0;
+		//$page = $this->sc->input('page');
+		$page = 0;
 		$limit= 10;
 		$goods = $this->cart_service->get_good_list($this->user['id'],$page,$limit);
 		//分页输出

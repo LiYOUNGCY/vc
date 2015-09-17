@@ -232,6 +232,11 @@ img {
     height: 99px;
     background: transparent url("../img/icon/qrcode.png") no-repeat scroll;   
 }
+.icon.tick{
+    width: 30px;
+    height: 30px;
+    background: transparent url("../img/icon/tick.png") no-repeat scroll; 
+}
 @media screen and (max-width: 960px) {
     .icon.qrcode{
         width: 209px;
@@ -1424,7 +1429,12 @@ textarea:focus {
     position: absolute;
 }
 
-
+#pageslide .showsign{
+    font-size: 18px;
+}
+#pageslide .showsign a{
+    color: #FFFFFF;
+}
 #pageslide .logout{
     bottom: 70px;
     left: 0px;
@@ -1440,19 +1450,19 @@ textarea:focus {
     left: 20px;
 }
 #pageslide .cart{
-    bottom: 70px;
-    width: 100%;
+    top: 130px;
+    left: 20px;
 }
 #pageslide .nav{
     position:absolute;
-    top: 140px;
+    top: 147px;
     z-index: 10;
     width: 100%;
     left: 0px;
 }
 #pageslide .nav li{
     display: block;
-    height: 65px;
+    height: 45px;
     line-height: 65px;
     color: #FFFFFF;
     font-size: 16px;
@@ -2467,7 +2477,7 @@ hr.line {
 }
 .footbanner{
     background-color: #0C0F08;
-    height: 10px;
+    height: 5px;
     width: 100%;
 }
 @media screen and (max-width:960px) {
@@ -3484,4 +3494,204 @@ img.zoom-img {
     width: 80%;
     
     max-width: calc(90% - 72px);
+}
+
+.forgetpwd{
+    width:92%;
+    max-width: 600px;
+    min-width: 310px;
+    box-shadow: 2px 2px 2px #B1B1B1;
+    border: #D8D8D8 solid 1px;
+    margin:20px auto 0;
+    padding: 70px 0;
+}
+
+.forgetpwd .btn{
+    background: #0C0F08;
+    color: #FFF;
+    width: 300px;
+    height: 40px;
+    line-height: 40px;
+    margin: 15px auto;
+}
+.forgetpwd .btn:hover{
+    background: #f7cc1e;
+    color: #0C0F08;
+}
+.forgetpwd label{
+    display: block;
+    color: #B3B3B3;
+    font-size: 14px;
+}
+.forgetpwd .form{
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+}
+.forgetpwd .form input[type="text"]{
+    width: 300px;
+    height: 40px;
+    border: 1px #534741 solid;
+    margin: 15px auto;
+    color: #534741;
+    padding:5px;
+    box-sizing:border-box;
+    transition:border-color .2s ease-in-out;
+}
+.forgetpwd .form input[type="text"]:hover,
+.forgetpwd .form input[type="text"]:focus{
+    border-color: #FCEE21;
+}
+.forgetpwd .form input[type="text"]:hover,
+.forgetpwd .form input[type="text"]:focus{
+    border-color: #FCEE21;
+}
+.forgetpwd .form .sendvelidata{
+    position: absolute;
+    bottom: 10px;
+    right: 1px;
+    color: #534741;
+    border-left: #534741 1px solid;
+    height: 20px;
+    line-height: 20px;
+    width: 120px;
+    background: #FFFFFF;
+}
+.forgetpwd .form .submit{
+    width: 300px;
+    height: 40px;
+    line-height: 40px;
+    margin: 15px auto;
+}
+.forgetpwd .changemethor{
+    font-size: 14px;
+    color: #B3B3B3;
+    cursor: pointer;
+    transition: color .2s ease-in-out;
+}
+.forgetpwd .changemethor:hover{
+    color: #FCEE21;
+}
+.paytitle{
+    margin-top:20px;
+    text-align: left;
+    font-size: 24px;
+}
+.paybox{
+    width: 100%;
+    margin-top: 10px;
+    border:1px #F4F4F4 solid;
+    box-shadow: 2px 2px 2px #CECECE;
+    padding-top: 40px;
+}
+.paybox .infoma{
+    float: left;
+    margin-left: 20px;
+    width:56%;
+    text-align: left;
+}
+.paybox .infoma .item{
+    margin: 30px 0;
+    color:#686868;
+}
+.paybox .infoma .price{
+    font-size: 30px;
+    color: #534741;
+}
+.paybox .infoma label{
+    font-size: 18px;
+    display: inline-block;
+    width: 100px;
+}
+.paybox .infoma .item input[type="text"]{
+    width: 280px;
+    padding: 10px 5px 10px 30px;
+    height: 30px;
+    border:none;
+    font-size: 16px;
+    color: #534741; 
+    background-color: #F4F4F4;
+    transition:background-color .2s ease-in-out;
+}
+.paybox .infoma .item .defaddress{
+    max-width: 310px;
+    color: #534741;
+    display: inline-block;
+    vertical-align: top;
+}
+.paybox .infoma .item textarea{
+    width: 290px;
+    padding: 5px 5px 5px 30px;
+    border:none;
+    font-size: 16px;
+    color: #534741; 
+    background: #F4F4F4;
+    vertical-align: top;
+    transition:background-color .2s ease-in-out;
+}
+
+.paybox .infoma .item input[type="text"]:hover,
+.paybox .infoma .item input[type="text"]:focus,
+.paybox .infoma .item textarea:hover,
+.paybox .infoma .item textarea:focus{
+    background: #fffaac;
+}
+.paybox .infoma .saveasdef{
+    width: 320px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    background: #dcdcdc;
+    border-radius: 5px;
+    color: #534741; 
+}
+.paybox .infoma .saveasdef:hover{
+    background: #FCEE21;
+}
+.paybox .paymethor label{
+    color: #686868;
+    display: block;
+}
+.paybox .paymethor{
+    float: left;
+    width: 40%;
+    text-align: left;
+}
+.paybox .paymethor .methor{
+    position: relative;
+    width: 230px;
+    margin: 15px 0;
+}
+.paybox .paymethor .methor .tick{
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+}
+.paybox .bottom{
+    float: left;
+    margin-top: 30px;
+    border-top: 1px solid #f4f4f4;
+    width: 100%;
+}
+.paybox .bottom .pay{
+    width:200px;
+    height: 40px;
+    line-height: 40px;
+    background: #534741;
+    margin: 20px auto 10px;
+    color: #FFFFFF;
+}
+.paybox .bottom .pay:hover{
+    background: #fcee21;
+    color: #534741;
+}
+.paybox .bottom .pay.disable{
+    background: #ededed;
+    color: #cccccc;
+}
+.paybox .bottom .serverule{
+    margin-bottom: 10px;
+}
+.paybox .bottom .serverule .link{
+    text-decoration: underline;
 }
