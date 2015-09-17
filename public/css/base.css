@@ -3423,6 +3423,8 @@ img.zoom-img {
     color: #888;
 
     border: 1px solid #EEEEEE;
+    word-wrap: break-word;
+    word-break: normal;
 }
 
 .conversation-list .message .content .time {

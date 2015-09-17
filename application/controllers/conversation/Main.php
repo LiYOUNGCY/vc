@@ -1,11 +1,12 @@
-<?php 
+<?php
 class Main extends MY_Controller{
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->service('conversation_service');
 	}
-	
+
+
 	public function index()
 	{
 		$head['css'] = array(
@@ -25,12 +26,24 @@ class Main extends MY_Controller{
 
         $body['top']     = $this->load->view('common/top', $user, TRUE);
         $body['footer']  = $this->load->view('common/footer', '', TRUE);
-		$body['customer_id']	= 15;
-        
+		$body['customer_id'] = $this->conversation_service->get_customer_id();
+
 		$this->load->view('common/head', $head);
 		$this->load->view('customer', $body);
 	}
-	
+
+
+    /**
+     * 获取所有客服的 id
+     * @return [type] [description]
+     */
+    public function get_customer_id()
+    {
+        $ids = $this->conversation_service->get_customer_id();
+        echo json_encode($ids);
+    }
+
+
 	/**
 	 * [get_conversation_content 获取对话内容]
 	 * @param  [type] $cid [对话id]
@@ -47,6 +60,7 @@ class Main extends MY_Controller{
 		echo json_encode($content);
 	}
 
+
 	/**
 	 * [publish_conversation 发私信]
 	 * @return [type] [description]
@@ -57,7 +71,7 @@ class Main extends MY_Controller{
 		$content    = $this->sc->input('conversation_content');
 		$result = $this->conversation_service->publish_conversation($this->user['id'],$reciver_id,$content);
 		if($result)
-		{	
+		{
 			echo json_encode(array('success' => 0));
 		}
 		else

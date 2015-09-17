@@ -1,0 +1,268 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a h3 {
+    display: inline-block;
+}
+
+a.link {
+    color: #534741;
+
+    transition: color .25s linear 0s;
+}
+
+a.link:hover {
+    color: #f7cc1e;
+}
+
+a:visited {
+    color: #534741;
+}
+
+.container {
+    position: relative;
+    height: 100%;
+
+    background: #ffffff;
+}
+
+.wrap {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    height: 80%;
+    width: 80%;
+
+}
+
+.wrap .contacts {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    height: 100%;
+    width: 30%;
+
+    margin-right: 20px;
+
+    border: 1px solid #EEE;
+    border-radius: 8px;
+    overflow: hidden;;
+    /*background-color: #888888;*/
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.wrap .contacts:before {
+    content: '会话';
+
+    line-height: 60px;
+
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+
+    display: block;
+    background: #333333;
+}
+
+.wrap .contacts .list {
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+
+.wrap .conversation-list {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: calc(100% - 30% - 20px);
+    height: 100%;
+
+    border: 1px solid #EEEEEE;
+    border-radius: 8px;
+    -webkit-box-shadow: 5px 5px 10px #666;
+    -moz-box-shadow: 5px 5px 10px #666;
+    box-shadow: 5px 5px 10px #666;
+
+    overflow: hidden;
+    /*background-color: yellowgreen;*/
+    /*display: inline-block;*/
+
+}
+
+.contacts .avatar {
+    position: relative;
+
+    padding: 10px 20px;
+    padding-left: 110px;
+
+    height: 80px;
+
+    cursor: pointer;
+    border-bottom: 1px solid #EEEEEE;;
+    -webkit-transition: background .25s ease-in-out;
+    -moz-transition: background .25s ease-in-out;
+    -ms-transition: background .25s ease-in-out;
+    -o-transition: background .25s ease-in-out;
+    transition: background .25s ease-in-out;;
+}
+
+.contacts .avatar:hover {
+    background-color: #EEE;
+}
+
+.contacts .avatar.active {
+    background-color: #EEEEEE;
+}
+
+.contacts .avatar img {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+
+    width: 60px;
+    height: 60px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.contacts .avatar .name {
+    height: 60px;
+    line-height: 60px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+}
+
+.conversation-list .title {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    background: linear-gradient(to right, red, orange, yellow);
+}
+
+.conversation-list .list {
+    position: relative;
+    height: calc(100% - 120px);
+    width: 100%;
+}
+
+.conversation-list .message {
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.conversation-list .message .content {
+    position: relative;
+    min-height: 100px;
+    padding: 10px;
+    padding-bottom: 25px;
+
+    color: #888;
+
+    border: 1px solid #EEEEEE;
+
+    word-wrap: break-word;
+    word-break: normal;
+}
+
+.conversation-list .message .content .time {
+    position: absolute;
+
+    left: 10px;
+    bottom: 5px;
+
+    color: #888;
+    font-size: .8em;
+}
+
+.conversation-list .message.left {
+    padding-left: 120px;
+    padding-right: 10px;
+}
+
+.conversation-list .message .avatar {
+    position: absolute;
+
+    width: 80px;
+    height: auto;
+}
+
+.conversation-list .message .avatar img {
+    width: 100%;
+    height: 80px;
+}
+
+.conversation-list .message .avatar .name {
+    margin-top: 5px;
+    text-align: center;
+
+    font-size: 14px;
+    color: #888888;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.conversation-list .message.left .avatar {
+    left: 15px;
+    top: 10px;
+}
+
+.conversation-list .message.right .avatar {
+    right: 15px;
+    top: 10px;
+}
+
+.conversation-list .message.right {
+    padding-right: 120px;
+    padding-left: 10px;
+}
+
+
+.conversation-list .form-inline {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    height: 60px;
+    width: 100%;
+
+    padding: 15px;
+
+    border-top: 1px solid #EEEEEE;
+
+}
+
+.conversation-list .form-inline input {
+    width: calc(100% - 80px);
+    margin-right: 10px;
+}
