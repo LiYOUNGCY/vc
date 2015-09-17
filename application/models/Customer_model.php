@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Rache
- * Date: 2015/7/15
- * Time: 21:56
- */
 class Customer_model extends CI_Model
 {
     public function __construct()
@@ -13,9 +7,33 @@ class Customer_model extends CI_Model
         parent::__construct();
     }
 
-    public function insert_message($data) {
-
+    public function insert_message($data)
+    {
         $this->db->insert('customer', $data);
         return $this->db->insert_id();
+    }
+
+    public function get_history_by_user($uid)
+    {
+        $query = $this
+            ->db
+            ->select('sender, uid, cid, msg, time')
+            ->where('uid', $uid)
+            ->get('customer')
+            ->result_array();
+
+        return $query;
+    }
+
+    public function get_customer_id()
+    {
+        $query = $this
+            ->db
+            ->select('id')
+            ->where('role', 90)
+            ->get('user')
+            ->result_array();
+
+        return $query;
     }
 }

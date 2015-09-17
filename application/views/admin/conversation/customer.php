@@ -74,6 +74,7 @@
             url: BACKUP_MESSAGE,
             type: 'post',
             data: {
+                sender: myself.id,
                 cid: myself.id,
                 uid: uid,
                 msg: myself.message,
