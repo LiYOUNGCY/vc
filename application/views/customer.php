@@ -4,30 +4,30 @@
     <?php echo $top; ?>
     <div class="conversation-list">
         <div class="list" id="list">
-<!--            <div class="message left">-->
-<!--                <div class="avatar"><img-->
-<!--                        src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150911/14419469971106.png"-->
-<!--                        alt="">-->
-<!---->
-<!--                    <div class="name">Miss CC</div>-->
-<!--                </div>-->
-<!--                <div class="content">-->
-<!--                    你好，我是维C小姐，有什么可以帮到你？-->
-<!--                    <div class="time">2015-09-14 17:06:53</div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="message right">-->
-<!--                <div class="avatar">-->
-<!--                    <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150911/14419469971106.png"-->
-<!--                         alt="">-->
-<!---->
-<!--                    <div class="name">Rache</div>-->
-<!--                </div>-->
-<!--                <div class="content">-->
-<!--                    新屋装修用了米黄色的墙，不知道这幅艺术画是否合适？-->
-<!--                    <div class="time">2015-09-14 17:07:35</div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div class="message left">-->
+            <!--                <div class="avatar"><img-->
+            <!--                        src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150911/14419469971106.png"-->
+            <!--                        alt="">-->
+            <!---->
+            <!--                    <div class="name">Miss CC</div>-->
+            <!--                </div>-->
+            <!--                <div class="content">-->
+            <!--                    你好，我是维C小姐，有什么可以帮到你？-->
+            <!--                    <div class="time">2015-09-14 17:06:53</div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--            <div class="message right">-->
+            <!--                <div class="avatar">-->
+            <!--                    <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/upload/20150911/14419469971106.png"-->
+            <!--                         alt="">-->
+            <!---->
+            <!--                    <div class="name">Rache</div>-->
+            <!--                </div>-->
+            <!--                <div class="content">-->
+            <!--                    新屋装修用了米黄色的墙，不知道这幅艺术画是否合适？-->
+            <!--                    <div class="time">2015-09-14 17:07:35</div>-->
+            <!--                </div>-->
+            <!--            </div>-->
         </div>
         <div class="input-box clearfix">
             <textarea name="msg" id="msg" tabindex="0" rows='1' placeholder=""></textarea>
@@ -42,6 +42,11 @@
 </div>
 </body>
 <script>
+    //请求个人信息
+    var myself = new Object();
+    var user_id = $('#user_id').val();
+    var customid = $('#customer_id').val();
+
     function insert_left_msg(name, avatar, msg, time) {
         var $box = $('<div class="message left">' +
             '<div class="avatar"><img src="' + avatar + '" alt="">' +
@@ -73,11 +78,8 @@
     $(function () {
 
         autosize($('textarea'));
-        var user_id = $('#user_id').val();
-        var customid = $('#customer_id').val();
 
-        //请求个人信息
-        var myself = new Object();
+
         $.ajax({
             url: BASE_URL + 'account/main/get_info_by_id',
             type: 'post',
@@ -88,14 +90,31 @@
             async: false,
             success: function (data) {
                 console.log(data);
-
+                myself.id = user_id;
                 myself.name = data.name;
                 myself.avatar = data.pic;
+
             },
             error: function (data) {
                 console.log(data);
             }
         });
+
+        function backup_message() {
+            $.ajax({
+                url: BACKUP_MESSAGE,
+                type: 'post',
+                data: {
+                    cid: customid,
+                    uid: myself.id,
+                    msg: myself.message,
+                    time: myself.time
+                },
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        }
 
         //请求客服MM的信息，并发第一句话
         $.ajax({
@@ -106,7 +125,7 @@
             },
             dataType: 'json',
             success: function (data) {
-                insert_left_msg(data.name, data.pic, '您好，我是'+data.name+'，请问有什么可以帮到您？', getTime());
+                insert_left_msg(data.name, data.pic, '您好，我是' + data.name + '，请问有什么可以帮到您？', getTime());
             },
             error: function (data) {
                 console.log(data);
@@ -148,8 +167,10 @@
 
         $('.send').click(function () {
             var message = $('#msg').val();
+            //清空消息
+            $('#msg').val('');
             myself.message = message;
-            var time = '2015-09-15 19:59:03';
+            var time = getTime();
             myself.time = time;
 
             yunba.publish_to_alias({
@@ -164,27 +185,11 @@
                     insert_right_msg(myself.name, myself.avatar, message, time);
                 }
             });
+
+            backup_message();
         });
 
-        /**
-         * 获取服务器时间
-         */
-        function getTime() {
-            var time = '';
 
-            $.ajax({
-                url: BASE_URL + 'account/main/get_time',
-                type: 'post',
-                dataType: 'json',
-                async: false,
-                success: function (data) {
-                    console.log(data);
-                    time = data.time;
-                }
-            });
-
-            return time;
-        }
     });
 </script>
 </html>

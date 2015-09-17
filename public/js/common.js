@@ -58,6 +58,10 @@ var GET_PERSONAL_TRANSACTION = BASE_URL + 'transaction/main/get_transaction_list
 
 //个人中心 - 获取消息
 var GET_NOTIFICATION = BASE_URL + 'notification/main/get_notification_list';
+
+//客服消息
+var BACKUP_MESSAGE = BASE_URL + 'conversation/custom/send_message_by_user';
+
 /**
  * [trim 去掉字符串前后两端的空格]
  */
@@ -77,4 +81,25 @@ function getQueryString(name) {
     if (r != null)
         return r[2];
     return null;
+}
+
+
+/**
+ * 获取服务器时间
+ */
+function getTime() {
+    var time = '';
+
+    $.ajax({
+        url: BASE_URL + 'account/main/get_time',
+        type: 'post',
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            console.log(data);
+            time = data.time;
+        }
+    });
+
+    return time;
 }

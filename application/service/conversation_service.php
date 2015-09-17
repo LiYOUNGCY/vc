@@ -8,6 +8,7 @@ class Conversation_service extends MY_Service{
 		$this->load->model('conversation_custom_model');
 		$this->load->model('notification_model');
 		$this->load->model('user_model');
+        $this->load->model('customer_model');
 	}
 
 	/**
@@ -213,5 +214,9 @@ class Conversation_service extends MY_Service{
 			}
 		}		
 		return $notification;
+	}
+
+	public function insert_message($data) {
+		return $this->customer_model->insert_message($data);
 	}
 }	

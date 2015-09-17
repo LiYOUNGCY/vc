@@ -10,7 +10,8 @@
     <meta name="author" content="">
 
     <title>Artvc</title>
-    <script src="<?=base_url()?>/public/js/jquery.js"></script>
+
+    <script src="<?=base_url()?>public/js/jquery.js"></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?=base_url()?>public/admin/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -51,8 +52,8 @@
     }
 
     ?>
-
     <input id="BASE_URL" type="hidden" value="<?=base_url()?>" />   
     <input id="ADMIN" type="hidden" value="<?=base_url().ADMINROUTE?>" />
+    <script src="<?=base_url()?>public/js/common.js"></script>
 
 </head>

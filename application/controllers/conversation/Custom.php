@@ -40,4 +40,19 @@ class Custom extends MY_Controller{
 		$latest = $this->conversation_service->get_latest_list($page,$this->user['id']);
 		echo json_encode($latest);
 	}
+
+	public function send_message_by_user(){
+		$data = array(
+			'cid',
+			'uid',
+			'msg',
+			'time'
+		);
+
+		$data = $this->sc->input($data);
+
+
+		$query = $this->conversation_service->insert_message($data);
+		echo $query;
+	}
 }
