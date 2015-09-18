@@ -26,7 +26,7 @@ class Main extends MY_Controller{
 
         $body['top']     = $this->load->view('common/top', $user, TRUE);
         $body['footer']  = $this->load->view('common/footer', '', TRUE);
-		$body['customer_id'] = $this->conversation_service->get_customer_id();
+//		$body['customer_id'] = $this->conversation_service->get_customer_id();
 
 		$this->load->view('common/head', $head);
 		$this->load->view('customer', $body);
