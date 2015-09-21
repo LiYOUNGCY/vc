@@ -9,19 +9,19 @@
         <div class="paybox clearfix">
             <div class="infoma">
                 <div>
-                    <label>应收金额：</label><span class="price">￥ 3000</span>
+                    <label>应收金额：</label><span class="price">￥ 20000</span>
                 </div>
                 <div class="item">
                     <label for="name">收货人</label>
-                    <input type="text" name="name" id="name">
+                    <input type="text" name="name" id="name" value="C先生">
                 </div>
                 <div class="item">
                     <label for="tel">联系电话</label>
-                    <input type="text" name="tel" id="tel">
+                    <input type="text" name="tel" id="tel" value="186800000000">
                 </div>
                 <div class="item">
                     <label for="address">地址</label>
-                    <div class="defaddress">广东省 佛山市 禅城区 小魔仙巴拉巴拉路520号1314房 <a href="javascript:void(0)" class="link"> [修改地址]</a></div>
+                    <div class="defaddress">广东省 广州市 天河区 怡景花园4座5号 <a href="javascript:void(0)" class="link"> [修改地址]</a></div>
                     <!-- <textarea name="address" id="address" cols="30" rows="10"></textarea> -->
                 </div>
                 <label></label>

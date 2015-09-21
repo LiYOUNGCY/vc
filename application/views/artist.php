@@ -62,8 +62,8 @@
 
         var color = [];
 
-        LoadMore();
-        WindowEvent();
+        //LoadMore();
+        //WindowEvent();
 
         $('.material-card > .mc-btn-action').click(clickEvent);
 

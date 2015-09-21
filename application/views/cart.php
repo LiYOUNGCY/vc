@@ -10,14 +10,14 @@
         <ul class="artlist" id="artlist">
             <!-- <li class="art clearfix">
                 <div class="delete"><i class="fa fa-close"></i></div>
-                <div class="pic" style="background: url(http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/slider/1440004716_1.jpg);background-size:cover;background-position:50% 50%;"></div>
+                <div class="pic" style="background: url(<?=base_url()?>public/img/topic/thumb2_1.jpg);background-size:cover;background-position:50% 50%;"></div>
                 <div class="info">
-                    <div class="name">受打击难受的</div>
-                    <div class="artist">&nbsp;&nbsp;作者：<a href="" class="link">鸡巴白</a></div>
-                    <div class="detail">油画，布面，20 X 30cm，2015年，</div>
+                    <div class="name">几何</div>
+                    <div class="artist">&nbsp;&nbsp;作者：<a href="" class="link">Bamford</a></div>
+                    <div class="detail">油画，布面，100 X 30cm，2015年，</div>
                 </div>
                 <div class="price">
-                    ￥<font style="font-size:32px;color:#f7cc1e">5000</font>
+                    ￥<font style="font-size:32px;color:#f7cc1e">3000</font>
                 </div>
             </li> -->
         </ul>
@@ -25,15 +25,15 @@
             <div class="font">
                 将有<font style="font-size:25px;color:#f7cc1e;margin:0 5px;" id="artnum"></font>件优秀的艺术品成为您的收藏
             </div>
-            <div class="total">￥<font style="font-size:32px;">5000</font></div>
+            <div class="total">￥<font style="font-size:32px;">20000</font></div>
         </div>
         <div class="topay">
           <div class="btn">确认购买</div>  
         </div>
         
     </div>
-    <?php echo $footer;?>
-    </div> 
+    </div>
+    <?php echo $footer;?> 
 </div>
 <?php echo $sign;?>   
 </body>

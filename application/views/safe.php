@@ -1,5 +1,5 @@
 <body>
-
+<?php var_dump($user);?>
 <div class="main-wrapper">
     <!-- 顶部 -->
     <?php echo $top; ?>

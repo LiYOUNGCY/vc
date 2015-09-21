@@ -39,10 +39,18 @@ class Main extends MY_Controller{
 		$page = 0;
 		$limit= 10;
 		$goods = $this->cart_service->get_good_list($this->user['id'],$page,$limit);
-		//分页输出
-		$arr['goods'] = array_slice($goods, $page * $limit, $limit);
-		//购物车总数量
-		$arr['count'] = count($goods);
+		if( ! empty($goods))
+		{
+			//分页输出
+			$arr['goods'] = array_slice($goods, $page * $limit, $limit);
+			//购物车总数量
+			$arr['count'] = count($goods);			
+		}
+		else
+		{
+			$arr['goods'] = NULL;
+			$arr['count'] = 0;
+		}
 		
 		echo json_encode($arr);
 	}

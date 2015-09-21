@@ -3403,9 +3403,9 @@ img.zoom-img {
     width: 80%;
 
     border: 1px solid #EEEEEE;
-    -webkit-box-shadow: 10px 10px 5px #888888;
-    -moz-box-shadow: 10px 10px 5px #888888;
-    box-shadow: 10px 10px 5px #888888;
+    -webkit-box-shadow: 2px 3px 5px #a1a1a1;
+    -moz-box-shadow: 2px 3px 5px #a1a1a1;
+    box-shadow: 2px 3px 5px #a1a1a1;
 }
 
 .conversation-list .message {
@@ -3478,6 +3478,10 @@ img.zoom-img {
     padding-right: 120px;
     padding-left: 10px;
 }
+.conversation-list .message.right .content{
+    background: #f4f4f4;
+}
+
 
 .conversation-list .input-box {
     padding: 10px;

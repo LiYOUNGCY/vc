@@ -103,6 +103,7 @@ class Cart_service extends MY_Service{
 	 */
 	public function get_good_list($uid, $page = 0, $limit = 10)
 	{
+		echo var_dump($_SESSION['cart']);
 		if(isset($_SESSION['cart']))
 		{
 			if(empty($_SESSION['cart']))
