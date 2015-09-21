@@ -80,11 +80,11 @@
         $('#list').append($box);
     }
 
-    var ids, j = 0,i = 0;
+    var ids, j = 0, i = 0;
     var online = [];
 
     function work(data) {
-    console.log(data);
+        console.log(data);
         if (data.success) {
             if (data.data == 'online') {
                 online.push(ids[i].id);
@@ -99,19 +99,37 @@
             console.log('不在线' + ids[i].id);
         }
 
-        if (i+1 < ids.length) {
-            console.log('[i]:'+ i);
+        if (i + 1 < ids.length) {
+            console.log('[i]:' + i);
             i++;
             yunba.get_state(ids[i].id, work)
         }
         else {
             if (online.length == 0) {
                 console.log('无在线客服');
+                function jump(count) {
+                    window.setTimeout(function () {
+                        count--;
+                        if (count > 0) {
+                            $('#num').attr('innerHTML', count);
+                            jump(count);
+                        } else {
+                            window.location.href = BASE_URL;
+                        }
+                    }, 1000);
+                }
+
+                jump(3);
+                swal({
+                    title: "Tips",
+                    text: "客服姐姐还没上线哦，三秒后将跳转到首页",
+                    timer: 2000
+                });
             }
             else {
                 var random = Math.floor(Math.random() * online.length);
                 console.log('随机的id为 ： ' + random);
-                customid =  online[random];
+                customid = online[random];
 
                 console.log('customid:' + customid);
 
@@ -272,11 +290,6 @@
                 e.preventDefault();
             }
         });
-
-
-
-
-
     });
 </script>
 </html>

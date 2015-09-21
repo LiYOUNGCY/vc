@@ -127,6 +127,11 @@ $route['msg/([a-z]*)'] = 'notification/main/index/$1';
 
 
 /**
+ * 客服
+ */
+$route['msg/csmsg'] = 'conversation/main/index';
+
+/**
  * 管理员用户管理
  */
 $route['admin/user/u'] = 'admin/user/index/u';
