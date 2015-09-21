@@ -10,34 +10,32 @@ class Main extends MY_Controller
 	}
 
 
-	public function index($type = 'login')
+	public function index($type = 'forget')
 	{
-		$head['css'] = array(
-				'common.css',
-				'font-awesome/css/font-awesome.min.css'
-			);
-		$head['javascript'] = array(
-				'jquery.js',
-				'error.js'
-			);
-		$this->load->view('common/head', $head);
-		$user['user'] = $this->user;
-		$sidebar = $this->load->view('common/sidebar', $user, TRUE);
+		$data['css'] = array(
+            'swiper.min.css',
+            'font-awesome/css/font-awesome.min.css',
+            'base.css'
+            
+        );
+        $data['javascript'] = array(
+            'jquery.js',
+            'masonry.pkgd.min.js',
+            'jquery.imageloader.js',
+            'error.js',
+            'validate.js'
+        );
 
-        $body['sidebar'] = $sidebar;
-		if($type == 'login')
-		{
-			//如果已经登录
-			if(isset($this->user['id']))
-			{
-				redirect(base_url(),'location');
-			}
-			$this->load->view('login', $body);
-		}
-		else if($type == 'signup')
-		{
-			$this->load->view('register', $body);
-		}
+        $user['user'] = $this->user;
+        $top = $this->load->view('common/top', $user, TRUE);
+        $data['title']        = "忘记密码";
+        $body['top']          = $top;
+        $body['sign']         = $this->load->view('common/sign', '', TRUE);
+        $body['footer']       = $this->load->view('common/footer', '', TRUE);
+        $body['user']         = $this->user;
+
+        $this->load->view('common/head', $data);
+        $this->load->view('forget_pwd', $body);
 	}
 
 	/**

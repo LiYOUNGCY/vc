@@ -10,7 +10,7 @@ class User_model extends CI_Model
 		$this->load->library('passwordhash');
 		$this->passwordhash->setPasswordHash(8, FALSE);
 
-        $this->base_field = array('id', 'name', 'pic', 'role', 'honour', 'email_status');
+        $this->base_field = array('id', 'name', 'pic', 'role', 'honour', 'email_status','phone','email','address',);
 	}
 
 

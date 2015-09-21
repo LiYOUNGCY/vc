@@ -22,9 +22,9 @@
             <div class="userarea clearfix">
                 <?php if($user['role']==0){ ?>
                 <div class="showsign">
-                    <a href="javascript:void(0)" onclick="showsign(1)">登陆</a>
+                    <a href="javascript:$.pageslide.close()" onclick="showsign(1)">登陆</a>
                     <font style="color:#F8E901;font-weight: bold;margin:0 3px;">/</font>
-                    <a href="javascript:void(0)" onclick="showsign(2)">注册</a>
+                    <a href="javascript:$.pageslide.close()" onclick="showsign(2)">注册</a>
                 </div>
                 <?php }else{ ?>
                 <div class="useropt">
@@ -68,7 +68,7 @@
         $.ajax({
             type: 'POST',
             url: GET_CART_GOODS,
-            async: false,
+            async: true,
             data: {
                 page : 0
             },
