@@ -168,31 +168,43 @@ img {
     width: 50px;
     height: 50px;
     background: transparent url("../img/icon/personal_like.png") no-repeat scroll;
+    background-size:cover;
+    background-position:50% 50%;
 }
 .icon.pmsg{
     width: 50px;
     height: 50px;
     background: transparent url("../img/icon/personal_msg.png") no-repeat scroll;
+    background-size:cover;
+    background-position:50% 50%;
 }
 .icon.psetting{
     width: 50px;
     height: 50px;
     background: transparent url("../img/icon/personal_setting.png") no-repeat scroll;
+    background-size:cover;
+    background-position:50% 50%;
 }
 .icon.pbuyed{
     width: 50px;
     height: 50px;
     background: transparent url("../img/icon/personal_buyed.png") no-repeat scroll;
+    background-size:cover;
+    background-position:50% 50%;
 }
 .icon.pcart{
     width: 50px;
     height: 50px;
     background: transparent url("../img/icon/personal_cart.png") no-repeat scroll;
+    background-size:cover;
+    background-position:50% 50%;
 }
 .icon.pgoods{
     width: 60px;
     height: 60px;
     background: transparent url("../img/icon/info_goods.png") no-repeat scroll;
+    background-size:cover;
+    background-position:50% 50%;
 }
 .icon.pgoodsbg{
     width: 250px;
@@ -243,6 +255,14 @@ img {
         height: 272px;
         background: transparent url("../img/icon/qrcode_mobile.png") no-repeat scroll;   
     }
+    .icon.plike,
+    .icon.pmsg,
+    .icon.psetting,
+    .icon.pbuyed{
+        width: 30px;
+        height: 30px;
+    }
+
 }
 
 /*ICON END*/
@@ -2531,7 +2551,7 @@ hr.line {
     width: 100%;
     height: 500px;
 
-    cursor: pointer !important;
+
 }
 .artarea .artpic:hover {
     border: 2px #f7cc1e solid;
@@ -2609,10 +2629,8 @@ hr.line {
 }
 .artistarea .artistinfo .atristintro {
     float: left;
-    overflow: hidden;
 
     width: 255px;
-    max-height: 210px;
 
     font-size: 14px;
     text-align: justify;
@@ -3120,7 +3138,6 @@ img.zoom-img {
 }
 .personal .userinfo{
     margin:30px 0;
-    max-width: 600px;
 }
 .personal .userinfo .uhead{
     float: left;
@@ -3138,7 +3155,7 @@ img.zoom-img {
     margin-left: 50px;
 }
 .personal .userinfo .info li{
-    height: 30px;
+    margin-bottom: 10px;
     color: #0C0F08;
 }
 .personal .userinfo .info li label{
@@ -3169,13 +3186,11 @@ img.zoom-img {
 }
 .pmenu ul{
     display: inline-block;
-    height: 86px;
     min-width: 100%;
 }
 .pmenu ul li{
     display: block;
     float: left;
-    height: 50px;
     width: 20%;
     opacity: 0.3;
     transition:all .2s ease-in-out;
@@ -3194,6 +3209,9 @@ img.zoom-img {
 .psubmenu{
     text-align: left;
     margin: 20px 0;
+    display: inline-block;
+    width: 100%;
+
 }
 .psubmenu div{
     color: #4C4640;
@@ -3224,6 +3242,8 @@ img.zoom-img {
     color: #534741;
     width: 100%;
     padding-top: 20px;
+    padding-bottom: 80px;
+    position: relative;
 }
 .transaction .box .time{
     float: left;
@@ -3252,11 +3272,13 @@ img.zoom-img {
     height: 50px;
     line-height: 50px;
     font-size: 18px;
-    background-color: #FFD72E;
+    background-color: #534741;
     margin-top: 20px;
+    color: #FFFFFF;
 }
 .transaction .box .glist .confirmgood:hover{
     background-color: #F8E901;
+    color: #534741;
 }
 
 .transaction .box .glist .good .name{
@@ -3270,25 +3292,20 @@ img.zoom-img {
     width: 100%;
     height: 100%;
 }
-.transaction .box .boxbottom{
-    width: 100%;
-    display: inline-block;
-    position: relative;
-}
-.transaction .box .boxbottom .status{
+
+.transaction .box .status{
     position: absolute;
     right: -5px;
-    top: -61px;
+    bottom: 10px;
     box-sizing:border-box;
     font-weight: bold;
     font-size: 24px;
     line-height: 45px;
 }
-.transaction .box .boxbottom .status.psending{
+.transaction .box .status.psending{
     color:#FFFFFF;
 }
-.msglist{
-}
+
 .msglist .col{
     background-color: #EEEEEE;
     color: #534741;
@@ -3392,6 +3409,134 @@ img.zoom-img {
     }
     .pmenu ul li{
         width: 25%;
+        font-size: 14px;
+    }
+    .personal .userinfo .uhead{
+        float: none;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+    }
+    .personal .userinfo .info {
+        float: none;
+        margin:20px auto 0;
+        width: 75%;
+        font-size: 15px;
+    }
+    .personal .userinfo .info .editinfo{
+        margin: 0 auto; 
+    }
+    .ptitle{
+        text-align: center;
+    }
+    .psubmenu{
+        width: auto;
+    }
+    .transaction .box{
+        width: 96%;
+        margin: 0 auto 15px;
+    }
+    .transaction .box .time{
+        float: none;
+        margin: 0 auto 12px; 
+    }
+    .transaction .box .glist{
+        float: none;
+        text-align: center;
+        margin:0 auto;
+    }
+    .transaction .box .glist .good {
+        margin:0 auto 20px;
+        display: block;
+        width: 250px;
+    }
+    .transaction .box .glist .confirmgood {
+        height: 45px;
+        line-height: 45px;
+        margin: 15px auto;
+    }
+    .transaction .box .glist .logistics {
+        width: 250px;
+        margin: 0 auto;
+    }
+    .msglist .col{
+        width: 96%;
+        box-sizing: border-box;
+        padding: 15px 15px 40px 15px;
+        margin: 0 auto 20px;
+    }
+    .msglist .col .type{
+        float: none;
+        margin: 0 auto;
+        margin-bottom: 15px;
+    }
+    .safesettig .setpwd,
+    .safesettig .setaccount {
+        float: none;
+        width: 96%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .safesettig .btn {
+        margin: 15px auto 40px;
+    }
+    .safesettig .type {
+        margin: 0 auto;
+    }
+    .safesettig .type {
+        margin: 15px auto;
+    }
+    .safesettig .submitphone,
+    .safesettig .sendpin{
+        margin: 10px auto;
+    }
+    .artarea{
+        float: none;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .artarea .title{
+        text-align: center;
+    }
+    .artarea .artpic{
+        border: 2px #f7cc1e solid;
+        box-shadow: 0 0 10px #666;
+        height: 330px;
+    }
+    .artarea .artinfo .likebtn{
+        float: none;
+        margin: 0 auto 12px;
+    }
+    .artarea .artinfo .info{
+        text-align: center;
+    }
+    .artistarea{
+        float: none;
+        width: 96%;
+        margin: 0 auto;
+        height: auto;
+    }
+    .artistarea .artistinfo .artist{
+        float: none;
+        margin-right: 0;
+    }
+    .artistarea .artistinfo .atristintro{
+        width: 90%;
+        margin: 0 auto;
+        float: none;
+    }
+    .artistarea .artintro{
+        width: 90%;
+        margin: 25px auto;
+    }
+    .artistarea .artintro .title{
+        text-align: center;
+    }
+    .artistarea .useropt .btn{
+        width: 120px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
     }
 }
 
