@@ -36,9 +36,24 @@ class Main extends MY_Controller{
 	 */
 	public function get_production_list()
 	{
-		$page = $this->sc->input('page');
+//		$page = $this->sc->input('page');
+
+        $page = 0;
+
+        $medium = $this->sc->input('m', 'get');
+        $categories = $this->sc->input('c', 'get');
+        $style = $this->sc->input('s', 'get');
+        $price = $this->sc->input('p', 'get');
+
+        $search = array(
+            'medium'        => $medium,
+            'categories'    => $categories,
+            'style'         => $style,
+            'price'         => $price
+        );
+
         $uid  = isset($this->user['id']) ? $this->user['id'] : NULL;
-		$production = $this->production_service->get_production_list($page,$uid);
+		$production = $this->production_service->get_production_list($page,$uid, $search);
 		echo json_encode($production);
 	}
 }

@@ -17,9 +17,23 @@ class Production_model extends CI_Model
      * @param  order 排序          string
      * @return [type]
      */
-    public function get_production_list($page = 0, $meid = NULL, $status = NULL, $aid = NULL, $limit = 6, $order = 'id DESC')
+    public function get_production_list(
+        $page = 0,
+        $meid = NULL,
+        $status = NULL,
+        $search = NULL,
+        $aid = NULL,
+        $limit = 6,
+        $order = 'id DESC'
+    )
     {
+
+        $medium = $search['medium'];
+        $categories = $search['categories'];
+        $style = $search['style'];
+        $price = $search['price'];
         $status = explode(',', $status);
+
         $query = $this->db->select('
                                     production.id,
                                     production.aid,
@@ -36,6 +50,30 @@ class Production_model extends CI_Model
 		');
 
         if (is_numeric($meid)) {
+        }
+        if (isset($medium) && is_numeric($medium)) {
+            $query = $query->where('medium', $medium);
+        }
+        if (isset($categories) && is_numeric($categories)) {
+            $query = $query->where('categories', $categories);
+        }
+        if (isset($style) && is_numeric($style)) {
+            $query = $query->where('style', $style);
+        }
+        if (isset($price) && is_string($price)) {
+            //解析 price 123, 456
+            $price = explode(',', $price);
+            foreach ($price as $key => $value) {
+                $price[$key] = intval($value);
+            }
+//            sort($price, SORT_NUMERIC);
+            if (isset ($price[0])) {
+                $query = $query->where('price >= ', $price[0]);
+            }
+            if (isset ($price[1]) && $price[1] > 0) {
+                $query = $query->where('price <= ', $price[1]);
+            }
+
         }
         if (!empty($aid)) {
             $query = $query->where('aid', $aid);
@@ -158,7 +196,7 @@ class Production_model extends CI_Model
      */
     public function get_production_by_keyword($keyword)
     {
-        $query  = $this->db->select('
+        $query = $this->db->select('
                                     production.id,
                                     production.name,
                                     production.pic,

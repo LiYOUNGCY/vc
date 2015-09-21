@@ -88,7 +88,7 @@
                         var w = data[i].w;
 
 
-                        var box = $('<div class="production">' +
+                        var box = $('<div class="production" onclick="a('+id+')">' +
                             '<img class="image" src="'+img+'">' +
                             '<p class="title">'+title+'</p>' +
                             '<p class="author">作者：'+author+'</p>' +
