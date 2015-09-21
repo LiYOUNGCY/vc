@@ -96,10 +96,7 @@
                             <a href="<?= base_url() . ADMINROUTE ?>production/p">艺术品</a>
                         </li>
                         <li>
-                            <a href="<?= base_url() . ADMINROUTE ?>production/t">类别</a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url() . ADMINROUTE ?>production/m">材质</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>production/medium">题材</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

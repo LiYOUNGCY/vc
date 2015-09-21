@@ -15,9 +15,9 @@ class Production_service extends MY_Service{
 	 * @param  uid  用户id [uid]
 	 * @return [type]
 	 */
-	public function get_production_list($page,$uid)
+	public function get_production_list($page, $uid, $search)
 	{
-		$production = $this->production_model->get_production_list($page, $uid, '0');
+		$production = $this->production_model->get_production_list($page, $uid, '0', $search);
 		foreach ($production as $k => $v) {
 			//显示缩略图
 
