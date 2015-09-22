@@ -18,6 +18,12 @@ class Production_categories_model extends CI_Model
         return $query;
     }
 
+    public function get_categories_by_id($id)
+    {
+        $query = $this->db->where('id', $id)->get('production_categories')->row_array();
+        return $query;
+    }
+
 
     public function insert_categories($name)
     {
@@ -37,7 +43,7 @@ class Production_categories_model extends CI_Model
         );
 
         $this->db->where('id', $id)->update('production_categories', $data);
-        return $this->db->affect_rows();
+        return $this->db->affected_rows();
     }
 
 
@@ -45,6 +51,6 @@ class Production_categories_model extends CI_Model
     public function delete_categories($id)
     {
         $this->db->where('id', $id)->delete('production_categories');
-        return $this->db->affect_rows();
+        return $this->db->affected_rows();
     }
 }

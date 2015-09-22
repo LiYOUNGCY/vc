@@ -98,6 +98,15 @@
                         <li>
                             <a href="<?= base_url() . ADMINROUTE ?>production/medium">题材</a>
                         </li>
+                        <li>
+                            <a href="<?= base_url() . ADMINROUTE ?>production/categories">种类</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url() . ADMINROUTE ?>production/style">风格</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url() . ADMINROUTE ?>production/price">价格分类</a>
+                        </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
