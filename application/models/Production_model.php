@@ -68,12 +68,11 @@ class Production_model extends CI_Model
             }
 //            sort($price, SORT_NUMERIC);
             if (isset ($price[0])) {
-                $query = $query->where('price >= ', $price[0]);
+                $query = $query->where('production.price >= ', $price[0]);
             }
             if (isset ($price[1]) && $price[1] > 0) {
-                $query = $query->where('price <= ', $price[1]);
+                $query = $query->where('production.price < ', $price[1]);
             }
-
         }
         if (!empty($aid)) {
             $query = $query->where('aid', $aid);
@@ -212,4 +211,4 @@ class Production_model extends CI_Model
 
         return $query;
     }
-} 
+}
