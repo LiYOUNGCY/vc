@@ -34,16 +34,28 @@
                 <div class="item">
                     <label for="aid">作者：</label>
                     <i class="fa fa-bars" id="author"></i>
-                    <div class="author-image"><img id="aimage" src=""></div>
+
+                    <div class="author-image">
+                        <img id="aimage" src="">
+                        <p id="author-name"></p>
+                    </div>
                     <input type="hidden" name="aid" id="aid">
                 </div>
-                <div class="item">
-                    <label for="">类型：</label>
-                    <input type="text" name="type">
+                <div class="item line-block">
+                    <label for="medium">艺术门类：</label>
+                    <select class="dropdown" id="medium" name="medium">
+                        <?php foreach ($medium as $key => $value) { ?>
+                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                        <?php } ?>
+                    </select>
                 </div>
-                <div class="item">
-                    <label for="">材质：</label>
-                    <input type="text" name="marterial">
+                <div class="item line-block">
+                    <label for="style">风格：</label>
+                    <select class="dropdown" id="style" name="style">
+                        <?php foreach ($style as $key => $value) { ?>
+                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                        <?php } ?>
+                    </select>
                 </div>
                 <div class="item size">
                     <label for="">长：</label><input type="text" name="l">
@@ -72,11 +84,11 @@
                         <i id="close" class="fa fa-close"></i>
                     </div>
 
-<!--                    作者的列表-->
-<!--                    <div class="pro" data-id="">-->
-<!--                        <div class="avatar"><img src=""></div>-->
-<!--                        <div class="name"></div>-->
-<!--                    </div>-->
+                    <!--                    作者的列表-->
+                    <!--                    <div class="pro" data-id="">-->
+                    <!--                        <div class="avatar"><img src=""></div>-->
+                    <!--                        <div class="name"></div>-->
+                    <!--                    </div>-->
 
                 </div>
             </div>
@@ -119,13 +131,13 @@
     }
 
     function close() {
-        $('body').css('overflow','');
+        $('body').css('overflow', '');
         $('#production').addClass('hidden');
     }
 
     function open() {
         $('#production').removeClass('hidden');
-        $('body').css('overflow','hidden');
+        $('body').css('overflow', 'hidden');
     }
 
     $(function () {
@@ -153,20 +165,20 @@
 
         $.ajax({
             type: 'post',
-            url:GET_ARTIST_LIST,
+            url: GET_ARTIST_LIST,
             data: {
                 page: page
             },
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 page++;
                 console.log(data);
 
-                for(var i = 0; i < data.length; i++) {
+                for (var i = 0; i < data.length; i++) {
                     var id = data[i].id;
                     var img = data[i].pic;
                     var name = data[i].name;
-                    var author = $('<div class="pro" data-id="'+id+'"> <div class="avatar"><img src="'+img+'"></div> <div class="name">'+name+'</div> </div>');
+                    var author = $('<div class="pro" data-id="' + id + '"> <div class="avatar"><img src="' + img + '"></div> <div class="name">' + name + '</div> </div>');
 
                     $('#production_list').append(author);
                     $('.pro').click(ProEvent);
@@ -176,11 +188,12 @@
 
         $('.pro').click(ProEvent);
 
-        function ProEvent(){
+        function ProEvent() {
             var id = $(this).attr('data-id');
             $('#aid').val(id);
             $('#aimage').attr('src', $(this).find('img').attr('src'));
-            if($('.author-image').css('display') == 'none') {
+            $('#author-name').html($(this).find('.name').html());
+            if ($('.author-image').css('display') == 'none') {
                 $('.author-image').show();
             }
             close();

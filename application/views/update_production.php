@@ -31,15 +31,29 @@
                 </div>
                 <div class="item">
                     <label for="aid">作者：</label>
-                    <input type="text" name="aid" id="aid">
+                    <i class="fa fa-bars" id="author"></i>
+
+                    <div class="author-image">
+                        <img id="aimage" src="<?=$production['artist']['pic']?>">
+                        <p id="author-name"><?=$production['artist']['name']?></p>
+                    </div>
+                    <input type="hidden" name="aid" id="aid" value="<?=$production['artist']['id']?>">
                 </div>
-                <div class="item">
-                    <label for="">类型：</label>
-                    <input type="text" name="type" value="<?=$production['type']?>">
+                <div class="item line-block">
+                    <label for="medium">艺术门类：</label>
+                    <select class="dropdown" id="medium" name="medium">
+                        <?php foreach ($medium as $key => $value) { ?>
+                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                        <?php } ?>
+                    </select>
                 </div>
-                <div class="item">
-                    <label for="">材质：</label>
-                    <input type="text" name="marterial" value="<?=$production['marterial']?>">
+                <div class="item line-block">
+                    <label for="style">风格：</label>
+                    <select class="dropdown" id="style" name="style">
+                        <?php foreach ($style as $key => $value) { ?>
+                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                        <?php } ?>
+                    </select>
                 </div>
                 <div class="item size">
                     <label for="">长：</label><input type="text" name="l" value="<?=$production['l']?>">
@@ -60,6 +74,23 @@
                     <div id="save" class="btn save">保存</div>
                 </div>
             </form>
+
+            <!--            弹出层  -->
+            <div id="production" class="production_list hidden">
+                <div class="list author" id="production_list">
+                    <div class="top">
+                        <i id="close" class="fa fa-close"></i>
+                    </div>
+
+                    <!--                    作者的列表-->
+                    <!--                    <div class="pro" data-id="">-->
+                    <!--                        <div class="avatar"><img src=""></div>-->
+                    <!--                        <div class="name"></div>-->
+                    <!--                    </div>-->
+
+                </div>
+            </div>
+            <!--            END 弹出层  -->
         </div>
     </div>
 </div>
@@ -102,8 +133,10 @@
 
     $(function(){
         autosize($('textarea'));
+        $('.author-image').css('display', 'block');
 
         var img_src = "";
+        var page = 0;
         $("#image").hide();
         //取消
         $("#cancel").click(function()
@@ -115,6 +148,64 @@
             $('form').submit();
         });
 
+
+        $('#author').click(function () {
+            open();
+        });
+
+        $('#close').click(function () {
+            close();
+        });
+
+        $.ajax({
+            type: 'post',
+            url: GET_ARTIST_LIST,
+            data: {
+                page: page
+            },
+            dataType: 'json',
+            success: function (data) {
+                page++;
+                console.log(data);
+
+                for (var i = 0; i < data.length; i++) {
+                    var id = data[i].id;
+                    var img = data[i].pic;
+                    var name = data[i].name;
+                    var author = $('<div class="pro" data-id="' + id + '"> <div class="avatar"><img src="' + img + '"></div> <div class="name">' + name + '</div> </div>');
+
+                    $('#production_list').append(author);
+                    $('.pro').click(ProEvent);
+                }
+            }
+        });
+
+
+        /**
+         * 弹出层的关闭
+         */
+        function close() {
+            $('body').css('overflow', '');
+            $('#production').addClass('hidden');
+        }
+
+        /**
+         * 弹出层的打开
+         */
+        function open() {
+            $('#production').removeClass('hidden');
+            $('body').css('overflow', 'hidden');
+        }
+
+        function ProEvent() {
+            var id = $(this).attr('data-id');
+            $('#aid').val(id);
+            $('#aimage').attr('src', $(this).find('img').attr('src'));
+            if ($('.author-image').css('display') == 'none') {
+                $('.author-image').show();
+            }
+            close();
+        }
 
     });
 </script>
