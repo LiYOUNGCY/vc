@@ -4,9 +4,13 @@ class Production_service extends MY_Service{
 	{
 		parent::__construct();
 		$this->load->model('production_model');
-		$this->load->model('production_like_model');		
+		$this->load->model('production_like_model');
 		$this->load->model('article_model');
 		$this->load->model('artist_model');
+        $this->load->model('production_medium_model');
+        $this->load->model('production_style_model');
+        $this->load->model('production_price_model');
+        $this->load->model('production_categories_model');
 	}
 
 	/**
@@ -35,12 +39,37 @@ class Production_service extends MY_Service{
 		}
 		return $production;
 	}
-	
+
+
+    public function get_medium_list()
+    {
+        $query = $this->production_medium_model->get_medium_list();
+        return $query;
+    }
+
+    public function get_style_list()
+    {
+        $query = $this->production_style_model->get_style_list();
+        return $query;
+    }
+
+    public function get_categories_list()
+    {
+        $query = $this->production_categories_model->get_categories_list();
+        return $query;
+    }
+
+    public function get_price_list()
+    {
+        $query = $this->production_price_model->get_price_list();
+        return $query;
+    }
+
 	public function get_type_list($page,$limit)
 	{
-		$this->load->model('production_type_model');	
+		$this->load->model('production_type_model');
 		$type = $this->production_type_model->get_type_list($page,$limit);
-		return $type;		
+		return $type;
 	}
 
 	public function get_marterial_list($page,$limit)
@@ -107,18 +136,18 @@ class Production_service extends MY_Service{
                 if($status['status'] == 0)
                 {
                     //文章的 like 数减一
-                    $this->production_model->disargee_production($pid);                   
+                    $this->production_model->disargee_production($pid);
                 }
                 else
                 {
                      //更新文章的 like 数加一
-                    $this->production_model->argee_production($pid);                   
+                    $this->production_model->argee_production($pid);
                 }
             }
 
     	}
         //失败
-    	else 
+    	else
     	{
             $this->error->output('INVALID_REQUEST');
     	}

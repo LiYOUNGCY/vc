@@ -423,7 +423,12 @@ img {
     border-width: 1px;
     border-style: none solid solid solid;
     border-color: #EEEEEE;
+<<<<<<< HEAD
     line-height: 45px;
+=======
+    /*height: 45px;*/
+    /*line-height: 45px;*/
+>>>>>>> 49ef7259848d7de7077462e6fe2c0f17d251039e
 }
 
 .filter-warp .filter:first-child {
@@ -436,14 +441,15 @@ img {
 
 .filter-warp .filter .fc-target li{
     float: left;
-    padding: 0 20px;
+    padding: 5px 20px;
+    line-height: 1.7;
 }
 
-.filter-warp .filter .fc-target li a {
-    padding: 5px;
-}
+/*.filter-warp .filter .fc-target li a {*/
+    /*padding: 5px;*/
+/*}*/
 
-.filter-warp .filter .fc-target li a.active{
+.filter-warp .filter .fc-target li.active{
     background-color: #F7CC1E;
     color: white;
     border-radius: 5px;
@@ -457,6 +463,11 @@ img {
         width: 33.3%;
         padding: 0;
     }
+}
+
+.filter-warp .filter .dropdown {
+    float: left;
+    margin-right: 25px;
 }
 
 /* 艺术家列表 */
