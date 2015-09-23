@@ -23,13 +23,14 @@
                 <div class="artistinfo clearfix">
                     <div class="artist">
                         <div class="head">
+                            <a href="<?=base_url()?>artist/<?=$production['artist']['id']?>" class="link">
                             <img src="<?=$production['artist']['pic']?>">
+                            </a>
                         </div>
-                        <div class="name"><a href="" class="link"><?=$production['artist']['name']?></a></div>
+                        <div class="name"><a href="<?=base_url()?>artist/<?=$production['artist']['id']?>" class="link"><?=$production['artist']['name']?></a></div>
                     </div>
                     <div class="atristintro">
                         <p><?=$production['artist']['intro']?></p>
-                        <div class="btn">更多介绍</div>
                     </div>
                 </div>
                 <div class="artintro">

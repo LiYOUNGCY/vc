@@ -99,8 +99,6 @@ $(function(){
 
                 page++;
 
-
-
                 for (var i = 0; i < items.length; i++) {
                     var time        = items[i].buy_time;
                     var goods       = items[i].production;
@@ -131,21 +129,21 @@ $(function(){
                     box += '' +
                     '<div class="total"> <p>￥ '+ total +'</p></div>';
                     if(status == 0){
-                        box += '</div><div class="boxbottom"><div class="status icon psending">待发货</div></div></div>'
+                        box += '</div><div class="status icon psending">待发货</div></div>'
                     }else if(status == 1){
                         box += '' +
                         '<div class="logistics">' +
                         '<p>快递：'+ logistics +' '+ lid +'</p>' +
                         '<p>地址：'+ address +'</p>' +
                         '</div><div class="confirmgood btn">确认收货</div></div>' +
-                        '<div class="boxbottom"><div class="status icon psended">已发货</div></div></div>'
+                        '<div class="status icon psended">已发货</div></div>'
                     }else if(status == 2){
                         box += '' +
                         '<div class="logistics">' +
                         '<p>快递：'+ logistics +' '+ lid +'</p>' +
                         '<p>地址：'+ address +'</p>' +
                         '</div></div>' +
-                        '<div class="boxbottom"><div class="status icon pconform">确认收货</div></div></div>'
+                        '<div class="status icon pconform">确认收货</div></div>'
                     }
 
                     $(".transaction .list").append(box);
