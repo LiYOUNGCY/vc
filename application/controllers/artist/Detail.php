@@ -52,7 +52,9 @@ class Detail extends MY_Controller{
 	public function get_artist_production()
 	{
 		$page = $this->sc->input('page');
+		// $page = 0;
 		$aid  = $this->sc->input('aid');
+		// $aid = 2;
 		$production = $this->artist_service->get_artist_production($page,$aid);
 		echo json_encode($production);
 	}

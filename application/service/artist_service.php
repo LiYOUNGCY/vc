@@ -39,7 +39,7 @@ class Artist_service extends MY_Service{
 	 */
 	public function get_artist_production($page, $aid)
 	{
-		$production = $this->production_model->get_production_list($page,NULL,NULL,$aid);
+		$production = $this->production_model->get_production_list($page,NULL,NULL,NULL,$aid);
 		foreach ($production as $k => $v) {
 			$production[$k]['pic'] = Common::get_thumb_url($production[$k]['pic']);
 		}

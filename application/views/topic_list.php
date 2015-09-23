@@ -7,8 +7,8 @@
             <!--标签-->
             <div id="stamp" class="filter-warp">
                 <div class="filter">
-                    <ul class="fc-target">
-                        <li>标签1的类型：</li>
+                    <ul class="fc-target clearfix">
+                        <li class="label">标签1的类型：</li>
                         <li><a href="javascript:void(0)" class="link <?php if($get_tag == 0) echo 'active'; ?>" onclick="getArticleListBYtag('all')">全部</a></li>
                         <?php foreach ($tag as $key => $value) { ?>
                             <li><a href="javascript:void(0)" class="link <?php if($get_tag == $value['id']) echo 'active'; ?>" onclick="getArticleListBYtag(<?= $value['id'] ?>)"><?= $value['name'] ?></a></li>
