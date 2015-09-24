@@ -62,8 +62,8 @@
                     <div id="save" class="btn save" onclick="alert(document.getElementById('address').value);">保存</div>
                 </div>
         </div>
-        <?= $footer ?>
     </div>
+    <?= $footer ?>
 </div>
 <div class="hidediv" style="display:none;" id="phone_div">
     <div class="msg_box">

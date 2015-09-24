@@ -4,9 +4,19 @@
     <?php echo $top; ?>
     <div class="container">
         <div class="item-list">
-            <div class="artist">
+<!--             <div class="artist" >
                 <div class="backcard">
-                    <i class="fa fa-share"></i>
+                    <div class="artistinfo">
+                        <div class="head">
+                            <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/headpic/1439898381_2.jpg">
+                        </div>
+                        <div class="name">鸡巴白</div>
+                    </div>
+                    <div class="intro">
+                        <p>
+                            阿萨德阿萨德阿萨德请问告诉对方的身份多少个地方规定收费撒旦水电费撒旦方式发第三方第三方第三方电放费第三方士大夫是大方的说法大哥大概后天仍然有具体聚集发挥好放到他认为认为
+                        </p>
+                    </div>
                 </div>
                 <div class="artistcard">
                     <div class="artistpic">
@@ -14,8 +24,7 @@
                     </div>
                     <div class="artistname">（<span class="name">鸡巴白</span>）</div>
                 </div>
-            </div>
-
+            </div> -->
         </div>
     </div>
     <?php echo $footer; ?>
@@ -30,6 +39,8 @@
         var container = document.querySelector('.item-list');
         var $container = $('.item-list');
 
+        LoadMore();
+        WindowEvent();
         var masonry = new Masonry(container, {
             itemSelector: '.artist',
             columnWidth: 300,
@@ -39,18 +50,13 @@
         });
 
         $container.imageloader({
-            selector: '.img-responsive',
+            selector: '.image',
             each: function (elm) {
                 masonry.layout();
             }
         });
 
-        var color = [];
-
-        //LoadMore();
-        //WindowEvent();
-
-        $('.material-card > .mc-btn-action').click(clickEvent);
+        
 
         function WindowEvent() {
             $(window).scroll(function () {
@@ -61,35 +67,6 @@
                     LoadMore();
                 }
             });
-        }
-
-        function clickEvent() {
-            console.log('dd');
-            var card = $(this).parent('.material-card');
-            var icon = $(this).children('i');
-            icon.addClass('fa-spin-fast');
-
-            if (card.hasClass('mc-active')) {
-                card.removeClass('mc-active');
-
-                window.setTimeout(function () {
-                    icon
-                        .removeClass('fa-arrow-left')
-                        .removeClass('fa-spin-fast')
-                        .addClass('fa-bars');
-
-                }, 800);
-            } else {
-                card.addClass('mc-active');
-
-                window.setTimeout(function () {
-                    icon
-                        .removeClass('fa-bars')
-                        .removeClass('fa-spin-fast')
-                        .addClass('fa-arrow-left');
-
-                }, 800);
-            }
         }
 
         var count = 0;
@@ -120,35 +97,26 @@
                         var name = data[i].name;
                         var content = data[i].intro;
                         var img = data[i].pic;
-                        var box = $('<div class="artist">' +
-                            '<article class="material-card Yellow">' +
-                            '<h2>' +
 
-                            '<span><i class="fa fa-fw fa-star"></i>' + name + '</span>' +
-                            '</h2>' +
-
-                            '<div class="mc-content">' +
-                            '<div class="img-container">' +
-                            '<img class="img-responsive" src="'+BASE_URL+'public/img/load.gif"'  +
-                            'data-src="' + img + '">' +
-                            '</div>' +
-                            '<div class="mc-description">' + content + '</div>' +
-                            '</div>' +
-                            '<a class="mc-btn-action">' +
-                            '<i class="fa fa-bars"></i>' +
-                            '</a>' +
-
-                            '<div class="mc-footer">' +
-                            '<div class="btn read" onclick="a(' + id + ')">See More</div>' +
-                            '</div>' +
-                            '</article>' +
-                            '</div>');
+                        var box = '' +
+                        '<div class="artist" onclick="a('+ id +')">' +
+                        '<div class="backcard">' +
+                        '<div class="artistinfo">' +
+                        '<div class="head">' +
+                        '<img class="image" src="'+ img +'"></div>' +
+                        '<div class="name">'+ name +'</div></div>' +
+                        '<div class="intro">' +
+                        '<p>'+ content +'</p></div></div>' +
+                        '<div class="artistcard">' +
+                        '<div class="artistpic">' +
+                        '<img class="image" src="'+ img +'"></div>' +
+                        '<div class="artistname">（<span class="name">'+ name +'</span>）</div>' +
+                        '</div></div>';
 
                         $('.item-list').append(box);
-                        masonry.appended(box);
 
                         $(box).imageloader({
-                            selector: '.img-responsive',
+                            selector: '.image',
                             each: function (elm) {
                                 masonry.layout();
                                 count++;
@@ -162,10 +130,6 @@
                                 masonry.layout();
                             }
                         });
-
-                        // Add Event
-                        box.find('.mc-btn-action').click(clickEvent);
-
 
                     }
                 }

@@ -31,10 +31,10 @@ class Main extends MY_Controller{
         );
 
         $user['user'] = $this->user;
-        $top = $this->load->view('common/top', $user, TRUE);
+        $user['sign'] = $this->load->view('common/sign', '', TRUE);
+        
         $data['title']        = "我的消息 - 用户中心";
-        $body['top']          = $top;
-        $body['sign']         = $this->load->view('common/sign', '', TRUE);
+        $body['top']          = $this->load->view('common/top', $user, TRUE);
         $body['footer']       = $this->load->view('common/footer', '', TRUE);
         $body['user']         = $this->user;
 
@@ -46,10 +46,6 @@ class Main extends MY_Controller{
 		elseif (strcmp($type, 'goodsmsg') == 0) 
 		{			
 			$this->load->view('goodsmsg', $body);			
-		}
-		elseif (strcmp($type, 'csmsg') == 0) 
-		{				
-			$this->load->view('comment_list', $body);
 		}
 	}
 

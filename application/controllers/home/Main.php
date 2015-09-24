@@ -36,11 +36,12 @@ class Main extends MY_Controller {
         //$data['artist']     = $all['artist'];
         $data['slider']     = $all['slider'];
 
+        
         $user['user'] = $this->user;
-        $top = $this->load->view('common/top', $user, TRUE);
+        $user['sign'] = $this->load->view('common/sign', '', TRUE);
+    
         $data['title']        = "最专业的艺术导购";
-        $body['top']          = $top;
-        $body['sign']         = $this->load->view('common/sign', '', TRUE);
+        $body['top']          = $this->load->view('common/top', $user, TRUE);
         $body['footer']       = $this->load->view('common/footer', '', TRUE);
         $body['user']         = $this->user;
 
