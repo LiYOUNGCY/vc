@@ -61,7 +61,7 @@
                 <!--
             </li>
         -->
-                <li>
+                <li style="display:none;">
                     <a href="index.html"><i class="fa fa-dashboard fa-fw"></i>基本信息</a>
                 </li>
                 <li>
@@ -115,7 +115,7 @@
                 <li>
                     <a href="<?= base_url() . ADMINROUTE ?>slider"><i class="fa fa-file fa-fw"></i>轮播管理</a>
                 </li>
-                <li>
+                <li style="display:none;">
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i>网站设置<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -127,7 +127,7 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
-                <li>
+                <li style="display:none;">
                     <a href="#"><i class="fa fa-files-o fa-fw"></i>数据统计<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -138,9 +138,6 @@
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="<?= base_url() . ADMINROUTE ?>main/logout"><i class="fa fa-dashboard fa-fw"></i>退出</a>
                 </li>
             </ul>
         </div>
