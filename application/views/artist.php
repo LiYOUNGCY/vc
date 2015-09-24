@@ -4,32 +4,17 @@
     <?php echo $top; ?>
     <div class="container">
         <div class="item-list">
-
-<!--                            <div class="artist">-->
-<!--                                <article class="material-card Yellow">-->
-<!--                                    <h2>-->
-<!---->
-<!--                                        <span><i class="fa fa-fw fa-star"></i>Mr Chen</span>-->
-<!--                                    </h2>-->
-<!---->
-<!--                                    <div class="mc-content">-->
-<!--                                        <div class="img-container">-->
-<!--                                            <img class="img-responsive"-->
-<!--                                                 src="" data-src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/headpic/1439898381_2.jpg">-->
-<!--                                        </div>-->
-<!--                                        <div class="mc-description">-->
-<!--                                            因为长得比较帅，成为设计师也是无可厚非的-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <a class="mc-btn-action">-->
-<!--                                        <i class="fa fa-bars"></i>-->
-<!--                                    </a>-->
-<!---->
-<!--                                    <div class="mc-footer">-->
-<!--                                        <div class="btn read">See More</div>-->
-<!--                                    </div>-->
-<!--                                </article>-->
-<!--                            </div>-->
+            <div class="artist">
+                <div class="backcard">
+                    <i class="fa fa-share"></i>
+                </div>
+                <div class="artistcard">
+                    <div class="artistpic">
+                        <img src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/headpic/1439898381_2.jpg">
+                    </div>
+                    <div class="artistname">（<span class="name">鸡巴白</span>）</div>
+                </div>
+            </div>
 
         </div>
     </div>

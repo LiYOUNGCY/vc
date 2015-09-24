@@ -249,6 +249,13 @@ img {
     height: 30px;
     background: transparent url("../img/icon/tick.png") no-repeat scroll; 
 }
+.icon.search{
+    width: 44px;
+    height: 44px;
+    background: transparent url("../img/icon/look.png") no-repeat scroll;
+    background-size:cover;
+    background-position:50% 50%;
+}
 @media screen and (max-width: 960px) {
     .icon.qrcode{
         width: 209px;
@@ -322,10 +329,10 @@ img {
 }
 
 .item-list .box:hover {
-    -webkit-box-shadow: 0 0 10px #666;
-    -moz-box-shadow: 0 0 10px #666;
-    box-shadow: 0 0 10px #666;
-    border-radius: 10px;
+    -webkit-box-shadow: 0 0 10px #a1a1a1;
+    -moz-box-shadow: 0 0 10px #a1a1a1;
+    box-shadow: 0 0 10px #a1a1a1;
+    border-radius: 5px;
 }
 
 .item-list .box .image {
@@ -416,8 +423,7 @@ img {
     border-width: 1px;
     border-style: none solid solid solid;
     border-color: #EEEEEE;
-    /*height: 45px;*/
-    /*line-height: 45px;*/
+    line-height: 45px;
 }
 
 .filter-warp .filter:first-child {
@@ -443,6 +449,16 @@ img {
     color: white;
     border-radius: 5px;
 }
+@media screen and (max-width: 767px){
+    .filter-warp .filter .fc-target .label{
+        display: none;
+    }
+    .filter-warp .filter .fc-target li{
+        text-align: center;
+        width: 33.3%;
+        padding: 0;
+    }
+}
 
 .filter-warp .filter .dropdown {
     float: left;
@@ -451,14 +467,51 @@ img {
 
 /* 艺术家列表 */
 .item-list .artist {
+    margin-top: 30px;
     width: 300px;
+    position: relative;
+    height: 340px;
 }
 
-.item-list .artist .btn.read {
-    margin: 10px auto;
-    width: 80%;
+.item-list .artist .backcard{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.item-list .artist .artistcard{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition:all .2s ease-out;
+}
+.item-list .artist .artistcard .artistpic{
+    height: 300px;
+    width: 100%;
+}
+.item-list .artist .artistcard .artistpic img{
+    height: 100%;
+    width: 100%;
+}
+.item-list .artist .artistcard .artistname{
     height: 40px;
+    width: 100%;
+    text-align: center;
+    color: #B3B3B3;
     line-height: 40px;
+    font-size: 18px;
+    background: #0C0F08;
+}
+.item-list .artist .artistcard .artistname .name{
+    color: #FFFFFF;
+}
+
+.item-list .artist:hover .artistcard{
+    box-shadow: 0 0 5px #a1a1a1;
+    transform:translate(10,10);
 }
 
 /* 艺术品列表 */
@@ -476,10 +529,10 @@ img {
 }
 
 .item-list .production:hover {
-    -webkit-box-shadow: 0 0 5px #666;
-    -moz-box-shadow: 0 0 5px #666;
-    box-shadow: 0 0 5px #666;
-    border-radius: 10px;
+    -webkit-box-shadow: 0 0 10px #a1a1a1;
+    -moz-box-shadow: 0 0 10px #a1a1a1;
+    box-shadow: 0 0 10px #a1a1a1;
+    border-radius: 5px;
 }
 
 .item-list .production img {
@@ -2332,7 +2385,6 @@ hr.line {
 }
 .new-subject .list .item .box .info p{
     position: absolute;
-    font-size: 18px;
     bottom:20px;
     margin: 0 10px;
     color: #B3B3B3;
@@ -2386,10 +2438,19 @@ hr.line {
 .new-art .list .item.big{
     width: 100%;
     height: 450px;
-    background-color: #000;
 }
 .new-art .list .item .box:hover .info{
     opacity: 1;
+}
+.new-art .list .item .box:hover .info .artistpic{
+    -moz-transform:translateX(-25px);
+    -webkit-transform:translateX(-25px);
+    transform:translateX(-25px);
+}
+.new-art .list .item .box:hover .info .look{
+    -moz-transform:translateX(25px);
+    -webkit-transform:translateX(25px);
+    transform:translateX(25px);
 }
 
 .new-art .list .item .box .intro{
@@ -2427,13 +2488,38 @@ hr.line {
     overflow: hidden;
     box-sizing:border-box;
 }
-.new-art .list .item .box .info p{
+.new-art .list .item .box .info .artistpic,
+.new-art .list .item .box .info .look{
+    width: 88px;
+    height: 88px;
+    border-radius: 100%;
+    overflow: hidden;
+
     position: absolute;
-    font-size: 18px;
-    bottom:20px;
-    margin: 0 10px;
-    color: #B3B3B3;
-    text-align: justify;
+    top: 50%;
+    left: 50%;
+
+    margin-left: -44px;
+    margin-top: -44px;
+
+    transition:all .4s ease-out;
+}
+.new-art .list .item .box .info .look{
+    background: rgba(0,0,0,0.2);
+}
+.new-art .list .item .box .info .look .icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+}
+
+.new-art .list .item .box .info .artistpic img{
+    width: 100%;
+    height: 100%;
 }
 
 /*new-art end*/
@@ -2800,9 +2886,8 @@ img.zoom-img {
     margin-right: 30px;
 }
 .artist_detail .pic img{
-    width: 280px;
-    height: 280px;
-    float: left;
+    width: 100%;
+    height: 100%;
 }
 
 .artist_detail .detail{
@@ -2822,14 +2907,6 @@ img.zoom-img {
 
 .artist_detail .detail .intro{
     width: 100%;
-    position: relative;
-}
-
-
-.artist_detail .detail .intro .more{
-    width: 100%;
-    font-size: 14px;
-    text-align: right;
     position: relative;
 }
 
@@ -2857,124 +2934,8 @@ img.zoom-img {
 }
 
 .artistevaluate .detail p{
-    /*text-align: justify;*/
-    text-indent: 2em;
+    text-align: justify;
     text-align: left;
-}
-
-.arts {
-    margin: 0 auto;
-}
-.arts .item {
-    overflow: hidden;
-
-    position: relative;
-
-    margin-top: 30px;
-    width: 300px;
-    height: 300px;
-
-    background-color: #fff;
-
-    transition: all .2s ease-in-out;
-}
-.arts .item:hover {
-    border-radius: 5px;
-
-    box-shadow: 0 0 10px #666;
-
-    cursor: pointer;
-}
-.arts .item .art-image {
-    position: relative;
-
-    width: 100%;
-    height: 200px;
-}
-.arts .item .art-title {
-    margin: 10px auto;
-    box-sizing: border-box;
-    padding: 0 10px;
-    width: 100%;
-
-    font-size: 18px;
-}
-.arts .item .author {
-    margin: 0 auto;
-    box-sizing: border-box;
-    padding: 0 10px;
-    width: 100%;
-
-    color: #b3b3b3;
-}
-.arts .item .art-title:before {
-    font-size: 18px;
-    font-weight: 800;
-
-    color: #fcee21;
-
-    content: "《 ";
-}
-.arts .item .art-title:after {
-    font-size: 18px;
-    font-weight: 800;
-
-    color: #fcee21;
-
-    content: " 》";
-}
-.arts .item .art-info {
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-
-    margin-top: 10px;
-    box-sizing: border-box;
-    padding: 0 10px;
-    width: 100%;
-
-    text-align: left;
-}
-.arts .item .art-info li {
-    display: inline-block;
-
-    margin-right: 10px;
-
-    font-size: 14px;
-
-    color: #b3b3b3;
-}
-.arts .item .art-info .fa {
-    color: #f1e203;
-}
-.arts .item .price {
-    position: absolute;
-    right: 10px;
-    bottom: 0;
-
-    font-size: 20px;
-    /* float: right; */
-
-    color: #999;
-}
-
-.arts .item:hover figcaption::before,
-.arts .item:hover figcaption::after {
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-
-    opacity: 1;
-
-    -webkit-transform: scale(1);
-            transform: scale(1);
-}
-
-.arts .item:hover h2,
-.arts .item:hover p {
-    opacity: 1;
-
-    -webkit-transform: translate3d(0,0,0);
-            transform: translate3d(0,0,0);
 }
 
 .loadmore:hover{
@@ -2986,7 +2947,7 @@ img.zoom-img {
 .loadmore{
     border: 1px #eee solid;
     max-width: 900px;
-    width: 98%;
+    width: 90%;
     line-height: 40px;
     height: 40px;
     display: inline-block;
@@ -3002,6 +2963,29 @@ img.zoom-img {
     cursor: default;
     color: #D9D9D9;
 }
+
+@media screen and (max-width:960px) {
+    .artist_detail .pic{
+        float: none;
+        width: 250px;
+        height: 250px;
+        margin: 0 auto;
+    }
+    .artist_detail .detail{
+        float: none;
+        width: 90%;
+        margin: 20px auto 0;
+    }
+    .artist_detail .detail .name{
+        text-align: center;
+    }
+    .artistevaluate{
+        width: 90%;
+        margin: 40px auto 0;
+        padding: 20px 0;
+    }
+}
+
 .cart .title{
     font-weight: bold;
     color: #666;

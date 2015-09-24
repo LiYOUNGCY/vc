@@ -92,7 +92,12 @@
                         $i++;
                     ?>
                             <div class="info">
-                                <p><?=$v['intro']?></p>
+                                <div class="look">
+                                    <div class="icon search"></div>
+                                </div>
+                                <div class="artistpic">
+                                    <img src="<?=$v['artist']['pic'];?>">
+                                </div>
                             </div>
                             <div class="intro">
                                 <div class="name">（<font color="#FFFFFF"><?=$v['name']?></font>）</div>

@@ -11,8 +11,6 @@
                 <input type="hidden" value="<?=$artist['id']?>" id="aid">
                 <div class="intro">
                     <p><?= $artist['intro'] ?></p>
-
-                    <div class="more"><a href="" class="link">[阅读更多+]</a></div>
                 </div>
             </div>
         </div>
@@ -22,25 +20,26 @@
                 <p><?= $artist['evaluation'] ?></p>
             </div>
         </div>
-        <div class="arts" id="arts">
-            <!-- <div class="item">
-                <figure class="effect-bubba">
-                    <div class="art-image" style="background: url(<?=$artist['pic']?>);background-size:cover;background-position:50% 50%;"></div>
-                    <figcaption>
-                        <p>类型：123<br>尺寸：12 * 12cm</p>
-                    </figcaption>           
-                </figure>
-                <div class="art-title">123</div>
-                <ul class="art-info">
-                    <li><i class="fa fa-heart-o"></i> 123</li>
-                    <div class="price">123 RMB</div>
-                </ul>
-            </div> -->
+        <div class="item-list" id="arts">
+
+           <!-- <div class="production">
+               <img class="image" src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/production/thumb1_1440593600_1.jpg">
+               <p class="title">天梯</p>
+               <p class="author">作者：条野太郎</p>
+               <div class="info">
+                   <span class="type">油画</span>，
+                   <span class="size">120cm X 90cm</span>
+               </div>
+               <div class="bottom clearfix">
+                <div class="price" title="价格">4100 RMB</div>
+                <div class="vote" title="收藏">158<div class="icon like"></div></div>
+               </div>
+           </div> -->
+
         </div>
         <div class="loadmore" id="loadmore">加载更多</div>
-
-        <?php echo $footer; ?>
     </div>
+    <?php echo $footer; ?>
 </div>
 
 <?php echo $sign; ?>
@@ -56,7 +55,7 @@ $(function() {
     var arts = document.querySelector('#arts');
     loadarts();
     var masonry = new Masonry(arts, {
-        itemSelector: '.item',
+        itemSelector: '.production',
         columnWidth: 300,
         gutter: 30,
         isFitWidth: true,
@@ -96,15 +95,30 @@ $(function() {
                     var price   = arts[i].price;
                     var name    = arts[i].name;
                     var width   = arts[i].w;
-                    var height   = arts[i].h;
-                    var elm = '<div class="item"><figure class="effect-bubba"><div class="art-image" style="background: url('+ image +');background-size:cover;background-position:50% 50%;"></div><figcaption><p>类型：'+ type +'<br>尺寸：'+ width +' * '+ height +'cm</p></figcaption></figure><div class="art-title">'+ name +'</div><ul class="art-info"><li><i class="fa fa-heart-o"></i> '+ like +'</li><div class="price">'+ price +' RMB</div></ul></div>'
+                    var height  = arts[i].h;
+                    var artist  = arts[i].aid;
 
-                    $("#arts").append(elm);
+
+
+                    var box = '' +
+                    '<div class="production">' +
+                    '<img class="image" src="'+ image +'">' +
+                    '<p class="title">'+ name +'</p>' +
+                    '<div class="info">' +
+                    '<span class="type">'+ type +'</span>，' +
+                    '<span class="size">'+ width +'cm X '+ height +'cm</span>' +
+                    '</div>' +
+                    '<div class="bottom clearfix">' +
+                    '<div class="price" title="价格">'+ price +' RMB</div>' +
+                    '<div class="vote" title="收藏">'+ like +'<div class="icon like"></div></div>' +
+                    '</div></div>';
+
+                    $('.item-list').append(box);
+
                 }
             }
         });
     }
-
 });
 
 </script>
