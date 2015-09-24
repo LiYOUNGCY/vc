@@ -240,9 +240,9 @@ img {
 }
 
 .icon.qrcode{
-    width: 209px;
-    height: 99px;
-    background: transparent url("../img/icon/qrcode.png") no-repeat scroll;
+    width: 220px;
+    height: 100px;
+    background: transparent url("../img/icon/qrcode.jpg") no-repeat scroll;
 }
 .icon.tick{
     width: 30px;
@@ -253,6 +253,27 @@ img {
     width: 44px;
     height: 44px;
     background: transparent url("../img/icon/look.png") no-repeat scroll;
+    background-size:cover;
+    background-position:50% 50%;
+}
+.icon.osafe{
+    width: 28px;
+    height: 28px;
+    background: transparent url("../img/icon/home_safe.png") no-repeat scroll;
+    background-size:cover;
+    background-position:50% 50%;
+}
+.icon.oseleted{
+    width: 28px;
+    height: 28px;
+    background: transparent url("../img/icon/home_seleted.png") no-repeat scroll;
+    background-size:cover;
+    background-position:50% 50%;
+}
+.icon.osure{
+    width: 28px;
+    height: 28px;
+    background: transparent url("../img/icon/home_sure.png") no-repeat scroll;
     background-size:cover;
     background-position:50% 50%;
 }
@@ -2648,6 +2669,7 @@ hr.line {
     position: relative;
     display: inline-block;
     width: 600px;
+    color: #b3b1ae;
 }
 .vi_footer .wrapper .copyright p{
     position:  absolute;
@@ -2661,7 +2683,7 @@ hr.line {
 }
 .footbanner{
     background-color: #0C0F08;
-    height: 5px;
+    height: 20px;
     width: 100%;
 }
 @media screen and (max-width:960px) {
@@ -3929,7 +3951,7 @@ img.zoom-img {
   -moz-transition: opacity .3s 0s, visibility 0s .3s;
   transition: opacity .3s 0s, visibility 0s .3s;
 }
-.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+.cd-top.cd-is-visible, .no-touch .cd-top:hover {
   -webkit-transition: opacity .3s 0s, visibility 0s 0s;
   -moz-transition: opacity .3s 0s, visibility 0s 0s;
   transition: opacity .3s 0s, visibility 0s 0s;
@@ -3939,10 +3961,7 @@ img.zoom-img {
   visibility: visible;
   opacity: 1;
 }
-.cd-top.cd-fade-out {
-  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
-  opacity: 1;
-}
+
 .cd-top:hover {
   opacity: .8;
 }
@@ -3960,3 +3979,101 @@ img.zoom-img {
     bottom: 30px;
   }
 }
+
+.other{
+    width: 100%;
+    display: inline-block;
+    margin-top: 40px;
+    color: #0C0F08;
+}
+.other .item{
+    background: #EAEAEA;
+    padding: 15px;
+    box-sizing:border-box;
+    float: left;
+    width: 33.3%;
+    font-size: 15px;
+    height: 300px;
+}
+.other .item.mid{
+    background: #F7F7F7;
+}
+.other .item .title{
+    font-size: 20px;
+    font-weight: bold;
+    height: 50px;
+    line-height: 40px;
+    text-align: left;
+}
+.other .item .title .icon{
+    margin: 0 10px -7px 0;
+}
+.other .item .content{
+    text-align: justify;
+}
+@media screen and (max-width: 960px) {
+    .other {
+        width: 95%;
+        margin: 40px auto 0;
+    }
+    .other .item{
+        height: auto;
+        width: 100%;
+    }
+}
+
+.nonebox {
+    width: 100%;
+}
+.nonebox .box{
+    padding: 40px 0;
+    width: 760px;
+    box-shadow: 2px 3px 5px #a1a1a1;
+    margin:0 auto;
+    text-align: center;
+    border:1px solid #EEEEEE;
+}
+.nonebox .box .text{
+    width: 100%;
+    font-size: 24px;
+    color: #0C0F08;
+}
+.nonebox .box .go{
+    width: 100%;
+    margin: 10px 0 40px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #f7cc1e;
+}
+.nonebox .box .opt{
+    width: 100%;
+}
+.nonebox .box .opt .btn{
+    background: #0C0F08;
+    width: 260px;
+    height: 40px;
+    line-height: 40px;
+    color: #FFFFFF;
+    margin:0 20px;
+    display: inline-block;
+}
+.nonebox .box .opt .btn a{
+    color: #FFFFFF;
+}
+.nonebox .box .opt .btn:hover{
+    background: #534741;
+}
+@media screen and (max-width: 960px) {
+    .nonebox .box  {
+        width: 90%;
+    }
+    .nonebox .box .go{
+        margin: 10px 0 20px;
+    }
+    .nonebox .box .opt .btn{
+        width: 95%;
+        margin: 10px 0;
+    }
+}
+
+
