@@ -3,6 +3,7 @@
 <div class="main-wrapper">
     <!-- 顶部 -->
     <?php echo $top; ?>
+    
     <!-- 轮播 -->
     <div class="swiper-container" id="swiper">
         <div class="swiper-wrapper">
@@ -112,11 +113,6 @@
     </div>
     <?php echo $footer; ?>
 </div>
-<?php
-  if($user['role']==0){
-    echo $sign;
-  }
-?>
 <script type="text/javascript" src="<?= base_url() ?>public/js/swiper.min.js"></script>
 </body>
 <script>

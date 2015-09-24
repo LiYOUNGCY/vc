@@ -56,7 +56,6 @@
             <input id="signway" type="hidden" value="phone"></div>
     </div>
 </div>
-</div>
 <script>
     $(function () {
         var phone_code = '';
@@ -119,7 +118,7 @@
         if (type == 1) {
             $(".sign .position").css({"top": 0});
         } else if (type == 2) {
-            $(".sign .position").css({"top": "-340px"});
+            $(".sign .position").css({"top": "-348px"});
         }
         $(".shade").fadeIn(200);
         $(".sign").fadeIn(200);
@@ -318,22 +317,6 @@
                         console.log(data);
                     }
                 });
-//	      	$.post(EMAIL_SIGNUP_URL,{
-//	    	  	email : email,
-//	          	pwd   : pwd
-//	        },function(data){
-//                console.log(data);
-//	          	data = eval('('+data+')');
-//	          	if(data.error != null)
-//	          	{
-//	          	  	//ERROR_OUTPUT(data);
-//			    	$('.error_div').html(data.error);
-//	          		return false;
-//	          	}else if(data.success == 0)
-//	          	{
-//	          	   eval(data.script);
-//	          	}
-//	        })
             }
         }
     }
