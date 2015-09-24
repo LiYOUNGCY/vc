@@ -9,14 +9,14 @@
                     <form role="form" method="post" action="<?=base_url().ADMINROUTE?>login/login_action">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="用户名" name="email" type="email" autofocus>
+                                <input class="form-control" placeholder="PHONE" name="phone" autofocus>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="密码" name="pwd" type="password" value="">
+                                <input class="form-control" placeholder="PASSWORD" name="pwd" type="password" value="">
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input name="rememberme" type="checkbox" value="记住密码">Remember Me
+                                    <input name="rememberme" type="checkbox" value="1">Remember Me
                                 </label>
                             </div>
                             <a href="javascript:void(0);" id="submit" class="btn btn-lg btn-success btn-block">Login</a>
