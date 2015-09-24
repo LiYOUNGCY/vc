@@ -139,14 +139,14 @@
 
         m = m == null ? '0' : m;
         s = s == null ? '0' : s;
-        p = p == null ? '0' : p;
+        p = p == null ? '0' : '"'+p+'"';
 
 
         //刷新 select 的值
         Select_status = false;
         medium.easyDropDown('select', m.toString());
         style.easyDropDown('select', s.toString());
-        price.easyDropDown('select', p.toString());
+        price.easyDropDown('select', p);
         Select_status = true;
     }
 

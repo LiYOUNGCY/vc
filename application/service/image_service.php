@@ -32,7 +32,7 @@ class Image_service extends MY_Service{
 			if( ! empty($arr))
 			{
 				$min_height = $arr[1] * ($min_width/$arr[0]);
-				$min_height = $min_height > 230 ? $min_height : 230;			
+				$min_height = $min_height > 230 ? $min_height : 230;
 			}
 			/**
 			 * [生成缩略图]
@@ -337,7 +337,7 @@ class Image_service extends MY_Service{
 	 */
 	public function upload_slider($form_name, $uid)
 	{
-		$config['upload_path'] = './public/slider/';
+		$config['upload_path'] = './public/img/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size'] = '5000';
 		$config['remove_spaces']=TRUE;
@@ -383,7 +383,7 @@ class Image_service extends MY_Service{
 						$result['success']  = 0;
 						$result['pic']   = OSS_URL."/{$pic_path}";
 					}
-				
+
 				}
 				else
 				{
@@ -404,6 +404,6 @@ class Image_service extends MY_Service{
 			$result = array();
 			$result['error'] = lang('error_INVALID_REQUEST');
 		}
-		return $result;		
+		return $result;
 	}
 }
