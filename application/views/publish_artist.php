@@ -8,7 +8,7 @@
                 <div class="item">
                     <label>艺术家的照片：</label>
 
-                    <div class="headpic">
+                    <div class="headpic avatar">
                         <input type="hidden" id="x" name="x"/>
                         <input type="hidden" id="y" name="y"/>
                         <input type="hidden" id="w" name="w"/>
@@ -19,7 +19,7 @@
                                 <input type="file" name="upfile" id="upfile" onchange="file_upload()">
                                 <i class="fa fa-camera fa-5x"></i>
                             </div>
-                            <img id="image" src="" width="100%" height="100%">
+                            <img id="image" src="" width="100%">
                         </div>
                     </div>
                 </div>

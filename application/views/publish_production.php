@@ -16,7 +16,7 @@
                                 <input type="file" name="upfile" id="upfile" onchange="file_upload()">
                                 <i class="fa fa-camera fa-5x"></i>
                             </div>
-                            <img id="image" src="" width="100%" height="100%">
+                            <img id="image" src="" style="width:100%; height:atuo;">
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,6 @@
                     <input id="creat_time" type="text" name="creat_time">
                 </div>
                 <div class="options">
-                    <div class="btn cancel" onclick="">取消</div>
                     <div id="save" class="btn save">保存</div>
                 </div>
             </form>
@@ -122,6 +121,7 @@
                     $('#img').attr('value', path);
                     $('#image').show();
                     $("#camera_warp").hide();
+                    $('.headpic').css('height', 'auto');
                 }
 
             },

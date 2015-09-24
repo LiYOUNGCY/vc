@@ -100,7 +100,7 @@
                         <li>
                             <a href="<?= base_url() . ADMINROUTE ?>production/medium">题材</a>
                         </li>
-                        <li>
+                        <li style="display:none;">
                             <a href="<?= base_url() . ADMINROUTE ?>production/categories">种类</a>
                         </li>
                         <li>

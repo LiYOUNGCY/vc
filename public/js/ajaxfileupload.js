@@ -104,7 +104,7 @@ handleError: function( s, xhr, status, e )    {
                 requestDone = true;
                 var status;
                 try {
-
+                    console.log(xml.responseText);
                     status = isTimeout != "timeout" ? "success" : "error";
                     // Make sure that the request was successful or notmodified
                     if( status != "error" )

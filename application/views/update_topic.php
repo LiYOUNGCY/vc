@@ -12,8 +12,8 @@
                 </div>
                 <input type="hidden" name="aid" />
                 <input type="hidden" name="article_type" value="2"/>
-                <input type="hidden" name="pids" />                    
-                <input id="title" type="hidden" type="text" name="article_content" />    
+                <input type="hidden" name="pids" />
+                <input id="title" type="hidden" type="text" name="article_content" />
 
                 <div class="item">
                     <label for="introduction">专题导语：</label>
@@ -55,7 +55,6 @@
                 </div>
                 <div class="options">
                     <div class="btn preview" id="preview">预览</div>
-                    <div class="btn cancel">取消</div>
                     <div id="save" class="btn save">保存</div>
                 </div>
             </form>
@@ -156,7 +155,7 @@
 
         function get_number(str) {
             var ret = '';
-            
+
             if(typeof str == "undefined") {
                 return 0;
             }
