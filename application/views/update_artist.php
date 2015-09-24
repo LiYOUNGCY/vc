@@ -49,6 +49,7 @@
             </form>
         </div>
     </div>
+    <?=$footer?>
 </div>
 </body>
 <script src="<?php echo base_url() ?>public/js/jquery.Jcrop.js"></script>

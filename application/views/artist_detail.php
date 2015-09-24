@@ -41,9 +41,6 @@
     </div>
     <?php echo $footer; ?>
 </div>
-
-<?php echo $sign; ?>
-
 </body>
 
 <script>

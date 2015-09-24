@@ -53,9 +53,10 @@ class Detail extends MY_Controller{
 
 
         $user['user']         = $this->user;
+        $user['sign'] = $this->load->view('common/sign', '', TRUE);
+
         $data['title']        = $production['name'];
         $body['top']          = $this->load->view('common/top', $user, TRUE);
-        $body['sign']         = $this->load->view('common/sign', '', TRUE);
         $body['footer']       = $this->load->view('common/footer', '', TRUE);
         $body['user']         = $this->user;
 

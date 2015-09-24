@@ -93,6 +93,7 @@
             <!--            END 弹出层  -->
         </div>
     </div>
+    <?=$footer?>
 </div>
 </body>
 <script>

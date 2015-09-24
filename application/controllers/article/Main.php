@@ -50,6 +50,7 @@ class Main extends MY_Controller
         );
 
         $user['user'] = $this->user;
+        $user['sign'] = $this->load->view('common/sign', '', TRUE);
         $body['top'] = $this->load->view('common/top', $user, TRUE);
 
         $body['get_tag']    = $get_tag;

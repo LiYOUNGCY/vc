@@ -27,6 +27,7 @@ class Publish extends MY_Controller
         );
 
         $user['user'] = $this->user;
+        $user['sign'] = $this->load->view('common/sign', '', TRUE);
         $body['top'] = $this->load->view('common/top', $user, TRUE);
         $body['footer'] = $this->load->view('common/footer', '', TRUE);
         $body['tag']    = $this->article_service->get_article_tag();

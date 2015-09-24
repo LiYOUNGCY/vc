@@ -93,6 +93,7 @@
             </div>
         </div>
     </div>
+    <?=$footer?>
 </div>
 </body>
 <script>

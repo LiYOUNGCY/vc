@@ -22,7 +22,8 @@ class Main extends MY_Controller{
 			'jquery.imageloader.js',
 			'masonry.pkgd.min.js'
 		);
-
+		
+		$user['sign'] = $this->load->view('common/sign', '', TRUE);
 		$user['user']= $this->user;
 		$data['top'] = $this->load->view('common/top', $user, TRUE);
 		$data['footer'] = $this->load->view('common/footer', '', TRUE);

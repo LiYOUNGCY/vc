@@ -23,7 +23,8 @@ class Main extends MY_Controller{
         $head['title']   = '在线客服';
 
         $user['user'] = $this->user;
-
+        $user['sign'] = $this->load->view('common/sign', '', TRUE);
+        
         $body['top']     = $this->load->view('common/top', $user, TRUE);
         $body['footer']  = $this->load->view('common/footer', '', TRUE);
 //		$body['customer_id'] = $this->conversation_service->get_customer_id();

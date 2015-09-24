@@ -481,6 +481,7 @@ img {
     top: 0;
     left: 0;
     opacity: 0;
+
     transform:translate(40px,40px) rotate(10deg);
 
     transition:all .4s ease-out;
@@ -549,12 +550,12 @@ img {
 .item-list .artist .artistcard .artistname .name{
     color: #FFFFFF;
 }
-
 .item-list .artist:hover .artistcard{
     transform:translate(80px,80px) rotate(15deg);
     opacity: 0;
 }
 .item-list .artist:hover .backcard{
+
     transform:translate(0px,0px) rotate(0deg);
     box-shadow: 0 0 10px #1a1a1a;
     opacity: 1;

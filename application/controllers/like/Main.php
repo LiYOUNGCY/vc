@@ -24,10 +24,10 @@ class Main extends MY_Controller{
         );
 
         $user['user'] = $this->user;
-        $top = $this->load->view('common/top', $user, TRUE);
+        $user['sign'] = $this->load->view('common/sign', '', TRUE);
+        
         $data['title']        = "我的喜欢 - 用户中心";
-        $body['top']          = $top;
-        $body['sign']         = $this->load->view('common/sign', '', TRUE);
+        $body['top']          = $this->load->view('common/top', $user, TRUE);
         $body['footer']       = $this->load->view('common/footer', '', TRUE);
         $body['user']         = $this->user;
 

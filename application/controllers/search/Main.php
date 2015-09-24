@@ -37,6 +37,7 @@ class Main extends MY_Controller {
         );
 
         $user['user']           = $this->user;
+        $user['sign'] = $this->load->view('common/sign', '', TRUE);
         $data['top']            = $this->load->view('common/top', $user, TRUE);
 
         $data['footer']         = $this->load->view('common/footer', '', TRUE);

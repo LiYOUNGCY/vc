@@ -111,7 +111,7 @@
             </div>
         </div>
     </div>
-    <?php echo $footer; ?>
+    <?=$footer?>
 </div>
 <script type="text/javascript" src="<?= base_url() ?>public/js/swiper.min.js"></script>
 </body>
