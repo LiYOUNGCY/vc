@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class CImage
 {
@@ -9,14 +9,14 @@ class CImage
 	 * $toW         缩略图宽
 	 * $toH         缩略图高
 	 * $toFile      缩略图文件名称，为空覆盖原图像文件
-	 * @return bool    
+	 * @return bool
 	*/
 	/*
-	public function create_thumbnail($srcFile, $toW, $toH, $toFile="") 
+	public function create_thumbnail($srcFile, $toW, $toH, $toFile="")
 	{
 		if ($toFile == "")
-		{ 
-	   		$toFile = $srcFile; 
+		{
+	   		$toFile = $srcFile;
 		}
 		$info = "";
 		//返回含有4个单元的数组，0-宽，1-高，2-图像类型，3-宽高的文本描述。
@@ -24,7 +24,7 @@ class CImage
 		$data = getimagesize($srcFile, $info);
 		if (!$data)
 			return false;
-		
+
 		//将文件载入到资源变量im中
 		switch ($data[2]) //1-GIF，2-JPG，3-PNG
 		{
@@ -36,7 +36,7 @@ class CImage
 			}
 			$im = imagecreatefromgif($srcFile);
 			break;
-			
+
 	    case 2:
 			if(!function_exists("imagecreatefromjpeg"))
 			{
@@ -45,44 +45,44 @@ class CImage
 			}
 			$im = imagecreatefromjpeg($srcFile);
 			break;
-		      
+
 		case 3:
-			$im = imagecreatefrompng($srcFile);    
+			$im = imagecreatefrompng($srcFile);
 			break;
 		}
-		
+
 		//计算缩略图的宽高
 		$srcW = imagesx($im);
 		$srcH = imagesy($im);
 		$toWH = $toW / $toH;
 		$srcWH = $srcW / $srcH;
-		if ($toWH <= $srcWH) 
+		if ($toWH <= $srcWH)
 		{
 			$ftoW = $toW;
 			$ftoH = (int)($ftoW * ($srcH / $srcW));
 		}
-		else 
+		else
 		{
 			$ftoH = $toH;
 			$ftoW = (int)($ftoH * ($srcW / $srcH));
 		}
-		
-		if (function_exists("imagecreatetruecolor")) 
+
+		if (function_exists("imagecreatetruecolor"))
 		{
 			$ni = imagecreatetruecolor($ftoW, $ftoH); //新建一个真彩色图像
-			if ($ni) 
+			if ($ni)
 			{
 				//重采样拷贝部分图像并调整大小 可保持较好的清晰度
 				imagecopyresampled($ni, $im, 0, 0, 0, 0, $ftoW, $ftoH, $srcW, $srcH);
-			} 
-			else 
+			}
+			else
 			{
 				//拷贝部分图像并调整大小
 				$ni = imagecreate($ftoW, $ftoH);
 				imagecopyresized($ni, $im, 0, 0, 0, 0, $ftoW, $ftoH, $srcW, $srcH);
 			}
 		}
-		else 
+		else
 		{
 			$ni = imagecreate($ftoW, $ftoH);
 			imagecopyresized($ni, $im, 0, 0, 0, 0, $ftoW, $ftoH, $srcW, $srcH);
@@ -112,18 +112,18 @@ class CImage
 	    {
 	        return false;
 	    }
-	    $ot = $this->fileext($dst_img);
+	    $ot = strtolower($this->fileext($dst_img));
 	    $otfunc = 'image' . ($ot == 'jpg' ? 'jpeg' : $ot);
 	    $srcinfo = getimagesize($src_img);
 	    $src_w = $srcinfo[0];
 	    $src_h = $srcinfo[1];
 	    $type  = strtolower(substr(image_type_to_extension($srcinfo[2]), 1));
 	    $createfun = 'imagecreatefrom' . ($type == 'jpg' ? 'jpeg' : $type);
-	 
+
 	    $dst_h = $height;
 	    $dst_w = $width;
 	    $x = $y = 0;
-	 
+
 	    /**
 	     * 缩略图不超过源图尺寸（前提是宽或高只有一个）
 	     */
@@ -139,7 +139,7 @@ class CImage
 	    {
 	        $dst_h = $height = $src_h;
 	    }
-	 
+
 	    if(!$width && !$height && !$proportion)
 	    {
 	        return false;
@@ -198,12 +198,12 @@ class CImage
 	        $height = $dst_h = $src_h * $proportion;
 	        $width  = $dst_w = $src_w * $proportion;
 	    }
-	 
+
 	    $src = $createfun($src_img);
 	    $dst = imagecreatetruecolor($width ? $width : $dst_w, $height ? $height : $dst_h);
 	    $white = imagecolorallocate($dst, 255, 255, 255);
 	    imagefill($dst, 0, 0, $white);
-	 
+
 	    if(function_exists('imagecopyresampled'))
 	    {
 	        imagecopyresampled($dst, $src, $x, $y, 0, 0, $dst_w, $dst_h, $src_w, $src_h);
@@ -220,5 +220,5 @@ class CImage
 	function fileext($file)
 	{
 	    return pathinfo($file, PATHINFO_EXTENSION);
-	}	
+	}
 }

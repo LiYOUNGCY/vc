@@ -1,6 +1,6 @@
-<?php 
+<?php
 class Um_upload{
-   
+
     /**
      * 构造函数
      * @param string $fileField 表单名称
@@ -24,7 +24,7 @@ class Um_upload{
             "UNKNOWN" => "未知错误" ,
             "MOVE" => "文件保存时出错",
             "DIR_ERROR" => "创建目录失败"
-        );    
+        );
         $this->stateInfo = NULL;                //上传状态信息
         $this->fileType  = NULL;                //文件类型
         $this->fileSize  = NULL;                //文件大小
@@ -33,7 +33,7 @@ class Um_upload{
         $this->config    = NULL;           //配置信息
         $this->oriName   = NULL;                //原始文件名
         $this->fileName  = NULL;                //新文件名
-        $this->fullName  = NULL;                //完整文件名,即从当前配置目录开始的URL      
+        $this->fullName  = NULL;                //完整文件名,即从当前配置目录开始的URL
 
         $this->fileField = $param['fileField'];
         $this->config = $param['config'];
@@ -98,7 +98,7 @@ class Um_upload{
             }
 
             else{
-            	return TRUE;      
+            	return TRUE;
             }
         }
 
@@ -188,7 +188,8 @@ class Um_upload{
      */
     private function  checkSize()
     {
-        return $this->fileSize <= ( $this->config[ "maxSize" ] * 1024 );
+        // return $this->fileSize <= ( $this->config[ "maxSize" ] * 1024 );
+        return true;
     }
 
     /**

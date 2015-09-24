@@ -46,7 +46,7 @@ a {
 
 a.link {
     color: #534741;
- 
+
     transition: color .1s linear 0s;
 }
 
@@ -242,12 +242,12 @@ img {
 .icon.qrcode{
     width: 209px;
     height: 99px;
-    background: transparent url("../img/icon/qrcode.png") no-repeat scroll;   
+    background: transparent url("../img/icon/qrcode.png") no-repeat scroll;
 }
 .icon.tick{
     width: 30px;
     height: 30px;
-    background: transparent url("../img/icon/tick.png") no-repeat scroll; 
+    background: transparent url("../img/icon/tick.png") no-repeat scroll;
 }
 .icon.search{
     width: 44px;
@@ -260,7 +260,7 @@ img {
     .icon.qrcode{
         width: 209px;
         height: 272px;
-        background: transparent url("../img/icon/qrcode_mobile.png") no-repeat scroll;   
+        background: transparent url("../img/icon/qrcode_mobile.png") no-repeat scroll;
     }
     .icon.plike,
     .icon.pmsg,
@@ -795,15 +795,17 @@ img {
     max-width: 100%;
 }
 
+@media screen and (max-width: 767px) {
+    .article .detail img {
+        height: auto !important;
+    }
+}
+
 .article .detail .introduction {
     color: #666666;
     padding-left: 15px;
     border-left: 2px solid #EEEEEE;
     text-align: left;
-}
-
-.article .detail img {
-    max-width: 100%;
 }
 .article .detail .item {
     margin-top: 30px;
@@ -1174,7 +1176,14 @@ textarea:focus {
 }
 
 .edit .list .headpic {
+    margin: 0 auto;
     width: 100%;
+    height: 300px;
+}
+
+.edit .list .headpic.avatar {
+    margin: 0 auto;
+    width: 400px;
     height: 400px;
 }
 
@@ -1401,6 +1410,7 @@ textarea:focus {
 
 .edit .production_list .list {
     margin: 50px auto;
+    min-height: 600px;
     padding: 5px 10px 0;
     width: 800px;
 
@@ -2244,7 +2254,7 @@ hr.line {
 .main-wrapper .top .topright .userarea .useropt .logout{
     margin-left:15px;
     padding-left: 15px;
-    border-left: #FFF solid 1px; 
+    border-left: #FFF solid 1px;
 }
 .main-wrapper .top .topright .userarea .useropt .cart {
     font-size: 14px;
@@ -2603,7 +2613,7 @@ hr.line {
     margin-top: 50px;
 
     color: #CCCCCC;
-    
+
     position: absolute;
     bottom: 0;
 
@@ -3350,7 +3360,7 @@ img.zoom-img {
     background-color: #EEEEEE;
     color: #534741;
     padding: 15px 15px 40px 0px;
-    position: relative; 
+    position: relative;
     margin-bottom: 20px;
 }
 .msglist .col .type{
@@ -3434,7 +3444,7 @@ img.zoom-img {
     line-height: 29px;
     margin-top: 0px;
     font-size: 14px;
-    margin-left:4px; 
+    margin-left:4px;
 }
 .safesettig .submitphone{
     width: 212px;
@@ -3464,7 +3474,7 @@ img.zoom-img {
         font-size: 15px;
     }
     .personal .userinfo .info .editinfo{
-        margin: 0 auto; 
+        margin: 0 auto;
     }
     .ptitle{
         text-align: center;
@@ -3478,7 +3488,7 @@ img.zoom-img {
     }
     .transaction .box .time{
         float: none;
-        margin: 0 auto 12px; 
+        margin: 0 auto 12px;
     }
     .transaction .box .glist{
         float: none;
@@ -3683,7 +3693,7 @@ img.zoom-img {
 
 .conversation-list .input-box textarea {
     width: 80%;
-    
+
     max-width: calc(90% - 72px);
 }
 
@@ -3800,7 +3810,7 @@ img.zoom-img {
     height: 30px;
     border:none;
     font-size: 16px;
-    color: #534741; 
+    color: #534741;
     background-color: #F4F4F4;
     transition:background-color .2s ease-in-out;
 }
@@ -3815,7 +3825,7 @@ img.zoom-img {
     padding: 5px 5px 5px 30px;
     border:none;
     font-size: 16px;
-    color: #534741; 
+    color: #534741;
     background: #F4F4F4;
     vertical-align: top;
     transition:background-color .2s ease-in-out;
@@ -3834,7 +3844,7 @@ img.zoom-img {
     display: inline-block;
     background: #dcdcdc;
     border-radius: 5px;
-    color: #534741; 
+    color: #534741;
 }
 .paybox .infoma .saveasdef:hover{
     background: #FCEE21;

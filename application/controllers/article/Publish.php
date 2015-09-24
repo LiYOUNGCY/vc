@@ -93,7 +93,7 @@ class Publish extends MY_Controller
         //把文章插入到数据库
         $result = $article = $this->article_service->publish_article($this->user['id'], $article_title, $article_type, $pids, $article_content, $tags);
         if ($result) {
-            redirect(base_url(), 'location');
+            redirect(base_url().'admin/article');
         } else {
             $this->error->output('INVALID_REQUEST', array('script' => 'window.location.href="' . base_url() . 'publish/article";'));
         }
@@ -140,7 +140,7 @@ class Publish extends MY_Controller
 
         $result = $this->article_service->update_article($aid, $this->user['id'], $article_title, $article_type, $pids, $article_content, $tags);
         if ($result) {
-            redirect(base_url() . "article/" . $aid, 'location');
+            redirect(base_url().'admin/article');
         } else {
             $this->error->output('INVALID_REQUEST', array('script' => 'window.location.href="' . base_url() . 'update/{$type}/' . $aid . '";'));
         }

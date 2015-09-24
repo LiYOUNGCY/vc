@@ -4,7 +4,7 @@
     <div class="container">
         <div class="item-list">
             <div class="filter-warp" id="filter">
-                <div class="filter clearfix">
+                <div class="filter clearfix" style="border: none;">
                     <select class="dropdown" id="medium">
                         <option value="0">全部艺术门类</option>
                         <?php foreach ($medium as $key => $value) { ?>
@@ -204,7 +204,7 @@
                     var price = data[i].price;
                     var img = data[i].pic;
                     var like = data[i].like;
-                    var type = data[i].type;
+                    var style = data[i].style;
                     var l = data[i].l;
                     var w = data[i].w;
 
@@ -214,7 +214,7 @@
                         '<p class="title">' + title + '</p>' +
                         '<p class="author">作者：' + author + '</p>' +
                         '<div class="info">' +
-                        '<span class="type">' + type + '</span>，' +
+                        '<span class="type">' + style + '</span>，' +
                         '<span class="size">' + w + 'cm X ' + l + 'cm</span>' +
                         '</div>' +
                         '<div class="bottom clearfix">' +

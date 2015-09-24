@@ -99,6 +99,15 @@
                                                 type="button" class="btn btn-success btn-circle"><i
                                                 class="fa fa-edit"></i>
                                         </button>
+                                        <?php if($v['status'] == 2) { ?>
+                                        <button data-toggle="tooltip" title="发表" effect="publish" u="<?= $v['id'] ?>"
+                                                type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i>
+                                        </button>
+                                        <?php } else if($v['status'] == 0) { ?>
+                                        <button data-toggle="tooltip" title="取消发表" effect="cancel" u="<?= $v['id'] ?>"
+                                                type="button" class="btn btn-danger btn-circle"><i class="fa fa-close"></i>
+                                        </button>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -236,6 +245,52 @@
 
         $('#publish_production').click(function(){
             window.location.href = BASE_URL + 'publish/production';
+        });
+
+
+        //艺术品上架
+        $("button[effect=publish]").click(function () {
+            var aid = $(this).attr('u');
+            console.log(aid);
+            if (aid != null && aid != "") {
+                $.ajax({
+                    url: BASE_URL + 'production/publish/put_on',
+                    data: {
+                        id: aid
+                    },
+                    dataType: 'json',
+                    type: 'post',
+                    success : function(data) {
+                        console.log(data);
+                        if(data.success == 0)
+                            alert('成功发表');
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+
+        //艺术品下架
+        $("button[effect=cancel]").click(function () {
+            var aid = $(this).attr('u');
+            console.log(aid);
+            if (aid != null && aid != "") {
+                $.ajax({
+                    url: BASE_URL + 'production/publish/pull_off',
+                    data: {
+                        id: aid
+                    },
+                    dataType: 'json',
+                    type: 'post',
+                    success : function(data) {
+                        console.log(data);
+                        if(data.success == 0) {
+                        alert('成功取消发布');
+                        window.location.reload();
+                        }
+                    }
+                });
+            }
         });
     });
 </script>
