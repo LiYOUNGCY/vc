@@ -139,7 +139,7 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
-            </ul>
+                </ul>
         </div>
         <!-- /.sidebar-collapse -->
     </div>
