@@ -125,7 +125,8 @@
         loop: true,
         autoplay: 5000,
         autoplayDisableOnInteraction: false,
-        speed: 500
+        speed: 500,
+        
     });
     var swiper = new Swiper('.artist-swiper', {
         autoplayDisableOnInteraction: false,

@@ -8,7 +8,8 @@
                 <input type="text" name="username" id="username" placeholder="手机号/邮箱"/>
                 <input type="password" name="password" id="password" class="noborder" placeholder="密码"/>
             </div>
-            <div class="btn" onclick="signin()">登录</div>
+            <div class="btn" id="signinbtn" onclick="signin()">登录</div>
+            <div class="error_div" id="signinError" style="text-align:left;"></div>
             <div class="opt">
                 <div class="rememberme clearfix">
                     <div class="checkbox">
@@ -21,6 +22,7 @@
                     <a href="<?=base_url()?>account/forget" class="link">找回密码?</a>
                 </div>
             </div>
+
             <div class="thirdparty">
                 第三方登陆：
                 <i class="fa fa-qq"></i>
@@ -51,14 +53,15 @@
                 <input type="email" name="email" id="email" placeholder="邮箱地址"/>
                 <input type="password" name="password" id="password" class="noborder" placeholder="密码"/>
             </div>
-            <div class="error_div" style="text-align:left;margin-bottom:10px"></div>
-            <div class="btn" onclick="signup()">注册</div>
+            <div class="error_div" id="signupError" style="text-align:left;margin-bottom:10px"></div>
+            <div class="btn" onclick="signup()" id="signupbtn">注册</div>
             <input id="signway" type="hidden" value="phone"></div>
     </div>
 </div>
 <script>
+    var phone_code = '';
     $(function () {
-        var phone_code = '';
+        
         $("#toemail").click(function () {
             $(this).css({"display": "none"});
             $("#phonesign").css({"display": "none"});
@@ -68,6 +71,7 @@
             $("#signway").val("email");
             $("#emailsign").css({"display": "block"});
             $("#tophone").css({"display": "block"});
+            $("#signupError").html("");
         });
 
         $("#tophone").click(function () {
@@ -79,39 +83,58 @@
             $("#signway").val("phone");
             $("#emailsign").css({"display": "none"});
             $("#toemail").css({"display": "block"});
+            $("#signupError").html("");
         });
 
         $("#tosignin").click(function () {
+            
             $("#position").animate({
                 top: "0px"
             }, 200);
+            $("#signupError").html("");
+                $(".sign").find("input").each(function (i) {
+                $(this).val("");
+            });
         });
         $("#tosignup").click(function () {
+            
             $("#position").animate({
                 top: "-348px"
             }, 200);
+            $("#signinError").html("");
+                $(".sign").find("input").each(function (i) {
+                $(this).val("");
+            });
         });
+
+        $('#username').blur(function(){
+            var cp = validate('phone', $('#username').val());
+            var ce = validate('email', $('#username').val());
+            if(!cp && !ce){
+                $("#signinError").html("* 请输入正确的用户名");
+            }else{
+                $("#signinError").html("");
+            }
+        })
 
         $('#phone').blur(function () {
             var result = validate('phone', $('#phone').val());
             if (result) {
-                $(".error_div").html("");
+                $("#signupError").html("");
                 check_phone();
             } else {
-                $(".error_div").html("*请输入正确的手机号码");
+                $("#signupError").html("* 请输入正确的手机号码");
             }
         });
         $('#email').blur(function () {
             var result = validate('email', $('#email').val());
             if (result) {
-                $(".error_div").html("");
+                $("#signupError").html("");
                 check_email();
             } else {
-                $(".error_div").html("*请输入正确的邮箱地址");
+                $("#signupError").html("* 请输入正确的邮箱地址");
             }
         });
-
-
     });
 
     function showsign(type) {
@@ -126,6 +149,11 @@
     function hidesign() {
         $(".shade").fadeOut(200);
         $(".sign").fadeOut(200);
+        $(".sign").find("input").each(function (i) {
+            $(this).val("");
+        });
+        $("#signupError").html("");
+        $("#signinError").html("");
     }
 
     /**
@@ -172,7 +200,7 @@
             return;
         }
     }
-    var phone_check = true;
+    var phone_check = false;
     function check_phone() {
         var phone = $("#phone").val();
         $.post(CHECK_PHONE_URL, {phone: phone}, function (data) {
@@ -187,7 +215,7 @@
         });
     }
 
-    var email_check = true;
+    var email_check = false;
     function check_email() {
         var email = $("#email").val();
         $.post(CHECK_EMAIL_URL, {email: email}, function (data) {
@@ -201,122 +229,193 @@
             }
         });
     }
+
     function signin() {
+
         var username = $("#username").val();
         var password = $("#password").val();
 
-        var ce = !!username.match("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$");
-        var cp = !!username.match("^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$");
-        var is_remember = $("#rememberme").prop("checked");
-        if (is_remember == true) is_remember = 1; else is_remember = 0;
+        if($("#signinError").html() != "" || username == ""){
+            return ;
+        }
+
+        $("#signinbtn").attr("class","disable");
+        $("#signinbtn").html('<i class="fa fa-spinner fa-pulse"></i> 登录中');
+        
+
+        var cp = validate('phone', $('#username').val());
+        var ce = validate('email', $('#username').val());
+
+        var is_remember = $("#rememberme").prop("checked") ? 1 : 0;
 
         if (ce == true) {
-            $.post(
-                EMAIL_LOGIN_URL, {
-                    email: username,
-                    pwd: password,
-                    rememberme: is_remember
-                }, function (data) {
-                    data = eval('(' + data + ')');
-                    if (data.error != null) {
-                        ERROR_OUTPUT(data);
-                        return false;
-                    }
-                    else if (data.success == 0) {
+            $.ajax({
+                type: 'post',
+                url: EMAIL_LOGIN_URL,
+                async: false,
+                data: {
+                    'email'         : username,
+                    'pwd'           : password,
+                    'rememberme'    : is_remember
+                },
+                dataType: 'json',
+                success: function (data){
+                    if (data.error != null || data.length === 0) {
+                        $("#signinError").html(data.error);
+                        $("#signinbtn").attr("class","btn");
+                        $("#signinbtn").html('登录');
+
+                        return;
+                    }else if (data.success == 0) {
                         eval(data.script);
                     }
                 }
-            )
+            })
         }
         else if (cp == true) {
-            $.post(
-                PHONE_LOGIN_URL, {
-                    phone: username,
-                    pwd: password,
-                    rememberme: is_remember
-                }, function (data) {
-                    data = eval('(' + data + ')');
-                    if (data.error != null) {
-                        ERROR_OUTPUT(data);
-                        return false;
-                    }
-                    else if (data.success == 0) {
+            $.ajax({
+                type: 'post',
+                url: PHONE_LOGIN_URL,
+                async: false,
+                data: {
+                    'phone'         : username,
+                    'pwd'           : password,
+                    'rememberme'    : is_remember
+                },
+                dataType: 'json',
+                success: function (data){
+                    if (data.error != null || data.length === 0) {
+                        $("#signinError").html(data.error);
+                        $("#signinbtn").attr("class","btn");
+                        $("#signinbtn").html('登录');
+                        return;
+                    }else if (data.success == 0) {
                         eval(data.script);
                     }
                 }
-            )
+            })
         }
     }
 
 
     function signup() {
         var signup_way = $("#signway").val();
-        console.log(signup_way);
 
         if (signup_way == "phone") {
+
             var phone = $("#phonesign #phone").val();
             var pwd = $("#phonesign #password").val();
 
             var phone_result = validate('phone', phone);
-            var pwd_result = validate('pwd', password);
+            var pwd_result = validate('pwd', pwd);
 
-            var cp = phone_result && pwd_result && phone_check
+            var cp = phone_result && pwd_result && phone_check ;
+
+            if(!pwd_result){
+                $("#signupError").html("密码长度在8~36位");
+            }else if(!phone_check){
+                $("#signupError").html("该手机已被注册");
+            }else if(!phone_result){
+                $("#signupError").html("* 请输入正确的手机号码");
+            }else{
+                $("#signupError").html("");
+            }
+
+            if($("#signinError").html() != "" || phone == ""){
+                return ;
+            }
+
+            $("#signupbtn").attr("class","disable");
+            $("#signupbtn").html('<i class="fa fa-spinner fa-pulse"></i> 注册中');
+
+            
             if (cp == true) {
-                console.log(1);
+
                 //检验手机验证码
                 var input_phone_code = $('#velidata').val();
-                console.log(input_phone_code);
                 //验证码不对
-                if (phone_code == '' || input_phone_code != phone_code) {
+                
+                if (phone_code == '' || input_phone_code != phone_code || input_phone_code == '') {
                     //输出错误
-                    console.log('验证码错误');
+                    alert(3);
+                    $('#signupError').html("验证码错误");
+                    $("#signupbtn").attr("class","btn");
+                    $("#signupbtn").html('注册');
                     return -1;
                 }
-                $.post(PHONE_SIGNUP_URL, {
-                    phone: phone,
-                    pwd: pwd
-                }, function (data) {
-                    data = eval('(' + data + ')');
-                    if (data.error != null) {
-                        //ERROR_OUTPUT(data);
-                        $('.error_div').html(data.error);
-                        return false;
-                    }
-                    else if (data.success == 0) {
-                        eval(data.script);
+
+                $.ajax({
+                    type: 'post',
+                    url: PHONE_SIGNUP_URL,
+                    async: false,
+                    data: {
+                        'phone'   : phone,
+                        'pwd'     : pwd
+                    },
+                    dataType: 'json',
+                    success: function (data){
+                        if (data.error != null || data.length === 0) {
+                            $('#signupError').html(data.error);
+                            $("#signupbtn").attr("class","btn");
+                            $("#signupbtn").html('注册');
+                            return;
+                        }else if (data.success == 0) {
+                            eval(data.script);
+                        }
                     }
                 })
+            }else{
+                
+                $("#signupbtn").attr("class","btn");
+                $("#signupbtn").html('注册');
             }
         } else {
             var email = $("#emailsign #email").val();
             var pwd = $("#emailsign #password").val();
+
             var email_result = validate('email', email);
             var pwd_result = validate('pwd', password);
+
             var ce = email_result && pwd_result && email_check;
+
+            if(!pwd_result){
+                $("#signupError").html("密码长度在8~36位");
+            }else if(!email_check){
+                $("#signupError").html("该邮箱已被注册");
+            }else if(!email_result){
+                $("#signupError").html("* 请输入正确的邮箱地址");
+            }else{
+                $("#signupError").html("");
+            }
+
+            if($("#signinError").html() != "" || phone == ""){
+                return ;
+            }
+
+            $("#signupbtn").attr("class","disable");
+            $("#signupbtn").html('<i class="fa fa-spinner fa-pulse"></i> 注册中');
 
             if (ce == true) {
                 $.ajax({
-                    url: EMAIL_SIGNUP_URL,
                     type: 'post',
+                    url: EMAIL_SIGNUP_URL,
+                    async: false,
                     data: {
-                        email: email,
-                        pwd: pwd
+                        'email'   : email,
+                        'pwd'     : pwd
                     },
                     dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        if (data.error != null) {
-                            //ERROR_OUTPUT(data);
-                            $('.error_div').html(data.error);
-                            return false;
-                        } else if (data.success == 0) {
+                    success: function (data){
+                        if (data.error != null || data.length === 0) {
+                            $('#signupError').html(data.error);
+                            $("#signupbtn").attr("class","btn");
+                            $("#signupbtn").html('注册');
+                            return;
+                        }else if (data.success == 0) {
                             eval(data.script);
                         }
-                    },
-                    error: function (data) {
-                        console.log(data);
                     }
-                });
+                })
             }
         }
     }

@@ -28,7 +28,7 @@ $lang['error_OVER_SIZE']			= '宽高超出限制';
 
 
 $lang['error_PASSWORD_ERROR']		= '密码错误，请重新输入';
-$lang['error_LOGIN_ERROR']			= '登录失败,请检查用户名和密码是否正确';
+$lang['error_LOGIN_ERROR']			= '用户名不存在或密码错误';
 $lang['error_NOUSER_ERROR']			= '不存在该用户';
 $lang['error_REGISTER_ERROR']		= '注册失败';
 $lang['error_PHONE_REPEAT']			= "该手机号码已被注册";

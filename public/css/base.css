@@ -1769,12 +1769,26 @@ textarea:focus {
 
     line-height: 35px;
 
-    color: #888;
+    color: #444444;
     background-color: #fcee21;
 }
-.sign .btn:hover {
-    color: #444;
+.sign .disable{
+    border-radius: 5px;
+    width: 100%;
+    height: 35px;
+
+    line-height: 35px;
+
+    background: #f4f4f4;
+    color: #C3C3C3;
+    box-shadow: 0 0 5px #595959 inset;
+    cursor: normal;
 }
+.sign .btn:hover {
+    color: #0C0F08;
+    background: #f7cc1e;
+}
+
 .sign .signin .opt {
     display: inline-block;
 
@@ -1853,7 +1867,7 @@ textarea:focus {
     line-height: 29px;
 }
 .sign .signin .thirdparty {
-    margin-top: 15px;
+    margin-top: 5px;
     border-top: 1px dashed #eee;
     padding-top: 10px;
     width: 100%;
@@ -1883,9 +1897,9 @@ textarea:focus {
     color: #008000;
 }
 
-.sign .signin .tosignup {
+.sign .signin .tosignup,
+.sign .signup .tosignin {
     position: absolute;
-    bottom: 0;
     left: 0;
 
     width: 100%;
@@ -1898,20 +1912,17 @@ textarea:focus {
 
     cursor: pointer;
 }
-.sign .signup .tosignin {
-    position: absolute;
+
+.sign .signup .tosignin{
     top: 0;
-    left: 0;
+}
+.sign .signin .tosignup{
+    bottom: 0;
+}
 
-    width: 100%;
-    height: 40px;
-
-    line-height: 40px;
-
-    color: #fff;
-    background-color: #b3b3b3;
-
-    cursor: pointer;
+.sign .signin .tosignup:hover,
+.sign .signup .tosignin:hover{
+    color: #0C0F08;
 }
 
 /*sign end*/
@@ -2289,6 +2300,7 @@ hr.line {
 .swiper-slide {
     font-size: 16px;
     text-align: center;
+    background: #000000;
     position: relative;
 }
 
@@ -2311,7 +2323,7 @@ hr.line {
     top: 0;
     height: 100%;
     width: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0, .2),rgba(255,255,255,0),rgba(0,0,0,.2));
+    background: linear-gradient(to bottom, rgba(0,0,0,0),rgba(0,0,0,0),rgba(0,0,0,0),rgba(0,0,0,.2),rgba(0,0,0,.6),rgba(0,0,0,.8));
 }
 
 /*swiper end*/
@@ -2550,7 +2562,7 @@ hr.line {
     transition:all .4s ease-out;
 }
 .new-art .list .item .box .info .look{
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.8);
 }
 .new-art .list .item .box .info .look .icon{
     position: absolute;
@@ -2718,7 +2730,7 @@ hr.line {
 .artarea .artinfo {
     display: inline-block;
 
-    margin-top: 10px;
+    margin-top: 20px;
     width: 100%;
 
     text-align: right
@@ -3381,7 +3393,6 @@ img.zoom-img {
 .safesettig input[type="text"] {
     padding: 5px;
     width: 200px;
-    border-radius: 5px;
     color: #888888;
     border:1px #B3B3B3 solid ;
     transition: border-color .2s ease-in-out 0s;
