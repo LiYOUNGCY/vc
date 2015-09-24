@@ -78,11 +78,13 @@ class Article_model extends CI_Model
             $query = $query->where('article.type', $type);
         }
         if (!empty($pid)) {
-            $query = $query->like('pids', "|{$pid}|");
+            $query = $query->like('article.pids', "|{$pid}|");
         }
         if (!empty($tag)) {
-            $query = $query->like('tag', "|{$tag}|");
+            $query = $query->like('article.tag', "|{$tag}|");
         }
+
+        $query = $query->where('article.publish_status', '1');
         $query = $query->order_by($order)->limit($limit, $page * $limit)->get()->result_array();
         return $query;
     }
@@ -188,7 +190,8 @@ class Article_model extends CI_Model
       article.title,
       article.publish_time,
       article.read,
-      article.like
+      article.like,
+      article.publish_status
       ')
             ->join('article_type', 'article.type = article_type.id', 'left')
             ->join('user', 'user.id = article.uid')
@@ -196,6 +199,7 @@ class Article_model extends CI_Model
             ->limit($limit, $page * $limit)
             ->get('article')
             ->result_array();
+
         return $article;
     }
 
@@ -298,6 +302,25 @@ class Article_model extends CI_Model
     public function delete_tag($id)
     {
         $this->db->delete('article_tag', array('id' => $id));
+        return $this->db->affected_rows() === 1;
+    }
+
+
+    public function publish($id)
+    {
+        $data = array(
+                'publish_status' => 1
+            );
+        $this->db->where('id', $id)->update('article', $data);
+        return $this->db->affected_rows() === 1;
+    }
+
+    public function cancel_publish($id)
+    {
+        $data = array(
+                'publish_status' => 0
+            );
+        $this->db->where('id', $id)->update('article', $data);
         return $this->db->affected_rows() === 1;
     }
 }

@@ -20,10 +20,12 @@ class Publish extends MY_Controller
             'font-awesome/css/font-awesome.min.css',
             '../ueditor/themes/default/css/umeditor.css',
             'ueditor.css',
-            'radiocheck.min.css'
+            'radiocheck.min.css',
+            'alert.css'
         );
         $head['javascript'] = array(
-            'jquery.js'
+            'jquery.js',
+            'alert.min.js'
         );
 
         $user['user'] = $this->user;
@@ -145,4 +147,43 @@ class Publish extends MY_Controller
     }
 
 
+    public function publish()
+    {
+        $id = $this->sc->input('id');
+
+        $result = $this->article_service->publish($id);
+
+        if($result) {
+            $output = array(
+                'success'   => 0
+                );
+            echo json_encode($output);
+        }
+        else {
+            $output = array(
+                    'error' => -1
+                );
+            echo json_encode($output);
+        }
+    }
+
+    public function cancel_publish()
+    {
+        $id = $this->sc->input('id');
+
+        $result = $this->article_service->cancel_publish($id);
+
+        if($result) {
+            $output = array(
+                'success'   => 0
+                );
+            echo json_encode($output);
+        }
+        else {
+            $output = array(
+                    'error' => -1
+                );
+            echo json_encode($output);
+        }
+    }
 }

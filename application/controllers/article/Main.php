@@ -72,6 +72,5 @@ class Main extends MY_Controller
             $this->load->view('common/head', $data);
             $this->load->view('topic_list', $body);
         }
-
     }
 }

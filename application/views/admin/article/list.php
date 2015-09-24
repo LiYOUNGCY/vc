@@ -83,6 +83,17 @@
                                                 type="button" class="btn btn-success btn-circle"><i
                                                 class="fa fa-edit"></i>
                                         </button>
+                                        <?php if($v['publish_status'] == 0) {?>
+                                        <button data-toggle="tooltip" title="发表" effect="publish" u="<?= $v['id'] ?>"
+                                                type="button" class="btn btn-success btn-circle"><i
+                                                class="fa fa-edit"></i>
+                                        </button>
+                                        <?php } else { ?>
+                                        <button data-toggle="tooltip" title="取消发表" effect="cancel" u="<?= $v['id'] ?>"
+                                                type="button" class="btn btn-danger btn-circle"><i
+                                                class="fa fa-edit"></i>
+                                        </button>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -189,7 +200,6 @@
                             if (data.script != "") {
                                 eval(data.script);
                             }
-
                         });
                     }
                     else if (data.success == 0) {
@@ -218,12 +228,57 @@
             }
         });
 
-        //发布文章按钮
+        //发表文章
+        $("button[effect=publish]").click(function () {
+            var aid = $(this).attr('u');
+            console.log(aid);
+            if (aid != null && aid != "") {
+                $.ajax({
+                    url: BASE_URL + 'article/publish/publish',
+                    data: {
+                        id: aid
+                    },
+                    dataType: 'json',
+                    type: 'post',
+                    success : function(data) {
+                        console.log(data);
+                        if(data.success == 0)
+                            alert('成功发表');
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+
+        //取消发表
+        $("button[effect=cancel]").click(function () {
+            var aid = $(this).attr('u');
+            console.log(aid);
+            if (aid != null && aid != "") {
+                $.ajax({
+                    url: BASE_URL + 'article/publish/cancel_publish',
+                    data: {
+                        id: aid
+                    },
+                    dataType: 'json',
+                    type: 'post',
+                    success : function(data) {
+                        console.log(data);
+                        if(data.success == 0) {
+                        alert('成功取消发布');
+                        window.location.reload();
+                        }
+                    }
+                });
+            }
+        });
+
+        //写文章按钮
         $('#publish_article').click(function () {
             window.location.href = BASE_URL + 'publish/article';
         });
 
-        //发布专题按钮
+        //写专题按钮
         $('#publish_topic').click(function () {
             window.location.href = BASE_URL + 'publish/topic';
         });

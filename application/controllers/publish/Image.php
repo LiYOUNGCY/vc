@@ -1,6 +1,6 @@
 <?php
 class Image extends MY_Controller{
-	
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -12,26 +12,25 @@ class Image extends MY_Controller{
 	 * @return [type] [description]
 	 */
 	public function up_um_img()
-	{		
+	{
 	    //上传配置
 	    $config = array(
-	        "savePath"   => "./public/upload/" ,             //存储文件夹
-	        "maxSize"    => 1000 ,                          //允许的文件最大尺寸，单位KB
-	        "allowFiles" => array( ".gif" , ".png" , ".jpg" , ".jpeg" , ".bmp" )  //允许的文件格式
-	    );	    			
+	        "savePath"   => "./public/upload/" ,                                   //存储文件夹
+	        "allowFiles" => array( ".gif" , ".png" , ".jpg" , ".jpeg" , ".bmp" )   //允许的文件格式
+	    );
     	//上传文件域名
     	$fileField = 'upfile';
 		if( isset($_FILES[$fileField]))
 		{
 	    	$info = $this->image_service->up_um_img($fileField,$config);
 
-	     	$callback= isset($_GET['callback']) ? $_GET['callback'] : NULL;		   	
+	     	$callback= isset($_GET['callback']) ? $_GET['callback'] : NULL;
 			//返回数据
 			if($callback) {
 		        echo '<script>'.$callback.'('.json_encode($info).')</script>';
 		    } else {
 		        echo json_encode($info);
-		    }				
+		    }
 		}
 	}
 
@@ -55,7 +54,7 @@ class Image extends MY_Controller{
 	{
 		$img = $this->sc->input(array('img','x','y','w','h'));
 		$uid = $this->user['id'];
-		$result = $this->image_service->save_headpic($img['img'],$img['x'],$img['y'],$img['w'],$img['h'],$uid);	
+		$result = $this->image_service->save_headpic($img['img'],$img['x'],$img['y'],$img['w'],$img['h'],$uid);
 		if($result)
 		{
 			redirect(base_url()."feed",'location');
@@ -75,7 +74,7 @@ class Image extends MY_Controller{
 		$uid = $this->user['id'];
 		$result = $this->image_service->upload_production('upfile',$uid);
 		header('Content-Type:application/json');
-		echo json_encode($result);			
+		echo json_encode($result);
 	}
 	/**
 	 * [upload_slider 上传轮播图]
@@ -86,6 +85,6 @@ class Image extends MY_Controller{
 		$uid = $this->user['id'];
 		$result = $this->image_service->upload_slider('upfile',$uid);
 		header('Content-Type:application/json');
-		echo json_encode($result);					
+		echo json_encode($result);
 	}
 }

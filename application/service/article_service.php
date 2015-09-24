@@ -251,4 +251,14 @@ class Article_service extends MY_Service{
         $query = $this->article_model->get_article_tag();
         return $query;
     }
+
+    public function publish($id)
+    {
+        return $this->article_model->publish($id);
+    }
+
+    public function cancel_publish($id)
+    {
+        return $this->article_model->cancel_publish($id);
+    }
 }

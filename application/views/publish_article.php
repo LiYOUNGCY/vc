@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="item options">
-                    <div class="save btn" id="submit">发布</div>
+                    <div class="save btn" id="submit">保存</div>
                 </div>
 
             </form>
@@ -45,7 +45,15 @@
     $(function () {
         //实例化编辑器
         var um = UM.getEditor('editor');
+
+
         $('#submit').click(function () {
+            var str = $('#article_title').val();
+            if(str == '' || str == null) {
+                swal("文章标题不能为空");
+                return ;
+            }
+
             var tags = '|';
             $('input[type=checkbox]').each(function () {
                 if ($(this).is(':checked') === true) {
@@ -54,7 +62,6 @@
                     tags = tags + tag_id + '|';
                 }
             });
-//            tags = tags.substr(0, tags.length - 1);
             $('#tags').val(tags);
             $('#aform').submit();
         });
