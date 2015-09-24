@@ -118,5 +118,15 @@ class Artist_service extends MY_Service{
 		{
 			return FALSE;
 		}	
-	}	
+	}
+
+    public function publish($id)
+    {
+        return $this->artist_model->publish($id);
+    }
+
+    public function cancel_publish($id)
+    {
+        return $this->artist_model->cancel_publish($id);
+    }
 }

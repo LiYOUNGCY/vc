@@ -32,6 +32,7 @@ class Publish extends MY_Controller{
 		$user['user']= $this->user;
 		$user['sign'] = $this->load->view('common/sign', '', TRUE);
 		$data['top'] = $this->load->view('common/top', $user, TRUE);
+        $data['footer'] = $this->load->view('common/footer', '', TRUE);
 
 
 
@@ -130,6 +131,46 @@ class Publish extends MY_Controller{
 			}
 		}
 		$this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().'update/artist/'.$aid.'";'));
-
 	}
+
+
+    public function publish()
+    {
+        $id = $this->sc->input('id');
+
+        $result = $this->artist_service->publish($id);
+
+        if($result) {
+            $output = array(
+                'success'   => 0
+            );
+            echo json_encode($output);
+        }
+        else {
+            $output = array(
+                'error' => -1
+            );
+            echo json_encode($output);
+        }
+    }
+
+    public function cancel_publish()
+    {
+        $id = $this->sc->input('id');
+
+        $result = $this->artist_service->cancel_publish($id);
+
+        if($result) {
+            $output = array(
+                'success'   => 0
+            );
+            echo json_encode($output);
+        }
+        else {
+            $output = array(
+                'error' => -1
+            );
+            echo json_encode($output);
+        }
+    }
 }

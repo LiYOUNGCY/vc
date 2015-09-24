@@ -46,7 +46,6 @@ class Main extends MY_Controller
     {
 		$page = $this->sc->input('page');
 
-//        $page = 0;
 
         $medium = $this->sc->input('m', 'get');
         $categories = NULL;

@@ -62,6 +62,7 @@ class Artist_model extends CI_Model{
 	public function get_artist_list($page = 0, $limit = 6, $order = '')
 	{
 		$this->db->select('artist.id, artist.name, artist.pic, artist.intro');
+        $this->db->where('publish_status', '1');
 		if( ! empty($order))
 		{
 			$this->db->order_by($order);
@@ -95,6 +96,12 @@ class Artist_model extends CI_Model{
 		return $this->db->insert_id();
 	}
 
+
+    /**
+     * 根据关键字搜索艺术家
+     * @param $keyword
+     * @return mixed
+     */
 	public function get_artist_by_keyword($keyword)
     {
         $query = $this->db
@@ -105,11 +112,51 @@ class Artist_model extends CI_Model{
 					artist.intro,
 					artist.creat_time
 					')
+            ->where('publish_status', '1')
             ->from('artist')
             ->like('artist.name', $keyword)
             ->get()
             ->result_array();
 
         return $query;
+    }
+
+
+
+    public function admin_get_artist_list($page = 0, $limit = 10, $order = 'id DESC')
+    {
+        $query = $this->db->order_by($order)->limit($limit, $page * $limit)->get('artist')->result_array();
+        return $query;
+    }
+
+
+    public function get_artist_count()
+    {
+        return $this->db->count_all('artist');
+    }
+
+
+    public function delete_artist($id)
+    {
+        $this->db->where('id', $id)->delete('artist');
+        return $this->db->affected_rows() === 1;
+    }
+
+    public function publish($id)
+    {
+        $data = array(
+            'publish_status' => 1
+        );
+        $this->db->where('id', $id)->update('artist', $data);
+        return $this->db->affected_rows() === 1;
+    }
+
+    public function cancel_publish($id)
+    {
+        $data = array(
+            'publish_status' => 0
+        );
+        $this->db->where('id', $id)->update('artist', $data);
+        return $this->db->affected_rows() === 1;
     }
 }

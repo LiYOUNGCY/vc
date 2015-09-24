@@ -2,6 +2,7 @@
 <div class="main-wrapper">
     <!-- 顶部 -->
     <?php echo $top;?>
+
     <div class="container">
         <div class="content edit">
             <form class="list" method="post" action="<?=base_url()?>production/publish/update_production">
@@ -15,7 +16,7 @@
                                 <input type="file" name="upfile" id="upfile" onchange="file_upload()">
                                 <i class="fa fa-camera fa-5x"></i>
                             </div>
-                            <img id="image" src="" width="100%" height="100%">
+                            <img id="image" src="" width="100%" height="auto">
                         </div>
                     </div>
                 </div>
@@ -43,7 +44,8 @@
                     <label for="medium">艺术门类：</label>
                     <select class="dropdown" id="medium" name="medium">
                         <?php foreach ($medium as $key => $value) { ?>
-                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                            <option value="<?= $value['id'] ?>"
+                                <?php if($production['medium'] == $value['id']) echo 'selected';?>><?= $value['name'] ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -51,7 +53,7 @@
                     <label for="style">风格：</label>
                     <select class="dropdown" id="style" name="style">
                         <?php foreach ($style as $key => $value) { ?>
-                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                            <option value="<?= $value['id'] ?>" <?php if($production['style'] == $value['id']) echo 'selected';?>><?= $value['name'] ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -69,8 +71,7 @@
                     <label for="creat_time">创作日期：</label>
                     <input id="creat_time" type="text" name="creat_time" value="<?=$production['creat_time']?>">
                 </div>
-                <div class="options">
-                    <div class="btn cancel" onclick="">取消</div>
+                <div class="item options">
                     <div id="save" class="btn save">保存</div>
                 </div>
             </form>
@@ -123,6 +124,7 @@
                     $('#img').attr('value',path);
                     $('#image').show();
                     $("#camera_warp").hide();
+                    $(".headpic").css('height', 'auto');
                 }
 
             },

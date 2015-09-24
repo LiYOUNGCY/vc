@@ -42,12 +42,14 @@ class Production_model extends CI_Model
                                     production.h,
                                     production.w,
                                     production.l,
-                                    production.type,
+                                    production_style.name as style,
                                     production.like,
                                     production.intro,
                                     production.price,
                                     production.creat_time
 		');
+
+        $query = $query->join('production_style', 'production_style.id = production.style');
 
         if (is_numeric($meid)) {
         }
@@ -114,7 +116,7 @@ class Production_model extends CI_Model
      * @param  [type] $creat_time [description]
      * @return [type]             [description]
      */
-    public function insert_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $type, $marterial, $creat_time)
+    public function insert_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $style, $medium, $creat_time)
     {
         $data = array(
             'name' => $name,
@@ -125,8 +127,8 @@ class Production_model extends CI_Model
             'l' => $l,
             'w' => $w,
             'h' => $h,
-            'type' => $type,
-            'marterial' => $marterial,
+            'style' => $style,
+            'medium' => $medium,
             'creat_time' => $creat_time,
             'publish_time' => date("Y-m-d H:i:s", time()),
             'creat_by' => $uid
@@ -210,5 +212,31 @@ class Production_model extends CI_Model
             ->result_array();
 
         return $query;
+    }
+
+
+    /**
+     * 作品下架
+     */
+    public function pull_off($id)
+    {
+        $data = array(
+            'status' => 2
+            );
+        $this->db->where('id', $id)->update('production', $data);
+        return $this->db->affected_rows() === 1;
+    }
+
+
+    /**
+     * 作品上架
+     */
+    public function put_on($id)
+    {
+        $data = array(
+            'status' => 0
+            );
+        $this->db->where('id', $id)->update('production', $data);
+        return $this->db->affected_rows() === 1;
     }
 }

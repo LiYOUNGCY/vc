@@ -196,9 +196,9 @@ class Production_service extends MY_Service{
 	 * @param  [type] $creat_time [description]
 	 * @return [type]             [description]
 	 */
-	public function publish_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $type, $marterial, $creat_time)
+	public function publish_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $style, $medium, $creat_time)
 	{
-		$insert_result = $this->production_model->insert_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $type, $marterial, $creat_time);
+		$insert_result = $this->production_model->insert_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $style, $medium, $creat_time);
 		if($insert_result)
 		{
 			//更新艺术家作品数
@@ -224,8 +224,9 @@ class Production_service extends MY_Service{
 	 * @param  [type] $status [艺术品状态]
 	 * @return [type]         [description]
 	 */
-	public function update_production($pid, $uid, $name, $intro, $aid, $price, $pic, $l, $w, $h, $type, $marterial, $creat_time, $status)
+	public function update_production($pid, $uid, $name, $intro, $aid, $price, $pic, $l, $w, $h, $style, $medium, $creat_time, $status)
 	{
+        echo $style, $medium;
 		$data = array(
 			'name'   	=> $name,
 			'intro' 	=> $intro,
@@ -235,13 +236,13 @@ class Production_service extends MY_Service{
 			'l'			=> $l,
 			'w' 		=> $w,
 			'h' 		=> $h,
-			'type' 		=> $type,
-			'marterial' => $marterial,
+			'style' 	=> $style,
+			'medium'    => $medium,
 			'creat_time'=> $creat_time,
 			'status' 	=> $status,
 			'modify_by' => $uid
 		);
-		$update_result = $this->production_model->update_production($pid,$data);
+		$update_result = $this->production_model->update_production($pid, $data);
 		if($update_result)
 		{
 			return TRUE;

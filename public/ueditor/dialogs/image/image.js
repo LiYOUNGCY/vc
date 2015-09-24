@@ -185,6 +185,7 @@
         },
         uploadComplete: function(r){
             alert(r);
+            window.console.log(r);
             var me = this;
             try{
                 var json = eval('('+r+')');

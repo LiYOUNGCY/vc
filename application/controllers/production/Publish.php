@@ -31,6 +31,7 @@ class Publish extends MY_Controller
         $user['user'] = $this->user;
         $user['sign'] = $this->load->view('common/sign', '', TRUE);
         $data['top'] = $this->load->view('common/top', $user, TRUE);
+        $data['footer'] = $this->load->view('common/footer', $user, TRUE);
 
         $production_type = $this->production_service->get_type_list(0, NULL);
         $production_marterial = $this->production_service->get_marterial_list(0, NULL);
@@ -82,9 +83,9 @@ class Publish extends MY_Controller
         $result = $this->production_service->publish_production(
             $arr['production_name'], $this->user['id'], $arr['production_intro'], $arr['aid'],
             $arr['price'], $arr['pic'], $arr['l'], $arr['w'], $arr['h'],
-            $arr['type'], $arr['marterial'], $arr['creat_time']);
+            $arr['style'], $arr['medium'], $arr['creat_time']);
         if ($result) {
-            redirect(base_url() . 'production/' . $result, 'location');
+            redirect(base_url() . 'admin/production');
         } else {
             $this->error->output('INVALID_REQUEST', array('script' => 'window.location.href="' . base_url() . 'publish/production";'));
         }
@@ -107,15 +108,63 @@ class Publish extends MY_Controller
         $this->sc->set_error_redirect($error_redirect);
 
 
-        $arr = $this->sc->input(array('pid', 'production_name', 'production_intro', 'aid', 'price', 'pic', 'l', 'w', 'h', 'type', 'marterial', 'creat_time', 'status'));
+        $arr = $this->sc->input(array('pid', 'production_name', 'production_intro', 'aid', 'price', 'pic', 'l', 'w', 'h', 'style', 'medium', 'creat_time', 'status'));
         $result = $this->production_service->update_production(
             $arr['pid'], $this->user['id'], $arr['production_name'], $arr['production_intro'],
             $arr['aid'], $arr['price'], $arr['pic'], $arr['l'], $arr['w'],
-            $arr['h'], $arr['type'], $arr['marterial'], $arr['creat_time'], $arr['status']);
+            $arr['h'], $arr['style'], $arr['medium'], $arr['creat_time'], $arr['status']);
         if ($result) {
-            redirect(base_url() . 'production/' . $pid, 'location');
+            redirect(base_url() . 'admin/production');
         } else {
             $this->error->output('INVALID_REQUEST', array('script' => 'window.location.href="' . base_url() . 'update/production/' . $pid . '";'));
+        }
+    }
+
+
+    /**
+     * 作品下架
+     */
+    public function pull_off()
+    {
+        $id = $this->sc->input('id');
+
+        $result = $this->production_model->pull_off($id);
+
+        if($result) {
+            $output = array(
+                'success' => 0
+                );
+            echo json_encode($output);
+        }
+        else {
+            $output = array(
+                'error' => -1
+                );
+            echo json_encode($output);
+        }
+    }
+
+
+    /**
+     * 作品上架
+     */
+    public function put_on()
+    {
+        $id = $this->sc->input('id');
+
+        $result = $this->production_model->put_on($id);
+
+        if($result) {
+            $output = array(
+                'success' => 0
+                );
+            echo json_encode($output);
+        }
+        else {
+            $output = array(
+                'error' => -1
+                );
+            echo json_encode($output);
         }
     }
 }

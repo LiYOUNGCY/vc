@@ -43,7 +43,6 @@
                     </div>
                 </div>
                 <div class="options">
-                    <div class="btn cancel" onclick="">取消</div>
                     <div id="save" class="btn save">保存</div>
                 </div>
             </form>

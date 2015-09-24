@@ -1,10 +1,10 @@
 <?php
 
-class Email extends MY_Controller 
+class Email extends MY_Controller
 {
     function __construct()
     {
-        parent::__construct();  
+        parent::__construct();
         $this->load->service('user_service');
     }
 
@@ -24,9 +24,9 @@ class Email extends MY_Controller
         }
     }
 
-    function test()
-    {
-        $this->user_service->validate_email(1, '981533089@qq.com');
-        echo 'send email';
-    }
+    // function test()
+    // {
+    //     $this->user_service->validate_email(1, '981533089@qq.com');
+    //     echo 'send email';
+    // }
 }

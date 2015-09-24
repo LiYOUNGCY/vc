@@ -4,7 +4,7 @@
     <div class="container">
         <div class="item-list" id="item-list">
             <div class="filter-warp" id="filter">
-                <div class="filter">
+                <div class="filter clearfix">
                     <ul class="fc-target">
                         <li>热门分类：</li>
                         <li><a href="javascript:void(0)" class="link <?php if ($get_tag == 0) echo 'active'; ?>"
