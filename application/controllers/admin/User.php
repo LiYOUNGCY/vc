@@ -19,7 +19,8 @@ class User extends MY_Controller
 			$count= $this->user_model->get_user_count();
 			$role = $this->user_model->get_role_list();
 
-			$navbar 	= $this->load->view('admin/common/navbar',"",TRUE);
+			$user['user'] = $this->user;
+            $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
 
 			//分页数据
 			$p = array(
@@ -50,7 +51,8 @@ class User extends MY_Controller
 			$count= $this->auth_model->get_auth_count();
 			$role = $this->user_model->get_role_list();
 
-			$navbar = $this->load->view('admin/common/navbar',"",TRUE);
+			$user['user'] = $this->user;
+            $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
 
 			//分页数据
 			$p = array(
@@ -79,7 +81,8 @@ class User extends MY_Controller
             $count= $this->user_model->get_role_count();
             $role = $this->user_model->get_role_list();
 
-            $navbar = $this->load->view('admin/common/navbar',"",TRUE);
+            $user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
 
             //分页数据
             $p = array(
@@ -126,7 +129,8 @@ class User extends MY_Controller
 			}
 			$role = $this->user_model->get_role_list();
 
-			$navbar = $this->load->view('admin/common/navbar',"",TRUE);
+			$user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
 			$foot 		= $this->load->view('admin/common/foot',"",TRUE);
 			//页面数据
 			$body = array(
@@ -147,7 +151,8 @@ class User extends MY_Controller
 				show_404();
 			}
 			$role = $this->user_model->get_role_list();
-			$navbar = $this->load->view('admin/common/navbar',"",TRUE);
+			$user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
 			$foot 		= $this->load->view('admin/common/foot',"",TRUE);
 			//页面数据
 			$body = array(
@@ -166,7 +171,8 @@ class User extends MY_Controller
             {
                 show_404();
             }
-            $navbar = $this->load->view('admin/common/navbar',"",TRUE);
+            $user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
             $foot 		= $this->load->view('admin/common/foot',"",TRUE);
             //页面数据
             $body = array(

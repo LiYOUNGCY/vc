@@ -32,7 +32,8 @@ class Production extends MY_Controller
             $status = array('已上架', '已售出', '已下架');
             $count = $this->production_model->get_production_count();
 
-            $navbar = $this->load->view('admin/common/navbar', "", TRUE);
+            $user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
 
             //分页数据
             $p = array(
@@ -84,7 +85,8 @@ class Production extends MY_Controller
                 $count = 1;
             }
 
-            $navbar = $this->load->view('admin/common/navbar', "", TRUE);
+            $user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
 
             //分页数据
             $p = array(
@@ -116,7 +118,8 @@ class Production extends MY_Controller
 //                show_404();
 //            }
 
-            $navbar = $this->load->view('admin/common/navbar', "", TRUE);
+            $user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
             $foot = $this->load->view('admin/common/foot', "", TRUE);
             $this->load->view('admin/common/head');
 
@@ -184,7 +187,8 @@ class Production extends MY_Controller
             $count = 1;
         }
 
-        $navbar = $this->load->view('admin/common/navbar', "", TRUE);
+        $user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
 
         //分页数据
         $p = array(
@@ -216,7 +220,8 @@ class Production extends MY_Controller
 //                show_404();
 //            }
 
-        $navbar = $this->load->view('admin/common/navbar', "", TRUE);
+        $user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
         $foot = $this->load->view('admin/common/foot', "", TRUE);
         $this->load->view('admin/common/head');
 
@@ -284,7 +289,8 @@ class Production extends MY_Controller
                 $count = 1;
             }
 
-            $navbar = $this->load->view('admin/common/navbar', "", TRUE);
+            $user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
 
             //分页数据
             $p = array(
@@ -316,7 +322,8 @@ class Production extends MY_Controller
 //                show_404();
 //            }
 
-            $navbar = $this->load->view('admin/common/navbar', "", TRUE);
+            $user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
             $foot = $this->load->view('admin/common/foot', "", TRUE);
             $this->load->view('admin/common/head');
 
@@ -384,7 +391,8 @@ class Production extends MY_Controller
                 $count = 1;
             }
 
-            $navbar = $this->load->view('admin/common/navbar', "", TRUE);
+            $user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
 
             //分页数据
             $p = array(
@@ -420,7 +428,8 @@ class Production extends MY_Controller
 //                show_404();
 //            }
 
-            $navbar = $this->load->view('admin/common/navbar', "", TRUE);
+            $user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
             $foot = $this->load->view('admin/common/foot', "", TRUE);
             $this->load->view('admin/common/head');
 

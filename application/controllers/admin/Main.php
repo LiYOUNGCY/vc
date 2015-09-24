@@ -11,11 +11,12 @@ class Main extends MY_Controller{
 	 */
 	public function index()
 	{
-		$navbar = $this->load->view('admin/common/navbar',"",TRUE);
-		$foot = $this->load->view('admin/common/foot',"",TRUE);				
-		$body['navbar'] = $navbar;	
+        $user['user'] = $this->user;
+		$navbar = $this->load->view('admin/common/navbar', $user,TRUE);
+		$foot = $this->load->view('admin/common/foot',"",TRUE);
+		$body['navbar'] = $navbar;
 		$body['foot']	= $foot;
- 		$this->load->view('admin/common/head');		
+ 		$this->load->view('admin/common/head');
 		$this->load->view('admin/main',$body);
 	}
 	/**

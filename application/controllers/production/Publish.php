@@ -81,7 +81,7 @@ class Publish extends MY_Controller
         $result = $this->production_service->publish_production(
             $arr['production_name'], $this->user['id'], $arr['production_intro'], $arr['aid'],
             $arr['price'], $arr['pic'], $arr['l'], $arr['w'], $arr['h'],
-            $arr['type'], $arr['marterial'], $arr['creat_time']);
+            $arr['style'], $arr['medium'], $arr['creat_time']);
         if ($result) {
             redirect(base_url() . 'production/' . $result, 'location');
         } else {
@@ -106,11 +106,11 @@ class Publish extends MY_Controller
         $this->sc->set_error_redirect($error_redirect);
 
 
-        $arr = $this->sc->input(array('pid', 'production_name', 'production_intro', 'aid', 'price', 'pic', 'l', 'w', 'h', 'type', 'marterial', 'creat_time', 'status'));
+        $arr = $this->sc->input(array('pid', 'production_name', 'production_intro', 'aid', 'price', 'pic', 'l', 'w', 'h', 'style', 'medium', 'creat_time', 'status'));
         $result = $this->production_service->update_production(
             $arr['pid'], $this->user['id'], $arr['production_name'], $arr['production_intro'],
             $arr['aid'], $arr['price'], $arr['pic'], $arr['l'], $arr['w'],
-            $arr['h'], $arr['type'], $arr['marterial'], $arr['creat_time'], $arr['status']);
+            $arr['h'], $arr['style'], $arr['medium'], $arr['creat_time'], $arr['status']);
         if ($result) {
             redirect(base_url() . 'production/' . $pid, 'location');
         } else {

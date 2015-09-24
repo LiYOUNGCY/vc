@@ -114,7 +114,7 @@ class Production_model extends CI_Model
      * @param  [type] $creat_time [description]
      * @return [type]             [description]
      */
-    public function insert_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $type, $marterial, $creat_time)
+    public function insert_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $style, $medium, $creat_time)
     {
         $data = array(
             'name' => $name,
@@ -125,8 +125,8 @@ class Production_model extends CI_Model
             'l' => $l,
             'w' => $w,
             'h' => $h,
-            'type' => $type,
-            'marterial' => $marterial,
+            'style' => $style,
+            'medium' => $medium,
             'creat_time' => $creat_time,
             'publish_time' => date("Y-m-d H:i:s", time()),
             'creat_by' => $uid

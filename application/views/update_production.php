@@ -2,6 +2,7 @@
 <div class="main-wrapper">
     <!-- 顶部 -->
     <?php echo $top;?>
+
     <div class="container">
         <div class="content edit">
             <form class="list" method="post" action="<?=base_url()?>production/publish/update_production">
@@ -43,7 +44,8 @@
                     <label for="medium">艺术门类：</label>
                     <select class="dropdown" id="medium" name="medium">
                         <?php foreach ($medium as $key => $value) { ?>
-                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                            <option value="<?= $value['id'] ?>"
+                                <?php if($production['medium'] == $value['id']) echo 'selected';?>><?= $value['name'] ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -51,7 +53,7 @@
                     <label for="style">风格：</label>
                     <select class="dropdown" id="style" name="style">
                         <?php foreach ($style as $key => $value) { ?>
-                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                            <option value="<?= $value['id'] ?>" <?php if($production['style'] == $value['id']) echo 'selected';?>><?= $value['name'] ?></option>
                         <?php } ?>
                     </select>
                 </div>

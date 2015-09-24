@@ -18,8 +18,8 @@ class Article extends MY_Controller{
 			//获取文章列表
 			$article = $this->article_model->admin_get_article_list($page,$limit);
 			$count   = $this->article_model->get_article_count();
-
-			$navbar  = $this->load->view('admin/common/navbar',"",TRUE);
+            $user['user'] = $this->user;
+            $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
 
 			//分页数据
 			$p = array(
@@ -46,8 +46,8 @@ class Article extends MY_Controller{
             //获取文章标签列表
             $tag     = $this->article_model->get_all_tag();
             $count   = $this->article_model->get_tag_count();
-
-            $navbar  = $this->load->view('admin/common/navbar',"",TRUE);
+$user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
 
             //分页数据
             $p = array(
@@ -78,7 +78,8 @@ class Article extends MY_Controller{
             show_404();
         }
 
-        $navbar  = $this->load->view('admin/common/navbar',"",TRUE);
+        $user['user'] = $this->user;
+        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
         $foot 	 = $this->load->view('admin/common/foot',"",TRUE);
 
         $this->load->view('admin/common/head');
