@@ -62,6 +62,9 @@ var GET_NOTIFICATION = BASE_URL + 'notification/main/get_notification_list';
 //客服消息
 var BACKUP_MESSAGE = BASE_URL + 'conversation/custom/send_message_by_user';
 
+//修改密码
+var CHANGE_PWD = BASE_URL + 'account/setting/change_password';
+
 /**
  * [trim 去掉字符串前后两端的空格]
  */

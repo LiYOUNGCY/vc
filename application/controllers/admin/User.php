@@ -341,7 +341,7 @@ class User extends MY_Controller
 		$result = $this->auth_model->update_auth($aid,$auth);
 		if($result)
 		{
-			echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'user/edit/a/'.$aid.'";</script>';
+			echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'user/a";</script>';
 		}
 		else
 		{

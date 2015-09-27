@@ -398,4 +398,9 @@ class User_model extends CI_Model
     {
         $this->db->where('id', $uid)->update('user', array('email_status'=>1));
     }
+
+    public function change_phone($id, $phone) {
+        $this->db->where('id', $id)->update('user', array('phone'=>$phone));
+        return $this->db->affected_rows() === 1;
+    }
 }

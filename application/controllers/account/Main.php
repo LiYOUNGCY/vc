@@ -16,7 +16,7 @@ class Main extends MY_Controller
             'swiper.min.css',
             'font-awesome/css/font-awesome.min.css',
             'base.css'
-            
+
         );
         $data['javascript'] = array(
             'jquery.js',
@@ -28,7 +28,7 @@ class Main extends MY_Controller
 
         $user['user'] = $this->user;
         $user['sign'] = $this->load->view('common/sign', '', TRUE);
-       
+
         $data['title']        = "忘记密码";
         $body['top']          = $this->load->view('common/top', $user, TRUE);
         $body['footer']       = $this->load->view('common/footer', '', TRUE);

@@ -236,6 +236,10 @@ class User_service extends MY_Service
         $this->email->send();
     }
 
+    public function change_phone($id, $phone) {
+        return $this->user_model->change_phone($id, $phone);
+    }
+
 
     /**
      * [_clear 清除值为空的变量]
