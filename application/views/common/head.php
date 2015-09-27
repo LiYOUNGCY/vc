@@ -13,6 +13,8 @@
     <title>Artvc - <?= $title ?></title>
 
     <!-- 导入 Javascript -->
+
+    <script src="<?= base_url() ?>public/js/validate.js"></script>
     <?php
     if (isset($javascript)) {
         foreach ($javascript as $value) {
@@ -21,9 +23,9 @@
     }
     ?>
 
-    <script type="text/javascript" src="<?= base_url() ?>public/js/yunba/socket.io-1.3.5.min.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>public/js/yunba/yunba-js-sdk.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>public/js/cookie.js"></script>
+    <script src="<?= base_url() ?>public/js/yunba/socket.io-1.3.5.min.js"></script>
+    <script src="<?= base_url() ?>public/js/yunba/yunba-js-sdk.js"></script>
+    <script src="<?= base_url() ?>public/js/cookie.js"></script>
 
     <!-- 导入 CSS -->
     <?php
@@ -35,6 +37,6 @@
     ?>
 
     <input id="BASE_URL" type="hidden" value="<?= base_url() ?>">
+    <script src="<?= base_url() ?>public/js/common.js"></script>
 
-    <script type="text/javascript" src="<?= base_url() ?>public/js/common.js"></script>
 </head>

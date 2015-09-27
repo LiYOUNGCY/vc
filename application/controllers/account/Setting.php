@@ -21,7 +21,7 @@ class Setting extends MY_Controller
         $data['javascript'] = array(
             'jquery.js',
             'alert.min.js',
-            'validate.js',
+
             'error.js',
             'geo.js'
         );
@@ -51,17 +51,13 @@ class Setting extends MY_Controller
 		}
 	}
 
+
 	/**
 	 * [change_password 修改密码]
 	 * @return [type] [description]
 	 */
 	public function change_password()
 	{
-//		$error_redirect = array(
-//			'script' => 'window.location.href ="'.base_url().'setting/pwd";'
-//		);
-//		$this->sc->set_error_redirect($error_redirect);
-
 		$old_pwd = $this->sc->input('old_pwd');
 		$pwd 	 = $this->sc->input('pwd');
 
@@ -76,6 +72,7 @@ class Setting extends MY_Controller
 			$this->error->output('INVALID_REQUEST');
 		}
 	}
+
 
 	/**
 	 * [update_account 更新个人资料]

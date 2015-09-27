@@ -539,6 +539,7 @@ img {
     overflow: hidden;
 }
 .item-list .artist .backcard .intro p{
+    text-indent:2em;
     text-align: justify;
     line-height: 20px;
 }
@@ -2999,6 +3000,9 @@ img.zoom-img {
     position: relative;
 }
 
+.artist_detail .detail .intro{
+    text-indent:2em;
+}
 .artistevaluate{
     width: 100%;
     position: relative;

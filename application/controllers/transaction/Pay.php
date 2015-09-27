@@ -11,14 +11,13 @@ class Pay extends MY_Controller{
             'swiper.min.css',
             'font-awesome/css/font-awesome.min.css',
             'base.css'
-            
+
         );
         $data['javascript'] = array(
             'jquery.js',
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
-            'error.js',
-            'validate.js'
+            'error.js'
         );
 
         $user['user'] = $this->user;
@@ -52,7 +51,7 @@ class Pay extends MY_Controller{
 	private function _alipay()
 	{
 		$transaction = $this->sc->input(array('pids', 'amount', 'tel', 'address'));
-		$this->transaction_service->creat_payment($this->user['id'], $transaction['pids'], $transaction['amount'], $transaction['tel'], $transaction['address'],'alipay');		
+		$this->transaction_service->creat_payment($this->user['id'], $transaction['pids'], $transaction['amount'], $transaction['tel'], $transaction['address'],'alipay');
 	}
 
 }
