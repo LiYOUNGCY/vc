@@ -66,7 +66,9 @@
             </div>
             <div class="item-list" id="item-list">
 
-
+            </div>
+            <div class="nonebox">
+                     
             </div>
         </div>
     </div>
@@ -118,7 +120,18 @@
                     var items = data;
 
                     if (items.error != null || items.length === 0) {
-                        console.log('Error');
+                        if(page == 0){
+                            var box = '' +
+                            '<div class="box">' +
+                            '<div class="text">您还没有喜欢的作品呢</div>' +
+                            '<div class="go">快去看看吧！</div>' +
+                            '<div class="opt">' +
+                            '<div class="btn"><a href="<?=base_url()?>topic">专题推荐</a></div>' +
+                            '<div class="btn"><a href="<?=base_url()?>production">精选作品</a></div>' +
+                            '</div></div>';
+
+                            $(".nonebox").append(box);
+                        }
                         return;
                     }
 

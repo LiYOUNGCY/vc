@@ -110,6 +110,41 @@
                 <?php endforeach;?>
             </div>
         </div>
+        <div class="other">
+            <div class="item">
+                <div class="title">
+                    <div class="icon oseleted"></div>
+                    精心挑选
+                </div>
+                <div class="content">
+                    <p>
+                        使用阿里多媒体云服务，您可以坐享阿里领先的海量存储集群、国内海外多节点部署的CDN网络、强大的转码、渲染、图片处理服务等。共享淘宝天猫一样专业及响应迅速的技术保障和运维能力。同时阿里云资深架构师和官方认证的上云服务提供商也为您提供专业的架构咨询和服务。
+                    </p>
+                </div>
+            </div>
+            <div class="item mid">
+                <div class="title">
+                    <div class="icon osafe"></div>
+                    我们承诺
+                </div>
+                <div class="content">
+                    <p>
+                        使用阿里多媒体云服务，您可以坐享阿里领先的海量存储集群、国内海外多节点部署的CDN网络、强大的转码、渲染、图片处理服务等。共享淘宝天猫一样专业及响应迅速的技术保障和运维能力。同时阿里云资深架构师和官方认证的上云服务提供商也为您提供专业的架构咨询和服务。
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="title">
+                    <div class="icon osure"></div>
+                    我们的目标
+                </div>
+                <div class="content">
+                    <p>
+                        使用阿里多媒体云服务，您可以坐享阿里领先的海量存储集群、国内海外多节点部署的CDN网络、强大的转码、渲染、图片处理服务等。共享淘宝天猫一样专业及响应迅速的技术保障和运维能力。同时阿里云资深架构师和官方认证的上云服务提供商也为您提供专业的架构咨询和服务。
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
     <?=$footer?>
 </div>
@@ -125,7 +160,8 @@
         loop: true,
         autoplay: 5000,
         autoplayDisableOnInteraction: false,
-        speed: 500
+        speed: 500,
+        
     });
     var swiper = new Swiper('.artist-swiper', {
         autoplayDisableOnInteraction: false,

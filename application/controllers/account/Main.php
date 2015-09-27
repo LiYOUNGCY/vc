@@ -50,8 +50,8 @@ class Main extends MY_Controller
 		$result = $this->user_service->login_action($pwd, $email, NULL, $rememberme);
 		if($result)
 		{
-			//登陆成功, 重定向首页
-			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));
+			//登陆成功, 重定向
+			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.reload();'));
 		}
 		else
 		{
@@ -73,8 +73,8 @@ class Main extends MY_Controller
 		$result = $this->user_service->login_action($pwd, NULL, $phone, $rememberme);
 		if($result)
 		{
-			//登陆成功, 重定向首页
-			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.href="'.base_url().'";'));
+			//登陆成功, 重定向
+			echo json_encode(array('success' => 0, 'note' => '','script' => 'window.location.reload();'));
 		}
 		else
 		{

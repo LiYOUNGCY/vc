@@ -54,7 +54,7 @@
 <script>
 $(function() {
     $("#picture-frame").zoomToo({
-        magnify: 1
+        magnify: 2
     });
 
     //点赞
