@@ -1,4 +1,4 @@
-<?php 
+<?php
 	echo $navbar;
 ?>
     <!-- Page Content -->
@@ -11,10 +11,10 @@
                         <div class="panel-heading">
                             权限编辑
                         </div>
-                        <div class="panel-body">									
+                        <div class="panel-body">
 							<table class="table table-striped">
-								<form id="form" method="post" action="http://127.0.0.1/artvc/admin/user/update_auth">
-				                	<input name="id" type="hidden" value="<?=$auth['id']?>">				                    
+								<form id="form" method="post" action="<?=base_url()?>admin/user/update_auth">
+				                	<input name="id" type="hidden" value="<?=$auth['id']?>">
 				                    <tbody>
 					                    <tr>
 					                        <td>
@@ -41,7 +41,7 @@
 					                            <div class="form-group">
 					                                <span class="col-sm-4 col-xs-3 control-label">角色组:</span>
 					                                <div class="col-sm-5 col-xs-8">
-					                                	<?php 
+					                                	<?php
 					                                		$arr = explode(',',$auth['role_group']);
 															$str = "";
 															foreach ($arr as $k1 => $v1) {
@@ -56,13 +56,13 @@
 															}
 															if( ! empty($str))
 															{
-																$str = substr($str,0,strlen($str)-1);																	
+																$str = substr($str,0,strlen($str)-1);
 															}
 					                                	?>
 					                                    <input class="form-control" id="show_role"  type="text" value="<?=$str?>" disabled="disabled">
 					                                </div>
-														
-													<button type="button" id="clear_group" class="btn btn-warning btn-circle"><i class="fa fa-times"></i></button>							                                    
+
+													<button type="button" id="clear_group" class="btn btn-warning btn-circle"><i class="fa fa-times"></i></button>
 				                                    <input type="hidden" name="role_group" id="role_group" value="<?=$auth['role_group']?>"/>
 				                                    <div class="col-sm-2 col-xs-8">
 					                                    <select name="group_select" class="form-control">
@@ -72,12 +72,12 @@
 																		<?=$v['name']?>
 																	</option>
 	   														<?php }?>
-	                                                    </select>								                                    
-					                               </div>			                               
+	                                                    </select>
+					                               </div>
 					                            </div>
 					                        </td>
 					                    </tr>
-						            
+
 									</tbody>
 								</form>
 							</table>
@@ -88,7 +88,7 @@
                         	</center>
                         </div>
                     </div>
-	                	                
+
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -96,11 +96,11 @@
         </div>
         <!-- /.container-fluid -->
     </div>
-    <!-- /#page-wrapper -->		
-<?php 
+    <!-- /#page-wrapper -->
+<?php
     echo $foot;
 ?>
-<script type="text/javascript">	
+<script type="text/javascript">
 	$(function(){
 		$("#submit").click(function(){
 			$("form").submit();
@@ -115,7 +115,7 @@
 				op_html = op_html.replace(/^\s+|\s+$/g,"");
 				var old_html = $("#show_role").val() == "" ? "" : $("#show_role").val()+",";
 				$("#show_role").val(old_html+op_html);
-				var old_val  = $("input[name=role_group]").val() == "" ? "" : $("input[name=role_group]").val()+",";			
+				var old_val  = $("input[name=role_group]").val() == "" ? "" : $("input[name=role_group]").val()+",";
 				$("input[name=role_group]").val(old_val+op_val);
 			}
 
@@ -123,10 +123,10 @@
 		$("#clear_group").click(function(){
 			$("#show_role").val("");
 			$("input[name=role_group]").val("");
-		});		
+		});
 	});
 
 
 </script>
 </body>
-</html>    					
+</html>

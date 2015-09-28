@@ -18,7 +18,7 @@ class Detail extends MY_Controller{
 			show_404();
 		}
 		//echo json_encode($artist);
-		
+
         $data['css'] = array(
             'font-awesome/css/font-awesome.min.css',
             'base.css'
@@ -28,7 +28,7 @@ class Detail extends MY_Controller{
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
             'error.js',
-            'validate.js',
+
             'masonry.pkgd.min.js'
         );
 

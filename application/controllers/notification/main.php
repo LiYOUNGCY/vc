@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Main extends MY_Controller{
 	public function __construct()
@@ -26,26 +26,25 @@ class Main extends MY_Controller{
             'jquery.js',
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
-            'error.js',
-            'validate.js'
+            'error.js'
         );
 
         $user['user'] = $this->user;
         $user['sign'] = $this->load->view('common/sign', '', TRUE);
-        
+
         $data['title']        = "我的消息 - 用户中心";
         $body['top']          = $this->load->view('common/top', $user, TRUE);
         $body['footer']       = $this->load->view('common/footer', '', TRUE);
         $body['user']         = $this->user;
 
         $this->load->view('common/head', $data);
-		if (strcmp($type, 'systemmsg') == 0) 
+		if (strcmp($type, 'systemmsg') == 0)
 		{
 			$this->load->view('systemmsg', $body);
 		}
-		elseif (strcmp($type, 'goodsmsg') == 0) 
-		{			
-			$this->load->view('goodsmsg', $body);			
+		elseif (strcmp($type, 'goodsmsg') == 0)
+		{
+			$this->load->view('goodsmsg', $body);
 		}
 	}
 

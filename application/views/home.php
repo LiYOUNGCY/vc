@@ -167,7 +167,7 @@
         autoplayDisableOnInteraction: false,
         speed: 500,
         prevButton: '.swiper-button-prev',
-        nextButton: '.swiper-button-next',
+        nextButton: '.swiper-button-next'
     });
 
     $(function () {

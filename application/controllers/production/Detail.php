@@ -46,7 +46,7 @@ class Detail extends MY_Controller{
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
             'error.js',
-            'validate.js',
+
             'zoomtoo.js',
             'zoom.js'
         );

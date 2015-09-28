@@ -16,19 +16,18 @@ class Main extends MY_Controller
             'swiper.min.css',
             'font-awesome/css/font-awesome.min.css',
             'base.css'
-            
+
         );
         $data['javascript'] = array(
             'jquery.js',
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
-            'error.js',
-            'validate.js'
+            'error.js'
         );
 
         $user['user'] = $this->user;
         $user['sign'] = $this->load->view('common/sign', '', TRUE);
-       
+
         $data['title']        = "忘记密码";
         $body['top']          = $this->load->view('common/top', $user, TRUE);
         $body['footer']       = $this->load->view('common/footer', '', TRUE);
@@ -186,6 +185,11 @@ class Main extends MY_Controller
 		echo $this->user_service->validate_phone($phone);
 	}
 
+
+    /**
+     * [get_info_by_id 获取某个人的信息]
+     * @return [type] [description]
+     */
 	public function get_info_by_id()
     {
         $id = $this->sc->input('id');
@@ -194,6 +198,11 @@ class Main extends MY_Controller
         echo json_encode($result);
     }
 
+
+    /**
+     * [get_time 获取服务器时间]
+     * @return [type] [description]
+     */
     public function get_time()
     {
         $currentTime = array();

@@ -109,4 +109,32 @@ class Sc {
 		}
 		return $ret;
 	}
+
+    public function output_success($data = NULL) {
+        $output = array(
+            'success'   => 0
+        );
+
+        if( isset( $data ) ) {
+            foreach ($data as $key => $value) {
+                $output[$key] = $data[$key];
+            }
+        }
+
+        echo json_encode($output);
+    }
+
+    public function output_error($data = NULL) {
+        $output = array(
+            'error' => 0
+        );
+
+        if( isset($data) ) {
+            foreach($data as $key => $value) {
+                $output[$key] = $value;
+            }
+        }
+
+        echo json_encode($output);
+    }
 }

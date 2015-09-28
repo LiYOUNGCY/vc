@@ -21,7 +21,7 @@ class Setting extends MY_Controller
         $data['javascript'] = array(
             'jquery.js',
             'alert.min.js',
-            'validate.js',
+
             'error.js',
             'geo.js'
         );
@@ -51,21 +51,18 @@ class Setting extends MY_Controller
 		}
 	}
 
+
 	/**
 	 * [change_password 修改密码]
 	 * @return [type] [description]
 	 */
 	public function change_password()
 	{
-		$error_redirect = array(
-			'script' => 'window.location.href ="'.base_url().'setting/pwd";'
-		);
-		$this->sc->set_error_redirect($error_redirect);
 		$old_pwd = $this->sc->input('old_pwd');
 		$pwd 	 = $this->sc->input('pwd');
-		$this->sc->input('confirm_pwd');
 
 		$result = $this->user_service->change_password($this->user['id'], $old_pwd, $pwd);
+
 		if($result)
 		{
 			echo "<script>alert('".lang('OPERATE_SUCCESS')."');window.location.href='".base_url()."setting/pwd';</script>";
@@ -75,6 +72,7 @@ class Setting extends MY_Controller
 			$this->error->output('INVALID_REQUEST');
 		}
 	}
+
 
 	/**
 	 * [update_account 更新个人资料]
@@ -105,14 +103,21 @@ class Setting extends MY_Controller
 		}
 	}
 
-	public function get_msg()
-	{
-		$uid = $this->user['id'];
+    public function change_phone()
+    {
+        $phone = $this->sc->input('phone');
+        $id = $this->user['id'];
 
-		$data = $this->user_service->get_user_by_id($uid);
+        $result = $this->user_service->change_phone($id, $phone);
 
-		echo json_encode($data);
-	}
-
+        if($result)
+        {
+            $this->sc->output_success();
+        }
+        else
+        {
+            $this->sc->output_error();
+        }
+    }
 }
 
