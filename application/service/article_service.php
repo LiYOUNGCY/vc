@@ -20,43 +20,35 @@ class Article_service extends MY_Service{
     {
         //将文章插入到数据库
         $article_id = $this->article_model->publish_article($user_id, $article_title, $article_type, $pids,$article_content, $tags);
-        if( ! empty($article_id))
-        {
-            return TRUE;
-        }
-        else
-        {
-            return FALSE;
-        }
+        return empty($article_id) ? FALSE : TRUE;
     }
 
 
     /**
-     * [get_article_list 获取文章列表]
+     * @to do
      */
-    public function get_article_list($page, $uid, $type, $tag)
+    public function publish_topic()
     {
-        switch ($type) {
-            case 'article':
-                $type = 1;
-                break;
-            case 'topic':
-                $type = 2;
-                break;
-            default:
-                $type = 1;
-                break;
-        }
 
-        $article = $this->article_model->get_article_list($page, $uid, NULL, $type, NULL, $tag);
-        foreach( $article as $key => $value )
-        {
+    }
 
+
+    /**
+     * 获取资讯列表
+     * @param $page
+     * @param $uid
+     * @param $tag
+     * @return mixed
+     */
+    public function get_article_list($page, $uid, $tag)
+    {
+        $article = $this->article_model->get_article_list($page, $uid, NULL, NULL, $tag);
+        foreach ($article as $key => $value) {
             //对每篇文章内容进行字数截取
             $article[$key]['content'] = Common::extract_article($article[$key]['id'], $article[$key]['title'], $article[$key]['content']);
 
             //对文章标题字数截取
-            $article[$key]['content']["sort_title"] = mb_strlen($article[$key]['content']["article_title"]) > 9 ? mb_substr($article[$key]['content']["article_title"], 0, 9).'..' : $article[$key]['content']["article_title"];
+            $article[$key]['content']["sort_title"] = mb_strlen($article[$key]['content']["article_title"]) > 9 ? mb_substr($article[$key]['content']["article_title"], 0, 9) . '..' : $article[$key]['content']["article_title"];
 
             //查询作者的信息
             //$article[$key]['author'] = $this->user_model->get_user_base_id($article[$key]['uid']);
@@ -69,6 +61,32 @@ class Article_service extends MY_Service{
 
 
     /**
+     * 获取专题的列表
+     * @param $page
+     * @param $who
+     * @param $when
+     * @param $where
+     */
+    public function get_topic_list($page, $who, $when, $where)
+    {
+        $topic = $this->article_model->get_topic_list($page, $who, $when, $where);
+
+        foreach ($topic as $key => $value) {
+            //对每篇文章内容进行字数截取
+            $topic[$key]['content'] = Common::extract_article($topic[$key]['id'], $topic[$key]['title'], $topic[$key]['content']);
+
+            //对文章标题字数截取
+            $topic[$key]['content']["sort_title"] = mb_strlen($topic[$key]['content']["article_title"]) > 9 ?
+                mb_substr($topic[$key]['content']["article_title"], 0, 9) . '..' :
+                $topic[$key]['content']["article_title"];
+
+            unset($topic[$key]['id']);
+            unset($topic[$key]['title']);
+        }
+    }
+
+
+    /**
      * [get_article_by_id 获取文章的全部信息]
      */
     public function get_article_by_id($aid)
@@ -77,9 +95,17 @@ class Article_service extends MY_Service{
         return $query;
     }
 
+
+    /**
+     * [get_article_vote_by_both 获取某篇文章被某人点赞的状态]
+     * @param  [type] $aid [description]
+     * @param  [type] $uid [description]
+     * @return [type]      [description]
+     */
     public function get_article_vote_by_both($aid, $uid) {
         return $this->article_like_model->get_article_vote_by_both($aid, $uid)['status'];
     }
+
 
     /**
      * [get_comment_by_aid 获取文章评论]
@@ -186,6 +212,8 @@ class Article_service extends MY_Service{
             $this->error->output('INVALID_REQUEST');
         }
     }
+
+
     /**
      * 获取文章点过赞的人
      */
@@ -200,6 +228,7 @@ class Article_service extends MY_Service{
         }
         return $users;
     }
+
 
     /**
      * [update_article 更新文章]
@@ -220,6 +249,7 @@ class Article_service extends MY_Service{
         return $this->article_model->update_article($aid,$arr);
     }
 
+
     /**
      * [delete_article 删除文章]
      * @param  [type] $aid [文章id]
@@ -232,11 +262,13 @@ class Article_service extends MY_Service{
         return $result;
     }
 
+
     public function delete_article_like_comment($aid)
     {
         $this->article_comment_model->delete_comment_by_aid($aid);
         $this->article_like_model->delete_like_by_aid($aid);
     }
+
 
     /**
      * 获得专题的标签

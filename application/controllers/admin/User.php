@@ -19,8 +19,8 @@ class User extends MY_Controller
 			$count= $this->user_model->get_user_count();
 			$role = $this->user_model->get_role_list();
 
-			$user['user'] = $this->user;
-            $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
+			$myself['user'] = $this->user;
+            $navbar = $this->load->view('admin/common/navbar', $myself, TRUE);
 
 			//分页数据
 			$p = array(

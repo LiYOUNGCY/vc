@@ -61,10 +61,10 @@
         var url = '';
 
         if (tag != null) {
-            url = GET_ARTICLE_URL + '?tag=' + tag;
+            url = GET_TOPIC_URL + '?tag=' + tag;
         }
         else {
-            url = GET_ARTICLE_URL;
+            url = GET_TOPIC_URL;
         }
 
 
@@ -95,20 +95,23 @@
             $.ajax({
                 type: 'POST',
                 url: url,
-                async: false,
                 data: {
                     page: page,
                     type: 'topic'
                 },
                 dataType: 'json',
                 success: function (items) {
-                    sum = items.length;
+                    if(items == null) {
+                        console.log('[DEBUG]: items is null');
+                        return;
+                    }
 
                     if (items.error != null || items.length === 0) {
                         console.log('Error');
                         return;
                     }
 
+                    sum = items.length;
                     page++;
 
                     for (var i = 0; i < items.length; i++) {
