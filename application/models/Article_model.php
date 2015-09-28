@@ -231,19 +231,20 @@ class Article_model extends CI_Model
     }
 
 
-    public function admin_get_article_list($page = 0, $limit = 10, $order = 'id DESC')
+    public function admin_get_article_list($page = 0, $type, $limit = 10, $order = 'id DESC')
     {
         $article = $this->db->select('
-      article.id,
-      user.name as author,
-      article.type,
-      article_type.name as type_name,
-      article.title,
-      article.publish_time,
-      article.read,
-      article.like,
-      article.publish_status
-      ')
+        article.id,
+        user.name as author,
+        article.type,
+        article_type.name as type_name,
+        article.title,
+        article.publish_time,
+        article.read,
+        article.like,
+        article.publish_status'
+        )
+            ->where('article.type', $type)
             ->join('article_type', 'article.type = article_type.id', 'left')
             ->join('user', 'user.id = article.uid')
             ->order_by($order)

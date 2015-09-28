@@ -78,6 +78,15 @@
                 </li>
 
                 <li>
+                    <a href="#">专题管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="<?= base_url() . ADMINROUTE ?>topic">专题管理</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
                     <a href="<?= base_url() . ADMINROUTE ?>artist">艺术家管理</a>
                 </li>
 

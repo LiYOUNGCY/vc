@@ -16,7 +16,7 @@ class Article extends MY_Controller{
 			//页面限制个数
 			$limit= 10;
 			//获取文章列表
-			$article = $this->article_model->admin_get_article_list($page,$limit);
+			$article = $this->article_model->admin_get_article_list($page, 1, $limit);
 			$count   = $this->article_model->get_article_count();
             $user['user'] = $this->user;
             $navbar = $this->load->view('admin/common/navbar', $user,TRUE);

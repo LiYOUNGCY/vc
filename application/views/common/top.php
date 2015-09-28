@@ -89,6 +89,16 @@ if($user['role']==0){
             }
         });
 
+        $('#s_ipt').keydown(function(e){
+            if(e.keyCode == 13){
+                console.log('search event');
+
+                var keyword = $('#s_ipt').val();
+
+                window.location.href = BASE_URL + 'search?keyword='+ keyword;
+            }
+        });
+
         // browser window scroll (in pixels) after which the "back to top" link is shown
         var offset = 300,
             //browser window scroll (in pixels) after which the "back to top" link opacity is reduced

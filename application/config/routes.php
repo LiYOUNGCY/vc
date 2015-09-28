@@ -154,3 +154,7 @@ $route['admin/production/t'] = 'admin/production/index/t';
 $route['admin/production/t/(:num)'] = 'admin/production/index/t/$1';
 $route['admin/production/m'] = 'admin/production/index/m';
 $route['admin/production/m/(:num)'] = 'admin/production/index/m/$1';
+
+
+//搜索
+$route['search'] = 'search/main/index';
