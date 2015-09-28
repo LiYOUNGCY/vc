@@ -2998,11 +2998,9 @@ img.zoom-img {
 .artist_detail .detail .intro{
     width: 100%;
     position: relative;
+    text-align: justify;
 }
 
-.artist_detail .detail .intro{
-    text-indent:2em;
-}
 .artistevaluate{
     width: 100%;
     position: relative;

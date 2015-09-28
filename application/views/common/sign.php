@@ -61,7 +61,7 @@
 <script>
     var phone_code = '';
     $(function () {
-        
+
         $("#toemail").click(function () {
             $(this).css({"display": "none"});
             $("#phonesign").css({"display": "none"});
@@ -87,7 +87,7 @@
         });
 
         $("#tosignin").click(function () {
-            
+
             $("#position").animate({
                 top: "0px"
             }, 200);
@@ -97,7 +97,7 @@
             });
         });
         $("#tosignup").click(function () {
-            
+
             $("#position").animate({
                 top: "-348px"
             }, 200);
@@ -135,6 +135,15 @@
                 $("#signupError").html("* 请输入正确的邮箱地址");
             }
         });
+
+        (function(){
+            var callback = getQueryString('callback');
+
+            if(callback != null && callback == 'login') {
+                showsign(1);
+            }
+
+        })();
     });
 
     function showsign(type) {
@@ -241,7 +250,7 @@
 
         $("#signinbtn").attr("class","disable");
         $("#signinbtn").html('<i class="fa fa-spinner fa-pulse"></i> 登录中');
-        
+
 
         var cp = validate('phone', $('#username').val());
         var ce = validate('email', $('#username').val());
@@ -328,13 +337,13 @@
             $("#signupbtn").attr("class","disable");
             $("#signupbtn").html('<i class="fa fa-spinner fa-pulse"></i> 注册中');
 
-            
+
             if (cp == true) {
 
                 //检验手机验证码
                 var input_phone_code = $('#velidata').val();
                 //验证码不对
-                
+
                 if (phone_code == '' || input_phone_code != phone_code || input_phone_code == '') {
                     //输出错误
                     alert(3);
@@ -365,7 +374,7 @@
                     }
                 })
             }else{
-                
+
                 $("#signupbtn").attr("class","btn");
                 $("#signupbtn").html('注册');
             }
