@@ -10,10 +10,10 @@ class MY_Controller extends CI_Controller{
 		parent::__construct();
 
         $this->user = array();
-        $this->default_lang = 'zh-CN';        
+        $this->default_lang = 'zh-CN';
         //加载语言
         $this->lang->load('error', $this->default_lang);
-        $this->lang->load('base', $this->default_lang);   
+        $this->lang->load('base', $this->default_lang);
 
         $user = $this->auth_service->non_login_in();
 
@@ -32,6 +32,11 @@ class MY_Controller extends CI_Controller{
             $this->user = $user;
         }
 
-		$this->auth_service->check_user_auth();     
+		$auth = $this->auth_service->check_user_auth();
+
+        //没有权限或没有登录的用户
+        if(! $auth) {
+            header(redirect(base_url() . 'home?callback=login'));
+        }
 	}
 }

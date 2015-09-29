@@ -82,11 +82,16 @@ class Main extends MY_Controller
      */
     public function get_topic_list()
     {
-        $page = $this->sc->input('page');
+        //$page = $this->sc->input('page');
         $who  = $this->sc->input('w1', 'get');
         $when = $this->sc->input('w2', 'get');
         $where= $this->sc->input('w3', 'get');
 
+        $who = empty($who) ? NULL : $who;
+        $when = empty($when) ? NULL : $when;
+        $where = empty($where) ? NULL : $where;
+
+        $page = 0;
         $topic = $this->article_service->get_topic_list($page, $who, $when, $where);
         echo json_encode($topic);
     }

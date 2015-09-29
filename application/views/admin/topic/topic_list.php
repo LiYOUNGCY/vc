@@ -11,7 +11,6 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div style="margin-bottom: 10px;">
-                            <button id="publish_article" type="button" class="btn btn-outline btn-default">发布文章</button>
                             <button id="publish_topic" type="button" class="btn btn-outline btn-default">发布专题</button>
                         </div>
                         <!--表格-->
@@ -222,7 +221,7 @@
         $("button[effect=edit]").click(function () {
             var aid = $(this).attr('u');
             if (aid != null && aid != "") {
-                window.location.href = BASE_URL + 'update/article/' + aid;
+                window.location.href = BASE_URL + 'update/topic/' + aid;
             }
         });
 
@@ -269,11 +268,6 @@
                     }
                 });
             }
-        });
-
-        //写文章按钮
-        $('#publish_article').click(function () {
-            window.location.href = BASE_URL + 'publish/article';
         });
 
         //写专题按钮

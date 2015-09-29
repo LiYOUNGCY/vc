@@ -19,7 +19,7 @@ class Topic_tag_when_model extends CI_Model
     }
 
     public function get_topic_tag_when_by_id($id) {
-        $query = $this->db->when('id', $id)->get('topic_tag_when')->row_array();
+        $query = $this->db->where('id', $id)->get('topic_tag_when')->row_array();
         return $query;
     }
 
@@ -41,7 +41,7 @@ class Topic_tag_when_model extends CI_Model
             'name'  => $name
         );
 
-        $this->db->when('id', $id)->update('topic_tag_when', $data);
+        $this->db->where('id', $id)->update('topic_tag_when', $data);
         return $this->db->affected_rows();
     }
 
@@ -49,7 +49,7 @@ class Topic_tag_when_model extends CI_Model
 
     public function delete_topic_tag_when($id)
     {
-        $this->db->when('id', $id)->delete('topic_tag_when');
+        $this->db->where('id', $id)->delete('topic_tag_when');
         return $this->db->affected_rows();
     }
 }
