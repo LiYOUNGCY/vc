@@ -18,7 +18,7 @@ class Main extends MY_Controller {
 
     function index()
     {
-        $keyword = $this->sc->input('search', 'get');
+        $keyword = $this->sc->input('keyword', 'get');
 
         $query = $this->search_service->search($keyword);
 

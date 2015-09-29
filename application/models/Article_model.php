@@ -8,14 +8,22 @@ class Article_model extends CI_Model
         parent::__construct();
     }
 
+
     /**
-     * 把文章的信息插入到数据库
+     * [publish_article 保存文章]
+     * @param  [type] $user_id         [description]
+     * @param  [type] $article_title   [description]
+     * @param  [type] $article_type    [description]
+     * @param  [type] $pids            [description]
+     * @param  [type] $article_content [description]
+     * @param  [type] $tags            [description]
+     * @return [type]                  [description]
      */
     public function publish_article($user_id, $article_title, $article_type, $pids, $article_content, $tags)
     {
         $data = array(
             'uid'           => $user_id,
-            'type'          => $article_type,
+            'type'          => 1,
             'title'         => $article_title,
             'pids'          => $pids,
             'content'       => $article_content,
@@ -33,23 +41,32 @@ class Article_model extends CI_Model
         return $this->db->insert_id();
     }
 
+
+    /**
+     * [publish_topic 保存专题]
+     * @param  [type] $user_id         [description]
+     * @param  [type] $article_title   [description]
+     * @param  [type] $pids            [description]
+     * @param  [type] $article_content [description]
+     * @param  [type] $tags            [description]
+     * @return [type]                  [description]
+     */
+    public function publish_topic($user_id, $article_title, $pids, $article_content, $tags)
+    {
+
+    }
+
+
+    /**
+     * [get_article_by_id 获取文章详情]
+     * @param  [type] $aid [description]
+     * @return [type]      [description]
+     */
     public function get_article_by_id($aid)
     {
         return $this->db->where('id', $aid)->get('article')->row_array();
     }
 
-    /**
-     * [get_intro 获取简介]
-     * @param  [type] $uid [用户id]
-     * @return [type]      [description]
-     */
-    public function get_intro_by_uid($uid)
-    {
-        $query = $this->db->where(array('uid' => $uid, 'type' => 3))
-            ->get('article')
-            ->row_array();
-        return $query;
-    }
 
     /**
      * [get_article_list 获取文章列表]
@@ -61,10 +78,17 @@ class Article_model extends CI_Model
      * @param  string $order [排序]
      * @return [type]         [description]
      */
-    public function get_article_list($page = 0, $meid = NULL, $uid = NULL, $type = NULL, $pid = NULL, $tag = NULL, $limit = 6, $order = "id DESC")
+    public function get_article_list($page = 0, $meid = NULL, $uid = NULL, $pid = NULL, $tag = NULL, $limit = 6, $order = "id DESC")
     {
         $query = $this->db
-            ->select('article.id, article.uid, article.title, article.content, article.like, article.read')
+            ->select('
+            article.id,
+            article.uid,
+            article.title,
+            article.content,
+            article.like,
+            article.read
+            ')
             ->from('article');
 
         if (is_numeric($meid)) {
@@ -87,6 +111,38 @@ class Article_model extends CI_Model
         $query = $query->where('article.publish_status', '1');
         $query = $query->order_by($order)->limit($limit, $page * $limit)->get()->result_array();
         return $query;
+    }
+
+
+    public function get_topic_list($page = 0, $who = NULL, $when = NULL, $where = NULL, $limit = 6)
+    {
+        $query = $this->db
+            ->select('
+            article.id,
+            article.uid,
+            article.title,
+            article.content,
+            article.read,
+            article.like,
+            ')
+            ->where('publish_status', 1)
+            ->where('type', 2);
+
+        if( isset($who) && is_numeric($who) ) {
+            $query = $query->where('who', $who);
+        }
+
+        if( isset($when) && is_numeric($when) ) {
+            $query = $query->where('when', $when);
+        }
+
+        if( isset($where) && is_numeric($where) ) {
+            $query = $query->where('where', $where);
+        }
+
+        $query = $query->order_by('id DESC')->limit($limit, $page * $limit)->get('article')->result_array();
+        return $query;
+
     }
 
     public function update_count($aid, $field = array())
@@ -155,11 +211,6 @@ class Article_model extends CI_Model
         return $this->db->affected_rows() === 1;
     }
 
-    public function delete_article_by_uid($uid)
-    {
-        $this->db->delete('article', array('uid' => $uid));
-        return $this->db->affected_rows() > 0;
-    }
 
     /**
      * [update_article 更新文章]
@@ -180,19 +231,20 @@ class Article_model extends CI_Model
     }
 
 
-    public function admin_get_article_list($page = 0, $limit = 10, $order = 'id DESC')
+    public function admin_get_article_list($page = 0, $type, $limit = 10, $order = 'id DESC')
     {
         $article = $this->db->select('
-      article.id,
-      user.name as author,
-      article.type,
-      article_type.name as type_name,
-      article.title,
-      article.publish_time,
-      article.read,
-      article.like,
-      article.publish_status
-      ')
+        article.id,
+        user.name as author,
+        article.type,
+        article_type.name as type_name,
+        article.title,
+        article.publish_time,
+        article.read,
+        article.like,
+        article.publish_status'
+        )
+            ->where('article.type', $type)
             ->join('article_type', 'article.type = article_type.id', 'left')
             ->join('user', 'user.id = article.uid')
             ->order_by($order)
@@ -225,6 +277,7 @@ class Article_model extends CI_Model
                 article.read,
                 article.publish_time
                 ')
+            ->where('publish_status', 1)
             ->from('article')
             ->like('article.title', $keyword)
             ->get()

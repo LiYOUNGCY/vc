@@ -9,24 +9,6 @@ class Main extends MY_Controller
         $this->load->service('article_service');
     }
 
-    /**
-     * [get_article_list 获取文章列表]
-     * @param $[type] [文章类型]
-     * @return [type] [description]
-     */
-    public function get_article_list()
-    {
-        //获得页数
-        $page = $this->sc->input('page');
-        $tag = $this->sc->input('tag', 'get');
-        $tag = is_numeric($tag) ? $tag : 0;
-
-        $uid = isset($this->user['id']) ? $this->user['id'] : NULL;
-        //文章类型
-        $type = $this->sc->input('type');
-        $article = $this->article_service->get_article_list($page, $uid, $type, $tag);
-        echo json_encode($article);
-    }
 
     /**
      * [index 显示文章列表]
@@ -72,5 +54,40 @@ class Main extends MY_Controller
             $this->load->view('common/head', $data);
             $this->load->view('topic_list', $body);
         }
+    }
+
+
+    /**
+     * [get_article_list 获取文章列表]
+     * @param $[type] [文章类型]
+     * @return [type] [description]
+     */
+    public function get_article_list()
+    {
+        //获得页数
+        $page = $this->sc->input('page');
+        $tag = $this->sc->input('tag', 'get');
+        $tag = is_numeric($tag) ? $tag : 0;
+
+        $uid = isset($this->user['id']) ? $this->user['id'] : NULL;
+
+        $article = $this->article_service->get_article_list($page, $uid, $tag);
+        echo json_encode($article);
+    }
+
+
+    /**
+     * [get_topic_list 获得专题列表]
+     * @return [type] [description]
+     */
+    public function get_topic_list()
+    {
+        $page = $this->sc->input('page');
+        $who  = $this->sc->input('w1', 'get');
+        $when = $this->sc->input('w2', 'get');
+        $where= $this->sc->input('w3', 'get');
+
+        $topic = $this->article_service->get_topic_list($page, $who, $when, $where);
+        echo json_encode($topic);
     }
 }

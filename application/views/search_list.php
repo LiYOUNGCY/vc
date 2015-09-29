@@ -116,7 +116,7 @@ function encode(s){
         });
         }
 
-        var keyword = getQueryString('search');
+        var keyword = getQueryString('keyword');
         if(typeof keyword != 'undefined' && keyword != null) {
             keyword = decodeURIComponent(keyword);
             console.log(keyword);
