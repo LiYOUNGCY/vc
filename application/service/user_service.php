@@ -109,6 +109,7 @@ class User_service extends MY_Service
         delete_cookie('rmcn');
 
         session_destroy();
+        
     }
 
     /**

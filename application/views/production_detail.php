@@ -11,12 +11,11 @@
                 <div class="artpic" id="picture-frame">
                     <img src="<?=$production['pic_thumb']?>" class="thumb" data-src="<?=$production['pic']?>"/>
                 </div>
-                <div class="artinfo">
+                <div class="like">
                     <div class="likebtn" id="vote">
                         <div class="support"></div>
                         <div class="num" id="seeLike"><?=$production['like']?></div>
                     </div>
-                    <div class="info"><?=$production['type']?>，<?=$production['marterial']?>，<?php echo $production['w']." x ".$production['h'];?>cm，<?=$production['creat_time']?></div>
                 </div>
             </div>
             <div class="artistarea">
@@ -33,10 +32,15 @@
                         <p><?=$production['artist']['intro']?></p>
                     </div>
                 </div>
-                <div class="artintro">
-                    <div class="title">作品介绍</div>
-                    <div class="intro">
-                        <p><?=$production['intro']?></p>
+                <div class="artinfo">
+                    <div class="info">
+                        <ul>
+                            <li>类型：<?=$production['type']?></li>
+                            <li>材质：<?=$production['marterial']?></li>
+                            <li>尺寸：<?php echo $production['w']." x ".$production['h'];?>cm</li>
+                            <li>创作时间：<?=$production['creat_time']?></li>
+                            <li>上市时间：<?=$production['publish_time']?></li>
+                        </ul>
                     </div>
                     <div class="price"><font style="font-weight:normal;color:#888888;font-size:16px;">售价：</font><?=$production['price']?> RMB</div>
                 </div>
@@ -44,9 +48,25 @@
                     <div class="btn buy">立即购买</div>
                     <div class="btn addcart">加入购物车</div>
                 </div>
+                <div class="csopt">
+                    <div class="phonecs">
+                        联系客服：<span class="pcs">4008-123-456</span>
+                    </div>or
+                    <div class="onlinecs">
+                        <a href="<?=base_url()?>msg/csmsg" class="link">在线客服</a>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="artintro">
+            <div class="title">作品介绍</div>
+            <div class="intro">
+                <p><?=$production['intro']?></p>
+            </div>
+            
+        </div>
     </div>
+    <input type="hidden" id="pid" value="<?=$production['id']?>">
     <?php echo $footer;?>
 </div>
 </body>
@@ -56,7 +76,32 @@ $(function() {
     $("#picture-frame").zoomToo({
         magnify: 2
     });
-
+    var pid = $('#pid').val();
+    $(".addcart").click(function(){
+        $.ajax({
+            type: 'POST',
+            url: ADD_CART_GOODS,
+            async: false,
+            data: {
+                pid: pid
+            },
+            dataType: 'json',
+            success: function (data) {
+                var status = data;
+                if (status.success == 0) {
+                    swal("已添加到购物车!", "您可以在购物车里统一付款", "success");
+                    pushcartcount();
+                }
+                else if (status.error != null) {
+                    sweetAlert("添加购物车失败", status.error, "error");
+                    return false;
+                }
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    })
     //点赞
     var aid = $('#aid').val();
     $("#vote").click(function () {

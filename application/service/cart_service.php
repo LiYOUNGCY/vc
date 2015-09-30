@@ -14,12 +14,12 @@ class Cart_service extends MY_Service{
 	 */
 	public function add_good($uid, $pid)
 	{
-		if( ! isset($_SESSION['cart']))
+		if( ! isset($_SESSION['cart_has_get']) || $_SESSION['cart_has_get'] !== 1)
 		{
 			//获取购物车物品列表
 			$goods = $this->_get_all_good_list($uid);
 			//设置session
-			$this->session->set_userdata('cart',$goods);
+			$_SESSION['cart'] = $goods;
 		}
 
 		$set = FALSE;
@@ -51,7 +51,7 @@ class Cart_service extends MY_Service{
 					 'production' => $production
 				);
 				array_unshift($arr,$v);
-				$this->session->set_userdata('cart',$arr);
+				$_SESSION['cart'] = $arr;
 			}
 			else
 			{
@@ -103,22 +103,17 @@ class Cart_service extends MY_Service{
 	 */
 	public function get_good_list($uid, $page = 0, $limit = 10)
 	{
-		echo var_dump($_SESSION['cart']);
-		if(isset($_SESSION['cart']))
+		if(isset($_SESSION['cart_has_get']) && $_SESSION['cart_has_get'] === 1)
 		{
-			if(empty($_SESSION['cart']))
-			{
-				return NULL;
-			}
 			return $_SESSION['cart'];
-
 		}	
 		else
 		{
 			//获取购物车物品列表
 			$goods = $this->_get_all_good_list($uid);
 			//添加到session
-			$this->session->set_userdata('cart',$goods);
+			$_SESSION['cart'] = $goods;
+			$_SESSION['cart_has_get'] = 1;
 			return $goods;
 		}
 	}

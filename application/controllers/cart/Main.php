@@ -40,6 +40,7 @@ class Main extends MY_Controller{
 		$page = 0;
 		$limit= 10;
 		$goods = $this->cart_service->get_good_list($this->user['id'],$page,$limit);
+		
 		if( ! empty($goods))
 		{
 			//分页输出
@@ -62,6 +63,7 @@ class Main extends MY_Controller{
 	public function add_good()
 	{
 		$pid = $this->sc->input('pid');
+		
 		$result = $this->cart_service->add_good($this->user['id'],$pid);
 		echo json_encode(array('success' => 0, 'note' => lang('OPERATE_SUCCESS')));
 	}
