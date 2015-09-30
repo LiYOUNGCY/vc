@@ -443,44 +443,50 @@ p{
 }
 
 .filter-warp .filter {
-    border-width: 1px;
-    border-style: none solid solid solid;
-    border-color: #EEEEEE;
-    line-height: 45px;
+    width: 100%;
+    text-align: left;
 }
 
-.filter-warp .filter:first-child {
-    border-style: solid;
+.filter-warp .filter ul{
+    display: inline-block;
+    font-size: 18px;
+    color: #B3B3B3;
+    width: 100%;
+
 }
 
-.filter-warp .filter .fc-target {
-
-}
-
-.filter-warp .filter .fc-target li{
+.filter-warp .filter ul li{
     float: left;
-    padding: 5px 20px;
-    line-height: 1.7;
+    display: block;
+    padding: 0 10px;
+    margin: 0 5px 10px;
+    height: 40px;
+    line-height: 40px;
+    transition:all .2s ease-in-out;
+}
+.filter-warp .filter ul li.label{
+    color: #0C0F08 !important;
+    background: #FFFFFF !important;
+    cursor: default !important;
+    margin: 0px;
+    padding: 0px;
+}
+.filter-warp .filter ul li.active{
+    background: #EEEEEE;
+    color: #0C0F08;
+}
+.filter-warp .filter ul li.active{
+    background: #EEEEEE;
+    color: #0C0F08;
+}
+.filter-warp .filter ul li:hover{
+    background: #EEEEEE;
+    color: #0C0F08;
+    cursor: pointer;
 }
 
-/*.filter-warp .filter .fc-target li a {*/
-    /*padding: 5px;*/
-/*}*/
-
-.filter-warp .filter .fc-target li.active{
-    background-color: #F7CC1E;
-    color: white;
-    border-radius: 5px;
-}
 @media screen and (max-width: 767px){
-    .filter-warp .filter .fc-target .label{
-        display: none;
-    }
-    .filter-warp .filter .fc-target li{
-        text-align: center;
-        width: 33.3%;
-        padding: 0;
-    }
+    
 }
 
 .filter-warp .filter .dropdown {
