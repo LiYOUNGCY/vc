@@ -23,7 +23,7 @@ class Article_model extends CI_Model
     {
         $data = array(
             'uid'           => $user_id,
-            'type'          => 1,
+            'type'          => $article_type,
             'title'         => $article_title,
             'pids'          => $pids,
             'content'       => $article_content,
@@ -39,21 +39,6 @@ class Article_model extends CI_Model
         }
 
         return $this->db->insert_id();
-    }
-
-
-    /**
-     * [publish_topic 保存专题]
-     * @param  [type] $user_id         [description]
-     * @param  [type] $article_title   [description]
-     * @param  [type] $pids            [description]
-     * @param  [type] $article_content [description]
-     * @param  [type] $tags            [description]
-     * @return [type]                  [description]
-     */
-    public function publish_topic($user_id, $article_title, $pids, $article_content, $tags)
-    {
-
     }
 
 
@@ -125,7 +110,7 @@ class Article_model extends CI_Model
             article.read,
             article.like,
             ')
-            ->where('publish_status', 1)
+            ->where('publish_status', '1')
             ->where('type', 2);
 
         if( isset($who) && is_numeric($who) ) {

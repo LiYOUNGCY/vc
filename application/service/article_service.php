@@ -83,6 +83,8 @@ class Article_service extends MY_Service{
             unset($topic[$key]['id']);
             unset($topic[$key]['title']);
         }
+
+        return $topic;
     }
 
 

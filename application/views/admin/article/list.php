@@ -12,7 +12,6 @@
                     <div class="panel-body">
                         <div style="margin-bottom: 10px;">
                             <button id="publish_article" type="button" class="btn btn-outline btn-default">发布文章</button>
-                            <button id="publish_topic" type="button" class="btn btn-outline btn-default">发布专题</button>
                         </div>
                         <!--表格-->
                         <table id="sample-table-1" class="table table-striped table-bordered table-hover">

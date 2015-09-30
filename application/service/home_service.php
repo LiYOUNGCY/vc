@@ -16,7 +16,7 @@ class Home_service extends MY_Service{
 	public function enter_index()
 	{
 		//专题
-		$latest_topic      = $this->article_model->get_article_list(0,NULL,NULL,2);
+		$latest_topic      = $this->article_model->get_topic_list(0);
         foreach($latest_topic as $key => $value )
         {
             //对每篇文章内容进行字数截取

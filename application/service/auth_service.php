@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Auth_service extends MY_Service{
 
@@ -20,9 +20,9 @@ class Auth_service extends MY_Service{
         $this->token_size       = 32;
         $this->selector_size    = 16;
 
-        $this->load->helper('cookie');        
+        $this->load->helper('cookie');
 	}
-	
+
 	/**
 	 * [check_user_auth 检查用户权限]
 	 * @return [type] [description]
@@ -64,7 +64,7 @@ class Auth_service extends MY_Service{
 		if(array_key_exists($route,$auths))
 		{
 			$user 	   = isset($_SESSION[$this->login_in_session_name]) ? $_SESSION[$this->login_in_session_name] : NULL;
-			$user_role = isset($user['role']) 	  ? $user['role'] 	  : NULL; 
+			$user_role = isset($user['role']) 	  ? $user['role'] 	  : NULL;
 			//有权限
 			if(strstr($auths[$route],"|{$user_role}|"))
 			{
@@ -79,24 +79,23 @@ class Auth_service extends MY_Service{
                     //已登录
                     if( ! empty($user))
                     {
-                        return TRUE;                        
+                        return TRUE;
                     }
                     //未登录
                     else
                     {
-                        $this->error->output('NOTLOGIN_ERROR',array('script' => 'swal({title: "请登录后再进行操作",type: "warning",showCancelButton: true,confirmButtonColor: "#DD6B55",confirmButtonText: "注册/登录",closeOnConfirm: false},function () {showsign();});'));
+                        return FALSE;
                     }
                 }
-                //没有权限   
-                $this->error->output('NOAUTH_ERROR',array('script' => 'window.location.href ="'.base_url().'";'));
-                		
+                //没有权限
+                return FALSE;
 			}
 		}
 		//无需权限
 		else
 		{
 			return TRUE;
-		}		
+		}
 	}
 
 
@@ -110,7 +109,7 @@ class Auth_service extends MY_Service{
         $_cookie = NULL;
 
         //检查 SESSION
-        
+
         if ( $_user_data !== FALSE )
         {
             return $_user_data;
@@ -154,7 +153,7 @@ class Auth_service extends MY_Service{
     public function logout()
     {
         $this->session->unset_userdata($this->login_in_session_name);
-        $this->_set_cookie(NULL);   
+        $this->_set_cookie(NULL);
     }
 
     /**
@@ -212,7 +211,7 @@ class Auth_service extends MY_Service{
 
     /**
      * 生成 cookie ，如果传入 selector 就 代表刷新 cookie 的token
-     * 否则就是 生成一个全新的 cookie 
+     * 否则就是 生成一个全新的 cookie
      * @param string $selector
      * @return array
      */

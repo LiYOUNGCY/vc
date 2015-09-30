@@ -83,6 +83,15 @@
                         <li>
                             <a href="<?= base_url() . ADMINROUTE ?>topic">专题管理</a>
                         </li>
+                        <li>
+                            <a href="<?= base_url() . ADMINROUTE ?>topic/who">送礼的标签</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url() . ADMINROUTE ?>topic/where">装修的标签</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url() . ADMINROUTE ?>topic/when">收藏的标签</a>
+                        </li>
                     </ul>
                 </li>
 
