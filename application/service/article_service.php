@@ -277,7 +277,14 @@ class Article_service extends MY_Service{
      * @return mixed
      */
     public function get_topic_tag() {
-        $query = $this->article_model->get_topic_tag();
+        $this->load->model('topic_tag_when_model');
+        $this->load->model('topic_tag_where_model');
+        $this->load->model('topic_tag_who_model');
+
+        $query['when'] = $this->topic_tag_when_model->get_topic_tag_when_list();
+        $query['where'] = $this->topic_tag_where_model->get_topic_tag_where_list();
+        $query['who'] = $this->topic_tag_who_model->get_topic_tag_who_list();
+
         return $query;
     }
 

@@ -110,22 +110,26 @@ class Article_model extends CI_Model
             article.read,
             article.like,
             ')
-            ->where('publish_status', '1')
-            ->where('type', 2);
+            ->from('article, topic_tag')
+            ->where('article.tid = topic_tag.id')
+            ->where('article.publish_status', 1)
+            ->where('article.type', 2);
+
+
 
         if( isset($who) && is_numeric($who) ) {
-            $query = $query->where('who', $who);
+            $query = $query->where('topic_tag.who', $who);
         }
 
         if( isset($when) && is_numeric($when) ) {
-            $query = $query->where('when', $when);
+            $query = $query->where('topic_tag.when', $when);
         }
 
         if( isset($where) && is_numeric($where) ) {
-            $query = $query->where('where', $where);
+            $query = $query->where('topic_tag.where', $where);
         }
 
-        $query = $query->order_by('id DESC')->limit($limit, $page * $limit)->get('article')->result_array();
+        $query = $query->order_by('article.id DESC')->limit($limit, $page * $limit)->get()->result_array();
         return $query;
 
     }
@@ -282,20 +286,6 @@ class Article_model extends CI_Model
         return $this->db->count_all('article_tag');
     }
 
-    /**
-     * 取得专题的标签
-     * @return mixed
-     */
-    public function get_topic_tag()
-    {
-        $query = $this->db->where('type', 2)->get('article_tag')->result_array();
-        return $query;
-    }
-
-    public function get_topic_tag_count()
-    {
-        return $this->db->where('type', 2)->count_all_results('article_tag');
-    }
 
     public function get_article_tag()
     {

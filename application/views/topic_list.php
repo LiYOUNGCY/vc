@@ -7,36 +7,40 @@
             <!--标签-->
             <div id="stamp" class="filter-warp">
                 <div class="filter">
-                    <ul>
+                    <ul id="present">
                         <li class="label">送礼：</li>
-                        <li class="<?php if($get_tag == 0) echo 'active'; ?>" onclick="getArticleListBYtag('all')">
+                        <li class="<?php if($w1 == 0) echo 'active'; ?>" data-id="0" data-type="w1">
                             全部
                         </li>
-                        
-                        <?php foreach ($tag as $key => $value) { ?>
-                            <li class="<?php if($get_tag == $value['id']) echo 'active'; ?>" onclick="getArticleListBYtag(<?= $value['id'] ?>)">
+
+                        <?php foreach ($tag['who'] as $key => $value) { ?>
+                            <li class="<?php if($w1 == $value['id']) echo 'active'; ?>" data-id="<?=$value['id']?>" data-type="w1">
                                 <?= $value['name'] ?>
                             </li>
                         <?php } ?>
                     </ul>
                     <ul>
-                        <li class="label">送礼：</li>
-                        <li class="<?php if($get_tag == 0) echo 'active'; ?>" onclick="getArticleListBYtag('all')">
+                        <li class="label">装修：</li>
+                        <li class="<?php if($w2 == 0) echo 'active'; ?>" data-id="0" data-type="w2">
                             全部
                         </li>
-                        <?php foreach ($tag as $key => $value) { ?>
-                            <li class="<?php if($get_tag == $value['id']) echo 'active'; ?>" onclick="getArticleListBYtag(<?= $value['id'] ?>)">
+                        <?php foreach ($tag['where'] as $key => $value) { ?>
+                            <li class="<?php if($w2 == $value['id']) echo 'active'; ?>" data-id="<?=$value['id']?>" data-type="w2">
                                 <?= $value['name'] ?>
                             </li>
                         <?php } ?>
                     </ul>
-                    <!-- <ul class="fc-target clearfix">
-                        <li class="label">标签1的类型：</li>
-                        <li class="<?php if($get_tag == 0) echo 'active'; ?>"><a href="javascript:void(0)" class="link" onclick="getArticleListBYtag('all')">全部</a></li>
-                        <?php foreach ($tag as $key => $value) { ?>
-                            <li class="<?php if($get_tag == $value['id']) echo 'active'; ?>"><a href="javascript:void(0)" class="link" onclick="getArticleListBYtag(<?= $value['id'] ?>)"><?= $value['name'] ?></a></li>
+                    <ul>
+                        <li class="label">收藏：</li>
+                        <li class="<?php if($w3 == 0) echo 'active'; ?>" data-id="0" data-type="w3">
+                            全部
+                        </li>
+                        <?php foreach ($tag['when'] as $key => $value) { ?>
+                            <li class="<?php if($w3 == $value['id']) echo 'active'; ?>" data-id="<?=$value['id']?>" data-type="w3">
+                                <?= $value['name'] ?>
+                            </li>
                         <?php } ?>
-                    </ul> -->
+                    </ul>
                 </div>
             </div>
 
@@ -67,27 +71,31 @@
         window.location.href = BASE_URL + 'article/' + id;
     }
 
-    function getArticleListBYtag(tag_id) {
-        if(tag_id == 'all') {
-            window.location.href = TOPIC_URL;
-        }
-        else {
-            window.location.href = TOPIC_URL + '?tag=' + tag_id;
-        }
+    function getTopicListBYtag() {
+        $(this).parent().children('.active').removeClass('active');
+
+        var str = $(this).attr('data-type') + '=' +$(this).attr('data-id');
+
+        $('#stamp').find('.active').each(function(){
+            var w = $(this).attr('data-type') + '=' + $(this).attr('data-id');
+            str += ('&&' + w);
+        });
+
+        window.location.href = BASE_URL +'topic?'+str;
     }
 
     $(function () {
         'use strict';
 
-        var tag = getQueryString('tag');
-        var url = '';
+        var w1 = getQueryString('w1');
+        var w2 = getQueryString('w2');
+        var w3 = getQueryString('w3');
 
-        if (tag != null) {
-            url = GET_TOPIC_URL + '?tag=' + tag;
-        }
-        else {
-            url = GET_TOPIC_URL;
-        }
+        w1 = w1 == null ? 0 : w1;
+        w2 = w2 == null ? 0 : w2;
+        w3 = w3 == null ? 0 : w3;
+
+        var url = GET_TOPIC_URL + '?w1=' + w1 + '&&w2=' + w2 + '&&w3=' + w3;
 
 
         var $container = $('.item-list');
@@ -108,6 +116,11 @@
             each: function (elm) {
                 masonry.layout();
             }
+        });
+
+
+        $('#stamp').find('li').each(function(){
+            $(this).click(getTopicListBYtag);
         });
 
         var count = 0;

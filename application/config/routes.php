@@ -65,7 +65,7 @@ $route['home'] = 'home/main';
 
 $route['article/(:num)'] = 'article/detail/index/$1';
 $route['article'] = 'article/main';
-$route['topic'] = 'article/main/index/topic';
+$route['topic'] = 'article/main/topic';
 //发布文章
 $route['publish/article']  = 'article/publish/index/publish';
 //更新文章

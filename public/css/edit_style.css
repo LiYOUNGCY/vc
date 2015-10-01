@@ -1,0 +1,126 @@
+/*
+ * 全局样式
+ */
+/*
+ * Button Style
+ */
+.button {
+    padding: .25em 1em;
+    border: 1px solid rgba(0, 0, 0, .1);
+    background: #888 linear-gradient(hsla(0, 0%, 100%, .2), transparent);
+    border-radius: .2em;
+    box-shadow: 0 .05em .25em rgba(0, 0, 0, .5);
+    color: white;
+    text-shadow: 0 -.05em .05em rgba(0, 0, 0, .5);
+    font-size: 100%;
+    line-height: 1.5;
+    display: inline;
+
+    cursor: pointer;
+
+    transition: all .25s;
+}
+
+.button:hover{
+    opacity: .8;
+}
+
+.button.cancel {
+    background-color: #f44336;
+}
+
+.button.success {
+    background-color: #4caf50;
+}
+
+/*
+ * 输入样式
+ */
+.form-control {
+    position: relative;
+    display: block;
+    text-align: left;
+    padding-top: 1em;
+}
+
+input[type="text"] {
+    border-style: none none solid none;
+    border-color: #e0e0e0;
+    border-width: 2px;
+
+    width: calc(100% - .5em);
+    padding: .25em;
+    color: rgba(0, 0, 0, .8);
+    background: transparent;
+    font-size: 16px;
+
+    display: block;
+    transition: border-color .5s;
+}
+
+input[type="text"]:focus {
+    border-color: #cddc39;
+}
+
+input + .message,
+textarea + .message {
+    position: absolute;
+    bottom: 0;
+    right: -13em;
+    max-width: 16em;
+    font-size: .8em;
+    padding: .5em;
+    border-radius: .3em;
+
+    background: #fed;
+    box-shadow: .05em .2em .6em rgba(0,0,0,.2);
+    transform: scale(0);
+    transition: .5s cubic-bezier(.25,.1,.3,1.5) transform;
+}
+
+input + .message:before,
+textarea + .message:before {
+    content: "";
+    position: absolute;
+    left: -.35em;
+    top: calc(50% - .35em);
+
+    padding: .35em;
+    background: inherit;
+    border: inherit;
+    border-right: 0;
+    border-bottom: 0;
+    transform: rotate(45deg);
+
+}
+
+.message.open {
+    transform: scale(1);
+    transform-origin: 1.4em -.4em;
+}
+
+.message.danger {
+    background: #d50000;
+    color: white;
+}
+
+textarea {
+    border-style: none none solid none !important;
+    border-color: #e0e0e0;
+    border-width: 2px !important;
+
+    width: calc(100% - .5em);
+    padding: .25em;
+    color: rgba(0, 0, 0, .8);
+    background: transparent;
+    font-size: 1rem;
+
+    resize:none;
+    display: block;
+    transition: border-color .5s;
+
+}
+
+textarea:focus {
+    border-color: #cddc39;
+}
