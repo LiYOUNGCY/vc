@@ -69,7 +69,9 @@ img {
     vertical-align: middle;
 }
 
-
+p{
+    letter-spacing: 2px;
+}
 .hide-x {
     overflow-x: hidden;
 }
@@ -110,11 +112,14 @@ img {
     /*height: 168px;*/
     /*background: transparent url("../img/icon/logo_big.png") no-repeat scroll;*/
 /*}*/
-.icon.logo-w{
-    width: 61px;
-    height: 35px;
-    background: transparent url("../img/icon/logo_writh.png") no-repeat scroll;
+.icon.logo-normal{
+    width: 87px;
+    height: 30px;
+    background: transparent url("../img/icon/logo_normal.png") no-repeat scroll;
     display: inline-block;
+}
+.icon.logo-w{
+
 }
 .icon.logo-f{
     width: 61px;
@@ -277,6 +282,17 @@ img {
     background-size:cover;
     background-position:50% 50%;
 }
+.icon.emailsended{
+    width: 135px;
+    height: 134px;
+    background: transparent url("../img/icon/email_sended.png") no-repeat scroll;
+}
+.icon.emailconfirm{
+    width: 135px;
+    height: 133px;
+    background: transparent url("../img/icon/confirm_email.png") no-repeat scroll;
+}
+
 @media screen and (max-width: 960px) {
     .icon.qrcode{
         width: 209px;
@@ -441,44 +457,50 @@ img {
 }
 
 .filter-warp .filter {
-    border-width: 1px;
-    border-style: none solid solid solid;
-    border-color: #EEEEEE;
-    line-height: 45px;
+    width: 100%;
+    text-align: left;
 }
 
-.filter-warp .filter:first-child {
-    border-style: solid;
+.filter-warp .filter ul{
+    display: inline-block;
+    font-size: 18px;
+    color: #B3B3B3;
+    width: 100%;
+
 }
 
-.filter-warp .filter .fc-target {
-
-}
-
-.filter-warp .filter .fc-target li{
+.filter-warp .filter ul li{
     float: left;
-    padding: 5px 20px;
-    line-height: 1.7;
+    display: block;
+    padding: 0 10px;
+    margin: 0 5px 10px;
+    height: 40px;
+    line-height: 40px;
+    transition:all .2s ease-in-out;
+}
+.filter-warp .filter ul li.label{
+    color: #0C0F08 !important;
+    background: #FFFFFF !important;
+    cursor: default !important;
+    margin: 0px;
+    padding: 0px;
+}
+.filter-warp .filter ul li.active{
+    background: #EEEEEE;
+    color: #0C0F08;
+}
+.filter-warp .filter ul li.active{
+    background: #EEEEEE;
+    color: #0C0F08;
+}
+.filter-warp .filter ul li:hover{
+    background: #EEEEEE;
+    color: #0C0F08;
+    cursor: pointer;
 }
 
-/*.filter-warp .filter .fc-target li a {*/
-    /*padding: 5px;*/
-/*}*/
-
-.filter-warp .filter .fc-target li.active{
-    background-color: #F7CC1E;
-    color: white;
-    border-radius: 5px;
-}
 @media screen and (max-width: 767px){
-    .filter-warp .filter .fc-target .label{
-        display: none;
-    }
-    .filter-warp .filter .fc-target li{
-        text-align: center;
-        width: 33.3%;
-        padding: 0;
-    }
+    
 }
 
 .filter-warp .filter .dropdown {
@@ -2760,23 +2782,18 @@ hr.line {
     max-height: 100%;
 }
 
-.artarea .artinfo {
+.artarea .like {
     display: inline-block;
 
     margin-top: 20px;
     width: 100%;
 
-    text-align: right
-    ;
+    text-align: right;
 }
-.artarea .artinfo .likebtn {
+.artarea .like .likebtn {
     float: left;
 }
-.artarea .artinfo .info {
-    font-size: 16px;
 
-    color: #888;
-}
 
 
 .artistarea {
@@ -2785,7 +2802,6 @@ hr.line {
     position: relative;
 
     width: 340px;
-    height: 600px;
 }
 
 .artistarea .artistinfo {
@@ -2839,32 +2855,22 @@ hr.line {
 
     background-color: #f2f2f2;
 }
-
-.artistarea .artintro {
+.artistarea .artinfo{
     margin: 25px 0 5px;
     border-top: 1px #b3b3b3 dashed;
 
     text-align: left;
 }
-
-.artistarea .artintro .title {
-    margin: 15px 0;
+.artistarea .artinfo .info{
+    color: #888888;
     width: 100%;
-
-    font-weight: bold;
-
-    color: #888;
+    text-align: left;
+    padding-top: 10px;
 }
-.artistarea .artintro .intro {
-    font-size: 14px;
-    text-align: justify;
-
-    color: #b3b3b3;
+.artistarea .artinfo .info li{
+    height: 25px;
 }
-.artistarea .artintro .intro p {
-    text-indent: 2em;
-}
-.artistarea .artintro .price {
+.artistarea .artinfo .price{
     margin: 10px 0;
     width: 100%;
 
@@ -2872,6 +2878,61 @@ hr.line {
     font-weight: bold;
 
     color: #f7cc1e;
+}
+.artistarea .csopt{
+    margin: 15px 0;
+    width: 100%;
+    
+    background: #EEEEEE;
+    display: inline-block;
+    color: #B3B3B3;
+    text-align: left;
+}
+.artistarea .csopt .phonecs{
+    height: 30px;
+    line-height: 30px;
+    margin: 10px;
+    display: inline-block;
+}
+.artistarea .csopt .phonecs .pcs{
+    color: #0C0F08;
+    font-weight: bold;
+}
+.artistarea .csopt .onlinecs{
+    height: 30px;
+    line-height: 30px;
+    margin: 10px;
+    display: inline-block;
+}
+.artistarea .csopt .onlinecs .link{
+    color: #0C0F08;
+    font-weight: bold;
+}
+
+.artintro {
+    margin: 25px 0 5px;
+    border-top: 1px #b3b3b3 dashed;
+
+    text-align: left;
+}
+
+
+.artintro .title {
+    margin: 15px 0;
+    width: 100%;
+
+    font-weight: bold;
+
+    color: #888;
+}
+.artintro .intro {
+    font-size: 14px;
+    text-align: justify;
+
+    color: #b3b3b3;
+}
+.artintro .intro p {
+    text-indent: 2em;
 }
 
 .artistarea .artintro .btn {
@@ -2893,25 +2954,31 @@ hr.line {
     display: inline-block;
 
     border-radius: 10px;
-    width: 160px;
-    height: 50px;
+    width: 158px;
+    height: 48px;
 
     font-size: 20px;
     font-weight: bold;
-    line-height: 50px;
+    line-height: 48px;
 
-    color: #888;
+    color: #FFFFFF;
     background-color: #f2f2f2;
 }
 .artistarea .useropt .btn.buy {
     margin-right: 10px;
-
+    border: 2px #fcee21 solid;
     background-color: #fcee21 ;
 }
 .artistarea .useropt .btn.addcart {
-    background-color: #ccc ;
+    background: #FFFFFF;
+    border: 2px #fcee21 solid;
+    color: #fcee21;
 }
 
+.artistarea .useropt .btn.buy:hover,
+.artistarea .useropt .btn.addcart{
+    opacity: .7;
+}
 /*production end*/
 
 /*zoom*/
@@ -3075,6 +3142,10 @@ img.zoom-img {
         margin: 40px auto 0;
         padding: 20px 0;
     }
+    .artarea .like .likebtn{
+        float: none;
+        margin: 0 auto;
+    }
 }
 
 .cart .title{
@@ -3146,16 +3217,16 @@ img.zoom-img {
 }
 .cart .artlist .art .info .name:before {
     font-weight: 800;
-    color: #F8E901;
+    color: #B3B3B3;
 
-    content: "《 ";
+    content: "（ ";
 }
 
 .cart .artlist .art .info .name:after {
     font-weight: 800;
-    color: #F8E901;
+    color: #B3B3B3;
 
-    content: " 》";
+    content: " ）";
 }
 .cart .artlist .art .info .artist{
     margin-left: 2px;
@@ -3221,6 +3292,57 @@ img.zoom-img {
 }
 .cart .topay .btn:hover{
     background-color: #f7cc1e;
+}
+
+@media screen and (max-width:960px) {
+    .cart .title{
+        width: 95%;
+        margin: 20px auto;
+    }
+    .cart .artlist{
+        width: 95%;
+        margin: 0 auto;
+    }
+    .cart .artlist .art .delete{
+        display: block;
+        z-index: 5;
+    }
+    .cart .artlist .art .pic{
+        float: none;
+        margin: 0 auto;
+    }
+    .cart .artlist .art .info{
+        text-align: center;
+        float: none;
+        margin: 10px 0 0;
+        width: 100%;
+        height: auto;
+    }
+    .cart .artlist .art .info .artist{
+        margin-bottom: 10px;
+    }
+    .cart .artlist .art .info .detail{
+        position: relative;
+    }
+    .cart .artlist .art .price{
+        float: none;
+        width: 100%;
+        text-align: center;
+        height: auto;
+        line-height: normal;
+    }
+    .cart .final{
+        height: auto;
+    }
+    .cart .final .total{
+        position: relative;
+        text-align: center;
+    }
+    .cart .topay .btn{
+        position: relative;
+        margin: 0 auto;
+    }
+
 }
 .personal .userinfo{
     margin:30px 0;
@@ -3808,6 +3930,43 @@ img.zoom-img {
 .forgetpwd .changemethor:hover{
     color: #FCEE21;
 }
+.emailbox{
+    width:92%;
+    max-width: 600px;
+    min-width: 310px;
+    box-shadow: 2px 2px 2px #B1B1B1;
+    border: #D8D8D8 solid 1px;
+    margin:20px auto 0;
+    padding: 70px 0;
+    position: relative;
+}
+.emailbox .logo-normal{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+.emailbox .econtent .success{
+    color: #534741;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 25px;
+}
+.emailbox .econtent .success .taremail{
+    color: #FFDE00;
+}
+.emailbox .econtent .success .tips{
+    color: #C1C1C1;
+    font-size: 14px;
+    width: 95%;
+    margin: 0 auto; 
+}
+.emailbox .econtent .success .light{
+    color: #ffde00;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
 .paytitle{
     margin-top:20px;
     text-align: left;

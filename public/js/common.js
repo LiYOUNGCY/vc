@@ -36,8 +36,15 @@ var UPDATE_ARTICLE = BASE_URL + 'article/publish/update_article';
 //艺术作品
 var GET_ARTIST_ARTS = BASE_URL + 'artist/detail/get_artist_production';
 
-//购物车列表
+//获取购物车列表
 var GET_CART_GOODS = BASE_URL + 'cart/main/get_good_list';
+
+//删除购物车商品
+var REMOVE_CART_GOODS = BASE_URL + 'cart/main/remove_good';
+
+//添加购物车商品
+var ADD_CART_GOODS = BASE_URL + 'cart/main/add_good';
+
 
 //艺术品点赞
 var VOTE_PRODUCTION = BASE_URL + 'production/detail/like_production';

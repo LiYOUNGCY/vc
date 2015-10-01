@@ -7,15 +7,37 @@
             <!--标签-->
             <div id="stamp" class="filter-warp">
                 <div class="filter">
-                    <ul class="fc-target clearfix">
+                    <ul>
+                        <li class="label">送礼：</li>
+                        <li class="<?php if($get_tag == 0) echo 'active'; ?>" onclick="getArticleListBYtag('all')">
+                            全部
+                        </li>
+                        
+                        <?php foreach ($tag as $key => $value) { ?>
+                            <li class="<?php if($get_tag == $value['id']) echo 'active'; ?>" onclick="getArticleListBYtag(<?= $value['id'] ?>)">
+                                <?= $value['name'] ?>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                    <ul>
+                        <li class="label">送礼：</li>
+                        <li class="<?php if($get_tag == 0) echo 'active'; ?>" onclick="getArticleListBYtag('all')">
+                            全部
+                        </li>
+                        <?php foreach ($tag as $key => $value) { ?>
+                            <li class="<?php if($get_tag == $value['id']) echo 'active'; ?>" onclick="getArticleListBYtag(<?= $value['id'] ?>)">
+                                <?= $value['name'] ?>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                    <!-- <ul class="fc-target clearfix">
                         <li class="label">标签1的类型：</li>
                         <li class="<?php if($get_tag == 0) echo 'active'; ?>"><a href="javascript:void(0)" class="link" onclick="getArticleListBYtag('all')">全部</a></li>
                         <?php foreach ($tag as $key => $value) { ?>
                             <li class="<?php if($get_tag == $value['id']) echo 'active'; ?>"><a href="javascript:void(0)" class="link" onclick="getArticleListBYtag(<?= $value['id'] ?>)"><?= $value['name'] ?></a></li>
                         <?php } ?>
-                    </ul>
+                    </ul> -->
                 </div>
-
             </div>
 
 

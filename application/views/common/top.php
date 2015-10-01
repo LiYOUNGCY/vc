@@ -50,6 +50,7 @@ if($user['role']==0){
 <script type="text/javascript" src="<?=base_url()?>public/js/jquery.pageslide.min.js"></script>
 <script>
 
+    pushcartcount();
 
     $(function(){
         $(".openslider a").pageslide({direction: "left"});
@@ -69,25 +70,7 @@ if($user['role']==0){
             });
         }
 
-
-        $.ajax({
-            type: 'POST',
-            url: GET_CART_GOODS,
-            async: true,
-            data: {
-                page : 0
-            },
-            dataType: 'json',
-            success: function(data) {
-                var good = data;
-                if(good.error != null || good.length === 0) {
-                    console.log('Error');
-                    return false;
-                }
-                var count =  good.count;
-                $("#cartcount").html(count);
-            }
-        });
+        
 
         $('#s_ipt').keydown(function(e){
             if(e.keyCode == 13){
@@ -111,7 +94,7 @@ if($user['role']==0){
         //hide or show the "back to top" link
         $(window).scroll(function(){
             ( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible');
-            console.log($(this).scrollTop());
+            
         });
         
         //smooth scroll to top
@@ -124,4 +107,26 @@ if($user['role']==0){
         });
 
     })
+
+    function pushcartcount(){
+        $.ajax({
+            type: 'POST',
+            url: GET_CART_GOODS,
+            async: true,
+            data: {
+                page : 0
+            },
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                var good = data;
+                if(good.error != null || good.length === 0) {
+                    console.log('Error');
+                    return false;
+                }
+                var count =  good.count;
+                $("#cartcount").html(count);
+            }
+        });
+    }
 </script>

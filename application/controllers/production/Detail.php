@@ -29,6 +29,9 @@ class Detail extends MY_Controller{
 			$production['like_status'] 	= 0;
 		}
 
+
+		$production['publish_time'] = substr($production['publish_time'],0,10);
+
         $body['production'] 	= $production;
 
 		$uid = isset($this->user['id']) ? $this->user['id'] : NULL;
