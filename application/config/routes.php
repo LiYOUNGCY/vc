@@ -108,6 +108,10 @@ $route['account/forget'] = 'account/main/index/forget';
 $route['setting']   = 'account/setting/index/user';
 $route['setting/(([a-z]*))']   = 'account/setting/index/$1';
 
+//邮件发送验证页面
+$route['email/(([a-z]*))']   = 'account/email/index/$1';
+
+
 /**
  * 收藏列表
  */

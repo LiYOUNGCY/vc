@@ -21,7 +21,6 @@ class Setting extends MY_Controller
         $data['javascript'] = array(
             'jquery.js',
             'alert.min.js',
-
             'error.js',
             'geo.js'
         );

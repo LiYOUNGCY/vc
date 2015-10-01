@@ -112,11 +112,14 @@ p{
     /*height: 168px;*/
     /*background: transparent url("../img/icon/logo_big.png") no-repeat scroll;*/
 /*}*/
-.icon.logo-w{
-    width: 61px;
-    height: 35px;
-    background: transparent url("../img/icon/logo_writh.png") no-repeat scroll;
+.icon.logo-normal{
+    width: 87px;
+    height: 30px;
+    background: transparent url("../img/icon/logo_normal.png") no-repeat scroll;
     display: inline-block;
+}
+.icon.logo-w{
+
 }
 .icon.logo-f{
     width: 61px;
@@ -279,6 +282,17 @@ p{
     background-size:cover;
     background-position:50% 50%;
 }
+.icon.emailsended{
+    width: 135px;
+    height: 134px;
+    background: transparent url("../img/icon/email_sended.png") no-repeat scroll;
+}
+.icon.emailconfirm{
+    width: 135px;
+    height: 133px;
+    background: transparent url("../img/icon/confirm_email.png") no-repeat scroll;
+}
+
 @media screen and (max-width: 960px) {
     .icon.qrcode{
         width: 209px;
@@ -3916,6 +3930,43 @@ img.zoom-img {
 .forgetpwd .changemethor:hover{
     color: #FCEE21;
 }
+.emailbox{
+    width:92%;
+    max-width: 600px;
+    min-width: 310px;
+    box-shadow: 2px 2px 2px #B1B1B1;
+    border: #D8D8D8 solid 1px;
+    margin:20px auto 0;
+    padding: 70px 0;
+    position: relative;
+}
+.emailbox .logo-normal{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+.emailbox .econtent .success{
+    color: #534741;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 25px;
+}
+.emailbox .econtent .success .taremail{
+    color: #FFDE00;
+}
+.emailbox .econtent .success .tips{
+    color: #C1C1C1;
+    font-size: 14px;
+    width: 95%;
+    margin: 0 auto; 
+}
+.emailbox .econtent .success .light{
+    color: #ffde00;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
 .paytitle{
     margin-top:20px;
     text-align: left;
