@@ -7,7 +7,7 @@
             <!--标签-->
             <div id="stamp" class="filter-warp">
                 <div class="filter">
-                    <ul id="present">
+                    <ul>
                         <li class="label">送礼：</li>
                         <li class="<?php if($w1 == 0) echo 'active'; ?>" data-id="0" data-type="w1">
                             全部

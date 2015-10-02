@@ -22,14 +22,14 @@ class Article_model extends CI_Model
     public function publish_article($user_id, $article_title, $article_type, $pids, $article_content, $tags)
     {
         $data = array(
-            'uid'           => $user_id,
-            'type'          => $article_type,
-            'title'         => $article_title,
-            'pids'          => $pids,
-            'content'       => $article_content,
-            'publish_time'  => date("Y-m-d H:i:s", time()),
-            'creat_by'      => $user_id,
-            'tag'           => $tags
+            'uid' => $user_id,
+            'type' => $article_type,
+            'title' => $article_title,
+            'pids' => $pids,
+            'content' => $article_content,
+            'publish_time' => date("Y-m-d H:i:s", time()),
+            'creat_by' => $user_id,
+            'tag' => $tags
         );
 
         $this->db->insert('article', $data);
@@ -74,7 +74,9 @@ class Article_model extends CI_Model
             article.like,
             article.read
             ')
-            ->from('article');
+            ->from('article')
+            ->where('article.type', 1)
+            ->where('article.publish_status', '1');
 
         if (is_numeric($meid)) {
             $query = $query->select('article_like.status as like_status');
@@ -116,16 +118,15 @@ class Article_model extends CI_Model
             ->where('article.type', 2);
 
 
-
-        if( isset($who) && is_numeric($who) ) {
+        if (isset($who) && is_numeric($who)) {
             $query = $query->where('topic_tag.who', $who);
         }
 
-        if( isset($when) && is_numeric($when) ) {
+        if (isset($when) && is_numeric($when)) {
             $query = $query->where('topic_tag.when', $when);
         }
 
-        if( isset($where) && is_numeric($where) ) {
+        if (isset($where) && is_numeric($where)) {
             $query = $query->where('topic_tag.where', $where);
         }
 
@@ -337,8 +338,8 @@ class Article_model extends CI_Model
     public function publish($id)
     {
         $data = array(
-                'publish_status' => 1
-            );
+            'publish_status' => 1
+        );
         $this->db->where('id', $id)->update('article', $data);
         return $this->db->affected_rows() === 1;
     }
@@ -346,8 +347,8 @@ class Article_model extends CI_Model
     public function cancel_publish($id)
     {
         $data = array(
-                'publish_status' => 0
-            );
+            'publish_status' => 0
+        );
         $this->db->where('id', $id)->update('article', $data);
         return $this->db->affected_rows() === 1;
     }

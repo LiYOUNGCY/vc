@@ -3,20 +3,23 @@
     <?php echo $top; ?>
     <div class="container">
         <div class="item-list" id="item-list">
-            <div class="filter-warp" id="filter">
+
+            <div id="stamp" class="filter-warp">
                 <div class="filter clearfix">
-                    <ul class="fc-target">
-                        <li>热门分类：</li>
-                        <li><a href="javascript:void(0)" class="link <?php if ($get_tag == 0) echo 'active'; ?>"
-                               onclick="getArticleListBYtag('all')">全部</a></li>
-                        <?php foreach ($tag as $key => $value) { ?>
-                            <li><a href="javascript:void(0)"
-                                   class="link <?php if ($get_tag == $value['id']) echo 'active'; ?>"
-                                   onclick="getArticleListBYtag(<?= $value['id'] ?>)"><?= $value['name'] ?></a></li>
-                        <?php } ?>
-                    </ul>
+                    <div class="filter">
+                        <ul>
+                            <li class="label">热门分类：</li>
+                            <li class="<?php if ($get_tag == 0) echo 'active'; ?>" onclick="getArticleListBYtag('all')">全部</li>
+                            <?php foreach ($tag as $key => $value) { ?>
+                                <li class="<?php if ($get_tag == $value['id']) echo 'active'; ?>"
+                                    onclick="getArticleListBYtag(<?= $value['id'] ?>)">
+                                    <?= $value['name'] ?></li>
+                            <?php } ?>
+                        </ul>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
     <?= $footer ?>
@@ -55,7 +58,7 @@
         }
 
         var masonry = new Masonry(container, {
-            stamp: '#filter',
+            stamp: '#stamp',
             itemSelector: '.box',
             columnWidth: 300,
             gutter: 30,

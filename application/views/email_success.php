@@ -12,7 +12,7 @@
                 <div class="success">
                     <p>
                         验证成功，将在
-                        <span class="light">3</span>
+                        <span class="light" id="time">3</span>
                         秒内跳转
                     </p>
                 </div>
@@ -25,7 +25,16 @@
 <script>
 
     $(function () {
-
+        var waitTime = 3;
+        var time = self.setInterval(function () {
+                waitTime--;
+                $("#time").html(waitTime);
+                if (waitTime == 0) {
+                    window.clearInterval(time);
+                    window.location.href = BASE_URL;
+                }
+            }
+            , 1000);
     })
 </script>
 </html>
