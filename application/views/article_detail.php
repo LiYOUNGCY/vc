@@ -155,7 +155,19 @@
                         }
                     }
                     else if (status.error != null) {
-                        ERROR_OUTPUT(data);
+                         swal({
+                            title: "请登录后再进行操作",
+                            text: data.error,
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "注册/登录",
+                            cancelButtonText: "取消",
+                            closeOnConfirm: false
+                        },
+                        function () {
+                            window.location.href = LOGIN_URL;
+                        });
                         return false;
                     }
                 },
@@ -222,7 +234,19 @@
                         swal("Good job!", "You clicked the button!", "success")
                     }
                     else if (data.error != null) {
-                        ERROR_OUTPUT(data);
+                         swal({
+                            title: "请登录后再进行操作",
+                            text: data.error,
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "注册/登录",
+                            cancelButtonText: "取消",
+                            closeOnConfirm: false
+                        },
+                        function () {
+                            window.location.href = LOGIN_URL;
+                        });
                         return false;
                     }
                 }

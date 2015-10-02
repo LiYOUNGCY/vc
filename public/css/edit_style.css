@@ -1,6 +1,8 @@
 /*
  * 全局样式
  */
+
+
 /*
  * Button Style
  */
@@ -36,13 +38,6 @@
 /*
  * 输入样式
  */
-.form-control {
-    position: relative;
-    display: block;
-    text-align: left;
-    padding-top: 1em;
-}
-
 input[type="text"] {
     border-style: none none solid none;
     border-color: #e0e0e0;
@@ -78,6 +73,27 @@ textarea + .message {
     transition: .5s cubic-bezier(.25,.1,.3,1.5) transform;
 }
 
+textarea {
+    border-style: none none solid none !important;
+    border-color: #e0e0e0;
+    border-width: 2px !important;
+
+    width: calc(100% - .5em);
+    padding: .25em;
+    color: rgba(0, 0, 0, .8);
+    background: transparent;
+    font-size: 1rem;
+
+    resize:none;
+    display: block;
+    transition: border-color .5s;
+
+}
+
+textarea:focus {
+    border-color: #cddc39;
+}
+
 input + .message:before,
 textarea + .message:before {
     content: "";
@@ -104,23 +120,83 @@ textarea + .message:before {
     color: white;
 }
 
-textarea {
-    border-style: none none solid none !important;
-    border-color: #e0e0e0;
-    border-width: 2px !important;
+/*
+ * Reveal Model
+ */
+.reveal-model-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
 
-    width: calc(100% - .5em);
-    padding: .25em;
-    color: rgba(0, 0, 0, .8);
-    background: transparent;
-    font-size: 1rem;
-
-    resize:none;
-    display: block;
-    transition: border-color .5s;
-
+    background: rgba(0, 0, 0, .45);
+    width: 100%;
+    height: 100%;
+    z-index: 10;
 }
 
-textarea:focus {
-    border-color: #cddc39;
+.reveal-model {
+    position: absolute;
+    top: 5rem;
+    left: 0;
+    right: 0;
+
+    width: 700px;
+    min-height: 16em;
+    margin: 0 auto;
+    background: #FFF;
+    z-index: 11;
+    border-radius: .25em;
+    display: block;
+}
+
+.container-left {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    height: 100%;
+    width: 200px;
+    background-color: #F2D367;
+    box-shadow: .05em .2em .6em rgba(0,0,0,.2);
+    z-index: 5;
+}
+
+.container-left .title {
+    text-align: center;
+    color: #DE8E64;
+
+    padding: .2em;
+    border-bottom: .1em solid #CD8E64;
+}
+
+.container-left .title h3 {
+     color: #DE8E64;
+}
+
+.container {
+     position: relative;
+     left: 0px;
+     top: 0px;
+
+     width: 80px;
+     background-color: #FFF;
+}
+
+.container.open {
+    width: calc(100% - 200px);
+    transform: translateX(200px);
+    margin: 0px;
+    max-width: none;
+}
+
+.main-container {
+     width: 700px;
+     margin: 0 auto;
+}
+
+.form-control {
+    position: relative;
+    display: block;
+    text-align: left;
+    padding-top: 1em;
 }

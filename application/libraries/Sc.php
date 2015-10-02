@@ -20,7 +20,7 @@ class Sc {
 				 'phone'		=> 'exact_length[11]|numeric',		//手机号码的规则
 				 'email' 		=> 'valid_email',
 				 'pwd'			=> 'required|min_length[8]|max_length[36]',
-				 'old_pwd' 		=> 'required|min_length[8]|max_length[36]',				 
+				 'old_pwd' 		=> 'required|min_length[8]|max_length[36]',
 				 'confirm_pwd' 	=> 'matches[pwd]',
 				 'name'			=> 'required|min_length[2]|max_length[30]',
 				 'role' 		=> 'required|numeric',
@@ -30,7 +30,7 @@ class Sc {
 				 'article_title'=> 'required|min_length[1]|max_length[50]',
 				 'article_content' => 'required|min_length[1]',
 				 'id' 			=> 'required|numeric',
-				 'page' 		=> 'required|numeric',				 
+				 'page' 		=> 'required|numeric',
 				 'uid' 			=> 'required|numeric',
 				 'cid' 			=> 'required|numeric',
 				 'nid' 			=> 'required|numeric',
@@ -44,7 +44,7 @@ class Sc {
 			);
 
 		//验证错误重定向
-		$this->error_redirect = array('script' => NULL, 'type' => 0);	
+		$this->error_redirect = array('script' => NULL, 'type' => 0);
 	}
 
 	/**
@@ -61,13 +61,13 @@ class Sc {
 	 * 就能根据定义好的规则进行验证，
 	 * 如果没有错误就返回输入的值
 	 * 否则就返回带有error的键的数组，它的值为没有通过验证的名称
-	 * 
+	 *
 	 * @param  $name 的格式为:
 	 *         1. 'phone'
 	 *         2. array('phone', 'name')
-	 *         
+	 *
 	 * @return 数据验证失败: array('error' => 'name')
-	 *         成功: 
+	 *         成功:
 	 *         			1. phone_value
 	 *         			2. array(
 	 *         						'phone' => phone_value,
@@ -95,7 +95,7 @@ class Sc {
 		}
 		else if (is_array($name)) {
 			foreach ($name as $key => $value) {
-			
+
 				if(isset($this->rule[$value])) {
 					$this->CI->form_validation->set_rules($value, $value, $this->rule[$value]);
 					if($this->CI->form_validation->run() == FALSE) {
@@ -103,8 +103,8 @@ class Sc {
 						$this->CI->error->output("invalid_".$value,$this->error_redirect);
 					}
 				}
-				
-				$ret[$value] = trim($this->CI->input->$type($value, $xss));				
+
+				$ret[$value] = trim($this->CI->input->$type($value, $xss));
 			}
 		}
 		return $ret;
@@ -136,5 +136,6 @@ class Sc {
         }
 
         echo json_encode($output);
+        exit();
     }
 }

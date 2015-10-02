@@ -64,7 +64,7 @@
             <div class="intro">
                 <p><?=$production['intro']?></p>
             </div>
-            
+
         </div>
     </div>
     <input type="hidden" id="pid" value="<?=$production['id']?>">
@@ -127,17 +127,19 @@ $(function() {
                     }
                 }
                 else if (status.error != null) {
-                    swal({
-                            title: "请登录后再进行操作",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "注册/登录",
-                            closeOnConfirm: false
-                        },
-                        function () {
-                            window.location.href = LOGIN_URL;
-                        });
+                   swal({
+                        title: "请登录后再进行操作",
+                        text: data.error,
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "注册/登录",
+                        cancelButtonText: "取消",
+                        closeOnConfirm: false
+                    },
+                    function () {
+                        window.location.href = LOGIN_URL;
+                    });
                     return false;
                 }
             },

@@ -10,11 +10,13 @@ class Publish extends MY_Controller
 
     public function index($type = 'publish', $pid = NULL)
     {
+        /*
         $head['css'] = array(
             'base.css',
             'font-awesome/css/font-awesome.min.css',
             'alert.css',
-            'jquery.Jcrop.css'
+            'jquery.Jcrop.css',
+            'edit_style.css'
         );
 
         $head['javascript'] = array(
@@ -25,15 +27,14 @@ class Publish extends MY_Controller
             'autosize.js',
             'ajaxfileupload.js'
         );
-
-        $user['user'] = $this->user;
-        $user['sign'] = $this->load->view('common/sign', '', TRUE);
-        $data['top'] = $this->load->view('common/top', $user, TRUE);
-        $data['footer'] = $this->load->view('common/footer', $user, TRUE);
+        */
+        //$user['user'] = $this->user;
+        //$user['sign'] = $this->load->view('common/sign', '', TRUE);
+        //$data['top'] = $this->load->view('common/top', $user, TRUE);
+        //$data['footer'] = $this->load->view('common/footer', $user, TRUE);
 
         if ($type == 'publish') {
-            $head['title'] = '发布专题';
-            $this->load->view('common/head', $head);
+            $data = array();
             $this->load->view('publish_topic', $data);
         }
         else if($type == 'update' && is_numeric($pid))

@@ -73,6 +73,12 @@ class Detail extends MY_Controller
     public function like_production()
     {
         $pid = $this->sc->input('pid');
+        $pid = empty($pid) ? $this->sc->output_error() : $pid;
+
+        if( empty($this->user['id']) ) {
+            $this->sc->output_error();
+        }
+
         $this->production_service->like_production($pid, $this->user['id']);
     }
 }
