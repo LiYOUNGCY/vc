@@ -6,7 +6,7 @@
             <div class="title">欢迎登录<font>ARTVC</font></div>
             <div class="form">
                 <input type="text" name="username" id="username" placeholder="手机号/邮箱"/>
-                <input type="password" name="password" id="password" class="noborder" placeholder="密码"/>
+                <input type="password" name="password" id="signinpassword" class="noborder" placeholder="密码"/>
             </div>
             <div class="btn" id="signinbtn" onclick="signin()">登录</div>
             <div class="error_div" id="signinError" style="text-align:left;"></div>
@@ -55,7 +55,11 @@
             </div>
             <div class="error_div" id="signupError" style="text-align:left;margin-bottom:10px"></div>
             <div class="btn" onclick="signup()" id="signupbtn">注册</div>
-            <input id="signway" type="hidden" value="phone"></div>
+            <div class="tips">
+                <p>注册即默认您同意本站<a class="link" href="<?=base_url()?>about/terms">《用户协议》</a></p>
+            </div>
+            <input id="signway" type="hidden" value="phone">
+        </div>
     </div>
 </div>
 <script>
@@ -112,6 +116,14 @@
             var ce = validate('email', $('#username').val());
             if(!cp && !ce){
                 $("#signinError").html("* 请输入正确的用户名");
+            }else{
+                $("#signinError").html("");
+            }
+        })
+        $('#signinpassword').blur(function(){
+            var pwd_result = validate('pwd', $('#signinpassword').val());
+            if(!pwd_result){
+                $("#signinError").html("* 密码长度在8~36位");
             }else{
                 $("#signinError").html("");
             }
@@ -242,7 +254,7 @@
     function signin() {
 
         var username = $("#username").val();
-        var password = $("#password").val();
+        var password = $("#signinpassword").val();
 
         if($("#signinError").html() != "" || username == ""){
             return ;
@@ -261,7 +273,7 @@
             $.ajax({
                 type: 'post',
                 url: EMAIL_LOGIN_URL,
-                async: false,
+                async: true,
                 data: {
                     'email'         : username,
                     'pwd'           : password,
@@ -285,7 +297,7 @@
             $.ajax({
                 type: 'post',
                 url: PHONE_LOGIN_URL,
-                async: false,
+                async: true,
                 data: {
                     'phone'         : username,
                     'pwd'           : password,
@@ -346,7 +358,6 @@
 
                 if (phone_code == '' || input_phone_code != phone_code || input_phone_code == '') {
                     //输出错误
-                    alert(3);
                     $('#signupError').html("验证码错误");
                     $("#signupbtn").attr("class","btn");
                     $("#signupbtn").html('注册');
@@ -356,7 +367,7 @@
                 $.ajax({
                     type: 'post',
                     url: PHONE_SIGNUP_URL,
-                    async: false,
+                    async: true,
                     data: {
                         'phone'   : phone,
                         'pwd'     : pwd
@@ -408,7 +419,7 @@
                 $.ajax({
                     type: 'post',
                     url: EMAIL_SIGNUP_URL,
-                    async: false,
+                    async: true,
                     data: {
                         'email'   : email,
                         'pwd'     : pwd

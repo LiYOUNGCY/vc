@@ -128,6 +128,9 @@ $route['conversation/(:num)'] = 'conversation/main/index/$1';
 $route['msg']  = 'notification/main';
 $route['msg/([a-z]*)'] = 'notification/main/index/$1';
 
+//关于我们等
+$route['about/([a-z]*)']  = 'about/main/index/$1';
+
 
 
 /**

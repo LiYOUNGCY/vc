@@ -6,10 +6,6 @@
         <div class="content edit">
             <form class="list" method="post" action="<?= base_url() ?>artist/publish/publish_artist">
 
-                <div class="item">
-                    <p><a class="link" href="#">鸡巴白</a> » 修改个人信息</p>
-                </div>
-
                 <div class="item line-block">
                     <label for="name">昵称：</label>
                     <input id="name" name="name" type="text">
@@ -47,13 +43,7 @@
 
                 <div class="item line-block">
                     <label for="evaluation">手机：</label>
-                    <span id="phone_msg">15521322924</span>
-                    <a id="change_phone" href="javascript:void(0)" style="display:inline-block;">[ 更换手机 ]</a>
-                    <span class="introduction">当手机改变时，登录的账号也会改变</span>
-
                     <input class="width-280" type="text" name="phone" id="phone" style="display:none;">
-
-                    <div class="btn code" style="display:none;" id="phone_code">获取验证码</div>
                     <div class="error_box" id="phone_error" style="display:none;"></div>
                 </div>
 

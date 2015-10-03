@@ -72,6 +72,10 @@ img {
 p{
     letter-spacing: 2px;
 }
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
 .hide-x {
     overflow-x: hidden;
 }
@@ -525,7 +529,7 @@ p{
     left: 0;
     opacity: 0;
 
-    transform:translate(40px,40px) rotate(10deg);
+    transform:scale(.9);
 
     transition:all .4s ease-out;
 }
@@ -595,12 +599,12 @@ p{
     color: #FFFFFF;
 }
 .item-list .artist:hover .artistcard{
-    transform:translate(80px,80px) rotate(15deg);
+    transform:scale(1.1);
     opacity: 0;
 }
 .item-list .artist:hover .backcard{
 
-    transform:translate(0px,0px) rotate(0deg);
+    transform:scale(1);
     box-shadow: 0 0 10px #1a1a1a;
     opacity: 1;
 }
@@ -1978,6 +1982,11 @@ textarea:focus {
 .sign .signup .tosignin:hover{
     color: #0C0F08;
 }
+.sign .signup .tips{
+    font-size: 13px;
+    color: #B3B3B3;
+    margin-top: 5px;
+}
 
 /*sign end*/
 .main-wrapper {
@@ -2687,17 +2696,14 @@ hr.line {
     margin:0 auto;
 }
 .vi_footer .wrapper .copyright{
-    float: left;
-    height: 99px;
-    position: relative;
+    position: absolute;
     display: inline-block;
     width: 600px;
     color: #b3b1ae;
+    bottom: 22px;
 }
-.vi_footer .wrapper .copyright p{
-    position:  absolute;
-    bottom: 0px;
-}
+
+
 .vi_footer .wrapper .weixin{
     float: right;
     height: 100%;
@@ -4193,6 +4199,7 @@ img.zoom-img {
     margin:0 auto;
     text-align: center;
     border:1px solid #EEEEEE;
+    background-color: #FFFFFF;
 }
 .nonebox .box .text{
     width: 100%;
@@ -4238,3 +4245,35 @@ img.zoom-img {
 }
 
 
+.aboutbox{
+    width:92%;
+    max-width: 760px;
+    min-width: 310px;
+    box-shadow: 2px 2px 2px #B1B1B1;
+    border: #D8D8D8 solid 1px;
+    margin:20px auto 0;
+    padding: 30px 0;
+    position: relative;
+}
+.aboutbox .logo-normal{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+.aboutbox .content {
+    text-align: justify;
+    margin: 0px 20px;
+}
+.aboutbox .content .title{
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    color: #0C0F08;
+    margin: 10px;
+}
+.aboutbox .content p{
+    color: #737373;
+　　word-wrap:break-word;/*支持IE，chrome，FF*/
+    font-size: 16px;
+    line-height:22px;
+}
