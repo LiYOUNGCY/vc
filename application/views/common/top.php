@@ -70,7 +70,7 @@ if($user['role']==0){
             });
         }
 
-        
+
 
         $('#s_ipt').keydown(function(e){
             if(e.keyCode == 13){
@@ -82,6 +82,10 @@ if($user['role']==0){
             }
         });
 
+
+        /**
+         * 回到顶部
+         */
         // browser window scroll (in pixels) after which the "back to top" link is shown
         var offset = 300,
             //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
@@ -92,18 +96,27 @@ if($user['role']==0){
             $back_to_top = $('.cd-top');
 
         //hide or show the "back to top" link
-        $(window).scroll(function(){
-            ( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible');
-            
+        $(document).scroll(function(event){
+            event.preventDefault();
+
+            if ($(document).scrollTop() > offset  && ! $back_to_top.hasClass('cd-is-visible')) {
+                $back_to_top.addClass('cd-is-visible');
+            }
+            else if($(document).scrollTop() < offset && $back_to_top.hasClass('cd-is-visible')) {
+                $back_to_top.removeClass('cd-is-visible');
+            }
+
+            console.log('dasfasdf');
         });
-        
+
         //smooth scroll to top
         $back_to_top.on('click', function(event){
             event.preventDefault();
             $('body,html').animate({
                 scrollTop: 0 ,
-                }, scroll_top_duration
-            );
+                }, scroll_top_duration, function(){
+                    $back_to_top.removeClass('cd-is-visible');
+                });
         });
 
     })

@@ -205,7 +205,7 @@
 
         if (!$("#sendvelidata").hasClass("sending")) {
             $("#sendvelidata").addClass("sending");
-            var waitTime = 10;
+            var waitTime = 60;
             var time = self.setInterval(function () {
                     waitTime--;
                     $("#sendvelidata").html(waitTime + "s");

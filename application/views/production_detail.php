@@ -1,4 +1,5 @@
 <body>
+<input id="pid" type="hidden" name="pid" value="<?= $production['id']?>">
 <div class="main-wrapper">
     <!-- 顶部 -->
     <?php echo $top;?>
@@ -35,8 +36,8 @@
                 <div class="artinfo">
                     <div class="info">
                         <ul>
-                            <li>类型：<?=$production['type']?></li>
-                            <li>材质：<?=$production['marterial']?></li>
+                            <li>艺术门类：<?=$production['medium']?></li>
+                            <li>风格：<?=$production['style']?></li>
                             <li>尺寸：<?php echo $production['w']." x ".$production['h'];?>cm</li>
                             <li>创作时间：<?=$production['creat_time']?></li>
                             <li>上市时间：<?=$production['publish_time']?></li>
@@ -63,7 +64,7 @@
             <div class="intro">
                 <p><?=$production['intro']?></p>
             </div>
-            
+
         </div>
     </div>
     <input type="hidden" id="pid" value="<?=$production['id']?>">
@@ -101,16 +102,15 @@ $(function() {
                 console.log(data);
             }
         });
-    })
+    });
     //点赞
-    var aid = $('#aid').val();
+    var pid = $('#pid').val();
     $("#vote").click(function () {
         $.ajax({
             type: 'POST',
             url: VOTE_PRODUCTION,
-            async: false,
             data: {
-                aid: aid
+                pid: pid
             },
             dataType: 'json',
             success: function (data) {
@@ -127,17 +127,19 @@ $(function() {
                     }
                 }
                 else if (status.error != null) {
-                    swal({
-                            title: "请登录后再进行操作",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "注册/登录",
-                            closeOnConfirm: false
-                        },
-                        function () {
-                            window.location.href = LOGIN_URL;
-                        });
+                   swal({
+                        title: "请登录后再进行操作",
+                        text: data.error,
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "注册/登录",
+                        cancelButtonText: "取消",
+                        closeOnConfirm: false
+                    },
+                    function () {
+                        window.location.href = LOGIN_URL;
+                    });
                     return false;
                 }
             },

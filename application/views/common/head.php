@@ -13,7 +13,6 @@
     <title>Artvc - <?= $title ?></title>
 
     <!-- 导入 Javascript -->
-
     <script src="<?= base_url() ?>public/js/validate.js"></script>
     <?php
     if (isset($javascript)) {
