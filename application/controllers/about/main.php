@@ -34,7 +34,22 @@ class Main extends MY_Controller
             $data['title']        = "用户协议";
             $this->load->view('common/head', $data);
             $this->load->view('terms', $body);
+        }else if($type == "us"){
+            $data['title']        = "关于我们";
+            $this->load->view('common/head', $data);
+            $this->load->view('us', $body);
+        }else if($type == "service"){
+            $data['title']        = "服务保证";
+            $this->load->view('common/head', $data);
+            $this->load->view('service', $body);
+        }else if($type == "dealrole"){
+            $data['title']        = "交易须知";
+            $this->load->view('common/head', $data);
+            $this->load->view('dealrole', $body);
+        }else if($type == "aftersale"){
+            $data['title']        = "售后服务";
+            $this->load->view('common/head', $data);
+            $this->load->view('aftersale', $body);
         }
-
     }
 }

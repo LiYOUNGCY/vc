@@ -17,6 +17,7 @@
                 <input type="file" class="uploadhead">
             </div>
             <duv class="editinfo">
+                
                 <label for="name">昵称</label>
                 <input type="text" value="<?=$user['name']?>" name="name" id="name">
                 <label for="sex">性别</label>
@@ -48,50 +49,6 @@
         </div>
     </div>
     <?= $footer ?>
-</div>
-<div class="hidediv" style="display:none;" id="phone_div">
-    <div class="msg_box">
-        <div class="msg_close"><i class="fa fa-close"></i></div>
-        <div class="msg_content item">
-            <h3 class="title">绑定手机</h3>
-            <input type="text" name="phone_validate_code" id="phone_validate_code" placeholder="请输入短信验证码">
-
-            <div class="error_box" id="phone_validate_code_error"></div>
-
-            <p class="message">验证码将在xxx秒后过期</p>
-
-            <div class="options">
-                <div id="save" class="btn save">确定</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="hidediv" style="display:none;" id="address_div">
-    <div class="msg_box">
-        <div class="msg_close"><i class="fa fa-close"></i></div>
-        <div class="msg_content item">
-            <h3 class="title">编辑收货地址</h3>
-
-            <div style="margin: 10px 0;">
-                <select class="select" name="province" id="s1">
-                    <option></option>
-                </select>
-                <select class="select" name="city" id="s2">
-                    <option></option>
-                </select>
-                <select class="select" name="town" id="s3">
-                    <option></option>
-                </select>
-                <input id="address" name="address" type="hidden" value=""/>
-            </div>
-            <input type="text" name="detail_address" id="detail_address" placeholder="输入详细地址">
-
-            <div class="options">
-                <div id="address_save" class="btn save">保存</div>
-            </div>
-        </div>
-    </div>
 </div>
 </body>
 <script type="text/javascript">

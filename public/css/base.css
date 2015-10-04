@@ -2700,7 +2700,7 @@ hr.line {
     display: inline-block;
     width: 600px;
     color: #b3b1ae;
-    bottom: 22px;
+    bottom: 32px;
 }
 
 
@@ -2712,8 +2712,12 @@ hr.line {
 }
 .footbanner{
     background-color: #0C0F08;
-    height: 20px;
+    height: 30px;
     width: 100%;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 14px;
+    line-height: 30px;
 }
 @media screen and (max-width:960px) {
     .vi_footer .wrapper .copyright{
@@ -4370,6 +4374,7 @@ img.zoom-img {
     line-height: 40px;
     margin: 0 10px;
 }
+
 
 @media screen and (max-width: 960px) {
     .setting .headpic{
