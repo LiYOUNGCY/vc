@@ -21,16 +21,17 @@
                 </div>
             </li> -->
         </ul>
-        <div class="final">
-            <div class="font">
-                将有<font style="font-size:25px;color:#f7cc1e;margin:0 5px;" id="artnum"></font>件优秀的艺术品成为您的收藏
+        <div id="showder">
+            <div class="final">
+                <div class="font">
+                    将有<font style="font-size:25px;color:#f7cc1e;margin:0 5px;" id="artnum"></font>件优秀的艺术品成为您的收藏
+                </div>
+                <div class="total">￥<font style="font-size:32px;" id="totalprice"></font></div>
             </div>
-            <div class="total">￥<font style="font-size:32px;" id="totalprice"></font></div>
+            <div class="topay">
+              <div class="btn">确认购买</div>  
+            </div>
         </div>
-        <div class="topay">
-          <div class="btn">确认购买</div>  
-        </div>
-        
     </div>
     </div>
     <?php echo $footer;?> 
@@ -46,10 +47,18 @@ $(function(){
 
     $(".delete").click(function(){
         var id =  $(this).parent().attr("id");
+        var goodprice = $(this).parent().find("#goodprice").html();
+        goodprice = parseInt(goodprice);
+
         deletegood(id);
         pushcartcount();
+        
+
         $(this).parent().fadeOut(400,function(){
             $(this).remove();
+            if(!changefinal(goodprice)){
+                nogoods();
+            }
         })
     })
 
@@ -64,8 +73,8 @@ $(function(){
             dataType: 'json',
             success: function(data) {
                 var good = data;
-                if(good.error != null || good.length === 0) {
-                    console.log('Error');
+                if(good.goods == null || good.count === 0) {
+                    nogoods();
                     return false;
                 }
 
@@ -99,7 +108,7 @@ $(function(){
                     '<div class="detail">'+ type +'，'+ marterial +'，'+ w +' X '+ h +'cm，'+ time +'</div>' +
                     '</div>'+ 
                     '<div class="price">'+ 
-                    '￥<font style="font-size:32px;color:#f7cc1e">'+ price +'</font>'+ 
+                    '￥<font style="font-size:32px;color:#f7cc1e" id="goodprice">'+ price +'</font>'+ 
                     '</div>' +
                     '</li>';
 
@@ -112,6 +121,19 @@ $(function(){
                 $("#totalprice").html(sum);
             }
         });    
+    }
+    function nogoods(){
+        var elem = '' + 
+        '<div class="nonebox">' +
+        '<div class="box">' +
+        '<div class="text">您购物车还没有商品呢</div>' +
+        '<div class="go">快去选购吧！</div>' +
+        '<div class="opt">' +
+        '<div class="btn"><a href="<?=base_url()?>topic">专题推荐</a></div>' +
+        '<div class="btn"><a href="<?=base_url()?>production">精选作品</a></div>' +
+        '</div></div></div>';
+
+        $("#showder").html(elem);
     }
     function deletegood(id){
         $.ajax({
@@ -131,6 +153,19 @@ $(function(){
 
             }
         });  
+    }
+
+    function changefinal(goodprice){
+        var artnum = $("#artnum").html() - 1;
+        if(artnum == 0){
+            return false;
+        }
+        var total = $("#totalprice").html();
+        total = parseInt(total);
+        var finalprice = total - goodprice;
+        $("#totalprice").html(finalprice);
+        $("#artnum").html(artnum);
+        return true;
     }
 
 })
