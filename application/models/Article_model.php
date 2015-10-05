@@ -54,6 +54,35 @@ class Article_model extends CI_Model
 
 
     /**
+     * 发布专题
+     */
+    public function insert_topic($title, $content, $uid, $who, $where, $when)
+    {
+        $data = array(
+            'who' => $who,
+            'where' => $where,
+            'when' => $when
+        );
+
+        $this->db->insert('topic_tag', $data);
+        $tid = $this->db->insert_id();
+
+        $data = array(
+            'uid' => $uid,
+            'type' => 2,
+            'title' => $title,
+            'content' => $content,
+            'publish_time' => date("Y-m-d H:i:s", time()),
+            'creat_by' => $uid,
+            'tid' => $tid
+        );
+
+        $this->db->insert('article', $data);
+        return $this->db->insert_id();
+    }
+
+
+    /**
      * [get_article_list 获取文章列表]
      * @param  integer $page [页数]
      * @param  [type]  $meid  [我的id]

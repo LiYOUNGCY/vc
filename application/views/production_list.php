@@ -182,6 +182,7 @@
         $.ajax({
             type: 'POST',
             url: url,
+            async: false,
             data: {
                 page: page
             },

@@ -1,330 +1,465 @@
-<body>
-<div class="main-wrapper">
-    <!-- 顶部 -->
-    <?php echo $top; ?>
-    <div class="container">
-        <div class="content edit">
-            <form class="list" method="post" action="<?= base_url() ?>article/publish/publish_article">
-                <div class="item">
-                    <label for="title">专题标题：</label>
-                    <input id="title" type="text" name="article_title" />
-                </div>
-                <input type="hidden" name="article_type" value="2"/>
-                <input type="hidden" name="pids" />
-                <input id="title" type="hidden" type="text" name="article_content" />
-                <div class="item">
-                    <label for="introduction">专题导语：</label>
-                    <textarea id="introduction" rows="5"></textarea>
-                </div>
+<?php load_header(
+    '发布专题',
+    'base.css',
+    'font-awesome/css/font-awesome.min.css',
+    'edit_style.css',
+    'alert.css',
+    'easydropdown.css'
+) ?>
+<body style="position: relative;">
+<!-- Sidebar -->
+<div class="container-left" id="sidebar">
+    <div class="title">
+        <i class="fa fa-edit" style="font-size: 48px;"></i>
 
-                <div class="item">
-                    <h3>作品列表</h3>
-                </div>
+        <h3>发布专题</h3>
+    </div>
+    <nav>
+        <ul>
+            <li id="InsertParagraph">插入段落</li>
+            <li id="InsertImage">插入图片</li>
+            <li id="InsertProduction">插入艺术品</li>
+        </ul>
+    </nav>
 
-                <div class="item" id="art_item">
-<!--                    <div class="production">-->
-<!--                        <div class="group">-->
-<!--                            <i class="fa fa-trash-o fa-fw" title="删除"></i>-->
-<!--                            <i class="fa fa-angle-up" title="上移"></i>-->
-<!--                            <i class="fa fa-angle-down" title="下移"></i>-->
-<!--                        </div>-->
-<!--                        <div class="item">-->
-<!--                            <label for="ptitle">作品标题：</label>-->
-<!--                            <input type="text" id="ptitle">-->
-<!--                        </div>-->
-<!--                        <div class="item">-->
-<!--                            <label>作品的介绍：</label>-->
-<!--                            <textarea rows="5" id="pintro"></textarea>-->
-<!--                        </div>-->
-<!--                        <input type="hidden" id="pprice" value="99.00">-->
-<!--                        <input type="hidden" id="pvote" value="58">-->
-<!--                        <input type="hidden" id="pid" value="1">-->
-<!---->
-<!--                        <div class="image">-->
-<!--                            <img src="--><?//= base_url() ?><!--public/img/nrjpinzl4.jpg-w720.jpg">-->
-<!--                        </div>-->
-<!--                    </div>-->
-                </div>
-
-                <!--                    按钮-->
-                <div class="item" style="text-align: center">
-                    <i id="show_list" class="fa fa-plus"></i>
-                </div>
-                <div class="options">
-                    <div class="btn preview" id="preview">预览</div>
-                    <div class="btn cancel">取消</div>
-                    <div id="save" class="btn save">保存</div>
-                </div>
-            </form>
-
-            <!--            弹出层  -->
-            <div id="production" class="production_list hidden">
-                <div class="list" id="production_list">
-                    <i id="close" class="fa fa-close"
-                       style="font-size: 24px; float:right; cursor: pointer;z-index: 999;"></i>
-
-                    <!--                    <div class="pro">-->
-                    <!--                        <div class="intro">-->
-                    <!--                            <h3 class="title">八宝茶</h3>-->
-                    <!---->
-                    <!--                            <div class="content">宫廷秘制八宝茶，含有红枣干、葡萄干、枸杞、桂圆、冰糖、金桔干、芝麻、菊花，功效也是棒棒哒：改善血脂、降低胆固醇、降血压、美容养颜、调理气血-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                        <img src="">-->
-                    <!--                    </div>-->
+    </div>
+</div>
+<!-- Edit container -->
+<div class="container open">
+    <div class="article main-container">
+        <label class="form-control" for="name">
+            <span>标题：</span>
+            <input class="title" type="text" id="title">
+            <span class="message danger">标题不能为空</span>
+        </label>
+        <!--        <button type="button" class="button success" id="show" onclick="fadeInReveal()">提交</button>-->
+        <!--        <button type="button" class="button">默认</button>-->
+        <!--        <button type="button" class="button cancel">取消</button>-->
+        <!--        <label class="form-control" for="name">-->
+        <!--            <span>Name:</span>-->
+        <!--            <input type="text" id="name">-->
+        <!--            <span class="message danger">Name must at least three</span>-->
+        <!--        </label>-->
+        <!--        <label class="form-control" for="introduction">-->
+        <!--            <span>Introduciton:</span>-->
+        <!--            <textarea rows='1'></textarea>-->
+        <!--            <span class="message">这里应该是一段介绍的话</span>-->
+        <!--        </label>-->
 
 
-                </div>
-            </div>
-            <!--            END 弹出层  -->
-
-            <div class="production_list hidden" id="previewTopic">
-                <i id="PreviewClose" class="fa fa-close"
-                   style="font-size: 48px; float:right; cursor: pointer;z-index: 999;"></i>
-
-                <div class="article">
-                    <h1 class="title" id="tctitle"></h1>
-
-                    <div class="detail" id="content"></div>
-                </div>
-            </div>
+        <div class="detail" id="main-container">
+            <label class="form-control" for="introduction" data-type="introduction">
+                <span>专题的介绍：</span>
+                <textarea class="introduction" rows='1'></textarea>
+                <span class="message danger">内容不能为空</span>
+            </label>
         </div>
     </div>
-    <?=$footer?>
+
+    <div id="select" class="select clearfix">
+        <p>所属标签</p>
+        <select class="dropdown" id="who">
+            <?php foreach($tag['who'] as $key => $value) {?>
+                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+            <?php } ?>
+        </select>
+
+        <select class="dropdown" id="where" >
+            <?php foreach($tag['where'] as $key => $value) {?>
+                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+            <?php } ?>
+        </select>
+
+        <select class="dropdown" id="when" >
+            <?php foreach($tag['when'] as $key => $value) {?>
+                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+            <?php } ?>
+        </select>
+
+        <div class="option">
+            <button type="button" class="button" id="preview">预览</button>
+            <button type="button" class="button success" id="save">保存</button>
+
+    </div>
 </div>
+
+<!-- Reveal Model -->
+<div class="reveal-model-bg" id="reveal"></div>
+<div class="reveal-model">
+    <div class="top">
+        <div class="reveal-title">插入图片</div>
+        <div class="close-box" id="reveal-close"><i class="fa fa-close"></i></div>
+    </div>
+    <div class="wrap" id="reveal-content">
+    </div>
+    <div class="footer" id="reveal-footer"></div>
+</div>
+
+
+
+
 </body>
+<script src="<?= base_url() ?>public/js/jquery.js"></script>
+<script src="<?= base_url() ?>public/js/autosize.js"></script>
+<script src="<?= base_url() ?>public/js/ajaxfileupload.js"></script>
+<script src="<?= base_url() ?>public/js/alert.min.js"></script>
+<script src="<?= base_url() ?>public/js/jquery.easydropdown.js"></script>
 <script>
-    function close(tar) {
-        $('body').css('overflow', '');
-        $(tar).addClass('hidden');
-    }
 
-    function open(tar) {
-        $(tar).removeClass('hidden');
-        $('body').css('overflow', 'hidden');
-    }
+    var page = 0;
+    var order = 1;
     $(function () {
-        var page = 0;
-
-        $('#show_list').click(function () {
-            open('#production');
+        $('#show').click(function () {
+            $(".message").toggleClass('open');
         });
 
-        $('#close').click(function () {
-            close('#production');
+        $('input').each(function () {
+            $(this).blur(contentNullEvent);
         });
 
+        $('textarea').each(function () {
+            console.log(this);
+            autosize(this);
+            $(this).blur(contentNullEvent);
+        });
+
+
+        //插入段落的事件
+        $('#InsertParagraph').click(function () {
+            InsertParagraph('#main-container');
+        });
+
+        //插入图片
+        $('#InsertImage').click(function () {
+            InsertImage('#main-container');
+        });
+
+        //插入艺术品
+        $('#InsertProduction').click(function () {
+            InsertProduction('#main-container');
+        });
+
+        //预览
+        $('#preview').click(function () {
+            var code = _generateCode('#main-container');
+
+            fadeInReveal();
+
+            $('#reveal-content').append('<div class="article">' + code + '</div>');
+        });
+
+        //保存
+        $('#save').click(function () {
+
+            var title = $('#title').val();
+            var content = _generateCode('#main-container');
+            var who = $('#who').val();
+            var when = $('#when').val();
+            var where = $('#where').val();
+
+            $.ajax({
+                url: BASE_URL + 'topic/publish/save_topic',
+                data: {
+                    title: title,
+                    content: content,
+                    who: who,
+                    when: when,
+                    where: where
+                },
+                dataType: 'json',
+                type: 'post',
+                success: function(data) {
+                    console.log(data);
+
+                    if( data.error != null)  {
+                        swal('发布失败');
+                    }
+
+                    if( data.success == 0 ) {
+                        window.location.href = BASE_URL + 'admin/topic';
+                    }
+                }
+            });
+        });
+    });
+
+
+    /**
+     * 打开弹出层
+     */
+    function fadeInReveal() {
+        var reveal = $('.reveal-model-bg');
+
+        if (!reveal.hasClass('open')) {
+            reveal.addClass('open');
+            $('.reveal-model-bg').click(fadeOutReveal);
+            $('#reveal-close').click(fadeOutReveal);
+        }
+
+        $('#reveal-content').html('');
+        $('#reveal-footer').html('');
+    }
+
+
+    /**
+     * 关闭弹出层
+     */
+    function fadeOutReveal() {
+        var reveal = $('.reveal-model-bg');
+
+        if (reveal.hasClass('open')) {
+            reveal.removeClass('open');
+        }
+
+        $('#reveal-content').html('');
+        $('#reveal-footer').html('');
+    }
+
+
+    /**
+     * 插入段落
+     */
+    function InsertParagraph(container) {
+        $container = $(container);
+
+        var $paragraph = $(
+            '<label class="form-control" data-type="p">' +
+            '<span>段落：</span>' +
+            '<textarea rows="1" id="99"></textarea>' +
+            '<span class="message danger">内容不能为空</span>' +
+            '</label>');
+
+        $container.append($paragraph);
+
+        // autosize
+        var textarea = $paragraph.children('textarea');
+        autosize(textarea);
+        //add contentNullEvent
+        textarea.blur(contentNullEvent);
+    }
+
+
+    /**
+     * 插入图像
+     * @param container
+     * @constructor
+     */
+    function InsertImage(container) {
+        // Fade In Reveal
+        fadeInReveal();
+
+        $('#reveal-content').html('<label class="image-content" id="reveal-content" for="upfile">' +
+            '<i class="fa fa-camera"></i>' +
+            '<p>点击上传图片</p>' +
+            '<input type="file" name="upfile" id="upfile" onchange="file_upload(\'' + container + '\')">' +
+            '</label>');
+    }
+
+
+    /**
+     * 插入艺术品
+     */
+    function InsertProduction(container) {
+        $container = $(container);
+        page = 0;
+
+        fadeInReveal();
+
+        $('#reveal-footer').html('<button type="button" class="button">加载更多</button>');
+        $('#reveal-content').append('<div class="item-list search"></div>');
+        $('#reveal-footer > button').click(LoadMoreProduction);
+        LoadMoreProduction();
+    }
+
+    /**
+     * 加载更多艺术品
+     */
+    function LoadMoreProduction() {
         $.ajax({
-            type: 'post',
+            type: 'POST',
             url: GET_PRODUCTION_URL,
             data: {
                 page: page
             },
+            async: false,
             dataType: 'json',
             success: function (data) {
                 console.log(data);
-                page++;
+
+                if (data.error != null) {
+                    swal({
+                        title: '无法获取数据',
+                        type: 'warning'
+                    });
+                    return;
+                }
+
+
+                var reveal_container = $('#reveal-content > .item-list');
+
                 for (var i = 0; i < data.length; i++) {
-                    var id = data[i].id;
-                    var like = data[i].like;
-                    var price = data[i].price;
-                    var title = data[i].name;
-                    var img = data[i].pic;
-                    var content = data[i].intro;
+                    var item = data[i];
+                    var id = item.id;
+                    var title = item.name;
+                    var pic = item.pic;
+                    var intro = item.intro;
+                    var price = item.price;
+                    var time = item.create_time;
+                    var like = item.like;
 
-                    var $box = $('<div class="pro">' +
-                        '<div class="intro">' +
-                        '<h3 class="title">' + title + '</h3>' +
-                        '<div class="content"> ' + content + '</div>' +
-                        '<input type="hidden" value="' + id + '" id="pid">' +
-                        '<input type="hidden" value="' + like + '" id="pvote">' +
-                        '<input type="hidden" value="' + price + '" id="pprice">' +
+                    var $box = $('<div class="item clearfix" data-type="production" data-id="' + id + '" data-like="' + like + '">' +
+                        '<div class="image-warp">' +
+                        '<img class="image" src="' + pic + '">' +
                         '</div>' +
-                        '<img src="' + img + '">' +
-                        '</div>');
+                        '<p class="title">' + title + '</p>' +
+                        '<p class="time">' + time + '</p>' +
 
-                    //注册事件
-                    $box.click(AddProduction);
-                    $('#production_list').append($box);
+                        '<p class="content">' + intro + '</p>' +
+                        '<div class="price">' + price + '</div>' + '</div>');
+
+                    $box.click(InsertProductionToContainer);
+                    reveal_container.append($box);
                 }
             }
         });
+    }
 
+    function InsertProductionToContainer() {
+        var $container = $('#main-container');
+        $container.append();
 
-        $('.pro').click(AddProduction);
+        var id = $(this).attr('data-id');
+        var pic = $(this).find('img').attr('src');
+        var price = $(this).find('.price').html();
+        var like = $(this).attr('data-like');
 
-        //删除事件
-        $('.fa-trash-o').click(remove);
+        var $box = $('<div class="item" data-type="production">' +
+            '<div class="tctop">' +
+            '<span class="order">' + (order++) + '</span>' +
+            '<label class="form-control inline">' +
+            '<input type="text" class="tctitle" placeholder="标题">' +
+            '<span class="message danger">内容不能为空</span>' +
+            '</label>' +
+            '</div>' +
+            '<label class="form-control" for="introduction">' +
+            '<textarea class="tccontent" rows="1" placeholder="介绍"></textarea>' +
+            '<span class="message danger">内容不能为空</span>' +
+            '</label>' +
+            '<img class="tcimage" src="' + pic + '">' +
+            '<span class="tcprice">售价：' +
+            '<i class="fa fa-rmb" style="margin-right:5px;"></i>' + price + '</span>' +
+            '<span class="vote">' +
+            '<i class="fa fa-heart" style="margin-right:5px;"></i>' + like + '</span>' +
+            '<a class="link" href="http://localhost/artvc/production/' + id + '">' +
+            '<i class="fa fa-hand-o-right"></i>查看详情' +
+            '</a></div>');
 
-        //上移事件
-        $('.fa-angle-up').click(moveUp);
-        //下移事件
-        $('.fa-angle-down').click(moveDown);
+        $container.append($box);
 
-        //提交
-        $('#save').click(function(){
-            var pids = ReadProduction();
-            console.log(pids);
-            pids=pids.substring(0,pids.length-1)
-
-            $("input[name=article_content]").val($("#content").html());
-            $("input[name=pids]").val(pids);
-            $("form").submit();
-            /*
-            $.ajax({
-                type: 'post',
-                url:POST_ARTICLE_URL,
-                data: {
-                    article_title: title,
-                    article_type: 2,
-                    pids: pids,
-                    article_content: content
-                },
-                dataType: 'json',
-                success: function(data) {
-                    console.log(data);
-                }
-            });
-            */
+        $box.find('input').each(function () {
+            $(this).blur(contentNullEvent);
         });
 
-        //预览事件
-        $('#preview').click(function () {
-            //把内容写入弹出层里
-            //title
-            $('#tctitle').html($('#title').val());
-
-            ReadProduction();
-
-            open('#previewTopic');
+        $box.find('textarea').each(function () {
+            $(this).blur(contentNullEvent);
+            autosize(this);
         });
 
-        $('#PreviewClose').click(function () {
-            close('#previewTopic');
-            $('#content').empty();
-        });
+        fadeOutReveal();
+    }
 
-        function moveUp() {
-            console.log('up');
-            var $item = $(this).parent().parent();
 
-            var $prevItem = $item.prev();
-            console.log($prevItem);
-            //该元素不是第一个
-            if ($prevItem.length == 1) {
-                $production = $('<div class="production">' + $item.html() + '</div>');
-                $prevItem.before($production);
-                $production.find('.fa-angle-up').click(moveUp);
-                $production.find('.fa-angle-down').click(moveDown);
-                $production.find('.fa-trash-o').click(remove);
-                $item.remove();
+    /**
+     * 上传图片
+     * @param container
+     */
+    function file_upload(container) {
+        $container = $(container);
+        console.log('file upload');
+        $.ajaxFileUpload({
+            url: BASE_URL + 'publish/image/upload_image',
+            fileElementId: 'upfile',
+            dataType: 'JSON',
+            type: 'post',
+            success: function (data) {
+                console.log(data);
+                var src = data.image_path;
+
+                //close Reveal
+                fadeOutReveal();
+                $image = $('<label class="form-control" data-type="image">' +
+                    '<img src=' + src + '>' +
+                    '</label');
+                $container.append($image)
+            },
+            error: function (data) {
+                console.log(data);
             }
-        }
+        });
+    }
 
-        function moveDown() {
-            console.log('moveDown');
-            var $item = $(this).parent().parent();
-            var $afterItem = $item.next();
 
-            if ($afterItem.length == 1) {
-                $production = $('<div class="production">' + $item.html() + '</div>');
-                $afterItem.after($production);
-                $production.find('.fa-angle-up').click(moveUp);
-                $production.find('.fa-angle-down').click(moveDown);
-                $production.find('.fa-trash-o').click(remove);
-                $item.remove();
+    /**
+     * 判断输入框里的内容是否为空
+     * @returns {boolean}
+     */
+    function contentNullEvent() {
+        var content = trim(content = $(this).val());
+        var alert = $(this).next();
+
+        if (content == null || content == '') {
+            if (!$(alert).hasClass('open')) {
+                $(alert).addClass('open');
             }
+            return false;
         }
-
-        function remove() {
-            console.log('remove');
-            var $item = $(this).parent().parent();
-            $item.remove();
+        else {
+            if ($(alert).hasClass('open')) {
+                $(alert).removeClass('open');
+            }
+            return true;
         }
-
-        function AddProduction() {
-            console.log('add production');
-            var img = $(this).children('img').attr('src');
-            console.log(this);
-
-            var id = $(this).find('#pid').val();
-            var like = $(this).find('#pvote').val();
-            var price = $(this).find('#pprice').val();
-
-            console.log(id + " " + like + " " + price);
-
-            img = img.replace(/thumb1/g, "thumb2");
-
-            console.log(img);
-            $box = $('<div class="production">' +
-                '<div class="group">' +
-                '<i class="fa fa-trash-o fa-fw" title="删除"></i>' +
-                '<i class="fa fa-angle-up" title="上移"></i>' +
-                '<i class="fa fa-angle-down" title="下移"></i>' +
-                '</div>' +
-                '<div class="item">' +
-                '<label for="ptitle">作品标题：</label>' +
-                '<input type="text" id="ptitle">' +
-                '</div>' +
-                '<div class="item">' +
-                '<label>作品的介绍：</label>' +
-                '<textarea rows="5" id="pintro"></textarea>' +
-                '</div>' +
-                '<input type="hidden" id="pprice" value="' + price + '">' +
-                '<input type="hidden" id="pvote" value="' + like + '">' +
-                '<input type="hidden" id="pid" value="' + id + '">' +
-
-                '<div class="image">' +
-                '<img src="' + img + '">' +
-                '</div>' +
-                '</div>');
-
-            $box.find('.fa-angle-up').click(moveUp);
-            $box.find('.fa-angle-down').click(moveDown);
-            $box.find('.fa-trash-o').click(remove);
-
-            close('#production');
-            $('#art_item').append($box);
-        }
-
-        //读内容
+    }
 
 
-        /**
-         * @return {string}
-         */
-        function ReadProduction () {
-            var pids = '';
-            //导语
-            $('#content').append('<div class="introduction">' + $('#introduction').val() + '</div>');
-            var items = $('.production');
-            $.each(items, function (i, value) {
-                var id = $(items[i]).find('#pid').val();
-                pids += id + ',';
-                var title = $(items[i]).find('#ptitle').val();
-                var intro = $(items[i]).find('#pintro').val();
-                var img = $(items[i]).find('img').attr('src');
-                var price = $(items[i]).find('#pprice').val();
-                var vote = $(items[i]).find('#pvote').val();
+    function _generateCode(container) {
+        var $container = $(container);
 
-//                console.log(title + " " + intro);
+        var code = '';
 
-                var tar = $('<div class="item">' +
-                    '<div class="tctop">' +
-                    '<span class="order">'+(i+1)+'</span><span class="tctitle">' + title + '</span>' +
-                    '</div>' +
-                    '<p class="tccontent">' + intro + '</p>' +
-                    '<img class="tcimage" src="' + img + '">' +
-                    '<span class="tcprice">售价：<i class="fa fa-rmb" style="margin-right: 5px;"></i>' + price + '</span>' +
-                    '<span class="vote"><i class="fa fa-heart" style="margin-right: 5px;"></i>' + vote + '</span>' +
-                    '<a class="link" href="'+ BASE_URL +'production/'+ id + '"><i class="fa fa-hand-o-right"></i>查看详情</a>' +
-                    '</div>');
+        //判断所有输入框不能为空
 
-                $('#content').append(tar);
-            });
+        $container.children().each(function () {
+            var item = $(this);
+            if (item.attr('data-type') == 'introduction') {
+                code += '<div class="introduction">' + item.find('textarea').val() + '</div>';
+            }
+            else if (item.attr('data-type') == 'p') {
+                code += ('<p class="tc-p">' + item.find('textarea').val() + '</p>');
+            }
+            else if (item.attr('data-type') == 'image') {
+                code += '<img class="tcimage" src="' + item.find('img').attr('src') + '" >';
+            }
+            else if (item.attr('data-type') == 'production') {
+                var production = '<div class="item" data-type="production">' + item.html() + '</div>';
+                var title = item.find('.tctitle').val();
+                var intro = item.find('.tccontent').val();
 
-            return pids;
-        }
-    });
+                //替换 title
+                var re = /<label class="form-control inline">(.*?)<\/label>/;
+                production = production.replace(re, '<span class="tctitle">' + title + '</span>');
+//                console.log(re);
+
+                //替换 介绍
+                re = /<label class="form-control" for="introduction">(.*?)<\/label>/;
+                production = production.replace(re, '<p class="tccontent">' + intro + '</p>');
+//                console.log(production);
+                code += production;
+            }
+        });
+
+        return '<div class="detail">' + code + '</div>';
+    }
+
 </script>
 </html>
