@@ -21,5 +21,5 @@
             <a href="#" class="link">意见反馈</a>
         </div>
     </div>
-    <div class="footbanner">artvc.cc 京ICP备09025489号-4</div>
+    <div class="footbanner">artvc.cc 粤ICP备15084350号-1</div>
 </div>

@@ -38,7 +38,18 @@ class Cart_service extends MY_Service{
 			if(empty($production))
 			{
 				$this->error->output('INVALID_REQUEST');
-			}				
+			}
+			//获取艺术家信息
+			if( ! empty($production['aid']))
+			{
+				$this->load->model('artist_model');
+				$artist = $this->artist_model->get_artist_base_id($production['aid']);					
+			}	
+			else
+			{
+				$artist = NULL;
+			}		
+
 			//将购物车物品信息添加到数据库
 			$result = $this->cart_model->insert_good($uid,$pid);
 			if( ! empty($result))
@@ -48,7 +59,8 @@ class Cart_service extends MY_Service{
 				$v   = array(
 					 'id'         => $result['id'], 
 					 'add_time'   => $result['add_time'],
-					 'production' => $production
+					 'production' => $production,
+					 'artist' 	  => $artist
 				);
 				array_unshift($arr,$v);
 				$_SESSION['cart'] = $arr;
