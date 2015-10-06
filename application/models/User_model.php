@@ -38,6 +38,7 @@ class User_model extends CI_Model
 		$register_type['pwd'] = $this->passwordhash->HashPassword($pwd);
 		$register_type['name']= $name;
         $register_type['register_time'] = date("Y-m-d H:i:s", time());
+        $register_type['pic'] = base_url().'public/img/pfp7.png';
 
 		$this->db->insert('user', $register_type);
         $uid = $this->db->insert_id();
@@ -47,14 +48,11 @@ class User_model extends CI_Model
         {
             //插入 user_online 表
             $this->_insert_user_online($uid);
-            //更新默认键值
-            $this->update_account($uid,array('pic' => base_url().'public/img/pfp7.png'));
+            $this->db->insert('user_address', array('uid'=>$uid));
+
             return $uid;
 		}
-		else
-        {
-			$this->error->output('register_error');
-		}
+        $this->error->output('register_error');
 	}
 
 
@@ -225,15 +223,39 @@ class User_model extends CI_Model
     public function update_account($uid, $update)
     {
 
-    	if(! is_array($update))
-    	{
-    		return FASLE;
-    	}
+        if(! is_array($update))
+        {
+            return FASLE;
+        }
+
+
+        $address['address'] = $update['address'];
+        $address['contact'] = $update['contact'];
+        $address['phone']   = $update['phone'];
+
+        unset($update['uid']);
+        unset($update['address']);
+        unset($update['contact']);
+        unset($update['phone']);
+
+        $result1 = true;
+
+        //更新 收货信息
+        $this->db->where('uid', $uid)->update('user_address', $address);
+        if( $this->db->affected_rows() !== 1 ) {
+            $result1 = false;
+        }
+
 
     	//删除敏感字段
     	unset($update['pwd']);
     	$this->db->where('id', $uid)->update('user', $update);
-    	return $this->db->affected_rows() === 1;
+        return (($this->db->affected_rows() === 1 ) || $result1);
+    }
+
+
+    public function get_address($uid) {
+        return $this->db->where('uid', $uid)->get('user_address')->row_array();
     }
 
 

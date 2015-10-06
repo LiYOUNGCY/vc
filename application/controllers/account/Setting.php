@@ -22,17 +22,21 @@ class Setting extends MY_Controller
             'jquery.js',
             'alert.min.js',
             'error.js',
-            'geo.js'
+            'geo.js',
+            'ajaxfileupload.js'
         );
 
 
         $user['user']         = $this->user;
         $user['sign'] = $this->load->view('common/sign', '', TRUE);
+        $body = array();
 
         $body['top']          = $this->load->view('common/top', $user, TRUE);
         $body['footer']       = $this->load->view('common/footer', '', TRUE);
-        $body['user']         = $this->user;
 
+        $address = $this->user_service->get_address($this->user['id']);
+        $body['user']= $this->user_service->get_user_by_id($this->user['id']);
+//        $body['user']         = $this->user;
 
 		if($type == 'safe')
 		{
@@ -45,8 +49,13 @@ class Setting extends MY_Controller
 		else if($type == 'user')
 		{
             $data['title'] = '修改个人信息';
+            foreach ($address as $key => $value) {
+                $body['user'][$key] = $value;
+            }
+
             $this->load->view('common/head', $data);
 			$this->load->view('setting', $body);
+//            echo json_encode($body);
 		}
 	}
 
@@ -78,29 +87,37 @@ class Setting extends MY_Controller
 	 * @return [type] [description]
 	 */
 	public function update_account()
-	{
-		$error_redirect = array(
-			'script' => 'window.location.href ="'.base_url().'setting";'
-		);
-		$this->sc->set_error_redirect($error_redirect);
-		$arr 	= array('name', 'sex', 'address', 'tel', 'email', 'phone');
-		$data = $this->sc->input($arr);
+    {
+        $data = array(
+            'name',
+            'sex',
+            'phone',
+            'contact'
+        );
 
-		//更新用户资料
-		$result = $this->user_service->update_account($this->user['id'], $data);
-		if($result)
-		{
-			//更新 session 的信息
 
-			$this->auth_service->set_login_session($this->user_service->get_user_base_id($this->user['id']));
+        $data = $this->sc->input($data);
+        $province = $this->sc->input('province');
+        $city = $this->sc->input('city');
+        $town = $this->sc->input('town');
+        $address = $this->sc->input('address');
 
-			echo "<script>alert('".lang('OPERATE_SUCCESS')."');window.location.href='".base_url()."setting';</script>";
-		}
-		else
-		{
-			$this->error->output('INVALID_REQUEST',array('script' => 'window.location.href ="'.base_url().'setting";'));
-		}
-	}
+        $address = $province.$city.$town.$address;
+
+        $data['address'] = $address;
+
+        $result = $this->user_service->update_account($this->user['id'], $data);
+
+        if( $result ) {
+            $this->sc->output_success();
+        }
+        else {
+            $this->sc->output_error();
+        }
+
+//        var_dump($data);
+
+    }
 
     public function change_phone()
     {
