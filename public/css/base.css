@@ -504,7 +504,7 @@ pre {
 }
 
 @media screen and (max-width: 767px){
-    
+
 }
 
 .filter-warp .filter .dropdown {
@@ -2318,6 +2318,11 @@ hr.line {
     height: 10px;
 
     background: #f7cc1e;
+    display: none;
+}
+
+.dot.open {
+    display: block;
 }
 .main-wrapper .top .topright .userarea .useropt .logout{
     margin-left:15px;
@@ -2896,7 +2901,7 @@ hr.line {
 .artistarea .csopt{
     margin: 15px 0;
     width: 100%;
-    
+
     background: #EEEEEE;
     display: inline-block;
     color: #B3B3B3;
@@ -3972,7 +3977,7 @@ img.zoom-img {
     color: #C1C1C1;
     font-size: 14px;
     width: 95%;
-    margin: 0 auto; 
+    margin: 0 auto;
 }
 .emailbox .econtent .success .light{
     color: #ffde00;
@@ -4316,7 +4321,7 @@ img.zoom-img {
     left: 50%;
     color: #FFFFFF;
     text-align: center;
-    
+
 
     transform:translate(-50%,-50%);
     -webkit-transform:translate(-50%,-50%);
