@@ -18,18 +18,20 @@ class Oss{
 	 * @param  [type] $osspath [本地服务器路径]
 	 * @return [type]          [description]
 	 */
-	public function upload_by_file($osspath){	
-		$isok  	    = true;
-		$serverpath = $osspath;	
-		//$osspath    = substr_replace($osspath, "", 0, 1);	
-		$is_object_exist = $this->ossobj->is_object_exist($this->ossbuket, $osspath);		
-		$isexist = $is_object_exist->isOK();		
-		if (!$isexist) {	
+	public function upload_by_file($osspath){
+		$serverpath = $osspath;
+		//$osspath    = substr_replace($osspath, "", 0, 1);
+		$is_object_exist = $this->ossobj->is_object_exist($this->ossbuket, $osspath);
+		$isexist = $is_object_exist->isOK();
+        if( $isexist ) {
+            return $is_object_exist->header['_info']['url'];
+        }
+		else {
 			$response = $this->ossobj->upload_file_by_file($this->ossbuket, $osspath, $serverpath);
-			$isok = $response->isOK();
+            return $response->header['_info']['url'];
 		}
 
-		return $isok;				
+        return false;
 	}
 	/**
 	 * [delete_object 删除文件]
@@ -71,11 +73,11 @@ class Oss{
 	function _format($response) {
 		echo '|-----------------------Start---------------------------------------------------------------------------------------------------'."\n";
 		echo '|-Status:' . $response->status . "\n";
-		echo '|-Body:' ."\n"; 
+		echo '|-Body:' ."\n";
 		echo $response->body . "\n";
 		echo "|-Header:\n";
 		print_r ( $response->header );
 		echo '-----------------------End-----------------------------------------------------------------------------------------------------'."\n\n";
-	}	
+	}
 
 }

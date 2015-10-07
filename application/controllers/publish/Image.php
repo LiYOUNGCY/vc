@@ -46,6 +46,14 @@ class Image extends MY_Controller{
 		echo json_encode($result);
 	}
 
+
+    public function upload_image()
+    {
+        $result = $this->image_service->upload_image('upfile');
+        header('Content-Type:application/json');
+        $this->sc->output_success($result);
+    }
+
 	/**
 	 * [save_headpic 保存裁剪后的头像]
 	 * @return [type] [description]

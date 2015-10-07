@@ -27,9 +27,9 @@ class Article_service extends MY_Service{
     /**
      * @to do
      */
-    public function publish_topic()
+    public function publish_topic($title, $content,$uid, $who, $where, $when)
     {
-
+        return $this->article_model->insert_topic($title, $content,$uid, $who, $where, $when);
     }
 
 

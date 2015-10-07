@@ -29,8 +29,8 @@
                 <?php }else{ ?>
                 <div class="useropt">
                     <a href="<?=base_url()?>cart" class="link" title="购物车"><span class="cart"><i class="fa fa-shopping-cart" style="font-size: 16px;"></i> （ <font color="#f7cc1e" id="cartcount"></font> ）</span></a>
-                    <span class="user">Hi，<a href="<?=base_url()?>like" class="link"><?=$user["name"]?></a><div class="dot" style="display:block;"></div></span>
-                    <a href="<?=base_url()?>account/main/logout" class="link"><span class="logout">退出</span></a>
+                    <span class="user">Hi，<a href="<?=base_url()?>like" class="link"><?=$user["name"]?></a><div class="dot" id="notification_dot"></div></span>
+                    <a href="javascript:void(0);" id="logout" class="link"><span class="logout">退出</span></a>
                 </div>
                 <?php } ?>
                 <div class="search" id="search">
@@ -41,6 +41,50 @@
         </div>
     </div>
 </div>
+<?php
+$push_id = NULL;
+if (isset($user['id'])) {
+    $push_id = md5(md5('artvc' . $user['id']));
+}
+?>
+<input type="hidden" id="PUSH_ID" value="<?= $push_id ?>">
+<script type="text/javascript">
+    $(function () {
+        var status = getcookie('ucy');
+        if (status != null) {
+            $("#notification_dot").addClass('open');
+        }
+        var push_id = $("#PUSH_ID").val();
+        if (push_id != null && push_id != "" && push_id != undefined) {
+            var yunba = new Yunba({
+                server: 'sock.yunba.io', port: 3000, appkey: '55bc441c14ec0a7d21a70c5a'
+            });
+
+            yunba.init(function (success) {
+                if (success) {
+                    yunba.connect_by_customid(push_id, function (success, msg) {
+                        if (success) {
+
+                            yunba.subscribe({'topic': push_id});
+
+
+                            yunba.set_message_cb(function (data) {
+                                setcookie('ucy', 'qvy');
+                                var status = getcookie('ucy');
+                                if (status != null) {
+                                    $("#notification_dot").addClass('open');
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+</script>
+
+
+
 <?php
 if($user['role']==0){
     echo $sign;
@@ -53,6 +97,12 @@ if($user['role']==0){
     pushcartcount();
 
     $(function(){
+		//logout
+		$('#logout').click(function(){
+			//delete cookie
+			delcookie('ucy');
+			window.location.href = BASE_URL + "account/main/logout";
+		});
         $(".openslider a").pageslide({direction: "left"});
 
         if($(window).width() > 960){
@@ -74,10 +124,7 @@ if($user['role']==0){
 
         $('#s_ipt').keydown(function(e){
             if(e.keyCode == 13){
-                console.log('search event');
-
                 var keyword = $('#s_ipt').val();
-
                 window.location.href = BASE_URL + 'search?keyword='+ keyword;
             }
         });
@@ -96,30 +143,28 @@ if($user['role']==0){
             $back_to_top = $('.cd-top');
 
         //hide or show the "back to top" link
-        $(document).scroll(function(event){
+        $(document).scroll(function (event) {
             event.preventDefault();
 
-            if ($(document).scrollTop() > offset  && ! $back_to_top.hasClass('cd-is-visible')) {
+            if ($(document).scrollTop() > offset && !$back_to_top.hasClass('cd-is-visible')) {
                 $back_to_top.addClass('cd-is-visible');
             }
-            else if($(document).scrollTop() < offset && $back_to_top.hasClass('cd-is-visible')) {
+            else if ($(document).scrollTop() < offset && $back_to_top.hasClass('cd-is-visible')) {
                 $back_to_top.removeClass('cd-is-visible');
             }
-
-            console.log('dasfasdf');
         });
 
         //smooth scroll to top
-        $back_to_top.on('click', function(event){
+        $back_to_top.on('click', function (event) {
             event.preventDefault();
             $('body,html').animate({
-                scrollTop: 0 ,
-                }, scroll_top_duration, function(){
-                    $back_to_top.removeClass('cd-is-visible');
-                });
+                scrollTop: 0
+            }, scroll_top_duration, function () {
+                $back_to_top.removeClass('cd-is-visible');
+            });
         });
 
-    })
+    });
 
     function pushcartcount(){
         $.ajax({

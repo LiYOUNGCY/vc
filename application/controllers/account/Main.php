@@ -9,7 +9,11 @@ class Main extends MY_Controller
 		$this->load->service('user_service');
 	}
 
-
+    public function t()
+    {
+        $this->load->library('push');
+        $this->push->push_to_topic(2,'333333');
+    }
 	public function index($type = 'forget')
 	{
 		$data['css'] = array(

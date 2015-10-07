@@ -220,6 +220,10 @@ class User_service extends MY_Service
         $this->email_model->insert_token($uid, $token);
     }
 
+    public function get_address($uid) {
+        return $this->user_model->get_address($uid);
+    }
+
     private function send_email($email, $token)
     {
 
