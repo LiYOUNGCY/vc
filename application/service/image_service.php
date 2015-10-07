@@ -189,7 +189,10 @@ class Image_service extends MY_Service
             $file_name = $file_name[count($file_name) - 1];
             $file_name = str_replace('.', '_thumb.', $file_name);
 
-            $this->oss->upload_by_file($dir . $file_name);
+            $newName = Common::get_thumb_url($path, 'thumb1_');
+            rename($dir.$file_name, $newName);
+
+            $this->oss->upload_by_file($newName);
         }
     }
 
