@@ -1,6 +1,7 @@
 {
     "require": {
         "ircmaxell/random-lib": "1.0.*",
-        "endroid/qrcode":"1.5.4"
+        "endroid/qrcode":"1.5.4",
+        "sybio/image-workshop":"2.0.9"
     }
 }

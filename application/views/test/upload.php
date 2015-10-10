@@ -10,7 +10,7 @@
 
 <body>
     <div class="headpic">
-        <form action="<?php echo base_url()?>publish/image/save_headpic" method="post" onsubmit="return checkCoords();">
+        <form action="<?php echo base_url()?>publish/image/crop_image" method="post" onsubmit="return checkCoords();">
             <input type="hidden" id="x" name="x" />
             <input type="hidden" id="y" name="y" />
             <input type="hidden" id="w" name="w" />
@@ -18,12 +18,11 @@
             <input type="hidden" id="img"  name="img" />
         </form>
         <div class="box">
-            <div class="pic">
-                <div id="camera_warp" class="camera_warp">
+                <div id="camera_warp">
                     <input type="file" name="upfile" id="upfile" onchange="file_upload()" /> <i class="fa fa-camera fa-5x"></i>
                     <p style="color:#CCC;">点击修改头像</p>
                 </div>
-                <img id="image" src="" width="400px" height="400px"></div>
+                <img id="image" src="">
             <div class="option">
                 <div class="btn cancel">取消</div>
                 <div id="save" class="btn save">发布</div>
@@ -80,7 +79,7 @@ function checkCoords()
 function file_upload()
 {
     var BASE_URL  = $("#BASE_URL").val();
-    var UPLOAD_URL= BASE_URL+'publish/image/upload_headpic';
+    var UPLOAD_URL= BASE_URL+'publish/image/upload_avatar';
     $.ajaxFileUpload({
         url: UPLOAD_URL,
         fileElementId: 'upfile',
@@ -95,7 +94,8 @@ function file_upload()
             }
             else
             {
-                var path = data.filepath
+                var path = data.file_name
+                console.log(data.oss_path);
                 img_src  = path;
                 $("#image").attr('src',BASE_URL+path);
                 $('#image').show();

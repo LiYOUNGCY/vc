@@ -47,13 +47,6 @@ class Image extends MY_Controller{
 	}
 
 
-    public function upload_image()
-    {
-        $result = $this->image_service->upload_image('upfile');
-        header('Content-Type:application/json');
-        $this->sc->output_success($result);
-    }
-
 	/**
 	 * [save_headpic 保存裁剪后的头像]
 	 * @return [type] [description]
@@ -95,4 +88,45 @@ class Image extends MY_Controller{
 		header('Content-Type:application/json');
 		echo json_encode($result);
 	}
+
+    public function upload_image()
+    {
+        $result = $this->image_service->upload_image('upfile');
+        header('Content-Type:application/json');
+        $this->sc->output_success($result);
+    }
+
+
+    /**
+     * [upload_avatar 上传艺术家头像]
+     * @return [type] [description]
+     */
+    public function upload_avatar()
+    {
+        $result = $this->image_service->upload_avatar('image_upload');
+        header('Content-Type:application/json');
+        echo json_encode($result);
+
+        // $this->message->error();
+    }
+
+
+    /**
+     * [crop_image 裁剪图片]
+     */
+    public function crop_image()
+    {
+        $image = $this->sc->input('img');
+        $x = $this->sc->input('x');
+        $y = $this->sc->input('y');
+        $w = $this->sc->input('w');
+        $h = $this->sc->input('h');
+
+        $image_name = explode('/', $image);
+        $image_name = $image_name[count($image_name) - 1];
+
+        $this->image_service->crop_image($image_name, $x, $y, $w, $h);
+
+        $this->message->success();
+    }
 }

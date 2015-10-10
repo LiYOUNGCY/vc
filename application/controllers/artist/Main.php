@@ -22,7 +22,7 @@ class Main extends MY_Controller{
 			'jquery.imageloader.js',
 			'masonry.pkgd.min.js'
 		);
-		
+
 		$user['sign'] = $this->load->view('common/sign', '', TRUE);
 		$user['user']= $this->user;
 		$data['top'] = $this->load->view('common/top', $user, TRUE);
@@ -30,7 +30,7 @@ class Main extends MY_Controller{
 		$head['title'] = '艺术家';
 		$this->load->view('common/head', $head);
 		$this->load->view('artist', $data);
-	}	
+	}
 
 	/**
 	 * [get_artist_list 获取艺术家列表]
@@ -38,7 +38,8 @@ class Main extends MY_Controller{
 	 */
 	public function get_artist_list()
 	{
-		$page = $this->sc->input('page');
+		// $page = $this->sc->input('page');
+        $page = 0;
 		$artist = $this->artist_service->get_artist_list($page);
 		echo json_encode($artist);
 	}

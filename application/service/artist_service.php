@@ -45,27 +45,10 @@ class Artist_service extends MY_Service{
 		}
 		return $production;
 	}
-	/**
-	 * [insert_artist 添加艺术家]
-	 * @param  [type] $uid        [用户id]
-	 * @param  [type] $name       [名称]
-	 * @param  [type] $intro      [介绍]
-	 * @param  [type] $evaluation [评价]
-	 * @param  [type] $pic        [头像]
-	 * @return [type]             [description]
-	 */
-	public function publish_artist($uid, $name, $intro, $evaluation, $pic)
+
+	public function publish_artist($uid, $name, $image_id, $intro, $evaluation)
 	{
-		$result = $this->artist_model->insert_artist($uid, $name,$intro,$evaluation,$pic);
-		if($result)
-		{
-			return $result;
-		}
-		else
-		{
-			$this->_delete_oss_pic($pic);
-			return FALSE;
-		}
+        return $this->artist_model->insert_artist($uid, $name, $image_id, $intro, $evaluation);
 	}
 
 	/**
@@ -79,7 +62,7 @@ class Artist_service extends MY_Service{
 	 * @return [type]             [description]
 	 */
 	public function update_artist($aid, $uid, $name, $intro, $evaluation, $pic)
-	{	
+	{
 		$arr = array(
 			'name' 		 => array($name,TRUE),
 			'intro'      => array($intro,TRUE),
@@ -101,7 +84,7 @@ class Artist_service extends MY_Service{
 
 	private function _delete_oss_pic($pic)
 	{
-		try 
+		try
 		{
 			$this->load->library('oss');
 			//删除原图
@@ -110,14 +93,14 @@ class Artist_service extends MY_Service{
 			unset($arr[0]);
 			unset($arr[1]);
 			unset($arr[2]);
-			$pic = implode('/', $arr);	
+			$pic = implode('/', $arr);
 			$this->oss->delete_object($pic);
-			return TRUE;		
+			return TRUE;
 		}
-		catch(Exception $e) 
+		catch(Exception $e)
 		{
 			return FALSE;
-		}	
+		}
 	}
 
     public function publish($id)

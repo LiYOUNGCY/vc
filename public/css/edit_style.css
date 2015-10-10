@@ -38,6 +38,7 @@
  * 输入样式
  */
 input[type="text"] {
+    outline: none;
     border-style: none none solid none ;
     border-color: #e0e0e0;
     border-width: 2px;
@@ -73,6 +74,7 @@ textarea + .message {
 }
 
 textarea {
+    outline: none;
     border-style: none none solid none;
     border-color: #e0e0e0;
     border-width: 2px !important;
@@ -145,13 +147,14 @@ textarea + .message:before {
 }
 
 .reveal-model {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
 
     width: 730px;
     margin: 0 auto;
+    height: calc(100% - 10rem);
     background: #FFF;
     z-index: -1;
     border-radius: .25em;
@@ -231,12 +234,12 @@ textarea + .message:before {
     font-size: 64px;
 }
 
-.reveal-model .image-content input[type='file'] {
+input[type='file'] {
     display: none;
 }
 
 .reveal-model .footer .button {
-    margin: 1em auto;
+    margin: .5em auto;
     display: block;
 }
 
@@ -289,8 +292,9 @@ textarea + .message:before {
     left: 0px;
     top: 0px;
 
-    width: 80px;
+    width: 80%;
     background-color: #FFF;
+    margin: 0 auto;
 }
 
 .container.open {

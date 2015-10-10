@@ -29,8 +29,8 @@ class Um_upload{
         $this->fileType  = NULL;                //文件类型
         $this->fileSize  = NULL;                //文件大小
         $this->fileField = NULL;                //文件域名
-        $this->file      = NULL;           //文件上传对象
-        $this->config    = NULL;           //配置信息
+        $this->file      = NULL;                //文件上传对象
+        $this->config    = NULL;                //配置信息
         $this->oriName   = NULL;                //原始文件名
         $this->fileName  = NULL;                //新文件名
         $this->fullName  = NULL;                //完整文件名,即从当前配置目录开始的URL
