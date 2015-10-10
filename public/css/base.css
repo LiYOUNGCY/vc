@@ -279,10 +279,10 @@ pre {
     background-size:cover;
     background-position:50% 50%;
 }
-.icon.osure{
+.icon.oweic{
     width: 28px;
     height: 28px;
-    background: transparent url("../img/icon/home_sure.png") no-repeat scroll;
+    background: transparent url("../img/icon/home_weic.png") no-repeat scroll;
     background-size:cover;
     background-position:50% 50%;
 }
@@ -2470,9 +2470,8 @@ hr.line {
     cursor: pointer;
 }
 .new-subject .list .item.big{
-    width: 630px;
-    height: 550px;
-    background-color: #000;
+    width: 100%;
+    height: 450px;
 }
 .new-subject .list .item .box:hover .info{
     height: calc(100% - 45px);
@@ -2565,8 +2564,9 @@ hr.line {
     cursor: pointer;
 }
 .new-art .list .item.big{
-    width: 100%;
-    height: 450px;
+    width: 630px;
+    height: 550px;
+    background-color: #000;
 }
 .new-art .list .item .box:hover .info{
     opacity: 1;
