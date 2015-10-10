@@ -135,6 +135,10 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
+                <li>
+                    <a href="<?= base_url() . ADMINROUTE ?>Customer">在线客服</a>
+                    <!-- /.nav-second-level -->
+                </li>
                 <li style="display:none;">
                     <a href="#"><i class="fa fa-files-o fa-fw"></i>数据统计<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">

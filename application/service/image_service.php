@@ -1,5 +1,9 @@
 <?php
 
+
+//使用 image-workshop 库
+use PHPImageWorkshop\ImageWorkshop;
+
 class Image_service extends MY_Service
 {
     public function __construct()
@@ -7,6 +11,10 @@ class Image_service extends MY_Service
         parent::__construct();
         $this->load->library('Cimage');
         $this->load->library('Oss');
+        $this->load->model('image_model');
+
+        //图片默认的路径
+        $this->dir = 'public/image/';
     }
 
     /**
@@ -131,70 +139,7 @@ class Image_service extends MY_Service
     }
 
 
-    public function upload_image($field_name)
-    {
 
-        // $this->load->library('image_lib');
-        $upload_config['upload_path'] = 'public/image/';
-        $upload_config['allowed_types'] = 'gif|jpg|png';
-        $upload_config['remove_spaces'] = TRUE;
-        $upload_config['encrypt_name'] = TRUE;
-        $upload_config['file_ext_tolower'] = TRUE;
-
-        $this->load->library('upload', $upload_config);
-        $result = $this->upload->do_upload($field_name);
-        if (!$result) {
-//            echo json_encode($this->upload->display_errors());
-            return false;
-        }
-
-        $file_name = $this->upload->data('file_name');
-        // $file_name = 'b282fc8fe279798c65c3d966039d833e.jpg';
-        $file = substr($upload_config['upload_path'], 0) . $file_name;
-
-        $upload_path = $this->oss->upload_by_file($file);
-        $this->create_thumb(300, 188, $file);
-
-        if (!empty($upload_path)) {
-            $osspath['image_path'] = $upload_path;
-            return $osspath;
-        }
-
-        return false;
-    }
-
-
-    /**
-     * @param $width
-     * @param $height
-     * @param $path
-     * @param bool|true $is_upload 是否上传到服务器
-     */
-    function create_thumb($width, $height, $path, $is_upload = true)
-    {
-        $dir = 'public/image/';
-        $config['image_library'] = 'gd2';
-        $config['source_image'] = $path;
-        $config['create_thumb'] = TRUE;
-        $config['maintain_ratio'] = TRUE;
-        $config['new_image'] = $dir;
-        $config['width'] = $width;
-        $config['height'] = $height;
-
-        $this->load->library('image_lib', $config);
-        $this->image_lib->resize();
-
-        if ($is_upload) {
-            $file_name = explode('/', $path);
-            $file_name = $file_name[count($file_name) - 1];
-            $file_name = str_replace('.', '_thumb.', $file_name);
-
-            $newName = Common::get_thumb_url($path, 'thumb1_');
-            rename($dir.$file_name, $newName);
-
-            $this->oss->upload_by_file($newName);
-        }
-    }
 
     /**
      * [save_headpic 保存裁剪后的头像]
@@ -428,5 +373,142 @@ class Image_service extends MY_Service
             $result['error'] = lang('error_INVALID_REQUEST');
         }
         return $result;
+    }
+
+
+    public function upload_image($field_name, $thumb_width, $thumb_heigh, $create_thumb = TRUE)
+    {
+        // $this->load->library('image_lib');
+        $upload_config['upload_path'] = $this->dir;
+        $upload_config['allowed_types'] = 'gif|jpg|png';
+        $upload_config['remove_spaces'] = TRUE;
+        $upload_config['encrypt_name'] = TRUE;
+        $upload_config['file_ext_tolower'] = TRUE;
+
+        $this->load->library('upload', $upload_config);
+        $result = $this->upload->do_upload($field_name);
+        if ( empty($result) ) {
+            return false;
+        }
+
+        $file_name = $this->upload->data('file_name');
+        $file = substr($upload_config['upload_path'], 0) . $file_name;
+
+        $upload_path = $this->oss->upload_by_file($file);
+
+        if( $create_thumb ) {
+            $this->_create_thumb($file, $thumb_width, $thumb_heigh);
+        }
+
+        if (!empty($upload_path)) {
+            $result = array();
+            $result['oss_path'] = $upload_path;
+            $result['path'] = $this->dir.$file_name;
+            return $result;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * [upload_avatar 上传头像，因为头像需要裁剪，所以不上传到云服务器，等裁剪后再上传到服务器]
+     * @param  [type] $field_name [description]
+     * @return [type]             [description]
+     */
+    public function upload_avatar($field_name)
+    {
+        $upload_config['upload_path'] = $this->dir;
+        $upload_config['allowed_types'] = 'gif|jpg|png';
+        $upload_config['remove_spaces'] = TRUE;
+        $upload_config['encrypt_name'] = TRUE;
+        $upload_config['file_ext_tolower'] = TRUE;
+
+        $this->load->library('upload', $upload_config);
+        $result = $this->upload->do_upload($field_name);
+        if ( empty($result) ) {
+            return false;
+        }
+
+        $file['path'] = $this->dir.$this->upload->data('file_name');
+
+        return $file;
+    }
+
+
+    /**
+     * 裁剪图片
+     * @param  [type] $image_name [图片的文件名，不含路径名]
+     * @param  [type] $positionX  [起始X]
+     * @param  [type] $positionY  [起始Y]
+     * @param  [type] $newWidth   [裁剪的宽]
+     * @param  [type] $newHeight  [裁剪的高]
+     * @return [type]             [description]
+     */
+    public function crop_image($image_name, $positionX, $positionY, $newWidth, $newHeight)
+    {
+        $result = array();
+
+        $layer = ImageWorkshop::initFromPath($this->dir.$image_name);
+        //从左上角开始算
+        $position = "LT";
+        $layer->cropInPixel($newWidth, $newHeight, $positionX, $positionY, $position);
+
+        // Saving the result
+        $filename = 'Crop_'.$image_name;
+        $createFolders = true;
+        $backgroundColor = null; // transparent, only for PNG (otherwise it will be white if set null)
+        $imageQuality = 95; // useless for GIF, usefull for PNG and JPEG (0 to 100%)
+
+        $layer->save($this->dir, $filename, $createFolders, $backgroundColor, $imageQuality);
+
+        //上传到 oss
+
+        $result['image_path'] = $this->oss->upload_by_result[]($this->dir . $filename);
+
+        //记录到数据库
+        $result['image_id'] = $this->image_model->insert_artist_image($result['image_path'], $newWidth, $newHeight);
+
+        //删除本地图
+        // @unlink($this->dir . $filename);
+        // @unlink($this->dir . $image_name);
+
+        return $result;
+    }
+
+        /**
+     * 生成缩略图
+     * @param $width
+     * @param $height
+     * @param $path
+     */
+    private function _create_thumb($path, $width = null, $height = null)
+    {
+        $dir = 'public/image/';
+        $config['image_library'] = 'gd2';
+        $config['source_image'] = $path;
+        $config['create_thumb'] = TRUE;
+        $config['maintain_ratio'] = TRUE;
+        $config['master_dim'] = 'width';
+        $config['new_image'] = $dir;
+        if(isset($width))
+            $config['width'] = $width;
+        if(isset($height))
+            $config['height'] = $height;
+
+        $this->load->library('image_lib', $config);
+        $this->image_lib->resize();
+
+        //上传到服务器
+        $file_name = explode('/', $path);
+        $file_name = $file_name[count($file_name) - 1];
+        $file_name = str_replace('.', '_thumb.', $file_name);
+
+        $newName = $dir.$file_name;
+
+        // $newName = Common::get_thumb_url($path, 'thumb1_');
+        // rename($dir.$file_name, $newName);
+
+        $this->oss->upload_by_file($newName);
     }
 }

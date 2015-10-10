@@ -7,19 +7,9 @@ class Artist_model extends CI_Model{
 
 	public function get_artist_base_id($id,$base = array('id','pic','name'))
 	{
-		$artist = $this->get_artist_by_id($id);
-		if( ! empty($artist))
-		{
-			$arr = array();
-			foreach ($base as $k => $v) {
-				$arr[$v] = $artist[$v];
-			}
-			return $arr;
-		}
-		else
-		{
-			return NULL;
-		}
+        $query = $this->db->select('artist.id, artist.name, image.image_path as pic')->from('artist')
+        ->from('image')->where('artist.image_id', 'image.image_id')->get()->row_array();
+        return $query;
 	}
 
 	/**
@@ -29,9 +19,12 @@ class Artist_model extends CI_Model{
 	 */
 	public function get_artist_by_id($id)
 	{
-		$query = $this->db->where('id',$id)
-				 		  ->get('artist')
-				 		  ->row_array();
+		$query = $this->db->select('artist.id, artist.name, image.image_path as pic, artist.intro, artist.evaluation')
+        ->from('artist')
+        ->where('artist.id', $id)
+        ->join('image', 'artist.image_id = image.image_id')
+        ->get()
+        ->row_array();
 		return $query;
 	}
 
@@ -61,15 +54,12 @@ class Artist_model extends CI_Model{
 	 */
 	public function get_artist_list($page = 0, $limit = 6, $order = '')
 	{
-		$this->db->select('artist.id, artist.name, artist.pic, artist.intro');
-        $this->db->where('publish_status', '1');
-		if( ! empty($order))
-		{
-			$this->db->order_by($order);
-		}
-		$query = $this->db->limit($limit,$page * $limit)
-				 		  ->get('artist')
-				 		  ->result_array();
+		$query = $this->db->select('artist.id, artist.name, image.image_path as pic, artist.intro')
+        ->from('artist')
+        ->where('artist.publish_status', 1 )
+        ->join('image', 'artist.image_id = image.image_id')
+        ->limit($limit,$page * $limit)->get()->result_array();
+
 		return $query;
 	}
 
@@ -82,15 +72,15 @@ class Artist_model extends CI_Model{
 	 * @param  [type] $pic        [头像]
 	 * @return [type]             [description]
 	 */
-	public function insert_artist($uid, $name, $intro, $evaluation, $pic)
+	public function insert_artist($uid, $name, $image_id, $intro, $evaluation)
 	{
 		$data = array(
 			'name'   	 => $name,
 			'intro'  	 => $intro,
 			'evaluation' => $evaluation,
-			'pic' 		 => $pic,
+			'image_id' => $image_id,
 			'creat_by' 	 => $uid,
-			'creat_time' => date("Y-m-d H:i:s", time())
+			'creat_time' => date("Y-m-d H:i:s")
 		);
 		$this->db->insert('artist',$data);
 		return $this->db->insert_id();

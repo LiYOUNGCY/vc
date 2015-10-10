@@ -4,6 +4,7 @@ class Publish extends MY_Controller{
 	{
 		parent::__construct();
 		$this->load->service('artist_service');
+        $this->load->service('image_service');
 	}
 
 	/**
@@ -14,10 +15,11 @@ class Publish extends MY_Controller{
 	public function index($type = 'publish', $aid = NULL)
 	{
 		$head['css'] = array(
-			'base.css',
+			// 'base.css',
 			'font-awesome/css/font-awesome.min.css',
 			'alert.css',
-            'jquery.Jcrop.css'
+            'jquery.Jcrop.css',
+            'edit_style.css'
 		);
 
 		$head['javascript'] = array(
@@ -61,32 +63,51 @@ class Publish extends MY_Controller{
 	 * [publish_artist 添加艺术家]
 	 * @return [type] [description]
 	 */
-	public function publish_artist()
-	{
+	// public function publish_artist()
+	// {
 
-        $error_redirect = array(
-            'script' => "window.location.href='".base_url()."publish/artist';"
-        );
-        $this->sc->set_error_redirect($error_redirect);
+ //        $error_redirect = array(
+ //            'script' => "window.location.href='".base_url()."publish/artist';"
+ //        );
+ //        $this->sc->set_error_redirect($error_redirect);
 
-        $this->load->service('image_service');
-        $img = $this->sc->input(array('img','x','y','w','h'));
-        $pic = $this->image_service->save_artist_pic($img['img'],$img['x'],$img['y'],$img['w'],$img['h']);
-        //裁剪成功
-        if($pic)
-        {
-            $name       = $this->sc->input('artist_name');
-            $intro      = $this->sc->input('intro');
-            $evaluation = $this->sc->input('evaluation');
+ //        $this->load->service('image_service');
+ //        $img = $this->sc->input(array('img','x','y','w','h'));
+ //        $pic = $this->image_service->save_artist_pic($img['img'],$img['x'],$img['y'],$img['w'],$img['h']);
+ //        //裁剪成功
+ //        if($pic)
+ //        {
+ //            $name       = $this->sc->input('artist_name');
+ //            $intro      = $this->sc->input('intro');
+ //            $evaluation = $this->sc->input('evaluation');
 
-            $result = $this->artist_service->publish_artist($this->user['id'],$name,$intro,$evaluation,$pic);
-            if($result)
-            {
-                redirect(base_url().'artist/'.$result,'location');
-            }
-        }
-        $this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().'publish/artist";'));
-	}
+ //            $result = $this->artist_service->publish_artist($this->user['id'],$name,$intro,$evaluation,$pic);
+ //            if($result)
+ //            {
+ //                redirect(base_url().'artist/'.$result,'location');
+ //            }
+ //        }
+ //        $this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().'publish/artist";'));
+	// }
+
+
+    public function publish_artist()
+    {
+        $img = $this->sc->input('img');
+        $x = $this->sc->input('x');
+        $y = $this->sc->input('y');
+        $w = $this->sc->input('w');
+        $h = $this->sc->input('h');
+
+        $name = $this->sc->input('artist_name');
+        $intro = $this->sc->input('intor');
+        $evaluation = $this->sc->input('evaluation');
+
+        //保存图片
+        $image_id = $this->image_service->crop_image($img, $x, $y, $w, $h)['image_id'];
+
+        $this->artist_service->publish_artist($this->user['id'], $name, $image_id, $intro, $evaluation);
+    }
 
 	/**
 	 * [update_artist 更新艺术家]
