@@ -111,7 +111,7 @@ class Publish extends MY_Controller{
         $result = $this->artist_service->publish_artist($this->user['id'], $name, $image_id, $intro, $evaluation);
 
         if($result) {
-            redirect(base_url());
+            redirect(base_url(). ADMINROUTE . 'artist');
         }
     }
 
