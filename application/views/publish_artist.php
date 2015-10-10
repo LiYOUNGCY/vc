@@ -1,7 +1,7 @@
 <body>
 <div class="container">
     <div class="main-container" >
-    <form action="<?=base_url()?>publish/image/crop_image" method="post">
+    <form action="<?=base_url()?>artist/publish/publish_artist" method="post">
         <input type="hidden" id="x" name="x" />
         <input type="hidden" id="y" name="y" />
         <input type="hidden" id="w" name="w" />

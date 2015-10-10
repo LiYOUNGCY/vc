@@ -463,8 +463,7 @@ class Image_service extends MY_Service
         $layer->save($this->dir, $filename, $createFolders, $backgroundColor, $imageQuality);
 
         //上传到 oss
-
-        $result['image_path'] = $this->oss->upload_by_result[]($this->dir . $filename);
+        $result['image_path'] = $this->oss->upload_by_file($this->dir . $filename);
 
         //记录到数据库
         $result['image_id'] = $this->image_model->insert_artist_image($result['image_path'], $newWidth, $newHeight);

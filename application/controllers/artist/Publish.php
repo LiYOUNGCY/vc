@@ -94,6 +94,8 @@ class Publish extends MY_Controller{
     public function publish_artist()
     {
         $img = $this->sc->input('img');
+        $img = explode('/', $img);
+        $img = $img[count($img) - 1];
         $x = $this->sc->input('x');
         $y = $this->sc->input('y');
         $w = $this->sc->input('w');
@@ -106,7 +108,11 @@ class Publish extends MY_Controller{
         //保存图片
         $image_id = $this->image_service->crop_image($img, $x, $y, $w, $h)['image_id'];
 
-        $this->artist_service->publish_artist($this->user['id'], $name, $image_id, $intro, $evaluation);
+        $result = $this->artist_service->publish_artist($this->user['id'], $name, $image_id, $intro, $evaluation);
+
+        if($result) {
+            redirect(base_url());
+        }
     }
 
 	/**
