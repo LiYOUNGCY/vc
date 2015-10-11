@@ -81,49 +81,49 @@
         isAnimate: true
     });
 
-    // 插件 imageloader
-    $container.imageloader({
-        selector: '.image',
-        each: function (elm) {
-            masonry.layout();
-        }
-    });
+    // // 插件 imageloader
+    // $container.imageloader({
+    //     selector: '.image',
+    //     each: function (elm) {
+    //         masonry.layout();
+    //     }
+    // });
 
     // 为 select 注册事件
-    medium.easyDropDown({
-        onChange: function (selected) {
-            if (Select_status) {
-                TouchEvent();
-            }
-        }
-    });
+    // medium.easyDropDown({
+    //     onChange: function (selected) {
+    //         if (Select_status) {
+    //             TouchEvent();
+    //         }
+    //     }
+    // });
 
-    style.easyDropDown({
-        onChange: function (selected) {
-            if (Select_status) {
-                TouchEvent();
-            }
-        }
-    });
+    // style.easyDropDown({
+    //     onChange: function (selected) {
+    //         if (Select_status) {
+    //             TouchEvent();
+    //         }
+    //     }
+    // });
 
-    price.easyDropDown({
-        onChange: function (selected) {
-            if (Select_status) {
-                TouchEvent();
-            }
-        }
-    });
+    // price.easyDropDown({
+    //     onChange: function (selected) {
+    //         if (Select_status) {
+    //             TouchEvent();
+    //         }
+    //     }
+    // });
 
 
-    RefreshUrlData();
+    // RefreshUrlData();
 
     /**
      * 后退的操作
      */
-    window.addEventListener('popstate', function (e) {
-        RefreshUrlData();
-        reloadpage();
-    });
+    // window.addEventListener('popstate', function (e) {
+    //     RefreshUrlData();
+    //     reloadpage();
+    // });
 
 
     LoadMore();
@@ -132,39 +132,40 @@
     WindowEvent();
 
 
-    function RefreshUrlData() {
-        m = getQueryString('m');
-        s = getQueryString('s');
-        p = getQueryString('p');
+    // function RefreshUrlData() {
+    //     m = getQueryString('m');
+    //     s = getQueryString('s');
+    //     p = getQueryString('p');
 
-        m = m == null ? '0' : m;
-        s = s == null ? '0' : s;
-        p = p == null ? '0' : '"'+p+'"';
+    //     m = m == null ? '0' : m;
+    //     s = s == null ? '0' : s;
+    //     p = p == null ? '0' : '"'+p+'"';
 
 
-        //刷新 select 的值
-        Select_status = false;
-        medium.easyDropDown('select', m.toString());
-        style.easyDropDown('select', s.toString());
-        price.easyDropDown('select', p);
-        Select_status = true;
-    }
+    //     //刷新 select 的值
+    //     Select_status = false;
+    //     medium.easyDropDown('select', m.toString());
+    //     style.easyDropDown('select', s.toString());
+    //     price.easyDropDown('select', p);
+    //     Select_status = true;
+    // }
 
-    function TouchEvent() {
-        var url = BASE_URL + 'production?m=' + medium.val() + '&&s=' + style.val() + '&&p=' + price.val();
-        window.history.pushState(null, null, url);
-        reloadpage();
-    }
+    // function TouchEvent() {
+    //     var url = BASE_URL + 'production?m=' + medium.val() + '&&s=' + style.val() + '&&p=' + price.val();
+    //     window.history.pushState(null, null, url);
+    //     reloadpage();
+    // }
 
-    function reloadpage() {
-        //重置 page
-        page = 0;
-        var $container = $('.item-list > .production');
-        $container.each(function () {
-            $(this).remove();
-        });
-        LoadMore();
-    }
+    // function reloadpage() {
+    //     //重置 page
+    //     page = 0;
+    //     var $container = $('.item-list > .production');
+    //     $container.each(function () {
+    //         $(this).remove();
+    //     });
+    //     console.log('reloadpage');
+    //     LoadMore();
+    // }
 
 
     function LoadMore() {
@@ -188,10 +189,12 @@
             },
             dataType: 'json',
             success: function (data) {
+                console.log(data);
                 var items = data;
 
                 if (items.error != null || items.length === 0) {
                     console.log('Error');
+                    $(window).unbind('scroll');
                     return;
                 }
 
@@ -208,10 +211,12 @@
                     var style = data[i].style;
                     var l = data[i].l;
                     var w = data[i].w;
+                    var width = data[i].width;
+                    var height = data[i].height;
 
 
                     var box = $('<div class="production" onclick="a(' + id + ')">' +
-                        '<img class="image" src="' + img + '">' +
+                        '<img class="image" src="' + img + '" style="width: '+width+'px; height: '+height+'px;">' +
                         '<p class="title">' + title + '</p>' +
                         '<p class="author">作者：' + author + '</p>' +
                         '<div class="info">' +
@@ -227,26 +232,27 @@
                     $container.append(box);
                     masonry.appended(box);
 
-                    $(box).imageloader({
-                        selector: '.image',
-                        each: function (elm) {
-                            masonry.layout();
+                    // $(box).imageloader({
+                    //     selector: '.image',
+                    //     each: function (elm) {
+                    //         masonry.layout();
 
-                            count++;
-                            if (count == sum) {
-                                //Add Event
-                                WindowEvent();
-                                count = 0;
-                            }
-                        },
-                        callback: function (elm) {
-                            masonry.layout();
+                    //         count++;
+                    //         if (count == sum) {
+                    //             //Add Event
+                    //             WindowEvent();
+                    //             count = 0;
+                    //         }
+                    //     },
+                    //     callback: function (elm) {
+                    //         masonry.layout();
 
-                        }
-                    });
+                    //     }
+                    // });
 
 
                     // -------------- End -------------
+                    // WindowEvent();
                 }
             }
         });
@@ -256,6 +262,7 @@
     function WindowEvent() {
 
         $(window).scroll(function () {
+            console.log('scroll event');
             // 当滚动到最底部以上100像素时， 加载新内容
             if ($(document).height() - $(this).scrollTop() - $(this).height() < 100) {
                 $(window).unbind('scroll');

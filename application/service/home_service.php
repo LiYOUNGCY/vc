@@ -36,7 +36,7 @@ class Home_service extends MY_Service{
 
 		foreach ($latest_production as $k => $v) {
 			//显示缩略图
-			$latest_production[$k]['pic']   = Common::get_thumb_url($v['pic']);
+//			$latest_production[$k]['pic']   = Common::get_thumb_url($v['pic']);
 			$latest_production[$k]['bigpic']= $v['pic'];
 			// $latest_production[$k]['intro'] = Common::extract_content($latest_production[$k]['intro']);
 			//获取艺术家信息

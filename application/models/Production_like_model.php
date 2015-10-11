@@ -7,14 +7,28 @@ class Production_like_model extends CI_Model{
 
 	public function get_like_list($page = 0, $uid, $limit = 10, $order = 'id DESC')
     {
-        $this->db->where(array('uid' => $uid,'status' => 1));
-        if( ! empty($limit))
-        {
-            $this->db->limit($limit,$page * $limit);
-        }
-        $query  = $this->db->order_by($order)
-                           ->get('production_like')
-                           ->result_array();
+        $query = $this->db->select('
+            production.id,
+            production.name,
+            production.aid,
+            production.price,
+            image.thumb_path as pic,
+            production.like,
+            production_medium.name as medium,
+            production.l,
+            production.w,
+            production.h,
+            image.thumb_width as width,
+            image.thumb_height as height
+            ')
+        ->from('production, production_like, production_medium, image')
+        ->where('production.image_id = image.image_id')
+        ->where('production.medium = production_medium.id')
+        ->where('production_like.uid', $uid)
+        ->where('production_like.pid = production.id')
+        ->where('production_like.status', 1)
+        ->limit($limit, $page * $limit)->get()->result_array();
+
         return $query;
     }
 
@@ -28,7 +42,7 @@ class Production_like_model extends CI_Model{
     {
         $query = $this->check_like($pid, $uid);
         //首次点赞
-        if( empty($query) ) 
+        if( empty($query) )
         {
             $data = array(
                 'pid'           => $pid,
@@ -44,7 +58,7 @@ class Production_like_model extends CI_Model{
             $status = ! $query['status'];
             $this->db->where('id',$query['id'])
                      ->update('production_like', array('status' => $status, 'update_time' => date("Y-m-d H:i:s", time())));
-            
+
             $result = $this->db->affected_rows() === 1;
             if($result)
             {
@@ -63,5 +77,5 @@ class Production_like_model extends CI_Model{
     		     	      ->get('production_like')
     		     		  ->row_array();
     	return $query;
-    }       
+    }
 }

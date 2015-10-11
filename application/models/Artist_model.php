@@ -8,7 +8,7 @@ class Artist_model extends CI_Model{
 	public function get_artist_base_id($id,$base = array('id','pic','name'))
 	{
         $query = $this->db->select('artist.id, artist.name, image.image_path as pic')->from('artist')
-        ->from('image')->where('artist.image_id', 'image.image_id')->get()->row_array();
+        ->from('image')->where('artist.image_id = image.image_id')->get()->row_array();
         return $query;
 	}
 

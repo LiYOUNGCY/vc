@@ -22,7 +22,7 @@
         </ul>
     </nav>
 
-    </div>
+</div>
 </div>
 <!-- Edit container -->
 <div class="container open">
@@ -59,19 +59,19 @@
     <div id="select" class="select clearfix">
         <p>所属标签</p>
         <select class="dropdown" id="who">
-            <?php foreach($tag['who'] as $key => $value) {?>
+            <?php foreach ($tag['who'] as $key => $value) { ?>
                 <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
             <?php } ?>
         </select>
 
-        <select class="dropdown" id="where" >
-            <?php foreach($tag['where'] as $key => $value) {?>
+        <select class="dropdown" id="where">
+            <?php foreach ($tag['where'] as $key => $value) { ?>
                 <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
             <?php } ?>
         </select>
 
-        <select class="dropdown" id="when" >
-            <?php foreach($tag['when'] as $key => $value) {?>
+        <select class="dropdown" id="when">
+            <?php foreach ($tag['when'] as $key => $value) { ?>
                 <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
             <?php } ?>
         </select>
@@ -80,22 +80,20 @@
             <button type="button" class="button" id="preview">预览</button>
             <button type="button" class="button success" id="save">保存</button>
 
+        </div>
     </div>
-</div>
 
-<!-- Reveal Model -->
-<div class="reveal-model-bg" id="reveal"></div>
-<div class="reveal-model">
-    <div class="top">
-        <div class="reveal-title">插入图片</div>
-        <div class="close-box" id="reveal-close"><i class="fa fa-close"></i></div>
+    <!-- Reveal Model -->
+    <div class="reveal-model-bg" id="reveal"></div>
+    <div class="reveal-model">
+        <div class="top">
+            <div class="reveal-title">插入图片</div>
+            <div class="close-box" id="reveal-close"><i class="fa fa-close"></i></div>
+        </div>
+        <div class="wrap" id="reveal-content">
+        </div>
+        <div class="footer" id="reveal-footer"></div>
     </div>
-    <div class="wrap" id="reveal-content">
-    </div>
-    <div class="footer" id="reveal-footer"></div>
-</div>
-
-
 
 
 </body>
@@ -168,14 +166,14 @@
                 },
                 dataType: 'json',
                 type: 'post',
-                success: function(data) {
+                success: function (data) {
                     console.log(data);
 
-                    if( data.error != null)  {
+                    if (data.error != null) {
                         swal('发布失败');
                     }
 
-                    if( data.success == 0 ) {
+                    if (data.success == 0) {
                         window.location.href = BASE_URL + 'admin/topic';
                     }
                 }

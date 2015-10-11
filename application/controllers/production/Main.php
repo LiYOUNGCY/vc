@@ -45,8 +45,6 @@ class Main extends MY_Controller
     public function get_production_list()
     {
 		$page = $this->sc->input('page');
-//        $page = 0;
-
 
         $medium = $this->sc->input('m', 'get');
         $categories = NULL;

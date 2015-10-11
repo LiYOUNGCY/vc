@@ -27,7 +27,6 @@ class Production_model extends CI_Model
         $order = 'id DESC'
     )
     {
-
         $medium = $search['medium'];
         $categories = $search['categories'];
         $style = $search['style'];
@@ -38,7 +37,7 @@ class Production_model extends CI_Model
                                     production.id,
                                     production.aid,
                                     production.name,
-                                    production.pic,
+                                    image.thumb_path as pic,
                                     production.h,
                                     production.w,
                                     production.l,
@@ -46,10 +45,16 @@ class Production_model extends CI_Model
                                     production.like,
                                     production.intro,
                                     production.price,
-                                    production.creat_time
-		');
+                                    production.creat_time,
+                                    image.thumb_width as width,
+                                    image.thumb_height as height
+		')
+            ->from('production')
+            ->from('production_style')
+            ->from('image')
+            ->where('production_style.id = production.style')
+            ->where('image.image_id = production.image_id');
 
-        $query = $query->join('production_style', 'production_style.id = production.style');
 
         if (is_numeric($meid)) {
         }
@@ -68,7 +73,6 @@ class Production_model extends CI_Model
             foreach ($price as $key => $value) {
                 $price[$key] = intval($value);
             }
-//            sort($price, SORT_NUMERIC);
             if (isset ($price[0])) {
                 $query = $query->where('production.price >= ', $price[0]);
             }
@@ -83,7 +87,7 @@ class Production_model extends CI_Model
             $query = $query->where_in('production.status', $status);
         }
 
-        $query = $query->order_by($order)->limit($limit, $page * $limit)->get('production')->result_array();
+        $query = $query->order_by($order)->limit($limit, $page * $limit)->get()->result_array();
         return $query;
     }
 
@@ -94,45 +98,41 @@ class Production_model extends CI_Model
      */
     public function get_production_by_id($id)
     {
-        $query = $this->db->where('id', $id)
-            ->get('production')
+        $query = $this->db
+            ->select('
+            production.id,
+            production.aid,
+            image.image_path as pic,
+            production.intro,
+            production.price,
+            production.w,
+            production.l,
+            production.h,
+            production_medium.name as medium,
+            production_style.name as style,
+            production.like,
+            production.name,
+            production.publish_time,
+            production.creat_time
+            ')
+            ->from('production, production_style, image, production_medium')
+            ->where('production.id', $id)
+            ->where('production.image_id = image.image_id')
+            ->where('production.medium = production_medium.id')
+            ->where('production.style = production_style.id')
+            ->get()
             ->row_array();
         return $query;
     }
 
     /**
      * [insert_production 添加艺术品]
-     * @param  [type] $name       [description]
-     * @param  [type] $uid        [description]
-     * @param  [type] $intro      [description]
-     * @param  [type] $aid        [description]
-     * @param  [type] $price      [description]
-     * @param  [type] $pic        [description]
-     * @param  [type] $l          [description]
-     * @param  [type] $w          [description]
-     * @param  [type] $h          [description]
-     * @param  [type] $type       [description]
-     * @param  [type] $marterial  [description]
-     * @param  [type] $creat_time [description]
-     * @return [type]             [description]
      */
-    public function insert_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $style, $medium, $creat_time)
+    public function insert_production($uid, $data)
     {
-        $data = array(
-            'name' => $name,
-            'intro' => $intro,
-            'aid' => $aid,
-            'price' => $price,
-            'pic' => $pic,
-            'l' => $l,
-            'w' => $w,
-            'h' => $h,
-            'style' => $style,
-            'medium' => $medium,
-            'creat_time' => $creat_time,
-            'publish_time' => date("Y-m-d H:i:s", time()),
-            'creat_by' => $uid
-        );
+        $data['publish_time'] = date("Y-m-d H:i:s", time());
+        $data['creat_by'] = $uid;
+
         $this->db->insert('production', $data);
         return $this->db->insert_id();
     }
@@ -222,7 +222,7 @@ class Production_model extends CI_Model
     {
         $data = array(
             'status' => 2
-            );
+        );
         $this->db->where('id', $id)->update('production', $data);
         return $this->db->affected_rows() === 1;
     }
@@ -235,7 +235,7 @@ class Production_model extends CI_Model
     {
         $data = array(
             'status' => 0
-            );
+        );
         $this->db->where('id', $id)->update('production', $data);
         return $this->db->affected_rows() === 1;
     }

@@ -10,38 +10,37 @@ class Publish extends MY_Controller
 
     public function index($type = 'publish', $pid = NULL)
     {
-        $head['css'] = array(
-            'base.css',
-            'font-awesome/css/font-awesome.min.css',
-            'alert.css',
-            'jquery.Jcrop.css',
-            'easydropdown.css'
-        );
-
-        $head['javascript'] = array(
-            'jquery.js',
-            'error.js',
-            'timeago.js',
-            'alert.min.js',
-            'autosize.js',
-            'ajaxfileupload.js',
-            'jquery.easydropdown.js'
-        );
-
-        $user['user'] = $this->user;
-        $user['sign'] = $this->load->view('common/sign', '', TRUE);
-        $data['top'] = $this->load->view('common/top', $user, TRUE);
-        $data['footer'] = $this->load->view('common/footer', $user, TRUE);
-
-
+        $data = array();
         $data['medium'] = $this->production_service->get_medium_list();
         $data['style'] = $this->production_service->get_style_list();
-
         if ($type == 'publish') {
             $head['title'] = '发布艺术品';
-            $this->load->view('common/head', $head);
             $this->load->view('publish_production', $data);
         } else if ($type == 'update') {
+            $head['css'] = array(
+                'base.css',
+                'font-awesome/css/font-awesome.min.css',
+                'alert.css',
+                'jquery.Jcrop.css',
+                'easydropdown.css'
+            );
+
+            $head['javascript'] = array(
+                'jquery.js',
+                'error.js',
+                'timeago.js',
+                'alert.min.js',
+                'autosize.js',
+                'ajaxfileupload.js',
+                'jquery.easydropdown.js'
+            );
+
+            $user['user'] = $this->user;
+            $user['sign'] = $this->load->view('common/sign', '', TRUE);
+            $data['top'] = $this->load->view('common/top', $user, TRUE);
+            $data['footer'] = $this->load->view('common/footer', $user, TRUE);
+
+
             if (!is_numeric($pid)) {
                 show_404();
             }
@@ -69,22 +68,29 @@ class Publish extends MY_Controller
      */
     public function publish_production()
     {
-        $error_redirect = array(
-            'script' => "window.location.href='" . base_url() . "publish/production';"
-        );
-        $this->sc->set_error_redirect($error_redirect);
+        $data = array(
+                'name',
+                'intro',
+                'aid',
+                'medium',
+                'style',
+                'creat_time',
+                'w',
+                'h',
+                'l',
+                'image_id',
+                'price'
+            );
 
-        $arr = $this->sc->input(array('production_name', 'production_intro', 'aid', 'price', 'pic', 'l', 'w', 'h', 'style', 'medium', 'creat_time'));
+        $data = $this->sc->input($data);
 
-        $result = $this->production_service->publish_production(
-            $arr['production_name'], $this->user['id'], $arr['production_intro'], $arr['aid'],
-            $arr['price'], $arr['pic'], $arr['l'], $arr['w'], $arr['h'],
-            $arr['style'], $arr['medium'], $arr['creat_time']);
-        if ($result) {
-            redirect(base_url() . 'admin/production');
-        } else {
-            $this->error->output('INVALID_REQUEST', array('script' => 'window.location.href="' . base_url() . 'publish/production";'));
+        $result = $this->production_service->publish_production($this->user['id'], $data);
+
+        if(! $result) {
+            $this->message->error();
         }
+
+        redirect(base_url() . ADMINROUTE . 'production');
     }
 
     /**
@@ -126,16 +132,15 @@ class Publish extends MY_Controller
 
         $result = $this->production_model->pull_off($id);
 
-        if($result) {
+        if ($result) {
             $output = array(
                 'success' => 0
-                );
+            );
             echo json_encode($output);
-        }
-        else {
+        } else {
             $output = array(
                 'error' => -1
-                );
+            );
             echo json_encode($output);
         }
     }
@@ -150,16 +155,15 @@ class Publish extends MY_Controller
 
         $result = $this->production_model->put_on($id);
 
-        if($result) {
+        if ($result) {
             $output = array(
                 'success' => 0
-                );
+            );
             echo json_encode($output);
-        }
-        else {
+        } else {
             $output = array(
                 'error' => -1
-                );
+            );
             echo json_encode($output);
         }
     }

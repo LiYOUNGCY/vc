@@ -1,137 +1,126 @@
 <body>
 <div class="container">
-    <div class="main-container" >
-    <form action="<?=base_url()?>artist/publish/publish_artist" method="post">
-        <input type="hidden" id="x" name="x" />
-        <input type="hidden" id="y" name="y" />
-        <input type="hidden" id="w" name="w" />
-        <input type="hidden" id="h" name="h" />
-        <input type="hidden" id="img"  name="img" />
+    <div class="main-container">
+        <form action="<?= base_url() ?>artist/publish/publish_artist" method="post">
+            <input type="hidden" id="x" name="x"/>
+            <input type="hidden" id="y" name="y"/>
+            <input type="hidden" id="w" name="w"/>
+            <input type="hidden" id="h" name="h"/>
+            <input type="hidden" id="img" name="img"/>
 
-        <label class="form-control">
-            <span>上传艺术家照片</span>
-            <label class="button" for="image_upload" style="margin-right: 15px;">
-                上传
-                <input type="file" id="image_upload" name="image_upload" onchange="file_upload()">
+            <label class="form-control">
+                <span>上传艺术家照片</span>
+                <label class="button" for="image_upload" style="margin-right: 15px;">
+                    上传
+                    <input type="file" id="image_upload" name="image_upload" onchange="file_upload()">
+                </label>
+                <button class="button" type="button" id="preview">编辑照片</button>
+                <span class="message danger" id="image_message">艺术家照片还没上传！！</span>
             </label>
-            <button class="button" type="button" id="preview">编辑照片</button>
-            <span class="message danger" id="image_message">艺术家照片还没上传！！</span>
-        </label>
-        <!--        <button type="button" class="button success" id="show" onclick="fadeInReveal()">提交</button>-->
-        <!--        <button type="button" class="button">默认</button>-->
-        <!--        <button type="button" class="button cancel">取消</button>-->
-        <!--        <label class="form-control" for="name">-->
-        <!--            <span>Name:</span>-->
-        <!--            <input type="text" id="name">-->
-        <!--            <span class="message danger">Name must at least three</span>-->
-        <!--        </label>-->
-        <!--        <label class="form-control" for="introduction">-->
-        <!--            <span>Introduciton:</span>-->
-        <!--            <textarea rows='1'></textarea>-->
-        <!--            <span class="message">这里应该是一段介绍的话</span>-->
-        <!--        </label>-->
-        <label class="form-control" for="artist_name">
-            <span>艺术家的姓名：</span>
-            <input id="artist_name" name="artist_name" type="text">
-            <span class="message danger">内容不能为空</span>
-        </label>
-        <label class="form-control" for="intro">
-            <span>艺术家的介绍：</span>
-            <textarea id="intro" name="intro" rows='3'></textarea>
-            <span class="message danger">内容不能为空</span>
-        </label>
-        <label class="form-control" for="evaluation">
-            <span>维C的评价：</span>
-            <textarea id="evaluation" name="evaluation" rows='3'></textarea>
-            <span class="message danger">内容不能为空</span>
-        </label>
-        <div class="option form-control">
-            <button type="button" class="button cancel" id="back">返回</button>
-            <button type="button" class="button success" id="save">保存</button>
-        </div>
-    </form>
-</div>
 
-<!-- Reveal Model -->
-<div class="reveal-model-bg" id="reveal"></div>
-<div class="reveal-model">
-    <div class="top">
-        <div class="reveal-title">编辑图片</div>
-        <div class="close-box" id="reveal-close"><i class="fa fa-close"></i></div>
+            <label class="form-control" for="artist_name">
+                <span>艺术家的姓名：</span>
+                <input id="artist_name" name="artist_name" type="text">
+                <span class="message danger">内容不能为空</span>
+            </label>
+            <label class="form-control" for="intro">
+                <span>艺术家的介绍：</span>
+                <textarea id="intro" name="intro" rows='3'></textarea>
+                <span class="message danger">内容不能为空</span>
+            </label>
+            <label class="form-control" for="evaluation">
+                <span>维C的评价：</span>
+                <textarea id="evaluation" name="evaluation" rows='3'></textarea>
+                <span class="message danger">内容不能为空</span>
+            </label>
+
+            <div class="option form-control">
+                <button type="button" class="button cancel" id="back">返回</button>
+                <button type="button" class="button success" id="save">保存</button>
+            </div>
+        </form>
     </div>
+
+    <!-- Reveal Model -->
+    <div class="reveal-model-bg" id="reveal"></div>
+    <div class="reveal-model">
+        <div class="top">
+            <div class="reveal-title">编辑图片</div>
+            <div class="close-box" id="reveal-close"><i class="fa fa-close"></i></div>
+        </div>
         <div style="height: 85%; width: 100%; overflow: auto;">
             <img id="image" src="">
         </div>
         <div class="footer">
             <button class="button" type="button" id="close">确定</button>
         </div>
-</div>
+    </div>
 
 
 </body>
 <script src="<?php echo base_url() ?>public/js/jquery.Jcrop.js"></script>
 <script src="<?php echo base_url() ?>public/js/jquery.upload.js"></script>
 <script>
-var img_src = "";
+    var img_src = "";
     $(function () {
         $('#image_message').hide();
         $('.reveal-model').hide();
         $('input').each(function () {
-            $(this).blur(function(){
+            $(this).blur(function () {
                 contentNullEvent(this);
             });
         });
 
         $('textarea').each(function () {
             autosize(this);
-            $(this).blur(function(){
+            $(this).blur(function () {
                 contentNullEvent(this);
             });
         });
 
-        $('#preview').click(function(){
+        $('#preview').click(function () {
             fadeInReveal();
         });
 
-        $('#save').click(function(){
+        $('#save').click(function () {
             var submit_status = true;
             //检查表单的内容，不能为空
-            $('label > input[type="text"]').each(function(){
-                if( !contentNullEvent(this) ) {
-                    submit_status = false ;
+            $('label > input[type="text"]').each(function () {
+                if (!contentNullEvent(this)) {
+                    submit_status = false;
                 }
             });
-            $('textarea').each(function(){
-                if( !contentNullEvent(this) ) {
-                    submit_status = false ;
+            $('textarea').each(function () {
+                if (!contentNullEvent(this)) {
+                    submit_status = false;
                 }
 
             });
-            if( $('#img').val() == null ||
-                $('#img').val() == '' ) {
+            if ($('#img').val() == null ||
+                $('#img').val() == '') {
                 $('#image_message').show();
-                submit_status = false ;
+                submit_status = false;
             }
             else {
                 $('#image_message').hide();
             }
 
-            if( submit_status ) {
+            if (submit_status) {
                 $('form').submit();
-                console.log('qwer');
             }
         });
 
-        $('#close').click(function(){
+        $('#close').click(function () {
             fadeOutReveal();
         });
 
-        $('#back').click(function(){
+        //取消
+        $('#back').click(function () {
             window.history.go(-1);
         });
 
         $("#image").hide();
-        //取消
+
     });
 
     function jcrop_init(tar) {
@@ -172,7 +161,7 @@ var img_src = "";
             type: 'post',
             success: function (data) {
                 console.log(data);
-                if(data.error == 0) {
+                if (data.error == 0) {
                     console.log('Error');
                 }
                 else {
@@ -186,7 +175,7 @@ var img_src = "";
                 }
             },
             error: function (data) {
-                if(data.error == 0) {
+                if (data.error == 0) {
                     console.log('Error');
                 }
                 else {

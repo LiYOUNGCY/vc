@@ -25,9 +25,6 @@ class Production_service extends MY_Service
     {
         $production = $this->production_model->get_production_list($page, $uid, '0', $search);
         foreach ($production as $k => $v) {
-            //显示缩略图
-
-            $production[$k]['pic'] = Common::get_thumb_url($production[$k]['pic']);
             //获取艺术家信息
             if (!empty($v['aid'])) {
                 $production[$k]['artist'] = $this->artist_model->get_artist_base_id($v['aid']);
@@ -179,16 +176,14 @@ class Production_service extends MY_Service
      * @param  [type] $creat_time [description]
      * @return [type]             [description]
      */
-    public function publish_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $style, $medium, $creat_time)
+    public function publish_production($uid, $data)
     {
-        $insert_result = $this->production_model->insert_production($name, $uid, $intro, $aid, $price, $pic, $l, $w, $h, $style, $medium, $creat_time);
+        $insert_result = $this->production_model->insert_production($uid, $data);
         if ($insert_result) {
             //更新艺术家作品数
-            $this->artist_model->update_artist($aid, array('production' => array('production + 1', FALSE)));
+            $this->artist_model->update_artist($data['aid'], array('production' => array('production + 1', FALSE)));
             return $insert_result;
         } else {
-            //删除oss上图片
-            $this->_delete_oss_pic($pic);
             return FALSE;
         }
     }
