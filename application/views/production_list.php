@@ -90,32 +90,32 @@
     // });
 
     // 为 select 注册事件
-    // medium.easyDropDown({
-    //     onChange: function (selected) {
-    //         if (Select_status) {
-    //             TouchEvent();
-    //         }
-    //     }
-    // });
+    medium.easyDropDown({
+        onChange: function (selected) {
+            if (Select_status) {
+                TouchEvent();
+            }
+        }
+    });
 
-    // style.easyDropDown({
-    //     onChange: function (selected) {
-    //         if (Select_status) {
-    //             TouchEvent();
-    //         }
-    //     }
-    // });
+    style.easyDropDown({
+        onChange: function (selected) {
+            if (Select_status) {
+                TouchEvent();
+            }
+        }
+    });
 
-    // price.easyDropDown({
-    //     onChange: function (selected) {
-    //         if (Select_status) {
-    //             TouchEvent();
-    //         }
-    //     }
-    // });
+    price.easyDropDown({
+        onChange: function (selected) {
+            if (Select_status) {
+                TouchEvent();
+            }
+        }
+    });
 
 
-    // RefreshUrlData();
+    RefreshUrlData();
 
     /**
      * 后退的操作
@@ -132,29 +132,32 @@
     WindowEvent();
 
 
-    // function RefreshUrlData() {
-    //     m = getQueryString('m');
-    //     s = getQueryString('s');
-    //     p = getQueryString('p');
+    function RefreshUrlData() {
+        m = getQueryString('m');
+        s = getQueryString('s');
+        p = getQueryString('p');
 
-    //     m = m == null ? '0' : m;
-    //     s = s == null ? '0' : s;
-    //     p = p == null ? '0' : '"'+p+'"';
+        m = m == null ? '0' : m;
+        s = s == null ? '0' : s;
+        p = p == null ? '0' : '"'+p+'"';
 
 
-    //     //刷新 select 的值
-    //     Select_status = false;
-    //     medium.easyDropDown('select', m.toString());
-    //     style.easyDropDown('select', s.toString());
-    //     price.easyDropDown('select', p);
-    //     Select_status = true;
-    // }
+        //刷新 select 的值
+        Select_status = false;
+        medium.easyDropDown('select', m.toString());
+        style.easyDropDown('select', s.toString());
+        price.easyDropDown('select', p);
+        Select_status = true;
+    }
 
-    // function TouchEvent() {
-    //     var url = BASE_URL + 'production?m=' + medium.val() + '&&s=' + style.val() + '&&p=' + price.val();
-    //     window.history.pushState(null, null, url);
-    //     reloadpage();
-    // }
+
+    function TouchEvent() {
+        var url = BASE_URL + 'production?m=' + medium.val() + '&&s=' + style.val() + '&&p=' + price.val();
+        // window.history.pushState(null, null, url);
+        // reloadpage();
+
+        window.location.href = url;
+    }
 
     // function reloadpage() {
     //     //重置 page
