@@ -68,7 +68,7 @@
 
             </div>
             <div class="nonebox">
-                     
+
             </div>
         </div>
     </div>
@@ -116,7 +116,6 @@
                 },
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data);
                     var items = data;
 
                     if (items.error != null || items.length === 0) {
@@ -139,21 +138,22 @@
 
 
                     for (var i = 0; i < items.length; i++) {
-                        console.log(items[i]);
                         // var items[i].content = items[i].content;
-                        var id = data[i].production.id;
-                        var title = data[i].production.name;
-                        var author = data[i].production.aid;
-                        var price = data[i].production.price;
-                        var img = data[i].production.pic;
-                        var like = data[i].production.like;
-                        var type = data[i].production.type;
-                        var l = data[i].production.l;
-                        var w = data[i].production.w;
+                        var id = data[i].id;
+                        var title = data[i].name;
+                        var author = data[i].aid;
+                        var price = data[i].price;
+                        var img = data[i].pic;
+                        var like = data[i].like;
+                        var type = data[i].type;
+                        var l = data[i].l;
+                        var w = data[i].w;
+                        var width = data[i].width;
+                        var height = data[i].height;
 
 
                         var box = $('<div class="production">' +
-                            '<img class="image" src="' + img + '">' +
+                            '<img class="image" src="' + img + '" style="width: '+width+'px; height: '+height+'px;">' +
                             '<p class="title">' + title + '</p>' +
                             '<p class="author">作者：' + author + '</p>' +
                             '<div class="info">' +

@@ -73,7 +73,7 @@ class Article_service extends MY_Service{
 
         foreach ($topic as $key => $value) {
             //对每篇文章内容进行字数截取
-            $topic[$key]['content'] = Common::extract_article($topic[$key]['id'], $topic[$key]['title'], $topic[$key]['content']);
+            $topic[$key]['content'] = Common::extract_topic($topic[$key]['id'], $topic[$key]['title'], $topic[$key]['content']);
 
             //对文章标题字数截取
             $topic[$key]['content']["sort_title"] = mb_strlen($topic[$key]['content']["article_title"]) > 9 ?

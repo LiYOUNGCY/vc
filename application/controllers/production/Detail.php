@@ -19,7 +19,6 @@ class Detail extends MY_Controller
             show_404();
         }
 
-        $production['pic_thumb'] = Common::get_thumb_url($production['pic'], 'thumb2_');
         if (isset($this->user['id'])) {
             $production['like_status'] = $this->production_service->check_has_like($pid, $this->user['id']);
         } else {

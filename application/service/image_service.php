@@ -139,8 +139,6 @@ class Image_service extends MY_Service
     }
 
 
-
-
     /**
      * [save_headpic 保存裁剪后的头像]
      * @param  [type] $filename [文件路径]
@@ -376,9 +374,13 @@ class Image_service extends MY_Service
     }
 
 
-    public function upload_image($field_name, $thumb_width, $thumb_heigh, $create_thumb = TRUE)
+    /**
+     * @param $field_name 上传的图片的表单名
+     * @param $thumb_width 缩略图的宽度
+     * @param $thumb_height 缩略图的高度
+     */
+    public function upload_image_with_thumb($field_name, $thumb_width, $thumb_height)
     {
-        // $this->load->library('image_lib');
         $upload_config['upload_path'] = $this->dir;
         $upload_config['allowed_types'] = 'gif|jpg|png';
         $upload_config['remove_spaces'] = TRUE;
@@ -387,27 +389,80 @@ class Image_service extends MY_Service
 
         $this->load->library('upload', $upload_config);
         $result = $this->upload->do_upload($field_name);
-        if ( empty($result) ) {
+        if (empty($result)) {
             return false;
         }
 
         $file_name = $this->upload->data('file_name');
+        $image_width = $this->upload->data('image_width');
+        $image_height = $this->upload->data('image_height');
+
         $file = substr($upload_config['upload_path'], 0) . $file_name;
 
+        //对文件加水印
+
+        //upload to oss
         $upload_path = $this->oss->upload_by_file($file);
 
-        if( $create_thumb ) {
-            $this->_create_thumb($file, $thumb_width, $thumb_heigh);
-        }
+        //create thumb
+        $thumb = $this->_create_thumb($file, $thumb_width, $thumb_height);
+
+        //insert into database
+        $image_id = $this->image_model->insert_image_with_thumb($upload_path, $image_width, $image_height, $thumb['thumb_path'], $thumb['thumb_width'], $thumb['thumb_height']);
 
         if (!empty($upload_path)) {
             $result = array();
             $result['oss_path'] = $upload_path;
-            $result['path'] = $this->dir.$file_name;
+            $result['path'] = $this->dir . $file_name;
+            $result['image_id'] = $image_id;
             return $result;
         }
 
         return false;
+    }
+
+
+    /**
+     * 生成缩略图
+     * @param $width
+     * @param $height
+     * @param $path
+     */
+    private function _create_thumb($path, $width = null, $height = null)
+    {
+        $dir = 'public/image/';
+        $config['image_library'] = 'gd2';
+        $config['source_image'] = $path;
+        $config['create_thumb'] = TRUE;
+        $config['maintain_ratio'] = TRUE;
+        $config['master_dim'] = 'width';
+        $config['new_image'] = $dir;
+
+        if (isset($width))
+            $config['width'] = $width;
+        if (isset($height))
+            $config['height'] = $height;
+
+        $this->load->library('image_lib', $config);
+        $this->image_lib->resize();
+
+        //上传到服务器
+        $file_name = explode('/', $path);
+        $file_name = $file_name[count($file_name) - 1];
+        $file_name = str_replace('.', '_thumb.', $file_name);
+
+        $newName = $dir . $file_name;
+
+        $layer = ImageWorkshop::initFromPath($newName);
+
+        $thumb = array();
+
+        $thumb['thumb_width'] = $layer->getWidth();
+        $thumb['thumb_height'] = $layer->getHeight();
+
+        $thumb['thumb_path'] = $this->oss->upload_by_file($newName);
+
+        return $thumb;
     }
 
 
@@ -426,11 +481,11 @@ class Image_service extends MY_Service
 
         $this->load->library('upload', $upload_config);
         $result = $this->upload->do_upload($field_name);
-        if ( empty($result) ) {
+        if (empty($result)) {
             return false;
         }
 
-        $file['path'] = $this->dir.$this->upload->data('file_name');
+        $file['path'] = $this->dir . $this->upload->data('file_name');
 
         return $file;
     }
@@ -443,19 +498,18 @@ class Image_service extends MY_Service
      * @param  [type] $positionY  [起始Y]
      * @param  [type] $newWidth   [裁剪的宽]
      * @param  [type] $newHeight  [裁剪的高]
-     * @return [type]             [description]
      */
     public function crop_image($image_name, $positionX, $positionY, $newWidth, $newHeight)
     {
         $result = array();
 
-        $layer = ImageWorkshop::initFromPath($this->dir.$image_name);
+        $layer = ImageWorkshop::initFromPath($this->dir . $image_name);
         //从左上角开始算
         $position = "LT";
         $layer->cropInPixel($newWidth, $newHeight, $positionX, $positionY, $position);
 
         // Saving the result
-        $filename = 'Crop_'.$image_name;
+        $filename = 'Crop_' . $image_name;
         $createFolders = true;
         $backgroundColor = null; // transparent, only for PNG (otherwise it will be white if set null)
         $imageQuality = 95; // useless for GIF, usefull for PNG and JPEG (0 to 100%)
@@ -466,48 +520,12 @@ class Image_service extends MY_Service
         $result['image_path'] = $this->oss->upload_by_file($this->dir . $filename);
 
         //记录到数据库
-        $result['image_id'] = $this->image_model->insert_artist_image($result['image_path'], $newWidth, $newHeight);
+        $result['image_id'] = $this->image_model->insert_image_without_thumb($result['image_path'], $newWidth, $newHeight);
 
         //删除本地图
         // @unlink($this->dir . $filename);
         // @unlink($this->dir . $image_name);
 
         return $result;
-    }
-
-        /**
-     * 生成缩略图
-     * @param $width
-     * @param $height
-     * @param $path
-     */
-    private function _create_thumb($path, $width = null, $height = null)
-    {
-        $dir = 'public/image/';
-        $config['image_library'] = 'gd2';
-        $config['source_image'] = $path;
-        $config['create_thumb'] = TRUE;
-        $config['maintain_ratio'] = TRUE;
-        $config['master_dim'] = 'width';
-        $config['new_image'] = $dir;
-        if(isset($width))
-            $config['width'] = $width;
-        if(isset($height))
-            $config['height'] = $height;
-
-        $this->load->library('image_lib', $config);
-        $this->image_lib->resize();
-
-        //上传到服务器
-        $file_name = explode('/', $path);
-        $file_name = $file_name[count($file_name) - 1];
-        $file_name = str_replace('.', '_thumb.', $file_name);
-
-        $newName = $dir.$file_name;
-
-        // $newName = Common::get_thumb_url($path, 'thumb1_');
-        // rename($dir.$file_name, $newName);
-
-        $this->oss->upload_by_file($newName);
     }
 }

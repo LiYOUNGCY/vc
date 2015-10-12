@@ -33,7 +33,7 @@ class Production extends MY_Controller
             $count = $this->production_model->get_production_count();
 
             $user['user'] = $this->user;
-        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
 
             //分页数据
             $p = array(
@@ -86,7 +86,7 @@ class Production extends MY_Controller
             }
 
             $user['user'] = $this->user;
-        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
 
             //分页数据
             $p = array(
@@ -109,17 +109,17 @@ class Production extends MY_Controller
             $this->load->view('admin/common/head');
             $this->load->view('admin/production/medium_list', $body);
         } else if ($type == 'update') {
-//            if (!is_numeric($id)) {
-//                show_404();
-//            }
+            if (!is_numeric($id)) {
+                show_404();
+            }
             $medium = $this->production_medium_model->get_medium_by_id($id);
 
-//            if (empty($medium)) {
-//                show_404();
-//            }
+            if (empty($medium)) {
+                show_404();
+            }
 
             $user['user'] = $this->user;
-        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
             $foot = $this->load->view('admin/common/foot', "", TRUE);
             $this->load->view('admin/common/head');
 
@@ -178,62 +178,62 @@ class Production extends MY_Controller
     }
 
     public function categories($type = 'publish', $id = NULL)
-{
-    if ($type == 'publish') {
-        $categories = $this->production_categories_model->get_categories_list();
-        $count = count($categories);
+    {
+        if ($type == 'publish') {
+            $categories = $this->production_categories_model->get_categories_list();
+            $count = count($categories);
 
-        if ($count == 0) {
-            $count = 1;
+            if ($count == 0) {
+                $count = 1;
+            }
+
+            $user['user'] = $this->user;
+            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
+
+            //分页数据
+            $p = array(
+                'count' => $count,
+                'page' => 0,
+                'limit' => $count,
+                'pageurl' => base_url() . ADMINROUTE . 'production/p/'
+            );
+
+            $pagination = $this->load->view('admin/common/pagination', $p, TRUE);
+            $foot = $this->load->view('admin/common/foot', "", TRUE);
+
+            //页面数据
+            $body = array(
+                'navbar' => $navbar,
+                'foot' => $foot,
+                'pagination' => $pagination,
+                'data' => $categories
+            );
+            $this->load->view('admin/common/head');
+            $this->load->view('admin/production/categories_list', $body);
+        } else if ($type == 'update') {
+            if (!is_numeric($id)) {
+                show_404();
+            }
+            $categories = $this->production_categories_model->get_categories_by_id($id);
+
+            if (empty($categories)) {
+                show_404();
+            }
+
+            $user['user'] = $this->user;
+            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
+            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $this->load->view('admin/common/head');
+
+            //页面数据
+            $body = array(
+                'navbar' => $navbar,
+                'foot' => $foot,
+                'data' => $categories
+            );
+            $this->load->view('admin/production/categories_edit', $body);
         }
-
-        $user['user'] = $this->user;
-        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
-
-        //分页数据
-        $p = array(
-            'count' => $count,
-            'page' => 0,
-            'limit' => $count,
-            'pageurl' => base_url() . ADMINROUTE . 'production/p/'
-        );
-
-        $pagination = $this->load->view('admin/common/pagination', $p, TRUE);
-        $foot = $this->load->view('admin/common/foot', "", TRUE);
-
-        //页面数据
-        $body = array(
-            'navbar' => $navbar,
-            'foot' => $foot,
-            'pagination' => $pagination,
-            'data' => $categories
-        );
-        $this->load->view('admin/common/head');
-        $this->load->view('admin/production/categories_list', $body);
-    } else if ($type == 'update') {
-//            if (!is_numeric($id)) {
-//                show_404();
-//            }
-        $categories = $this->production_categories_model->get_categories_by_id($id);
-
-//            if (empty($categories)) {
-//                show_404();
-//            }
-
-        $user['user'] = $this->user;
-        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
-        $foot = $this->load->view('admin/common/foot', "", TRUE);
-        $this->load->view('admin/common/head');
-
-        //页面数据
-        $body = array(
-            'navbar' => $navbar,
-            'foot' => $foot,
-            'data' => $categories
-        );
-        $this->load->view('admin/production/categories_edit', $body);
     }
-}
 
 
     public function add_categories()
@@ -242,7 +242,7 @@ class Production extends MY_Controller
 
         $result = $this->production_categories_model->insert_categories($name);
 
-        redirect(base_url().'admin/production/categories');
+        redirect(base_url() . 'admin/production/categories');
     }
 
     public function delete_categories()
@@ -290,7 +290,7 @@ class Production extends MY_Controller
             }
 
             $user['user'] = $this->user;
-        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
 
             //分页数据
             $p = array(
@@ -313,17 +313,17 @@ class Production extends MY_Controller
             $this->load->view('admin/common/head');
             $this->load->view('admin/production/style_list', $body);
         } else if ($type == 'update') {
-//            if (!is_numeric($id)) {
-//                show_404();
-//            }
+            if (!is_numeric($id)) {
+                show_404();
+            }
             $style = $this->production_style_model->get_style_by_id($id);
 
-//            if (empty($style)) {
-//                show_404();
-//            }
+            if (empty($style)) {
+                show_404();
+            }
 
             $user['user'] = $this->user;
-        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
             $foot = $this->load->view('admin/common/foot', "", TRUE);
             $this->load->view('admin/common/head');
 
@@ -344,7 +344,7 @@ class Production extends MY_Controller
 
         $result = $this->production_style_model->insert_style($name);
 
-        redirect(base_url().'admin/production/style');
+        redirect(base_url() . 'admin/production/style');
     }
 
     public function delete_style()
@@ -392,7 +392,7 @@ class Production extends MY_Controller
             }
 
             $user['user'] = $this->user;
-        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
 
             //分页数据
             $p = array(
@@ -415,21 +415,21 @@ class Production extends MY_Controller
             $this->load->view('admin/common/head');
             $this->load->view('admin/production/price_list', $body);
         } else if ($type == 'update') {
-//            if (!is_numeric($id)) {
-//                show_404();
-//            }
+            if (!is_numeric($id)) {
+                show_404();
+            }
             $price = $this->production_price_model->get_price_by_id($id);
 
             $value = explode(',', $price['value']);
             $price['min'] = $value[0];
             $price['max'] = $value[1];
 
-//            if (empty($price)) {
-//                show_404();
-//            }
+            if (empty($price)) {
+                show_404();
+            }
 
             $user['user'] = $this->user;
-        $navbar = $this->load->view('admin/common/navbar', $user,TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
             $foot = $this->load->view('admin/common/foot', "", TRUE);
             $this->load->view('admin/common/head');
 
@@ -459,7 +459,7 @@ class Production extends MY_Controller
 
         $result = $this->production_price_model->insert_price($name, $value);
 
-        redirect(base_url().'admin/production/price');
+        redirect(base_url() . 'admin/production/price');
     }
 
     public function delete_price()

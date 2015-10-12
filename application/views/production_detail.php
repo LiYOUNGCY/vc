@@ -10,7 +10,7 @@
                 <div class="title"><?=$production['name']?></div>
 
                 <div class="artpic" id="picture-frame">
-                    <img src="<?=$production['pic_thumb']?>" class="thumb" data-src="<?=$production['pic']?>"/>
+                    <img src="<?=$production['pic']?>" class="thumb" data-src="<?=$production['pic']?>"/>
                 </div>
                 <div class="like">
                     <div class="likebtn" id="vote">

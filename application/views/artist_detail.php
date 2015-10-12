@@ -91,19 +91,21 @@ $(function() {
                     var like    = arts[i].like;
                     var price   = arts[i].price;
                     var name    = arts[i].name;
-                    var width   = arts[i].w;
-                    var height  = arts[i].h;
+                    var w       = arts[i].w;
+                    var h       = arts[i].h;
                     var artist  = arts[i].aid;
+                    var width   = arts[i].width;
+                    var height  = arts[i].height;
 
 
 
                     var box = '' +
                     '<div class="production">' +
-                    '<img class="image" src="'+ image +'">' +
+                    '<img class="image" src="'+ image +'" style="width: '+width+'px;height: '+height+'px;">' +
                     '<p class="title">'+ name +'</p>' +
                     '<div class="info">' +
                     '<span class="type">'+ type +'</span>，' +
-                    '<span class="size">'+ width +'cm X '+ height +'cm</span>' +
+                    '<span class="size">'+ w +'cm X '+ h +'cm</span>' +
                     '</div>' +
                     '<div class="bottom clearfix">' +
                     '<div class="price" title="价格">'+ price +' RMB</div>' +
