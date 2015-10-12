@@ -15,6 +15,7 @@ class Production_service extends MY_Service
         $this->load->model('production_categories_model');
     }
 
+
     /**
      * 获得作品列表
      * @param  page 页数   [int]
@@ -93,11 +94,15 @@ class Production_service extends MY_Service
             } else {
                 $p['artist'] = NULL;
             }
-            unset($p['aid']);
             return $p;
         } else {
             return FALSE;
         }
+    }
+
+    public function get_production_detail_by_id($id) {
+        $p = $this->production_model->get_production_detail_by_id($id);
+        return $p;
     }
 
     /**
@@ -160,21 +165,12 @@ class Production_service extends MY_Service
         return $topic;
     }
 
+
     /**
-     * [publish_production 发布艺术品]
-     * @param  [type] $name       [description]
-     * @param  [type] $uid        [description]
-     * @param  [type] $intro      [description]
-     * @param  [type] $aid        [description]
-     * @param  [type] $price      [description]
-     * @param  [type] $pic        [description]
-     * @param  [type] $l          [description]
-     * @param  [type] $w          [description]
-     * @param  [type] $h          [description]
-     * @param  [type] $type       [description]
-     * @param  [type] $marterial  [description]
-     * @param  [type] $creat_time [description]
-     * @return [type]             [description]
+     * [publish_production 发布作品]
+     * @param  [type] $uid  [description]
+     * @param  [type] $data [description]
+     * @return [type]       [description]
      */
     public function publish_production($uid, $data)
     {
@@ -188,43 +184,18 @@ class Production_service extends MY_Service
         }
     }
 
+
     /**
-     * [update_production 更新艺术品]
-     * @param  [type] $pid    [艺术品id]
-     * @param  [type] $uid    [用户id]
-     * @param  [type] $name   [艺术品名称]
-     * @param  [type] $aid    [艺术家id]
-     * @param  [type] $price  [价格]
-     * @param  [type] $pic    [图片地址]
-     * @param  [type] $status [艺术品状态]
-     * @return [type]         [description]
+     * [update_production 更新艺术品信息]
+     * @param  [type] $id   [description]
+     * @param  [type] $uid  [description]
+     * @param  [type] $data [description]
+     * @return [type]       [description]
      */
-    public function update_production($pid, $uid, $name, $intro, $aid, $price, $pic, $l, $w, $h, $style, $medium, $creat_time, $status)
+    public function update_production($id, $uid, $data)
     {
-        echo $style, $medium;
-        $data = array(
-            'name' => $name,
-            'intro' => $intro,
-            'aid' => $aid,
-            'price' => $price,
-            'pic' => $pic,
-            'l' => $l,
-            'w' => $w,
-            'h' => $h,
-            'style' => $style,
-            'medium' => $medium,
-            'creat_time' => $creat_time,
-            'status' => $status,
-            'modify_by' => $uid
-        );
-        $update_result = $this->production_model->update_production($pid, $data);
-        if ($update_result) {
-            return TRUE;
-        } else {
-            //删除oss上图片
-            $this->_delete_oss_pic($pic);
-            return FALSE;
-        }
+        $result = $this->production_model->update_production($id, $uid, $data);
+        return $result;
     }
 
     private function _delete_oss_pic($pic)

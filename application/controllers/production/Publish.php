@@ -13,38 +13,15 @@ class Publish extends MY_Controller
         $data = array();
         $data['medium'] = $this->production_service->get_medium_list();
         $data['style'] = $this->production_service->get_style_list();
+
         if ($type == 'publish') {
             $head['title'] = '发布艺术品';
             $this->load->view('publish_production', $data);
         } else if ($type == 'update') {
-            $head['css'] = array(
-                'base.css',
-                'font-awesome/css/font-awesome.min.css',
-                'alert.css',
-                'jquery.Jcrop.css',
-                'easydropdown.css'
-            );
-
-            $head['javascript'] = array(
-                'jquery.js',
-                'error.js',
-                'timeago.js',
-                'alert.min.js',
-                'autosize.js',
-                'ajaxfileupload.js',
-                'jquery.easydropdown.js'
-            );
-
-            $user['user'] = $this->user;
-            $user['sign'] = $this->load->view('common/sign', '', TRUE);
-            $data['top'] = $this->load->view('common/top', $user, TRUE);
-            $data['footer'] = $this->load->view('common/footer', $user, TRUE);
-
-
             if (!is_numeric($pid)) {
                 show_404();
             }
-            $production = $this->production_service->get_production_by_id($pid);
+            $production = $this->production_service->get_production_detail_by_id($pid);
 
 //            echo json_encode($production);
 
@@ -52,12 +29,7 @@ class Publish extends MY_Controller
                 show_404();
             }
 
-            $data['medium'] = $this->production_service->get_medium_list();
-            $data['style'] = $this->production_service->get_style_list();
-
             $data['production'] = $production;
-            $head['title'] = '修改艺术品信息';
-            $this->load->view('common/head', $head);
             $this->load->view('update_production', $data);
         }
     }
@@ -99,27 +71,33 @@ class Publish extends MY_Controller
      */
     public function update_production()
     {
-        $pid = $this->input->post('pid');
-        if (!is_numeric($pid)) {
-            show_404();
+        $id = $this->sc->input('id');
+        $image_id = $this->sc->input('image_id');
+
+        $data = array(
+                'name',
+                'intro',
+                'aid',
+                'medium',
+                'style',
+                'creat_time',
+                'w',
+                'h',
+                'l',
+                'price'
+            );
+        $data = $this->sc->input($data);
+
+        //有新的图片上传
+        if($image_id != null) {
+            $data['image_id'] = $image_id;
         }
 
-        $error_redirect = array(
-            'script' => "window.location.href='" . base_url() . "update/production/" . $pid . "';"
-        );
-        $this->sc->set_error_redirect($error_redirect);
+        $result = $this->production_service->update_production($id, $this->user['id'], $data);
 
-
-        $arr = $this->sc->input(array('pid', 'production_name', 'production_intro', 'aid', 'price', 'pic', 'l', 'w', 'h', 'style', 'medium', 'creat_time', 'status'));
-        $result = $this->production_service->update_production(
-            $arr['pid'], $this->user['id'], $arr['production_name'], $arr['production_intro'],
-            $arr['aid'], $arr['price'], $arr['pic'], $arr['l'], $arr['w'],
-            $arr['h'], $arr['style'], $arr['medium'], $arr['creat_time'], $arr['status']);
-        if ($result) {
-            redirect(base_url() . 'admin/production');
-        } else {
-            $this->error->output('INVALID_REQUEST', array('script' => 'window.location.href="' . base_url() . 'update/production/' . $pid . '";'));
-        }
+        // if($result) {
+        //     redirect(base_url() . ADMINROUTE . 'production');
+        // }
     }
 
 

@@ -47,30 +47,18 @@ load_header(
         <div class="clearfix" style="padding-top: 1rem;">
             <label for="medium" style="float:left;">艺术门类：</label>
             <select class="dropdown" id="medium" name="medium">
-                <option value="4">当代水墨</option>
-                <option value="7">综合材料</option>
-                <option value="8">当代油画</option>
-                <option value="9">版画</option>
+            <?php foreach ($medium as $key => $value) { ?>
+                <option value="<?=$value['id']?>"><?=$value['name']?></option>
+            <?php } ?>
             </select>
         </div>
 
         <div class="clearfix" style="padding-top: 1rem;">
             <label for="style" style="float: left;">风格：</label>
             <select class="dropdown" id="style" name="style">
-                <option value="10">女人</option>
-                <option value="11">男人</option>
-                <option value="12">小孩</option>
-                <option value="13">人像</option>
-                <option value="14">人物场景</option>
-                <option value="15">抽象人物</option>
-                <option value="16">意象人物</option>
-                <option value="17">具象人物</option>
-                <option value="18">人物写生</option>
-                <option value="19">古典人物</option>
-                <option value="20">题材性人物画</option>
-                <option value="21">隐喻性人物画</option>
-                <option value="22">宗教人物画</option>
-                <option value="23">其他</option>
+                <?php foreach ($style as $key => $value) { ?>
+                <option value="<?=$value['id']?>"><?=$value['name']?></option>
+            <?php } ?>
             </select>
         </div>
 

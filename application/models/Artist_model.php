@@ -19,30 +19,13 @@ class Artist_model extends CI_Model{
 	 */
 	public function get_artist_by_id($id)
 	{
-		$query = $this->db->select('artist.id, artist.name, image.image_path as pic, artist.intro, artist.evaluation')
+		$query = $this->db->select('artist.id, artist.name, image.image_id, image.image_path as pic, artist.intro, artist.evaluation')
         ->from('artist')
         ->where('artist.id', $id)
         ->join('image', 'artist.image_id = image.image_id')
         ->get()
         ->row_array();
 		return $query;
-	}
-
-	/**
-	 * [update_artist 更新艺术家信息]
-	 * @param  [type] $aid [艺术家id]
-	 * @param  [type] $arr [更新键值数组]
-	 * @return [type]      [description]
-	 */
-	public function update_artist($aid,$arr)
-	{
-		$arr['modify_time'] = array(date("Y-m-d H:i:s", time()),TRUE);
-		$this->db->where('id',$aid);
-		foreach ($arr as $k => $v) {
-			$this->db->set($k,$v[0],$v[1]);
-		}
-		$this->db->update('artist');
-		return $this->db->affected_rows() === 1;
 	}
 
 	/**
@@ -85,6 +68,31 @@ class Artist_model extends CI_Model{
 		$this->db->insert('artist',$data);
 		return $this->db->insert_id();
 	}
+
+
+    /**
+     * [update_artist 更新艺术家信息]
+     * @param  [type] $aid        [description]
+     * @param  [type] $uid        [description]
+     * @param  [type] $name       [description]
+     * @param  [type] $image_id   [description]
+     * @param  [type] $intro      [description]
+     * @param  [type] $evaluation [description]
+     * @return [type]             [description]
+     */
+    public function update_artist($aid, $uid, $name, $image_id, $intro, $evaluation)
+    {
+        $data = array(
+            'name' => $name,
+            'intro' => $intro,
+            'evaluation' => $evaluation,
+            'image_id' => $image_id,
+            'modify_by' => $uid,
+            'modify_time' => date("Y-m-d H:i:s")
+            );
+        $this->db->where('id', $aid)->update('artist', $data);
+        return $this->db->affected_rows();
+    }
 
 
     /**

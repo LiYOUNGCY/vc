@@ -49,36 +49,20 @@ class Artist_service extends MY_Service{
         return $this->artist_model->insert_artist($uid, $name, $image_id, $intro, $evaluation);
 	}
 
-	/**
-	 * [update_artist 更新艺术家资料]
-	 * @param  [type] $aid        [艺术家id]
-	 * @param  [type] $uid        [用户id]
-	 * @param  [type] $name       [名称]
-	 * @param  [type] $intro      [介绍]
-	 * @param  [type] $evaluation [评价]
-	 * @param  [type] $pic        [头像]
-	 * @return [type]             [description]
-	 */
-	public function update_artist($aid, $uid, $name, $intro, $evaluation, $pic)
-	{
-		$arr = array(
-			'name' 		 => array($name,TRUE),
-			'intro'      => array($intro,TRUE),
-			'evaluation' => array($evaluation,TRUE),
-			'pic' 		 => array($pic,TRUE),
-			'modify_by'  => array($uid,TRUE)
-		);
-		$result = $this->artist_model->update_artist($aid,$arr);
-		if($result)
-		{
-			return TRUE;
-		}
-		else
-		{
-			$this->_delete_oss_pic($pic);
-			return FALSE;
-		}
-	}
+
+    /**
+     * [update_artist 更新艺术家信息]
+     * @param  [type] $uid        [description]
+     * @param  [type] $name       [description]
+     * @param  [type] $image_id   [description]
+     * @param  [type] $intro      [description]
+     * @param  [type] $evaluation [description]
+     * @return [type]             [description]
+     */
+	public function update_artist($aid, $uid, $name, $image_id, $intro, $evaluation)
+    {
+        return $this->artist_model->update_artist($aid, $uid, $name, $image_id, $intro, $evaluation);
+    }
 
 	private function _delete_oss_pic($pic)
 	{
