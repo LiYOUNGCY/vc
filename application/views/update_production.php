@@ -39,11 +39,12 @@ load_header(
             <span class="message danger">内容不能为空</span>
         </label>
 
-        <label class="form-control">
+        <label class="form-control" >
             <span>作者：</span>
             <input type="hidden" id="aid" name="aid" value="<?=$production['aid']?>">
             <button class="button" type="button" id="choose_author">选择</button>
             <span class="message danger" id="author_message">请选择作者！！</span>
+            <div class="avatar" id="author"></div>
         </label>
 
         <div class="clearfix" style="padding-top: 1rem;">
@@ -259,8 +260,9 @@ load_header(
 
                     //add click event
                     $box.click(function(){
+                        var pic = $(this).find('img').attr('src');
+                        $('#author').html('<img src="'+pic+'">');
                         var id = $(this).attr('data-id');
-                        console.log(id);
                         $('#aid').val(id);
                         fadeOutReveal();
                     });

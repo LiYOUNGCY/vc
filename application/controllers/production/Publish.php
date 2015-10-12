@@ -95,9 +95,9 @@ class Publish extends MY_Controller
 
         $result = $this->production_service->update_production($id, $this->user['id'], $data);
 
-        // if($result) {
-        //     redirect(base_url() . ADMINROUTE . 'production');
-        // }
+        if($result) {
+            redirect(base_url() . ADMINROUTE . 'production');
+        }
     }
 
 
