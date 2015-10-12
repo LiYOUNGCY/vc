@@ -10,7 +10,7 @@ class User extends CI_Controller
 
 	public function index()
 	{
-		echo 'aasdfdasf';
+        $str = Common::get_thumb_url_by_suffix('http://oss-cn-shenzhen.aliyuncs.com/hanzh/public/image/ed2836751578cc83c2e0d7742f81b7e1.jpg');
 	}
 
 	public function check_email()

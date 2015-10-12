@@ -246,10 +246,10 @@
         // Fade In Reveal
         fadeInReveal();
 
-        $('#reveal-content').html('<label class="image-content" id="reveal-content" for="upfile">' +
+        $('#reveal-content').html('<label class="image-content" id="reveal-content" for="image_upload">' +
             '<i class="fa fa-camera"></i>' +
             '<p>点击上传图片</p>' +
-            '<input type="file" name="upfile" id="upfile" onchange="file_upload(\'' + container + '\')">' +
+            '<input type="file" name="image_upload" id="image_upload" onchange="file_upload(\'' + container + '\')">' +
             '</label>');
     }
 
@@ -375,13 +375,14 @@
         $container = $(container);
         console.log('file upload');
         $.ajaxFileUpload({
-            url: BASE_URL + 'publish/image/upload_image',
-            fileElementId: 'upfile',
+            url: BASE_URL + 'publish/image/upload_topic_image',
+            fileElementId: 'image_upload',
             dataType: 'JSON',
             type: 'post',
             success: function (data) {
                 console.log(data);
-                var src = data.image_path;
+                var src = data.oss_path;
+                console.log(src);
 
                 //close Reveal
                 fadeOutReveal();

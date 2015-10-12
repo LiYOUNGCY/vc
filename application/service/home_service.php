@@ -19,9 +19,11 @@ class Home_service extends MY_Service{
 		$latest_topic      = $this->article_model->get_topic_list(0);
         foreach($latest_topic as $key => $value )
         {
+            $content = $latest_topic[$key]['content'];
             //对每篇文章内容进行字数截取
-            $latest_topic[$key]['content'] = Common::extract_article($latest_topic[$key]['id'], $latest_topic[$key]['title'], $latest_topic[$key]['content']);
-            $latest_topic[$key]['content']['article_bigimage'] = str_replace('thumb1_','thumb2_', $latest_topic[$key]['content']['article_image']);
+            $latest_topic[$key]['content'] = Common::extract_topic($latest_topic[$key]['id'], $latest_topic[$key]['title'], $content);
+            $latest_topic[$key]['content']['article_bigimage'] = str_replace('_thumb', '', $latest_topic[$key]['content']['article_image']);
+
             //对文章标题字数截取
             $latest_topic[$key]['content']["sort_title"] = mb_strlen($latest_topic[$key]['content']["article_title"]) > 9 ? mb_substr($latest_topic[$key]['content']["article_title"], 0, 9).'..' : $latest_topic[$key]['content']["article_title"];
 

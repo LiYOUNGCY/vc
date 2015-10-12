@@ -102,6 +102,22 @@ class Image extends MY_Controller
 
 
     /**
+     * 专题上传图片
+     */
+    public function upload_topic_image()
+    {
+        $result = $this->image_service->upload_image_with_thumb('image_upload', 300, 188);
+        header('Content-Type:application/json');
+
+        if ($result != false) {
+            $this->message->success($result);
+        }
+
+        $this->message->error();
+    }
+
+
+    /**
      * [upload_avatar 上传艺术家头像]
      * @return [type] [description]
      */
