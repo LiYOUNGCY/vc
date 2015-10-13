@@ -46,8 +46,8 @@
                     <div class="price"><font style="font-weight:normal;color:#888888;font-size:16px;">售价：</font><?=$production['price']?> RMB</div>
                 </div>
                 <div class="useropt">
-                    <div class="btn buy">立即购买</div>
                     <div class="btn addcart">加入购物车</div>
+                    <div class="btn buy">立即购买</div>
                 </div>
                 <div class="csopt">
                     <div class="phonecs">
