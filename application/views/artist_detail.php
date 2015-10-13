@@ -87,7 +87,7 @@ $(function() {
                 page++;
                 for (var i = 0; i < arts.length; i++){
                     var image   = arts[i].pic;
-                    var type    = arts[i].type;
+                    var style   = arts[i].style;
                     var like    = arts[i].like;
                     var price   = arts[i].price;
                     var name    = arts[i].name;
@@ -104,7 +104,7 @@ $(function() {
                     '<img class="image" src="'+ image +'" style="width: '+width+'px;height: '+height+'px;">' +
                     '<p class="title">'+ name +'</p>' +
                     '<div class="info">' +
-                    '<span class="type">'+ type +'</span>，' +
+                    '<span class="type">'+ style +'</span>，' +
                     '<span class="size">'+ w +'cm X '+ h +'cm</span>' +
                     '</div>' +
                     '<div class="bottom clearfix">' +
