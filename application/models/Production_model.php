@@ -102,6 +102,7 @@ class Production_model extends CI_Model
             ->select('
             production.id,
             production.aid,
+            image.image_id,
             image.image_path as pic,
             production.intro,
             production.price,
@@ -110,6 +111,42 @@ class Production_model extends CI_Model
             production.h,
             production_medium.name as medium,
             production_style.name as style,
+            production.like,
+            production.name,
+            production.publish_time,
+            production.creat_time
+            ')
+            ->from('production, production_style, image, production_medium')
+            ->where('production.id', $id)
+            ->where('production.image_id = image.image_id')
+            ->where('production.medium = production_medium.id')
+            ->where('production.style = production_style.id')
+            ->get()
+            ->row_array();
+        return $query;
+    }
+
+
+    /**
+     * 根据id获取艺术品详情
+     * @param  [type]
+     * @return [type]
+     */
+    public function get_production_detail_by_id($id)
+    {
+        $query = $this->db
+            ->select('
+            production.id,
+            production.aid,
+            image.image_id,
+            image.image_path as pic,
+            production.intro,
+            production.price,
+            production.w,
+            production.l,
+            production.h,
+            production.medium,
+            production.style,
             production.like,
             production.name,
             production.publish_time,
@@ -143,11 +180,13 @@ class Production_model extends CI_Model
      * @param  [type] $arr [description]
      * @return [type]      [description]
      */
-    public function update_production($pid, $arr)
+    public function update_production($id, $uid, $data)
     {
-        $arr['modify_time'] = date("Y-m-d H:i:s", time());
-        $this->db->where('id', $pid)->update('production', $arr);
-        return $this->db->affected_rows() === 1;
+        $data['modify_by'] = $uid;
+        $data['modify_time'] = date('Y-m-d H:i:s');
+
+        $this->db->where('id', $id)->update('production', $data);
+        return $this->db->affected_rows();
     }
 
 

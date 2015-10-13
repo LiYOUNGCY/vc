@@ -102,7 +102,7 @@ class Publish extends MY_Controller{
         $h = $this->sc->input('h');
 
         $name = $this->sc->input('artist_name');
-        $intro = $this->sc->input('intor');
+        $intro = $this->sc->input('intro');
         $evaluation = $this->sc->input('evaluation');
 
         //保存图片
@@ -121,43 +121,38 @@ class Publish extends MY_Controller{
 	 */
 	public function update_artist()
 	{
+        $aid = $this->sc->input('aid');
+        $img = $this->sc->input('img');
+        $name = $this->sc->input('artist_name');
+        $intro = $this->sc->input('intro');
+        $evaluation = $this->sc->input('evaluation');
 
-		$aid = $this->input->post('aid');
-		if( ! is_numeric($aid))
-		{
-			show_404();
-		}
-        $error_redirect = array(
-            'script' => "window.location.href='".base_url()."update/artist/".$aid."';"
-        );
-		$this->sc->set_error_redirect($error_redirect);
+        //已有图片
+        if ($img == null) {
+            $image_id = $this->sc->input('image_id');
+            $result = $this->artist_service->update_artist($aid, $this->user['id'], $name, $image_id, $intro, $evaluation);
 
-		$this->load->service('image_service');
-		$img = $this->sc->input(array('img','x','y','w','h'));
+            if($result) {
+                redirect(base_url(). ADMINROUTE . 'artist');
+            }
+        }
+        //重新上传图片
+        else {
+            $img = explode('/', $img);
+            $img = $img[count($img) - 1];
+            $x = $this->sc->input('x');
+            $y = $this->sc->input('y');
+            $w = $this->sc->input('w');
+            $h = $this->sc->input('h');
+            $image_id = $this->image_service->crop_image($img, $x, $y, $w, $h)['image_id'];
+            $result = $this->artist_service->update_artist($aid, $this->user['id'], $name, $image_id, $intro, $evaluation);
 
-		//如果未上传新图
-		if(empty($img['w']) || empty($img['h']))
-		{
-			$pic = $img['img'];
-		}
-		else
-		{
-			$pic = $this->image_service->save_artist_pic($img['img'],$img['x'],$img['y'],$img['w'],$img['h']);
-		}
-		if($pic)
-		{
-			$aid 		= $this->sc->input('aid');
-			$name 		= $this->sc->input('artist_name');
-			$intro		= $this->sc->input('intro');
-			$evaluation = $this->sc->input('evaluation');
+            if($result) {
+                redirect(base_url(). ADMINROUTE . 'artist');
+            }
+        }
 
-			$result = $this->artist_service->update_artist($aid,$this->user['id'],$name,$intro,$evaluation,$pic);
-			if($result)
-			{
-				redirect(base_url()."artist/".$aid,'location');
-			}
-		}
-		$this->error->output('INVALID_REQUEST',array('script' => 'window.location.href="'.base_url().'update/artist/'.$aid.'";'));
+        $this->message->error();
 	}
 
 

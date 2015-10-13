@@ -1,216 +1,327 @@
+<?php
+load_header(
+    '修改艺术品信息',
+    'font-awesome/css/font-awesome.min.css',
+    'edit_style.css',
+    'alert.css',
+    'easydropdown.css'
+)
+?>
+
 <body>
-<div class="main-wrapper">
-    <!-- 顶部 -->
-    <?php echo $top;?>
+<div class="main-container">
+    <h2>修改艺术品信息</h2>
 
-    <div class="container">
-        <div class="content edit">
-            <form class="list" method="post" action="<?=base_url()?>production/publish/update_production">
-                <input type="hidden" name="pid" value="<?=$production['id']?>">
-                <div class="item">
-                    <label>艺术品的展示图：</label>
-                    <div class="headpic">
-                        <input type="hidden" id="img"  name="pic" value="<?=$production['pic']?>"/>
-                        <div class="box" style="background-image: url(<?=$production['pic']?>) ;background-position: 50% 50%; -moz-background-size:100% 100%; background-size:100% 100%;">
-                            <div id="camera_warp" class="camera_warp">
-                                <input type="file" name="upfile" id="upfile" onchange="file_upload()">
-                                <i class="fa fa-camera fa-5x"></i>
-                            </div>
-                            <img id="image" src="" width="100%" height="auto">
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <label for="name">艺术品的标题：</label>
-                    <input id="name" name="production_name" type="text" value="<?=$production['name']?>">
-                </div>
-                <div class="item">
-                    <label for="intro">艺术品的介绍：</label>
-                    <div class="text">
-                        <textarea id="intro" name="production_intro" rows="5" ><?=$production['intro']?></textarea>
-                    </div>
-                </div>
-                <div class="item">
-                    <label for="aid">作者：</label>
-                    <i class="fa fa-bars" id="author"></i>
+    <form action="<?= base_url() ?>production/publish/update_production" method="post">
+        <input type="hidden" id="id" name="id" value="<?=$production['id']?>">
+        <input type="hidden" id="image_id" name="image_id" value="">
+        <input type="hidden" id="image_path" name="image_path" value="<?=$production['pic']?>">
 
-                    <div class="author-image">
-                        <img id="aimage" src="<?=$production['artist']['pic']?>">
-                        <p id="author-name"><?=$production['artist']['name']?></p>
-                    </div>
-                    <input type="hidden" name="aid" id="aid" value="<?=$production['artist']['id']?>">
-                </div>
-                <div class="item line-block">
-                    <label for="medium">艺术门类：</label>
-                    <select class="dropdown" id="medium" name="medium">
-                        <?php foreach ($medium as $key => $value) { ?>
-                            <option value="<?= $value['id'] ?>"
-                                <?php if($production['medium'] == $value['id']) echo 'selected';?>><?= $value['name'] ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <div class="item line-block">
-                    <label for="style">风格：</label>
-                    <select class="dropdown" id="style" name="style">
-                        <?php foreach ($style as $key => $value) { ?>
-                            <option value="<?= $value['id'] ?>" <?php if($production['style'] == $value['id']) echo 'selected';?>><?= $value['name'] ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <div class="item size">
-                    <label for="">长：</label><input type="text" name="l" value="<?=$production['l']?>">
-                    <label for="">宽：</label><input type="text" name="w" value="<?=$production['w']?>">
-                    <label for="">高：</label><input type="text" name="h" value="<?=$production['h']?>">
-                    CM（厘米）
-                </div>
-                <div class="item">
-                    <label for="">价格：</label>
-                    <input type="text" name="price" value="<?=$production['price']?>">
-                </div>
-                <div class="item">
-                    <label for="creat_time">创作日期：</label>
-                    <input id="creat_time" type="text" name="creat_time" value="<?=$production['creat_time']?>">
-                </div>
-                <div class="item options">
-                    <div id="save" class="btn save">保存</div>
-                </div>
-            </form>
+        <label class="form-control">
+            <span>上传艺术品照片</span>
+            <label class="button" for="image_upload" style="margin-right: 15px;">
+                <span>上传</span>
+                <input type="file" id="image_upload" name="image_upload" onchange="file_upload()">
+            </label>
+            <button class="button" type="button" id="preview">查看照片</button>
+            <span class="message danger" id="image_message">艺术品图片还没上传！！</span>
+        </label>
 
-            <!--            弹出层  -->
-            <div id="production" class="production_list hidden">
-                <div class="list author" id="production_list">
-                    <div class="top">
-                        <i id="close" class="fa fa-close"></i>
-                    </div>
+        <label class="form-control" for="name">
+            <span>艺术品的标题：</span>
+            <input id="name" name="name" type="text" value="<?=$production['name']?>">
+            <span class="message danger">内容不能为空</span>
+        </label>
 
-                    <!--                    作者的列表-->
-                    <!--                    <div class="pro" data-id="">-->
-                    <!--                        <div class="avatar"><img src=""></div>-->
-                    <!--                        <div class="name"></div>-->
-                    <!--                    </div>-->
+        <label class="form-control" for="intro">
+            <span>艺术品的介绍：</span>
+            <textarea id="intro" name="intro" rows='3'><?=$production['intro']?></textarea>
+            <span class="message danger">内容不能为空</span>
+        </label>
 
-                </div>
-            </div>
-            <!--            END 弹出层  -->
+        <label class="form-control" >
+            <span>作者：</span>
+            <input type="hidden" id="aid" name="aid" value="<?=$production['aid']?>">
+            <button class="button" type="button" id="choose_author">选择</button>
+            <span class="message danger" id="author_message">请选择作者！！</span>
+            <div class="avatar" id="author"></div>
+        </label>
+
+        <div class="clearfix" style="padding-top: 1rem;">
+            <label for="medium" style="float:left;">艺术门类：</label>
+            <select class="dropdown" id="medium" name="medium">
+            <?php foreach ($medium as $key => $value) { ?>
+                <option value="<?=$value['id']?>" <?php if($production['medium'] == $value['id']) echo 'selected'; ?>><?=$value['name']?></option>
+            <?php } ?>
+            </select>
         </div>
-    </div>
-    <?=$footer?>
+
+        <div class="clearfix" style="padding-top: 1rem;">
+            <label for="style" style="float: left;">风格：</label>
+            <select class="dropdown" id="style" name="style">
+                <?php foreach ($style as $key => $value) { ?>
+                <option value="<?=$value['id']?>" <?php if($production['style'] == $value['id']) echo 'selected'; ?>><?=$value['name']?></option>
+            <?php } ?>
+            </select>
+        </div>
+
+        <label class="form-control" for="l">
+            <span>长（CM 厘米）：</span>
+            <input id="l" name="l" type="text" value="<?=$production['l']?>">
+            <span class="message danger">内容不能为空</span>
+        </label>
+
+        <label class="form-control" for="w">
+            <span>宽（CM 厘米）：</span>
+            <input id="w" name="w" type="text" value="<?=$production['w']?>">
+            <span class="message danger">内容不能为空</span>
+        </label>
+
+        <label class="form-control" for="h">
+            <span>高（CM 厘米）：</span>
+            <input id="h" name="h" type="text" value="<?=$production['h']?>">
+            <span class="message danger">内容不能为空</span>
+        </label>
+
+        <label class="form-control" for="price">
+            <span>价格（元）：</span>
+            <input id="price" name="price" type="text" value="<?=$production['price']?>">
+            <span class="message danger">内容不能为空</span>
+        </label>
+
+        <label class="form-control" for="creat_time">
+            <span>创作日期：（无规定格式，可数字，可中文）</span>
+            <input id="creat_time" name="creat_time" type="text" value="<?=$production['creat_time']?>">
+            <span class="message danger">内容不能为空</span>
+        </label>
+
+        <div class="option form-control">
+            <button type="button" class="button cancel" id="back">返回</button>
+            <button type="button" class="button success" id="save">保存</button>
+        </div>
+    </form>
 </div>
+
+<!-- Reveal Model -->
+<div class="reveal-model-bg" id="reveal"></div>
+<div class="reveal-model">
+    <div class="top">
+        <div class="reveal-title">查看图片</div>
+        <div class="close-box" id="reveal-close"><i class="fa fa-close"></i></div>
+    </div>
+    <div class="wrap" id="reveal-content">
+    </div>
+    <div></div>
+</div>
+
+
 </body>
+<script src="<?= base_url() ?>public/js/jquery.js"></script>
+<script src="<?= base_url() ?>public/js/autosize.js"></script>
+<script src="<?= base_url() ?>public/js/ajaxfileupload.js"></script>
+<script src="<?= base_url() ?>public/js/alert.min.js"></script>
+<script src="<?= base_url() ?>public/js/jquery.easydropdown.js"></script>
 <script>
-    function file_upload()
-    {
-        var BASE_URL  = $("#BASE_URL").val();
-        var UPLOAD_URL= BASE_URL+'publish/image/upload_production';
+
+    var img_src = '';
+    var page = 0;
+    $(function () {
+        img_src = $('#image_path').val();
+        $('#image_message').hide();
+        $('#author_message').hide();
+
+        $('#preview').click(function () {
+            fadeInReveal();
+
+            $('#reveal-content').html('<img id="image" src="' + img_src + '">');
+        });
+
+        //保存
+        $('#save').click(function () {
+            var submit_status = true;
+            //检查表单的内容，不能为空
+            $('label > input[type="text"]').each(function () {
+                if (!contentNullEvent(this)) {
+                    submit_status = false;
+                }
+            });
+
+            $('textarea').each(function () {
+                if (!contentNullEvent(this)) {
+                    submit_status = false;
+                }
+            });
+
+            if ($('#aid').val() == null ||
+                $('#aid').val() == '') {
+                $('#author_message').show();
+                submit_status = false;
+            }
+            else {
+                $('#author_message').hide();
+            }
+
+            if (submit_status) {
+                $('form').submit();
+            }
+        });
+
+
+        $('#back').click(function () {
+            window.history.go(-1);
+        });
+
+        //选择作者
+        $('#choose_author').click(function () {
+            page = 0;
+            var $container = $('#reveal-content');
+            var $load_more = $('<button type="button" class="button">加载更多</butto>');
+            $container.html('');
+            $container.append($load_more);
+            $load_more.click(function(){
+                get_author($container);
+            });
+            get_author($container);
+            fadeInReveal();
+        });
+
+    });
+
+    function file_upload() {
+        var BASE_URL = $("#BASE_URL").val();
+        var UPLOAD_URL = BASE_URL + 'publish/image/upload_image';
         $.ajaxFileUpload({
             url: UPLOAD_URL,
-            fileElementId: 'upfile',
+            fileElementId: 'image_upload',
             dataType: 'JSON',
-            type:'post',
+            type: 'post',
             success: function (data) {
-                // alert(data);
                 console.log(data);
-                $("#error_div").html("");
-                if(data.error != null)
-                {
-                    $("#error_div").html(data.error);
+                if (data.error == 0) {
+                    console.log('Error');
                 }
-                else
-                {
-                    var path = data.pic;
-                    var thumb= data.thumb;
-                    img_src  = path;
-                    $("#image").attr('src',thumb);
-                    $('#img').attr('value',path);
+                else {
+                    var path = data.oss_path;
+                    console.log('path:' + path);
+                    img_src = path;
+                    //获取图片的id
+                    $('#image_id').val(data.image_id);
+                    //获取图片的路径
+                    $("#image").attr('src', path);
                     $('#image').show();
-                    $("#camera_warp").hide();
-                    $(".headpic").css('height', 'auto');
+                    // $("form").show();
                 }
-
             },
             error: function (data) {
-                alert('error');
+                if (data.error == 0) {
+                    console.log('Error');
+                }
+                else {
+                    var path = data.path;
+                    img_src = path;
+                    $("#image").attr('src', BASE_URL + path);
+                    $('#image').show();
+                    // $("form").show();
+                }
             }
         });
     }
 
-    $(function(){
-        autosize($('textarea'));
-        $('.author-image').css('display', 'block');
-
-        var img_src = "";
-        var page = 0;
-        $("#image").hide();
-        //取消
-        $("#cancel").click(function()
-        {
-            //重定向
-        });
-
-        $("#save").click(function(){
-            $('form').submit();
-        });
-
-
-        $('#author').click(function () {
-            open();
-        });
-
-        $('#close').click(function () {
-            close();
-        });
-
+    function get_author($container) {
+        console.log('adsf');
         $.ajax({
+            url: BASE_URL + 'artist/main/get_artist_list',
             type: 'post',
-            url: GET_ARTIST_LIST,
             data: {
                 page: page
             },
+            async: false,
             dataType: 'json',
             success: function (data) {
-                page++;
                 console.log(data);
 
-                for (var i = 0; i < data.length; i++) {
-                    var id = data[i].id;
-                    var img = data[i].pic;
-                    var name = data[i].name;
-                    var author = $('<div class="pro" data-id="' + id + '"> <div class="avatar"><img src="' + img + '"></div> <div class="name">' + name + '</div> </div>');
+                if (data.error != null || data.length == 0) {
+                    $container.append('<span>没有更多了</span>');
+                    console.log('Cannot read the artist');
+                    return false;
+                }
 
-                    $('#production_list').append(author);
-                    $('.pro').click(ProEvent);
+                page ++;
+                for (var i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    var name = item.name;
+                    var pic = item.pic;
+                    var id = item.id;
+
+                    $box = $('<div class="avatar" data-id="' + id + '">' +
+                        '<img src="' + pic + '">' +
+                        '<span>' + name + '</span>' +
+                        '</div>');
+
+                    //add click event
+                    $box.click(function(){
+                        var pic = $(this).find('img').attr('src');
+                        $('#author').html('<img src="'+pic+'">');
+                        var id = $(this).attr('data-id');
+                        $('#aid').val(id);
+                        fadeOutReveal();
+                    });
+
+                    $container.append($box);
                 }
             }
         });
+    }
 
 
-        /**
-         * 弹出层的关闭
-         */
-        function close() {
-            $('body').css('overflow', '');
-            $('#production').addClass('hidden');
+    /**
+     * 打开弹出层
+     */
+    function fadeInReveal() {
+        var reveal = $('.reveal-model-bg');
+
+        if (!reveal.hasClass('open')) {
+            reveal.addClass('open');
+            $('.reveal-model-bg').click(fadeOutReveal);
+            $('#reveal-close').click(fadeOutReveal);
+            $('.reveal-model').show();
         }
+    }
 
-        /**
-         * 弹出层的打开
-         */
-        function open() {
-            $('#production').removeClass('hidden');
-            $('body').css('overflow', 'hidden');
+
+    /**
+     * 关闭弹出层
+     */
+    function fadeOutReveal() {
+        var reveal = $('.reveal-model-bg');
+
+        if (reveal.hasClass('open')) {
+            reveal.removeClass('open');
+            $('.container').css('zIndex', 9999);
+            $('.reveal-model').hide();
         }
+    }
 
-        function ProEvent() {
-            var id = $(this).attr('data-id');
-            $('#aid').val(id);
-            $('#aimage').attr('src', $(this).find('img').attr('src'));
-            if ($('.author-image').css('display') == 'none') {
-                $('.author-image').show();
+    /**
+     * 判断输入框里的内容是否为空
+     * @returns {boolean}
+     */
+    function contentNullEvent(self) {
+        var content = trim(content = $(self).val());
+        var alert = $(self).next();
+
+        if (content == null || content == '') {
+            if (!$(alert).hasClass('open')) {
+                $(alert).addClass('open');
             }
-            close();
+            return false;
         }
-
-    });
-</script>
+        else {
+            if ($(alert).hasClass('open')) {
+                $(alert).removeClass('open');
+            }
+            return true;
+        }
+    }
 </script>
 </html>

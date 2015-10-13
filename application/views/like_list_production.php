@@ -98,12 +98,6 @@
             isAnimate: true
         });
 
-        $container.imageloader({
-            selector: '.image',
-            each: function (elm) {
-                masonry.layout();
-            }
-        });
 
 
         function LoadMore() {
@@ -145,7 +139,8 @@
                         var price = data[i].price;
                         var img = data[i].pic;
                         var like = data[i].like;
-                        var type = data[i].type;
+                        var medium = data[i].medium;
+                        console.log(medium);
                         var l = data[i].l;
                         var w = data[i].w;
                         var width = data[i].width;
@@ -157,7 +152,7 @@
                             '<p class="title">' + title + '</p>' +
                             '<p class="author">作者：' + author + '</p>' +
                             '<div class="info">' +
-                            '<span class="type">' + type + '</span>，' +
+                            '<span class="type">' + medium + '</span>，' +
                             '<span class="size">' + w + 'cm X ' + l + 'cm</span>' +
                             '</div>' +
                             '<div class="bottom clearfix">' +
@@ -169,16 +164,7 @@
                         $container.append(box);
                         masonry.appended(box);
 
-                        $(box).imageloader({
-                            selector: '.image',
-                            each: function (elm) {
-                                masonry.layout();
-                            },
-                            callback: function (elm) {
-                                console.log('loadding');
-                                masonry.layout();
-                            }
-                        });
+
 
 
                         // -------------- End -------------
