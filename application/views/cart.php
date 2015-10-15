@@ -89,11 +89,11 @@ $(function(){
                     var name        = good[i].production.name;
                     var artist      = good[i].artist.name;
                     var aid         = good[i].artist.ids;
-                    var type        = good[i].production.type;
+                    var medium        = good[i].production.medium;
                     var price       = good[i].production.price;
                     var w           = good[i].production.w;
                     var h           = good[i].production.h;
-                    var marterial   = good[i].production.marterial;
+                    var style        = good[i].production.style;
                     var time        = good[i].production.creat_time;
 
                     var elm = '' +
@@ -105,7 +105,7 @@ $(function(){
                     '<div class="info">'+ 
                     '<div class="name"><a href="<?=base_url()?>production/'+ id +'" class="link">'+ name +'</a></div>' +
                     '<div class="artist">&nbsp;&nbsp;作者：<a href="<?=base_url()?>artist/'+ aid +'" class="link">'+ artist +'</a></div>' +
-                    '<div class="detail">'+ type +'，'+ marterial +'，'+ w +' X '+ h +'cm，'+ time +'</div>' +
+                    '<div class="detail">'+ medium +'，'+ style +'，'+ w +' X '+ h +'cm，'+ time +'</div>' +
                     '</div>'+ 
                     '<div class="price">'+ 
                     '￥<font style="font-size:32px;color:#f7cc1e" id="goodprice">'+ price +'</font>'+ 
