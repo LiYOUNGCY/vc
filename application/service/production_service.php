@@ -13,6 +13,7 @@ class Production_service extends MY_Service
         $this->load->model('production_style_model');
         $this->load->model('production_price_model');
         $this->load->model('production_categories_model');
+
     }
 
 
@@ -62,19 +63,6 @@ class Production_service extends MY_Service
         return $query;
     }
 
-    public function get_type_list($page, $limit)
-    {
-        $this->load->model('production_type_model');
-        $type = $this->production_type_model->get_type_list($page, $limit);
-        return $type;
-    }
-
-    public function get_marterial_list($page, $limit)
-    {
-        $this->load->model('production_marterial_model');
-        $marterial = $this->production_marterial_model->get_marterial_list($page, $limit);
-        return $marterial;
-    }
 
     /**
      * 根据id获取艺术品详情
@@ -151,6 +139,7 @@ class Production_service extends MY_Service
         }
     }
 
+
     /**
      * 获取艺术品相关联的专题
      * @param  pid 艺术品id [int]
@@ -197,6 +186,7 @@ class Production_service extends MY_Service
         $result = $this->production_model->update_production($id, $uid, $data);
         return $result;
     }
+
 
     private function _delete_oss_pic($pic)
     {
