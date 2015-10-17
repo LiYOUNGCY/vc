@@ -50,5 +50,4 @@ public/upload/*
 public/headpic/*
 public/production/*
 public/image/*
-application/config/database.php
-application/config/database.php
+application/vendor/*
