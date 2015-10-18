@@ -10,6 +10,7 @@ class Production extends MY_Controller
         $this->load->model('production_categories_model');
         $this->load->model('production_style_model');
         $this->load->model('production_price_model');
+        $this->load->model('frame_model');
     }
 
     public function index($type = 'p', $page = 0)
@@ -499,5 +500,114 @@ class Production extends MY_Controller
         } else {
             echo '<script>alert("操作失败!");window.location.href="' . base_url() . ADMINROUTE . 'production/price";</script>';
         }
+    }
+
+
+    public function frame($type = 'publish', $id = NULL)
+    {
+        if ($type == 'publish') {
+            $frame = $this->frame_model->get_frame_list();
+            $count = count($frame);
+
+            if ($count == 0) {
+                $count = 1;
+            }
+
+            $user['user'] = $this->user;
+            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
+
+            //分页数据
+            $p = array(
+                'count' => $count,
+                'page' => 0,
+                'limit' => $count,
+                'pageurl' => base_url() . ADMINROUTE . 'production/p/'
+            );
+
+            $pagination = $this->load->view('admin/common/pagination', $p, TRUE);
+            $foot = $this->load->view('admin/common/foot', "", TRUE);
+
+            //页面数据
+            $body = array(
+                'navbar' => $navbar,
+                'foot' => $foot,
+                'pagination' => $pagination,
+                'data' => $frame
+            );
+            $this->load->view('admin/common/head');
+            $this->load->view('admin/production/frame_list', $body);
+        } else if ($type == 'update') {
+            if (!is_numeric($id)) {
+                show_404();
+            }
+            $frame = $this->frame_model->get_frame_by_id($id);
+
+            if (empty($frame)) {
+                show_404();
+            }
+
+            $user['user'] = $this->user;
+            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
+            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $this->load->view('admin/common/head');
+
+            //页面数据
+            $body = array(
+                'navbar' => $navbar,
+                'foot' => $foot,
+                'data' => $frame
+            );
+            $this->load->view('admin/production/frame_edit', $body);
+        }
+    }
+
+
+    public function add_frame()
+    {
+        $this->load->service('image_service');
+        $image_id = $this->image_service->upload_image_without_thumb('image')['image_id'];
+        $thumb_id = $this->image_service->upload_image_without_thumb('thumb')['image_id'];
+        $name = $this->sc->input('name');
+        $price = $this->sc->input('price');
+
+        $this->frame_model->insert_frame($this->user['id'], $name, $image_id, $thumb_id, $price);
+
+        redirect(base_url() . 'admin/production/frame');
+    }
+
+    public function update_frame()
+    {
+        $this->load->service('image_service');
+        $image_id = $this->image_service->upload_image_without_thumb('image')['image_id'];
+        $thumb_id = $this->image_service->upload_image_without_thumb('thumb')['image_id'];
+        $name = $this->sc->input('name');
+        $price = $this->sc->input('price');
+        $id = $this->sc->input('id');
+
+        $result = $this->frame_model->update_frame($id, $this->user['id'], $name, $image_id, $thumb_id, $price);
+
+        if ($result) {
+            echo '<script>alert("操作成功!");window.location.href="' . base_url() . ADMINROUTE . 'production/frame";</script>';
+        } else {
+            echo '<script>alert("操作失败!");window.location.href="' . base_url() . ADMINROUTE . 'production/frame";</script>';
+        }
+    }
+
+
+    public function delete_frame()
+    {
+        $id = $this->sc->input('ids');
+        $id = explode(",", $id);
+
+
+        foreach ($id as $k => $v) {
+            $result = $this->frame_model->delete_frame($v);
+
+            if (!$result) {
+                $this->error->output('INVALID_REQUEST');
+            }
+        }
+
+        echo json_encode(array('success' => 0, 'note' => lang('OPERATE_SUCCESS'), 'script' => 'location.reload();'));
     }
 }

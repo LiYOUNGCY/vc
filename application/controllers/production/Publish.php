@@ -6,6 +6,7 @@ class Publish extends MY_Controller
     {
         parent::__construct();
         $this->load->service('production_service');
+        $this->load->model('frame_model');
     }
 
     public function index($type = 'publish', $pid = NULL)
@@ -16,6 +17,7 @@ class Publish extends MY_Controller
 
         if ($type == 'publish') {
             $head['title'] = '发布艺术品';
+            $data['frame'] = $this->frame_model->get_frame_list();
             $this->load->view('publish_production', $data);
         } else if ($type == 'update') {
             if (!is_numeric($pid)) {
@@ -23,13 +25,14 @@ class Publish extends MY_Controller
             }
             $production = $this->production_service->get_production_detail_by_id($pid);
 
-//            echo json_encode($production);
-
             if (empty($production)) {
                 show_404();
             }
 
             $data['production'] = $production;
+            $data['frame'] = $this->frame_model->get_frame_list();
+            $data['production_frame'] = $this->production_service->get_frame_id_by_production_id($pid);
+//            echo json_encode($data);
             $this->load->view('update_production', $data);
         }
     }
@@ -41,24 +44,31 @@ class Publish extends MY_Controller
     public function publish_production()
     {
         $data = array(
-                'name',
-                'intro',
-                'aid',
-                'medium',
-                'style',
-                'creat_time',
-                'w',
-                'h',
-                'l',
-                'image_id',
-                'price'
-            );
+            'name',
+            'intro',
+            'aid',
+            'medium',
+            'style',
+            'creat_time',
+            'w',
+            'h',
+            'l',
+            'image_id',
+            'price'
+        );
 
         $data = $this->sc->input($data);
 
         $result = $this->production_service->publish_production($this->user['id'], $data);
 
-        if(! $result) {
+        $this->production_service->delete_production_frame($result);
+        if (!empty($_POST['frame_list'])) {
+            foreach ($_POST['frame_list'] as $frame_id) {
+                $this->production_service->insert_production_frame($result, $frame_id);
+            }
+        }
+
+        if (!$result) {
             $this->message->error();
         }
 
@@ -75,27 +85,34 @@ class Publish extends MY_Controller
         $image_id = $this->sc->input('image_id');
 
         $data = array(
-                'name',
-                'intro',
-                'aid',
-                'medium',
-                'style',
-                'creat_time',
-                'w',
-                'h',
-                'l',
-                'price'
-            );
+            'name',
+            'intro',
+            'aid',
+            'medium',
+            'style',
+            'creat_time',
+            'w',
+            'h',
+            'l',
+            'price'
+        );
         $data = $this->sc->input($data);
 
         //有新的图片上传
-        if($image_id != null) {
+        if ($image_id != null) {
             $data['image_id'] = $image_id;
         }
 
         $result = $this->production_service->update_production($id, $this->user['id'], $data);
 
-        if($result) {
+        $this->production_service->delete_production_frame($id);
+        if (!empty($_POST['frame_list'])) {
+            foreach ($_POST['frame_list'] as $frame_id) {
+                $this->production_service->insert_production_frame($id, $frame_id);
+            }
+        }
+
+        if ($result) {
             redirect(base_url() . ADMINROUTE . 'production');
         }
     }

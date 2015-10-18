@@ -31,8 +31,8 @@ class Main extends MY_Controller
         $data['top'] = $this->load->view('common/top', $user, TRUE);
         $data['footer'] = $this->load->view('common/footer', '', TRUE);
         $data['medium'] = $this->production_service->get_medium_list();
-        $data['style']  = $this->production_service->get_style_list();
-        $data['price']  = $this->production_service->get_price_list();
+        $data['style'] = $this->production_service->get_style_list();
+        $data['price'] = $this->production_service->get_price_list();
         $head['title'] = '艺术品';
         $this->load->view('common/head', $head);
         $this->load->view('production_list', $data);
@@ -44,14 +44,14 @@ class Main extends MY_Controller
      */
     public function get_production_list()
     {
-		$page = $this->sc->input('page');
+        $page = $this->sc->input('page');
 
         $medium = $this->sc->input('m', 'get');
         $categories = NULL;
         $style = $this->sc->input('s', 'get');
         $price = $this->sc->input('p', 'get');
 
-        $medium = strcmp($medium, '0') === 0  ? NULL : $medium;
+        $medium = strcmp($medium, '0') === 0 ? NULL : $medium;
         $style = strcmp($style, '0') === 0 ? NULL : $style;
         $price = strcmp($price, '0') === 0 ? NULL : $price;
 
@@ -66,5 +66,19 @@ class Main extends MY_Controller
         $uid = isset($this->user['id']) ? $this->user['id'] : NULL;
         $production = $this->production_service->get_production_list($page, $uid, $search);
         echo json_encode($production);
+    }
+
+    public function get_frame_by_production_id()
+    {
+        $id = $this->sc->input('id');
+        // $id = 61;
+
+        $frame = $this->production_service->get_frame_by_production_id($id);
+
+        if (!empty($frame)) {
+            $this->message->success($frame);
+        } else {
+            $this->message->error();
+        }
     }
 }

@@ -13,6 +13,7 @@ class Production_service extends MY_Service
         $this->load->model('production_style_model');
         $this->load->model('production_price_model');
         $this->load->model('production_categories_model');
+        $this->load->model('frame_model');
     }
 
 
@@ -62,19 +63,6 @@ class Production_service extends MY_Service
         return $query;
     }
 
-    public function get_type_list($page, $limit)
-    {
-        $this->load->model('production_type_model');
-        $type = $this->production_type_model->get_type_list($page, $limit);
-        return $type;
-    }
-
-    public function get_marterial_list($page, $limit)
-    {
-        $this->load->model('production_marterial_model');
-        $marterial = $this->production_marterial_model->get_marterial_list($page, $limit);
-        return $marterial;
-    }
 
     /**
      * 根据id获取艺术品详情
@@ -151,6 +139,7 @@ class Production_service extends MY_Service
         }
     }
 
+
     /**
      * 获取艺术品相关联的专题
      * @param  pid 艺术品id [int]
@@ -177,7 +166,7 @@ class Production_service extends MY_Service
         $insert_result = $this->production_model->insert_production($uid, $data);
         if ($insert_result) {
             //更新艺术家作品数
-            $this->artist_model->update_artist($data['aid'], array('production' => array('production + 1', FALSE)));
+            $this->artist_model->update_artist_production_count($data['aid']);
             return $insert_result;
         } else {
             return FALSE;
@@ -197,6 +186,7 @@ class Production_service extends MY_Service
         $result = $this->production_model->update_production($id, $uid, $data);
         return $result;
     }
+
 
     private function _delete_oss_pic($pic)
     {
@@ -223,5 +213,27 @@ class Production_service extends MY_Service
             return FALSE;
         }
 
+    }
+
+    public function delete_production_frame($production_id)
+    {
+        $this->production_model->delete_production_frame($production_id);
+    }
+
+
+    public function insert_production_frame($production_id, $frame_id)
+    {
+        return $this->production_model->insert_production_frame($production_id, $frame_id);
+    }
+
+
+    public function get_frame_id_by_production_id($id)
+    {
+        return $this->frame_model->get_frame_id_by_production_id($id);
+    }
+
+    public function get_frame_by_production_id($id)
+    {
+        return $this->frame_model->get_frame_by_production_id($id);
     }
 }
