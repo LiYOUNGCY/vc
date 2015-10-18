@@ -13,7 +13,7 @@ class Production_service extends MY_Service
         $this->load->model('production_style_model');
         $this->load->model('production_price_model');
         $this->load->model('production_categories_model');
-
+        $this->load->model('frame_model');
     }
 
 
@@ -166,7 +166,7 @@ class Production_service extends MY_Service
         $insert_result = $this->production_model->insert_production($uid, $data);
         if ($insert_result) {
             //更新艺术家作品数
-            $this->artist_model->update_artist($data['aid'], array('production' => array('production + 1', FALSE)));
+            $this->artist_model->update_artist_production_count($data['aid']);
             return $insert_result;
         } else {
             return FALSE;
@@ -213,5 +213,27 @@ class Production_service extends MY_Service
             return FALSE;
         }
 
+    }
+
+    public function delete_production_frame($production_id)
+    {
+        $this->production_model->delete_production_frame($production_id);
+    }
+
+
+    public function insert_production_frame($production_id, $frame_id)
+    {
+        return $this->production_model->insert_production_frame($production_id, $frame_id);
+    }
+
+
+    public function get_frame_id_by_production_id($id)
+    {
+        return $this->frame_model->get_frame_id_by_production_id($id);
+    }
+
+    public function get_frame_by_production_id($id)
+    {
+        return $this->frame_model->get_frame_by_production_id($id);
     }
 }

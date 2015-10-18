@@ -106,6 +106,9 @@
                             <a href="<?= base_url() . ADMINROUTE ?>production/p">艺术品</a>
                         </li>
                         <li>
+                            <a href="<?= base_url() . ADMINROUTE ?>production/frame">裱</a>
+                        </li>
+                        <li>
                             <a href="<?= base_url() . ADMINROUTE ?>production/medium">题材</a>
                         </li>
                         <li style="display:none;">

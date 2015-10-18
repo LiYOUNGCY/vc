@@ -278,4 +278,32 @@ class Production_model extends CI_Model
         $this->db->where('id', $id)->update('production', $data);
         return $this->db->affected_rows() === 1;
     }
+
+
+    /**
+     * 删除艺术品所有的裱
+     * @param $production_id
+     */
+    public function delete_production_frame($production_id)
+    {
+        $this->db->where('production_id', $production_id)->delete('production_frame');
+    }
+
+
+    /**
+     * 插入艺术品的裱
+     * @param $production_id
+     * @param $frame_id
+     * @return mixed
+     */
+    public function insert_production_frame($production_id, $frame_id)
+    {
+        $data = array(
+            'production_id' => $production_id,
+            'frame_id' => $frame_id
+        );
+
+        $this->db->insert('production_frame', $data);
+        return $this->db->insert_id();
+    }
 }

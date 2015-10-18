@@ -13,9 +13,9 @@ load_header(
     <h2>修改艺术品信息</h2>
 
     <form action="<?= base_url() ?>production/publish/update_production" method="post">
-        <input type="hidden" id="id" name="id" value="<?=$production['id']?>">
+        <input type="hidden" id="id" name="id" value="<?= $production['id'] ?>">
         <input type="hidden" id="image_id" name="image_id" value="">
-        <input type="hidden" id="image_path" name="image_path" value="<?=$production['pic']?>">
+        <input type="hidden" id="image_path" name="image_path" value="<?= $production['pic'] ?>">
 
         <label class="form-control">
             <span>上传艺术品照片</span>
@@ -29,30 +29,32 @@ load_header(
 
         <label class="form-control" for="name">
             <span>艺术品的标题：</span>
-            <input id="name" name="name" type="text" value="<?=$production['name']?>">
+            <input id="name" name="name" type="text" value="<?= $production['name'] ?>">
             <span class="message danger">内容不能为空</span>
         </label>
 
         <label class="form-control" for="intro">
             <span>艺术品的介绍：</span>
-            <textarea id="intro" name="intro" rows='3'><?=$production['intro']?></textarea>
+            <textarea id="intro" name="intro" rows='3'><?= $production['intro'] ?></textarea>
             <span class="message danger">内容不能为空</span>
         </label>
 
-        <label class="form-control" >
+        <label class="form-control">
             <span>作者：</span>
-            <input type="hidden" id="aid" name="aid" value="<?=$production['aid']?>">
+            <input type="hidden" id="aid" name="aid" value="<?= $production['aid'] ?>">
             <button class="button" type="button" id="choose_author">选择</button>
             <span class="message danger" id="author_message">请选择作者！！</span>
+
             <div class="avatar" id="author"></div>
         </label>
 
         <div class="clearfix" style="padding-top: 1rem;">
             <label for="medium" style="float:left;">艺术门类：</label>
             <select class="dropdown" id="medium" name="medium">
-            <?php foreach ($medium as $key => $value) { ?>
-                <option value="<?=$value['id']?>" <?php if($production['medium'] == $value['id']) echo 'selected'; ?>><?=$value['name']?></option>
-            <?php } ?>
+                <?php foreach ($medium as $key => $value) { ?>
+                    <option
+                        value="<?= $value['id'] ?>" <?php if ($production['medium'] == $value['id']) echo 'selected'; ?>><?= $value['name'] ?></option>
+                <?php } ?>
             </select>
         </div>
 
@@ -60,40 +62,69 @@ load_header(
             <label for="style" style="float: left;">风格：</label>
             <select class="dropdown" id="style" name="style">
                 <?php foreach ($style as $key => $value) { ?>
-                <option value="<?=$value['id']?>" <?php if($production['style'] == $value['id']) echo 'selected'; ?>><?=$value['name']?></option>
-            <?php } ?>
+                    <option
+                        value="<?= $value['id'] ?>" <?php if ($production['style'] == $value['id']) echo 'selected'; ?>><?= $value['name'] ?></option>
+                <?php } ?>
             </select>
         </div>
 
         <label class="form-control" for="l">
             <span>长（CM 厘米）：</span>
-            <input id="l" name="l" type="text" value="<?=$production['l']?>">
+            <input id="l" name="l" type="text" value="<?= $production['l'] ?>">
             <span class="message danger">内容不能为空</span>
         </label>
 
         <label class="form-control" for="w">
             <span>宽（CM 厘米）：</span>
-            <input id="w" name="w" type="text" value="<?=$production['w']?>">
+            <input id="w" name="w" type="text" value="<?= $production['w'] ?>">
             <span class="message danger">内容不能为空</span>
         </label>
 
         <label class="form-control" for="h">
             <span>高（CM 厘米）：</span>
-            <input id="h" name="h" type="text" value="<?=$production['h']?>">
+            <input id="h" name="h" type="text" value="<?= $production['h'] ?>">
             <span class="message danger">内容不能为空</span>
         </label>
 
         <label class="form-control" for="price">
             <span>价格（元）：</span>
-            <input id="price" name="price" type="text" value="<?=$production['price']?>">
+            <input id="price" name="price" type="text" value="<?= $production['price'] ?>">
             <span class="message danger">内容不能为空</span>
         </label>
 
         <label class="form-control" for="creat_time">
             <span>创作日期：（无规定格式，可数字，可中文）</span>
-            <input id="creat_time" name="creat_time" type="text" value="<?=$production['creat_time']?>">
+            <input id="creat_time" name="creat_time" type="text" value="<?= $production['creat_time'] ?>">
             <span class="message danger">内容不能为空</span>
         </label>
+
+        <label for="" class="form-control">
+            <p>选择裱：</p>
+        </label>
+
+
+        <?php foreach ($frame as $key => $value) { ?>
+            <label class="form-control inline" style="width: auto;">
+                <?= $value['name'] ?>
+                <input type="checkbox" name="frame_list[]" value="<?= $value['id'] ?>"
+                    <?php
+                    $status = false;
+                    foreach ($production_frame as $production_frame_id) {
+                        if ($value['id'] == $production_frame_id['frame_id']) {
+                            $status = true;
+                            break;
+                        }
+                        ?>
+
+                    <?php }
+                    if ($status) {
+                        echo 'checked';
+                    }
+                    ?>
+                    >
+
+            </label>
+        <?php } ?>
 
         <div class="option form-control">
             <button type="button" class="button cancel" id="back">返回</button>
@@ -178,7 +209,7 @@ load_header(
             var $load_more = $('<button type="button" class="button">加载更多</butto>');
             $container.html('');
             $container.append($load_more);
-            $load_more.click(function(){
+            $load_more.click(function () {
                 get_author($container);
             });
             get_author($container);
@@ -246,7 +277,7 @@ load_header(
                     return false;
                 }
 
-                page ++;
+                page++;
                 for (var i = 0; i < data.length; i++) {
                     var item = data[i];
                     var name = item.name;
@@ -259,9 +290,9 @@ load_header(
                         '</div>');
 
                     //add click event
-                    $box.click(function(){
+                    $box.click(function () {
                         var pic = $(this).find('img').attr('src');
-                        $('#author').html('<img src="'+pic+'">');
+                        $('#author').html('<img src="' + pic + '">');
                         var id = $(this).attr('data-id');
                         $('#aid').val(id);
                         fadeOutReveal();

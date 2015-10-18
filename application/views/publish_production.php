@@ -47,9 +47,9 @@ load_header(
         <div class="clearfix" style="padding-top: 1rem;">
             <label for="medium" style="float:left;">艺术门类：</label>
             <select class="dropdown" id="medium" name="medium">
-            <?php foreach ($medium as $key => $value) { ?>
-                <option value="<?=$value['id']?>"><?=$value['name']?></option>
-            <?php } ?>
+                <?php foreach ($medium as $key => $value) { ?>
+                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                <?php } ?>
             </select>
         </div>
 
@@ -57,8 +57,8 @@ load_header(
             <label for="style" style="float: left;">风格：</label>
             <select class="dropdown" id="style" name="style">
                 <?php foreach ($style as $key => $value) { ?>
-                <option value="<?=$value['id']?>"><?=$value['name']?></option>
-            <?php } ?>
+                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                <?php } ?>
             </select>
         </div>
 
@@ -92,6 +92,15 @@ load_header(
             <span class="message danger">内容不能为空</span>
         </label>
 
+        <label for="" class="form-control">
+            <p>选择裱：</p>
+        </label>
+        <?php foreach ($frame as $key => $value) { ?>
+            <label class="form-control inline" style="width: auto;">
+                <?= $value['name'] ?>
+                <input type="checkbox" name="frame_list[]" value="<?= $value['id'] ?>" >
+            </label>
+        <?php } ?>
 
         <div class="option form-control">
             <button type="button" class="button cancel" id="back">返回</button>
@@ -183,7 +192,7 @@ load_header(
             var $load_more = $('<button type="button" class="button">加载更多</butto>');
             $container.html('');
             $container.append($load_more);
-            $load_more.click(function(){
+            $load_more.click(function () {
                 get_author($container);
             });
             get_author($container);
@@ -251,7 +260,7 @@ load_header(
                     return false;
                 }
 
-                page ++;
+                page++;
                 for (var i = 0; i < data.length; i++) {
                     var item = data[i];
                     var name = item.name;
@@ -264,7 +273,7 @@ load_header(
                         '</div>');
 
                     //add click event
-                    $box.click(function(){
+                    $box.click(function () {
                         var id = $(this).attr('data-id');
                         console.log(id);
                         $('#aid').val(id);

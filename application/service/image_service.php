@@ -375,6 +375,51 @@ class Image_service extends MY_Service
 
 
     /**
+     * 上传图片，不生成缩略图
+     * @param $field_name
+     */
+    public function upload_image_without_thumb($field_name)
+    {
+        $upload_config['upload_path'] = $this->dir;
+        $upload_config['allowed_types'] = 'gif|jpg|png';
+        $upload_config['remove_spaces'] = TRUE;
+        $upload_config['encrypt_name'] = TRUE;
+        $upload_config['file_ext_tolower'] = TRUE;
+
+        $this->load->library('upload', $upload_config);
+        $result = $this->upload->do_upload($field_name);
+
+        if (empty($result)) {
+            $this->message->error($this->upload->display_errors('', ''));
+        }
+
+        $file_name = $this->upload->data('file_name');
+        $image_width = $this->upload->data('image_width');
+        $image_height = $this->upload->data('image_height');
+
+
+        $file = substr($upload_config['upload_path'], 0) . $file_name;
+
+        //对文件加水印
+
+        //upload to oss
+        $upload_path = $this->oss->upload_by_file($file);
+
+        $image_id = $this->image_model->insert_image_without_thumb($upload_path, $image_width, $image_height);
+
+        if (!empty($upload_path)) {
+            $result = array();
+            $result['oss_path'] = $upload_path;
+            $result['path'] = $this->dir . $file_name;
+            $result['image_id'] = $image_id;
+            return $result;
+        }
+
+        return false;
+    }
+
+
+    /**
      * @param $field_name 上传的图片的表单名
      * @param $thumb_width 缩略图的宽度
      * @param $thumb_height 缩略图的高度
@@ -389,8 +434,9 @@ class Image_service extends MY_Service
 
         $this->load->library('upload', $upload_config);
         $result = $this->upload->do_upload($field_name);
+
         if (empty($result)) {
-            return false;
+            $this->message->error($this->upload->display_errors('', ''));
         }
 
         $file_name = $this->upload->data('file_name');
@@ -528,4 +574,6 @@ class Image_service extends MY_Service
 
         return $result;
     }
+
+
 }
