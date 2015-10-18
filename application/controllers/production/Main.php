@@ -70,8 +70,8 @@ class Main extends MY_Controller
 
     public function get_frame_by_production_id()
     {
-        // $id = $this->sc->input('id');
-        $id = 61;
+        $id = $this->sc->input('id');
+        // $id = 61;
 
         $frame = $this->production_service->get_frame_by_production_id($id);
 

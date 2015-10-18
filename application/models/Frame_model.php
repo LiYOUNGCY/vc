@@ -11,7 +11,7 @@ class Frame_model extends CI_Model
 
     public function get_frame_by_production_id($production_id)
     {
-        $query = $this->db->select('frame.name, frame.price, image.image_path as image, frame.thumb_id')
+        $query = $this->db->select('frame.id, frame.name, frame.price, image.image_path as image, frame.thumb_id')
             ->from('frame, production_frame, image')
             ->where('frame.id = production_frame.frame_id')
             ->where('production_frame.production_id', $production_id)
