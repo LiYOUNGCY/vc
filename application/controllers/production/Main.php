@@ -68,10 +68,14 @@ class Main extends MY_Controller
         echo json_encode($production);
     }
 
+
+    /**
+     * [get_frame_by_production_id 获取某艺术品的裱]
+     * @return [type] [description]
+     */
     public function get_frame_by_production_id()
     {
         $id = $this->sc->input('id');
-        // $id = 61;
 
         $frame = $this->production_service->get_frame_by_production_id($id);
 
