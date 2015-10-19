@@ -66,11 +66,6 @@
 </body>
 <script>
 
-
-    function readArticle(id) {
-        window.location.href = BASE_URL + 'article/' + id;
-    }
-
     function getTopicListBYtag() {
         $(this).parent().children('.active').removeClass('active');
 
@@ -160,7 +155,8 @@
                         var read = items[i].read;
 
 
-                        var box = $('<div class="box" onclick="readArticle(' + article_id + ')" style="height:360px;">' +
+                        var box = $('<div class="box" style="height:360px;">' +
+                            '<a href="<?=base_url()?>article/'+ article_id +'">' +
                             '<div class="image" style="background-image:url(' + img + ')"></div>' +
                             '<p class="title">' + article_title + '</p>' +
                             '<p class="content">' + article_content + '</p>' +
@@ -170,6 +166,7 @@
                             '<div class="icon like"></div>' +
                             '</div>' +
                             '</div>' +
+                            '</a>' +
                             '</div>');
                         $container.append(box);
                         masonry.appended(box);

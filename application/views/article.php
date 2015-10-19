@@ -27,11 +27,6 @@
 </body>
 <script>
 
-    function readArticle(id) {
-        window.location.href = BASE_URL + 'article/' + id;
-    }
-
-
     function getArticleListBYtag(tag_id) {
         if (tag_id == 'all') {
             window.location.href = BASE_URL + 'article';
@@ -106,13 +101,11 @@
                         var read = items[i].read;
 
 
-                        var box = $('<div class="box" onclick="readArticle(' + article_id + ')">' +
+                        var box = $('<div class="box">' +
+                            '<a href="<?=base_url()?>article/'+ article_id +'">' +
                             '<div class="image" style="background-image:url(' + img + ')"></div>' +
-
                             '<p class="title">' + article_title + '</p>' +
-
                             '<p class="content">' + article_content + '</p>' +
-
                             '<div class="bottom">' +
                             '<div class="like">' +
                             '<span>' + like + '</span>' +
@@ -123,6 +116,7 @@
                             '<i class="fa fa-eye"></i>' +
                             '</div>' +
                             '</div>' +
+                            '</a>' +
                             '</div>');
                         $container.append(box);
                         masonry.appended(box);

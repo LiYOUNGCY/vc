@@ -30,9 +30,6 @@
     <?php echo $footer; ?>
 </div>
 <script>
-    function a(id) {
-        window.location.href = BASE_URL + 'artist/' + id;
-    }
     $(function () {
         var page = 0;
 
@@ -99,7 +96,8 @@
                         var img = data[i].pic;
 
                         var box = '' +
-                        '<div class="artist" onclick="a('+ id +')">' +
+                        '<div class="artist">' +
+                        '<a href="<?=base_url()?>artist/'+ id +'">' +
                         '<div class="backcard">' +
                         '<div class="artistinfo">' +
                         '<div class="head">' +
@@ -111,7 +109,7 @@
                         '<div class="artistpic">' +
                         '<img class="image" src="'+ img +'"></div>' +
                         '<div class="artistname">（<span class="name">'+ name +'</span>）</div>' +
-                        '</div></div>';
+                        '</div></a></div>';
 
                         $('.item-list').append(box);
 

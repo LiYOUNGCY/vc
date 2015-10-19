@@ -9,9 +9,11 @@
         <div class="swiper-wrapper">
             <?php foreach ($slider as $k => $v): ?>
                 <div class="swiper-slide">
+                    <a href="<?= $v['href'] ?>">
                     <img data-src="<?= $v['pic'] ?>" class="swiper-lazy">
                     <div class="swiper-shadow" ></div>
                     <div class="swiper-lazy-preloader"></div>
+                    </a>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -39,16 +41,21 @@
                 </div>
                 <?php $i=0;
                 foreach ($topic as $k => $v): ?>
+                    
                     <?php
+                        if($i > 3) {
+                            break;
+                        }
                         if($i == 0)
                         {
                             $i=1;
-                            echo '<div class="item big"><div class="box" style="background:url('.$v['content']['article_bigimage'].');background-size:cover;background-position:50% 50%;">';
+                            echo '<div class="item big"><a href="'.base_url().'article/'.$v['content']['article_id'].'"><div class="box" style="background:url('.$v['content']['article_bigimage'].');background-size:cover;background-position:50% 50%;">';
                         }
                         else
                         {
-                            echo '<div class="item"><div class="box" style="background: url('.$v['content']['article_image'].');background-size:cover;background-position:50% 50%;">';
+                            echo '<div class="item"><a href="'.base_url().'article/'.$v['content']['article_id'].'"><div class="box" style="background: url('.$v['content']['article_image'].');background-size:cover;background-position:50% 50%;">';
                         }
+                        $i++;
                     ?>
                             <div class="info">
                                 <p><?=$v['content']['article_content']?></p>
@@ -58,6 +65,7 @@
                                 <div class="collect"><?=$v['like']?><div class="icon like"></div></div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 <?php endforeach;?>
             </div>
@@ -79,16 +87,14 @@
                 <?php $i=0;
                 foreach ($production as $k => $v): ?>
                     <?php
-                        if($i > 3) {
-                            break;
-                        }
+                        
                         if($i == 0)
                         {
-                            echo '<div class="item big"><div class="box" style="background:url('.$v['bigpic'].');background-size:cover;background-position:50% 50%;">';
+                            echo '<div class="item big"><a href="'.base_url().'production/'.$v['id'].'"><div class="box" style="background:url('.$v['bigpic'].');background-size:cover;background-position:50% 50%;">';
                         }
                         else
                         {
-                            echo '<div class="item"><div class="box" style="background: url('.$v['pic'].');background-size:cover;background-position:50% 50%;">';
+                            echo '<div class="item"><a href="'.base_url().'production/'.$v['id'].'"><div class="box" style="background: url('.$v['pic'].');background-size:cover;background-position:50% 50%;">';
                         }
                         $i++;
                     ?>
@@ -106,6 +112,7 @@
                             </div>
                         </div>
                         <div class="price icon pricebg">￥<?=$v['price']?></div>
+                        </a>
                     </div>
                 <?php endforeach;?>
             </div>
