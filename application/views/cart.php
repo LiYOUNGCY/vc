@@ -29,7 +29,7 @@
                 <div class="total">￥<font style="font-size:32px;" id="totalprice"></font></div>
             </div>
             <div class="topay">
-              <div class="btn">确认购买</div>  
+              <div class="btn">去结算</div>  
             </div>
         </div>
     </div>

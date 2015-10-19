@@ -563,9 +563,9 @@ pre {
     padding-top: 20px;
     max-height: 160px;
     overflow: hidden;
+    color: #9B9B9B;
 }
 .item-list .artist .backcard .intro p{
-    text-indent:2em;
     text-align: justify;
     line-height: 20px;
 }
@@ -605,7 +605,7 @@ pre {
 .item-list .artist:hover .backcard{
 
     transform:scale(1);
-    box-shadow: 0 0 10px #1a1a1a;
+    box-shadow: 0 0 10px #a1a1a1;
     opacity: 1;
 }
 
@@ -657,11 +657,15 @@ pre {
 .item-list .production .author {
     padding: 0 10px;
     margin-top: 10px;
+    font-size: 14px;
+    color: #9B9B9B;
 }
 
 .item-list .production .info {
-    margin-top: 10px;
+    margin-top: 5px;
     padding: 0 10px;
+    font-size: 14px;
+    color: #9B9B9B;
 }
 
 .item-list .production .bottom {
@@ -674,7 +678,7 @@ pre {
     height: 30px;
     line-height: 30px;
     /*text-align: center;*/
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .item-list .production .bottom .price {
@@ -689,7 +693,6 @@ pre {
 
 .item-list .production .bottom .vote {
     margin-right: 10px;
-    color: #B3B3B3;
 }
 
 .item-list .production .bottom .vote .icon{
@@ -2875,6 +2878,7 @@ hr.line {
     background-color: #f2f2f2;
 }
 .artistarea .artinfo{
+    position: relative;
     margin: 25px 0 5px;
     border-top: 1px #b3b3b3 dashed;
 
@@ -2884,20 +2888,100 @@ hr.line {
     color: #888888;
     width: 100%;
     text-align: left;
-    padding-top: 10px;
+    padding-top: 20px;
 }
 .artistarea .artinfo .info li{
     height: 25px;
+    font-size: 15px;
 }
-.artistarea .artinfo .price{
+.artistarea .price{
     margin: 10px 0;
     width: 100%;
 
     font-size: 20px;
     font-weight: bold;
-
+    
+    text-align: left;
     color: #f7cc1e;
 }
+
+.artistarea .frame{
+    text-align: left;
+    margin-top: 5px;
+}
+.artistarea .frame .title{
+    color: #888888;
+    font-weight: bold;
+    font-size: 17px;
+}
+.artistarea .frame ul{
+    display: inline-block;
+    margin-top: 10px; 
+}
+.artistarea .frame ul li{
+    display: block;
+    float: left;
+    width: 76px;
+    box-sizing:border-box;
+    margin-left: 12px;
+    text-align: center;
+    cursor: pointer;    
+}
+
+.artistarea .frame ul li:first-child{
+    margin-left: 0px;
+}
+.artistarea .frame .noframe{
+    border:1px dotted #BBBBBB;
+    width: 100%;
+    height: 120px;
+    line-height: 120px;
+    font-size: 14px;
+    color: #BBBBBB;
+    box-sizing:border-box;
+}
+.artistarea .frame .frameimg{
+    height: 120px;
+    width: 100%;
+}
+.artistarea .frame .frameimg img{
+    width: 100%;
+    height: 100%;
+}
+.artistarea .frame .frame_name{
+    color: #878787;
+    font-size: 14px;
+    margin:2px 0;
+}
+.artistarea .frame .frame_price{
+    color: #878787;
+    font-size: 14px;
+}
+.artistarea .frame .frame_price span{
+    color: #f7cc1e;
+}
+.artistarea .frame .frame_detail{
+    position: absolute;
+    background: #FFFFFF;
+    width:340px;
+    height: 125px;
+    box-shadow: 0 0 10px #878787; 
+    top: 15px;
+    left: 0px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .35s ease-in-out;
+}
+.artistarea .frame .frame_detail.hover{
+    opacity: 1;
+    visibility:visible;
+}
+
+.artistarea .frame .frame_detail img{
+    width: 100%;
+    height: 100%;
+}
+
 .artistarea .csopt{
     margin: 15px 0;
     width: 100%;
@@ -3301,14 +3385,14 @@ img.zoom-img {
     position: absolute;
     width: 200px;
     height: 50px;
-    background-color: #FCEE21;
+    background-color: #0C0F08;
     line-height: 50px;
-    color: #666;
+    color: #FFFFFF;
     font-weight: bold;
     right: 0;
 }
 .cart .topay .btn:hover{
-    background-color: #f7cc1e;
+    opacity: 0.7;
 }
 
 @media screen and (max-width:960px) {
@@ -3985,9 +4069,11 @@ img.zoom-img {
 
 
 .paytitle{
-    margin-top:20px;
+    font-weight: bold;
+    color: #666;
+    font-size: 30px;
+    margin: 20px 0 0;
     text-align: left;
-    font-size: 24px;
 }
 .paybox{
     width: 100%;

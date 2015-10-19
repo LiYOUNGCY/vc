@@ -57,10 +57,6 @@
      *************************************/
     'use strict';
 
-    function a(id) {
-        window.location.href = BASE_URL + 'production/' + id;
-    }
-
     var medium = $('#medium');
     var style = $('#style');
     var price = $('#price');
@@ -218,7 +214,8 @@
                     var height = data[i].height;
 
 
-                    var box = $('<div class="production" onclick="a(' + id + ')">' +
+                    var box = $('<div class="production">' +
+                        '<a href="<?=base_url()?>production/'+ id +'">' +
                         '<img class="image" src="' + img + '" style="width: '+width+'px; height: '+height+'px;">' +
                         '<p class="title">' + title + '</p>' +
                         '<p class="author">作者：' + author + '</p>' +
@@ -230,6 +227,7 @@
                         '<div class="price" title="价格">' + price + ' RMB</div>' +
                         '<div class="vote" title="收藏">' + like + '<div class="icon like"></div></div>' +
                         '</div>' +
+                        '</a>' +
                         '</div>');
 
                     $container.append(box);
