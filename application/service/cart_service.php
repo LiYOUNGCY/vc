@@ -34,7 +34,7 @@ class Cart_service extends MY_Service{
 		if( ! $set)
 		{
 			$production 	   = $this->production_model->get_production_by_id($pid);
-			$production['pic'] = Common::get_thumb_url($production['pic']);			
+			$production['pic'] = Common::get_thumb_url($production['pic']);
 			if(empty($production))
 			{
 				$this->error->output('INVALID_REQUEST');
@@ -43,21 +43,21 @@ class Cart_service extends MY_Service{
 			if( ! empty($production['aid']))
 			{
 				$this->load->model('artist_model');
-				$artist = $this->artist_model->get_artist_base_id($production['aid']);					
-			}	
+				$artist = $this->artist_model->get_artist_base_id($production['aid']);
+			}
 			else
 			{
 				$artist = NULL;
-			}		
+			}
 
 			//将购物车物品信息添加到数据库
 			$result = $this->cart_model->insert_good($uid,$pid);
 			if( ! empty($result))
 			{
-				//将购物车物品信息添加到session					
+				//将购物车物品信息添加到session
 				$arr = $_SESSION['cart'];
 				$v   = array(
-					 'id'         => $result['id'], 
+					 'id'         => $result['id'],
 					 'add_time'   => $result['add_time'],
 					 'production' => $production,
 					 'artist' 	  => $artist
@@ -68,7 +68,7 @@ class Cart_service extends MY_Service{
 			else
 			{
 				$this->error->output('INVALID_REQUEST');
-			}			
+			}
 		}
 		//购物车已有该物品
 		else
@@ -103,7 +103,7 @@ class Cart_service extends MY_Service{
 			return TRUE;
 		}
 		return FALSE;
-		
+
 	}
 
 	/**
@@ -118,7 +118,7 @@ class Cart_service extends MY_Service{
 		if(isset($_SESSION['cart_has_get']) && $_SESSION['cart_has_get'] === 1)
 		{
 			return $_SESSION['cart'];
-		}	
+		}
 		else
 		{
 			//获取购物车物品列表
@@ -142,21 +142,21 @@ class Cart_service extends MY_Service{
 		foreach ($goods as $k => $v) {
 			//获取物品详情
 			$p = $this->production_model->get_production_by_id($goods[$k]['pid']);
-			$p['pic'] = Common::get_thumb_url($p['pic']);
-			unset($goods[$k]['pid']);	
+			// $p['pic'] = Common::get_thumb_url($p['pic']);
+			unset($goods[$k]['pid']);
 			unset($goods[$k]['uid']);
 			$goods[$k]['production'] = $p;
 			$this->load->model('artist_model');
 			if( ! empty($p['aid']))
 			{
-				$goods[$k]['artist'] = $this->artist_model->get_artist_base_id($p['aid']);				
+				$goods[$k]['artist'] = $this->artist_model->get_artist_base_id($p['aid']);
 			}
 			else
 			{
 				$goods[$k]['artist'] = NULL;
 			}
 		}
-		return $goods;	
+		return $goods;
 	}
 
 

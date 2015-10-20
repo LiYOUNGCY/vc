@@ -51,11 +51,12 @@ class Frame_model extends CI_Model
     }
 
 
-    public function get_frame_by_id()
+    public function get_frame_by_id($id)
     {
         $query = $this->db->select('frame.id, frame.name, frame.price, image.image_path as image, frame.thumb_id')
             ->from('frame, image')
             ->where('frame.image_id = image.image_id')
+            ->where('frame.id', $id)
             ->get()
             ->row_array();
 

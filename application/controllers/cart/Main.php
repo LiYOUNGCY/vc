@@ -5,6 +5,8 @@ class Main extends MY_Controller{
 		parent::__construct();
 		$this->load->service('cart_service');
 	}
+
+
 	public function index()
 	{
 		$head['css'] = array(
@@ -30,6 +32,8 @@ class Main extends MY_Controller{
 		$this->load->view('common/head', $head);
 		$this->load->view('cart', $body);
 	}
+
+
 	/**
 	 * [get_good_list 获取购物车物品列表]
 	 * @return [type] [description]
@@ -40,22 +44,23 @@ class Main extends MY_Controller{
 		$page = 0;
 		$limit= 10;
 		$goods = $this->cart_service->get_good_list($this->user['id'],$page,$limit);
-		
+
 		if( ! empty($goods))
 		{
 			//分页输出
 			$arr['goods'] = array_slice($goods, $page * $limit, $limit);
 			//购物车总数量
-			$arr['count'] = count($goods);			
+			$arr['count'] = count($goods);
 		}
 		else
 		{
 			$arr['goods'] = NULL;
 			$arr['count'] = 0;
 		}
-		
+
 		echo json_encode($arr);
 	}
+
 
 	/**
 	 * [add_good 添加购物车物品]
@@ -63,10 +68,11 @@ class Main extends MY_Controller{
 	public function add_good()
 	{
 		$pid = $this->sc->input('pid');
-		
+
 		$result = $this->cart_service->add_good($this->user['id'],$pid);
 		echo json_encode(array('success' => 0, 'note' => lang('OPERATE_SUCCESS')));
 	}
+
 
 	/**
 	 * [remove_good 移除购物车物品]

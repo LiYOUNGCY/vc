@@ -29,6 +29,7 @@ class Detail extends MY_Controller
         $production['publish_time'] = substr($production['publish_time'], 0, 10);
 
         $body['production'] = $production;
+        $body['frame'] = $this->production_service->get_frame_by_production_id($pid);
 
         $uid = isset($this->user['id']) ? $this->user['id'] : NULL;
         //获取相关联的专题
@@ -62,7 +63,7 @@ class Detail extends MY_Controller
         $this->load->view('common/head', $data);
         $this->load->view('production_detail', $body);
 
-
+        // var_dump($body);
     }
 
     /**
