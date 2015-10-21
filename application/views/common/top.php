@@ -169,15 +169,10 @@ if($user['role']==0){
     function pushcartcount(){
         $.ajax({
             type: 'POST',
-            url: GET_CART_GOODS,
+            url: GET_CART_GOODS_COUNT,
             async: true,
-            data: {
-                page : 0
-            },
             dataType: 'json',
-            success: function(data) {
-                console.log(data);
-                var good = data;
+            success: function(good) {
                 if(good.error != null || good.length === 0) {
                     console.log('Error');
                     return false;

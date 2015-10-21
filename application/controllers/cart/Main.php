@@ -1,94 +1,92 @@
 <?php
-class Main extends MY_Controller{
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load->service('cart_service');
-	}
 
+class Main extends MY_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->service('cart_service');
+    }
 
-	public function index()
-	{
-		$head['css'] = array(
-			'base.css',
-			'font-awesome/css/font-awesome.min.css',
-			'alert.css',
-		);
+    public function index()
+    {
+        $head['css'] = array(
+            'base.css',
+            'font-awesome/css/font-awesome.min.css',
+            'alert.css',
+        );
 
-		$head['javascript'] = array(
-			'jquery.js',
-			'error.js',
-			'alert.min.js',
-		);
+        $head['javascript'] = array(
+            'jquery.js',
+            'error.js',
+            'alert.min.js',
+        );
 
-		$user['user'] 		  = $this->user;
-		$user['sign'] = $this->load->view('common/sign', '', TRUE);
+        $user['user'] = $this->user;
+        $user['sign'] = $this->load->view('common/sign', '', true);
 
-        $head['title']        = "购物车";
-        $body['top']          = $this->load->view('common/top', $user, TRUE);
-        $body['footer']       = $this->load->view('common/footer', '', TRUE);
-        $body['user']         = $this->user;
+        $head['title'] = '购物车';
+        $body['top'] = $this->load->view('common/top', $user, true);
+        $body['footer'] = $this->load->view('common/footer', '', true);
+        $body['user'] = $this->user;
 
-		$this->load->view('common/head', $head);
-		$this->load->view('cart', $body);
-	}
+        $this->load->view('common/head', $head);
+        $this->load->view('cart', $body);
+    }
 
+    /**
+     * [get_good_list 获取购物车物品列表].
+     *
+     * @return [type] [description]
+     */
+    public function get_good_list()
+    {
+        $goods = $this->cart_service->get_good_list($this->user['id']);
+        echo json_encode($goods);
+    }
 
-	/**
-	 * [get_good_list 获取购物车物品列表]
-	 * @return [type] [description]
-	 */
-	public function get_good_list()
-	{
-		//$page = $this->sc->input('page');
-		$page = 0;
-		$limit= 10;
-		$goods = $this->cart_service->get_good_list($this->user['id'],$page,$limit);
+    /**
+     * [remove_good 移除购物车物品].
+     *
+     * @return [type] [description]
+     */
+    public function remove_goods()
+    {
+        $production_id = $this->sc->input('id');
 
-		if( ! empty($goods))
-		{
-			//分页输出
-			$arr['goods'] = array_slice($goods, $page * $limit, $limit);
-			//购物车总数量
-			$arr['count'] = count($goods);
-		}
-		else
-		{
-			$arr['goods'] = NULL;
-			$arr['count'] = 0;
-		}
+        $this->cart_service->remove_goods($this->user['id'], $production_id);
 
-		echo json_encode($arr);
-	}
+        $this->message->success();
+    }
 
+    /**
+     * [get_cart_count 获取购物车上的商品数].
+     *
+     * @return [type] [description]
+     */
+    public function get_cart_count()
+    {
+        $query = $this->cart_service->get_cart_count_by_user($this->user['id']);
+        $this->message->success($query);
+    }
 
-	/**
-	 * [add_good 添加购物车物品]
-	 */
-	public function add_good()
-	{
-		$pid = $this->sc->input('pid');
+    /**
+     * [add_goods 添加艺术品到购物车]
+     */
+    public function add_goods()
+    {
+        $production_id = $this->sc->input('production_id');
+        $frame_id = $this->sc->input('frame_id');
 
-		$result = $this->cart_service->add_good($this->user['id'],$pid);
-		echo json_encode(array('success' => 0, 'note' => lang('OPERATE_SUCCESS')));
-	}
+        $this->cart_service->insert_goods_to_cart($this->user['id'], $production_id, $frame_id);
 
+        $this->message->success();
+    }
 
-	/**
-	 * [remove_good 移除购物车物品]
-	 * @return [type] [description]
-	 */
-	public function remove_good()
-	{
-		$id = $this->sc->input('id');
-		$result = $this->cart_service->remove_good($id,$this->user['id']);
-		if($result)
-		{
-			echo json_encode(array('success' => 0, 'note' => lang('OPERATE_SUCCESS')));
-		}
-		else
-		{
-			$this->error->output('INVALID_REQUEST');
-		}
-	}
+    public function test()
+    {
+        $production_id = 61;
+        $query = $this->cart_service->insert_goods_to_cart($this->user['id'], $production_id, 1);
+        var_dump($query);
+    }
 }

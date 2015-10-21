@@ -43,8 +43,6 @@ class Detail extends MY_Controller
         $data['javascript'] = array(
             'jquery.js',
             'alert.min.js',
-            'masonry.pkgd.min.js',
-            'jquery.imageloader.js',
             'error.js',
 
             'zoomtoo.js',
@@ -63,7 +61,7 @@ class Detail extends MY_Controller
         $this->load->view('common/head', $data);
         $this->load->view('production_detail', $body);
 
-        // var_dump($body);
+//         var_dump($body);
     }
 
     /**
