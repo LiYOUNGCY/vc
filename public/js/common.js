@@ -39,11 +39,14 @@ var GET_ARTIST_ARTS = BASE_URL + 'artist/detail/get_artist_production';
 //获取购物车列表
 var GET_CART_GOODS = BASE_URL + 'cart/main/get_good_list';
 
+//获取购物车商品的数量
+var GET_CART_GOODS_COUNT = BASE_URL + 'cart/main/get_cart_count';
+
 //删除购物车商品
-var REMOVE_CART_GOODS = BASE_URL + 'cart/main/remove_good';
+var REMOVE_CART_GOODS = BASE_URL + 'cart/main/remove_goods';
 
 //添加购物车商品
-var ADD_CART_GOODS = BASE_URL + 'cart/main/add_good';
+var ADD_CART_GOODS = BASE_URL + 'cart/main/add_goods';
 
 
 //艺术品点赞

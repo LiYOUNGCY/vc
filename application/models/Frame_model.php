@@ -54,8 +54,8 @@ class Frame_model extends CI_Model
     public function get_frame_by_id($id)
     {
         $query = $this->db->select('frame.id, frame.name, frame.price, image.image_path as image, frame.thumb_id')
-            ->from('frame, image')
-            ->where('frame.image_id = image.image_id')
+            ->from('frame')
+            ->join('image', 'frame.image_id = image.image_id', 'left')
             ->where('frame.id', $id)
             ->get()
             ->row_array();
@@ -101,5 +101,18 @@ class Frame_model extends CI_Model
     {
         $this->db->where('id', $id)->delete('frame');
         return $this->db->affected_rows() === 1;
+    }
+
+
+    /**
+     * [check_frame_by_production_id 查询裱是否属于艺术品]
+     * @param  [type] $frame_id      [description]
+     * @param  [type] $production_id [description]
+     * @return [type]                [description]
+     */
+    public function check_frame_by_production_id($frame_id, $production_id)
+    {
+        $this->db->from('production_frame')->where('frame_id', $frame_id)->where('production_id', $production_id);
+        return $this->db->count_all_results() === 1;
     }
 }

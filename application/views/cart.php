@@ -29,18 +29,19 @@
                 <div class="total">￥<font style="font-size:32px;" id="totalprice"></font></div>
             </div>
             <div class="topay">
-              <div class="btn">去结算</div>  
+              <div class="btn">去结算</div>
             </div>
         </div>
     </div>
     </div>
-    <?php echo $footer;?> 
+    <?php echo $footer;?>
 </div>
 </body>
 <script>
 
 
 $(function(){
+    'use strict';
     var page = 0;
 
     loadgoods();
@@ -52,7 +53,7 @@ $(function(){
 
         deletegood(id);
         pushcartcount();
-        
+
 
         $(this).parent().fadeOut(400,function(){
             $(this).remove();
@@ -67,48 +68,45 @@ $(function(){
             type: 'POST',
             url: GET_CART_GOODS,
             async: false,
-            data: {
-                page : page
-            },
             dataType: 'json',
             success: function(data) {
+                console.log(data);
                 var good = data;
-                if(good.goods == null || good.count === 0) {
+                console.log(good.length);
+                if(good.error != null || good.length == 0) {
                     nogoods();
                     return false;
                 }
 
-                page++;
                 var sum   = 0;
-                var count =  good.count;
-                var good  = good.goods;
+                var count = good.length;
                 for(var i = 0; i < good.length; i++){
-                    var id          = good[i].id;
-                    var pid         = good[i].production.id;
-                    var image       = good[i].production.pic;
-                    var name        = good[i].production.name;
-                    var artist      = good[i].artist.name;
-                    var aid         = good[i].artist.ids;
-                    var medium        = good[i].production.medium;
-                    var price       = good[i].production.price;
-                    var w           = good[i].production.w;
-                    var h           = good[i].production.h;
-                    var style        = good[i].production.style;
-                    var time        = good[i].production.creat_time;
+                    var id          = good[i].production_id;
+                    var pid         = good[i].production_id;
+                    var image       = good[i].pic;
+                    var name        = good[i].name;
+                    var artist      = good[i].artist_name;
+                    var aid         = good[i].artist_id;
+                    var medium      = good[i].medium;
+                    var price       = good[i].price;
+                    var w           = good[i].w;
+                    var h           = good[i].h;
+                    var style       = good[i].style;
+                    var time        = good[i].creat_time;
 
                     var elm = '' +
                     '<li class="art clearfix" id="'+ id +'">' +
                     '<div class="delete"><i class="fa fa-close"></i></div>' +
                     '<a href="<?=base_url()?>production/'+ pid +'">' +
                     '<div class="pic" style="background: url('+ image +');background-size:cover;background-position:50% 50%;"></div>' +
-                    '</a>'+ 
-                    '<div class="info">'+ 
+                    '</a>'+
+                    '<div class="info">'+
                     '<div class="name"><a href="<?=base_url()?>production/'+ id +'" class="link">'+ name +'</a></div>' +
                     '<div class="artist">&nbsp;&nbsp;作者：<a href="<?=base_url()?>artist/'+ aid +'" class="link">'+ artist +'</a></div>' +
                     '<div class="detail">'+ medium +'，'+ style +'，'+ w +' X '+ h +'cm，'+ time +'</div>' +
-                    '</div>'+ 
-                    '<div class="price">'+ 
-                    '￥<font style="font-size:32px;color:#f7cc1e" id="goodprice">'+ price +'</font>'+ 
+                    '</div>'+
+                    '<div class="price">'+
+                    '￥<font style="font-size:32px;color:#f7cc1e" id="goodprice">'+ price +'</font>'+
                     '</div>' +
                     '</li>';
 
@@ -120,10 +118,10 @@ $(function(){
                 $("#artnum").html(count);
                 $("#totalprice").html(sum);
             }
-        });    
+        });
     }
     function nogoods(){
-        var elem = '' + 
+        var elem = '' +
         '<div class="nonebox">' +
         '<div class="box">' +
         '<div class="text">您购物车还没有商品呢</div>' +
@@ -136,6 +134,7 @@ $(function(){
         $("#showder").html(elem);
     }
     function deletegood(id){
+        console.log(id);
         $.ajax({
             type: 'POST',
             url: REMOVE_CART_GOODS,
@@ -145,6 +144,7 @@ $(function(){
             },
             dataType: 'json',
             success: function(data) {
+                console.log(data);
                 var good = data;
                 if(good.error != null || good.length === 0) {
                     console.log('Error');
@@ -152,7 +152,7 @@ $(function(){
                 }
 
             }
-        });  
+        });
     }
 
     function changefinal(goodprice){

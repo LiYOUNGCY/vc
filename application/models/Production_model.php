@@ -8,6 +8,7 @@ class Production_model extends CI_Model
         parent::__construct();
     }
 
+
     /**
      * 获取作品列表
      * @param  page 页数          integer
@@ -90,6 +91,7 @@ class Production_model extends CI_Model
         $query = $query->order_by($order)->limit($limit, $page * $limit)->get()->result_array();
         return $query;
     }
+
 
     /**
      * 根据id获取艺术品详情
@@ -247,6 +249,7 @@ class Production_model extends CI_Model
 		')
             ->from('production')
             ->like('production.name', $keyword)
+            ->where('production.status', 0)
             ->get()
             ->result_array();
 
@@ -305,5 +308,17 @@ class Production_model extends CI_Model
 
         $this->db->insert('production_frame', $data);
         return $this->db->insert_id();
+    }
+
+
+    /**
+     * [exist_production 检查艺术品是否在]
+     * @param  [type] $production_id [description]
+     * @return [type]                [description]
+     */
+    public function exist_production($production_id)
+    {
+        $this->db->from('production')->where('id', $production_id);
+        return $this->db->count_all_results() === 1;
     }
 }

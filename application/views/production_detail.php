@@ -46,60 +46,25 @@
                     <div class="frame">
                         <div class="title">选裱推荐：</div>
                         <ul>
-                            <li>
-                                <div class="noframe">
-                                    不装裱
-                                </div>
-                                <div class="frame_name">
-                                    无
-                                </div>
-                                <div class="frame_price">
-                                    ￥ <span>0</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="frameimg">
-                                    <img src="<?= base_url()?>public/img/jb.jpg" alt="金边">
-                                </div>
-                                <div class="frame_name">
-                                    金边
-                                </div>
-                                <div class="frame_price">
-                                    ￥ <span>200</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="frameimg">
-                                    <img src="<?= base_url()?>public/img/yb.jpg" alt="银边">
-                                </div>
-                                <div class="frame_name">
-                                    银边
-                                </div>
-                                <div class="frame_price">
-                                    ￥ <span>110</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="frameimg">
-                                    <img src="<?= base_url()?>public/img/jb.jpg" alt="金边">
-                                </div>
-                                <div class="frame_name">
-                                    金边
-                                </div>
-                                <div class="frame_price">
-                                    ￥ <span>200</span>
-                                </div>
-                            </li>
+                            <?php foreach($frame as $value) { ?>
+                                <li data-id="<?=$value['id']?>">
+                                    <div class="frameimg">
+                                        <img src="<?=$value['image']?>" alt="金边">
+                                    </div>
+                                    <div class="frame_name">
+                                        <?=$value['name']?>
+                                    </div>
+                                    <div class="frame_price">
+                                        ￥ <span><?=$value['price']?></span>
+                                    </div>
+                                </li>
+                            <?php } ?>
                         </ul>
-                        <div class="frame_detail" id="fd1">
-                            <img src="<?= base_url()?>public/img/jbx.jpg" alt="">
+                        <?php foreach($frame as $value) if(isset($value['thumb'])) {  ?>
+                        <div class="frame_detail" id="fd<?=$value['id']?>">
+                            <img src="<?=$value['thumb']?>" alt="">
                         </div>
-                        <div class="frame_detail" id="fd2">
-                            <img src="<?= base_url()?>public/img/jbx.jpg" alt="">
-                        </div>
-                        <div class="frame_detail" id="fd3">
-                            <img src="<?= base_url()?>public/img/jbx.jpg" alt="">
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="price"><font style="font-weight:normal;color:#888888;font-size:16px;">售价：</font><?=$production['price']?> RMB</div>
@@ -136,8 +101,9 @@ $(function() {
         magnify: 2
     });
     var pid = $('#pid').val();
-    
-    $(".frame li").each(function(i){
+
+    $(".frame li").each(function(){
+        var i = $(this).attr('data-id');
         $(this).hover(function(){
             var id = "#fd" + i;
             $(id).addClass("hover");

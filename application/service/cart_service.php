@@ -1,163 +1,81 @@
 <?php
-class Cart_service extends MY_Service{
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load->model('cart_model');
-		$this->load->model('production_model');
-	}
-
-	/**
-	 * [add_good 添加物品到购物车]
-	 * @param [type] $uid [用户id]
-	 * @param [type] $pid [物品id]
-	 */
-	public function add_good($uid, $pid)
-	{
-		if( ! isset($_SESSION['cart_has_get']) || $_SESSION['cart_has_get'] !== 1)
-		{
-			//获取购物车物品列表
-			$goods = $this->_get_all_good_list($uid);
-			//设置session
-			$_SESSION['cart'] = $goods;
-		}
-
-		$set = FALSE;
-		foreach ($_SESSION['cart'] as $k => $v) {
-			if($v['production']['id'] == $pid)
-			{
-				$set = TRUE;
-				break;
-			}
-		}
-		//购物车还未有该物品
-		if( ! $set)
-		{
-			$production 	   = $this->production_model->get_production_by_id($pid);
-			$production['pic'] = Common::get_thumb_url($production['pic']);
-			if(empty($production))
-			{
-				$this->error->output('INVALID_REQUEST');
-			}
-			//获取艺术家信息
-			if( ! empty($production['aid']))
-			{
-				$this->load->model('artist_model');
-				$artist = $this->artist_model->get_artist_base_id($production['aid']);
-			}
-			else
-			{
-				$artist = NULL;
-			}
-
-			//将购物车物品信息添加到数据库
-			$result = $this->cart_model->insert_good($uid,$pid);
-			if( ! empty($result))
-			{
-				//将购物车物品信息添加到session
-				$arr = $_SESSION['cart'];
-				$v   = array(
-					 'id'         => $result['id'],
-					 'add_time'   => $result['add_time'],
-					 'production' => $production,
-					 'artist' 	  => $artist
-				);
-				array_unshift($arr,$v);
-				$_SESSION['cart'] = $arr;
-			}
-			else
-			{
-				$this->error->output('INVALID_REQUEST');
-			}
-		}
-		//购物车已有该物品
-		else
-		{
-			$this->error->output('INVALID_REQUEST');
-		}
-		return TRUE;
-	}
-
-	/**
-	 * [remove_good 从购物车中删除物品]
-	 * @param  [type] $id  [物品id]
-	 * @param  [type] $uid [用户id]
-	 * @return [type]      [description]
-	 */
-	public function remove_good($id, $uid)
-	{
-		$result = $this->cart_model->delete_good($id,$uid);
-		if($result)
-		{
-			//删除session
-			if(isset($_SESSION['cart']))
-			{
-				foreach ($_SESSION['cart'] as $k => $v) {
-					if($v['id'] == $id)
-					{
-						unset($_SESSION['cart'][$k]);
-						break;
-					}
-				}
-			}
-			return TRUE;
-		}
-		return FALSE;
-
-	}
-
-	/**
-	 * [get_good_list 获取购物车物品列表]
-	 * @param  [type]  $uid   [用户id]
-	 * @param  integer $page  [页数]
-	 * @param  integer $limit [页面个数限制]
-	 * @return [type]         [description]
-	 */
-	public function get_good_list($uid, $page = 0, $limit = 10)
-	{
-		if(isset($_SESSION['cart_has_get']) && $_SESSION['cart_has_get'] === 1)
-		{
-			return $_SESSION['cart'];
-		}
-		else
-		{
-			//获取购物车物品列表
-			$goods = $this->_get_all_good_list($uid);
-			//添加到session
-			$_SESSION['cart'] = $goods;
-			$_SESSION['cart_has_get'] = 1;
-			return $goods;
-		}
-	}
 
 
-	/**
-	 * [_get_all_good_list 获取用户的所有购物车物品]
-	 * @param  [type] $uid [用户id]
-	 * @return [type]      [description]
-	 */
-	private function _get_all_good_list($uid)
-	{
-		$goods = $this->cart_model->get_good_list_by_uid($uid);
-		foreach ($goods as $k => $v) {
-			//获取物品详情
-			$p = $this->production_model->get_production_by_id($goods[$k]['pid']);
-			// $p['pic'] = Common::get_thumb_url($p['pic']);
-			unset($goods[$k]['pid']);
-			unset($goods[$k]['uid']);
-			$goods[$k]['production'] = $p;
-			$this->load->model('artist_model');
-			if( ! empty($p['aid']))
-			{
-				$goods[$k]['artist'] = $this->artist_model->get_artist_base_id($p['aid']);
-			}
-			else
-			{
-				$goods[$k]['artist'] = NULL;
-			}
-		}
-		return $goods;
-	}
+class Cart_service extends MY_Service
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('cart_model');
+        $this->load->model('frame_model');
+        $this->load->model('production_model');
+    }
+
+    /**
+     * [insert_goods_to_cart 添加艺术品到购物车]
+     * @param  [type] $user_id       [description]
+     * @param  [type] $production_id [description]
+     * @param  [type] $frame_id      [description]
+     * @return [type]                [description]
+     */
+    public function insert_goods_to_cart($user_id, $production_id, $frame_id)
+    {
+        //检查 艺术品 是否 存在
+        $state = $this->production_model->exist_production($production_id);
+
+        if ($state != true) {
+            return false;
+        }
+
+        //检查 艺术品 是否有推荐该 裱
+        $state = $this->frame_model->check_frame_by_production_id($frame_id, $production_id);
+
+        if ($state != true) {
+            return false;
+        }
+
+        //检查 购物车 是否有该 艺术品
+        $state = $this->cart_model->check_production_in_cart($user_id, $production_id);
+
+        if ($state == true) {
+            return false;
+        }
+
+        //把 艺术品 放入购物车
+        $result = $this->cart_model->insert_goods_to_cart($user_id, $production_id, $frame_id);
+
+        return $result;
+    }
 
 
+    public function remove_goods($user_id, $production_id)
+    {
+        return $this->cart_model->remove_goods($user_id, $production_id);
+    }
+
+
+    /**
+     * [get_good_list 获取购物车物品列表]
+     * @param  [type]  $uid   [用户id]
+     * @param  integer $page [页数]
+     * @param  integer $limit [页面个数限制]
+     * @return [type]         [description]
+     */
+    public function get_good_list($uid)
+    {
+        $goods = $this->cart_model->get_good_list_by_user($uid);
+        return $goods;
+    }
+
+
+    /**
+     * [get_cart_count_by_user 获取购物车上商品的数量]
+     * @param  [type] $uid [description]
+     * @return [type]      [description]
+     */
+    public function get_cart_count_by_user($uid)
+    {
+        return $this->cart_model->get_cart_count_by_user($uid);
+    }
 }
