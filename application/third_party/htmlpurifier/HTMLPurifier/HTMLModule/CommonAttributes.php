@@ -3,12 +3,12 @@
 class HTMLPurifier_HTMLModule_CommonAttributes extends HTMLPurifier_HTMLModule
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'CommonAttributes';
 
     /**
-     * @type array
+     * @var array
      */
     public $attr_collections = array(
         'Core' => array(
@@ -23,9 +23,10 @@ class HTMLPurifier_HTMLModule_CommonAttributes extends HTMLPurifier_HTMLModule
             0 => array('Lang'), // proprietary, for xml:lang/lang
         ),
         'Common' => array(
-            0 => array('Core', 'I18N')
-        )
+            0 => array('Core', 'I18N'),
+        ),
     );
 }
 
 // vim: et sw=4 sts=4
+

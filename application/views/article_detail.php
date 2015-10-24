@@ -32,7 +32,9 @@
 
                 <!-- END 文章内容-->
                 <div class="share clearfix">
-                    <div class="likebtn <?php if($like_status) echo 'focus'; ?>" id="vote">
+                    <div class="likebtn <?php if ($like_status) {
+    echo 'focus';
+} ?>" id="vote">
                         <div class="support" id="mark-like"></div>
                         <div class="num" id="seeLike"><?=$article['like']?></div>
                     </div>
@@ -63,7 +65,7 @@
                     {
                         $len = count($comment);
 
-                        for ($j = 0; $j < $len; $j++) {
+                        for ($j = 0; $j < $len; ++$j) {
                             if ($comment[$j]['pid'] == $comment[$i]['id']) {
                                 ?>
                                 <div class="sub_comment" data-id="<?= $comment[$j]['id'] ?>">
@@ -87,13 +89,16 @@
                                 </div>
                                 <?php
                                 find_subcomment($comment, $j);
+
                                 return;
                             }
                         }
                     }
 
                     $len = count($comment);
-                    for ($i = 0; $i < $len; $i++) if ($comment[$i]['pid'] == 0) { ?>
+                    for ($i = 0; $i < $len; ++$i) {
+                        if ($comment[$i]['pid'] == 0) {
+                            ?>
                         <div class="comment" data-id="<?= $comment[$i]['id'] ?>">
                             <div class="avatar"><img src="<?= $comment[$i]['user']['pic'] ?>"></div>
                             <div class="time"><?= $comment[$i]['publish_time'] ?></div>
@@ -115,6 +120,7 @@
                         </div>
                         <?php
                         find_subcomment($comment, $i);
+                        }
                     } ?>
                     <div class="answer clearfix">
                         <div class="btn send" id="wcomment">评论</div>

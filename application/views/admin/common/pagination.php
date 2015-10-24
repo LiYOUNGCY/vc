@@ -8,58 +8,67 @@
 		<ul class="pagination">
 
 			<?php 
-			if($page - 1 < 0)
-			{?>
+            if ($page - 1 < 0) {
+                ?>
 			<li class="prev disabled">	
 				<a href="javascript:void(0);">
 					<<
 				</a>
 			</li>												
 			<?php
-			}else{
-			?>	
+
+            } else {
+                ?>	
 			<li>	
-				<a href="<?=$pageurl.intval($page-1)?>">
+				<a href="<?=$pageurl.intval($page - 1)?>">
 					<<
 				</a>
 			</li>											
-			<?php }?>
+			<?php 
+            }?>
 
 			<?php
-				$count = ceil($count/$limit);
-				for($i = 0; $i < $count; $i++){	
-			?>
+                $count = ceil($count / $limit);
+                for ($i = 0; $i < $count; ++$i) {
+                    ?>
 
-			<?php if($i == $page){?>
+			<?php if ($i == $page) {
+    ?>
 				<li class="active">
 					<a href="javascript:void(0);">
-			<?php } else{?>
+			<?php 
+} else {
+    ?>
 				<li>
 					<a href="<?=$pageurl.$i?>">
-			<?php }?><?=$i+1?>										
+			<?php 
+}
+                    ?><?=$i + 1?>										
 					</a>
 				</li>
 
-			<?php }?>
+			<?php 
+                }?>
 				
 			<?php 
-			if($page + 1 >= $count)
-			{
-			?>
+            if ($page + 1 >= $count) {
+                ?>
 			<li class="prev disabled">	
 				<a href="javascript:void(0);">
 					>>
 				</a>
 			</li>												
 			<?php
-			}else{
-			?>	
+
+            } else {
+                ?>	
 			<li>	
-				<a href="<?=$pageurl.intval($page+1)?>">
+				<a href="<?=$pageurl.intval($page + 1)?>">
 					>>
 				</a>
 			</li>											
-			<?php }?>
+			<?php 
+            }?>
 
 		</ul>
 	</div>

@@ -1,14 +1,15 @@
 <?php
 
 /**
- * Microsoft's proprietary filter: CSS property
+ * Microsoft's proprietary filter: CSS property.
+ *
  * @note Currently supports the alpha filter. In the future, this will
  *       probably need an extensible framework
  */
 class HTMLPurifier_AttrDef_CSS_Filter extends HTMLPurifier_AttrDef
 {
     /**
-     * @type HTMLPurifier_AttrDef_Integer
+     * @var HTMLPurifier_AttrDef_Integer
      */
     protected $intValidator;
 
@@ -18,9 +19,10 @@ class HTMLPurifier_AttrDef_CSS_Filter extends HTMLPurifier_AttrDef
     }
 
     /**
-     * @param string $value
-     * @param HTMLPurifier_Config $config
+     * @param string               $value
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool|string
      */
     public function validate($value, $config, $context)
@@ -58,7 +60,7 @@ class HTMLPurifier_AttrDef_CSS_Filter extends HTMLPurifier_AttrDef
             if ($value === false) {
                 continue;
             }
-            $int = (int)$value;
+            $int = (int) $value;
             if ($int > 100) {
                 $value = '100';
             }
@@ -70,8 +72,10 @@ class HTMLPurifier_AttrDef_CSS_Filter extends HTMLPurifier_AttrDef
         }
         $ret_parameters = implode(',', $ret_params);
         $ret_function = "$function($ret_parameters)";
+
         return $ret_function;
     }
 }
 
 // vim: et sw=4 sts=4
+

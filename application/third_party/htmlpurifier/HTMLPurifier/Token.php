@@ -7,42 +7,47 @@ abstract class HTMLPurifier_Token
 {
     /**
      * Line number node was on in source document. Null if unknown.
-     * @type int
+     *
+     * @var int
      */
     public $line;
 
     /**
      * Column of line node was on in source document. Null if unknown.
-     * @type int
+     *
+     * @var int
      */
     public $col;
 
     /**
      * Lookup array of processing that this token is exempt from.
      * Currently, valid values are "ValidateAttributes" and
-     * "MakeWellFormed_TagClosedError"
-     * @type array
+     * "MakeWellFormed_TagClosedError".
+     *
+     * @var array
      */
     public $armor = array();
 
     /**
      * Used during MakeWellFormed.
-     * @type
+     *
+     * @var
      */
     public $skip;
 
     /**
-     * @type
+     * @var
      */
     public $rewind;
 
     /**
-     * @type
+     * @var
      */
     public $carryover;
 
     /**
      * @param string $n
+     *
      * @return null|string
      */
     public function __get($n)
@@ -61,13 +66,14 @@ abstract class HTMLPurifier_Token
                 case 'HTMLPurifier_Token_Comment':
                     return 'comment';
                 default:
-                    return null;
+                    return;
             }
         }
     }
 
     /**
      * Sets the position of the token in the source document.
+     *
      * @param int $l
      * @param int $c
      */
@@ -79,13 +85,14 @@ abstract class HTMLPurifier_Token
 
     /**
      * Convenience function for DirectLex settings line/col position.
+     *
      * @param int $l
      * @param int $c
      */
     public function rawPosition($l, $c)
     {
         if ($c === -1) {
-            $l++;
+            ++$l;
         }
         $this->line = $l;
         $this->col = $c;
@@ -98,3 +105,4 @@ abstract class HTMLPurifier_Token
 }
 
 // vim: et sw=4 sts=4
+

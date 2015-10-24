@@ -39,23 +39,20 @@
                     </div>
                     <div class="more"><a href="<?= base_url() ?>topic" class="link">more</a></div>
                 </div>
-                <?php $i=0;
+                <?php $i = 0;
                 foreach ($topic as $k => $v): ?>
                     
                     <?php
-                        if($i > 3) {
+                        if ($i > 3) {
                             break;
                         }
-                        if($i == 0)
-                        {
-                            $i=1;
+                        if ($i == 0) {
+                            $i = 1;
                             echo '<div class="item big"><a href="'.base_url().'article/'.$v['content']['article_id'].'"><div class="box" style="background:url('.$v['content']['article_bigimage'].');background-size:cover;background-position:50% 50%;">';
-                        }
-                        else
-                        {
+                        } else {
                             echo '<div class="item"><a href="'.base_url().'article/'.$v['content']['article_id'].'"><div class="box" style="background: url('.$v['content']['article_image'].');background-size:cover;background-position:50% 50%;">';
                         }
-                        $i++;
+                        ++$i;
                     ?>
                             <div class="info">
                                 <p><?=$v['content']['article_content']?></p>
@@ -84,19 +81,16 @@
                     </div>
                     <div class="more"><a href="<?= base_url() ?>topic" class="link">more</a></div>
                 </div>
-                <?php $i=0;
+                <?php $i = 0;
                 foreach ($production as $k => $v): ?>
                     <?php
-                        
-                        if($i == 0)
-                        {
+
+                        if ($i == 0) {
                             echo '<div class="item big"><a href="'.base_url().'production/'.$v['id'].'"><div class="box" style="background:url('.$v['bigpic'].');background-size:cover;background-position:50% 50%;">';
-                        }
-                        else
-                        {
+                        } else {
                             echo '<div class="item"><a href="'.base_url().'production/'.$v['id'].'"><div class="box" style="background: url('.$v['pic'].');background-size:cover;background-position:50% 50%;">';
                         }
-                        $i++;
+                        ++$i;
                     ?>
                             <div class="info">
                                 <div class="look">

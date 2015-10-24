@@ -9,7 +9,7 @@ class Publish extends MY_Controller
         $this->load->model('frame_model');
     }
 
-    public function index($type = 'publish', $pid = NULL)
+    public function index($type = 'publish', $pid = null)
     {
         $data = array();
         $data['medium'] = $this->production_service->get_medium_list();
@@ -19,7 +19,7 @@ class Publish extends MY_Controller
             $head['title'] = '发布艺术品';
             $data['frame'] = $this->frame_model->get_frame_list();
             $this->load->view('publish_production', $data);
-        } else if ($type == 'update') {
+        } elseif ($type == 'update') {
             if (!is_numeric($pid)) {
                 show_404();
             }
@@ -38,7 +38,8 @@ class Publish extends MY_Controller
     }
 
     /**
-     * [publish_production 发布艺术品]
+     * [publish_production 发布艺术品].
+     *
      * @return [type] [description]
      */
     public function publish_production()
@@ -54,7 +55,7 @@ class Publish extends MY_Controller
             'h',
             'l',
             'image_id',
-            'price'
+            'price',
         );
 
         $data = $this->sc->input($data);
@@ -72,11 +73,12 @@ class Publish extends MY_Controller
             $this->message->error();
         }
 
-        redirect(base_url() . ADMINROUTE . 'production');
+        redirect(base_url().ADMINROUTE.'production');
     }
 
     /**
-     * [update_production 更新艺术品]
+     * [update_production 更新艺术品].
+     *
      * @return [type] [description]
      */
     public function update_production()
@@ -94,7 +96,7 @@ class Publish extends MY_Controller
             'w',
             'h',
             'l',
-            'price'
+            'price',
         );
         $data = $this->sc->input($data);
 
@@ -113,13 +115,12 @@ class Publish extends MY_Controller
         }
 
         if ($result) {
-            redirect(base_url() . ADMINROUTE . 'production');
+            redirect(base_url().ADMINROUTE.'production');
         }
     }
 
-
     /**
-     * 作品下架
+     * 作品下架.
      */
     public function pull_off()
     {
@@ -129,20 +130,19 @@ class Publish extends MY_Controller
 
         if ($result) {
             $output = array(
-                'success' => 0
+                'success' => 0,
             );
             echo json_encode($output);
         } else {
             $output = array(
-                'error' => -1
+                'error' => -1,
             );
             echo json_encode($output);
         }
     }
 
-
     /**
-     * 作品上架
+     * 作品上架.
      */
     public function put_on()
     {
@@ -152,12 +152,12 @@ class Publish extends MY_Controller
 
         if ($result) {
             $output = array(
-                'success' => 0
+                'success' => 0,
             );
             echo json_encode($output);
         } else {
             $output = array(
-                'error' => -1
+                'error' => -1,
             );
             echo json_encode($output);
         }

@@ -33,7 +33,8 @@
                         <div class="time">2015-09-14 17:06:53</div>
                     </div>
                 </div>
-                <?php for ($i = 0; $i < 20; $i++) { ?>
+                <?php for ($i = 0; $i < 20; ++$i) {
+    ?>
                     <div class="message right">
                         <div class="avatar">
                             <img
@@ -47,7 +48,8 @@
                             <div class="time">2015-09-14 17:07:35</div>
                         </div>
                     </div>
-                <?php } ?>
+                <?php 
+} ?>
             </div>
             <div class="form-inline">
                 <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">

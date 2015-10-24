@@ -15,11 +15,10 @@
  * as well as transform elements that don't have an implementation.
  * See docs/ref-strictness.txt for more details.
  */
-
 class HTMLPurifier_HTMLModule_Legacy extends HTMLPurifier_HTMLModule
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'Legacy';
 
@@ -37,7 +36,7 @@ class HTMLPurifier_HTMLModule_Legacy extends HTMLPurifier_HTMLModule
                 'color' => 'Color',
                 'face' => 'Text', // extremely broad, we should
                 'size' => 'Text', // tighten it
-                'id' => 'ID'
+                'id' => 'ID',
             )
         );
         $this->addElement('center', 'Block', 'Flow', 'Common');
@@ -47,7 +46,7 @@ class HTMLPurifier_HTMLModule_Legacy extends HTMLPurifier_HTMLModule
             'Required: li',
             'Common',
             array(
-                'compact' => 'Bool#compact'
+                'compact' => 'Bool#compact',
             )
         );
         $this->addElement(
@@ -67,7 +66,7 @@ class HTMLPurifier_HTMLModule_Legacy extends HTMLPurifier_HTMLModule
             'Required: li',
             'Common',
             array(
-                'compact' => 'Bool#compact'
+                'compact' => 'Bool#compact',
             )
         );
 
@@ -106,7 +105,7 @@ class HTMLPurifier_HTMLModule_Legacy extends HTMLPurifier_HTMLModule
         $dl = $this->addBlankElement('dl');
         $dl->attr['compact'] = 'Bool#compact';
 
-        for ($i = 1; $i <= 6; $i++) {
+        for ($i = 1; $i <= 6; ++$i) {
             $h = $this->addBlankElement("h$i");
             $h->attr['align'] = $align;
         }
@@ -184,3 +183,4 @@ class HTMLPurifier_HTMLModule_Legacy extends HTMLPurifier_HTMLModule
 }
 
 // vim: et sw=4 sts=4
+

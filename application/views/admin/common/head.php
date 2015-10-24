@@ -33,22 +33,20 @@
     <![endif]-->
         <!-- 导入 CSS -->
     <?php
-    if(isset($css))
-    {
+    if (isset($css)) {
         foreach ($css as $value) {
-            echo "<link rel='stylesheet' href='".base_url()."public/admin/css/".$value."'>";
-        }       
-    } 
+            echo "<link rel='stylesheet' href='".base_url().'public/admin/css/'.$value."'>";
+        }
+    }
 
     ?>
 
     <!-- 导入 Javascript -->
     <?php
-    if(isset($javascript))
-    {
+    if (isset($javascript)) {
         foreach ($javascript as $value) {
-            echo "<script src=".base_url().'public/admin/js/'.$value."></script>";
-        }        
+            echo '<script src='.base_url().'public/admin/js/'.$value.'></script>';
+        }
     }
 
     ?>

@@ -5,10 +5,10 @@
  */
 class HTMLPurifier_AttrDef_CSS_Font extends HTMLPurifier_AttrDef
 {
-
     /**
-     * Local copy of validators
-     * @type HTMLPurifier_AttrDef[]
+     * Local copy of validators.
+     *
+     * @var HTMLPurifier_AttrDef[]
      * @note If we moved specific CSS property definitions to their own
      *       classes instead of having them be assembled at run time by
      *       CSSDefinition, this wouldn't be necessary.  We'd instantiate
@@ -31,9 +31,10 @@ class HTMLPurifier_AttrDef_CSS_Font extends HTMLPurifier_AttrDef
     }
 
     /**
-     * @param string $string
-     * @param HTMLPurifier_Config $config
+     * @param string               $string
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool|string
      */
     public function validate($string, $config, $context)
@@ -44,7 +45,7 @@ class HTMLPurifier_AttrDef_CSS_Font extends HTMLPurifier_AttrDef
             'menu' => true,
             'message-box' => true,
             'small-caption' => true,
-            'status-bar' => true
+            'status-bar' => true,
         );
 
         // regular pre-processing
@@ -65,7 +66,7 @@ class HTMLPurifier_AttrDef_CSS_Font extends HTMLPurifier_AttrDef
         $stage_1 = array('font-style', 'font-variant', 'font-weight');
         $final = ''; // output
 
-        for ($i = 0, $size = count($bits); $i < $size; $i++) {
+        for ($i = 0, $size = count($bits); $i < $size; ++$i) {
             if ($bits[$i] === '') {
                 continue;
             }
@@ -81,7 +82,7 @@ class HTMLPurifier_AttrDef_CSS_Font extends HTMLPurifier_AttrDef
                             $context
                         );
                         if ($r !== false) {
-                            $final .= $r . ' ';
+                            $final .= $r.' ';
                             $caught[$validator_name] = true;
                             break;
                         }
@@ -117,7 +118,7 @@ class HTMLPurifier_AttrDef_CSS_Font extends HTMLPurifier_AttrDef
                         // attempt to catch line-height
                         if ($line_height === false) {
                             // we need to scroll forward
-                            for ($j = $i + 1; $j < $size; $j++) {
+                            for ($j = $i + 1; $j < $size; ++$j) {
                                 if ($bits[$j] === '') {
                                     continue;
                                 }
@@ -145,13 +146,14 @@ class HTMLPurifier_AttrDef_CSS_Font extends HTMLPurifier_AttrDef
                                 $context
                             );
                             if ($r !== false) {
-                                $final .= '/' . $r;
+                                $final .= '/'.$r;
                             }
                         }
                         $final .= ' ';
                         $stage = 2;
                         break;
                     }
+
                     return false;
                 case 2: // attempting to catch font-family
                     $font_family =
@@ -162,15 +164,18 @@ class HTMLPurifier_AttrDef_CSS_Font extends HTMLPurifier_AttrDef
                         $context
                     );
                     if ($r !== false) {
-                        $final .= $r . ' ';
+                        $final .= $r.' ';
                         // processing completed successfully
                         return rtrim($final);
                     }
+
                     return false;
             }
         }
+
         return false;
     }
 }
 
 // vim: et sw=4 sts=4
+

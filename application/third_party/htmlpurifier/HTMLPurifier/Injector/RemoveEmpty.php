@@ -3,40 +3,39 @@
 class HTMLPurifier_Injector_RemoveEmpty extends HTMLPurifier_Injector
 {
     /**
-     * @type HTMLPurifier_Context
+     * @var HTMLPurifier_Context
      */
     private $context;
 
     /**
-     * @type HTMLPurifier_Config
+     * @var HTMLPurifier_Config
      */
     private $config;
 
     /**
-     * @type HTMLPurifier_AttrValidator
+     * @var HTMLPurifier_AttrValidator
      */
     private $attrValidator;
 
     /**
-     * @type bool
+     * @var bool
      */
     private $removeNbsp;
 
     /**
-     * @type bool
+     * @var bool
      */
     private $removeNbspExceptions;
 
     /**
-     * @type array
-     * TODO: make me configurable
+     * @var array
+     *            TODO: make me configurable
      */
     private $_exclude = array('colgroup' => 1, 'th' => 1, 'td' => 1, 'iframe' => 1);
 
     /**
-     * @param HTMLPurifier_Config $config
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
-     * @return void
      */
     public function prepare($config, $context)
     {
@@ -65,7 +64,7 @@ class HTMLPurifier_Injector_RemoveEmpty extends HTMLPurifier_Injector
                     continue;
                 }
                 if ($this->removeNbsp && !isset($this->removeNbspExceptions[$token->name])) {
-                    $plain = str_replace("\xC2\xA0", "", $next->data);
+                    $plain = str_replace("\xC2\xA0", '', $next->data);
                     $isWsOrNbsp = $plain === '' || ctype_space($plain);
                     if ($isWsOrNbsp) {
                         continue;
@@ -84,7 +83,7 @@ class HTMLPurifier_Injector_RemoveEmpty extends HTMLPurifier_Injector
                 return;
             }
             $token = $deleted + 1;
-            for ($b = 0, $c = count($this->inputZipper->front); $b < $c; $b++) {
+            for ($b = 0, $c = count($this->inputZipper->front); $b < $c; ++$b) {
                 $prev = $this->inputZipper->front[$b];
                 if ($prev instanceof HTMLPurifier_Token_Text && $prev->is_whitespace) {
                     continue;
@@ -92,10 +91,12 @@ class HTMLPurifier_Injector_RemoveEmpty extends HTMLPurifier_Injector
                 break;
             }
             // This is safe because we removed the token that triggered this.
-            $this->rewindOffset($b+$deleted);
+            $this->rewindOffset($b + $deleted);
+
             return;
         }
     }
 }
 
 // vim: et sw=4 sts=4
+

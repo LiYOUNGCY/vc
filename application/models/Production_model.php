@@ -2,32 +2,31 @@
 
 class Production_model extends CI_Model
 {
-
     public function __construct()
     {
         parent::__construct();
     }
 
-
     /**
-     * 获取作品列表
+     * 获取作品列表.
+     *
      * @param  page 页数          integer
      * @param  meid 我的id      [int]
      * @param  aid  艺术家id      [int]
      * @param  limit页面个数限制  integer
      * @param  order 排序          string
+     *
      * @return [type]
      */
     public function get_production_list(
         $page = 0,
-        $meid = NULL,
-        $status = NULL,
-        $search = NULL,
-        $aid = NULL,
+        $meid = null,
+        $status = null,
+        $search = null,
+        $aid = null,
         $limit = 6,
         $order = 'id DESC'
-    )
-    {
+    ) {
         $medium = $search['medium'];
         $categories = $search['categories'];
         $style = $search['style'];
@@ -56,7 +55,6 @@ class Production_model extends CI_Model
             ->where('production_style.id = production.style')
             ->where('image.image_id = production.image_id');
 
-
         if (is_numeric($meid)) {
         }
         if (isset($medium) && is_numeric($medium)) {
@@ -74,10 +72,10 @@ class Production_model extends CI_Model
             foreach ($price as $key => $value) {
                 $price[$key] = intval($value);
             }
-            if (isset ($price[0])) {
+            if (isset($price[0])) {
                 $query = $query->where('production.price >= ', $price[0]);
             }
-            if (isset ($price[1]) && $price[1] > 0) {
+            if (isset($price[1]) && $price[1] > 0) {
                 $query = $query->where('production.price < ', $price[1]);
             }
         }
@@ -89,13 +87,15 @@ class Production_model extends CI_Model
         }
 
         $query = $query->order_by($order)->limit($limit, $page * $limit)->get()->result_array();
+
         return $query;
     }
 
-
     /**
-     * 根据id获取艺术品详情
+     * 根据id获取艺术品详情.
+     *
      * @param  [type]
+     *
      * @return [type]
      */
     public function get_production_by_id($id)
@@ -125,13 +125,15 @@ class Production_model extends CI_Model
             ->where('production.style = production_style.id')
             ->get()
             ->row_array();
+
         return $query;
     }
 
-
     /**
-     * 根据id获取艺术品详情
+     * 根据id获取艺术品详情.
+     *
      * @param  [type]
+     *
      * @return [type]
      */
     public function get_production_detail_by_id($id)
@@ -161,26 +163,30 @@ class Production_model extends CI_Model
             ->where('production.style = production_style.id')
             ->get()
             ->row_array();
+
         return $query;
     }
 
     /**
-     * [insert_production 添加艺术品]
+     * [insert_production 添加艺术品].
      */
     public function insert_production($uid, $data)
     {
-        $data['publish_time'] = date("Y-m-d H:i:s", time());
+        $data['publish_time'] = date('Y-m-d H:i:s', time());
         $data['creat_by'] = $uid;
 
         $this->db->insert('production', $data);
+
         return $this->db->insert_id();
     }
 
     /**
-     * [update_production 更新]
-     * @param  [type] $pid [description]
-     * @param  [type] $arr [description]
-     * @return [type]      [description]
+     * [update_production 更新].
+     *
+     * @param [type] $pid [description]
+     * @param [type] $arr [description]
+     *
+     * @return [type] [description]
      */
     public function update_production($id, $uid, $data)
     {
@@ -188,25 +194,25 @@ class Production_model extends CI_Model
         $data['modify_time'] = date('Y-m-d H:i:s');
 
         $this->db->where('id', $id)->update('production', $data);
+
         return $this->db->affected_rows();
     }
 
-
     /**
-     * 点赞时，艺术品的 like 加一
+     * 点赞时，艺术品的 like 加一.
      */
     public function argee_production($pid)
     {
-        $table_name = $this->db->protect_identifiers('production', TRUE);
+        $table_name = $this->db->protect_identifiers('production', true);
         $this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` + 1 WHERE {$table_name}.id = {$pid}");
     }
 
     /**
-     * 取消点赞时，艺术品的 like 减一
+     * 取消点赞时，艺术品的 like 减一.
      */
     public function disargee_production($pid)
     {
-        $table_name = $this->db->protect_identifiers('production', TRUE);
+        $table_name = $this->db->protect_identifiers('production', true);
         $this->db->query("UPDATE {$table_name} SET {$table_name}.`like` = {$table_name}.`like` - 1 WHERE {$table_name}.id = {$pid} and {$table_name}.`like` > 0");
     }
 
@@ -218,6 +224,7 @@ class Production_model extends CI_Model
     public function delete_production($pid)
     {
         $this->db->delete('production', array('id' => $pid));
+
         return $this->db->affected_rows() === 1;
     }
 
@@ -227,13 +234,15 @@ class Production_model extends CI_Model
             ->limit($limit, $page * $limit)
             ->get('production')
             ->result_array();
+
         return $query;
     }
 
-
     /**
-     * 对艺术品进行模糊搜索
+     * 对艺术品进行模糊搜索.
+     *
      * @param $keyword
+     *
      * @return mixed
      */
     public function get_production_by_keyword($keyword)
@@ -256,35 +265,35 @@ class Production_model extends CI_Model
         return $query;
     }
 
-
     /**
-     * 作品下架
+     * 作品下架.
      */
     public function pull_off($id)
     {
         $data = array(
-            'status' => 2
+            'status' => 2,
         );
         $this->db->where('id', $id)->update('production', $data);
+
         return $this->db->affected_rows() === 1;
     }
 
-
     /**
-     * 作品上架
+     * 作品上架.
      */
     public function put_on($id)
     {
         $data = array(
-            'status' => 0
+            'status' => 0,
         );
         $this->db->where('id', $id)->update('production', $data);
+
         return $this->db->affected_rows() === 1;
     }
 
-
     /**
-     * 删除艺术品所有的裱
+     * 删除艺术品所有的裱.
+     *
      * @param $production_id
      */
     public function delete_production_frame($production_id)
@@ -292,33 +301,37 @@ class Production_model extends CI_Model
         $this->db->where('production_id', $production_id)->delete('production_frame');
     }
 
-
     /**
-     * 插入艺术品的裱
+     * 插入艺术品的裱.
+     *
      * @param $production_id
      * @param $frame_id
+     *
      * @return mixed
      */
     public function insert_production_frame($production_id, $frame_id)
     {
         $data = array(
             'production_id' => $production_id,
-            'frame_id' => $frame_id
+            'frame_id' => $frame_id,
         );
 
         $this->db->insert('production_frame', $data);
+
         return $this->db->insert_id();
     }
 
-
     /**
-     * [exist_production 检查艺术品是否在]
-     * @param  [type] $production_id [description]
-     * @return [type]                [description]
+     * [exist_production 检查艺术品是否在].
+     *
+     * @param [type] $production_id [description]
+     *
+     * @return [type] [description]
      */
     public function exist_production($production_id)
     {
         $this->db->from('production')->where('id', $production_id);
+
         return $this->db->count_all_results() === 1;
     }
 }

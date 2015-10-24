@@ -71,7 +71,7 @@ class Main extends MY_Controller
     }
 
     /**
-     * [add_goods 添加艺术品到购物车]
+     * [add_goods 添加艺术品到购物车].
      */
     public function add_goods()
     {
@@ -85,8 +85,9 @@ class Main extends MY_Controller
 
     public function test()
     {
-        $production_id = 61;
-        $query = $this->cart_service->insert_goods_to_cart($this->user['id'], $production_id, 1);
-        var_dump($query);
+        $production_id = 67;
+        $frame_id = 5;
+
+        $this->cart_service->insert_goods_to_cart($this->user['id'], $production_id, $frame_id);
     }
 }

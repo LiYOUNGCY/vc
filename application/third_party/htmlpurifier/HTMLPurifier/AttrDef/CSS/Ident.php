@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Validates based on {ident} CSS grammar production
+ * Validates based on {ident} CSS grammar production.
  */
 class HTMLPurifier_AttrDef_CSS_Ident extends HTMLPurifier_AttrDef
 {
-
     /**
-     * @param string $string
-     * @param HTMLPurifier_Config $config
+     * @param string               $string
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool|string
      */
     public function validate($string, $config, $context)
@@ -25,8 +25,10 @@ class HTMLPurifier_AttrDef_CSS_Ident extends HTMLPurifier_AttrDef
         if (!preg_match($pattern, $string)) {
             return false;
         }
+
         return $string;
     }
 }
 
 // vim: et sw=4 sts=4
+

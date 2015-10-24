@@ -2,14 +2,15 @@
 
 /**
  * Validates shorthand CSS property background.
+ *
  * @warning Does not support url tokens that have internal spaces.
  */
 class HTMLPurifier_AttrDef_CSS_Background extends HTMLPurifier_AttrDef
 {
-
     /**
      * Local copy of component validators.
-     * @type HTMLPurifier_AttrDef[]
+     *
+     * @var HTMLPurifier_AttrDef[]
      * @note See HTMLPurifier_AttrDef_Font::$info for a similar impl.
      */
     protected $info;
@@ -28,9 +29,10 @@ class HTMLPurifier_AttrDef_CSS_Background extends HTMLPurifier_AttrDef
     }
 
     /**
-     * @param string $string
-     * @param HTMLPurifier_Config $config
+     * @param string               $string
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool|string
      */
     public function validate($string, $config, $context)
@@ -65,7 +67,7 @@ class HTMLPurifier_AttrDef_CSS_Background extends HTMLPurifier_AttrDef
                     if ($status !== false) {
                         continue;
                     }
-                    $r = $this->info['background-' . $key]->validate($bit, $config, $context);
+                    $r = $this->info['background-'.$key]->validate($bit, $config, $context);
                 } else {
                     $r = $bit;
                 }
@@ -76,11 +78,11 @@ class HTMLPurifier_AttrDef_CSS_Background extends HTMLPurifier_AttrDef
                     if ($caught[$key] === false) {
                         $caught[$key] = '';
                     }
-                    $caught[$key] .= $r . ' ';
+                    $caught[$key] .= $r.' ';
                 } else {
                     $caught[$key] = $r;
                 }
-                $i++;
+                ++$i;
                 break;
             }
         }
@@ -104,8 +106,10 @@ class HTMLPurifier_AttrDef_CSS_Background extends HTMLPurifier_AttrDef
         if (empty($ret)) {
             return false;
         }
+
         return implode(' ', $ret);
     }
 }
 
 // vim: et sw=4 sts=4
+

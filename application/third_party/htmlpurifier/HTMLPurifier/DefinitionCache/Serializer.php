@@ -2,10 +2,10 @@
 
 class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCache
 {
-
     /**
      * @param HTMLPurifier_Definition $def
-     * @param HTMLPurifier_Config $config
+     * @param HTMLPurifier_Config     $config
+     *
      * @return int|bool
      */
     public function add($def, $config)
@@ -20,12 +20,14 @@ class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCac
         if (!$this->_prepareDir($config)) {
             return false;
         }
+
         return $this->_write($file, serialize($def), $config);
     }
 
     /**
      * @param HTMLPurifier_Definition $def
-     * @param HTMLPurifier_Config $config
+     * @param HTMLPurifier_Config     $config
+     *
      * @return int|bool
      */
     public function set($def, $config)
@@ -37,12 +39,14 @@ class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCac
         if (!$this->_prepareDir($config)) {
             return false;
         }
+
         return $this->_write($file, serialize($def), $config);
     }
 
     /**
      * @param HTMLPurifier_Definition $def
-     * @param HTMLPurifier_Config $config
+     * @param HTMLPurifier_Config     $config
+     *
      * @return int|bool
      */
     public function replace($def, $config)
@@ -57,11 +61,13 @@ class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCac
         if (!$this->_prepareDir($config)) {
             return false;
         }
+
         return $this->_write($file, serialize($def), $config);
     }
 
     /**
      * @param HTMLPurifier_Config $config
+     *
      * @return bool|HTMLPurifier_Config
      */
     public function get($config)
@@ -70,11 +76,13 @@ class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCac
         if (!file_exists($file)) {
             return false;
         }
+
         return unserialize(file_get_contents($file));
     }
 
     /**
      * @param HTMLPurifier_Config $config
+     *
      * @return bool
      */
     public function remove($config)
@@ -83,11 +91,13 @@ class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCac
         if (!file_exists($file)) {
             return false;
         }
+
         return unlink($file);
     }
 
     /**
      * @param HTMLPurifier_Config $config
+     *
      * @return bool
      */
     public function flush($config)
@@ -104,12 +114,13 @@ class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCac
             if ($filename[0] === '.') {
                 continue;
             }
-            unlink($dir . '/' . $filename);
+            unlink($dir.'/'.$filename);
         }
     }
 
     /**
      * @param HTMLPurifier_Config $config
+     *
      * @return bool
      */
     public function cleanup($config)
@@ -128,56 +139,70 @@ class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCac
             }
             $key = substr($filename, 0, strlen($filename) - 4);
             if ($this->isOld($key, $config)) {
-                unlink($dir . '/' . $filename);
+                unlink($dir.'/'.$filename);
             }
         }
     }
 
     /**
      * Generates the file path to the serial file corresponding to
-     * the configuration and definition name
+     * the configuration and definition name.
+     *
      * @param HTMLPurifier_Config $config
+     *
      * @return string
+     *
      * @todo Make protected
      */
     public function generateFilePath($config)
     {
         $key = $this->generateKey($config);
-        return $this->generateDirectoryPath($config) . '/' . $key . '.ser';
+
+        return $this->generateDirectoryPath($config).'/'.$key.'.ser';
     }
 
     /**
-     * Generates the path to the directory contain this cache's serial files
+     * Generates the path to the directory contain this cache's serial files.
+     *
      * @param HTMLPurifier_Config $config
+     *
      * @return string
      * @note No trailing slash
+     *
      * @todo Make protected
      */
     public function generateDirectoryPath($config)
     {
         $base = $this->generateBaseDirectoryPath($config);
-        return $base . '/' . $this->type;
+
+        return $base.'/'.$this->type;
     }
 
     /**
      * Generates path to base directory that contains all definition type
-     * serials
+     * serials.
+     *
      * @param HTMLPurifier_Config $config
+     *
      * @return mixed|string
+     *
      * @todo Make protected
      */
     public function generateBaseDirectoryPath($config)
     {
         $base = $config->get('Cache.SerializerPath');
-        $base = is_null($base) ? HTMLPURIFIER_PREFIX . '/HTMLPurifier/DefinitionCache/Serializer' : $base;
+        $base = is_null($base) ? HTMLPURIFIER_PREFIX.'/HTMLPurifier/DefinitionCache/Serializer' : $base;
+
         return $base;
     }
 
     /**
-     * Convenience wrapper function for file_put_contents
-     * @param string $file File name to write to
-     * @param string $data Data to write into file
+     * Convenience wrapper function for file_put_contents.
+     *
+     * @param string              $file   File name to write to
+     * @param string              $data   Data to write into file
      * @param HTMLPurifier_Config $config
+     *
      * @return int|bool Number of bytes written if success, or false if failure.
      */
     private function _write($file, $data, $config)
@@ -192,12 +217,15 @@ class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCac
             $chmod = $chmod & 0666;
             chmod($file, $chmod);
         }
+
         return $result;
     }
 
     /**
-     * Prepares the directory that this type stores the serials in
+     * Prepares the directory that this type stores the serials in.
+     *
      * @param HTMLPurifier_Config $config
+     *
      * @return bool True if successful
      */
     private function _prepareDir($config)
@@ -211,10 +239,11 @@ class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCac
             $base = $this->generateBaseDirectoryPath($config);
             if (!is_dir($base)) {
                 trigger_error(
-                    'Base directory ' . $base . ' does not exist,
+                    'Base directory '.$base.' does not exist,
                     please create or change using %Cache.SerializerPath',
                     E_USER_WARNING
                 );
+
                 return false;
             } elseif (!$this->_testPermissions($base, $chmod)) {
                 return false;
@@ -225,14 +254,17 @@ class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCac
         } elseif (!$this->_testPermissions($directory, $chmod)) {
             return false;
         }
+
         return true;
     }
 
     /**
      * Tests permissions on a directory and throws out friendly
-     * error messages and attempts to chmod it itself if possible
-     * @param string $dir Directory path
-     * @param int $chmod Permissions
+     * error messages and attempts to chmod it itself if possible.
+     *
+     * @param string $dir   Directory path
+     * @param int    $chmod Permissions
+     *
      * @return bool True if directory is writable
      */
     private function _testPermissions($dir, $chmod)
@@ -245,9 +277,10 @@ class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCac
             // generally, you'll want to handle this beforehand
             // so a more specific error message can be given
             trigger_error(
-                'Directory ' . $dir . ' does not exist',
+                'Directory '.$dir.' does not exist',
                 E_USER_WARNING
             );
+
             return false;
         }
         if (function_exists('posix_getuid')) {
@@ -266,20 +299,22 @@ class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCac
                 $chmod = $chmod | 0777;
             }
             trigger_error(
-                'Directory ' . $dir . ' not writable, ' .
-                'please chmod to ' . decoct($chmod),
+                'Directory '.$dir.' not writable, '.
+                'please chmod to '.decoct($chmod),
                 E_USER_WARNING
             );
         } else {
             // generic error message
             trigger_error(
-                'Directory ' . $dir . ' not writable, ' .
+                'Directory '.$dir.' not writable, '.
                 'please alter file permissions',
                 E_USER_WARNING
             );
         }
+
         return false;
     }
 }
 
 // vim: et sw=4 sts=4
+

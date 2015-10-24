@@ -14,7 +14,7 @@ class Main extends MY_Controller
             'base.css',
             'font-awesome/css/font-awesome.min.css',
             'alert.css',
-            'material-cards.css'
+            'material-cards.css',
         );
 
         $head['javascript'] = array(
@@ -22,20 +22,21 @@ class Main extends MY_Controller
             'error.js',
             'alert.min.js',
             'jquery.imageloader.js',
-            'masonry.pkgd.min.js'
+            'masonry.pkgd.min.js',
         );
 
-        $user['sign'] = $this->load->view('common/sign', '', TRUE);
+        $user['sign'] = $this->load->view('common/sign', '', true);
         $user['user'] = $this->user;
-        $data['top'] = $this->load->view('common/top', $user, TRUE);
-        $data['footer'] = $this->load->view('common/footer', '', TRUE);
+        $data['top'] = $this->load->view('common/top', $user, true);
+        $data['footer'] = $this->load->view('common/footer', '', true);
         $head['title'] = '艺术家';
         $this->load->view('common/head', $head);
         $this->load->view('artist', $data);
     }
 
     /**
-     * [get_artist_list 获取艺术家列表]
+     * [get_artist_list 获取艺术家列表].
+     *
      * @return [type] [description]
      */
     public function get_artist_list()

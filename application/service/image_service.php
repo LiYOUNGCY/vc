@@ -18,15 +18,16 @@ class Image_service extends MY_Service
     }
 
     /**
-     * [up_um_img UMeditor上传图片]
+     * [up_um_img UMeditor上传图片].
+     *
      * @return [type] [description]
      */
     public function up_um_img($fileField, $config)
     {
-        $result = FALSE;
+        $result = false;
         $this->load->library('Um_upload', array(
             'fileField' => $fileField,
-            'config' => $config
+            'config' => $config,
         ));
 
         $up_result = $this->um_upload->upFile();
@@ -34,7 +35,7 @@ class Image_service extends MY_Service
         if ($up_result) {
             $osspath = $this->um_upload->getFileInfo();
 
-            $osspath = !empty($osspath['url']) ? $osspath['url'] : NULL;
+            $osspath = !empty($osspath['url']) ? $osspath['url'] : null;
             $arr = getimagesize($osspath);
             $min_width = 300;
             $min_height = 230;
@@ -42,7 +43,7 @@ class Image_service extends MY_Service
                 $min_height = $arr[1] * ($min_width / $arr[0]);
                 $min_height = $min_height > 230 ? $min_height : 230;
             }
-            /**
+            /*
              * [生成缩略图]
              * $tofile [缩略图本地保存路径]
              * $osspath[原图本地保存路径]
@@ -57,7 +58,7 @@ class Image_service extends MY_Service
                 $oss_result = $this->oss->upload_by_file($toFile);
                 //缩略图上传成功
                 if ($oss_result) {
-                    /**
+                    /*
                      * [上传原图到oss]
                      * $oss_result [type]
                      */
@@ -70,7 +71,7 @@ class Image_service extends MY_Service
                     //上传原图成功
                     if ($oss_result) {
                         //设置图片url
-                        $this->um_upload->setFullName(OSS_URL . "/{$osspath}");
+                        $this->um_upload->setFullName(OSS_URL."/{$osspath}");
                     } //失败
                     else {
                         //删除oss上缩略图
@@ -87,13 +88,16 @@ class Image_service extends MY_Service
         //设置上传结果
         $this->um_upload->setStateInfo($result);
         $info = $this->um_upload->getFileInfo();
+
         return $info;
     }
 
     /**
-     * [upload_headpic 上传头像]
-     * @param  [type] $form_name [表单名]
-     * @return [type]            [description]
+     * [upload_headpic 上传头像].
+     *
+     * @param [type] $form_name [表单名]
+     *
+     * @return [type] [description]
      */
     public function upload_headpic($form_name, $uid)
     {
@@ -102,13 +106,13 @@ class Image_service extends MY_Service
         $config['upload_path'] = './public/headpic/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '5000';
-        $config['remove_spaces'] = TRUE;
+        $config['remove_spaces'] = true;
         if (isset($_FILES[$form_name])) {
-            $imgname = $this->security->sanitize_filename($_FILES[$form_name]["name"]); //获取上传的文件名称
+            $imgname = $this->security->sanitize_filename($_FILES[$form_name]['name']); //获取上传的文件名称
             $filetype = pathinfo($imgname, PATHINFO_EXTENSION);//获取后缀
-            $config['file_name'] = time() . "_{$uid}." . $filetype;
+            $config['file_name'] = time()."_{$uid}.".$filetype;
             //图片新路径
-            $pic_path = substr($config['upload_path'], 2) . $config['file_name'];
+            $pic_path = substr($config['upload_path'], 2).$config['file_name'];
 
             $this->load->library('upload', $config);
             $upload_result = $this->upload->do_upload($form_name);
@@ -135,19 +139,21 @@ class Image_service extends MY_Service
             $result = array();
             $result['error'] = lang('error_INVALID_REQUEST');
         }
+
         return $result;
     }
 
-
     /**
-     * [save_headpic 保存裁剪后的头像]
-     * @param  [type] $filename [文件路径]
-     * @param  [type] $x        [目标x坐标]
-     * @param  [type] $y        [目标y坐标]
-     * @param  [type] $w        [目标宽度]
-     * @param  [type] $h        [目标高度]
-     * @param  [type] $uid      [用户id]
-     * @return [type]           [description]
+     * [save_headpic 保存裁剪后的头像].
+     *
+     * @param [type] $filename [文件路径]
+     * @param [type] $x        [目标x坐标]
+     * @param [type] $y        [目标y坐标]
+     * @param [type] $w        [目标宽度]
+     * @param [type] $h        [目标高度]
+     * @param [type] $uid      [用户id]
+     *
+     * @return [type] [description]
      */
     public function save_headpic($filename, $x, $y, $w, $h, $uid)
     {
@@ -159,12 +165,13 @@ class Image_service extends MY_Service
         if (!empty($shot_name)) {
             $upload_result = $this->oss->upload_by_file($shot_name);
             if ($upload_result) {
-                $osspath = OSS_URL . "/{$shot_name}";
+                $osspath = OSS_URL."/{$shot_name}";
                 $this->load->model('user_model');
                 $update_result = $this->user_model->update_account($uid, array('pic' => $osspath));
                 if ($update_result) {
                     @unlink("./{$filename}");
-                    return TRUE;
+
+                    return true;
                 } else {
                     //删除oss上的文件
                     $this->oss->delete_object($shot_name);
@@ -173,18 +180,20 @@ class Image_service extends MY_Service
         }
         //删除原图并输出错误
         @unlink("./{$filename}");
-        return FALSE;
+
+        return false;
     }
 
-
     /**
-     * [save_headpic 保存裁剪后的头像]
-     * @param  [type] $filename [文件路径]
-     * @param  [type] $x        [目标x坐标]
-     * @param  [type] $y        [目标y坐标]
-     * @param  [type] $w        [目标宽度]
-     * @param  [type] $h        [目标高度]
-     * @return [type]           [description]
+     * [save_headpic 保存裁剪后的头像].
+     *
+     * @param [type] $filename [文件路径]
+     * @param [type] $x        [目标x坐标]
+     * @param [type] $y        [目标y坐标]
+     * @param [type] $w        [目标宽度]
+     * @param [type] $h        [目标高度]
+     *
+     * @return [type] [description]
      */
     public function save_artist_pic($filename, $x, $y, $w, $h)
     {
@@ -196,35 +205,38 @@ class Image_service extends MY_Service
         if (!empty($shot_name)) {
             $upload_result = $this->oss->upload_by_file($shot_name);
             if ($upload_result) {
-                $osspath = OSS_URL . "/{$shot_name}";
+                $osspath = OSS_URL."/{$shot_name}";
                 @unlink("./{$filename}");
+
                 return $osspath;
             }
         }
         //删除原图并输出错误
         @unlink("./{$filename}");
-        return FALSE;
+
+        return false;
     }
 
     /**
-     * [upload_production 上传图片(保存缩略图与原图)]
-     * @param  [type] $form_name [description]
-     * @param  [type] $uid       [description]
-     * @return [type]            [description]
+     * [upload_production 上传图片(保存缩略图与原图)].
+     *
+     * @param [type] $form_name [description]
+     * @param [type] $uid       [description]
+     *
+     * @return [type] [description]
      */
     public function upload_production($form_name, $uid)
     {
-
         $config['upload_path'] = './public/production/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '5000';
-        $config['remove_spaces'] = TRUE;
+        $config['remove_spaces'] = true;
         if (isset($_FILES[$form_name])) {
-            $imgname = $this->security->sanitize_filename($_FILES[$form_name]["name"]); //获取上传的文件名称
+            $imgname = $this->security->sanitize_filename($_FILES[$form_name]['name']); //获取上传的文件名称
             $filetype = pathinfo($imgname, PATHINFO_EXTENSION);//获取后缀
-            $config['file_name'] = time() . "_{$uid}." . $filetype;
+            $config['file_name'] = time()."_{$uid}.".$filetype;
             //图片新路径
-            $pic_path = substr($config['upload_path'], 2) . $config['file_name'];
+            $pic_path = substr($config['upload_path'], 2).$config['file_name'];
 
             $this->load->library('upload', $config);
             $upload_result = $this->upload->do_upload($form_name);
@@ -247,7 +259,7 @@ class Image_service extends MY_Service
             $min_height1 = $src_h * ($min_width1 / $src_w);
             //上传成功
             if ($upload_result) {
-                /**
+                /*
                  * [生成缩略图]
                  * $tofile [缩略图本地保存路径]
                  * $osspath[原图本地保存路径]
@@ -265,7 +277,7 @@ class Image_service extends MY_Service
                     if ($oss_result && $oss_result1) {
                         /**
                          * [上传原图到oss]
-                         * $oss_result [type]
+                         * $oss_result [type].
                          */
                         $oss_result = $this->oss->upload_by_file($pic_path);
                         //设置上传结果
@@ -276,8 +288,8 @@ class Image_service extends MY_Service
                             //设置图片url
                             $result = array();
                             $result['success'] = 0;
-                            $result['pic'] = OSS_URL . "/{$pic_path}";
-                            $result['thumb'] = OSS_URL . "/{$toFile1}";
+                            $result['pic'] = OSS_URL."/{$pic_path}";
+                            $result['thumb'] = OSS_URL."/{$toFile1}";
                         } //失败
                         else {
                             //删除oss上缩略图
@@ -302,27 +314,30 @@ class Image_service extends MY_Service
             $result = array();
             $result['error'] = lang('error_INVALID_REQUEST');
         }
+
         return $result;
     }
 
     /**
-     * [upload_slider 上传轮播图]
-     * @param  [type] $form_name [description]
-     * @param  [type] $uid       [description]
-     * @return [type]            [description]
+     * [upload_slider 上传轮播图].
+     *
+     * @param [type] $form_name [description]
+     * @param [type] $uid       [description]
+     *
+     * @return [type] [description]
      */
     public function upload_slider($form_name, $uid)
     {
         $config['upload_path'] = './public/img/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '5000';
-        $config['remove_spaces'] = TRUE;
+        $config['remove_spaces'] = true;
         if (isset($_FILES[$form_name])) {
-            $imgname = $this->security->sanitize_filename($_FILES[$form_name]["name"]); //获取上传的文件名称
+            $imgname = $this->security->sanitize_filename($_FILES[$form_name]['name']); //获取上传的文件名称
             $filetype = pathinfo($imgname, PATHINFO_EXTENSION);//获取后缀
-            $config['file_name'] = time() . "_{$uid}." . $filetype;
+            $config['file_name'] = time()."_{$uid}.".$filetype;
             //图片新路径
-            $pic_path = substr($config['upload_path'], 2) . $config['file_name'];
+            $pic_path = substr($config['upload_path'], 2).$config['file_name'];
 
             $this->load->library('upload', $config);
             $upload_result = $this->upload->do_upload($form_name);
@@ -332,7 +347,7 @@ class Image_service extends MY_Service
             $min_height = 470;
             //上传成功
             if ($upload_result) {
-                /**
+                /*
                  * [生成缩略图]
                  * $tofile [缩略图本地保存路径]
                  * $osspath[原图本地保存路径]
@@ -342,7 +357,7 @@ class Image_service extends MY_Service
                 if ($thumb_result) {
                     /**
                      * [上传缩略图到oss]
-                     * $oss_result [type]
+                     * $oss_result [type].
                      */
                     $oss_result = $this->oss->upload_by_file($pic_path);
                     //设置上传结果
@@ -353,9 +368,8 @@ class Image_service extends MY_Service
                         //设置图片url
                         $result = array();
                         $result['success'] = 0;
-                        $result['pic'] = OSS_URL . "/{$pic_path}";
+                        $result['pic'] = OSS_URL."/{$pic_path}";
                     }
-
                 } else {
                     $result['error'] = lang('error_INVALID_REQUEST');
                 }
@@ -370,21 +384,22 @@ class Image_service extends MY_Service
             $result = array();
             $result['error'] = lang('error_INVALID_REQUEST');
         }
+
         return $result;
     }
 
-
     /**
-     * 上传图片，不生成缩略图
+     * 上传图片，不生成缩略图.
+     *
      * @param $field_name
      */
     public function upload_image_without_thumb($field_name)
     {
         $upload_config['upload_path'] = $this->dir;
         $upload_config['allowed_types'] = 'gif|jpg|png';
-        $upload_config['remove_spaces'] = TRUE;
-        $upload_config['encrypt_name'] = TRUE;
-        $upload_config['file_ext_tolower'] = TRUE;
+        $upload_config['remove_spaces'] = true;
+        $upload_config['encrypt_name'] = true;
+        $upload_config['file_ext_tolower'] = true;
 
         $this->load->library('upload', $upload_config);
         $result = $this->upload->do_upload($field_name);
@@ -397,8 +412,7 @@ class Image_service extends MY_Service
         $image_width = $this->upload->data('image_width');
         $image_height = $this->upload->data('image_height');
 
-
-        $file = substr($upload_config['upload_path'], 0) . $file_name;
+        $file = substr($upload_config['upload_path'], 0).$file_name;
 
         //对文件加水印
 
@@ -410,14 +424,14 @@ class Image_service extends MY_Service
         if (!empty($upload_path)) {
             $result = array();
             $result['oss_path'] = $upload_path;
-            $result['path'] = $this->dir . $file_name;
+            $result['path'] = $this->dir.$file_name;
             $result['image_id'] = $image_id;
+
             return $result;
         }
 
         return false;
     }
-
 
     /**
      * @param $field_name 上传的图片的表单名
@@ -428,9 +442,9 @@ class Image_service extends MY_Service
     {
         $upload_config['upload_path'] = $this->dir;
         $upload_config['allowed_types'] = 'gif|jpg|png';
-        $upload_config['remove_spaces'] = TRUE;
-        $upload_config['encrypt_name'] = TRUE;
-        $upload_config['file_ext_tolower'] = TRUE;
+        $upload_config['remove_spaces'] = true;
+        $upload_config['encrypt_name'] = true;
+        $upload_config['file_ext_tolower'] = true;
 
         $this->load->library('upload', $upload_config);
         $result = $this->upload->do_upload($field_name);
@@ -443,7 +457,7 @@ class Image_service extends MY_Service
         $image_width = $this->upload->data('image_width');
         $image_height = $this->upload->data('image_height');
 
-        $file = substr($upload_config['upload_path'], 0) . $file_name;
+        $file = substr($upload_config['upload_path'], 0).$file_name;
 
         //对文件加水印
 
@@ -459,17 +473,18 @@ class Image_service extends MY_Service
         if (!empty($upload_path)) {
             $result = array();
             $result['oss_path'] = $upload_path;
-            $result['path'] = $this->dir . $file_name;
+            $result['path'] = $this->dir.$file_name;
             $result['image_id'] = $image_id;
+
             return $result;
         }
 
         return false;
     }
 
-
     /**
-     * 生成缩略图
+     * 生成缩略图.
+     *
      * @param $width
      * @param $height
      * @param $path
@@ -479,15 +494,17 @@ class Image_service extends MY_Service
         $dir = 'public/image/';
         $config['image_library'] = 'gd2';
         $config['source_image'] = $path;
-        $config['create_thumb'] = TRUE;
-        $config['maintain_ratio'] = TRUE;
+        $config['create_thumb'] = true;
+        $config['maintain_ratio'] = true;
         $config['master_dim'] = 'width';
         $config['new_image'] = $dir;
 
-        if (isset($width))
+        if (isset($width)) {
             $config['width'] = $width;
-        if (isset($height))
+        }
+        if (isset($height)) {
             $config['height'] = $height;
+        }
 
         $this->load->library('image_lib', $config);
         $this->image_lib->resize();
@@ -497,7 +514,7 @@ class Image_service extends MY_Service
         $file_name = $file_name[count($file_name) - 1];
         $file_name = str_replace('.', '_thumb.', $file_name);
 
-        $newName = $dir . $file_name;
+        $newName = $dir.$file_name;
 
         $layer = ImageWorkshop::initFromPath($newName);
 
@@ -511,19 +528,20 @@ class Image_service extends MY_Service
         return $thumb;
     }
 
-
     /**
-     * [upload_avatar 上传头像，因为头像需要裁剪，所以不上传到云服务器，等裁剪后再上传到服务器]
-     * @param  [type] $field_name [description]
-     * @return [type]             [description]
+     * [upload_avatar 上传头像，因为头像需要裁剪，所以不上传到云服务器，等裁剪后再上传到服务器].
+     *
+     * @param [type] $field_name [description]
+     *
+     * @return [type] [description]
      */
     public function upload_avatar($field_name)
     {
         $upload_config['upload_path'] = $this->dir;
         $upload_config['allowed_types'] = 'gif|jpg|png';
-        $upload_config['remove_spaces'] = TRUE;
-        $upload_config['encrypt_name'] = TRUE;
-        $upload_config['file_ext_tolower'] = TRUE;
+        $upload_config['remove_spaces'] = true;
+        $upload_config['encrypt_name'] = true;
+        $upload_config['file_ext_tolower'] = true;
 
         $this->load->library('upload', $upload_config);
         $result = $this->upload->do_upload($field_name);
@@ -531,31 +549,31 @@ class Image_service extends MY_Service
             return false;
         }
 
-        $file['path'] = $this->dir . $this->upload->data('file_name');
+        $file['path'] = $this->dir.$this->upload->data('file_name');
 
         return $file;
     }
 
-
     /**
-     * 裁剪图片
-     * @param  [type] $image_name [图片的文件名，不含路径名]
-     * @param  [type] $positionX  [起始X]
-     * @param  [type] $positionY  [起始Y]
-     * @param  [type] $newWidth   [裁剪的宽]
-     * @param  [type] $newHeight  [裁剪的高]
+     * 裁剪图片.
+     *
+     * @param [type] $image_name [图片的文件名，不含路径名]
+     * @param [type] $positionX  [起始X]
+     * @param [type] $positionY  [起始Y]
+     * @param [type] $newWidth   [裁剪的宽]
+     * @param [type] $newHeight  [裁剪的高]
      */
     public function crop_image($image_name, $positionX, $positionY, $newWidth, $newHeight)
     {
         $result = array();
 
-        $layer = ImageWorkshop::initFromPath($this->dir . $image_name);
+        $layer = ImageWorkshop::initFromPath($this->dir.$image_name);
         //从左上角开始算
-        $position = "LT";
+        $position = 'LT';
         $layer->cropInPixel($newWidth, $newHeight, $positionX, $positionY, $position);
 
         // Saving the result
-        $filename = 'Crop_' . $image_name;
+        $filename = 'Crop_'.$image_name;
         $createFolders = true;
         $backgroundColor = null; // transparent, only for PNG (otherwise it will be white if set null)
         $imageQuality = 95; // useless for GIF, usefull for PNG and JPEG (0 to 100%)
@@ -563,7 +581,7 @@ class Image_service extends MY_Service
         $layer->save($this->dir, $filename, $createFolders, $backgroundColor, $imageQuality);
 
         //上传到 oss
-        $result['image_path'] = $this->oss->upload_by_file($this->dir . $filename);
+        $result['image_path'] = $this->oss->upload_by_file($this->dir.$filename);
 
         //记录到数据库
         $result['image_id'] = $this->image_model->insert_image_without_thumb($result['image_path'], $newWidth, $newHeight);
@@ -574,6 +592,4 @@ class Image_service extends MY_Service
 
         return $result;
     }
-
-
 }

@@ -2,12 +2,13 @@
 
 /**
  * Module defines proprietary tags and attributes in HTML.
+ *
  * @warning If this module is enabled, standards-compliance is off!
  */
 class HTMLPurifier_HTMLModule_Proprietary extends HTMLPurifier_HTMLModule
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'Proprietary';
 
@@ -38,3 +39,4 @@ class HTMLPurifier_HTMLModule_Proprietary extends HTMLPurifier_HTMLModule
 }
 
 // vim: et sw=4 sts=4
+

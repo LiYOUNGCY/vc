@@ -12,8 +12,8 @@
                 <div class="info">
                     <ul>
                         <li><label>昵称</label>：<?= $user['name'] ?></li>
-                        <li><label>收货地址</label>：<?php echo 1 ? "空" : $user['address']; ?></li>
-                        <li><label>联系电话</label>：<?php echo 1 ? "空" : $user['tel']; ?></li>
+                        <li><label>收货地址</label>：<?php echo 1 ? '空' : $user['address']; ?></li>
+                        <li><label>联系电话</label>：<?php echo 1 ? '空' : $user['tel']; ?></li>
                         <li><label>联系人</label>：</li>
                     </ul>
                     <a href="<?= base_url() ?>setting">
@@ -78,21 +78,29 @@
                     <div class="bindphone">
                         <div class="phone">
                             <label >已绑定手机号码</label>
-                            <?php if($user["phone"] == NULL){ ?>
+                            <?php if ($user['phone'] == null) {
+    ?>
                             无<a href="javascript:void(0);" class="link" id="bindphone"> [绑定手机]</a>
-                            <?php }else{ ?>
-                            <?=$user["phone"]?><a href="javascript:void(0);" class="link" id="bindphone"> [重新绑定]</a>
-                            <?php } ?>
+                            <?php 
+} else {
+    ?>
+                            <?=$user['phone']?><a href="javascript:void(0);" class="link" id="bindphone"> [重新绑定]</a>
+                            <?php 
+} ?>
                         </div>
                     </div>
                     <div class="bindemail">
                         <div class="email">
                             <label >已绑定邮箱</label>
-                            <?php if($user["email"] == NULL){ ?>
+                            <?php if ($user['email'] == null) {
+    ?>
                             无<a href="javascript:void(0);" class="link" id="bindemail"> [绑定邮箱]</a>
-                            <?php }else{ ?>
-                            <?=$user["email"]?><a href="javascript:void(0);" class="link" id="bindemail"> [重新绑定]</a>
-                            <?php } ?>
+                            <?php 
+} else {
+    ?>
+                            <?=$user['email']?><a href="javascript:void(0);" class="link" id="bindemail"> [重新绑定]</a>
+                            <?php 
+} ?>
                         </div>
                     </div>
                 </div>

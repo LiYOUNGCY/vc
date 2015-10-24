@@ -1,17 +1,18 @@
 <?php
 
 /**
- * Validates a rel/rev link attribute against a directive of allowed values
+ * Validates a rel/rev link attribute against a directive of allowed values.
+ *
  * @note We cannot use Enum because link types allow multiple
  *       values.
  * @note Assumes link types are ASCII text
  */
 class HTMLPurifier_AttrDef_HTML_LinkTypes extends HTMLPurifier_AttrDef
 {
-
     /**
      * Name config attribute to pull.
-     * @type string
+     *
+     * @var string
      */
     protected $name;
 
@@ -22,28 +23,30 @@ class HTMLPurifier_AttrDef_HTML_LinkTypes extends HTMLPurifier_AttrDef
     {
         $configLookup = array(
             'rel' => 'AllowedRel',
-            'rev' => 'AllowedRev'
+            'rev' => 'AllowedRev',
         );
         if (!isset($configLookup[$name])) {
             trigger_error(
-                'Unrecognized attribute name for link ' .
+                'Unrecognized attribute name for link '.
                 'relationship.',
                 E_USER_ERROR
             );
+
             return;
         }
         $this->name = $configLookup[$name];
     }
 
     /**
-     * @param string $string
-     * @param HTMLPurifier_Config $config
+     * @param string               $string
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool|string
      */
     public function validate($string, $config, $context)
     {
-        $allowed = $config->get('Attr.' . $this->name);
+        $allowed = $config->get('Attr.'.$this->name);
         if (empty($allowed)) {
             return false;
         }
@@ -65,8 +68,10 @@ class HTMLPurifier_AttrDef_HTML_LinkTypes extends HTMLPurifier_AttrDef
             return false;
         }
         $string = implode(' ', array_keys($ret_lookup));
+
         return $string;
     }
 }
 
 // vim: et sw=4 sts=4
+

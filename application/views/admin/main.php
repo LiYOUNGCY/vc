@@ -1,5 +1,5 @@
 <?php
-	echo $navbar;
+    echo $navbar;
 ?>
     <!-- Page Content -->
     <div id="page-wrapper">

@@ -15,12 +15,12 @@
 class HTMLPurifier_AttrTransform_SafeParam extends HTMLPurifier_AttrTransform
 {
     /**
-     * @type string
+     * @var string
      */
-    public $name = "SafeParam";
+    public $name = 'SafeParam';
 
     /**
-     * @type HTMLPurifier_AttrDef_URI
+     * @var HTMLPurifier_AttrDef_URI
      */
     private $uri;
 
@@ -31,9 +31,10 @@ class HTMLPurifier_AttrTransform_SafeParam extends HTMLPurifier_AttrTransform
     }
 
     /**
-     * @param array $attr
-     * @param HTMLPurifier_Config $config
+     * @param array                $attr
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return array
      */
     public function transform($attr, $config, $context)
@@ -61,7 +62,7 @@ class HTMLPurifier_AttrTransform_SafeParam extends HTMLPurifier_AttrTransform
                 break;
             case 'movie':
             case 'src':
-                $attr['name'] = "movie";
+                $attr['name'] = 'movie';
                 $attr['value'] = $this->uri->validate($attr['value'], $config, $context);
                 break;
             case 'flashvars':
@@ -72,8 +73,10 @@ class HTMLPurifier_AttrTransform_SafeParam extends HTMLPurifier_AttrTransform
             default:
                 $attr['name'] = $attr['value'] = null;
         }
+
         return $attr;
     }
 }
 
 // vim: et sw=4 sts=4
+

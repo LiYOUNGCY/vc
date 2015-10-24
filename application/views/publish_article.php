@@ -3,7 +3,7 @@
     <?php echo $top; ?>
     <div class="container">
         <div class="content edit">
-            <form id="aform" class="list" action="<?= base_url() . 'article/publish/publish_article' ?>" method="post">
+            <form id="aform" class="list" action="<?= base_url().'article/publish/publish_article' ?>" method="post">
                 <input type="hidden" name="article_type" value="1">
 
                 <div class="item line-block" style="border-style: solid;">
@@ -19,10 +19,12 @@
                 <div class="item line-block">
                     <label for="">文章标签：</label>
 
-                    <?php foreach ($tag as $key => $value) { ?>
+                    <?php foreach ($tag as $key => $value) {
+    ?>
                         <input type="checkbox" class="radiocheck" id="tag_<?= $value['id'] ?>">
                         <label class="nofull default left" for="tag_<?= $value['id'] ?>"><?= $value['name'] ?></label>
-                    <?php } ?>
+                    <?php 
+} ?>
 
                     <input type="hidden" id="tags" name="tags" value="">
                 </div>

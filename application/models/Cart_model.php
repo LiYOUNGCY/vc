@@ -29,6 +29,7 @@ class Cart_model extends CI_Model
                     production.price,
                     production.w,
                     production.h,
+                    production.status,
                     production.creat_time,
                     frame.name as frame_name,
                     frame.price as frame_price,
@@ -45,6 +46,10 @@ class Cart_model extends CI_Model
             ->where('production.medium = production_medium.id')
             ->get()->result_array();
 
+            // foreach ($query as $key => $value) {
+            //     $query[$key]['status'] = $this->_extends_status($value['status']);
+            // }
+
         return $query;
     }
 
@@ -60,16 +65,25 @@ class Cart_model extends CI_Model
      */
     public function insert_goods_to_cart($user_id, $production_id, $frame_id, $amount = 1)
     {
-        $data = array(
-            'user_id' => $user_id,
-            'production_id' => $production_id,
-            'frame_id' => $frame_id,
-            'amount' => $amount,
-            'create_time' => date('Y-m-d H:i:s'),
-        );
+        // $data = array(
+        //     'user_id' => $user_id,
+        //     'production_id' => $production_id,
+        //     'frame_id' => $frame_id,
+        //     'amount' => $amount,
+        //     'create_time' => date('Y-m-d H:i:s'),
+        // );
 
-        $this->db->insert('cart', $data);
+        // $this->db->insert('cart', $data);
 
+        // return $this->db->insert_id();
+
+        $cart = $this->db->dbprefix('cart');
+        $production = $this->db->dbprefix('production');
+        $frame = $this->db->dbprefix('frame');
+        $create_time = date('Y-m-d H:i:s');
+
+        $sql = "insert into {$cart}(user_id, production_id, frame_id, amount, price, create_time) SELECT ?, ?, ?, 1, {$production}.price + {$frame}.price, ? from {$production}, {$frame} where {$production}.id = ? AND {$frame}.id = ?";
+        $this->db->query($sql, array($user_id, $production_id, $frame_id, $create_time, $production_id, $frame_id));
         return $this->db->insert_id();
     }
 
@@ -118,5 +132,21 @@ class Cart_model extends CI_Model
             ->delete('cart');
 
         return $this->db->affected_rows() === 1;
+    }
+
+    /**
+     * [_extends_status 艺术品的状态]
+     * @param  [type] $status_number [description]
+     * @return [type]                [description]
+     */
+    private function _extends_status($status_number)
+    {
+        $data = array(
+            0 => '出售中',
+            1 => '已出售',
+            2 => '已下架'
+        );
+
+        return $data[$status_number];
     }
 }

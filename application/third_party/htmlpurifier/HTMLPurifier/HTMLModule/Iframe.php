@@ -9,14 +9,13 @@
  */
 class HTMLPurifier_HTMLModule_Iframe extends HTMLPurifier_HTMLModule
 {
-
     /**
-     * @type string
+     * @var string
      */
     public $name = 'Iframe';
 
     /**
-     * @type bool
+     * @var bool
      */
     public $safe = false;
 
@@ -49,3 +48,4 @@ class HTMLPurifier_HTMLModule_Iframe extends HTMLPurifier_HTMLModule
 }
 
 // vim: et sw=4 sts=4
+

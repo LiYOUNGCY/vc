@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -42,7 +43,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $autoload['packages'] = array();
 
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Libraries
@@ -61,14 +61,13 @@ $autoload['packages'] = array();
 */
 
 $autoload['libraries'] = array(
-					'common',
-					'error',
-					'database',
-					'sc',
-					'session',
-                    'message'
-				);
-
+                    'common',
+                    'error',
+                    'database',
+                    'sc',
+                    'session',
+                    'message',
+                );
 
 /*
 | -------------------------------------------------------------------
@@ -84,9 +83,8 @@ $autoload['libraries'] = array(
 */
 
 $autoload['drivers'] = array(
-				'cache'
-			);
-
+                'cache',
+            );
 
 /*
 | -------------------------------------------------------------------
@@ -98,7 +96,6 @@ $autoload['drivers'] = array(
 */
 
 $autoload['helper'] = array('url', 'language', 'MY_loader');
-
 
 /*
 | -------------------------------------------------------------------
@@ -115,7 +112,6 @@ $autoload['helper'] = array('url', 'language', 'MY_loader');
 
 $autoload['config'] = array();
 
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Language files
@@ -130,7 +126,6 @@ $autoload['config'] = array();
 */
 
 $autoload['language'] = array();
-
 
 /*
 | -------------------------------------------------------------------
@@ -158,5 +153,5 @@ $autoload['model'] = array();
 |
 */
 $autoload['service'] = array(
-			'auth_service'
-		);
+            'auth_service',
+        );

@@ -9,13 +9,13 @@
  *    error conditions with the original version of PH5P. Pending changes,
  *    this lexer will punt to DirectLex if DOM throws an exception.
  */
-
 class HTMLPurifier_Lexer_PH5P extends HTMLPurifier_Lexer_DOMLex
 {
     /**
-     * @param string $html
-     * @param HTMLPurifier_Config $config
+     * @param string               $html
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return HTMLPurifier_Token[]
      */
     public function tokenizeHTML($html, $config, $context)
@@ -36,9 +36,10 @@ class HTMLPurifier_Lexer_PH5P extends HTMLPurifier_Lexer_DOMLex
             $doc->getElementsByTagName('html')->item(0)-> // <html>
                 getElementsByTagName('body')->item(0)-> //   <body>
                 getElementsByTagName('div')->item(0) //     <div>
-            ,
+,
             $tokens
         );
+
         return $tokens;
     }
 }
@@ -444,7 +445,7 @@ class HTML5
         'yuml',
         'zeta;',
         'zwj;',
-        'zwnj;'
+        'zwnj;',
     );
 
     const PCDATA = 0;
@@ -464,13 +465,13 @@ class HTML5
         $this->data = $data;
         $this->char = -1;
         $this->EOF = strlen($data);
-        $this->tree = new HTML5TreeConstructer;
+        $this->tree = new HTML5TreeConstructer();
         $this->content_model = self::PCDATA;
 
         $this->state = 'data';
 
         while ($this->state !== null) {
-            $this->{$this->state . 'State'}();
+            $this->{$this->state.'State'}();
         }
     }
 
@@ -499,13 +500,13 @@ class HTML5
 
     private function characters($char_class, $start)
     {
-        return preg_replace('#^([' . $char_class . ']+).*#s', '\\1', substr($this->data, $start));
+        return preg_replace('#^(['.$char_class.']+).*#s', '\\1', substr($this->data, $start));
     }
 
     private function dataState()
     {
         // Consume the next input character
-        $this->char++;
+        ++$this->char;
         $char = $this->char();
 
         if ($char === '&' && ($this->content_model === self::PCDATA || $this->content_model === self::RCDATA)) {
@@ -514,7 +515,6 @@ class HTML5
             states: switch to the entity data state. Otherwise: treat it as per
             the "anything else"    entry below. */
             $this->state = 'entityData';
-
         } elseif ($char === '-') {
             /* If the content model flag is set to either the RCDATA state or
             the CDATA state, and the escape flag is false, and there are at
@@ -534,7 +534,7 @@ class HTML5
             $this->emitToken(
                 array(
                     'type' => self::CHARACTR,
-                    'data' => $char
+                    'data' => $char,
                 )
             );
 
@@ -572,15 +572,13 @@ class HTML5
             $this->emitToken(
                 array(
                     'type' => self::CHARACTR,
-                    'data' => $char
+                    'data' => $char,
                 )
             );
-
         } elseif ($this->char === $this->EOF) {
             /* EOF
             Emit an end-of-file token. */
             $this->EOF();
-
         } elseif ($this->content_model === self::PLAINTEXT) {
             /* When the content model flag is set to the PLAINTEXT state
             THIS DIFFERS GREATLY FROM THE SPEC: Get the remaining characters of
@@ -588,12 +586,11 @@ class HTML5
             $this->emitToken(
                 array(
                     'type' => self::CHARACTR,
-                    'data' => substr($this->data, $this->char)
+                    'data' => substr($this->data, $this->char),
                 )
             );
 
             $this->EOF();
-
         } else {
             /* Anything else
             THIS DIFFERS GREATLY FROM THE SPEC: Get as many character that
@@ -606,7 +603,7 @@ class HTML5
             $this->emitToken(
                 array(
                     'type' => self::CHARACTR,
-                    'data' => $char
+                    'data' => $char,
                 )
             );
 
@@ -625,7 +622,7 @@ class HTML5
         $this->emitToken(
             array(
                 'type' => self::CHARACTR,
-                'data' => $char
+                'data' => $char,
             )
         );
 
@@ -644,14 +641,13 @@ class HTML5
                 U+003C LESS-THAN SIGN character token and switch to the data
                 state to process the next input character. */
                 if ($this->character($this->char + 1) === '/') {
-                    $this->char++;
+                    ++$this->char;
                     $this->state = 'closeTagOpen';
-
                 } else {
                     $this->emitToken(
                         array(
                             'type' => self::CHARACTR,
-                            'data' => '<'
+                            'data' => '<',
                         )
                     );
 
@@ -669,12 +665,10 @@ class HTML5
                     /* U+0021 EXCLAMATION MARK (!)
                     Switch to the markup declaration open state. */
                     $this->state = 'markupDeclarationOpen';
-
                 } elseif ($char === '/') {
                     /* U+002F SOLIDUS (/)
                     Switch to the close tag open state. */
                     $this->state = 'closeTagOpen';
-
                 } elseif (preg_match('/^[A-Za-z]$/', $char)) {
                     /* U+0041 LATIN LETTER A through to U+005A LATIN LETTER Z
                     Create a new start tag token, set its tag name to the lowercase
@@ -684,11 +678,10 @@ class HTML5
                     $this->token = array(
                         'name' => strtolower($char),
                         'type' => self::STARTTAG,
-                        'attr' => array()
+                        'attr' => array(),
                     );
 
                     $this->state = 'tagName';
-
                 } elseif ($char === '>') {
                     /* U+003E GREATER-THAN SIGN (>)
                     Parse error. Emit a U+003C LESS-THAN SIGN character token and a
@@ -696,17 +689,15 @@ class HTML5
                     $this->emitToken(
                         array(
                             'type' => self::CHARACTR,
-                            'data' => '<>'
+                            'data' => '<>',
                         )
                     );
 
                     $this->state = 'data';
-
                 } elseif ($char === '?') {
                     /* U+003F QUESTION MARK (?)
                     Parse error. Switch to the bogus comment state. */
                     $this->state = 'bogusComment';
-
                 } else {
                     /* Anything else
                     Parse error. Emit a U+003C LESS-THAN SIGN character token and
@@ -714,11 +705,11 @@ class HTML5
                     $this->emitToken(
                         array(
                             'type' => self::CHARACTR,
-                            'data' => '<'
+                            'data' => '<',
                         )
                     );
 
-                    $this->char--;
+                    --$this->char;
                     $this->state = 'data';
                 }
                 break;
@@ -754,17 +745,16 @@ class HTML5
             $this->emitToken(
                 array(
                     'type' => self::CHARACTR,
-                    'data' => '</'
+                    'data' => '</',
                 )
             );
 
             $this->state = 'data';
-
         } else {
             /* Otherwise, if the content model flag is set to the PCDATA state,
             or if the next few characters do match that tag name, consume the
             next input character: */
-            $this->char++;
+            ++$this->char;
             $char = $this->char();
 
             if (preg_match('/^[A-Za-z]$/', $char)) {
@@ -775,16 +765,14 @@ class HTML5
                 will be filled in before it is emitted.) */
                 $this->token = array(
                     'name' => strtolower($char),
-                    'type' => self::ENDTAG
+                    'type' => self::ENDTAG,
                 );
 
                 $this->state = 'tagName';
-
             } elseif ($char === '>') {
                 /* U+003E GREATER-THAN SIGN (>)
                 Parse error. Switch to the data state. */
                 $this->state = 'data';
-
             } elseif ($this->char === $this->EOF) {
                 /* EOF
                 Parse error. Emit a U+003C LESS-THAN SIGN character token and a U+002F
@@ -792,13 +780,12 @@ class HTML5
                 $this->emitToken(
                     array(
                         'type' => self::CHARACTR,
-                        'data' => '</'
+                        'data' => '</',
                     )
                 );
 
-                $this->char--;
+                --$this->char;
                 $this->state = 'data';
-
             } else {
                 /* Parse error. Switch to the bogus comment state. */
                 $this->state = 'bogusComment';
@@ -809,7 +796,7 @@ class HTML5
     private function tagNameState()
     {
         // Consume the next input character:
-        $this->char++;
+        ++$this->char;
         $char = $this->character($this->char);
 
         if (preg_match('/^[\t\n\x0b\x0c ]$/', $char)) {
@@ -820,28 +807,24 @@ class HTML5
             U+0020 SPACE
             Switch to the before attribute name state. */
             $this->state = 'beforeAttributeName';
-
         } elseif ($char === '>') {
             /* U+003E GREATER-THAN SIGN (>)
             Emit the current tag token. Switch to the data state. */
             $this->emitToken($this->token);
             $this->state = 'data';
-
         } elseif ($this->char === $this->EOF) {
             /* EOF
             Parse error. Emit the current tag token. Reconsume the EOF
             character in the data state. */
             $this->emitToken($this->token);
 
-            $this->char--;
+            --$this->char;
             $this->state = 'data';
-
         } elseif ($char === '/') {
             /* U+002F SOLIDUS (/)
             Parse error unless this is a permitted slash. Switch to the before
             attribute name state. */
             $this->state = 'beforeAttributeName';
-
         } else {
             /* Anything else
             Append the current input character to the current tag token's tag name.
@@ -854,7 +837,7 @@ class HTML5
     private function beforeAttributeNameState()
     {
         // Consume the next input character:
-        $this->char++;
+        ++$this->char;
         $char = $this->character($this->char);
 
         if (preg_match('/^[\t\n\x0b\x0c ]$/', $char)) {
@@ -865,28 +848,24 @@ class HTML5
             U+0020 SPACE
             Stay in the before attribute name state. */
             $this->state = 'beforeAttributeName';
-
         } elseif ($char === '>') {
             /* U+003E GREATER-THAN SIGN (>)
             Emit the current tag token. Switch to the data state. */
             $this->emitToken($this->token);
             $this->state = 'data';
-
         } elseif ($char === '/') {
             /* U+002F SOLIDUS (/)
             Parse error unless this is a permitted slash. Stay in the before
             attribute name state. */
             $this->state = 'beforeAttributeName';
-
         } elseif ($this->char === $this->EOF) {
             /* EOF
             Parse error. Emit the current tag token. Reconsume the EOF
             character in the data state. */
             $this->emitToken($this->token);
 
-            $this->char--;
+            --$this->char;
             $this->state = 'data';
-
         } else {
             /* Anything else
             Start a new attribute in the current tag token. Set that attribute's
@@ -894,7 +873,7 @@ class HTML5
             Switch to the attribute name state. */
             $this->token['attr'][] = array(
                 'name' => strtolower($char),
-                'value' => null
+                'value' => null,
             );
 
             $this->state = 'attributeName';
@@ -904,7 +883,7 @@ class HTML5
     private function attributeNameState()
     {
         // Consume the next input character:
-        $this->char++;
+        ++$this->char;
         $char = $this->character($this->char);
 
         if (preg_match('/^[\t\n\x0b\x0c ]$/', $char)) {
@@ -915,33 +894,28 @@ class HTML5
             U+0020 SPACE
             Stay in the before attribute name state. */
             $this->state = 'afterAttributeName';
-
         } elseif ($char === '=') {
             /* U+003D EQUALS SIGN (=)
             Switch to the before attribute value state. */
             $this->state = 'beforeAttributeValue';
-
         } elseif ($char === '>') {
             /* U+003E GREATER-THAN SIGN (>)
             Emit the current tag token. Switch to the data state. */
             $this->emitToken($this->token);
             $this->state = 'data';
-
         } elseif ($char === '/' && $this->character($this->char + 1) !== '>') {
             /* U+002F SOLIDUS (/)
             Parse error unless this is a permitted slash. Switch to the before
             attribute name state. */
             $this->state = 'beforeAttributeName';
-
         } elseif ($this->char === $this->EOF) {
             /* EOF
             Parse error. Emit the current tag token. Reconsume the EOF
             character in the data state. */
             $this->emitToken($this->token);
 
-            $this->char--;
+            --$this->char;
             $this->state = 'data';
-
         } else {
             /* Anything else
             Append the current input character to the current attribute's name.
@@ -956,7 +930,7 @@ class HTML5
     private function afterAttributeNameState()
     {
         // Consume the next input character:
-        $this->char++;
+        ++$this->char;
         $char = $this->character($this->char);
 
         if (preg_match('/^[\t\n\x0b\x0c ]$/', $char)) {
@@ -967,33 +941,28 @@ class HTML5
             U+0020 SPACE
             Stay in the after attribute name state. */
             $this->state = 'afterAttributeName';
-
         } elseif ($char === '=') {
             /* U+003D EQUALS SIGN (=)
             Switch to the before attribute value state. */
             $this->state = 'beforeAttributeValue';
-
         } elseif ($char === '>') {
             /* U+003E GREATER-THAN SIGN (>)
             Emit the current tag token. Switch to the data state. */
             $this->emitToken($this->token);
             $this->state = 'data';
-
         } elseif ($char === '/' && $this->character($this->char + 1) !== '>') {
             /* U+002F SOLIDUS (/)
             Parse error unless this is a permitted slash. Switch to the
             before attribute name state. */
             $this->state = 'beforeAttributeName';
-
         } elseif ($this->char === $this->EOF) {
             /* EOF
             Parse error. Emit the current tag token. Reconsume the EOF
             character in the data state. */
             $this->emitToken($this->token);
 
-            $this->char--;
+            --$this->char;
             $this->state = 'data';
-
         } else {
             /* Anything else
             Start a new attribute in the current tag token. Set that attribute's
@@ -1001,7 +970,7 @@ class HTML5
             Switch to the attribute name state. */
             $this->token['attr'][] = array(
                 'name' => strtolower($char),
-                'value' => null
+                'value' => null,
             );
 
             $this->state = 'attributeName';
@@ -1011,7 +980,7 @@ class HTML5
     private function beforeAttributeValueState()
     {
         // Consume the next input character:
-        $this->char++;
+        ++$this->char;
         $char = $this->character($this->char);
 
         if (preg_match('/^[\t\n\x0b\x0c ]$/', $char)) {
@@ -1022,30 +991,25 @@ class HTML5
             U+0020 SPACE
             Stay in the before attribute value state. */
             $this->state = 'beforeAttributeValue';
-
         } elseif ($char === '"') {
             /* U+0022 QUOTATION MARK (")
             Switch to the attribute value (double-quoted) state. */
             $this->state = 'attributeValueDoubleQuoted';
-
         } elseif ($char === '&') {
             /* U+0026 AMPERSAND (&)
             Switch to the attribute value (unquoted) state and reconsume
             this input character. */
-            $this->char--;
+            --$this->char;
             $this->state = 'attributeValueUnquoted';
-
         } elseif ($char === '\'') {
             /* U+0027 APOSTROPHE (')
             Switch to the attribute value (single-quoted) state. */
             $this->state = 'attributeValueSingleQuoted';
-
         } elseif ($char === '>') {
             /* U+003E GREATER-THAN SIGN (>)
             Emit the current tag token. Switch to the data state. */
             $this->emitToken($this->token);
             $this->state = 'data';
-
         } else {
             /* Anything else
             Append the current input character to the current attribute's value.
@@ -1060,28 +1024,25 @@ class HTML5
     private function attributeValueDoubleQuotedState()
     {
         // Consume the next input character:
-        $this->char++;
+        ++$this->char;
         $char = $this->character($this->char);
 
         if ($char === '"') {
             /* U+0022 QUOTATION MARK (")
             Switch to the before attribute name state. */
             $this->state = 'beforeAttributeName';
-
         } elseif ($char === '&') {
             /* U+0026 AMPERSAND (&)
             Switch to the entity in attribute value state. */
             $this->entityInAttributeValueState('double');
-
         } elseif ($this->char === $this->EOF) {
             /* EOF
             Parse error. Emit the current tag token. Reconsume the character
             in the data state. */
             $this->emitToken($this->token);
 
-            $this->char--;
+            --$this->char;
             $this->state = 'data';
-
         } else {
             /* Anything else
             Append the current input character to the current attribute's value.
@@ -1096,28 +1057,25 @@ class HTML5
     private function attributeValueSingleQuotedState()
     {
         // Consume the next input character:
-        $this->char++;
+        ++$this->char;
         $char = $this->character($this->char);
 
         if ($char === '\'') {
             /* U+0022 QUOTATION MARK (')
             Switch to the before attribute name state. */
             $this->state = 'beforeAttributeName';
-
         } elseif ($char === '&') {
             /* U+0026 AMPERSAND (&)
             Switch to the entity in attribute value state. */
             $this->entityInAttributeValueState('single');
-
         } elseif ($this->char === $this->EOF) {
             /* EOF
             Parse error. Emit the current tag token. Reconsume the character
             in the data state. */
             $this->emitToken($this->token);
 
-            $this->char--;
+            --$this->char;
             $this->state = 'data';
-
         } else {
             /* Anything else
             Append the current input character to the current attribute's value.
@@ -1132,7 +1090,7 @@ class HTML5
     private function attributeValueUnquotedState()
     {
         // Consume the next input character:
-        $this->char++;
+        ++$this->char;
         $char = $this->character($this->char);
 
         if (preg_match('/^[\t\n\x0b\x0c ]$/', $char)) {
@@ -1143,18 +1101,15 @@ class HTML5
             U+0020 SPACE
             Switch to the before attribute name state. */
             $this->state = 'beforeAttributeName';
-
         } elseif ($char === '&') {
             /* U+0026 AMPERSAND (&)
             Switch to the entity in attribute value state. */
             $this->entityInAttributeValueState();
-
         } elseif ($char === '>') {
             /* U+003E GREATER-THAN SIGN (>)
             Emit the current tag token. Switch to the data state. */
             $this->emitToken($this->token);
             $this->state = 'data';
-
         } else {
             /* Anything else
             Append the current input character to the current attribute's value.
@@ -1196,7 +1151,7 @@ class HTML5
         $this->emitToken(
             array(
                 'data' => $data,
-                'type' => self::COMMENT
+                'type' => self::COMMENT,
             )
         );
 
@@ -1221,7 +1176,7 @@ class HTML5
             $this->state = 'comment';
             $this->token = array(
                 'data' => null,
-                'type' => self::COMMENT
+                'type' => self::COMMENT,
             );
 
             /* Otherwise if the next seven chacacters are a case-insensitive match
@@ -1235,7 +1190,7 @@ class HTML5
             The next character that is consumed, if any, is the first character
             that will be in the comment. */
         } else {
-            $this->char++;
+            ++$this->char;
             $this->state = 'bogusComment';
         }
     }
@@ -1243,7 +1198,7 @@ class HTML5
     private function commentState()
     {
         /* Consume the next input character: */
-        $this->char++;
+        ++$this->char;
         $char = $this->char();
 
         /* U+002D HYPHEN-MINUS (-) */
@@ -1256,7 +1211,7 @@ class HTML5
             /* Parse error. Emit the comment token. Reconsume the EOF character
             in the data state. */
             $this->emitToken($this->token);
-            $this->char--;
+            --$this->char;
             $this->state = 'data';
 
             /* Anything else */
@@ -1270,7 +1225,7 @@ class HTML5
     private function commentDashState()
     {
         /* Consume the next input character: */
-        $this->char++;
+        ++$this->char;
         $char = $this->char();
 
         /* U+002D HYPHEN-MINUS (-) */
@@ -1283,14 +1238,14 @@ class HTML5
             /* Parse error. Emit the comment token. Reconsume the EOF character
             in the data state. */
             $this->emitToken($this->token);
-            $this->char--;
+            --$this->char;
             $this->state = 'data';
 
             /* Anything else */
         } else {
             /* Append a U+002D HYPHEN-MINUS (-) character and the input
             character to the comment token's data. Switch to the comment state. */
-            $this->token['data'] .= '-' . $char;
+            $this->token['data'] .= '-'.$char;
             $this->state = 'comment';
         }
     }
@@ -1298,23 +1253,20 @@ class HTML5
     private function commentEndState()
     {
         /* Consume the next input character: */
-        $this->char++;
+        ++$this->char;
         $char = $this->char();
 
         if ($char === '>') {
             $this->emitToken($this->token);
             $this->state = 'data';
-
         } elseif ($char === '-') {
             $this->token['data'] .= '-';
-
         } elseif ($this->char === $this->EOF) {
             $this->emitToken($this->token);
-            $this->char--;
+            --$this->char;
             $this->state = 'data';
-
         } else {
-            $this->token['data'] .= '--' . $char;
+            $this->token['data'] .= '--'.$char;
             $this->state = 'comment';
         }
     }
@@ -1322,14 +1274,13 @@ class HTML5
     private function doctypeState()
     {
         /* Consume the next input character: */
-        $this->char++;
+        ++$this->char;
         $char = $this->char();
 
         if (preg_match('/^[\t\n\x0b\x0c ]$/', $char)) {
             $this->state = 'beforeDoctypeName';
-
         } else {
-            $this->char--;
+            --$this->char;
             $this->state = 'beforeDoctypeName';
         }
     }
@@ -1337,49 +1288,45 @@ class HTML5
     private function beforeDoctypeNameState()
     {
         /* Consume the next input character: */
-        $this->char++;
+        ++$this->char;
         $char = $this->char();
 
         if (preg_match('/^[\t\n\x0b\x0c ]$/', $char)) {
             // Stay in the before DOCTYPE name state.
-
         } elseif (preg_match('/^[a-z]$/', $char)) {
             $this->token = array(
                 'name' => strtoupper($char),
                 'type' => self::DOCTYPE,
-                'error' => true
+                'error' => true,
             );
 
             $this->state = 'doctypeName';
-
         } elseif ($char === '>') {
             $this->emitToken(
                 array(
                     'name' => null,
                     'type' => self::DOCTYPE,
-                    'error' => true
+                    'error' => true,
                 )
             );
 
             $this->state = 'data';
-
         } elseif ($this->char === $this->EOF) {
             $this->emitToken(
                 array(
                     'name' => null,
                     'type' => self::DOCTYPE,
-                    'error' => true
+                    'error' => true,
                 )
             );
 
-            $this->char--;
+            --$this->char;
             $this->state = 'data';
-
         } else {
             $this->token = array(
                 'name' => $char,
                 'type' => self::DOCTYPE,
-                'error' => true
+                'error' => true,
             );
 
             $this->state = 'doctypeName';
@@ -1389,24 +1336,20 @@ class HTML5
     private function doctypeNameState()
     {
         /* Consume the next input character: */
-        $this->char++;
+        ++$this->char;
         $char = $this->char();
 
         if (preg_match('/^[\t\n\x0b\x0c ]$/', $char)) {
             $this->state = 'AfterDoctypeName';
-
         } elseif ($char === '>') {
             $this->emitToken($this->token);
             $this->state = 'data';
-
         } elseif (preg_match('/^[a-z]$/', $char)) {
             $this->token['name'] .= strtoupper($char);
-
         } elseif ($this->char === $this->EOF) {
             $this->emitToken($this->token);
-            $this->char--;
+            --$this->char;
             $this->state = 'data';
-
         } else {
             $this->token['name'] .= $char;
         }
@@ -1419,21 +1362,18 @@ class HTML5
     private function afterDoctypeNameState()
     {
         /* Consume the next input character: */
-        $this->char++;
+        ++$this->char;
         $char = $this->char();
 
         if (preg_match('/^[\t\n\x0b\x0c ]$/', $char)) {
             // Stay in the DOCTYPE name state.
-
         } elseif ($char === '>') {
             $this->emitToken($this->token);
             $this->state = 'data';
-
         } elseif ($this->char === $this->EOF) {
             $this->emitToken($this->token);
-            $this->char--;
+            --$this->char;
             $this->state = 'data';
-
         } else {
             $this->token['error'] = true;
             $this->state = 'bogusDoctype';
@@ -1443,18 +1383,16 @@ class HTML5
     private function bogusDoctypeState()
     {
         /* Consume the next input character: */
-        $this->char++;
+        ++$this->char;
         $char = $this->char();
 
         if ($char === '>') {
             $this->emitToken($this->token);
             $this->state = 'data';
-
         } elseif ($this->char === $this->EOF) {
             $this->emitToken($this->token);
-            $this->char--;
+            --$this->char;
             $this->state = 'data';
-
         } else {
             // Stay in the bogus DOCTYPE state.
         }
@@ -1503,7 +1441,7 @@ class HTML5
 
                 // Consume as many characters as match the range of characters
                 // given above.
-                $this->char++;
+                ++$this->char;
                 $e_name = $this->characters($char_class, $this->char + $char + 1);
                 $entity = $this->character($start, $this->char);
                 $cond = strlen($e_name) > 0;
@@ -1519,14 +1457,14 @@ class HTML5
                 $e_name = $this->characters('0-9A-Za-z;', $this->char + 1);
                 $len = strlen($e_name);
 
-                for ($c = 1; $c <= $len; $c++) {
+                for ($c = 1; $c <= $len; ++$c) {
                     $id = substr($e_name, 0, $c);
-                    $this->char++;
+                    ++$this->char;
 
                     if (in_array($id, $this->entities)) {
                         if ($e_name[$c - 1] !== ';') {
                             if ($c < $len && $e_name[$c] == ';') {
-                                $this->char++; // consume extra semicolon
+                                ++$this->char; // consume extra semicolon
                             }
                         }
                         $entity = $id;
@@ -1543,12 +1481,13 @@ class HTML5
             // If no match can be made, then this is a parse error. No
             // characters are consumed, and nothing is returned.
             $this->char = $start;
+
             return false;
         }
 
         // Return a character token for the character corresponding to the
         // entity name (as given by the second column of the entities table).
-        return html_entity_decode('&' . $entity . ';', ENT_QUOTES, 'UTF-8');
+        return html_entity_decode('&'.$entity.';', ENT_QUOTES, 'UTF-8');
     }
 
     private function emitToken($token)
@@ -1557,7 +1496,6 @@ class HTML5
 
         if (is_int($emit)) {
             $this->content_model = $emit;
-
         } elseif ($token['type'] === self::ENDTAG) {
             $this->content_model = self::PCDATA;
         }
@@ -1568,7 +1506,7 @@ class HTML5
         $this->state = null;
         $this->tree->emitToken(
             array(
-                'type' => self::EOF
+                'type' => self::EOF,
             )
         );
     }
@@ -1601,7 +1539,7 @@ class HTML5TreeConstructer
         'strike',
         'strong',
         'tt',
-        'u'
+        'u',
     );
     private $special = array(
         'address',
@@ -1664,7 +1602,7 @@ class HTML5TreeConstructer
         'title',
         'tr',
         'ul',
-        'wbr'
+        'wbr',
     );
 
     // The different phases.
@@ -1701,7 +1639,7 @@ class HTML5TreeConstructer
     {
         $this->phase = self::INIT_PHASE;
         $this->mode = self::BEFOR_HEAD;
-        $this->dom = new DOMDocument;
+        $this->dom = new DOMDocument();
 
         $this->dom->encoding = 'UTF-8';
         $this->dom->preserveWhiteSpace = true;
@@ -1755,6 +1693,7 @@ class HTML5TreeConstructer
             with a greater emphasis on backwards compatibility. */
 
             $this->phase = self::ROOT_PHASE;
+
             return $this->rootElementPhase($token);
 
             /* A DOCTYPE token marked as being correct */
@@ -1829,6 +1768,7 @@ class HTML5TreeConstructer
             $this->stack[] = $html;
 
             $this->phase = self::MAIN_PHASE;
+
             return $this->mainPhase($token);
         }
     }
@@ -1963,7 +1903,7 @@ class HTML5TreeConstructer
                 array(
                     'name' => 'head',
                     'type' => HTML5::STARTTAG,
-                    'attr' => array()
+                    'attr' => array(),
                 )
             );
 
@@ -2001,11 +1941,11 @@ class HTML5TreeConstructer
             /* Append a Comment node to the current node with the data attribute
             set to the data given in the comment token. */
             $this->insertComment($token['data']);
-
         } elseif ($token['type'] === HTML5::ENDTAG &&
             in_array($token['name'], array('title', 'style', 'script'))
         ) {
             array_pop($this->stack);
+
             return HTML5::PCDATA;
 
             /* A start tag with the tag name "title" */
@@ -2016,7 +1956,6 @@ class HTML5TreeConstructer
             if ($this->head_pointer !== null) {
                 $element = $this->insertElement($token, false);
                 $this->head_pointer->appendChild($element);
-
             } else {
                 $element = $this->insertElement($token);
             }
@@ -2032,7 +1971,6 @@ class HTML5TreeConstructer
             if ($this->head_pointer !== null) {
                 $element = $this->insertElement($token, false);
                 $this->head_pointer->appendChild($element);
-
             } else {
                 $this->insertElement($token);
             }
@@ -2062,7 +2000,6 @@ class HTML5TreeConstructer
                 $element = $this->insertElement($token, false);
                 $this->head_pointer->appendChild($element);
                 array_pop($this->stack);
-
             } else {
                 $this->insertElement($token);
             }
@@ -2096,7 +2033,7 @@ class HTML5TreeConstructer
                 $this->inHead(
                     array(
                         'name' => 'head',
-                        'type' => HTML5::ENDTAG
+                        'type' => HTML5::ENDTAG,
                     )
                 );
 
@@ -2155,6 +2092,7 @@ class HTML5TreeConstructer
             /* Parse error. Switch the insertion mode back to "in head" and
             reprocess the token. */
             $this->mode = self::IN_HEAD;
+
             return $this->inHead($token);
 
             /* Anything else */
@@ -2165,7 +2103,7 @@ class HTML5TreeConstructer
                 array(
                     'name' => 'body',
                     'type' => HTML5::STARTTAG,
-                    'attr' => array()
+                    'attr' => array(),
                 )
             );
 
@@ -2261,7 +2199,7 @@ class HTML5TreeConstructer
                             $this->emitToken(
                                 array(
                                     'name' => 'p',
-                                    'type' => HTML5::ENDTAG
+                                    'type' => HTML5::ENDTAG,
                                 )
                             );
                         }
@@ -2286,7 +2224,7 @@ class HTML5TreeConstructer
                                 $this->emitToken(
                                     array(
                                         'name' => 'p',
-                                        'type' => HTML5::ENDTAG
+                                        'type' => HTML5::ENDTAG,
                                     )
                                 );
                             }
@@ -2309,14 +2247,14 @@ class HTML5TreeConstructer
                             $this->emitToken(
                                 array(
                                     'name' => 'p',
-                                    'type' => HTML5::ENDTAG
+                                    'type' => HTML5::ENDTAG,
                                 )
                             );
                         }
 
                         $stack_length = count($this->stack) - 1;
 
-                        for ($n = $stack_length; 0 <= $n; $n--) {
+                        for ($n = $stack_length; 0 <= $n; --$n) {
                             /* 1. Initialise node to be the current node (the
                             bottommost node of the stack). */
                             $stop = false;
@@ -2329,7 +2267,7 @@ class HTML5TreeConstructer
                             if ($token['name'] === $node->tagName || ($token['name'] !== 'li'
                                     && ($node->tagName === 'dd' || $node->tagName === 'dt'))
                             ) {
-                                for ($x = $stack_length; $x >= $n; $x--) {
+                                for ($x = $stack_length; $x >= $n; --$x) {
                                     array_pop($this->stack);
                                 }
 
@@ -2360,7 +2298,7 @@ class HTML5TreeConstructer
                             $this->emitToken(
                                 array(
                                     'name' => 'p',
-                                    'type' => HTML5::ENDTAG
+                                    'type' => HTML5::ENDTAG,
                                 )
                             );
                         }
@@ -2385,7 +2323,7 @@ class HTML5TreeConstructer
                             $this->emitToken(
                                 array(
                                     'name' => 'p',
-                                    'type' => HTML5::ENDTAG
+                                    'type' => HTML5::ENDTAG,
                                 )
                             );
                         }
@@ -2416,15 +2354,14 @@ class HTML5TreeConstructer
                         might not have if the element is not in table scope). */
                         $leng = count($this->a_formatting);
 
-                        for ($n = $leng - 1; $n >= 0; $n--) {
+                        for ($n = $leng - 1; $n >= 0; --$n) {
                             if ($this->a_formatting[$n] === self::MARKER) {
                                 break;
-
                             } elseif ($this->a_formatting[$n]->nodeName === 'a') {
                                 $this->emitToken(
                                     array(
                                         'name' => 'a',
-                                        'type' => HTML5::ENDTAG
+                                        'type' => HTML5::ENDTAG,
                                     )
                                 );
                                 break;
@@ -2477,7 +2414,7 @@ class HTML5TreeConstructer
                             $this->inBody(
                                 array(
                                     'name' => 'button',
-                                    'type' => HTML5::ENDTAG
+                                    'type' => HTML5::ENDTAG,
                                 )
                             );
                         }
@@ -2527,7 +2464,7 @@ class HTML5TreeConstructer
                             $this->emitToken(
                                 array(
                                     'name' => 'p',
-                                    'type' => HTML5::ENDTAG
+                                    'type' => HTML5::ENDTAG,
                                 )
                             );
                         }
@@ -2568,7 +2505,7 @@ class HTML5TreeConstructer
                             $this->emitToken(
                                 array(
                                     'name' => 'p',
-                                    'type' => HTML5::ENDTAG
+                                    'type' => HTML5::ENDTAG,
                                 )
                             );
                         }
@@ -2585,6 +2522,7 @@ class HTML5TreeConstructer
                         /* Parse error. Change the token's tag name to "img" and
                         reprocess it. (Don't ask.) */
                         $token['name'] = 'img';
+
                         return $this->inBody($token);
                         break;
 
@@ -2621,7 +2559,7 @@ class HTML5TreeConstructer
                                 array(
                                     'name' => 'body',
                                     'type' => HTML5::STARTTAG,
-                                    'attr' => array()
+                                    'attr' => array(),
                                 )
                             );
 
@@ -2631,7 +2569,7 @@ class HTML5TreeConstructer
                                 array(
                                     'name' => 'hr',
                                     'type' => HTML5::STARTTAG,
-                                    'attr' => array()
+                                    'attr' => array(),
                                 )
                             );
 
@@ -2641,7 +2579,7 @@ class HTML5TreeConstructer
                                 array(
                                     'name' => 'p',
                                     'type' => HTML5::STARTTAG,
-                                    'attr' => array()
+                                    'attr' => array(),
                                 )
                             );
 
@@ -2651,13 +2589,13 @@ class HTML5TreeConstructer
                                 array(
                                     'name' => 'label',
                                     'type' => HTML5::STARTTAG,
-                                    'attr' => array()
+                                    'attr' => array(),
                                 )
                             );
 
                             /* Act as if a stream of character tokens had been seen. */
                             $this->insertText(
-                                'This is a searchable index. ' .
+                                'This is a searchable index. '.
                                 'Insert your search keywords here: '
                             );
 
@@ -2672,14 +2610,14 @@ class HTML5TreeConstructer
                                 array(
                                     'name' => 'input',
                                     'type' => HTML5::STARTTAG,
-                                    'attr' => $attr
+                                    'attr' => $attr,
                                 )
                             );
 
                             /* Act as if a stream of character tokens had been seen
                             (see below for what they should say). */
                             $this->insertText(
-                                'This is a searchable index. ' .
+                                'This is a searchable index. '.
                                 'Insert your search keywords here: '
                             );
 
@@ -2688,7 +2626,7 @@ class HTML5TreeConstructer
                             $this->inBody(
                                 array(
                                     'name' => 'label',
-                                    'type' => HTML5::ENDTAG
+                                    'type' => HTML5::ENDTAG,
                                 )
                             );
 
@@ -2697,7 +2635,7 @@ class HTML5TreeConstructer
                             $this->inBody(
                                 array(
                                     'name' => 'p',
-                                    'type' => HTML5::ENDTAG
+                                    'type' => HTML5::ENDTAG,
                                 )
                             );
 
@@ -2706,7 +2644,7 @@ class HTML5TreeConstructer
                             $this->inBody(
                                 array(
                                     'name' => 'hr',
-                                    'type' => HTML5::ENDTAG
+                                    'type' => HTML5::ENDTAG,
                                 )
                             );
 
@@ -2715,7 +2653,7 @@ class HTML5TreeConstructer
                             $this->inBody(
                                 array(
                                     'name' => 'form',
-                                    'type' => HTML5::ENDTAG
+                                    'type' => HTML5::ENDTAG,
                                 )
                             );
                         }
@@ -2826,7 +2764,7 @@ class HTML5TreeConstructer
                         $this->inBody(
                             array(
                                 'name' => 'body',
-                                'type' => HTML5::ENDTAG
+                                'type' => HTML5::ENDTAG,
                             )
                         );
 
@@ -2863,7 +2801,7 @@ class HTML5TreeConstructer
                             scope with the same tag name as that of the token,
                             then pop elements from this stack until an element
                             with that tag name has been popped from the stack. */
-                            for ($n = count($this->stack) - 1; $n >= 0; $n--) {
+                            for ($n = count($this->stack) - 1; $n >= 0; --$n) {
                                 if ($this->stack[$n]->nodeName === $token['name']) {
                                     $n = -1;
                                 }
@@ -2880,7 +2818,6 @@ class HTML5TreeConstructer
                         implied    end tags. */
                         if ($this->elementInScope($token['name'])) {
                             $this->generateImpliedEndTags();
-
                         }
 
                         if (end($this->stack)->nodeName !== $token['name']) {
@@ -2888,7 +2825,6 @@ class HTML5TreeConstructer
                             same tag name as that of the token, then this is a parse
                             error. */
                             // w/e
-
                         } else {
                             /* Otherwise, if the current node is an element with
                             the same tag name as that of the token pop that element
@@ -2914,10 +2850,9 @@ class HTML5TreeConstructer
                             /* If the stack of open elements has a p element in
                             scope, then pop elements from this stack until the stack
                             no longer has a p element in scope. */
-                            for ($n = count($this->stack) - 1; $n >= 0; $n--) {
+                            for ($n = count($this->stack) - 1; $n >= 0; --$n) {
                                 if ($this->elementInScope('p')) {
                                     array_pop($this->stack);
-
                                 } else {
                                     break;
                                 }
@@ -2944,7 +2879,7 @@ class HTML5TreeConstructer
                             whose tag name matches the tag name of the token, then
                             pop elements from this stack until an element with that
                             tag name has been popped from the stack. */
-                            for ($n = count($this->stack) - 1; $n >= 0; $n--) {
+                            for ($n = count($this->stack) - 1; $n >= 0; --$n) {
                                 if ($this->stack[$n]->nodeName === $token['name']) {
                                     $n = -1;
                                 }
@@ -3007,10 +2942,9 @@ class HTML5TreeConstructer
                             * has the same tag name as the token.
                         */
                         while (true) {
-                            for ($a = count($this->a_formatting) - 1; $a >= 0; $a--) {
+                            for ($a = count($this->a_formatting) - 1; $a >= 0; --$a) {
                                 if ($this->a_formatting[$a] === self::MARKER) {
                                     break;
-
                                 } elseif ($this->a_formatting[$a]->tagName === $token['name']) {
                                     $formatting_element = $this->a_formatting[$a];
                                     $in_stack = in_array($formatting_element, $this->stack, true);
@@ -3046,7 +2980,7 @@ class HTML5TreeConstructer
                             $fe_s_pos = array_search($formatting_element, $this->stack, true);
                             $length = count($this->stack);
 
-                            for ($s = $fe_s_pos + 1; $s < $length; $s++) {
+                            for ($s = $fe_s_pos + 1; $s < $length; ++$s) {
                                 $category = $this->getElementCategory($this->stack[$s]->nodeName);
 
                                 if ($category !== self::PHRASING && $category !== self::FORMATTING) {
@@ -3061,7 +2995,7 @@ class HTML5TreeConstructer
                             element, and remove the formatting element from the
                             list of active formatting elements. */
                             if (!isset($furthest_block)) {
-                                for ($n = $length - 1; $n >= $fe_s_pos; $n--) {
+                                for ($n = $length - 1; $n >= $fe_s_pos; --$n) {
                                     array_pop($this->stack);
                                 }
 
@@ -3093,7 +3027,7 @@ class HTML5TreeConstructer
                             $last_node = $furthest_block;
 
                             while (true) {
-                                for ($n = array_search($node, $this->stack, true) - 1; $n >= 0; $n--) {
+                                for ($n = array_search($node, $this->stack, true) - 1; $n >= 0; --$n) {
                                     /* 7.1 Let node be the element immediately
                                     prior to node in the stack of open elements. */
                                     $node = $this->stack[$n];
@@ -3105,7 +3039,6 @@ class HTML5TreeConstructer
                                     if (!in_array($node, $this->a_formatting, true)) {
                                         unset($this->stack[$n]);
                                         $this->stack = array_merge($this->stack);
-
                                     } else {
                                         break;
                                     }
@@ -3229,7 +3162,7 @@ class HTML5TreeConstructer
                             elements from the stack until that element has been popped from
                             the stack, and clear the list of active formatting elements up
                             to the last marker. */
-                            for ($n = count($this->stack) - 1; $n >= 0; $n--) {
+                            for ($n = count($this->stack) - 1; $n >= 0; --$n) {
                                 if ($this->stack[$n]->nodeName === $token['name']) {
                                     $n = -1;
                                 }
@@ -3239,7 +3172,7 @@ class HTML5TreeConstructer
 
                             $marker = end(array_keys($this->a_formatting, self::MARKER, true));
 
-                            for ($n = count($this->a_formatting) - 1; $n > $marker; $n--) {
+                            for ($n = count($this->a_formatting) - 1; $n > $marker; --$n) {
                                 array_pop($this->a_formatting);
                             }
                         }
@@ -3273,7 +3206,7 @@ class HTML5TreeConstructer
 
                     /* An end tag token not covered by the previous entries */
                     default:
-                        for ($n = count($this->stack) - 1; $n >= 0; $n--) {
+                        for ($n = count($this->stack) - 1; $n >= 0; --$n) {
                             /* Initialise node to be the current node (the bottommost
                             node of the stack). */
                             $node = end($this->stack);
@@ -3291,10 +3224,9 @@ class HTML5TreeConstructer
 
                                 /* Pop all the nodes from the current node up to
                                 node, including node, then stop this algorithm. */
-                                for ($x = count($this->stack) - $n; $x >= $n; $x--) {
+                                for ($x = count($this->stack) - $n; $x >= $n; --$x) {
                                     array_pop($this->stack);
                                 }
-
                             } else {
                                 $category = $this->getElementCategory($node);
 
@@ -3370,7 +3302,7 @@ class HTML5TreeConstructer
                 array(
                     'name' => 'colgroup',
                     'type' => HTML5::STARTTAG,
-                    'attr' => array()
+                    'attr' => array(),
                 )
             );
 
@@ -3400,7 +3332,7 @@ class HTML5TreeConstructer
                 array(
                     'name' => 'tbody',
                     'type' => HTML5::STARTTAG,
-                    'attr' => array()
+                    'attr' => array(),
                 )
             );
 
@@ -3416,7 +3348,7 @@ class HTML5TreeConstructer
             $this->inTable(
                 array(
                     'name' => 'table',
-                    'type' => HTML5::ENDTAG
+                    'type' => HTML5::ENDTAG,
                 )
             );
 
@@ -3471,7 +3403,7 @@ class HTML5TreeConstructer
                     'tfoot',
                     'th',
                     'thead',
-                    'tr'
+                    'tr',
                 )
             )
         ) {
@@ -3501,7 +3433,7 @@ class HTML5TreeConstructer
                 its parent node is not an element, then the foster parent
                 element is the element before the last table element in the
                 stack of open elements. */
-                for ($n = count($this->stack) - 1; $n >= 0; $n--) {
+                for ($n = count($this->stack) - 1; $n >= 0; --$n) {
                     if ($this->stack[$n]->nodeName === 'table') {
                         $table = $this->stack[$n];
                         break;
@@ -3510,10 +3442,8 @@ class HTML5TreeConstructer
 
                 if (isset($table) && $table->parentNode !== null) {
                     $this->foster_parent = $table->parentNode;
-
                 } elseif (!isset($table)) {
                     $this->foster_parent = $this->stack[0];
-
                 } elseif (isset($table) && ($table->parentNode === null ||
                         $table->parentNode->nodeType !== XML_ELEMENT_NODE)
                 ) {
@@ -3577,7 +3507,7 @@ class HTML5TreeConstructer
                         'tfoot',
                         'th',
                         'thead',
-                        'tr'
+                        'tr',
                     )
                 )) || ($token['type'] === HTML5::ENDTAG &&
                 $token['name'] === 'table')
@@ -3588,7 +3518,7 @@ class HTML5TreeConstructer
             $this->inCaption(
                 array(
                     'name' => 'caption',
-                    'type' => HTML5::ENDTAG
+                    'type' => HTML5::ENDTAG,
                 )
             );
 
@@ -3607,7 +3537,7 @@ class HTML5TreeConstructer
                     'tfoot',
                     'th',
                     'thead',
-                    'tr'
+                    'tr',
                 )
             )
         ) {
@@ -3674,7 +3604,7 @@ class HTML5TreeConstructer
             $this->inColumnGroup(
                 array(
                     'name' => 'colgroup',
-                    'type' => HTML5::ENDTAG
+                    'type' => HTML5::ENDTAG,
                 )
             );
 
@@ -3706,7 +3636,7 @@ class HTML5TreeConstructer
                 array(
                     'name' => 'tr',
                     'type' => HTML5::STARTTAG,
-                    'attr' => array()
+                    'attr' => array(),
                 )
             );
 
@@ -3758,7 +3688,7 @@ class HTML5TreeConstructer
                 $this->inTableBody(
                     array(
                         'name' => end($this->stack)->nodeName,
-                        'type' => HTML5::ENDTAG
+                        'type' => HTML5::ENDTAG,
                     )
                 );
 
@@ -3833,7 +3763,7 @@ class HTML5TreeConstructer
             $this->inRow(
                 array(
                     'name' => 'tr',
-                    'type' => HTML5::ENDTAG
+                    'type' => HTML5::ENDTAG,
                 )
             );
 
@@ -3856,7 +3786,7 @@ class HTML5TreeConstructer
                 $this->inRow(
                     array(
                         'name' => 'tr',
-                        'type' => HTML5::ENDTAG
+                        'type' => HTML5::ENDTAG,
                     )
                 );
 
@@ -3934,7 +3864,7 @@ class HTML5TreeConstructer
                     'tfoot',
                     'th',
                     'thead',
-                    'tr'
+                    'tr',
                 )
             )
         ) {
@@ -3948,6 +3878,7 @@ class HTML5TreeConstructer
                 token. */
             } else {
                 $this->closeCell();
+
                 return $this->inRow($token);
             }
 
@@ -3964,7 +3895,7 @@ class HTML5TreeConstructer
                     'tfoot',
                     'th',
                     'thead',
-                    'tr'
+                    'tr',
                 )
             )
         ) {
@@ -3978,6 +3909,7 @@ class HTML5TreeConstructer
                 token. */
             } else {
                 $this->closeCell();
+
                 return $this->inRow($token);
             }
 
@@ -4008,6 +3940,7 @@ class HTML5TreeConstructer
                 token. */
             } else {
                 $this->closeCell();
+
                 return $this->inRow($token);
             }
 
@@ -4043,7 +3976,7 @@ class HTML5TreeConstructer
                 $this->inSelect(
                     array(
                         'name' => 'option',
-                        'type' => HTML5::ENDTAG
+                        'type' => HTML5::ENDTAG,
                     )
                 );
             }
@@ -4061,7 +3994,7 @@ class HTML5TreeConstructer
                 $this->inSelect(
                     array(
                         'name' => 'option',
-                        'type' => HTML5::ENDTAG
+                        'type' => HTML5::ENDTAG,
                     )
                 );
             }
@@ -4072,7 +4005,7 @@ class HTML5TreeConstructer
                 $this->inSelect(
                     array(
                         'name' => 'optgroup',
-                        'type' => HTML5::ENDTAG
+                        'type' => HTML5::ENDTAG,
                     )
                 );
             }
@@ -4096,7 +4029,7 @@ class HTML5TreeConstructer
                 $this->inSelect(
                     array(
                         'name' => 'option',
-                        'type' => HTML5::ENDTAG
+                        'type' => HTML5::ENDTAG,
                     )
                 );
             }
@@ -4155,7 +4088,7 @@ class HTML5TreeConstructer
             $this->inSelect(
                 array(
                     'name' => 'select',
-                    'type' => HTML5::ENDTAG
+                    'type' => HTML5::ENDTAG,
                 )
             );
 
@@ -4171,7 +4104,7 @@ class HTML5TreeConstructer
                     'thead',
                     'tr',
                     'td',
-                    'th'
+                    'th',
                 )
             ) && $token['type'] === HTML5::ENDTAG
         ) {
@@ -4186,7 +4119,7 @@ class HTML5TreeConstructer
                 $this->inSelect(
                     array(
                         'name' => 'select',
-                        'type' => HTML5::ENDTAG
+                        'type' => HTML5::ENDTAG,
                     )
                 );
 
@@ -4236,6 +4169,7 @@ class HTML5TreeConstructer
             /* Parse error. Set the insertion mode to "in body" and reprocess
             the token. */
             $this->mode = self::IN_BODY;
+
             return $this->inBody($token);
         }
     }
@@ -4273,7 +4207,6 @@ class HTML5TreeConstructer
             parse error; ignore the token. (innerHTML case) */
             if (end($this->stack)->nodeName === 'html') {
                 // Ignore
-
             } else {
                 /* Otherwise, pop the current node from the stack of open
                 elements. */
@@ -4383,6 +4316,7 @@ class HTML5TreeConstructer
             /* Parse error. Switch back to the main phase and reprocess the
             token. */
             $this->phase = self::MAIN_PHASE;
+
             return $this->mainPhase($token);
 
             /* An end-of-file token */
@@ -4436,7 +4370,6 @@ class HTML5TreeConstructer
     {
         if ($this->foster_parent === null) {
             end($this->stack)->appendChild($node);
-
         } elseif ($this->foster_parent !== null) {
             /* If the foster parent element is the parent element of the
             last table element in the stack of open elements, then the new
@@ -4444,7 +4377,7 @@ class HTML5TreeConstructer
             in the stack of open elements in the foster parent element;
             otherwise, the new node must be appended to the foster parent
             element. */
-            for ($n = count($this->stack) - 1; $n >= 0; $n--) {
+            for ($n = count($this->stack) - 1; $n >= 0; --$n) {
                 if ($this->stack[$n]->nodeName === 'table' &&
                     $this->stack[$n]->parentNode !== null
                 ) {
@@ -4477,7 +4410,7 @@ class HTML5TreeConstructer
 
         $leng = count($this->stack);
 
-        for ($n = 0; $n < $leng; $n++) {
+        for ($n = 0; $n < $leng; ++$n) {
             /* 1. Initialise node to be the current node (the bottommost node of
             the stack). */
             $node = $this->stack[$leng - 1 - $n];
@@ -4485,12 +4418,10 @@ class HTML5TreeConstructer
             if ($node->tagName === $el) {
                 /* 2. If node is the target node, terminate in a match state. */
                 return true;
-
             } elseif ($node->tagName === 'table') {
                 /* 3. Otherwise, if node is a table element, terminate in a failure
                 state. */
                 return false;
-
             } elseif ($table === true && in_array(
                     $node->tagName,
                     array(
@@ -4499,7 +4430,7 @@ class HTML5TreeConstructer
                         'th',
                         'button',
                         'marquee',
-                        'object'
+                        'object',
                     )
                 )
             ) {
@@ -4507,7 +4438,6 @@ class HTML5TreeConstructer
                 variant (rather than the "has an element in table scope" variant),
                 and node is one of the following, terminate in a failure state. */
                 return false;
-
             } elseif ($node === $node->ownerDocument->documentElement) {
                 /* 5. Otherwise, if node is an html element (root element), terminate
                 in a failure state. (This can only happen if the node is the topmost
@@ -4555,7 +4485,7 @@ class HTML5TreeConstructer
 
             /* 5. Let entry be the entry one earlier than entry in the list of
             active formatting elements. */
-            $a--;
+            --$a;
             $entry = $this->a_formatting[$a];
 
             /* 6. If entry is neither a marker nor an element that is also in
@@ -4569,7 +4499,7 @@ class HTML5TreeConstructer
             /* 7. Let entry be the element one later than entry in the list of
             active formatting elements. */
             if (isset($step_seven) && $step_seven === true) {
-                $a++;
+                ++$a;
                 $entry = $this->a_formatting[$a];
             }
 
@@ -4670,7 +4600,7 @@ class HTML5TreeConstructer
         $last = false;
         $leng = count($this->stack);
 
-        for ($n = $leng - 1; $n >= 0; $n--) {
+        for ($n = $leng - 1; $n >= 0; --$n) {
             /* 2. Let node be the last node in the stack of open elements. */
             $node = $this->stack[$n];
 
@@ -4772,7 +4702,7 @@ class HTML5TreeConstructer
                 $this->inCell(
                     array(
                         'name' => $cell,
-                        'type' => HTML5::ENDTAG
+                        'type' => HTML5::ENDTAG,
                     )
                 );
 

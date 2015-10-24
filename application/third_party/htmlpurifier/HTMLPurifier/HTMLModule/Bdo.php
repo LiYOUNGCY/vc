@@ -6,17 +6,16 @@
  */
 class HTMLPurifier_HTMLModule_Bdo extends HTMLPurifier_HTMLModule
 {
-
     /**
-     * @type string
+     * @var string
      */
     public $name = 'Bdo';
 
     /**
-     * @type array
+     * @var array
      */
     public $attr_collections = array(
-        'I18N' => array('dir' => false)
+        'I18N' => array('dir' => false),
     );
 
     /**
@@ -42,3 +41,4 @@ class HTMLPurifier_HTMLModule_Bdo extends HTMLPurifier_HTMLModule
 }
 
 // vim: et sw=4 sts=4
+

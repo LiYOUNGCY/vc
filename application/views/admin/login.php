@@ -29,7 +29,7 @@
 </div>
  
 <?php 
-	echo $foot;
+    echo $foot;
 ?>
 <script type="text/javascript">
 	$(function(){

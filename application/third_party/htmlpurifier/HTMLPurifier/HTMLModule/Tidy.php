@@ -3,6 +3,7 @@
 /**
  * Abstract class for a set of proprietary modules that clean up (tidy)
  * poorly written HTML.
+ *
  * @todo Figure out how to protect some of these methods/properties
  */
 class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
@@ -10,33 +11,38 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
     /**
      * List of supported levels.
      * Index zero is a special case "no fixes" level.
-     * @type array
+     *
+     * @var array
      */
     public $levels = array(0 => 'none', 'light', 'medium', 'heavy');
 
     /**
      * Default level to place all fixes in.
      * Disabled by default.
-     * @type string
+     *
+     * @var string
      */
     public $defaultLevel = null;
 
     /**
      * Lists of fixes used by getFixesForLevel().
      * Format is:
-     *      HTMLModule_Tidy->fixesForLevel[$level] = array('fix-1', 'fix-2');
-     * @type array
+     *      HTMLModule_Tidy->fixesForLevel[$level] = array('fix-1', 'fix-2');.
+     *
+     * @var array
      */
     public $fixesForLevel = array(
         'light' => array(),
         'medium' => array(),
-        'heavy' => array()
+        'heavy' => array(),
     );
 
     /**
      * Lazy load constructs the module by determining the necessary
      * fixes to create and then delegating to the populate() function.
+     *
      * @param HTMLPurifier_Config $config
+     *
      * @todo Wildcard matching and error reporting when an added or
      *       subtracted fix has no effect.
      */
@@ -69,7 +75,9 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
     /**
      * Retrieves all fixes per a level, returning fixes for that specific
      * level as well as all levels below it.
+     *
      * @param string $level level identifier, see $levels for valid values
+     *
      * @return array Lookup up table of fixes
      */
     public function getFixesForLevel($level)
@@ -78,7 +86,7 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
             return array();
         }
         $activated_levels = array();
-        for ($i = 1, $c = count($this->levels); $i < $c; $i++) {
+        for ($i = 1, $c = count($this->levels); $i < $c; ++$i) {
             $activated_levels[] = $this->levels[$i];
             if ($this->levels[$i] == $level) {
                 break;
@@ -86,9 +94,10 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
         }
         if ($i == $c) {
             trigger_error(
-                'Tidy level ' . htmlspecialchars($level) . ' not recognized',
+                'Tidy level '.htmlspecialchars($level).' not recognized',
                 E_USER_WARNING
             );
+
             return array();
         }
         $ret = array();
@@ -97,6 +106,7 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
                 $ret[$fix] = true;
             }
         }
+
         return $ret;
     }
 
@@ -104,6 +114,7 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
      * Dynamically populates the $fixesForLevel member variable using
      * the fixes array. It may be custom overloaded, used in conjunction
      * with $defaultLevel, or not used at all.
+     *
      * @param array $fixes
      */
     public function makeFixesForLevel($fixes)
@@ -113,9 +124,10 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
         }
         if (!isset($this->fixesForLevel[$this->defaultLevel])) {
             trigger_error(
-                'Default level ' . $this->defaultLevel . ' does not exist',
+                'Default level '.$this->defaultLevel.' does not exist',
                 E_USER_ERROR
             );
+
             return;
         }
         $this->fixesForLevel[$this->defaultLevel] = array_keys($fixes);
@@ -123,7 +135,8 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
 
     /**
      * Populates the module with transforms and other special-case code
-     * based on a list of fixes passed to it
+     * based on a list of fixes passed to it.
+     *
      * @param array $fixes Lookup table of fixes to activate
      */
     public function populate($fixes)
@@ -148,7 +161,7 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
                     }
                     // PHP does some weird parsing when I do
                     // $e->$type[$attr], so I have to assign a ref.
-                    $f =& $e->$type;
+                    $f = &$e->$type;
                     $f[$attr] = $fix;
                     break;
                 case 'tag_transform':
@@ -173,8 +186,10 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
 
     /**
      * Parses a fix name and determines what kind of fix it is, as well
-     * as other information defined by the fix
+     * as other information defined by the fix.
+     *
      * @param $name String name of fix
+     *
      * @return array(string $fix_type, array $fix_parameters)
      * @note $fix_parameters is type dependant, see populate() for usage
      *       of these parameters
@@ -204,7 +219,8 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
             if (is_null($property)) {
                 $property = 'pre';
             }
-            $type = 'attr_transform_' . $property;
+            $type = 'attr_transform_'.$property;
+
             return array($type, $params);
         }
 
@@ -214,12 +230,12 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
         }
 
         return array($property, $params);
-
     }
 
     /**
      * Defines all fixes the module will perform in a compact
      * associative array of fix name to fix implementation.
+     *
      * @return array
      */
     public function makeFixes()
@@ -228,3 +244,4 @@ class HTMLPurifier_HTMLModule_Tidy extends HTMLPurifier_HTMLModule
 }
 
 // vim: et sw=4 sts=4
+

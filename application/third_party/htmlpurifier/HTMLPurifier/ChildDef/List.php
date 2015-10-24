@@ -12,20 +12,21 @@
 class HTMLPurifier_ChildDef_List extends HTMLPurifier_ChildDef
 {
     /**
-     * @type string
+     * @var string
      */
     public $type = 'list';
-    /**
-     * @type array
-     */
+/**
+ * @var array
+ */
     // lying a little bit, so that we can handle ul and ol ourselves
     // XXX: This whole business with 'wrap' is all a bit unsatisfactory
     public $elements = array('li' => true, 'ul' => true, 'ol' => true);
 
     /**
-     * @param array $children
-     * @param HTMLPurifier_Config $config
+     * @param array                $children
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return array
      */
     public function validateChildren($children, $config, $context)
@@ -79,8 +80,10 @@ class HTMLPurifier_ChildDef_List extends HTMLPurifier_ChildDef
         if ($all_whitespace) {
             return false;
         }
+
         return $result;
     }
 }
 
 // vim: et sw=4 sts=4
+

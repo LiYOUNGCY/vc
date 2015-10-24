@@ -1,4 +1,5 @@
 <?php
+
 class Customer extends MY_Controller
 {
     public function __construct()
@@ -9,11 +10,11 @@ class Customer extends MY_Controller
     public function index()
     {
         $head['javascript'] = array(
-            'perfect-scrollbar.jquery.min.js'
+            'perfect-scrollbar.jquery.min.js',
         );
         $head['css'] = array(
             'style.css',
-            'perfect-scrollbar.min.css'
+            'perfect-scrollbar.min.css',
         );
 
         $body['user'] = $this->user;

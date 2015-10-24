@@ -38,7 +38,7 @@
                         <ul>
                             <li>艺术门类：<?=$production['medium']?></li>
                             <li>风格：<?=$production['style']?></li>
-                            <li>尺寸：<?php echo $production['w']." x ".$production['h'];?>cm</li>
+                            <li>尺寸：<?php echo $production['w'].' x '.$production['h'];?>cm</li>
                             <li>创作时间：<?=$production['creat_time']?></li>
                             <li>上市时间：<?=$production['publish_time']?></li>
                         </ul>
@@ -58,14 +58,18 @@
                                     <div class="frame_price">
                                         ￥ <span id="fp"><?=$value['price']?></span>
                                     </div>
-                                </li>
+                                </li> 
                             <?php $i++;} ?>
                         </ul>
-                        <?php foreach($frame as $value) if(isset($value['thumb'])) {  ?>
+                        <?php foreach ($frame as $value) {
+    if (isset($value['thumb'])) {
+        ?>
                         <div class="frame_detail" id="fd<?=$value['id']?>">
                             <img src="<?=$value['thumb']?>" alt="">
                         </div>
-                        <?php } ?>
+                        <?php 
+    }
+} ?>
                     </div>
                 </div>
                 <div class="price"><span style="font-weight:normal;color:#888888;font-size:16px;">售价：</span><?=$production['price']?> <font class="price_fp"></font> RMB</div>

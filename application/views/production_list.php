@@ -7,23 +7,29 @@
                 <div class="filter clearfix" style="border: none;">
                     <select class="dropdown" id="medium">
                         <option value="0">全部艺术门类</option>
-                        <?php foreach ($medium as $key => $value) { ?>
+                        <?php foreach ($medium as $key => $value) {
+    ?>
                             <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-                        <?php } ?>
+                        <?php 
+} ?>
                     </select>
 
                     <select class="dropdown" id="style">
                         <option value="0">全部风格</option>
-                        <?php foreach ($style as $key => $value) { ?>
+                        <?php foreach ($style as $key => $value) {
+    ?>
                             <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-                        <?php } ?>
+                        <?php 
+} ?>
                     </select>
 
                     <select class="dropdown" id="price">
                         <option value="0">全部价格</option>
-                        <?php foreach ($price as $key => $value) { ?>
+                        <?php foreach ($price as $key => $value) {
+    ?>
                             <option value="<?= $value['value'] ?>"><?= $value['name'] ?></option>
-                        <?php } ?>
+                        <?php 
+} ?>
                     </select>
                 </div>
             </div>

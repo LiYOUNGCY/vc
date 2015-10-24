@@ -10,13 +10,14 @@ class Message_model extends CI_Model
     private function _insert_message($sender_id, $message_text, $reply_to_message_id = 0)
     {
         $data = array(
-            'send_datetime' => date("Y-m-d H:i:s"),
+            'send_datetime' => date('Y-m-d H:i:s'),
             'message_text' => $message_text,
             'sender_user_id' => $sender_id,
-            'reply_to_message_id' => $reply_to_message_id
+            'reply_to_message_id' => $reply_to_message_id,
         );
 
         $this->db->insert('message', $data);
+
         return $this->db->insert_id();
     }
 
@@ -24,7 +25,7 @@ class Message_model extends CI_Model
     {
         $message_id = $this->_insert_message($sender_id, $message_text);
 
-        if(empty($message_id)) {
+        if (empty($message_id)) {
             return false;
         }
 

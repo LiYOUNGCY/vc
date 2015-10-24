@@ -6,12 +6,12 @@
 class HTMLPurifier_Injector_DisplayLinkURI extends HTMLPurifier_Injector
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'DisplayLinkURI';
 
     /**
-     * @type array
+     * @var array
      */
     public $needed = array('a');
 
@@ -38,3 +38,4 @@ class HTMLPurifier_Injector_DisplayLinkURI extends HTMLPurifier_Injector
 }
 
 // vim: et sw=4 sts=4
+

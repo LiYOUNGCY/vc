@@ -2,33 +2,35 @@
 
 /**
  * Injector that converts configuration directive syntax %Namespace.Directive
- * to links
+ * to links.
  */
 class HTMLPurifier_Injector_PurifierLinkify extends HTMLPurifier_Injector
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'PurifierLinkify';
 
     /**
-     * @type string
+     * @var string
      */
     public $docURL;
 
     /**
-     * @type array
+     * @var array
      */
     public $needed = array('a' => array('href'));
 
     /**
-     * @param HTMLPurifier_Config $config
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return string
      */
     public function prepare($config, $context)
     {
         $this->docURL = $config->get('AutoFormat.PurifierLinkify.DocURL');
+
         return parent::prepare($config, $context);
     }
 
@@ -61,7 +63,7 @@ class HTMLPurifier_Injector_PurifierLinkify extends HTMLPurifier_Injector
                     'a',
                     array('href' => str_replace('%s', $bits[$i], $this->docURL))
                 );
-                $token[] = new HTMLPurifier_Token_Text('%' . $bits[$i]);
+                $token[] = new HTMLPurifier_Token_Text('%'.$bits[$i]);
                 $token[] = new HTMLPurifier_Token_End('a');
             }
         }
@@ -69,3 +71,4 @@ class HTMLPurifier_Injector_PurifierLinkify extends HTMLPurifier_Injector
 }
 
 // vim: et sw=4 sts=4
+

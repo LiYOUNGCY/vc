@@ -6,7 +6,7 @@
 class HTMLPurifier_HTMLModule_Tables extends HTMLPurifier_HTMLModule
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'Tables';
 
@@ -29,7 +29,7 @@ class HTMLPurifier_HTMLModule_Tables extends HTMLPurifier_HTMLModule
                 'frame' => 'Enum#void,above,below,hsides,lhs,rhs,vsides,box,border',
                 'rules' => 'Enum#none,groups,rows,cols,all',
                 'summary' => 'Text',
-                'width' => 'Length'
+                'width' => 'Length',
             )
         );
 
@@ -73,3 +73,4 @@ class HTMLPurifier_HTMLModule_Tables extends HTMLPurifier_HTMLModule
 }
 
 // vim: et sw=4 sts=4
+

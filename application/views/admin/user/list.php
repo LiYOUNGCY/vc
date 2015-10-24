@@ -56,7 +56,8 @@
 										</thead>
 
 										<tbody>
-												<?php foreach ($user as $k => $v) {?>
+												<?php foreach ($user as $k => $v) {
+    ?>
 													<tr class="selected">
 														<td class="center">
 															<label>
@@ -86,7 +87,12 @@
 															<?=$v['last_active']?>
 														</td>
 														<td>
-															<?php if($v['forbidden'] == 0){echo "正常";}else{echo "被封禁";}?>
+															<?php if ($v['forbidden'] == 0) {
+    echo '正常';
+} else {
+    echo '被封禁';
+}
+    ?>
 														</td>											
 														<td class="tooltip-btn">
 															<button data-toggle="tooltip"  title="编辑" effect="edit" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-edit"></i>
@@ -95,7 +101,8 @@
 											                </button>								                				
 														</td>
 													</tr>																					
-												<?php }?>
+												<?php 
+}?>
 										</tbody>
 									</table>
 			                        <!-- /表格-->
@@ -179,9 +186,11 @@
 							                                <label class="col-sm-4 col-xs-3 control-label">用户组:</label>
 							                                <div class="col-sm-5 col-xs-8">
 							                                    <select name="role" class="form-control">
-			   														<?php foreach ($role as $k => $v){ ?>
+			   														<?php foreach ($role as $k => $v) {
+    ?>
 																			<option value="<?=$v['id']?>"><?=$v['name']?></option>
-			   														<?php }?>
+			   														<?php 
+}?>
 			                                                    </select>
 							                                </div>
 							                            </div>

@@ -51,20 +51,30 @@ load_header(
         <div class="clearfix" style="padding-top: 1rem;">
             <label for="medium" style="float:left;">艺术门类：</label>
             <select class="dropdown" id="medium" name="medium">
-                <?php foreach ($medium as $key => $value) { ?>
+                <?php foreach ($medium as $key => $value) {
+    ?>
                     <option
-                        value="<?= $value['id'] ?>" <?php if ($production['medium'] == $value['id']) echo 'selected'; ?>><?= $value['name'] ?></option>
-                <?php } ?>
+                        value="<?= $value['id'] ?>" <?php if ($production['medium'] == $value['id']) {
+    echo 'selected';
+}
+    ?>><?= $value['name'] ?></option>
+                <?php 
+} ?>
             </select>
         </div>
 
         <div class="clearfix" style="padding-top: 1rem;">
             <label for="style" style="float: left;">风格：</label>
             <select class="dropdown" id="style" name="style">
-                <?php foreach ($style as $key => $value) { ?>
+                <?php foreach ($style as $key => $value) {
+    ?>
                     <option
-                        value="<?= $value['id'] ?>" <?php if ($production['style'] == $value['id']) echo 'selected'; ?>><?= $value['name'] ?></option>
-                <?php } ?>
+                        value="<?= $value['id'] ?>" <?php if ($production['style'] == $value['id']) {
+    echo 'selected';
+}
+    ?>><?= $value['name'] ?></option>
+                <?php 
+} ?>
             </select>
         </div>
 
@@ -103,28 +113,31 @@ load_header(
         </label>
 
 
-        <?php foreach ($frame as $key => $value) { ?>
+        <?php foreach ($frame as $key => $value) {
+    ?>
             <label class="form-control inline" style="width: auto;">
                 <?= $value['name'] ?>
                 <input type="checkbox" name="frame_list[]" value="<?= $value['id'] ?>"
                     <?php
                     $status = false;
-                    foreach ($production_frame as $production_frame_id) {
-                        if ($value['id'] == $production_frame_id['frame_id']) {
-                            $status = true;
-                            break;
-                        }
-                        ?>
+    foreach ($production_frame as $production_frame_id) {
+        if ($value['id'] == $production_frame_id['frame_id']) {
+            $status = true;
+            break;
+        }
+        ?>
 
-                    <?php }
-                    if ($status) {
-                        echo 'checked';
-                    }
-                    ?>
+                    <?php 
+    }
+    if ($status) {
+        echo 'checked';
+    }
+    ?>
                     >
 
             </label>
-        <?php } ?>
+        <?php 
+} ?>
 
         <div class="option form-control">
             <button type="button" class="button cancel" id="back">返回</button>

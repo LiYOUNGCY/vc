@@ -1,16 +1,32 @@
-<?php 
+<?php
 
 class Err extends MY_Controller
 {
-	public function __construct()
-	{
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	public function index()
-	{
-		// $this->load->library('error');
-		$this->error->output('invalid_phone');
-		// var_dump( lang("error_INVALID_PHONE") );
-	}
+    public function index()
+    {
+        try {
+            $this->bar();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function bar()
+    {
+        throw new Exception('Error Processing Request', 1);
+    }
+
+    public function inverse($x)
+    {
+        if (!$x) {
+            throw new Exception('Division by zero.', 1);
+        }
+
+        return 1 / $x;
+    }
 }

@@ -9,37 +9,58 @@
                 <div class="filter">
                     <ul>
                         <li class="label">送礼：</li>
-                        <li class="<?php if($w1 == 0) echo 'active'; ?>" data-id="0" data-type="w1">
+                        <li class="<?php if ($w1 == 0) {
+    echo 'active';
+} ?>" data-id="0" data-type="w1">
                             全部
                         </li>
 
-                        <?php foreach ($tag['who'] as $key => $value) { ?>
-                            <li class="<?php if($w1 == $value['id']) echo 'active'; ?>" data-id="<?=$value['id']?>" data-type="w1">
+                        <?php foreach ($tag['who'] as $key => $value) {
+    ?>
+                            <li class="<?php if ($w1 == $value['id']) {
+    echo 'active';
+}
+    ?>" data-id="<?=$value['id']?>" data-type="w1">
                                 <?= $value['name'] ?>
                             </li>
-                        <?php } ?>
+                        <?php 
+} ?>
                     </ul>
                     <ul>
                         <li class="label">装修：</li>
-                        <li class="<?php if($w2 == 0) echo 'active'; ?>" data-id="0" data-type="w2">
+                        <li class="<?php if ($w2 == 0) {
+    echo 'active';
+} ?>" data-id="0" data-type="w2">
                             全部
                         </li>
-                        <?php foreach ($tag['where'] as $key => $value) { ?>
-                            <li class="<?php if($w2 == $value['id']) echo 'active'; ?>" data-id="<?=$value['id']?>" data-type="w2">
+                        <?php foreach ($tag['where'] as $key => $value) {
+    ?>
+                            <li class="<?php if ($w2 == $value['id']) {
+    echo 'active';
+}
+    ?>" data-id="<?=$value['id']?>" data-type="w2">
                                 <?= $value['name'] ?>
                             </li>
-                        <?php } ?>
+                        <?php 
+} ?>
                     </ul>
                     <ul>
                         <li class="label">收藏：</li>
-                        <li class="<?php if($w3 == 0) echo 'active'; ?>" data-id="0" data-type="w3">
+                        <li class="<?php if ($w3 == 0) {
+    echo 'active';
+} ?>" data-id="0" data-type="w3">
                             全部
                         </li>
-                        <?php foreach ($tag['when'] as $key => $value) { ?>
-                            <li class="<?php if($w3 == $value['id']) echo 'active'; ?>" data-id="<?=$value['id']?>" data-type="w3">
+                        <?php foreach ($tag['when'] as $key => $value) {
+    ?>
+                            <li class="<?php if ($w3 == $value['id']) {
+    echo 'active';
+}
+    ?>" data-id="<?=$value['id']?>" data-type="w3">
                                 <?= $value['name'] ?>
                             </li>
-                        <?php } ?>
+                        <?php 
+} ?>
                     </ul>
                 </div>
             </div>

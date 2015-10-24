@@ -9,53 +9,52 @@ class Main extends MY_Controller
         $this->load->service('article_service');
     }
 
-
     /**
-     * [index 显示文章列表]
-     * @param  string $type [文章类型(article 文章 topic 专题)]
-     * @return [type]       [description]
+     * [index 显示文章列表].
+     *
+     * @param string $type [文章类型(article 文章 topic 专题)]
+     *
+     * @return [type] [description]
      */
     public function index($type = 'article')
     {
-
         $get_tag = $this->sc->input('tag', 'get');
         $get_tag = isset($get_tag) && is_numeric($get_tag) ? $get_tag : 0;
         $data['css'] = array(
             'base.css',
-            'font-awesome/css/font-awesome.min.css'
+            'font-awesome/css/font-awesome.min.css',
         );
         $data['javascript'] = array(
             'jquery.js',
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
-            'jquery.pageslide.min.js'
+            'jquery.pageslide.min.js',
         );
 
         $user['user'] = $this->user;
-        $user['sign'] = $this->load->view('common/sign', '', TRUE);
-        $body['top'] = $this->load->view('common/top', $user, TRUE);
+        $user['sign'] = $this->load->view('common/sign', '', true);
+        $body['top'] = $this->load->view('common/top', $user, true);
 
         $body['get_tag'] = $get_tag;
         $body['user'] = $this->user;
-        $body['footer'] = $this->load->view('common/footer', '', TRUE);
+        $body['footer'] = $this->load->view('common/footer', '', true);
 
         //文章类型
         $body['article_type'] = $type;
         if ($type == 'article') {
-            $data['title'] = "资讯";
+            $data['title'] = '资讯';
             $body['tag'] = $this->article_service->get_article_tag();
 
             $this->load->view('common/head', $data);
             $this->load->view('article', $body);
-        } else if ($type == 'topic') {
-            $data['title'] = "专题";
+        } elseif ($type == 'topic') {
+            $data['title'] = '专题';
             $body['tag'] = $this->article_service->get_topic_tag();
 
             $this->load->view('common/head', $data);
             $this->load->view('topic_list', $body);
         }
     }
-
 
     public function topic()
     {
@@ -69,22 +68,22 @@ class Main extends MY_Controller
 
         $data['css'] = array(
             'base.css',
-            'font-awesome/css/font-awesome.min.css'
+            'font-awesome/css/font-awesome.min.css',
         );
         $data['javascript'] = array(
             'jquery.js',
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
-            'jquery.pageslide.min.js'
+            'jquery.pageslide.min.js',
         );
 
         $user['user'] = $this->user;
-        $user['sign'] = $this->load->view('common/sign', '', TRUE);
-        $body['top'] = $this->load->view('common/top', $user, TRUE);
+        $user['sign'] = $this->load->view('common/sign', '', true);
+        $body['top'] = $this->load->view('common/top', $user, true);
 
         $body['user'] = $this->user;
-        $body['footer'] = $this->load->view('common/footer', '', TRUE);
-        $data['title'] = "专题";
+        $body['footer'] = $this->load->view('common/footer', '', true);
+        $data['title'] = '专题';
 
         $body['tag'] = $this->article_service->get_topic_tag();
         $body['w1'] = $w1;
@@ -95,10 +94,11 @@ class Main extends MY_Controller
         $this->load->view('topic_list', $body);
     }
 
-
     /**
-     * [get_article_list 获取文章列表]
+     * [get_article_list 获取文章列表].
+     *
      * @param $[type] [文章类型]
+     *
      * @return [type] [description]
      */
     public function get_article_list()
@@ -108,15 +108,15 @@ class Main extends MY_Controller
         $tag = $this->sc->input('tag', 'get');
         $tag = is_numeric($tag) ? $tag : 0;
 
-        $uid = isset($this->user['id']) ? $this->user['id'] : NULL;
+        $uid = isset($this->user['id']) ? $this->user['id'] : null;
 
         $article = $this->article_service->get_article_list($page, $uid, $tag);
         echo json_encode($article);
     }
 
-
     /**
-     * [get_topic_list 获得专题列表]
+     * [get_topic_list 获得专题列表].
+     *
      * @return [type] [description]
      */
     public function get_topic_list()
@@ -126,10 +126,9 @@ class Main extends MY_Controller
         $when = $this->sc->input('w2', 'get');
         $where = $this->sc->input('w3', 'get');
 
-        $who = empty($who) || $who == 0 ? NULL : $who;
-        $when = empty($when) || $when == 0 ? NULL : $when;
-        $where = empty($where)  || $where == 0 ? NULL : $where;
-
+        $who = empty($who) || $who == 0 ? null : $who;
+        $when = empty($when) || $when == 0 ? null : $when;
+        $where = empty($where)  || $where == 0 ? null : $where;
 
         $topic = $this->article_service->get_topic_list($page, $who, $when, $where);
         echo json_encode($topic);

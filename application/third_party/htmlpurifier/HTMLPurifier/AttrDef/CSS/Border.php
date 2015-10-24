@@ -5,10 +5,10 @@
  */
 class HTMLPurifier_AttrDef_CSS_Border extends HTMLPurifier_AttrDef
 {
-
     /**
      * Local copy of properties this property is shorthand for.
-     * @type HTMLPurifier_AttrDef[]
+     *
+     * @var HTMLPurifier_AttrDef[]
      */
     protected $info = array();
 
@@ -24,9 +24,10 @@ class HTMLPurifier_AttrDef_CSS_Border extends HTMLPurifier_AttrDef
     }
 
     /**
-     * @param string $string
-     * @param HTMLPurifier_Config $config
+     * @param string               $string
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool|string
      */
     public function validate($string, $config, $context)
@@ -43,14 +44,16 @@ class HTMLPurifier_AttrDef_CSS_Border extends HTMLPurifier_AttrDef
                 }
                 $r = $validator->validate($bit, $config, $context);
                 if ($r !== false) {
-                    $ret .= $r . ' ';
+                    $ret .= $r.' ';
                     $done[$propname] = true;
                     break;
                 }
             }
         }
+
         return rtrim($ret);
     }
 }
 
 // vim: et sw=4 sts=4
+

@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Validates a URI in CSS syntax, which uses url('http://example.com')
+ * Validates a URI in CSS syntax, which uses url('http://example.com').
+ *
  * @note While theoretically speaking a URI in a CSS document could
  *       be non-embedded, as of CSS2 there is no such usage so we're
  *       generalizing it. This may need to be changed in the future.
@@ -11,16 +12,16 @@
  */
 class HTMLPurifier_AttrDef_CSS_URI extends HTMLPurifier_AttrDef_URI
 {
-
     public function __construct()
     {
         parent::__construct(true); // always embedded
     }
 
     /**
-     * @param string $uri_string
-     * @param HTMLPurifier_Config $config
+     * @param string               $uri_string
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool|string
      */
     public function validate($uri_string, $config, $context)
@@ -57,7 +58,7 @@ class HTMLPurifier_AttrDef_CSS_URI extends HTMLPurifier_AttrDef_URI
         }
 
         // extra sanity check; should have been done by URI
-        $result = str_replace(array('"', "\\", "\n", "\x0c", "\r"), "", $result);
+        $result = str_replace(array('"', '\\', "\n", "\x0c", "\r"), '', $result);
 
         // suspicious characters are ()'; we're going to percent encode
         // them for safety.
@@ -72,3 +73,4 @@ class HTMLPurifier_AttrDef_CSS_URI extends HTMLPurifier_AttrDef_URI
 }
 
 // vim: et sw=4 sts=4
+

@@ -10,7 +10,7 @@
                         文章编辑
                     </div>
                     <div class="panel-body">
-                        <form method="post" action="<?= base_url() . ADMINROUTE . 'article/update_article' ?>">
+                        <form method="post" action="<?= base_url().ADMINROUTE.'article/update_article' ?>">
                             <table class="table table-striped">
                                 <input name="aid" type="hidden" value="<?= $article['id'] ?>">
                                 <tbody>

@@ -6,12 +6,12 @@
 class HTMLPurifier_URIScheme_data extends HTMLPurifier_URIScheme
 {
     /**
-     * @type bool
+     * @var bool
      */
     public $browsable = true;
 
     /**
-     * @type array
+     * @var array
      */
     public $allowed_types = array(
         // you better write validation code for other types if you
@@ -23,14 +23,15 @@ class HTMLPurifier_URIScheme_data extends HTMLPurifier_URIScheme
     // this is actually irrelevant since we only write out the path
     // component
     /**
-     * @type bool
+     * @var bool
      */
     public $may_omit_host = true;
 
     /**
-     * @param HTMLPurifier_URI $uri
-     * @param HTMLPurifier_Config $config
+     * @param HTMLPurifier_URI     $uri
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool
      */
     public function doValidate(&$uri, $config, $context)
@@ -81,7 +82,7 @@ class HTMLPurifier_URIScheme_data extends HTMLPurifier_URIScheme
         }
         // XXX probably want to refactor this into a general mechanism
         // for filtering arbitrary content types
-        $file = tempnam("/tmp", "");
+        $file = tempnam('/tmp', '');
         file_put_contents($file, $raw_data);
         if (function_exists('exif_imagetype')) {
             $image_code = exif_imagetype($file);
@@ -96,7 +97,7 @@ class HTMLPurifier_URIScheme_data extends HTMLPurifier_URIScheme
             }
             $image_code = $info[2];
         } else {
-            trigger_error("could not find exif_imagetype or getimagesize functions", E_USER_ERROR);
+            trigger_error('could not find exif_imagetype or getimagesize functions', E_USER_ERROR);
         }
         $real_content_type = image_type_to_mime_type($image_code);
         if ($real_content_type != $content_type) {
@@ -113,12 +114,13 @@ class HTMLPurifier_URIScheme_data extends HTMLPurifier_URIScheme
         $uri->port = null;
         $uri->fragment = null;
         $uri->query = null;
-        $uri->path = "$content_type;base64," . base64_encode($raw_data);
+        $uri->path = "$content_type;base64,".base64_encode($raw_data);
+
         return true;
     }
 
     /**
-     * @param int $errno
+     * @param int    $errno
      * @param string $errstr
      */
     public function muteErrorHandler($errno, $errstr)

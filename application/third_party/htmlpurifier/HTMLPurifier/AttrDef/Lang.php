@@ -2,15 +2,16 @@
 
 /**
  * Validates the HTML attribute lang, effectively a language code.
+ *
  * @note Built according to RFC 3066, which obsoleted RFC 1766
  */
 class HTMLPurifier_AttrDef_Lang extends HTMLPurifier_AttrDef
 {
-
     /**
-     * @param string $string
-     * @param HTMLPurifier_Config $config
+     * @param string               $string
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool|string
      */
     public function validate($string, $config, $context)
@@ -63,13 +64,13 @@ class HTMLPurifier_AttrDef_Lang extends HTMLPurifier_AttrDef
             $subtags[1] = strtolower($subtags[1]);
         }
 
-        $new_string .= '-' . $subtags[1];
+        $new_string .= '-'.$subtags[1];
         if ($num_subtags == 2) {
             return $new_string;
         }
 
         // process all other subtags, index 2 and up
-        for ($i = 2; $i < $num_subtags; $i++) {
+        for ($i = 2; $i < $num_subtags; ++$i) {
             $length = strlen($subtags[$i]);
             if ($length == 0 || $length > 8 || !ctype_alnum($subtags[$i])) {
                 return $new_string;
@@ -77,10 +78,12 @@ class HTMLPurifier_AttrDef_Lang extends HTMLPurifier_AttrDef
             if (!ctype_lower($subtags[$i])) {
                 $subtags[$i] = strtolower($subtags[$i]);
             }
-            $new_string .= '-' . $subtags[$i];
+            $new_string .= '-'.$subtags[$i];
         }
+
         return $new_string;
     }
 }
 
 // vim: et sw=4 sts=4
+

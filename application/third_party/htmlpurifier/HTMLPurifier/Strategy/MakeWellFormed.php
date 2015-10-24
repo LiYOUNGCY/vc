@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Takes tokens makes them well-formed (balance end tags, etc.)
+ * Takes tokens makes them well-formed (balance end tags, etc.).
  *
  * Specification of the armor attributes this strategy uses:
  *
@@ -13,54 +13,62 @@
  */
 class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
 {
-
     /**
      * Array stream of tokens being processed.
-     * @type HTMLPurifier_Token[]
+     *
+     * @var HTMLPurifier_Token[]
      */
     protected $tokens;
 
     /**
      * Current token.
-     * @type HTMLPurifier_Token
+     *
+     * @var HTMLPurifier_Token
      */
     protected $token;
 
     /**
      * Zipper managing the true state.
-     * @type HTMLPurifier_Zipper
+     *
+     * @var HTMLPurifier_Zipper
      */
     protected $zipper;
 
     /**
      * Current nesting of elements.
-     * @type array
+     *
+     * @var array
      */
     protected $stack;
 
     /**
      * Injectors active in this stream processing.
-     * @type HTMLPurifier_Injector[]
+     *
+     * @var HTMLPurifier_Injector[]
      */
     protected $injectors;
 
     /**
      * Current instance of HTMLPurifier_Config.
-     * @type HTMLPurifier_Config
+     *
+     * @var HTMLPurifier_Config
      */
     protected $config;
 
     /**
      * Current instance of HTMLPurifier_Context.
-     * @type HTMLPurifier_Context
+     *
+     * @var HTMLPurifier_Context
      */
     protected $context;
 
     /**
      * @param HTMLPurifier_Token[] $tokens
-     * @param HTMLPurifier_Config $config
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return HTMLPurifier_Token[]
+     *
      * @throws HTMLPurifier_Exception
      */
     public function execute($tokens, $config, $context)
@@ -75,17 +83,17 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
         $e = $context->get('ErrorCollector', true);
         $i = false; // injector index
         list($zipper, $token) = HTMLPurifier_Zipper::fromArray($tokens);
-        if ($token === NULL) {
+        if ($token === null) {
             return array();
         }
         $reprocess = false; // whether or not to reprocess the same token
         $stack = array();
 
         // member variables
-        $this->stack =& $stack;
-        $this->tokens =& $tokens;
-        $this->token =& $token;
-        $this->zipper =& $zipper;
+        $this->stack = &$stack;
+        $this->tokens = &$tokens;
+        $this->token = &$token;
+        $this->zipper = &$zipper;
         $this->config = $config;
         $this->context = $context;
 
@@ -111,7 +119,7 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
             if (!$b) {
                 continue;
             }
-            $this->injectors[] = new $injector;
+            $this->injectors[] = new $injector();
         }
         foreach ($def_injectors as $injector) {
             // assumed to be objects
@@ -123,7 +131,7 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
             }
             if (is_string($injector)) {
                 $injector = "HTMLPurifier_Injector_$injector";
-                $injector = new $injector;
+                $injector = new $injector();
             }
             $this->injectors[] = $injector;
         }
@@ -161,8 +169,10 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
                 // infinite loop, but might hinder some advanced rewinding.
                 $rewind_offset = $this->injectors[$i]->getRewindOffset();
                 if (is_int($rewind_offset)) {
-                    for ($j = 0; $j < $rewind_offset; $j++) {
-                        if (empty($zipper->front)) break;
+                    for ($j = 0; $j < $rewind_offset; ++$j) {
+                        if (empty($zipper->front)) {
+                            break;
+                        }
                         $token = $zipper->prev($token);
                         // indicate that other injectors should not process this token,
                         // but we need to reprocess it
@@ -179,7 +189,7 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
             }
 
             // handle case of document end
-            if ($token === NULL) {
+            if ($token === null) {
                 // kill processing if stack is empty
                 if (empty($this->stack)) {
                     break;
@@ -359,7 +369,6 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
                         $reprocess = true;
                         continue;
                     }
-
                 }
                 $ok = true;
             }
@@ -447,7 +456,7 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
             $size = count($this->stack);
             // -2 because -1 is the last element, but we already checked that
             $skipped_tags = false;
-            for ($j = $size - 2; $j >= 0; $j--) {
+            for ($j = $size - 2; $j >= 0; --$j) {
                 if ($this->stack[$j]->name == $token->name) {
                     $skipped_tags = array_slice($this->stack, $j);
                     break;
@@ -474,7 +483,7 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
             // do errors, in REVERSE $j order: a,b,c with </a></b></c>
             $c = count($skipped_tags);
             if ($e) {
-                for ($j = $c - 1; $j > 0; $j--) {
+                for ($j = $c - 1; $j > 0; --$j) {
                     // notice we exclude $j == 0, i.e. the current ending tag, from
                     // the errors... [TagClosedSuppress]
                     if (!isset($skipped_tags[$j]->armor['MakeWellFormed_TagClosedError'])) {
@@ -485,7 +494,7 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
 
             // insert tags, in FORWARD $j order: c,b,a with </a></b></c>
             $replace = array($token);
-            for ($j = 1; $j < $c; $j++) {
+            for ($j = 1; $j < $c; ++$j) {
                 // ...as well as from the insertions
                 $new_token = new HTMLPurifier_Token_End($skipped_tags[$j]->name);
                 $new_token->start = $skipped_tags[$j];
@@ -508,12 +517,13 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
         $context->destroy('InputZipper');
 
         unset($this->injectors, $this->stack, $this->tokens);
+
         return $zipper->toArray($token);
     }
 
     /**
      * Processes arbitrary token values for complicated substitution patterns.
-     * In general:
+     * In general:.
      *
      * If $token is an array, it is a list of tokens to substitute for the
      * current token. These tokens then get individually processed. If there
@@ -527,9 +537,10 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
      * If $token is an integer, that number of tokens (with the first token
      * being the current one) will be deleted.
      *
-     * @param HTMLPurifier_Token|array|int|bool $token Token substitution value
-     * @param HTMLPurifier_Injector|int $injector Injector that performed the substitution; default is if
-     *        this is not an injector related operation.
+     * @param HTMLPurifier_Token|array|int|bool $token    Token substitution value
+     * @param HTMLPurifier_Injector|int         $injector Injector that performed the substitution; default is if
+     *                                                    this is not an injector related operation.
+     *
      * @throws HTMLPurifier_Exception
      */
     protected function processToken($token, $injector = -1)
@@ -570,12 +581,12 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
         }
 
         return $r;
-
     }
 
     /**
      * Inserts a token before the current token. Cursor now points to
      * this token.  You must reprocess after this.
+     *
      * @param HTMLPurifier_Token $token
      */
     private function insertBefore($token)
@@ -598,3 +609,4 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
 }
 
 // vim: et sw=4 sts=4
+

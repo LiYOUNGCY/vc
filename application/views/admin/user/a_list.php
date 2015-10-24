@@ -43,7 +43,8 @@
                                     </thead>
 
                                     <tbody>
-                                    <?php foreach ($auth as $k => $v) { ?>
+                                    <?php foreach ($auth as $k => $v) {
+    ?>
                                         <tr class="selected">
                                             <td class="center">
                                                 <label>
@@ -64,19 +65,19 @@
                                             <td>
                                                 <?php
                                                 $arr = explode(',', $v['role_group']);
-                                                $str = "";
-                                                foreach ($arr as $k1 => $v1) {
-                                                    for ($i = 0; $i < count($role); $i++) {
-                                                        if ($v1 == "|{$role[$i]['id']}|") {
-                                                            $str .= $role[$i]['name'] . ",";
-                                                            break;
-                                                        }
-                                                    }
-                                                }
-                                                if (!empty($str)) {
-                                                    $str = substr($str, 0, strlen($str) - 1);
-                                                }
-                                                ?>
+    $str = '';
+    foreach ($arr as $k1 => $v1) {
+        for ($i = 0; $i < count($role); ++$i) {
+            if ($v1 == "|{$role[$i]['id']}|") {
+                $str .= $role[$i]['name'].',';
+                break;
+            }
+        }
+    }
+    if (!empty($str)) {
+        $str = substr($str, 0, strlen($str) - 1);
+    }
+    ?>
                                                 <?= $str ?>
                                             </td>
                                             <td class="tooltip-btn">
@@ -86,7 +87,8 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                    <?php } ?>
+                                    <?php 
+} ?>
                                     </tbody>
                                 </table>
                                 <!-- /表格-->
@@ -170,11 +172,13 @@
                                                     <div class="col-sm-2 col-xs-8">
                                                         <select name="group_select" class="form-control">
                                                             <option value=""></option>
-                                                            <?php foreach ($role as $k => $v) { ?>
+                                                            <?php foreach ($role as $k => $v) {
+    ?>
                                                                 <option value="|<?= $v['id'] ?>|">
                                                                     <?= $v['name'] ?>
                                                                 </option>
-                                                            <?php } ?>
+                                                            <?php 
+} ?>
                                                         </select>
                                                     </div>
                                                 </div>

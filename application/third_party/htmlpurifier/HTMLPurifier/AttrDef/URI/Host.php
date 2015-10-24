@@ -5,16 +5,17 @@
  */
 class HTMLPurifier_AttrDef_URI_Host extends HTMLPurifier_AttrDef
 {
-
     /**
      * IPv4 sub-validator.
-     * @type HTMLPurifier_AttrDef_URI_IPv4
+     *
+     * @var HTMLPurifier_AttrDef_URI_IPv4
      */
     protected $ipv4;
 
     /**
      * IPv6 sub-validator.
-     * @type HTMLPurifier_AttrDef_URI_IPv6
+     *
+     * @var HTMLPurifier_AttrDef_URI_IPv6
      */
     protected $ipv6;
 
@@ -25,9 +26,10 @@ class HTMLPurifier_AttrDef_URI_Host extends HTMLPurifier_AttrDef
     }
 
     /**
-     * @param string $string
-     * @param HTMLPurifier_Config $config
+     * @param string               $string
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool|string
      */
     public function validate($string, $config, $context)
@@ -49,7 +51,8 @@ class HTMLPurifier_AttrDef_URI_Host extends HTMLPurifier_AttrDef
             if ($valid === false) {
                 return false;
             }
-            return '[' . $valid . ']';
+
+            return '['.$valid.']';
         }
 
         // need to do checks on unusual encodings too
@@ -77,8 +80,8 @@ class HTMLPurifier_AttrDef_URI_Host extends HTMLPurifier_AttrDef
         $underscore = $config->get('Core.AllowHostnameUnderscore') ? '_' : '';
 
         // The productions describing this are:
-        $a   = '[a-z]';     // alpha
-        $an  = '[a-z0-9]';  // alphanum
+        $a = '[a-z]';     // alpha
+        $an = '[a-z0-9]';  // alphanum
         $and = "[a-z0-9-$underscore]"; // alphanum | "-"
         // domainlabel = alphanum | alphanum *( alphanum | "-" ) alphanum
         $domainlabel = "$an($and*$an)?";
@@ -101,7 +104,7 @@ class HTMLPurifier_AttrDef_URI_Host extends HTMLPurifier_AttrDef
                 $new_parts = array();
                 foreach ($parts as $part) {
                     $encodable = false;
-                    for ($i = 0, $c = strlen($part); $i < $c; $i++) {
+                    for ($i = 0, $c = strlen($part); $i < $c; ++$i) {
                         if (ord($part[$i]) > 0x7a) {
                             $encodable = true;
                             break;
@@ -121,8 +124,10 @@ class HTMLPurifier_AttrDef_URI_Host extends HTMLPurifier_AttrDef
                 // XXX error reporting
             }
         }
+
         return false;
     }
 }
 
 // vim: et sw=4 sts=4
+

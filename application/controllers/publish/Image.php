@@ -2,7 +2,6 @@
 
 class Image extends MY_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -10,25 +9,26 @@ class Image extends MY_Controller
     }
 
     /**
-     * [up_um_img UMeditor上传图片]
+     * [up_um_img UMeditor上传图片].
+     *
      * @return [type] [description]
      */
     public function up_um_img()
     {
         //上传配置
         $config = array(
-            "savePath" => "./public/upload/",                                   //存储文件夹
-            "allowFiles" => array(".gif", ".png", ".jpg", ".jpeg", ".bmp")   //允许的文件格式
+            'savePath' => './public/upload/',                                   //存储文件夹
+            'allowFiles' => array('.gif', '.png', '.jpg', '.jpeg', '.bmp'),   //允许的文件格式
         );
         //上传文件域名
         $fileField = 'upfile';
         if (isset($_FILES[$fileField])) {
             $info = $this->image_service->up_um_img($fileField, $config);
 
-            $callback = isset($_GET['callback']) ? $_GET['callback'] : NULL;
+            $callback = isset($_GET['callback']) ? $_GET['callback'] : null;
             //返回数据
             if ($callback) {
-                echo '<script>' . $callback . '(' . json_encode($info) . ')</script>';
+                echo '<script>'.$callback.'('.json_encode($info).')</script>';
             } else {
                 echo json_encode($info);
             }
@@ -36,7 +36,8 @@ class Image extends MY_Controller
     }
 
     /**
-     * [upload_headpic 上传头像]
+     * [upload_headpic 上传头像].
+     *
      * @return [type] [description]
      */
     public function upload_headpic()
@@ -47,9 +48,9 @@ class Image extends MY_Controller
         echo json_encode($result);
     }
 
-
     /**
-     * [save_headpic 保存裁剪后的头像]
+     * [save_headpic 保存裁剪后的头像].
+     *
      * @return [type] [description]
      */
     public function save_headpic()
@@ -58,14 +59,15 @@ class Image extends MY_Controller
         $uid = $this->user['id'];
         $result = $this->image_service->save_headpic($img['img'], $img['x'], $img['y'], $img['w'], $img['h'], $uid);
         if ($result) {
-            redirect(base_url() . "feed", 'location');
+            redirect(base_url().'feed', 'location');
         } else {
-            $this->error->output('INVALID_REQUEST', array('script' => 'window.location.href = "' . base_url() . 'feed";'));
+            $this->error->output('INVALID_REQUEST', array('script' => 'window.location.href = "'.base_url().'feed";'));
         }
     }
 
     /**
-     * [upload_production 上传艺术品图]
+     * [upload_production 上传艺术品图].
+     *
      * @return [type] [description]
      */
     public function upload_production()
@@ -77,7 +79,8 @@ class Image extends MY_Controller
     }
 
     /**
-     * [upload_slider 上传轮播图]
+     * [upload_slider 上传轮播图].
+     *
      * @return [type] [description]
      */
     public function upload_slider()
@@ -100,9 +103,8 @@ class Image extends MY_Controller
         $this->message->error();
     }
 
-
     /**
-     * 专题上传图片
+     * 专题上传图片.
      */
     public function upload_topic_image()
     {
@@ -116,9 +118,9 @@ class Image extends MY_Controller
         $this->message->error();
     }
 
-
     /**
-     * [upload_avatar 上传艺术家头像]
+     * [upload_avatar 上传艺术家头像].
+     *
      * @return [type] [description]
      */
     public function upload_avatar()
@@ -130,9 +132,8 @@ class Image extends MY_Controller
         // $this->message->error();
     }
 
-
     /**
-     * [crop_image 裁剪图片]
+     * [crop_image 裁剪图片].
      */
     public function crop_image()
     {

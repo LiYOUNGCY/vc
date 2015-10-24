@@ -9,12 +9,19 @@
                     <div class="filter">
                         <ul>
                             <li class="label">热门分类：</li>
-                            <li class="<?php if ($get_tag == 0) echo 'active'; ?>" onclick="getArticleListBYtag('all')">全部</li>
-                            <?php foreach ($tag as $key => $value) { ?>
-                                <li class="<?php if ($get_tag == $value['id']) echo 'active'; ?>"
+                            <li class="<?php if ($get_tag == 0) {
+    echo 'active';
+} ?>" onclick="getArticleListBYtag('all')">全部</li>
+                            <?php foreach ($tag as $key => $value) {
+    ?>
+                                <li class="<?php if ($get_tag == $value['id']) {
+    echo 'active';
+}
+    ?>"
                                     onclick="getArticleListBYtag(<?= $value['id'] ?>)">
                                     <?= $value['name'] ?></li>
-                            <?php } ?>
+                            <?php 
+} ?>
                         </ul>
                     </div>
                 </div>

@@ -59,21 +59,27 @@
     <div id="select" class="select clearfix">
         <p>所属标签</p>
         <select class="dropdown" id="who">
-            <?php foreach ($tag['who'] as $key => $value) { ?>
+            <?php foreach ($tag['who'] as $key => $value) {
+    ?>
                 <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-            <?php } ?>
+            <?php 
+} ?>
         </select>
 
         <select class="dropdown" id="where">
-            <?php foreach ($tag['where'] as $key => $value) { ?>
+            <?php foreach ($tag['where'] as $key => $value) {
+    ?>
                 <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-            <?php } ?>
+            <?php 
+} ?>
         </select>
 
         <select class="dropdown" id="when">
-            <?php foreach ($tag['when'] as $key => $value) { ?>
+            <?php foreach ($tag['when'] as $key => $value) {
+    ?>
                 <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-            <?php } ?>
+            <?php 
+} ?>
         </select>
 
         <div class="option">
