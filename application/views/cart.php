@@ -14,7 +14,11 @@
                 <div class="info">
                     <div class="name">几何</div>
                     <div class="artist">&nbsp;&nbsp;作者：<a href="" class="link">Bamford</a></div>
-                    <div class="detail">油画，布面，100 X 30cm，2015年，</div>
+                    <div class="detail">
+                        <div>油画，布面，100 X 30cm，2015年</div>
+                        <div>装裱选择：金边（￥100）</div>
+                        <div>售价：￥1000</div>
+                    </div>
                 </div>
                 <div class="price">
                     ￥<font style="font-size:32px;color:#f7cc1e">3000</font>
@@ -93,6 +97,8 @@ $(function(){
                     var h           = good[i].h;
                     var style       = good[i].style;
                     var time        = good[i].creat_time;
+                    var frame_name  = good[i].frame_name;
+                    var frame_price  = good[i].frame_price;
 
                     var elm = '' +
                     '<li class="art clearfix" id="'+ id +'">' +
@@ -103,7 +109,11 @@ $(function(){
                     '<div class="info">'+
                     '<div class="name"><a href="<?=base_url()?>production/'+ id +'" class="link">'+ name +'</a></div>' +
                     '<div class="artist">&nbsp;&nbsp;作者：<a href="<?=base_url()?>artist/'+ aid +'" class="link">'+ artist +'</a></div>' +
-                    '<div class="detail">'+ medium +'，'+ style +'，'+ w +' X '+ h +'cm，'+ time +'</div>' +
+                    '<div class="detail">' +
+                    '<div>'+ medium +'，'+ style +'，'+ w +' X '+ h +'cm，'+ time +'</div>' +
+                    '<div>装裱选择：'+ frame_name +'（￥'+ frame_price +'）</div>' +
+                    '<div>售价：￥'+ price +'</div>' +
+                    '</div>' +
                     '</div>'+
                     '<div class="price">'+
                     '￥<font style="font-size:32px;color:#f7cc1e" id="goodprice">'+ price +'</font>'+
