@@ -29,6 +29,7 @@ class Cart_model extends CI_Model
                     production.price,
                     production.w,
                     production.h,
+                    production.status,
                     production.creat_time,
                     frame.name as frame_name,
                     frame.price as frame_price,
@@ -44,6 +45,10 @@ class Cart_model extends CI_Model
             ->where('production.style = production_style.id')
             ->where('production.medium = production_medium.id')
             ->get()->result_array();
+
+            foreach ($query as $key => $value) {
+                $query[$key]['status'] = $this->_extends_status($value['status']);
+            }
 
         return $query;
     }
@@ -127,5 +132,21 @@ class Cart_model extends CI_Model
             ->delete('cart');
 
         return $this->db->affected_rows() === 1;
+    }
+
+    /**
+     * [_extends_status 艺术品的状态]
+     * @param  [type] $status_number [description]
+     * @return [type]                [description]
+     */
+    private function _extends_status($status_number)
+    {
+        $data = array(
+            0 => '出售中',
+            1 => '已出售',
+            2 => '已下架'
+        );
+
+        return $data[$status_number];
     }
 }
