@@ -46,9 +46,9 @@ class Cart_model extends CI_Model
             ->where('production.medium = production_medium.id')
             ->get()->result_array();
 
-            foreach ($query as $key => $value) {
-                $query[$key]['status'] = $this->_extends_status($value['status']);
-            }
+            // foreach ($query as $key => $value) {
+            //     $query[$key]['status'] = $this->_extends_status($value['status']);
+            // }
 
         return $query;
     }
