@@ -7,28 +7,29 @@
 class HTMLPurifier_Injector_SafeObject extends HTMLPurifier_Injector
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'SafeObject';
 
     /**
-     * @type array
+     * @var array
      */
     public $needed = array('object', 'param');
 
     /**
-     * @type array
+     * @var array
      */
     protected $objectStack = array();
 
     /**
-     * @type array
+     * @var array
      */
     protected $paramStack = array();
 
     /**
      * Keep this synchronized with AttrTransform/SafeParam.php.
-     * @type array
+     *
+     * @var array
      */
     protected $addParam = array(
         'allowScriptAccess' => 'never',
@@ -36,7 +37,7 @@ class HTMLPurifier_Injector_SafeObject extends HTMLPurifier_Injector
     );
 
     /**
-     * @type array
+     * @var array
      */
     protected $allowedParam = array(
         'wmode' => true,
@@ -47,9 +48,8 @@ class HTMLPurifier_Injector_SafeObject extends HTMLPurifier_Injector
     );
 
     /**
-     * @param HTMLPurifier_Config $config
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
-     * @return void
      */
     public function prepare($config, $context)
     {
@@ -75,6 +75,7 @@ class HTMLPurifier_Injector_SafeObject extends HTMLPurifier_Injector
                 $i = count($this->objectStack) - 1;
                 if (!isset($token->attr['name'])) {
                     $token = false;
+
                     return;
                 }
                 $n = $token->attr['name'];
@@ -119,3 +120,4 @@ class HTMLPurifier_Injector_SafeObject extends HTMLPurifier_Injector
 }
 
 // vim: et sw=4 sts=4
+

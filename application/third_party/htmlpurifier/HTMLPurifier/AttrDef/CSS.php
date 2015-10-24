@@ -2,6 +2,7 @@
 
 /**
  * Validates the HTML attribute style, otherwise known as CSS.
+ *
  * @note We don't implement the whole CSS specification, so it might be
  *       difficult to reuse this component in the context of validating
  *       actual stylesheet declarations.
@@ -13,11 +14,11 @@
  */
 class HTMLPurifier_AttrDef_CSS extends HTMLPurifier_AttrDef
 {
-
     /**
-     * @param string $css
-     * @param HTMLPurifier_Config $config
+     * @param string               $css
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool|string
      */
     public function validate($css, $config, $context)
@@ -35,7 +36,7 @@ class HTMLPurifier_AttrDef_CSS extends HTMLPurifier_AttrDef
         $declarations = explode(';', $css);
         $propvalues = array();
 
-        /**
+        /*
          * Name of the current CSS property being validated.
          */
         $property = false;
@@ -98,9 +99,8 @@ class HTMLPurifier_AttrDef_CSS extends HTMLPurifier_AttrDef
         }
 
         return $new_declarations ? $new_declarations : false;
-
     }
-
 }
 
 // vim: et sw=4 sts=4
+

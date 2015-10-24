@@ -1,19 +1,20 @@
 <?php
 
 /**
- * XHTML 1.1 Object Module, defines elements for generic object inclusion
+ * XHTML 1.1 Object Module, defines elements for generic object inclusion.
+ *
  * @warning Users will commonly use <embed> to cater to legacy browsers: this
  *      module does not allow this sort of behavior
  */
 class HTMLPurifier_HTMLModule_Object extends HTMLPurifier_HTMLModule
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'Object';
 
     /**
-     * @type bool
+     * @var bool
      */
     public $safe = false;
 
@@ -39,7 +40,7 @@ class HTMLPurifier_HTMLModule_Object extends HTMLPurifier_HTMLModule
                 'standby' => 'Text',
                 'tabindex' => 'Number',
                 'type' => 'ContentType',
-                'width' => 'Length'
+                'width' => 'Length',
             )
         );
 
@@ -53,10 +54,11 @@ class HTMLPurifier_HTMLModule_Object extends HTMLPurifier_HTMLModule
                 'name*' => 'Text',
                 'type' => 'Text',
                 'value' => 'Text',
-                'valuetype' => 'Enum#data,ref,object'
+                'valuetype' => 'Enum#data,ref,object',
             )
         );
     }
 }
 
 // vim: et sw=4 sts=4
+

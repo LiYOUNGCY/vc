@@ -14,11 +14,13 @@ class Conversation_service extends MY_Service
     }
 
     /**
-     * [get_conversation_content 获取对话内容]
-     * @param  [type] $page [页数]
-     * @param  [type] $uid  [用户id]
-     * @param  [type] $cid  [对话id]
-     * @return [type]       [description]
+     * [get_conversation_content 获取对话内容].
+     *
+     * @param [type] $page [页数]
+     * @param [type] $uid  [用户id]
+     * @param [type] $cid  [对话id]
+     *
+     * @return [type] [description]
      */
     public function get_conversation_content($page, $uid, $cid)
     {
@@ -33,20 +35,23 @@ class Conversation_service extends MY_Service
                 $conversation['me'] = $this->user_model->get_user_base_id($uid);
 
                 $conversation['list'] = $content;
+
                 return $conversation;
             } else {
-                return FALSE;
+                return false;
             }
         } else {
-            $this->error->output('INVALID_REQUEST', array('script' => 'window.location.href="' . base_url() . 'notification";', 'type' => 0));
+            $this->error->output('INVALID_REQUEST', array('script' => 'window.location.href="'.base_url().'notification";', 'type' => 0));
         }
     }
 
     /**
-     * [check_has_conversation 查看是否参与该对话]
-     * @param  [type] $uid [用户id]
-     * @param  [type] $cid [对话id]
-     * @return [type]      [description]
+     * [check_has_conversation 查看是否参与该对话].
+     *
+     * @param [type] $uid [用户id]
+     * @param [type] $cid [对话id]
+     *
+     * @return [type] [description]
      */
     public function check_has_conversation($uid, $cid)
     {
@@ -56,24 +61,27 @@ class Conversation_service extends MY_Service
                 return $result;
             }
         }
+
         return false;
     }
 
     /**
-     * [publish_conversation 发送私信]
-     * @param  [type] $sender_id  [发送者id]
-     * @param  [type] $reciver_id [接收者id]
-     * @param  [type] $content    [对话内容]
-     * @return [type]             [description]
+     * [publish_conversation 发送私信].
+     *
+     * @param [type] $sender_id  [发送者id]
+     * @param [type] $reciver_id [接收者id]
+     * @param [type] $content    [对话内容]
+     *
+     * @return [type] [description]
      */
     public function publish_conversation($sender_id, $reciver_id, $content)
     {
         if ($sender_id == $reciver_id) {
-            return FALSE;
+            return false;
         }
         $content = Common::replace_face_url($content);
-        $aid = "";
-        $bid = "";
+        $aid = '';
+        $bid = '';
         if ($sender_id < $reciver_id) {
             $aid = $sender_id;
             $bid = $reciver_id;
@@ -82,8 +90,8 @@ class Conversation_service extends MY_Service
             $bid = $sender_id;
         }
         $check_result = $this->conversation_model->get_conversation_by_uid($aid, $bid);
-        $cid = "";
-        $insert_result = FALSE;
+        $cid = '';
+        $insert_result = false;
         //未建立过对话
         if (empty($check_result)) {
             //添加新对话
@@ -105,20 +113,21 @@ class Conversation_service extends MY_Service
             $this->insert_conversation_notification($reciver_id, $sender_id, $content, $cid, 1);
             //推送
             $this->load->library('push');
-            $this->push->push_to_topic($reciver_id, "");
-
+            $this->push->push_to_topic($reciver_id, '');
         } else {
-            return FALSE;
+            return false;
         }
     }
 
     /**
-     * [insert_conversation_notification 添加私信消息]
-     * @param  [type] $sender_id  [发送者id]
-     * @param  [type] $reciver_id [接收者id]
-     * @param  [type] $content    [对话内容]
-     * @param  [type] $cid        [description]
-     * @return [type]             [description]
+     * [insert_conversation_notification 添加私信消息].
+     *
+     * @param [type] $sender_id  [发送者id]
+     * @param [type] $reciver_id [接收者id]
+     * @param [type] $content    [对话内容]
+     * @param [type] $cid        [description]
+     *
+     * @return [type] [description]
      */
     public function insert_conversation_notification($sender_id, $reciver_id, $content, $cid, $read_flag = 0)
     {
@@ -130,7 +139,7 @@ class Conversation_service extends MY_Service
                 'conversation_id' => $cid,
                 'conversation_content' => $content,
                 'count' => 1,
-                'publish_time' => date('Y-m-d H-m-s')
+                'publish_time' => date('Y-m-d H-m-s'),
             );
             $this->notification_model->insert($sender_id, $reciver_id, 1, json_encode($arr), $read_flag);
         } else {
@@ -138,23 +147,23 @@ class Conversation_service extends MY_Service
             $count = 1;
             if ($check_result['read_flag'] == 0) {
                 //增加未读私信个数
-                $notification_content = (array)json_decode($check_result['content']);
-                $count = (int)$notification_content['count'] + 1;
+                $notification_content = (array) json_decode($check_result['content']);
+                $count = (int) $notification_content['count'] + 1;
             }
 
             $arr = array(
                 'content' => json_encode(array('conversation_id' => $cid, 'conversation_content' => Common::extract_content($content), 'count' => $count)),
                 'read_flag' => $read_flag,
-                'publish_time' => date('Y-m-d H-m-s')
+                'publish_time' => date('Y-m-d H-m-s'),
             );
             $nid = $check_result['id'];
             $this->notification_model->update_notification($nid, $arr);
         }
     }
 
-
     /**
-     * [get_custom_service_list 获取客服列表]
+     * [get_custom_service_list 获取客服列表].
+     *
      * @return [type] [description]
      */
     public function get_custom_service_list()
@@ -168,14 +177,17 @@ class Conversation_service extends MY_Service
                 unset($custom[$k]['info']['id']);
             }
         }
+
         return $custom;
     }
 
     /**
-     * [get_latest_list 获取最近消息]
-     * @param  [type] $page [description]
-     * @param  [type] $uid  [description]
-     * @return [type]       [description]
+     * [get_latest_list 获取最近消息].
+     *
+     * @param [type] $page [description]
+     * @param [type] $uid  [description]
+     *
+     * @return [type] [description]
      */
     public function get_latest_list($page, $uid)
     {
@@ -191,6 +203,7 @@ class Conversation_service extends MY_Service
                 unset($notification[$k]['type']);
             }
         }
+
         return $notification;
     }
 
@@ -202,12 +215,12 @@ class Conversation_service extends MY_Service
     public function get_history_by_user($uid)
     {
         $query = $this->customer_model->get_history_by_user($uid);
+
         return $query;
     }
-
 
     public function get_customer_id()
     {
         return $this->customer_model->get_customer_id();
     }
-}	
+}

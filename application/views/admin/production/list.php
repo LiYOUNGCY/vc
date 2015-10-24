@@ -52,7 +52,8 @@
                             </thead>
 
                             <tbody>
-                            <?php foreach ($production as $k => $v) { ?>
+                            <?php foreach ($production as $k => $v) {
+    ?>
                                 <tr class="selected">
                                     <td class="center">
                                         <label>
@@ -67,7 +68,7 @@
                                         <?= $v['name'] ?>
                                     </td>
                                     <td>
-                                        <a href="<?= base_url() . 'artist/' . $v['aid'] ?>"><?= $v['artist'] ?></a>
+                                        <a href="<?= base_url().'artist/'.$v['aid'] ?>"><?= $v['artist'] ?></a>
                                     </td>
                                     <td>
                                         <?= $v['price'] ?>
@@ -99,18 +100,24 @@
                                                 type="button" class="btn btn-success btn-circle"><i
                                                 class="fa fa-edit"></i>
                                         </button>
-                                        <?php if($v['status'] == 2) { ?>
+                                        <?php if ($v['status'] == 2) {
+    ?>
                                         <button data-toggle="tooltip" title="发表" effect="publish" u="<?= $v['id'] ?>"
                                                 type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i>
                                         </button>
-                                        <?php } else if($v['status'] == 0) { ?>
+                                        <?php 
+} elseif ($v['status'] == 0) {
+    ?>
                                         <button data-toggle="tooltip" title="取消发表" effect="cancel" u="<?= $v['id'] ?>"
                                                 type="button" class="btn btn-danger btn-circle"><i class="fa fa-close"></i>
                                         </button>
-                                        <?php } ?>
+                                        <?php 
+}
+    ?>
                                     </td>
                                 </tr>
-                            <?php } ?>
+                            <?php 
+} ?>
                             </tbody>
                         </table>
                         <!-- /表格-->

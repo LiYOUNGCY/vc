@@ -7,18 +7,18 @@
 class HTMLPurifier_HTMLModule_StyleAttribute extends HTMLPurifier_HTMLModule
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'StyleAttribute';
 
     /**
-     * @type array
+     * @var array
      */
     public $attr_collections = array(
         // The inclusion routine differs from the Abstract Modules but
         // is in line with the DTD and XML Schemas.
         'Style' => array('style' => false), // see constructor
-        'Core' => array(0 => array('Style'))
+        'Core' => array(0 => array('Style')),
     );
 
     /**
@@ -31,3 +31,4 @@ class HTMLPurifier_HTMLModule_StyleAttribute extends HTMLPurifier_HTMLModule
 }
 
 // vim: et sw=4 sts=4
+

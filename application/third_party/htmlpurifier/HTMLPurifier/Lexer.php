@@ -41,7 +41,6 @@
  */
 class HTMLPurifier_Lexer
 {
-
     /**
      * Whether or not this lexer implements line-number/column-number tracking.
      * If it does, set to true.
@@ -63,7 +62,9 @@ class HTMLPurifier_Lexer
      *       This change in behavior de-singletonizes the lexer object.
      *
      * @param HTMLPurifier_Config $config
+     *
      * @return HTMLPurifier_Lexer
+     *
      * @throws HTMLPurifier_Exception
      */
     public static function create($config)
@@ -71,9 +72,9 @@ class HTMLPurifier_Lexer
         if (!($config instanceof HTMLPurifier_Config)) {
             $lexer = $config;
             trigger_error(
-                "Passing a prototype to
+                'Passing a prototype to
                 HTMLPurifier_Lexer::create() is deprecated, please instead
-                use %Core.LexerImpl",
+                use %Core.LexerImpl',
                 E_USER_WARNING
             );
         } else {
@@ -124,7 +125,7 @@ class HTMLPurifier_Lexer
                     break;
                 default:
                     throw new HTMLPurifier_Exception(
-                        "Cannot instantiate unrecognized Lexer type " .
+                        'Cannot instantiate unrecognized Lexer type '.
                         htmlspecialchars($lexer)
                     );
             }
@@ -138,13 +139,12 @@ class HTMLPurifier_Lexer
         // hack out something using XSLT, remove this stipulation
         if ($needs_tracking && !$inst->tracksLineNumbers) {
             throw new HTMLPurifier_Exception(
-                'Cannot use lexer that does not support line numbers with ' .
+                'Cannot use lexer that does not support line numbers with '.
                 'Core.MaintainLineNumbers or Core.CollectErrors (use DirectLex instead)'
             );
         }
 
         return $inst;
-
     }
 
     // -- CONVENIENCE MEMBERS ---------------------------------------------
@@ -156,7 +156,8 @@ class HTMLPurifier_Lexer
 
     /**
      * Most common entity to raw value conversion table for special entities.
-     * @type array
+     *
+     * @var array
      */
     protected $_special_entity2str =
         array(
@@ -166,7 +167,7 @@ class HTMLPurifier_Lexer
             '&gt;' => '>',
             '&#39;' => "'",
             '&#039;' => "'",
-            '&#x27;' => "'"
+            '&#x27;' => "'",
         );
 
     /**
@@ -181,6 +182,7 @@ class HTMLPurifier_Lexer
      * have been handled previously in substituteNonSpecialEntities()
      *
      * @param string $string String character data to be parsed.
+     *
      * @return string Parsed character data.
      */
     public function parseData($string)
@@ -210,14 +212,17 @@ class HTMLPurifier_Lexer
 
         // hmm... now we have some uncommon entities. Use the callback.
         $string = $this->_entity_parser->substituteSpecialEntities($string);
+
         return $string;
     }
 
     /**
      * Lexes an HTML string into tokens.
+     *
      * @param $string String HTML.
-     * @param HTMLPurifier_Config $config
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return HTMLPurifier_Token[] array representation of HTML.
      */
     public function tokenizeHTML($string, $config, $context)
@@ -227,7 +232,9 @@ class HTMLPurifier_Lexer
 
     /**
      * Translates CDATA sections into regular sections (through escaping).
+     *
      * @param string $string HTML string to process.
+     *
      * @return string HTML with CDATA sections escaped.
      */
     protected static function escapeCDATA($string)
@@ -240,8 +247,10 @@ class HTMLPurifier_Lexer
     }
 
     /**
-     * Special CDATA case that is especially convoluted for <script>
+     * Special CDATA case that is especially convoluted for <script>.
+     *
      * @param string $string HTML string to process.
+     *
      * @return string HTML with CDATA sections escaped.
      */
     protected static function escapeCommentedCDATA($string)
@@ -255,7 +264,9 @@ class HTMLPurifier_Lexer
 
     /**
      * Special Internet Explorer conditional comments should be removed.
+     *
      * @param string $string HTML string to process.
+     *
      * @return string HTML with conditional comments removed.
      */
     protected static function removeIEConditional($string)
@@ -272,8 +283,10 @@ class HTMLPurifier_Lexer
      *
      * @warning Though this is public in order to let the callback happen,
      *          calling it directly is not recommended.
+     *
      * @param array $matches PCRE matches array, with index 0 the entire match
-     *                  and 1 the inside of the CDATA section.
+     *                       and 1 the inside of the CDATA section.
+     *
      * @return string Escaped internals of the CDATA section.
      */
     protected static function CDATACallback($matches)
@@ -285,10 +298,13 @@ class HTMLPurifier_Lexer
     /**
      * Takes a piece of HTML and normalizes it by converting entities, fixing
      * encoding, extracting bits, and other good stuff.
-     * @param string $html HTML.
-     * @param HTMLPurifier_Config $config
+     *
+     * @param string               $html    HTML.
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return string
+     *
      * @todo Consider making protected
      */
     public function normalize($html, $config, $context)
@@ -313,7 +329,7 @@ class HTMLPurifier_Lexer
         if ($config->get('Core.ConvertDocumentToFragment')) {
             $e = false;
             if ($config->get('Core.CollectErrors')) {
-                $e =& $context->get('ErrorCollector');
+                $e = &$context->get('ErrorCollector');
             }
             $new_html = $this->extractBody($html);
             if ($e && $new_html != $html) {
@@ -339,7 +355,8 @@ class HTMLPurifier_Lexer
     }
 
     /**
-     * Takes a string of HTML (fragment or document) and returns the content
+     * Takes a string of HTML (fragment or document) and returns the content.
+     *
      * @todo Consider making protected
      */
     public function extractBody($html)
@@ -355,3 +372,4 @@ class HTMLPurifier_Lexer
 }
 
 // vim: et sw=4 sts=4
+

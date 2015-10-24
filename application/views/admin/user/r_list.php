@@ -39,7 +39,8 @@
                                     </thead>
 
                                     <tbody>
-                                    <?php foreach ($role as $k => $v) { ?>
+                                    <?php foreach ($role as $k => $v) {
+    ?>
                                         <tr class="selected">
                                             <td class="center">
                                                 <label>
@@ -61,7 +62,8 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                    <?php } ?>
+                                    <?php 
+} ?>
                                     </tbody>
                                 </table>
                                 <!-- /表格-->

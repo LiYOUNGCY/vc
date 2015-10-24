@@ -13,7 +13,7 @@ echo $navbar;
                     </div>
                     <div class="panel-body">
                         <table class="table table-striped">
-                            <form method="post" action="<?= base_url() . ADMINROUTE . 'user/update_role' ?>">
+                            <form method="post" action="<?= base_url().ADMINROUTE.'user/update_role' ?>">
                                 <input name="id" type="hidden" value="<?= $role['id'] ?>">
                                 <tbody>
                                 <tr>

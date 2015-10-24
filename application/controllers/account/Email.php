@@ -2,7 +2,7 @@
 
 class Email extends MY_Controller
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->load->service('user_service');
@@ -13,35 +13,34 @@ class Email extends MY_Controller
         $data['css'] = array(
             'swiper.min.css',
             'font-awesome/css/font-awesome.min.css',
-            'base.css'
+            'base.css',
 
         );
         $data['javascript'] = array(
             'jquery.js',
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
-            'error.js'
+            'error.js',
         );
 
         $user['user'] = $this->user;
-        $user['sign'] = $this->load->view('common/sign', '', TRUE);
-        $body['top'] = $this->load->view('common/top', $user, TRUE);
-        $body['footer'] = $this->load->view('common/footer', '', TRUE);
+        $user['sign'] = $this->load->view('common/sign', '', true);
+        $body['top'] = $this->load->view('common/top', $user, true);
+        $body['footer'] = $this->load->view('common/footer', '', true);
         $body['user'] = $this->user;
 
-
-        if ($type == "sended") {
-            $data['title'] = "已发送邮件";
+        if ($type == 'sended') {
+            $data['title'] = '已发送邮件';
             $this->load->view('common/head', $data);
             $this->load->view('email_sended', $body);
-        } else if ($type == "success") {
-            $data['title'] = "验证成功";
+        } elseif ($type == 'success') {
+            $data['title'] = '验证成功';
             $this->load->view('common/head', $data);
             $this->load->view('email_success', $body);
         }
     }
 
-    function active()
+    public function active()
     {
         $token = $this->sc->input('token', 'get');
 
@@ -51,22 +50,22 @@ class Email extends MY_Controller
             $data['css'] = array(
                 'swiper.min.css',
                 'font-awesome/css/font-awesome.min.css',
-                'base.css'
+                'base.css',
 
             );
             $data['javascript'] = array(
                 'jquery.js',
                 'masonry.pkgd.min.js',
                 'jquery.imageloader.js',
-                'error.js'
+                'error.js',
             );
 
             $user['user'] = $this->user;
-            $user['sign'] = $this->load->view('common/sign', '', TRUE);
-            $body['top'] = $this->load->view('common/top', $user, TRUE);
-            $body['footer'] = $this->load->view('common/footer', '', TRUE);
+            $user['sign'] = $this->load->view('common/sign', '', true);
+            $body['top'] = $this->load->view('common/top', $user, true);
+            $body['footer'] = $this->load->view('common/footer', '', true);
             $body['user'] = $this->user;
-            $data['title'] = "验证成功";
+            $data['title'] = '验证成功';
             $this->load->view('common/head', $data);
             $this->load->view('email_success', $body);
         }

@@ -6,9 +6,9 @@
  */
 class HTMLPurifier_ConfigSchema_Builder_ConfigSchema
 {
-
     /**
      * @param HTMLPurifier_ConfigSchema_Interchange $interchange
+     *
      * @return HTMLPurifier_ConfigSchema
      */
     public function build($interchange)
@@ -41,8 +41,10 @@ class HTMLPurifier_ConfigSchema_Builder_ConfigSchema
             }
         }
         $schema->postProcess();
+
         return $schema;
     }
 }
 
 // vim: et sw=4 sts=4
+

@@ -1,15 +1,17 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
 
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class MY_Service
 {
     public function __construct()
     {
-        log_message('debug', "Service Class Initialized");
+        log_message('debug', 'Service Class Initialized');
     }
-    function __get($key)
+    public function __get($key)
     {
-        $CI = & get_instance();
+        $CI = &get_instance();
+
         return $CI->$key;
     }
 }

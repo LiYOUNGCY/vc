@@ -9,7 +9,7 @@
 class HTMLPurifier_HTMLModule_SafeObject extends HTMLPurifier_HTMLModule
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'SafeObject';
 
@@ -31,12 +31,12 @@ class HTMLPurifier_HTMLModule_SafeObject extends HTMLPurifier_HTMLModule
                 // While technically not required by the spec, we're forcing
                 // it to this value.
                 'type' => 'Enum#application/x-shockwave-flash',
-                'width' => 'Pixels#' . $max,
-                'height' => 'Pixels#' . $max,
+                'width' => 'Pixels#'.$max,
+                'height' => 'Pixels#'.$max,
                 'data' => 'URI#embedded',
                 'codebase' => new HTMLPurifier_AttrDef_Enum(
                     array(
-                        'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0'
+                        'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0',
                     )
                 ),
             )
@@ -51,7 +51,7 @@ class HTMLPurifier_HTMLModule_SafeObject extends HTMLPurifier_HTMLModule
             array(
                 'id' => 'ID',
                 'name*' => 'Text',
-                'value' => 'Text'
+                'value' => 'Text',
             )
         );
         $param->attr_transform_post[] = new HTMLPurifier_AttrTransform_SafeParam();
@@ -60,3 +60,4 @@ class HTMLPurifier_HTMLModule_SafeObject extends HTMLPurifier_HTMLModule
 }
 
 // vim: et sw=4 sts=4
+

@@ -37,7 +37,7 @@
     </div>
 
     <input type="hidden" id="user_id" name="user_id" value="<?= $user['id'] ?>">
-    <!--    <input type="hidden" id="customer_id" name="customer_id" value="--><? //= $customer_id ?><!--">-->
+    <!--    <input type="hidden" id="customer_id" name="customer_id" value="--><?php //= $customer_id ?><!--">-->
     <?php echo $footer; ?>
 </div>
 </body>

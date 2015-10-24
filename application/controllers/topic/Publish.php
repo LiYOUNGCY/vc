@@ -8,8 +8,7 @@ class Publish extends MY_Controller
         $this->load->service('article_service');
     }
 
-
-    public function index($type = 'publish', $pid = NULL)
+    public function index($type = 'publish', $pid = null)
     {
         /*
         $head['css'] = array(
@@ -38,7 +37,7 @@ class Publish extends MY_Controller
             $data = array();
             $data['tag'] = $this->article_service->get_topic_tag();
             $this->load->view('publish_topic', $data);
-        } else if ($type == 'update' && is_numeric($pid)) {
+        } elseif ($type == 'update' && is_numeric($pid)) {
             if (!is_numeric($pid)) {
                 show_404();
             }
@@ -62,7 +61,6 @@ class Publish extends MY_Controller
 
     public function save_topic()
     {
-
         $title = $this->sc->input('title');
         $content = $this->sc->input('content');
         $who = $this->sc->input('who');
@@ -70,8 +68,6 @@ class Publish extends MY_Controller
         $when = $this->sc->input('when');
 
         $uid = $this->user['id'];
-
-
 
         $id = $this->article_service->publish_topic($title, $content, $uid, $who, $where, $when);
 

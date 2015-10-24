@@ -9,17 +9,17 @@
 class HTMLPurifier_URIFilter_SafeIframe extends HTMLPurifier_URIFilter
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'SafeIframe';
 
     /**
-     * @type bool
+     * @var bool
      */
     public $always_load = true;
 
     /**
-     * @type string
+     * @var string
      */
     protected $regexp = null;
 
@@ -28,18 +28,21 @@ class HTMLPurifier_URIFilter_SafeIframe extends HTMLPurifier_URIFilter
     // defer till the actual filtering.
     /**
      * @param HTMLPurifier_Config $config
+     *
      * @return bool
      */
     public function prepare($config)
     {
         $this->regexp = $config->get('URI.SafeIframeRegexp');
+
         return true;
     }
 
     /**
-     * @param HTMLPurifier_URI $uri
-     * @param HTMLPurifier_Config $config
+     * @param HTMLPurifier_URI     $uri
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool
      */
     public function filter(&$uri, $config, $context)
@@ -66,3 +69,4 @@ class HTMLPurifier_URIFilter_SafeIframe extends HTMLPurifier_URIFilter
 }
 
 // vim: et sw=4 sts=4
+

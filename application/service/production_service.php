@@ -16,11 +16,12 @@ class Production_service extends MY_Service
         $this->load->model('frame_model');
     }
 
-
     /**
-     * 获得作品列表
+     * 获得作品列表.
+     *
      * @param  page 页数   [int]
      * @param  uid  用户id [uid]
+     *
      * @return [type]
      */
     public function get_production_list($page, $uid, $search)
@@ -31,42 +32,47 @@ class Production_service extends MY_Service
             if (!empty($v['aid'])) {
                 $production[$k]['artist'] = $this->artist_model->get_artist_base_id($v['aid']);
             } else {
-                $production[$k]['artist'] = NULL;
+                $production[$k]['artist'] = null;
             }
             unset($production[$k]['aid']);
         }
+
         return $production;
     }
-
 
     public function get_medium_list()
     {
         $query = $this->production_medium_model->get_medium_list();
+
         return $query;
     }
 
     public function get_style_list()
     {
         $query = $this->production_style_model->get_style_list();
+
         return $query;
     }
 
     public function get_categories_list()
     {
         $query = $this->production_categories_model->get_categories_list();
+
         return $query;
     }
 
     public function get_price_list()
     {
         $query = $this->production_price_model->get_price_list();
+
         return $query;
     }
 
-
     /**
-     * 根据id获取艺术品详情
+     * 根据id获取艺术品详情.
+     *
      * @param  [type]
+     *
      * @return [type]
      */
     public function get_production_by_id($id)
@@ -77,24 +83,28 @@ class Production_service extends MY_Service
             if (!empty($p['aid'])) {
                 $p['artist'] = $this->artist_model->get_artist_by_id($p['aid']);
                 $p['artist']['intro'] = mb_strlen($p['artist']['intro']) > 100 ?
-                    mb_substr($p['artist']['intro'], 0, 100) . '..' :
+                    mb_substr($p['artist']['intro'], 0, 100).'..' :
                     $p['artist']['intro'];
             } else {
-                $p['artist'] = NULL;
+                $p['artist'] = null;
             }
+
             return $p;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
-    public function get_production_detail_by_id($id) {
+    public function get_production_detail_by_id($id)
+    {
         $p = $this->production_model->get_production_detail_by_id($id);
+
         return $p;
     }
 
     /**
-     * [like_production 艺术品点赞]
+     * [like_production 艺术品点赞].
+     *
      * @return [type] [description]
      */
     public function like_production($pid, $uid)
@@ -122,7 +132,6 @@ class Production_service extends MY_Service
                     $this->production_model->argee_production($pid);
                 }
             }
-
         } //失败
         else {
             $this->error->output('INVALID_REQUEST');
@@ -133,33 +142,36 @@ class Production_service extends MY_Service
     {
         $result = $this->production_like_model->check_like($pid, $uid);
         if (empty($result)) {
-            return FALSE;
+            return false;
         } else {
             return $result['status'];
         }
     }
 
-
     /**
-     * 获取艺术品相关联的专题
+     * 获取艺术品相关联的专题.
+     *
      * @param  pid 艺术品id [int]
+     *
      * @return [type]
      */
     public function get_topic_by_production($pid, $uid)
     {
-        $topic = $this->article_model->get_article_list(0, $uid, NULL, NULL, $pid);
+        $topic = $this->article_model->get_article_list(0, $uid, null, null, $pid);
         foreach ($topic as $k => $v) {
             $topic[$k]['article_img'] = Common::extract_first_img($topic[$k]['content']);
         }
+
         return $topic;
     }
 
-
     /**
-     * [publish_production 发布作品]
-     * @param  [type] $uid  [description]
-     * @param  [type] $data [description]
-     * @return [type]       [description]
+     * [publish_production 发布作品].
+     *
+     * @param [type] $uid  [description]
+     * @param [type] $data [description]
+     *
+     * @return [type] [description]
      */
     public function publish_production($uid, $data)
     {
@@ -167,26 +179,28 @@ class Production_service extends MY_Service
         if ($insert_result) {
             //更新艺术家作品数
             $this->artist_model->update_artist_production_count($data['aid']);
+
             return $insert_result;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
-
     /**
-     * [update_production 更新艺术品信息]
-     * @param  [type] $id   [description]
-     * @param  [type] $uid  [description]
-     * @param  [type] $data [description]
-     * @return [type]       [description]
+     * [update_production 更新艺术品信息].
+     *
+     * @param [type] $id   [description]
+     * @param [type] $uid  [description]
+     * @param [type] $data [description]
+     *
+     * @return [type] [description]
      */
     public function update_production($id, $uid, $data)
     {
         $result = $this->production_model->update_production($id, $uid, $data);
+
         return $result;
     }
-
 
     private function _delete_oss_pic($pic)
     {
@@ -207,12 +221,11 @@ class Production_service extends MY_Service
 
             $this->oss->delete_object($toFile);
             $this->oss->delete_object($toFile1);
-            return TRUE;
 
+            return true;
         } catch (Exception $e) {
-            return FALSE;
+            return false;
         }
-
     }
 
     public function delete_production_frame($production_id)
@@ -220,12 +233,10 @@ class Production_service extends MY_Service
         $this->production_model->delete_production_frame($production_id);
     }
 
-
     public function insert_production_frame($production_id, $frame_id)
     {
         return $this->production_model->insert_production_frame($production_id, $frame_id);
     }
-
 
     public function get_frame_id_by_production_id($id)
     {

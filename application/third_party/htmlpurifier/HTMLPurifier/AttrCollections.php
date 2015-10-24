@@ -1,24 +1,24 @@
 <?php
 
 /**
- * Defines common attribute collections that modules reference
+ * Defines common attribute collections that modules reference.
  */
-
 class HTMLPurifier_AttrCollections
 {
-
     /**
      * Associative array of attribute collections, indexed by name.
-     * @type array
+     *
+     * @var array
      */
     public $info = array();
 
     /**
      * Performs all expansions on internal data for use by other inclusions
      * It also collects all attribute collection extensions from
-     * modules
-     * @param HTMLPurifier_AttrTypes $attr_types HTMLPurifier_AttrTypes instance
-     * @param HTMLPurifier_HTMLModule[] $modules Hash array of HTMLPurifier_HTMLModule members
+     * modules.
+     *
+     * @param HTMLPurifier_AttrTypes    $attr_types HTMLPurifier_AttrTypes instance
+     * @param HTMLPurifier_HTMLModule[] $modules    Hash array of HTMLPurifier_HTMLModule members
      */
     public function __construct($attr_types, $modules)
     {
@@ -53,6 +53,7 @@ class HTMLPurifier_AttrCollections
     /**
      * Takes a reference to an attribute associative array and performs
      * all inclusions specified by the zero index.
+     *
      * @param array &$attr Reference to attribute array
      */
     public function performInclusions(&$attr)
@@ -61,9 +62,9 @@ class HTMLPurifier_AttrCollections
             return;
         }
         $merge = $attr[0];
-        $seen  = array(); // recursion guard
+        $seen = array(); // recursion guard
         // loop through all the inclusions
-        for ($i = 0; isset($merge[$i]); $i++) {
+        for ($i = 0; isset($merge[$i]); ++$i) {
             if (isset($seen[$merge[$i]])) {
                 continue;
             }
@@ -88,8 +89,9 @@ class HTMLPurifier_AttrCollections
 
     /**
      * Expands all string identifiers in an attribute array by replacing
-     * them with the appropriate values inside HTMLPurifier_AttrTypes
-     * @param array &$attr Reference to attribute array
+     * them with the appropriate values inside HTMLPurifier_AttrTypes.
+     *
+     * @param array                  &$attr      Reference to attribute array
      * @param HTMLPurifier_AttrTypes $attr_types HTMLPurifier_AttrTypes instance
      */
     public function expandIdentifiers(&$attr, $attr_types)
@@ -141,3 +143,4 @@ class HTMLPurifier_AttrCollections
 }
 
 // vim: et sw=4 sts=4
+

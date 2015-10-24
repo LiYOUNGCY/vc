@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -60,26 +61,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $active_group = 'default';
-$query_builder = TRUE;
+$query_builder = true;
 
 $db['default'] = array(
-	'dsn'	=> '',
+    'dsn' => '',
     'hostname' => '112.74.207.10',
-	'username' => 'root',
-	'password' => 'Hi2015',
-	'database' => 'artvc',
-	'dbdriver' => 'mysqli',
-	'dbprefix' => 'av__',
-	'pconnect' => FALSE,
-	'db_debug' => TRUE,
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => 'av__',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
+    'username' => 'root',
+    'password' => 'Hi2015',
+    'database' => 'artvc',
+    'dbdriver' => 'mysqli',
+    'dbprefix' => 'av__',
+    'pconnect' => false,
+    'db_debug' => true,
+    'cache_on' => false,
+    'cachedir' => '',
+    'char_set' => 'utf8',
+    'dbcollat' => 'utf8_general_ci',
+    'swap_pre' => 'av__',
+    'encrypt' => false,
+    'compress' => false,
+    'stricton' => false,
+    'failover' => array(),
+    'save_queries' => true,
 );

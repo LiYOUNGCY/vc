@@ -6,36 +6,39 @@
  */
 class HTMLPurifier_Length
 {
-
     /**
      * String numeric magnitude.
-     * @type string
+     *
+     * @var string
      */
     protected $n;
 
     /**
      * String unit. False is permitted if $n = 0.
-     * @type string|bool
+     *
+     * @var string|bool
      */
     protected $unit;
 
     /**
      * Whether or not this length is valid. Null if not calculated yet.
-     * @type bool
+     *
+     * @var bool
      */
     protected $isValid;
 
     /**
-     * Array Lookup array of units recognized by CSS 2.1
-     * @type array
+     * Array Lookup array of units recognized by CSS 2.1.
+     *
+     * @var array
      */
     protected static $allowedUnits = array(
         'em' => true, 'ex' => true, 'px' => true, 'in' => true,
-        'cm' => true, 'mm' => true, 'pt' => true, 'pc' => true
+        'cm' => true, 'mm' => true, 'pt' => true, 'pc' => true,
     );
 
     /**
-     * @param string $n Magnitude
+     * @param string      $n Magnitude
      * @param bool|string $u Unit
      */
     public function __construct($n = '0', $u = false)
@@ -46,12 +49,13 @@ class HTMLPurifier_Length
 
     /**
      * @param string $s Unit string, like '2em' or '3.4in'
+     *
      * @return HTMLPurifier_Length
      * @warning Does not perform validation.
      */
     public static function make($s)
     {
-        if ($s instanceof HTMLPurifier_Length) {
+        if ($s instanceof self) {
             return $s;
         }
         $n_length = strspn($s, '1234567890.+-');
@@ -60,11 +64,13 @@ class HTMLPurifier_Length
         if ($unit === '') {
             $unit = false;
         }
-        return new HTMLPurifier_Length($n, $unit);
+
+        return new self($n, $unit);
     }
 
     /**
      * Validates the number and unit.
+     *
      * @return bool
      */
     protected function validate()
@@ -79,7 +85,7 @@ class HTMLPurifier_Length
         if (!ctype_lower($this->unit)) {
             $this->unit = strtolower($this->unit);
         }
-        if (!isset(HTMLPurifier_Length::$allowedUnits[$this->unit])) {
+        if (!isset(self::$allowedUnits[$this->unit])) {
             return false;
         }
         // Hack:
@@ -89,11 +95,13 @@ class HTMLPurifier_Length
             return false;
         }
         $this->n = $result;
+
         return true;
     }
 
     /**
      * Returns string representation of number.
+     *
      * @return string
      */
     public function toString()
@@ -101,11 +109,13 @@ class HTMLPurifier_Length
         if (!$this->isValid()) {
             return false;
         }
-        return $this->n . $this->unit;
+
+        return $this->n.$this->unit;
     }
 
     /**
      * Retrieves string numeric magnitude.
+     *
      * @return string
      */
     public function getN()
@@ -115,6 +125,7 @@ class HTMLPurifier_Length
 
     /**
      * Retrieves string unit.
+     *
      * @return string
      */
     public function getUnit()
@@ -124,6 +135,7 @@ class HTMLPurifier_Length
 
     /**
      * Returns true if this length unit is valid.
+     *
      * @return bool
      */
     public function isValid()
@@ -131,12 +143,15 @@ class HTMLPurifier_Length
         if ($this->isValid === null) {
             $this->isValid = $this->validate();
         }
+
         return $this->isValid;
     }
 
     /**
      * Compares two lengths, and returns 1 if greater, -1 if less and 0 if equal.
+     *
      * @param HTMLPurifier_Length $l
+     *
      * @return int
      * @warning If both values are too large or small, this calculation will
      *          not work properly
@@ -153,8 +168,10 @@ class HTMLPurifier_Length
                 return false;
             }
         }
+
         return $this->n - $l->n;
     }
 }
 
 // vim: et sw=4 sts=4
+

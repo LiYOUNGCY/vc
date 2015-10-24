@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Pre-transform that changes deprecated hspace and vspace attributes to CSS
+ * Pre-transform that changes deprecated hspace and vspace attributes to CSS.
  */
 class HTMLPurifier_AttrTransform_ImgSpace extends HTMLPurifier_AttrTransform
 {
     /**
-     * @type string
+     * @var string
      */
     protected $attr;
 
     /**
-     * @type array
+     * @var array
      */
     protected $css = array(
         'hspace' => array('left', 'right'),
-        'vspace' => array('top', 'bottom')
+        'vspace' => array('top', 'bottom'),
     );
 
     /**
@@ -25,14 +25,15 @@ class HTMLPurifier_AttrTransform_ImgSpace extends HTMLPurifier_AttrTransform
     {
         $this->attr = $attr;
         if (!isset($this->css[$attr])) {
-            trigger_error(htmlspecialchars($attr) . ' is not valid space attribute');
+            trigger_error(htmlspecialchars($attr).' is not valid space attribute');
         }
     }
 
     /**
-     * @param array $attr
-     * @param HTMLPurifier_Config $config
+     * @param array                $attr
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return array
      */
     public function transform($attr, $config, $context)
@@ -54,8 +55,10 @@ class HTMLPurifier_AttrTransform_ImgSpace extends HTMLPurifier_AttrTransform
             $style .= "$property:{$width}px;";
         }
         $this->prependCSS($attr, $style);
+
         return $attr;
     }
 }
 
 // vim: et sw=4 sts=4
+

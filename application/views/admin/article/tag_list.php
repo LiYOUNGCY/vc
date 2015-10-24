@@ -38,7 +38,8 @@
                                     </thead>
 
                                     <tbody>
-                                    <?php foreach ($tag as $k => $v) { ?>
+                                    <?php foreach ($tag as $k => $v) {
+    ?>
                                         <tr class="selected">
                                             <td class="center">
                                                 <label>
@@ -62,7 +63,8 @@
                                                     case 2:
                                                         echo '专题';
                                                         break;
-                                                } ?>
+                                                }
+    ?>
                                             </td>
                                             <td class="tooltip-btn">
                                                 <button data-toggle="tooltip" title="编辑" effect="edit"
@@ -71,7 +73,8 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                    <?php } ?>
+                                    <?php 
+} ?>
                                     </tbody>
                                 </table>
                                 <!-- /表格-->

@@ -60,16 +60,25 @@ class Cart_model extends CI_Model
      */
     public function insert_goods_to_cart($user_id, $production_id, $frame_id, $amount = 1)
     {
-        $data = array(
-            'user_id' => $user_id,
-            'production_id' => $production_id,
-            'frame_id' => $frame_id,
-            'amount' => $amount,
-            'create_time' => date('Y-m-d H:i:s'),
-        );
+        // $data = array(
+        //     'user_id' => $user_id,
+        //     'production_id' => $production_id,
+        //     'frame_id' => $frame_id,
+        //     'amount' => $amount,
+        //     'create_time' => date('Y-m-d H:i:s'),
+        // );
 
-        $this->db->insert('cart', $data);
+        // $this->db->insert('cart', $data);
 
+        // return $this->db->insert_id();
+
+        $cart = $this->db->dbprefix('cart');
+        $production = $this->db->dbprefix('production');
+        $frame = $this->db->dbprefix('frame');
+        $create_time = date('Y-m-d H:i:s');
+
+        $sql = "insert into {$cart}(user_id, production_id, frame_id, amount, price, create_time) SELECT ?, ?, ?, 1, {$production}.price + {$frame}.price, ? from {$production}, {$frame} where {$production}.id = ? AND {$frame}.id = ?";
+        $this->db->query($sql, array($user_id, $production_id, $frame_id, $create_time, $production_id, $frame_id));
         return $this->db->insert_id();
     }
 

@@ -22,7 +22,8 @@
 				</div>
 			</li>
 			</a>
-			<?php if($user['role'] == 0) { ?>
+			<?php if ($user['role'] == 0) {
+    ?>
 			<a class="link" href="<?=base_url()?>login">		
 			<li class="menu-list">
 				<div class="menu-list-item">
@@ -39,8 +40,10 @@
 				</div>
 			</li>
 			</a>
-			<?php }?>
-			<?php if($user['role'] != 0) { ?>
+			<?php 
+}?>
+			<?php if ($user['role'] != 0) {
+    ?>
 			<a class="link" href="<?=base_url()?>notification">		
 			<li class="menu-list">
 				<div class="menu-list-item">
@@ -60,7 +63,8 @@
 				</div>
 			</li>
 			</a>
-			<?php } ?>
+			<?php 
+} ?>
 			<a class="link" id="showlang" href="javascript:void(0);">
 			<li class="menu-list">
 				<div class="menu-list-item">
@@ -73,7 +77,8 @@
 				<div id="lop-zh" style="border-right: 1px solid #4C4640;" class="btn">简体中文</div>
 				<div id="lop-en" class="btn">English</div>
 			</div>
-			<?php if($user['role'] != 0) { ?>
+			<?php if ($user['role'] != 0) {
+    ?>
 			<a class="link" href="<?=base_url()?>account/main/logout">
 			<li class="menu-list">
 				<div class="menu-list-item">
@@ -82,16 +87,16 @@
 				</div>
 			</li>
 			</a>
-			<?php } ?>
+			<?php 
+} ?>
 		</ul>
 	</div>
 	<?php
-		$push_id = NULL; 
-		if(isset($user['id']))
-		{
-			$push_id = md5(md5('artvc'.$user['id']));
-		}
-	?>
+        $push_id = null;
+        if (isset($user['id'])) {
+            $push_id = md5(md5('artvc'.$user['id']));
+        }
+    ?>
 	<input type="hidden" id="PUSH_ID" value="<?=$push_id?>" />	
 	<script type="text/javascript">
 	$(function(){

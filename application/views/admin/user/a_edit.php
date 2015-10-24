@@ -1,5 +1,5 @@
 <?php
-	echo $navbar;
+    echo $navbar;
 ?>
     <!-- Page Content -->
     <div id="page-wrapper">
@@ -42,23 +42,20 @@
 					                                <span class="col-sm-4 col-xs-3 control-label">角色组:</span>
 					                                <div class="col-sm-5 col-xs-8">
 					                                	<?php
-					                                		$arr = explode(',',$auth['role_group']);
-															$str = "";
-															foreach ($arr as $k1 => $v1) {
-																for($i = 0; $i < count($role); $i++)
-																{
-																	if($v1 == "|{$role[$i]['id']}|")
-																	{
-																		$str.=$role[$i]['name'].",";
-																		break;
-																	}
-																}
-															}
-															if( ! empty($str))
-															{
-																$str = substr($str,0,strlen($str)-1);
-															}
-					                                	?>
+                                                            $arr = explode(',', $auth['role_group']);
+                                                            $str = '';
+                                                            foreach ($arr as $k1 => $v1) {
+                                                                for ($i = 0; $i < count($role); ++$i) {
+                                                                    if ($v1 == "|{$role[$i]['id']}|") {
+                                                                        $str .= $role[$i]['name'].',';
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            }
+                                                            if (!empty($str)) {
+                                                                $str = substr($str, 0, strlen($str) - 1);
+                                                            }
+                                                        ?>
 					                                    <input class="form-control" id="show_role"  type="text" value="<?=$str?>" disabled="disabled">
 					                                </div>
 
@@ -67,11 +64,13 @@
 				                                    <div class="col-sm-2 col-xs-8">
 					                                    <select name="group_select" class="form-control">
 					                                    	<option value="" ></option>
-	   														<?php foreach ($role as $k => $v){ ?>
+	   														<?php foreach ($role as $k => $v) {
+    ?>
 																	<option value="|<?=$v['id']?>|">
 																		<?=$v['name']?>
 																	</option>
-	   														<?php }?>
+	   														<?php 
+}?>
 	                                                    </select>
 					                               </div>
 					                            </div>

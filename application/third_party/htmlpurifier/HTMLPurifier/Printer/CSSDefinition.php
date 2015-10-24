@@ -3,12 +3,13 @@
 class HTMLPurifier_Printer_CSSDefinition extends HTMLPurifier_Printer
 {
     /**
-     * @type HTMLPurifier_CSSDefinition
+     * @var HTMLPurifier_CSSDefinition
      */
     protected $def;
 
     /**
      * @param HTMLPurifier_Config $config
+     *
      * @return string
      */
     public function render($config)
@@ -42,3 +43,4 @@ class HTMLPurifier_Printer_CSSDefinition extends HTMLPurifier_Printer
 }
 
 // vim: et sw=4 sts=4
+

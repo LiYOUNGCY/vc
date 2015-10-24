@@ -1,25 +1,28 @@
 <?php
 
 /**
- * Generic property list implementation
+ * Generic property list implementation.
  */
 class HTMLPurifier_PropertyList
 {
     /**
      * Internal data-structure for properties.
-     * @type array
+     *
+     * @var array
      */
     protected $data = array();
 
     /**
      * Parent plist.
-     * @type HTMLPurifier_PropertyList
+     *
+     * @var HTMLPurifier_PropertyList
      */
     protected $parent;
 
     /**
      * Cache.
-     * @type array
+     *
+     * @var array
      */
     protected $cache;
 
@@ -32,8 +35,10 @@ class HTMLPurifier_PropertyList
     }
 
     /**
-     * Recursively retrieves the value for a key
+     * Recursively retrieves the value for a key.
+     *
      * @param string $name
+     *
      * @throws HTMLPurifier_Exception
      */
     public function get($name)
@@ -49,9 +54,10 @@ class HTMLPurifier_PropertyList
     }
 
     /**
-     * Sets the value of a key, for this plist
+     * Sets the value of a key, for this plist.
+     *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function set($name, $value)
     {
@@ -59,8 +65,10 @@ class HTMLPurifier_PropertyList
     }
 
     /**
-     * Returns true if a given key exists
+     * Returns true if a given key exists.
+     *
      * @param string $name
+     *
      * @return bool
      */
     public function has($name)
@@ -71,6 +79,7 @@ class HTMLPurifier_PropertyList
     /**
      * Resets a value to the value of it's parent, usually the default. If
      * no value is specified, the entire plist is reset.
+     *
      * @param string $name
      */
     public function reset($name = null)
@@ -85,7 +94,9 @@ class HTMLPurifier_PropertyList
     /**
      * Squashes this property list and all of its property lists into a single
      * array, and returns the array. This value is cached by default.
+     *
      * @param bool $force If true, ignores the cache and regenerates the array.
+     *
      * @return array
      */
     public function squash($force = false)
@@ -102,6 +113,7 @@ class HTMLPurifier_PropertyList
 
     /**
      * Returns the parent plist.
+     *
      * @return HTMLPurifier_PropertyList
      */
     public function getParent()
@@ -111,6 +123,7 @@ class HTMLPurifier_PropertyList
 
     /**
      * Sets the parent plist.
+     *
      * @param HTMLPurifier_PropertyList $plist Parent plist
      */
     public function setParent($plist)
@@ -120,3 +133,4 @@ class HTMLPurifier_PropertyList
 }
 
 // vim: et sw=4 sts=4
+

@@ -2,21 +2,23 @@
 
 /**
  * Defines allowed CSS attributes and what their values are.
+ *
  * @see HTMLPurifier_HTMLDefinition
  */
 class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
 {
-
     public $type = 'CSS';
 
     /**
      * Assoc array of attribute name to definition object.
-     * @type HTMLPurifier_AttrDef[]
+     *
+     * @var HTMLPurifier_AttrDef[]
      */
     public $info = array();
 
     /**
      * Constructs the info array.  The meat of this class.
+     *
      * @param HTMLPurifier_Config $config
      */
     protected function doSetup($config)
@@ -41,7 +43,7 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
                     'groove',
                     'ridge',
                     'inset',
-                    'outset'
+                    'outset',
                 ),
                 false
             );
@@ -68,7 +70,7 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
         $uri_or_none = new HTMLPurifier_AttrDef_CSS_Composite(
             array(
                 new HTMLPurifier_AttrDef_Enum(array('none')),
-                new HTMLPurifier_AttrDef_CSS_URI()
+                new HTMLPurifier_AttrDef_CSS_URI(),
             )
         );
 
@@ -86,7 +88,7 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
                 'upper-roman',
                 'lower-alpha',
                 'upper-alpha',
-                'none'
+                'none',
             ),
             false
         );
@@ -117,7 +119,7 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
             $this->info['background-color'] = new HTMLPurifier_AttrDef_CSS_Composite(
                 array(
                     new HTMLPurifier_AttrDef_Enum(array('transparent')),
-                    new HTMLPurifier_AttrDef_CSS_Color()
+                    new HTMLPurifier_AttrDef_CSS_Color(),
                 )
             );
 
@@ -132,7 +134,7 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
             $this->info['border-right-width'] = new HTMLPurifier_AttrDef_CSS_Composite(
                 array(
                     new HTMLPurifier_AttrDef_Enum(array('thin', 'medium', 'thick')),
-                    new HTMLPurifier_AttrDef_CSS_Length('0') //disallow negative
+                    new HTMLPurifier_AttrDef_CSS_Length('0'), //disallow negative
                 )
             );
 
@@ -141,14 +143,14 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
         $this->info['letter-spacing'] = new HTMLPurifier_AttrDef_CSS_Composite(
             array(
                 new HTMLPurifier_AttrDef_Enum(array('normal')),
-                new HTMLPurifier_AttrDef_CSS_Length()
+                new HTMLPurifier_AttrDef_CSS_Length(),
             )
         );
 
         $this->info['word-spacing'] = new HTMLPurifier_AttrDef_CSS_Composite(
             array(
                 new HTMLPurifier_AttrDef_Enum(array('normal')),
-                new HTMLPurifier_AttrDef_CSS_Length()
+                new HTMLPurifier_AttrDef_CSS_Length(),
             )
         );
 
@@ -164,11 +166,11 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
                         'x-large',
                         'xx-large',
                         'larger',
-                        'smaller'
+                        'smaller',
                     )
                 ),
                 new HTMLPurifier_AttrDef_CSS_Percentage(),
-                new HTMLPurifier_AttrDef_CSS_Length()
+                new HTMLPurifier_AttrDef_CSS_Length(),
             )
         );
 
@@ -177,7 +179,7 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
                 new HTMLPurifier_AttrDef_Enum(array('normal')),
                 new HTMLPurifier_AttrDef_CSS_Number(true), // no negatives
                 new HTMLPurifier_AttrDef_CSS_Length('0'),
-                new HTMLPurifier_AttrDef_CSS_Percentage(true)
+                new HTMLPurifier_AttrDef_CSS_Percentage(true),
             )
         );
 
@@ -189,7 +191,7 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
                 array(
                     new HTMLPurifier_AttrDef_CSS_Length(),
                     new HTMLPurifier_AttrDef_CSS_Percentage(),
-                    new HTMLPurifier_AttrDef_Enum(array('auto'))
+                    new HTMLPurifier_AttrDef_Enum(array('auto')),
                 )
             );
 
@@ -203,7 +205,7 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
             $this->info['padding-right'] = new HTMLPurifier_AttrDef_CSS_Composite(
                 array(
                     new HTMLPurifier_AttrDef_CSS_Length('0'),
-                    new HTMLPurifier_AttrDef_CSS_Percentage(true)
+                    new HTMLPurifier_AttrDef_CSS_Percentage(true),
                 )
             );
 
@@ -212,7 +214,7 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
         $this->info['text-indent'] = new HTMLPurifier_AttrDef_CSS_Composite(
             array(
                 new HTMLPurifier_AttrDef_CSS_Length(),
-                new HTMLPurifier_AttrDef_CSS_Percentage()
+                new HTMLPurifier_AttrDef_CSS_Percentage(),
             )
         );
 
@@ -220,7 +222,7 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
             array(
                 new HTMLPurifier_AttrDef_CSS_Length('0'),
                 new HTMLPurifier_AttrDef_CSS_Percentage(true),
-                new HTMLPurifier_AttrDef_Enum(array('auto'))
+                new HTMLPurifier_AttrDef_Enum(array('auto')),
             )
         );
         $max = $config->get('CSS.MaxImgLength');
@@ -235,7 +237,7 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
                     new HTMLPurifier_AttrDef_CSS_Composite(
                         array(
                             new HTMLPurifier_AttrDef_CSS_Length('0', $max),
-                            new HTMLPurifier_AttrDef_Enum(array('auto'))
+                            new HTMLPurifier_AttrDef_Enum(array('auto')),
                         )
                     ),
                     // For everyone else:
@@ -261,7 +263,7 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
                 '600',
                 '700',
                 '800',
-                '900'
+                '900',
             ),
             false
         );
@@ -300,11 +302,11 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
                         'text-top',
                         'middle',
                         'bottom',
-                        'text-bottom'
+                        'text-bottom',
                     )
                 ),
                 new HTMLPurifier_AttrDef_CSS_Length(),
-                new HTMLPurifier_AttrDef_CSS_Percentage()
+                new HTMLPurifier_AttrDef_CSS_Percentage(),
             )
         );
 
@@ -366,11 +368,10 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
                 'always',
                 'avoid',
                 'left',
-                'right'
+                'right',
             )
         );
         $this->info['page-break-inside'] = new HTMLPurifier_AttrDef_Enum(array('auto', 'avoid'));
-
     }
 
     /**
@@ -397,7 +398,7 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
                 'table-column',
                 'table-cell',
                 'table-caption',
-                'none'
+                'none',
             )
         );
         $this->info['visibility'] = new HTMLPurifier_AttrDef_Enum(
@@ -435,15 +436,17 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
     /**
      * Performs extra config-based processing. Based off of
      * HTMLPurifier_HTMLDefinition.
+     *
      * @param HTMLPurifier_Config $config
+     *
      * @todo Refactor duplicate elements into common class (probably using
      *       composition, not inheritance).
      */
     protected function setupConfigStuff($config)
     {
         // setup allowed elements
-        $support = "(for information on implementing this, see the " .
-            "support forums) ";
+        $support = '(for information on implementing this, see the '.
+            'support forums) ';
         $allowed_properties = $config->get('CSS.AllowedProperties');
         if ($allowed_properties !== null) {
             foreach ($this->info as $name => $d) {
@@ -472,3 +475,4 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
 }
 
 // vim: et sw=4 sts=4
+

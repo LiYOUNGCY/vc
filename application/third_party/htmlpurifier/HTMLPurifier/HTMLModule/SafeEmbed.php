@@ -6,7 +6,7 @@
 class HTMLPurifier_HTMLModule_SafeEmbed extends HTMLPurifier_HTMLModule
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'SafeEmbed';
 
@@ -24,8 +24,8 @@ class HTMLPurifier_HTMLModule_SafeEmbed extends HTMLPurifier_HTMLModule
             array(
                 'src*' => 'URI#embedded',
                 'type' => 'Enum#application/x-shockwave-flash',
-                'width' => 'Pixels#' . $max,
-                'height' => 'Pixels#' . $max,
+                'width' => 'Pixels#'.$max,
+                'height' => 'Pixels#'.$max,
                 'allowscriptaccess' => 'Enum#never',
                 'allownetworking' => 'Enum#internal',
                 'flashvars' => 'Text',
@@ -38,3 +38,4 @@ class HTMLPurifier_HTMLModule_SafeEmbed extends HTMLPurifier_HTMLModule
 }
 
 // vim: et sw=4 sts=4
+

@@ -38,7 +38,7 @@
                         <ul>
                             <li>艺术门类：<?=$production['medium']?></li>
                             <li>风格：<?=$production['style']?></li>
-                            <li>尺寸：<?php echo $production['w']." x ".$production['h'];?>cm</li>
+                            <li>尺寸：<?php echo $production['w'].' x '.$production['h'];?>cm</li>
                             <li>创作时间：<?=$production['creat_time']?></li>
                             <li>上市时间：<?=$production['publish_time']?></li>
                         </ul>
@@ -46,7 +46,8 @@
                     <div class="frame">
                         <div class="title">选裱推荐：</div>
                         <ul>
-                            <?php foreach($frame as $value) { ?>
+                            <?php foreach ($frame as $value) {
+    ?>
                                 <li data-id="<?=$value['id']?>">
                                     <div class="frameimg">
                                         <img src="<?=$value['image']?>" alt="金边">
@@ -58,13 +59,18 @@
                                         ￥ <span><?=$value['price']?></span>
                                     </div>
                                 </li>
-                            <?php } ?>
+                            <?php 
+} ?>
                         </ul>
-                        <?php foreach($frame as $value) if(isset($value['thumb'])) {  ?>
+                        <?php foreach ($frame as $value) {
+    if (isset($value['thumb'])) {
+        ?>
                         <div class="frame_detail" id="fd<?=$value['id']?>">
                             <img src="<?=$value['thumb']?>" alt="">
                         </div>
-                        <?php } ?>
+                        <?php 
+    }
+} ?>
                     </div>
                 </div>
                 <div class="price"><font style="font-weight:normal;color:#888888;font-size:16px;">售价：</font><?=$production['price']?> RMB</div>

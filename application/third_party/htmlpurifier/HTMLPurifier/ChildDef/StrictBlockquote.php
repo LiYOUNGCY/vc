@@ -6,32 +6,33 @@
 class HTMLPurifier_ChildDef_StrictBlockquote extends HTMLPurifier_ChildDef_Required
 {
     /**
-     * @type array
+     * @var array
      */
     protected $real_elements;
 
     /**
-     * @type array
+     * @var array
      */
     protected $fake_elements;
 
     /**
-     * @type bool
+     * @var bool
      */
     public $allow_empty = true;
 
     /**
-     * @type string
+     * @var string
      */
     public $type = 'strictblockquote';
 
     /**
-     * @type bool
+     * @var bool
      */
     protected $init = false;
 
     /**
      * @param HTMLPurifier_Config $config
+     *
      * @return array
      * @note We don't want MakeWellFormed to auto-close inline elements since
      *       they might be allowed.
@@ -39,13 +40,15 @@ class HTMLPurifier_ChildDef_StrictBlockquote extends HTMLPurifier_ChildDef_Requi
     public function getAllowedElements($config)
     {
         $this->init($config);
+
         return $this->fake_elements;
     }
 
     /**
-     * @param array $children
-     * @param HTMLPurifier_Config $config
+     * @param array                $children
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return array
      */
     public function validateChildren($children, $config, $context)
@@ -73,13 +76,12 @@ class HTMLPurifier_ChildDef_StrictBlockquote extends HTMLPurifier_ChildDef_Requi
             if ($block_wrap === false) {
                 if (($node instanceof HTMLPurifier_Node_Text && !$node->is_whitespace) ||
                     ($node instanceof HTMLPurifier_Node_Element && !isset($this->elements[$node->name]))) {
-                        $block_wrap = new HTMLPurifier_Node_Element($def->info_block_wrapper);
-                        $ret[] = $block_wrap;
+                    $block_wrap = new HTMLPurifier_Node_Element($def->info_block_wrapper);
+                    $ret[] = $block_wrap;
                 }
             } else {
                 if ($node instanceof HTMLPurifier_Node_Element && isset($this->elements[$node->name])) {
                     $block_wrap = false;
-
                 }
             }
             if ($block_wrap) {
@@ -88,6 +90,7 @@ class HTMLPurifier_ChildDef_StrictBlockquote extends HTMLPurifier_ChildDef_Requi
                 $ret[] = $node;
             }
         }
+
         return $ret;
     }
 
@@ -108,3 +111,4 @@ class HTMLPurifier_ChildDef_StrictBlockquote extends HTMLPurifier_ChildDef_Requi
 }
 
 // vim: et sw=4 sts=4
+

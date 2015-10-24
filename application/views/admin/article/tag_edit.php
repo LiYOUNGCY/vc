@@ -47,10 +47,10 @@ echo $navbar;
                                             <div class="col-sm-2 col-xs-8">
                                                 <select name="type" class="form-control">
                                                     <?php if ($tag['type'] == 1) {
-                                                        echo '<option value="1" selected="selected">资讯</option>';
-                                                    } else {
-                                                        echo '<option value="1">资讯</option>';
-                                                    }
+    echo '<option value="1" selected="selected">资讯</option>';
+} else {
+    echo '<option value="1">资讯</option>';
+}
 
                                                     if ($tag['type'] == 2) {
                                                         echo '<option value="2" selected="selected">专题</option>';

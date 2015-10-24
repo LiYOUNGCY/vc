@@ -43,14 +43,13 @@
  */
 class HTMLPurifier_AttrDef_CSS_BackgroundPosition extends HTMLPurifier_AttrDef
 {
-
     /**
-     * @type HTMLPurifier_AttrDef_CSS_Length
+     * @var HTMLPurifier_AttrDef_CSS_Length
      */
     protected $length;
 
     /**
-     * @type HTMLPurifier_AttrDef_CSS_Percentage
+     * @var HTMLPurifier_AttrDef_CSS_Percentage
      */
     protected $percentage;
 
@@ -61,9 +60,10 @@ class HTMLPurifier_AttrDef_CSS_BackgroundPosition extends HTMLPurifier_AttrDef
     }
 
     /**
-     * @param string $string
-     * @param HTMLPurifier_Config $config
+     * @param string               $string
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool|string
      */
     public function validate($string, $config, $context)
@@ -85,7 +85,7 @@ class HTMLPurifier_AttrDef_CSS_BackgroundPosition extends HTMLPurifier_AttrDef
             'bottom' => 'v',
             'left' => 'h',
             'right' => 'h',
-            'center' => 'c'
+            'center' => 'c',
         );
 
         foreach ($bits as $bit) {
@@ -105,21 +105,21 @@ class HTMLPurifier_AttrDef_CSS_BackgroundPosition extends HTMLPurifier_AttrDef
                     }
                 }
                 $keywords[$status] = $lbit;
-                $i++;
+                ++$i;
             }
 
             // test for length
             $r = $this->length->validate($bit, $config, $context);
             if ($r !== false) {
                 $measures[] = $r;
-                $i++;
+                ++$i;
             }
 
             // test for percentage
             $r = $this->percentage->validate($bit, $config, $context);
             if ($r !== false) {
                 $measures[] = $r;
-                $i++;
+                ++$i;
             }
         }
 
@@ -150,8 +150,10 @@ class HTMLPurifier_AttrDef_CSS_BackgroundPosition extends HTMLPurifier_AttrDef
         if (empty($ret)) {
             return false;
         }
+
         return implode(' ', $ret);
     }
 }
 
 // vim: et sw=4 sts=4
+

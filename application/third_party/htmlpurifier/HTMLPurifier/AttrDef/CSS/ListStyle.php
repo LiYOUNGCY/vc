@@ -2,14 +2,15 @@
 
 /**
  * Validates shorthand CSS property list-style.
+ *
  * @warning Does not support url tokens that have internal spaces.
  */
 class HTMLPurifier_AttrDef_CSS_ListStyle extends HTMLPurifier_AttrDef
 {
-
     /**
      * Local copy of validators.
-     * @type HTMLPurifier_AttrDef[]
+     *
+     * @var HTMLPurifier_AttrDef[]
      * @note See HTMLPurifier_AttrDef_CSS_Font::$info for a similar impl.
      */
     protected $info;
@@ -26,9 +27,10 @@ class HTMLPurifier_AttrDef_CSS_ListStyle extends HTMLPurifier_AttrDef
     }
 
     /**
-     * @param string $string
-     * @param HTMLPurifier_Config $config
+     * @param string               $string
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return bool|string
      */
     public function validate($string, $config, $context)
@@ -61,7 +63,7 @@ class HTMLPurifier_AttrDef_CSS_ListStyle extends HTMLPurifier_AttrDef
                 if ($status !== false) {
                     continue;
                 }
-                $r = $this->info['list-style-' . $key]->validate($bit, $config, $context);
+                $r = $this->info['list-style-'.$key]->validate($bit, $config, $context);
                 if ($r === false) {
                     continue;
                 }
@@ -76,7 +78,7 @@ class HTMLPurifier_AttrDef_CSS_ListStyle extends HTMLPurifier_AttrDef
                     }
                 }
                 $caught[$key] = $r;
-                $i++;
+                ++$i;
                 break;
             }
         }
@@ -105,8 +107,10 @@ class HTMLPurifier_AttrDef_CSS_ListStyle extends HTMLPurifier_AttrDef
         if (empty($ret)) {
             return false;
         }
+
         return implode(' ', $ret);
     }
 }
 
 // vim: et sw=4 sts=4
+

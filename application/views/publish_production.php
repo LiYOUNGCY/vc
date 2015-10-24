@@ -47,18 +47,22 @@ load_header(
         <div class="clearfix" style="padding-top: 1rem;">
             <label for="medium" style="float:left;">艺术门类：</label>
             <select class="dropdown" id="medium" name="medium">
-                <?php foreach ($medium as $key => $value) { ?>
+                <?php foreach ($medium as $key => $value) {
+    ?>
                     <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-                <?php } ?>
+                <?php 
+} ?>
             </select>
         </div>
 
         <div class="clearfix" style="padding-top: 1rem;">
             <label for="style" style="float: left;">风格：</label>
             <select class="dropdown" id="style" name="style">
-                <?php foreach ($style as $key => $value) { ?>
+                <?php foreach ($style as $key => $value) {
+    ?>
                     <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-                <?php } ?>
+                <?php 
+} ?>
             </select>
         </div>
 
@@ -95,12 +99,14 @@ load_header(
         <label for="" class="form-control">
             <p>选择裱：</p>
         </label>
-        <?php foreach ($frame as $key => $value) { ?>
+        <?php foreach ($frame as $key => $value) {
+    ?>
             <label class="form-control inline" style="width: auto;">
                 <?= $value['name'] ?>
                 <input type="checkbox" name="frame_list[]" value="<?= $value['id'] ?>" >
             </label>
-        <?php } ?>
+        <?php 
+} ?>
 
         <div class="option form-control">
             <button type="button" class="button cancel" id="back">返回</button>

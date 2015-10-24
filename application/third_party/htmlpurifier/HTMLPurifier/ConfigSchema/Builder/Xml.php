@@ -6,14 +6,13 @@
  */
 class HTMLPurifier_ConfigSchema_Builder_Xml extends XMLWriter
 {
-
     /**
-     * @type HTMLPurifier_ConfigSchema_Interchange
+     * @var HTMLPurifier_ConfigSchema_Interchange
      */
     protected $interchange;
 
     /**
-     * @type string
+     * @var string
      */
     private $namespace;
 
@@ -34,6 +33,7 @@ class HTMLPurifier_ConfigSchema_Builder_Xml extends XMLWriter
 
     /**
      * @param mixed $var
+     *
      * @return string
      */
     protected function export($var)
@@ -41,6 +41,7 @@ class HTMLPurifier_ConfigSchema_Builder_Xml extends XMLWriter
         if ($var === array()) {
             return 'array()';
         }
+
         return var_export($var, true);
     }
 
@@ -142,3 +143,4 @@ class HTMLPurifier_ConfigSchema_Builder_Xml extends XMLWriter
 }
 
 // vim: et sw=4 sts=4
+

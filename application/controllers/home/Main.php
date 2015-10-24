@@ -1,7 +1,8 @@
 <?php
 
 
-class Main extends MY_Controller {
+class Main extends MY_Controller
+{
     public function __construct()
     {
         parent::__construct();
@@ -9,43 +10,41 @@ class Main extends MY_Controller {
         $this->load->service('home_service');
     }
 
-
     /**
-     * [index 显示首页]
-     * @return [type]       [description]
+     * [index 显示首页].
+     *
+     * @return [type] [description]
      */
     public function index()
     {
         $data['css'] = array(
             'swiper.min.css',
             'font-awesome/css/font-awesome.min.css',
-            'base.css'
+            'base.css',
 
         );
         $data['javascript'] = array(
             'jquery.js',
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
-            'error.js'
+            'error.js',
         );
 
         $all = $this->home_service->enter_index();
-        $data['topic']      = $all['topic'];
+        $data['topic'] = $all['topic'];
         $data['production'] = $all['production'];
         //$data['artist']     = $all['artist'];
-        $data['slider']     = $all['slider'];
-
+        $data['slider'] = $all['slider'];
 
         $user['user'] = $this->user;
-        $user['sign'] = $this->load->view('common/sign', '', TRUE);
+        $user['sign'] = $this->load->view('common/sign', '', true);
 
-        $data['title']        = "最专业的艺术导购";
-        $body['top']          = $this->load->view('common/top', $user, TRUE);
-        $body['footer']       = $this->load->view('common/footer', '', TRUE);
-        $body['user']         = $this->user;
+        $data['title'] = '最专业的艺术导购';
+        $body['top'] = $this->load->view('common/top', $user, true);
+        $body['footer'] = $this->load->view('common/footer', '', true);
+        $body['user'] = $this->user;
 
         $this->load->view('common/head', $data);
         $this->load->view('home', $body);
-
     }
 }

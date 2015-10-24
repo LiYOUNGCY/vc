@@ -2,52 +2,51 @@
 
 /**
  * Error collection class that enables HTML Purifier to report HTML
- * problems back to the user
+ * problems back to the user.
  */
 class HTMLPurifier_ErrorCollector
 {
-
     /**
      * Identifiers for the returned error array. These are purposely numeric
      * so list() can be used.
      */
-    const LINENO   = 0;
+    const LINENO = 0;
     const SEVERITY = 1;
-    const MESSAGE  = 2;
+    const MESSAGE = 2;
     const CHILDREN = 3;
 
     /**
-     * @type array
+     * @var array
      */
     protected $errors;
 
     /**
-     * @type array
+     * @var array
      */
     protected $_current;
 
     /**
-     * @type array
+     * @var array
      */
     protected $_stacks = array(array());
 
     /**
-     * @type HTMLPurifier_Language
+     * @var HTMLPurifier_Language
      */
     protected $locale;
 
     /**
-     * @type HTMLPurifier_Generator
+     * @var HTMLPurifier_Generator
      */
     protected $generator;
 
     /**
-     * @type HTMLPurifier_Context
+     * @var HTMLPurifier_Context
      */
     protected $context;
 
     /**
-     * @type array
+     * @var array
      */
     protected $lines = array();
 
@@ -56,16 +55,17 @@ class HTMLPurifier_ErrorCollector
      */
     public function __construct($context)
     {
-        $this->locale    =& $context->get('Locale');
-        $this->context   = $context;
-        $this->_current  =& $this->_stacks[0];
-        $this->errors    =& $this->_stacks[0];
+        $this->locale = &$context->get('Locale');
+        $this->context = $context;
+        $this->_current = &$this->_stacks[0];
+        $this->errors = &$this->_stacks[0];
     }
 
     /**
-     * Sends an error message to the collector for later use
-     * @param int $severity Error severity, PHP error style (don't use E_USER_)
-     * @param string $msg Error message text
+     * Sends an error message to the collector for later use.
+     *
+     * @param int    $severity Error severity, PHP error style (don't use E_USER_)
+     * @param string $msg      Error message text
      */
     public function send($severity, $msg)
     {
@@ -77,9 +77,9 @@ class HTMLPurifier_ErrorCollector
         }
 
         $token = $this->context->get('CurrentToken', true);
-        $line  = $token ? $token->line : $this->context->get('CurrentLine', true);
-        $col   = $token ? $token->col  : $this->context->get('CurrentCol', true);
-        $attr  = $this->context->get('CurrentAttr', true);
+        $line = $token ? $token->line : $this->context->get('CurrentLine', true);
+        $col = $token ? $token->col  : $this->context->get('CurrentCol', true);
+        $attr = $this->context->get('CurrentAttr', true);
 
         // perform special substitutions, also add custom parameters
         $subst = array();
@@ -105,10 +105,10 @@ class HTMLPurifier_ErrorCollector
 
         // (numerically indexed)
         $error = array(
-            self::LINENO   => $line,
+            self::LINENO => $line,
             self::SEVERITY => $severity,
-            self::MESSAGE  => $msg,
-            self::CHILDREN => array()
+            self::MESSAGE => $msg,
+            self::CHILDREN => array(),
         );
         $this->_current[] = $error;
 
@@ -158,7 +158,7 @@ class HTMLPurifier_ErrorCollector
     }
 
     /**
-     * Retrieves raw error data for custom formatter to use
+     * Retrieves raw error data for custom formatter to use.
      */
     public function getRaw()
     {
@@ -166,9 +166,11 @@ class HTMLPurifier_ErrorCollector
     }
 
     /**
-     * Default HTML formatting implementation for error messages
+     * Default HTML formatting implementation for error messages.
+     *
      * @param HTMLPurifier_Config $config Configuration, vital for HTML output nature
-     * @param array $errors Errors array to display; used for recursion.
+     * @param array               $errors Errors array to display; used for recursion.
+     *
      * @return string
      */
     public function getHTMLFormatted($config, $errors = null)
@@ -196,11 +198,10 @@ class HTMLPurifier_ErrorCollector
         }
 
         if (empty($errors)) {
-            return '<p>' . $this->locale->getMessage('ErrorCollector: No errors') . '</p>';
+            return '<p>'.$this->locale->getMessage('ErrorCollector: No errors').'</p>';
         } else {
-            return '<ul><li>' . implode('</li><li>', $ret) . '</li></ul>';
+            return '<ul><li>'.implode('</li><li>', $ret).'</li></ul>';
         }
-
     }
 
     private function _renderStruct(&$ret, $struct, $line = null, $col = null)
@@ -221,7 +222,7 @@ class HTMLPurifier_ErrorCollector
                 } else {
                     $string .= '<em class="location">End of Document: </em> ';
                 }
-                $string .= '<strong class="description">' . $this->generator->escape($msg) . '</strong> ';
+                $string .= '<strong class="description">'.$this->generator->escape($msg).'</strong> ';
                 $string .= '</div>';
                 // Here, have a marker for the character on the column appropriate.
                 // Be sure to clip extremely long lines.
@@ -233,7 +234,7 @@ class HTMLPurifier_ErrorCollector
             foreach ($current->children as $array) {
                 $context[] = $current;
                 $stack = array_merge($stack, array_reverse($array, true));
-                for ($i = count($array); $i > 0; $i--) {
+                for ($i = count($array); $i > 0; --$i) {
                     $context_stack[] = $context;
                 }
             }
@@ -242,3 +243,4 @@ class HTMLPurifier_ErrorCollector
 }
 
 // vim: et sw=4 sts=4
+

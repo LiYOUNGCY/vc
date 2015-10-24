@@ -78,7 +78,8 @@
 										</thead>
 
 										<tbody>
-												<?php foreach ($slider as $k => $v) {?>
+												<?php foreach ($slider as $k => $v) {
+    ?>
 													<tr class="selected">
 														<td class="center">
 															<label>
@@ -112,7 +113,8 @@
 											                </button>								                				
 														</td>
 													</tr>																					
-												<?php }?>
+												<?php 
+}?>
 										</tbody>
 									</table>
 			                        <!-- /表格-->

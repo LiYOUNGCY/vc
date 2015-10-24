@@ -1,7 +1,9 @@
 <?php
 
-class send_email extends CI_Controller {
-    function index() {
+class send_email extends CI_Controller
+{
+    public function index()
+    {
         $this->load->library('email');
 
         $this->email->from('rachechenmu@163.com', 'Rache');
@@ -14,6 +16,6 @@ class send_email extends CI_Controller {
 
         $this->email->send();
 
-        var_dump( $this->email->print_debugger() );
+        var_dump($this->email->print_debugger());
     }
 }

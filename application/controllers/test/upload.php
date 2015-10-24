@@ -1,11 +1,13 @@
 <?php
-class upload extends CI_Controller{
-	public function __construct()
-	{
-		parent::__construct();
-	}
-	public function index()
-	{
-		$this->load->view('test/upload');
-	}
+
+class upload extends CI_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    public function index()
+    {
+        $this->load->view('test/upload');
+    }
 }

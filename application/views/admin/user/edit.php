@@ -1,5 +1,5 @@
 <?php 
-	echo $navbar;
+    echo $navbar;
 ?>
     <!-- Page Content -->
     <div id="page-wrapper">
@@ -52,13 +52,20 @@
 					                                <label class="col-sm-4 col-xs-3 control-label">用户组:</label>
 					                                <div class="col-sm-5 col-xs-8">
 					                                    <select name="role" class="form-control">
-	   														<?php foreach ($role as $k => $v){ ?>
-	   															 <?php if($user['role'] == $v['id']){?>
+	   														<?php foreach ($role as $k => $v) {
+    ?>
+	   															 <?php if ($user['role'] == $v['id']) {
+    ?>
 																	<option value="<?=$v['id']?>" selected><?=$v['name']?></option>
-	   															 <?php } else{?>
+	   															 <?php 
+} else {
+    ?>
 	   															 <option value="<?=$v['id']?>"><?=$v['name']?></option>
-	   															<?php }?>
-	   														<?php }?>
+	   															<?php 
+}
+    ?>
+	   														<?php 
+}?>
 	                                                    </select>
 					                                </div>
 					                            </div>
@@ -98,10 +105,14 @@
 					                                <div class="col-sm-8 col-xs-8">
 
 			                                            <label class="radio-inline">
-			                                                <input type="radio" name="forbidden" id="optionsRadiosInline1" value="0" <?php if($user['forbidden'] == 0){echo "checked";}?>>否
+			                                                <input type="radio" name="forbidden" id="optionsRadiosInline1" value="0" <?php if ($user['forbidden'] == 0) {
+    echo 'checked';
+}?>>否
 			                                            </label>
 			                                            <label class="radio-inline">
-			                                                <input type="radio" name="forbidden" id="optionsRadiosInline2" value="1" <?php if($user['forbidden'] == 1){echo "checked";}?>>是
+			                                                <input type="radio" name="forbidden" id="optionsRadiosInline2" value="1" <?php if ($user['forbidden'] == 1) {
+    echo 'checked';
+}?>>是
 			                                            </label>												
 					                                </div>
 					                            </div>

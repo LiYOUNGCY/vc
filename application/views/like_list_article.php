@@ -13,8 +13,8 @@
                 <div class="info">
                     <ul>
                         <li><label>昵称</label>：<?= $user['name'] ?></li>
-                        <li><label>收货地址</label>：<?php echo 1 ? "空" : $user['address']; ?></li>
-                        <li><label>联系电话</label>：<?php echo 1 ? "空" : $user['tel']; ?></li>
+                        <li><label>收货地址</label>：<?php echo 1 ? '空' : $user['address']; ?></li>
+                        <li><label>联系电话</label>：<?php echo 1 ? '空' : $user['tel']; ?></li>
                         <li><label>联系人</label>：</li>
                     </ul>
                     <a href="<?= base_url() ?>setting">

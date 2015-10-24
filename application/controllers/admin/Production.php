@@ -24,28 +24,27 @@ class Production extends MY_Controller
             foreach ($production as $k => $v) {
                 if (!empty($v['aid'])) {
                     $a = $this->artist_model->get_artist_by_id($v['aid']);
-                    $production[$k]['artist'] = empty($a) ? "" : $a['name'];
+                    $production[$k]['artist'] = empty($a) ? '' : $a['name'];
                 } else {
-                    $production[$k]['artist'] = "";
+                    $production[$k]['artist'] = '';
                 }
-
             }
             $status = array('已上架', '已售出', '已下架');
             $count = $this->production_model->get_production_count();
 
             $user['user'] = $this->user;
-            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, true);
 
             //分页数据
             $p = array(
                 'count' => $count,
                 'page' => $page,
                 'limit' => $limit,
-                'pageurl' => base_url() . ADMINROUTE . 'production/p/'
+                'pageurl' => base_url().ADMINROUTE.'production/p/',
             );
 
-            $pagination = $this->load->view('admin/common/pagination', $p, TRUE);
-            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $pagination = $this->load->view('admin/common/pagination', $p, true);
+            $foot = $this->load->view('admin/common/foot', '', true);
 
             //页面数据
             $body = array(
@@ -53,18 +52,17 @@ class Production extends MY_Controller
                 'foot' => $foot,
                 'pagination' => $pagination,
                 'production' => $production,
-                'status' => $status
+                'status' => $status,
             );
             $this->load->view('admin/common/head');
             $this->load->view('admin/production/list', $body);
         }
-
     }
 
     public function delete_production()
     {
         $aid = $this->sc->input('aids');
-        $aid = explode(",", $aid);
+        $aid = explode(',', $aid);
         foreach ($aid as $k => $v) {
             $result = $this->production_model->delete_production($v);
         }
@@ -75,8 +73,7 @@ class Production extends MY_Controller
         }
     }
 
-
-    public function medium($type = 'publish', $id = NULL)
+    public function medium($type = 'publish', $id = null)
     {
         if ($type == 'publish') {
             $medium = $this->production_medium_model->get_medium_list();
@@ -87,29 +84,29 @@ class Production extends MY_Controller
             }
 
             $user['user'] = $this->user;
-            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, true);
 
             //分页数据
             $p = array(
                 'count' => $count,
                 'page' => 0,
                 'limit' => $count,
-                'pageurl' => base_url() . ADMINROUTE . 'production/p/'
+                'pageurl' => base_url().ADMINROUTE.'production/p/',
             );
 
-            $pagination = $this->load->view('admin/common/pagination', $p, TRUE);
-            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $pagination = $this->load->view('admin/common/pagination', $p, true);
+            $foot = $this->load->view('admin/common/foot', '', true);
 
             //页面数据
             $body = array(
                 'navbar' => $navbar,
                 'foot' => $foot,
                 'pagination' => $pagination,
-                'data' => $medium
+                'data' => $medium,
             );
             $this->load->view('admin/common/head');
             $this->load->view('admin/production/medium_list', $body);
-        } else if ($type == 'update') {
+        } elseif ($type == 'update') {
             if (!is_numeric($id)) {
                 show_404();
             }
@@ -120,15 +117,15 @@ class Production extends MY_Controller
             }
 
             $user['user'] = $this->user;
-            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
-            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, true);
+            $foot = $this->load->view('admin/common/foot', '', true);
             $this->load->view('admin/common/head');
 
             //页面数据
             $body = array(
                 'navbar' => $navbar,
                 'foot' => $foot,
-                'data' => $medium
+                'data' => $medium,
             );
             $this->load->view('admin/production/medium_edit', $body);
         }
@@ -141,17 +138,16 @@ class Production extends MY_Controller
         $result = $this->production_medium_model->insert_medium($name);
 
         if ($result) {
-            echo '<script>alert("操作成功!");window.location.href="' . base_url() . ADMINROUTE . 'production/medium/publish";</script>';
+            echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'production/medium/publish";</script>';
         } else {
-            echo '<script>alert("操作失败!");window.location.href="' . base_url() . ADMINROUTE . 'production/medium/publish";</script>';
+            echo '<script>alert("操作失败!");window.location.href="'.base_url().ADMINROUTE.'production/medium/publish";</script>';
         }
     }
 
     public function delete_medium()
     {
         $id = $this->sc->input('ids');
-        $id = explode(",", $id);
-
+        $id = explode(',', $id);
 
         foreach ($id as $k => $v) {
             $result = $this->production_medium_model->delete_medium($v);
@@ -172,13 +168,13 @@ class Production extends MY_Controller
         $result = $this->production_medium_model->update_medium($id, $name);
 
         if ($result) {
-            echo '<script>alert("操作成功!");window.location.href="' . base_url() . ADMINROUTE . 'production/medium/publish";</script>';
+            echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'production/medium/publish";</script>';
         } else {
-            echo '<script>alert("操作失败!");window.location.href="' . base_url() . ADMINROUTE . 'production/medium/publish";</script>';
+            echo '<script>alert("操作失败!");window.location.href="'.base_url().ADMINROUTE.'production/medium/publish";</script>';
         }
     }
 
-    public function categories($type = 'publish', $id = NULL)
+    public function categories($type = 'publish', $id = null)
     {
         if ($type == 'publish') {
             $categories = $this->production_categories_model->get_categories_list();
@@ -189,29 +185,29 @@ class Production extends MY_Controller
             }
 
             $user['user'] = $this->user;
-            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, true);
 
             //分页数据
             $p = array(
                 'count' => $count,
                 'page' => 0,
                 'limit' => $count,
-                'pageurl' => base_url() . ADMINROUTE . 'production/p/'
+                'pageurl' => base_url().ADMINROUTE.'production/p/',
             );
 
-            $pagination = $this->load->view('admin/common/pagination', $p, TRUE);
-            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $pagination = $this->load->view('admin/common/pagination', $p, true);
+            $foot = $this->load->view('admin/common/foot', '', true);
 
             //页面数据
             $body = array(
                 'navbar' => $navbar,
                 'foot' => $foot,
                 'pagination' => $pagination,
-                'data' => $categories
+                'data' => $categories,
             );
             $this->load->view('admin/common/head');
             $this->load->view('admin/production/categories_list', $body);
-        } else if ($type == 'update') {
+        } elseif ($type == 'update') {
             if (!is_numeric($id)) {
                 show_404();
             }
@@ -222,20 +218,19 @@ class Production extends MY_Controller
             }
 
             $user['user'] = $this->user;
-            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
-            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, true);
+            $foot = $this->load->view('admin/common/foot', '', true);
             $this->load->view('admin/common/head');
 
             //页面数据
             $body = array(
                 'navbar' => $navbar,
                 'foot' => $foot,
-                'data' => $categories
+                'data' => $categories,
             );
             $this->load->view('admin/production/categories_edit', $body);
         }
     }
-
 
     public function add_categories()
     {
@@ -243,14 +238,13 @@ class Production extends MY_Controller
 
         $result = $this->production_categories_model->insert_categories($name);
 
-        redirect(base_url() . 'admin/production/categories');
+        redirect(base_url().'admin/production/categories');
     }
 
     public function delete_categories()
     {
         $id = $this->sc->input('ids');
-        $id = explode(",", $id);
-
+        $id = explode(',', $id);
 
         foreach ($id as $k => $v) {
             $result = $this->production_categories_model->delete_categories($v);
@@ -271,16 +265,15 @@ class Production extends MY_Controller
         $result = $this->production_categories_model->update_categories($id, $name);
 
         if ($result) {
-            echo '<script>alert("操作成功!");window.location.href="' . base_url() . ADMINROUTE . 'production/categories";</script>';
+            echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'production/categories";</script>';
         } else {
-            echo '<script>alert("操作失败!");window.location.href="' . base_url() . ADMINROUTE . 'production/categories";</script>';
+            echo '<script>alert("操作失败!");window.location.href="'.base_url().ADMINROUTE.'production/categories";</script>';
         }
     }
 
-
     //-------------------------------Style---------------------------
 
-    public function style($type = 'publish', $id = NULL)
+    public function style($type = 'publish', $id = null)
     {
         if ($type == 'publish') {
             $style = $this->production_style_model->get_style_list();
@@ -291,29 +284,29 @@ class Production extends MY_Controller
             }
 
             $user['user'] = $this->user;
-            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, true);
 
             //分页数据
             $p = array(
                 'count' => $count,
                 'page' => 0,
                 'limit' => $count,
-                'pageurl' => base_url() . ADMINROUTE . 'production/p/'
+                'pageurl' => base_url().ADMINROUTE.'production/p/',
             );
 
-            $pagination = $this->load->view('admin/common/pagination', $p, TRUE);
-            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $pagination = $this->load->view('admin/common/pagination', $p, true);
+            $foot = $this->load->view('admin/common/foot', '', true);
 
             //页面数据
             $body = array(
                 'navbar' => $navbar,
                 'foot' => $foot,
                 'pagination' => $pagination,
-                'data' => $style
+                'data' => $style,
             );
             $this->load->view('admin/common/head');
             $this->load->view('admin/production/style_list', $body);
-        } else if ($type == 'update') {
+        } elseif ($type == 'update') {
             if (!is_numeric($id)) {
                 show_404();
             }
@@ -324,20 +317,19 @@ class Production extends MY_Controller
             }
 
             $user['user'] = $this->user;
-            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
-            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, true);
+            $foot = $this->load->view('admin/common/foot', '', true);
             $this->load->view('admin/common/head');
 
             //页面数据
             $body = array(
                 'navbar' => $navbar,
                 'foot' => $foot,
-                'data' => $style
+                'data' => $style,
             );
             $this->load->view('admin/production/style_edit', $body);
         }
     }
-
 
     public function add_style()
     {
@@ -345,14 +337,13 @@ class Production extends MY_Controller
 
         $result = $this->production_style_model->insert_style($name);
 
-        redirect(base_url() . 'admin/production/style');
+        redirect(base_url().'admin/production/style');
     }
 
     public function delete_style()
     {
         $id = $this->sc->input('ids');
-        $id = explode(",", $id);
-
+        $id = explode(',', $id);
 
         foreach ($id as $k => $v) {
             $result = $this->production_style_model->delete_style($v);
@@ -373,16 +364,15 @@ class Production extends MY_Controller
         $result = $this->production_style_model->update_style($id, $name);
 
         if ($result) {
-            echo '<script>alert("操作成功!");window.location.href="' . base_url() . ADMINROUTE . 'production/style";</script>';
+            echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'production/style";</script>';
         } else {
-            echo '<script>alert("操作失败!");window.location.href="' . base_url() . ADMINROUTE . 'production/style";</script>';
+            echo '<script>alert("操作失败!");window.location.href="'.base_url().ADMINROUTE.'production/style";</script>';
         }
     }
 
-
     // ------------------- 价格段 -------------------------------------
 
-    public function price($type = 'publish', $id = NULL)
+    public function price($type = 'publish', $id = null)
     {
         if ($type == 'publish') {
             $price = $this->production_price_model->get_price_list();
@@ -393,29 +383,29 @@ class Production extends MY_Controller
             }
 
             $user['user'] = $this->user;
-            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, true);
 
             //分页数据
             $p = array(
                 'count' => $count,
                 'page' => 0,
                 'limit' => $count,
-                'pageurl' => base_url() . ADMINROUTE . 'production/p/'
+                'pageurl' => base_url().ADMINROUTE.'production/p/',
             );
 
-            $pagination = $this->load->view('admin/common/pagination', $p, TRUE);
-            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $pagination = $this->load->view('admin/common/pagination', $p, true);
+            $foot = $this->load->view('admin/common/foot', '', true);
 
             //页面数据
             $body = array(
                 'navbar' => $navbar,
                 'foot' => $foot,
                 'pagination' => $pagination,
-                'data' => $price
+                'data' => $price,
             );
             $this->load->view('admin/common/head');
             $this->load->view('admin/production/price_list', $body);
-        } else if ($type == 'update') {
+        } elseif ($type == 'update') {
             if (!is_numeric($id)) {
                 show_404();
             }
@@ -430,24 +420,23 @@ class Production extends MY_Controller
             }
 
             $user['user'] = $this->user;
-            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
-            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, true);
+            $foot = $this->load->view('admin/common/foot', '', true);
             $this->load->view('admin/common/head');
 
             //页面数据
             $body = array(
                 'navbar' => $navbar,
                 'foot' => $foot,
-                'data' => $price
+                'data' => $price,
             );
             $this->load->view('admin/production/price_edit', $body);
         }
     }
 
-
     public function add_price()
     {
-//        $name = $this->sc->input('cname');
+        //        $name = $this->sc->input('cname');
         $value[0] = $this->sc->input('min');
         $value[1] = $this->sc->input('max');
         $name = "{$value[0]}-{$value[1]}";
@@ -460,14 +449,13 @@ class Production extends MY_Controller
 
         $result = $this->production_price_model->insert_price($name, $value);
 
-        redirect(base_url() . 'admin/production/price');
+        redirect(base_url().'admin/production/price');
     }
 
     public function delete_price()
     {
         $id = $this->sc->input('ids');
-        $id = explode(",", $id);
-
+        $id = explode(',', $id);
 
         foreach ($id as $k => $v) {
             $result = $this->production_price_model->delete_price($v);
@@ -492,18 +480,16 @@ class Production extends MY_Controller
 
         $value = "{$value[0]},{$value[1]}";
 
-
         $result = $this->production_price_model->update_price($id, $name, $value);
 
         if ($result) {
-            echo '<script>alert("操作成功!");window.location.href="' . base_url() . ADMINROUTE . 'production/price";</script>';
+            echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'production/price";</script>';
         } else {
-            echo '<script>alert("操作失败!");window.location.href="' . base_url() . ADMINROUTE . 'production/price";</script>';
+            echo '<script>alert("操作失败!");window.location.href="'.base_url().ADMINROUTE.'production/price";</script>';
         }
     }
 
-
-    public function frame($type = 'publish', $id = NULL)
+    public function frame($type = 'publish', $id = null)
     {
         if ($type == 'publish') {
             $frame = $this->frame_model->get_frame_list();
@@ -514,29 +500,29 @@ class Production extends MY_Controller
             }
 
             $user['user'] = $this->user;
-            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, true);
 
             //分页数据
             $p = array(
                 'count' => $count,
                 'page' => 0,
                 'limit' => $count,
-                'pageurl' => base_url() . ADMINROUTE . 'production/p/'
+                'pageurl' => base_url().ADMINROUTE.'production/p/',
             );
 
-            $pagination = $this->load->view('admin/common/pagination', $p, TRUE);
-            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $pagination = $this->load->view('admin/common/pagination', $p, true);
+            $foot = $this->load->view('admin/common/foot', '', true);
 
             //页面数据
             $body = array(
                 'navbar' => $navbar,
                 'foot' => $foot,
                 'pagination' => $pagination,
-                'data' => $frame
+                'data' => $frame,
             );
             $this->load->view('admin/common/head');
             $this->load->view('admin/production/frame_list', $body);
-        } else if ($type == 'update') {
+        } elseif ($type == 'update') {
             if (!is_numeric($id)) {
                 show_404();
             }
@@ -547,20 +533,19 @@ class Production extends MY_Controller
             }
 
             $user['user'] = $this->user;
-            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
-            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, true);
+            $foot = $this->load->view('admin/common/foot', '', true);
             $this->load->view('admin/common/head');
 
             //页面数据
             $body = array(
                 'navbar' => $navbar,
                 'foot' => $foot,
-                'data' => $frame
+                'data' => $frame,
             );
             $this->load->view('admin/production/frame_edit', $body);
         }
     }
-
 
     public function add_frame()
     {
@@ -572,7 +557,7 @@ class Production extends MY_Controller
 
         $this->frame_model->insert_frame($this->user['id'], $name, $image_id, $thumb_id, $price);
 
-        redirect(base_url() . 'admin/production/frame');
+        redirect(base_url().'admin/production/frame');
     }
 
     public function update_frame()
@@ -587,18 +572,16 @@ class Production extends MY_Controller
         $result = $this->frame_model->update_frame($id, $this->user['id'], $name, $image_id, $thumb_id, $price);
 
         if ($result) {
-            echo '<script>alert("操作成功!");window.location.href="' . base_url() . ADMINROUTE . 'production/frame";</script>';
+            echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'production/frame";</script>';
         } else {
-            echo '<script>alert("操作失败!");window.location.href="' . base_url() . ADMINROUTE . 'production/frame";</script>';
+            echo '<script>alert("操作失败!");window.location.href="'.base_url().ADMINROUTE.'production/frame";</script>';
         }
     }
-
 
     public function delete_frame()
     {
         $id = $this->sc->input('ids');
-        $id = explode(",", $id);
-
+        $id = explode(',', $id);
 
         foreach ($id as $k => $v) {
             $result = $this->frame_model->delete_frame($v);

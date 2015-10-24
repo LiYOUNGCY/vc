@@ -2,6 +2,7 @@
 
 /**
  * XHTML 1.1 Text Module, defines basic text containers. Core Module.
+ *
  * @note In the normative XML Schema specification, this module
  *       is further abstracted into the following modules:
  *          - Block Phrasal (address, blockquote, pre, h1, h2, h3, h4, h5, h6)
@@ -15,15 +16,15 @@
 class HTMLPurifier_HTMLModule_Text extends HTMLPurifier_HTMLModule
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'Text';
 
     /**
-     * @type array
+     * @var array
      */
     public $content_sets = array(
-        'Flow' => 'Heading | Block | Inline'
+        'Flow' => 'Heading | Block | Inline',
     );
 
     /**
@@ -77,7 +78,7 @@ class HTMLPurifier_HTMLModule_Text extends HTMLPurifier_HTMLModule
         // Block Structural -----------------------------------------------
         $p = $this->addElement('p', 'Block', 'Inline', 'Common');
         $p->autoclose = array_flip(
-            array("address", "blockquote", "center", "dir", "div", "dl", "fieldset", "ol", "p", "ul")
+            array('address', 'blockquote', 'center', 'dir', 'div', 'dl', 'fieldset', 'ol', 'p', 'ul')
         );
 
         $this->addElement('div', 'Block', 'Flow', 'Common');
@@ -85,3 +86,4 @@ class HTMLPurifier_HTMLModule_Text extends HTMLPurifier_HTMLModule
 }
 
 // vim: et sw=4 sts=4
+

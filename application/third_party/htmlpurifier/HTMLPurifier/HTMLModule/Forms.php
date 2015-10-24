@@ -6,17 +6,17 @@
 class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
 {
     /**
-     * @type string
+     * @var string
      */
     public $name = 'Forms';
 
     /**
-     * @type bool
+     * @var bool
      */
     public $safe = false;
 
     /**
-     * @type array
+     * @var array
      */
     public $content_sets = array(
         'Block' => 'Form',
@@ -188,3 +188,4 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
 }
 
 // vim: et sw=4 sts=4
+

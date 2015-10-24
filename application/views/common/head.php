@@ -17,7 +17,7 @@
     <?php
     if (isset($javascript)) {
         foreach ($javascript as $value) {
-            echo "<script src=" . base_url() . 'public/js/' . $value . "></script>";
+            echo '<script src='.base_url().'public/js/'.$value.'></script>';
         }
     }
     ?>
@@ -30,7 +30,7 @@
     <?php
     if (isset($css)) {
         foreach ($css as $value) {
-            echo "<link rel='stylesheet' href='" . base_url() . "public/css/" . $value . "'>";
+            echo "<link rel='stylesheet' href='".base_url().'public/css/'.$value."'>";
         }
     }
     ?>

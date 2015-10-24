@@ -18,25 +18,25 @@ class Artist extends MY_Controller
             $count = $this->artist_model->get_artist_count();
 
             $user['user'] = $this->user;
-            $navbar = $this->load->view('admin/common/navbar', $user, TRUE);
+            $navbar = $this->load->view('admin/common/navbar', $user, true);
 
             //分页数据
             $p = array(
                 'count' => $count,
                 'page' => $page,
                 'limit' => $limit,
-                'pageurl' => base_url() . ADMINROUTE . 'article/artist/'
+                'pageurl' => base_url().ADMINROUTE.'article/artist/',
             );
 
-            $pagination = $this->load->view('admin/common/pagination', $p, TRUE);
-            $foot = $this->load->view('admin/common/foot', "", TRUE);
+            $pagination = $this->load->view('admin/common/pagination', $p, true);
+            $foot = $this->load->view('admin/common/foot', '', true);
 
             //页面数据
             $body = array(
                 'navbar' => $navbar,
                 'foot' => $foot,
                 'pagination' => $pagination,
-                'artist' => $artist
+                'artist' => $artist,
             );
 
             $this->load->view('admin/common/head');
@@ -44,11 +44,10 @@ class Artist extends MY_Controller
         }
     }
 
-
     public function delete_artist()
     {
         $aid = $this->sc->input('aids');
-        $aid = explode(",", $aid);
+        $aid = explode(',', $aid);
 
         foreach ($aid as $k => $v) {
             $result = $this->artist_model->delete_artist($v);

@@ -32,17 +32,17 @@
 class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
 {
     /**
-     * @type bool
+     * @var bool
      */
     public $allow_empty = false;
 
     /**
-     * @type string
+     * @var string
      */
     public $type = 'table';
 
     /**
-     * @type array
+     * @var array
      */
     public $elements = array(
         'tr' => true,
@@ -51,7 +51,7 @@ class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
         'tfoot' => true,
         'caption' => true,
         'colgroup' => true,
-        'col' => true
+        'col' => true,
     );
 
     public function __construct()
@@ -59,9 +59,10 @@ class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
     }
 
     /**
-     * @param array $children
-     * @param HTMLPurifier_Config $config
+     * @param array                $children
+     * @param HTMLPurifier_Config  $config
      * @param HTMLPurifier_Context $context
+     *
      * @return array
      */
     public function validateChildren($children, $config, $context)
@@ -88,7 +89,7 @@ class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
         $tbody_mode = false; // if true, then we need to wrap any stray
                              // <tr>s with a <tbody>.
 
-        $ws_accum =& $initial_ws;
+        $ws_accum = &$initial_ws;
 
         foreach ($children as $node) {
             if ($node instanceof HTMLPurifier_Node_Comment) {
@@ -101,13 +102,15 @@ class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
                 // fall through
             case 'tr':
                 $content[] = $node;
-                $ws_accum =& $content;
+                $ws_accum = &$content;
                 break;
             case 'caption':
                 // there can only be one caption!
-                if ($caption !== false)  break;
+                if ($caption !== false) {
+                    break;
+                }
                 $caption = $node;
-                $ws_accum =& $after_caption_ws;
+                $ws_accum = &$after_caption_ws;
                 break;
             case 'thead':
                 $tbody_mode = true;
@@ -119,7 +122,7 @@ class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
                 // turned into <tbody>? Very tricky, indeed.
                 if ($thead === false) {
                     $thead = $node;
-                    $ws_accum =& $after_thead_ws;
+                    $ws_accum = &$after_thead_ws;
                 } else {
                     // Oops, there's a second one! What
                     // should we do?  Current behavior is to
@@ -132,7 +135,7 @@ class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
                     // bottom like it does for the first one.
                     $node->name = 'tbody';
                     $content[] = $node;
-                    $ws_accum =& $content;
+                    $ws_accum = &$content;
                 }
                 break;
             case 'tfoot':
@@ -140,17 +143,17 @@ class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
                 $tbody_mode = true;
                 if ($tfoot === false) {
                     $tfoot = $node;
-                    $ws_accum =& $after_tfoot_ws;
+                    $ws_accum = &$after_tfoot_ws;
                 } else {
                     $node->name = 'tbody';
                     $content[] = $node;
-                    $ws_accum =& $content;
+                    $ws_accum = &$content;
                 }
                 break;
             case 'colgroup':
             case 'col':
                 $cols[] = $node;
-                $ws_accum =& $cols;
+                $ws_accum = &$cols;
                 break;
             case '#PCDATA':
                 // How is whitespace handled? We treat is as sticky to
@@ -189,7 +192,7 @@ class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
             // we have to shuffle tr into tbody
             $current_tr_tbody = null;
 
-            foreach($content as $node) {
+            foreach ($content as $node) {
                 switch ($node->name) {
                 case 'tbody':
                     $current_tr_tbody = null;
@@ -217,8 +220,8 @@ class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
         }
 
         return $ret;
-
     }
 }
 
 // vim: et sw=4 sts=4
+

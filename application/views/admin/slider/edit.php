@@ -1,5 +1,5 @@
 <?php 
-	echo $navbar;
+    echo $navbar;
 ?>
 <style>
 
