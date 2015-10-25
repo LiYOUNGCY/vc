@@ -106,7 +106,7 @@ $(function() {
         magnify: 2
     });
     var pid = $('#pid').val();
-    var fid = 0;
+    var fid = 1;
 
     $(".frame li").each(function(){
         var i = $(this).attr('data-id');
@@ -130,11 +130,14 @@ $(function() {
             }else{
                 $(".price_fp").html("+ "+fp);
             }
+
         })
     });
 
 
     $(".addcart").click(function(){
+        console.log(pid);
+        console.log(fid);
         $.ajax({
             type: 'POST',
             url: ADD_CART_GOODS,
@@ -146,12 +149,13 @@ $(function() {
             dataType: 'json',
             success: function (data) {
                 var status = data;
+                console.log(data);
                 if (status.success == 0) {
                     swal("已添加到购物车!", "您可以在购物车里统一付款", "success");
                     pushcartcount();
                 }
                 else if (status.error != null) {
-                    sweetAlert("添加购物车失败", status.error, "error");
+                    sweetAlert(status.message, status.error, "error");
                     return false;
                 }
             },

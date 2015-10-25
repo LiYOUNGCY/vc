@@ -93,6 +93,7 @@ $(function(){
                     var aid         = good[i].artist_id;
                     var medium      = good[i].medium;
                     var price       = good[i].price;
+                    var sum_price   = good[i].sum_price;
                     var w           = good[i].w;
                     var h           = good[i].h;
                     var style       = good[i].style;
@@ -116,7 +117,7 @@ $(function(){
                     '</div>' +
                     '</div>'+
                     '<div class="price">'+
-                    '￥<font style="font-size:32px;color:#f7cc1e" id="goodprice">'+ price +'</font>'+
+                    '￥<font style="font-size:32px;color:#f7cc1e" id="goodprice">'+ sum_price +'</font>'+
                     '</div>' +
                     '</li>';
 
