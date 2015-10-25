@@ -34,7 +34,8 @@ class Cart_model extends CI_Model
                     frame.name as frame_name,
                     frame.price as frame_price,
                     artist.id as artist_id,
-                    artist.name as artist_name
+                    artist.name as artist_name,
+                    cart.price as sum_price
                     ')
             ->from('production, image, cart, frame, artist, production_medium, production_style')
             ->where('production.image_id = image.image_id')

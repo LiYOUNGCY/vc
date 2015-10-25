@@ -46,21 +46,20 @@
                     <div class="frame">
                         <div class="title">选裱推荐：</div>
                         <ul>
-                            <?php foreach ($frame as $value) {
-    ?>
-                                <li data-id="<?=$value['id']?>">
+                            <div class="icon tick" id="tick"></div>
+                            <?php $i=0; foreach($frame as $value) { ?>
+                                <li data-id="<?=$value['id']?>" <?php if($i == 0) echo 'class="fc"';?>>
                                     <div class="frameimg">
-                                        <img src="<?=$value['image']?>" alt="金边">
+                                        <img src="<?=$value['image']?>" alt="<?=$value['name']?>">
                                     </div>
                                     <div class="frame_name">
                                         <?=$value['name']?>
                                     </div>
                                     <div class="frame_price">
-                                        ￥ <span><?=$value['price']?></span>
+                                        ￥ <span id="fp"><?=$value['price']?></span>
                                     </div>
-                                </li>
-                            <?php 
-} ?>
+                                </li> 
+                            <?php $i++;} ?>
                         </ul>
                         <?php foreach ($frame as $value) {
     if (isset($value['thumb'])) {
@@ -73,7 +72,7 @@
 } ?>
                     </div>
                 </div>
-                <div class="price"><font style="font-weight:normal;color:#888888;font-size:16px;">售价：</font><?=$production['price']?> RMB</div>
+                <div class="price"><span style="font-weight:normal;color:#888888;font-size:16px;">售价：</span><?=$production['price']?> <font class="price_fp"></font> RMB</div>
                 <div class="useropt">
                     <div class="btn addcart">加入购物车</div>
                     <div class="btn buy">立即购买</div>
@@ -107,6 +106,7 @@ $(function() {
         magnify: 2
     });
     var pid = $('#pid').val();
+    var fid = 1;
 
     $(".frame li").each(function(){
         var i = $(this).attr('data-id');
@@ -119,23 +119,43 @@ $(function() {
         })
     });
 
+    $(".frame li").each(function(i){
+        $(this).click(function(){
+            var loca = 60 + i*88 + "px";
+            $("#tick").css({left:loca});
+            fid = $(this).attr('data-id');
+            var fp = $(this).find("#fp").html();
+            if(fp == 0){
+                $(".price_fp").html("");
+            }else{
+                $(".price_fp").html("+ "+fp);
+            }
+
+        })
+    });
+
+
     $(".addcart").click(function(){
+        console.log(pid);
+        console.log(fid);
         $.ajax({
             type: 'POST',
             url: ADD_CART_GOODS,
             async: false,
             data: {
-                pid: pid
+                production_id: pid,
+                frame_id: fid
             },
             dataType: 'json',
             success: function (data) {
                 var status = data;
+                console.log(data);
                 if (status.success == 0) {
                     swal("已添加到购物车!", "您可以在购物车里统一付款", "success");
                     pushcartcount();
                 }
                 else if (status.error != null) {
-                    sweetAlert("添加购物车失败", status.error, "error");
+                    sweetAlert(status.message, status.error, "error");
                     return false;
                 }
             },
