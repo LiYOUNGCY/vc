@@ -301,7 +301,8 @@ class Article_model extends CI_Model
                 article.content,
                 article.like,
                 article.read,
-                article.publish_time
+                article.publish_time,
+                article.type
                 ')
             ->where('publish_status', 1)
             ->from('article')

@@ -27,8 +27,18 @@ class Search_service extends MY_Service
         //对专题，艺术品，艺术家，资讯的介绍，截取前50个字。
 
         foreach ($article as $key => $value) {
-            //对每篇文章内容进行字数截取
-            $article[$key]['content'] = Common::extract_article($article[$key]['id'], $article[$key]['title'], $article[$key]['content']);
+
+            //文章
+            if($value['type'] == 1) {
+                //对每篇文章内容进行字数截取
+                $article[$key]['content'] = Common::extract_article($article[$key]['id'], $article[$key]['title'], $article[$key]['content']);
+            }
+
+            //专题
+            if($value['type'] == 2) {
+                //对每篇文章内容进行字数截取
+                $article[$key]['content'] = Common::extract_topic($article[$key]['id'], $article[$key]['title'], $article[$key]['content']);
+            }
 
             //对时间的截取
             $article[$key]['publish_time'] = substr($article[$key]['publish_time'], 0, 10);

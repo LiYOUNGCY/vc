@@ -135,6 +135,28 @@ class Cart_model extends CI_Model
         return $this->db->affected_rows() === 1;
     }
 
+    public function check_goods_sell_out($user_id)
+    {
+        $query = $this->db
+            ->select('production.name, production.status')
+            ->from('production, cart')
+            ->where('production.id = cart.production_id')
+            ->where('production.status != 0')
+            ->where('cart.user_id', $user_id)
+            ->get()
+            ->result_array();
+
+        if(empty($query)) {
+            return true;
+        }
+
+        foreach($query as $key => $value) {
+            $query[$key]['status'] = $this->_extends_status($value['status']);
+        }
+
+        return $query;
+    }
+
     /**
      * [_extends_status 艺术品的状态]
      * @param  [type] $status_number [description]

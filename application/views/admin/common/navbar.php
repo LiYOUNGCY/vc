@@ -124,6 +124,14 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
+                    <a href="#">订单管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="<?= base_url().ADMINROUTE ?>transport">配送方式</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
                     <a href="<?= base_url().ADMINROUTE ?>slider">轮播管理</a>
                 </li>
                 <li style="display:none;">

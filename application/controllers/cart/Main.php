@@ -83,11 +83,23 @@ class Main extends MY_Controller
         $this->message->success();
     }
 
-    public function test()
+    /**
+     * [check_goods 检查商品是否售罄]
+     * @return [type] [description]
+     */
+    public function check_goods()
     {
-        $production_id = 67;
-        $frame_id = 5;
+        $query = $this->cart_service->check_goods_sell_out($this->user['id']);
 
-        $this->cart_service->insert_goods_to_cart($this->user['id'], $production_id, $frame_id);
+        if( $query === true) {
+            $this->message->success();
+        }
+
+        $message = '';
+        foreach($query as $value) {
+            $message = $message . $value['name'] . $value['status'];
+        }
+
+        $this->message->error($message);
     }
 }

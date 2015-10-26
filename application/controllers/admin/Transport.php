@@ -69,13 +69,17 @@ class Transport extends MY_Controller
     public function add_transport()
     {
         $name = $this->sc->input('name');
+        $price = $this->sc->input('price');
+        $range = $this->sc->input('range');
 
-        $result = $this->transport_model->insert_transport($name);
+        // echo $name, $price, $range;
+
+        $result = $this->transport_model->insert_transport($name, $price, $range);
 
         if ($result) {
-            echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'transport/transport/publish";</script>';
+            echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'transport/";</script>';
         } else {
-            echo '<script>alert("操作失败!");window.location.href="'.base_url().ADMINROUTE.'transport/transport/publish";</script>';
+            echo '<script>alert("操作失败!");window.location.href="'.base_url().ADMINROUTE.'transport/";</script>';
         }
     }
 
@@ -99,13 +103,15 @@ class Transport extends MY_Controller
     {
         $id = $this->sc->input('id');
         $name = $this->sc->input('name');
+        $price = $this->sc->input('price');
+        $range = $this->sc->input('range');
 
-        $result = $this->transport_model->update_transport($id, $name);
+        $result = $this->transport_model->update_transport($id, $name, $price, $range);
 
         if ($result) {
-            echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'transport/transport/publish";</script>';
+            echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'transport/";</script>';
         } else {
-            echo '<script>alert("操作失败!");window.location.href="'.base_url().ADMINROUTE.'transport/transport/publish";</script>';
+            echo '<script>alert("操作失败!");window.location.href="'.base_url().ADMINROUTE.'transport/";</script>';
         }
     }
 }

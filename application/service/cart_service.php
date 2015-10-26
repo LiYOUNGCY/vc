@@ -87,4 +87,9 @@ class Cart_service extends MY_Service
     {
         return $this->cart_model->get_cart_count_by_user($uid);
     }
+
+    public function check_goods_sell_out($user_id)
+    {
+        return $this->cart_model->check_goods_sell_out($user_id);
+    }
 }
