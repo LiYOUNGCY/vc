@@ -91,7 +91,6 @@ pre {
 .show {
     display: block;
 }
-
 .clearfix:before,
 .clearfix:after {
     display: table;
@@ -4093,132 +4092,6 @@ img.zoom-img {
 }
 
 
-.paytitle{
-    font-weight: bold;
-    color: #666;
-    font-size: 30px;
-    margin: 20px 0 0;
-    text-align: left;
-}
-.paybox{
-    width: 100%;
-    margin-top: 10px;
-    border:1px #F4F4F4 solid;
-    box-shadow: 2px 2px 2px #CECECE;
-    padding-top: 40px;
-}
-.paybox .infoma{
-    float: left;
-    margin-left: 20px;
-    width:56%;
-    text-align: left;
-}
-.paybox .infoma .item{
-    margin: 30px 0;
-    color:#686868;
-}
-.paybox .infoma .price{
-    font-size: 30px;
-    color: #534741;
-}
-.paybox .infoma label{
-    font-size: 18px;
-    display: inline-block;
-    width: 100px;
-}
-.paybox .infoma .item input[type="text"]{
-    width: 280px;
-    padding: 10px 5px 10px 30px;
-    height: 30px;
-    border:none;
-    font-size: 16px;
-    color: #534741;
-    background-color: #F4F4F4;
-    transition:background-color .2s ease-in-out;
-}
-.paybox .infoma .item .defaddress{
-    max-width: 310px;
-    color: #534741;
-    display: inline-block;
-    vertical-align: top;
-}
-.paybox .infoma .item textarea{
-    width: 290px;
-    padding: 5px 5px 5px 30px;
-    border:none;
-    font-size: 16px;
-    color: #534741;
-    background: #F4F4F4;
-    vertical-align: top;
-    transition:background-color .2s ease-in-out;
-}
-
-.paybox .infoma .item input[type="text"]:hover,
-.paybox .infoma .item input[type="text"]:focus,
-.paybox .infoma .item textarea:hover,
-.paybox .infoma .item textarea:focus{
-    background: #fffaac;
-}
-.paybox .infoma .saveasdef{
-    width: 320px;
-    height: 40px;
-    line-height: 40px;
-    display: inline-block;
-    background: #dcdcdc;
-    border-radius: 5px;
-    color: #534741;
-}
-.paybox .infoma .saveasdef:hover{
-    background: #FCEE21;
-}
-.paybox .paymethor label{
-    color: #686868;
-    display: block;
-}
-.paybox .paymethor{
-    float: left;
-    width: 40%;
-    text-align: left;
-}
-.paybox .paymethor .methor{
-    position: relative;
-    width: 230px;
-    margin: 15px 0;
-}
-.paybox .paymethor .methor .tick{
-    position: absolute;
-    bottom: -15px;
-    right: -15px;
-}
-.paybox .bottom{
-    float: left;
-    margin-top: 30px;
-    border-top: 1px solid #f4f4f4;
-    width: 100%;
-}
-.paybox .bottom .pay{
-    width:200px;
-    height: 40px;
-    line-height: 40px;
-    background: #534741;
-    margin: 20px auto 10px;
-    color: #FFFFFF;
-}
-.paybox .bottom .pay:hover{
-    background: #fcee21;
-    color: #534741;
-}
-.paybox .bottom .pay.disable{
-    background: #ededed;
-    color: #cccccc;
-}
-.paybox .bottom .serverule{
-    margin-bottom: 10px;
-}
-.paybox .bottom .serverule .link{
-    text-decoration: underline;
-}
-
 /*back to top*/
 .cd-top {
   display: inline-block;
@@ -4502,4 +4375,195 @@ img.zoom-img {
     .setting input[type="text"]{
         width: 260px;
     }
+}
+
+.payment {
+    margin-top: 30px;
+    color:#878787;
+    text-align: left;
+}
+.payment .pmh{
+    border-bottom: 1px solid #BBBBBB;
+    font-size: 22px;
+    padding-bottom: 5px;
+}
+.payment .addressbox{
+    background:#e6e6e6;
+    margin:15px 0 25px;
+    padding: 15px 0 15px 20px;
+    position: relative;
+}
+
+.payment .addressbox .info{
+    max-width: 800px;
+    display: inline-block;
+}
+.payment .addressbox .address{
+    margin-right: 10px;
+}
+.payment .addressbox .tel{
+    font-weight: bold;
+}
+.payment .addressbox .editaddress{
+    float: right;
+    margin-right: 20px;
+    width: 
+}
+.payment .peisong ul{
+    margin-top: 15px;
+    display: inline-block;
+}
+.payment .peisong ul li{
+    float: left;
+    display: block;
+    height: 80px;
+    width: 195px;
+    margin-right: 60px;
+    background: #e6e6e6;
+    margin-bottom: 10px;
+    cursor: pointer;
+    box-sizing:border-box;
+    text-align: center;
+    font-size: 22px;
+    line-height: 70px;
+    border: 4px solid #e6e6e6;
+}
+.payment .peisong ul li.focus{
+    border:4px solid #f7cc1e;
+    font-style: italic;
+}
+.payment .peisong ul li.nomargin{
+    margin-right: 0px;
+}
+.payment .peisong .tips{
+    margin-bottom: 25px;
+}
+.payment .peisong .tips span{
+    color: #f7cc1e;
+    font-weight: bold;
+}
+.payment .goodslist{
+    margin-bottom: 25px;
+}
+.payment .goodslist .item{
+    border:2px solid #BBBBBB;
+    padding: 10px;
+    width: 430px;
+    margin: 10px 10px 0 10px;
+    display: inline-block;
+}
+.payment .goodslist .item:hover{
+    background: #EEEEEE;
+}
+.payment .goodslist .item .pic{
+    width: 160px;
+    height: 120px;
+    float: left;
+}
+.payment .goodslist .item .info{
+    position: relative;
+    margin-left: 10px;
+    float: left;
+    text-align: left;
+    color: #666666;
+    width: 260px;
+    height: 120px;
+}
+.payment .goodslist .item .info .name{
+    color: #B3B3B3;
+}
+.payment .goodslist .item .info .detail{
+    font-size:14px;
+    position: absolute;
+    width: 100%;
+    bottom: 2px;
+}
+.payment .goodslist .item .info .detail .price{
+    font-size:24px;
+    color: #f7cc1e;
+    font-weight: bold;
+}
+.payment .paymethor{
+    margin-top: 15px;
+}
+.payment .paymethor .item{
+    width: 195px;
+    height: 70px;
+    padding: 5px;
+    position: relative;
+    margin-bottom: 25px;
+}
+.payment .paymethor .item img{
+    width: 100%;
+    height: 100%;
+}
+.payment .paymethor .item .tick{
+    position: absolute;
+    right: -7px;
+    top: -7px;
+    width: 25px;
+    height: 25px;
+}
+.payment .invoice{
+    margin-top: 25px;
+}
+.payment .invoice .opt{
+    margin-bottom: 10px;
+}
+.payment .invoice .opt label{
+    width: 100px;
+    display: inline-block;
+}
+.payment .invoice input[type="text"] {
+    padding: 5px;
+    width: 200px;
+    color: #888888;
+    border:1px #B3B3B3 solid ;
+    transition: border-color .2s ease-in-out 0s;
+}
+.payment .invoice input[type="text"]:hover,
+.payment .invoice input[type="text"]:focus {
+    border-color:#FCEE21;
+}
+.payment hr{
+    border: 1px dashed #BBBBBB;
+    margin: 40px 0;
+}
+.payment .sumup{
+    text-align: right;
+}
+.payment .sumup .part{
+    height: 35px;
+    line-height: 35px;
+}
+.payment .sumup .part .partprice{
+    width: 150px;
+    display: inline-block;
+}
+.payment .sum{
+    margin-top: 15px;
+    width: 100%;
+}
+.payment .sum .text{
+    display: inline-block;
+    height: 50px;
+    margin-right: 40px;
+    line-height: 50px;
+}
+.payment .sum .text .sum_price{
+    color: #f7cc1e;
+    font-size: 24px;
+    font-weight: bold;
+}
+.payment .sum .btn{
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+    background: #0C0F08;
+    color: #FFFFFF;
+    line-height: 50px;
+    text-align: center;
+}
+.payment .sum .btn:hover{
+    opacity: 0.7;
 }

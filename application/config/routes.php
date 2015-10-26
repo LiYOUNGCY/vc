@@ -100,7 +100,7 @@ $route['cart'] = 'cart/main';
 //购买记录
 $route['transaction'] = 'transaction/main';
 //支付
-$route['pay'] = 'transaction/pay';
+$route['payment'] = 'order/main';
 
 /*
  * 用户
