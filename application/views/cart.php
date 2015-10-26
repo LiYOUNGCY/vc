@@ -15,6 +15,7 @@
                     <div class="name">几何</div>
                     <div class="artist">&nbsp;&nbsp;作者：<a href="" class="link">Bamford</a></div>
                     <div class="detail">
+                        <div class="status-1">作品已售出，请移除商品再进行结算</div>
                         <div>油画，布面，100 X 30cm，2015年</div>
                         <div>装裱选择：金边（￥100）</div>
                         <div>售价：￥1000</div>
@@ -85,6 +86,13 @@ $(function(){
                 var sum   = 0;
                 var count = good.length;
                 for(var i = 0; i < good.length; i++){
+                    var status      = good[i].status;
+                    var status_elm  = '';
+                    if(status == 1){
+                        status_elm = '<div class="status-1">作品已售出，请移除商品再进行结算</div>';
+                    }else if(status == 2){
+                        status_elm = '<div class="status-1">作品已下架，请移除商品再进行结算</div>';                        
+                    }
                     var id          = good[i].production_id;
                     var pid         = good[i].production_id;
                     var image       = good[i].pic;
@@ -101,6 +109,7 @@ $(function(){
                     var frame_name  = good[i].frame_name;
                     var frame_price  = good[i].frame_price;
 
+
                     var elm = '' +
                     '<li class="art clearfix" id="'+ id +'">' +
                     '<div class="delete"><i class="fa fa-close"></i></div>' +
@@ -111,6 +120,7 @@ $(function(){
                     '<div class="name"><a href="<?=base_url()?>production/'+ id +'" class="link">'+ name +'</a></div>' +
                     '<div class="artist">&nbsp;&nbsp;作者：<a href="<?=base_url()?>artist/'+ aid +'" class="link">'+ artist +'</a></div>' +
                     '<div class="detail">' +
+                    status_elm +
                     '<div>'+ medium +'，'+ style +'，'+ w +' X '+ h +'cm，'+ time +'</div>' +
                     '<div>装裱选择：'+ frame_name +'（￥'+ frame_price +'）</div>' +
                     '<div>售价：￥'+ price +'</div>' +
@@ -122,7 +132,7 @@ $(function(){
                     '</li>';
 
 
-                    sum = sum + parseInt(price);
+                    sum = sum + parseInt(sum_price);
 
                     $("#artlist").append(elm);
                 }

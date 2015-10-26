@@ -3340,9 +3340,6 @@ img.zoom-img {
 
     content: " ）";
 }
-.cart .artlist .art .info .artist{
-    margin-left: 2px;
-}
 .cart .artlist .art .info .detail{
     position: absolute;
     bottom: 0;
@@ -3352,6 +3349,19 @@ img.zoom-img {
 }
 .cart .artlist .art .info .detail div{
     line-height: 22px;
+}
+.cart .artlist .art .info .detail .status-0{
+    color: #D24D1D;
+    font-size: 16px;
+    font-weight: bold;
+}
+.cart .artlist .art .info .detail .status-1{
+    color: #D24D1D;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 2px solid #D24D1D;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
 }
 .cart .artlist .art .price{
     float: right;
