@@ -35,12 +35,12 @@ class Main extends MY_Controller
 
         //商户订单号
         // $out_trade_no = $_POST['WIDout_trade_no'];
-        $out_trade_no = '159753';
+        $out_trade_no = time();
         //商户网站订单系统中唯一订单号，必填
 
         //订单名称
         // $subject = $_POST['WIDsubject'];
-        $subject = 'TEST2';
+        $subject = 'TEST';
         //必填
 
         //付款金额
