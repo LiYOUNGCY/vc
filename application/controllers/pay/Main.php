@@ -26,11 +26,11 @@ class Main extends MY_Controller
         $payment_type = '1';
         //必填，不能修改
         //服务器异步通知页面路径
-        $notify_url = 'http://www.artvc.com/pay/success';
+        $notify_url = 'http://www.artvc.cc/pay/success';
         //需http://格式的完整路径，不能加?id=123这类自定义参数
 
         //页面跳转同步通知页面路径
-        $return_url = 'http://www.artvc.com/pay/success';
+        $return_url = 'http://www.artvc.cc/pay/success';
         //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
         //商户订单号
@@ -54,7 +54,7 @@ class Main extends MY_Controller
         $body = 'TEST';
         //商品展示地址
         // $show_url = $_POST['WIDshow_url'];
-        $show_url = 'www.artvc.com';
+        $show_url = 'www.artvc.cc';
         //需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
 
         //防钓鱼时间戳
