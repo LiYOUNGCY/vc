@@ -10,7 +10,7 @@
     <meta name="format-detection" content="telephone=yes">
     <meta name="msapplication-tap-highlight" content="no">
 
-    <title>Artvc - <?= $title ?></title>
+    <title><?= $title ?> - Artvc 艺术维C</title>
 
     <!-- 导入 Javascript -->
     <script src="<?= base_url() ?>public/js/validate.js"></script>
