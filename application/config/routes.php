@@ -99,8 +99,15 @@ $route['update/artist/(:num)'] = 'artist/publish/index/update/$1';
 $route['cart'] = 'cart/main';
 //购买记录
 $route['transaction'] = 'transaction/main';
-//支付
+
+//订单
 $route['payment'] = 'order/main';
+
+//支付
+$route['pay'] = 'pay/main/index';
+
+//支付成功
+$route['pay/success'] = 'pay/main/success';
 
 /*
  * 用户

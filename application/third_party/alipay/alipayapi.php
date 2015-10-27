@@ -71,6 +71,7 @@ require_once 'lib/alipay_submit.class.php';
 $parameter = array(
         'service' => 'create_direct_pay_by_user',
         'partner' => trim($alipay_config['partner']),
+        'seller_id' => trim($alipay_config['partner']),
         'seller_email' => trim($alipay_config['seller_email']),
         'payment_type' => $payment_type,
         'notify_url' => $notify_url,
