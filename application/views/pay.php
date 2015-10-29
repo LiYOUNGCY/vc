@@ -39,8 +39,9 @@
     <div class="container">
         <div class="payment">
             <div class="pmh">确认收货信息</div>
-            <?php if(! empty($address)) {?>
             <div class="addressbox">
+            <?php if(! empty($address)) {?>
+            
                 <div class="info">
                     <span class="address">
                         寄送到： <?=$address['address']?> （<?=$address['contact']?> 收）
@@ -141,7 +142,7 @@
                 </div>
                 <div class="part">
                     <label for="">手续费：</label>
-                    <span class="partprice">100</span> RMB
+                    <span class="partprice f_poundage_price">100</span> RMB
                 </div>
                 <div class="sum">
                     <div class="text">应付总额：<span class="sum_price">10300</span> RMB</div>
@@ -174,6 +175,7 @@
                     $(".peisong .tips").html(tip);
                     var peisong_price = $(".peisong .tips").find("#price").html();
                     $(".f_peisong_price").html(peisong_price);
+                    calsumprice();
                 }
             })
         });
@@ -194,10 +196,12 @@
         
 
         function calsumprice(){
-
+            var goods_price = parseInt($(".f_sumgoods_price").html());
+            var peisong_price = parseInt($(".f_peisong_price").html());
+            var poundage_price = parseInt($(".f_poundage_price").html());
+            var sum_price = goods_price + peisong_price + poundage_price;
+            $(".sum_price").html(sum_price);
         }
-
-        });
 
         //提交订单
         $('#submit').click(function(){
@@ -214,7 +218,7 @@
                     console.log(data);
                 },
                 error: function (data) {
-//                    sweetAlert('Network connect fail');
+    //                    sweetAlert('Network connect fail');
                     console.log(data);
                 }
             });
