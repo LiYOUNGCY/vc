@@ -28,12 +28,11 @@ class Main extends MY_Controller
             'swiper.min.css',
             'font-awesome/css/font-awesome.min.css',
             'base.css',
-
+            'radiocheck.min.css',
         );
         $data['javascript'] = array(
             'jquery.js',
-            'masonry.pkgd.min.js',
-            'jquery.imageloader.js',
+            'geo.js',
             'error.js',
         );
 

@@ -4404,7 +4404,7 @@ img.zoom-img {
 .payment .addressbox .tel{
     font-weight: bold;
 }
-.payment .addressbox .editaddress{
+.payment .addressbox .toeditaddress{
     float: right;
     margin-right: 20px;
     width: 
@@ -4427,6 +4427,9 @@ img.zoom-img {
     font-size: 22px;
     line-height: 70px;
     border: 4px solid #e6e6e6;
+}
+.payment .peisong ul li:hover{
+    border:4px solid  #F9E8A6;
 }
 .payment .peisong ul li.focus{
     border:4px solid #f7cc1e;
@@ -4492,6 +4495,11 @@ img.zoom-img {
     padding: 5px;
     position: relative;
     margin-bottom: 25px;
+}
+.payment .paymethor .item .poundage{
+    font-size: 14px;
+    text-align: center;
+    margin-top: 5px;
 }
 .payment .paymethor .item img{
     width: 100%;
@@ -4566,4 +4574,62 @@ img.zoom-img {
 }
 .payment .sum .btn:hover{
     opacity: 0.7;
+}
+.editaddress{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    background: rgba(0,0,0,0.4);
+    top:0;
+    left: 0;
+}
+.editaddress .box{
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    width: 280px;
+    background: #FFFFFF;
+    padding: 10px;
+
+    transform:translate(-50%,-50%);
+    -webkit-transform:translate(-50%,-50%);
+    -moz-transform:translate(-50%,-50%);
+}
+.editaddress .box .editinfo{
+    text-align: left;
+    display: inline-block;
+    font-size: 18px;
+}
+.editaddress .box input[type="text"]{
+    padding: 5px;
+    width: 260px;
+    color: #888888;
+    border:1px #B3B3B3 solid ;
+    transition: border-color .2s ease-in-out 0s;
+}
+.editaddress .box input[type="text"]:hover,
+.editaddress .box input[type="text"]:focus {
+    border-color:#FCEE21;
+}
+.editaddress .box label{
+    display: block;
+    margin:10px 0 7px;
+    color: #534741;
+}
+.editaddress .opt{
+    margin-top: 15px;
+    text-align: center;
+}
+.editaddress .opt .btn{
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    background: #0C0F08;
+    display: inline-block;
+    margin: 0 10px;
+    color: #FFFFFF;
+}
+.editaddress .opt .btn.cancel{
+    background: #B3B3B3;
 }
