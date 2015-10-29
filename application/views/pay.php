@@ -39,20 +39,27 @@
     <div class="container">
         <div class="payment">
             <div class="pmh">确认收货信息</div>
+            <?php if(! empty($address)) {?>
             <div class="addressbox">
                 <div class="info">
                     <span class="address">
-                        寄送到： 广东省 广州市 天河区 怡景花园4座5号 （灼神 收）
+                        寄送到： <?=$address['address']?> （<?=$address['contact']?> 收）
                     </span>
                     <span class="tel">
-                        1860000000
+                        <?=$address['phone']?>
                     </span>    
                 </div>
                 
                 <div class="toeditaddress">
                     <a href="javascript:void(0);" class="link changeadress">修改地址</a>
                 </div>
+
                 <!-- 暂无收货地址，请 <a class="link changeadress" href="javascript:void(0);">添加收货地址</a> -->
+
+                <?php } else { ?>
+                暂无收货地址，请 <a class="link" href="">添加收货地址</a>
+                <?php } ?>
+
             </div>
             <div class="pmh">确认配送方式</div>
             <div class="peisong">
@@ -86,32 +93,22 @@
             </div>
             <div class="pmh">清单</div>
             <div class="goodslist">
+
+                <?php foreach($goods as $key => $value) { ?>
                 <div class="item">
                     <a href="javascript:void(0)">
-                        <div class="pic" style="background: url(<?=base_url()?>public/img/topic/thumb2_1.jpg);background-size:cover;background-position:50% 50%;"></div>
+                        <div class="pic" style="background: url(<?= $value['pic']?>);background-size:cover;background-position:50% 50%;"></div>
                     </a>
                     <div class="info">
-                        <div class="name">（ <a href="" class="link">小狗</a> ）</div>
+                        <div class="name">（ <a href="" class="link"><?=$value['name']?></a> ）</div>
                         <div class="detail">
-                            <div>装裱选择：金边（￥100）</div>
-                            <div>售价：￥2000</div>
-                            <div>总价：<span class="price">2100</span></div>
+                            <div>装裱选择：<?=$value['frame_name']?>（￥<?=$value['frame_price']?>）</div>
+                            <div>售价：￥<?=$value['price']?></div>
+                            <div>总价：<span class="price"><?=$value['sum_price']?></span></div>
                         </div>
                     </div>
                 </div>
-                <div class="item">
-                    <a href="javascript:void(0)">
-                        <div class="pic" style="background: url(<?=base_url()?>public/img/topic/thumb2_1.jpg);background-size:cover;background-position:50% 50%;"></div>
-                    </a>
-                    <div class="info">
-                        <div class="name">（ <a href="" class="link">小狗</a> ）</div>
-                        <div class="detail">
-                            <div>装裱选择：金边（￥100）</div>
-                            <div>售价：￥2000</div>
-                            <div>总价：<span class="price">2100</span></div>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
             <div class="pmh">支付方式</div>
             <div class="paymethor">
@@ -148,11 +145,17 @@
                 </div>
                 <div class="sum">
                     <div class="text">应付总额：<span class="sum_price">10300</span> RMB</div>
-                    <div class="btn submitorder">提交订单</div>
+                    <div class="btn submitorder" id="submit">提交订单</div>
                 </div>
             </div>
         </div>
     </div>
+    <form action="<?=base_url()?>pay/main/pay_for_cart" method="post" target="_blank">
+        <input type="hidden" name="contact_id" value="1">
+        <input type="hidden" name="transport_id" value="1">
+        <input type="hidden" name="issue_header" value="">
+        <input type="hidden" name="uj" value="" id="uj">
+    </form>
     <?php echo $footer; ?>
 </div>
 <script type="text/javascript" src="<?= base_url() ?>public/js/swiper.min.js"></script>
@@ -173,7 +176,7 @@
                     $(".f_peisong_price").html(peisong_price);
                 }
             })
-        })
+        });
         $('input:radio[name="invoice"]').change(function(){
             var val = $(this).val();
             if(val == 1){
@@ -193,7 +196,33 @@
         function calsumprice(){
 
         }
-    
+
+        });
+
+        //提交订单
+        $('#submit').click(function(){
+            console.log('submit');
+            $.ajax({
+                url: BASE_URL + 'pay/main/validate_pay',
+                type: 'post',
+                data: {
+                    transport_id: 1
+                },
+                dataType: 'json',
+                async:false,
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+//                    sweetAlert('Network connect fail');
+                    console.log(data);
+                }
+            });
+
+            $('#uj').val('qsc');
+            $('form').submit();
+        });
+
     })
 
 </script>

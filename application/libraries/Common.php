@@ -107,7 +107,7 @@ class Common
             return self::get_thumb_url_by_suffix($match[1][0]);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -131,14 +131,14 @@ class Common
             }
 //    		$filename = str_replace('.', '_thumb.', $path[$count-1]);
             $file = explode('.', $path[$count - 1]);
-            $filename = 'thumb1_'.$file[0].'.'.$file[1];
+            $filename = 'thumb1_' . $file[0] . '.' . $file[1];
 //            $filename = 'f011597f8615be412c8fad36e7c0f694_thumb.jpg';
             $path[$count - 1] = $filename;
             $path = implode('/', $path);
 
             return $path;
         } else {
-            $default_img = base_url().'public/img/defaultBG.jpg';
+            $default_img = base_url() . 'public/img/defaultBG.jpg';
 
             return $default_img;
         }
@@ -148,7 +148,7 @@ class Common
     {
         $arr = explode('/', $pic);
         if (!empty($arr)) {
-            $arr[count($arr) - 1] = $pre.$arr[count($arr) - 1];
+            $arr[count($arr) - 1] = $pre . $arr[count($arr) - 1];
             $pic = implode('/', $arr);
 
             return $pic;
@@ -167,7 +167,7 @@ class Common
             return implode('/', $image);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -208,7 +208,7 @@ class Common
 
     public static function replace_face_url($str)
     {
-        $face_url = base_url().'public/img/face/';
+        $face_url = base_url() . 'public/img/face/';
         $str = str_replace('>', '<；', $str);
         $str = str_replace('>', '>；', $str);
         $str = str_replace("\n", '<br/>', $str);
@@ -224,5 +224,30 @@ class Common
         }
 
         return false;
+    }
+
+    /**
+     * 计算支付宝的手续费
+     * @param $total
+     * @return int 返回整数，手续费的向上取整
+     */
+    public static function alipay_poundage($total)
+    {
+        $total = floatval($total);
+        $poundage = 0;
+
+        if ($total >= 0 && $total <= 60000) {
+            $poundage = $total * 0.012;
+        } else if ($total > 60000 && $total <= 500000) {
+            $poundage = 60000 * 0.012 + ($total - 60000) * 0.01;
+        } else if ($total > 500000 && $total <= 1000000) {
+            $poundage = 60000 * 0.012 + (500000 - 60000) * 0.01 + ($total - 500000) * 0.009;
+        } else if ($total > 1000000 && $total <= 2000000) {
+            $poundage = 60000 * 0.012 + (500000 - 60000) * 0.01 + (1000000 - 500000) * 0.009 + ($total - 1000000) * 0.008;
+        } else if ($total > 2000000) {
+            $poundage = 60000 * 0.012 + (500000 - 60000) * 0.01 + (1000000 - 500000) * 0.009 + (2000000 - 1000000) * 0.008 + ($total - 2000000) * 0.007;
+        }
+
+        return ceil($poundage);
     }
 }

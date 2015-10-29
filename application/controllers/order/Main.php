@@ -9,6 +9,7 @@ class Main extends MY_Controller
     {
         parent::__construct();
         $this->load->service('user_service');
+        $this->load->service('cart_service');
     }
 
     /**
@@ -23,6 +24,7 @@ class Main extends MY_Controller
         //配送方式
 
         //作品列表
+        $goods = $this->cart_service->get_good_list($this->user['id']);
 
         $data['css'] = array(
             'swiper.min.css',
@@ -39,9 +41,12 @@ class Main extends MY_Controller
         $user['user'] = $this->user;
         $user['sign'] = $this->load->view('common/sign', '', true);
         $data['title'] = '支付';
+
         $body['top'] = $this->load->view('common/top', $user, true);
         $body['footer'] = $this->load->view('common/footer', '', true);
         $body['user'] = $this->user;
+        $body['goods'] = $goods;
+        $body['address'] = $address;
 
         $this->load->view('common/head', $data);
         $this->load->view('pay', $body);
