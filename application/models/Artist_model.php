@@ -126,12 +126,13 @@ class Artist_model extends CI_Model
             ->select('
 					artist.id,
 					artist.name,
-					artist.pic,
+					image.image_path as pic,
 					artist.intro,
 					artist.creat_time
 					')
+            ->from('artist, image')
+            ->where('image.image_id = artist.image_id')
             ->where('publish_status', '1')
-            ->from('artist')
             ->like('artist.name', $keyword)
             ->get()
             ->result_array();

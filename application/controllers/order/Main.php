@@ -23,7 +23,7 @@ class Main extends MY_Controller
         //配送方式
 
         //作品列表
-        
+
         $data['css'] = array(
             'swiper.min.css',
             'font-awesome/css/font-awesome.min.css',

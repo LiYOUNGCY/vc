@@ -250,15 +250,16 @@ class Production_model extends CI_Model
         $query = $this->db->select('
                                     production.id,
                                     production.name,
-                                    production.pic,
+                                    image.image_path as pic,
                                     production.like,
                                     production.intro,
                                     production.price,
                                     production.publish_time
 		')
-            ->from('production')
-            ->like('production.name', $keyword)
+            ->from('production, image')
+            ->where('production.image_id = image.image_id')
             ->where('production.status', 0)
+            ->like('production.name', $keyword)
             ->get()
             ->result_array();
 

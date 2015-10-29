@@ -39,8 +39,7 @@
                                     </thead>
 
                                     <tbody>
-                                    <?php foreach ($data as $k => $v) {
-    ?>
+                                    <?php foreach ($data as $k => $v) {?>
                                         <tr class="selected">
                                             <td class="center">
                                                 <label>
@@ -68,8 +67,7 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                    <?php
-} ?>
+                                    <?php } ?>
                                     </tbody>
                                 </table>
                                 <!-- /表格-->
@@ -106,15 +104,40 @@
                             </div>
                             <div class="tab-pane fade" id="add">
                                 <table class="table table-striped">
-                                    <form id="add_form" method="post" action="<?= base_url() ?>admin/production/add_medium">
+                                    <form id="add_form" method="post" action="<?= base_url() ?>admin/transport/add_transport">
                                         <tbody>
                                         <tr>
                                             <td>
                                                 <div class="form-group">
                                                     <span class="col-sm-4 col-xs-3 control-label">配送方式名称:</span>
-
                                                     <div class="col-sm-5 col-xs-8">
                                                         <input class="form-control" name="name" type="text"/>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <span class="col-sm-4 col-xs-3 control-label">价格:</span>
+
+                                                    <div class="col-sm-5 col-xs-8">
+                                                        <input class="form-control" name="price" type="text"/>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <span class="col-sm-4 col-xs-3 control-label">配送范围:</span>
+
+                                                    <div class="col-sm-5 col-xs-8">
+                                                        <select class="form-control" name="range">
+                                                            <option value="0">全国</option>
+                                                            <option value="1">广州市内</option>
+                                                            <option value="2">广州市外</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </td>
@@ -149,7 +172,7 @@
 <script type="text/javascript">
     var BASE_URL = $("#BASE_URL").val();
     var ADMIN = $("#ADMIN").val();
-    var DELETE_URL = ADMIN + 'production/delete_medium';
+    var DELETE_URL = ADMIN + 'transport/delete_transport';
     $(function () {
         $('.tooltip-btn').tooltip({
             selector: "[data-toggle=tooltip]",
@@ -234,7 +257,7 @@
         $("button[effect=edit]").click(function () {
             var id = $(this).attr('u');
             if (id != null && id != "") {
-                window.location.href = BASE_URL + 'admin/production/medium/update/' + id;
+                window.location.href = BASE_URL + 'admin/transport/index/update/' + id;
             }
         });
     });
