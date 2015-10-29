@@ -1,14 +1,47 @@
 <body>
 
 <div class="main-wrapper">
+    <!-- 修改地址 -->
+    <div class="editaddress" style="display:none;">
+        <div class="box">
+            <label for="address">收货地址</label>
+            <div style="margin:10px 0;">
+                <select class="select" name="province" id="s1">
+                    <option></option>
+                </select>
+                <select class="select" name="city"< id="s2">
+                    <option></option>
+                </select>
+                <select class="select" name="town" id="s3">
+                    <option></option>
+                </select>
+                <input id="address" name="address" type="hidden" value=""/>
+            </div>
+            <input type="text" value="" name="address" placeholder="详细地址" id="address">
+            <div class="error_div" id="address_error"></div>
+            <label for="contact">收件人</label>
+            <input type="text" value="" name="contact" id="contact" placeholder="例如：张三">
+            <div class="error_div" id="contact_error"></div>
+            <label for="phone">联系电话</label>
+            <input type="text" value="" name="phone" id="phone">
+            <div class="error_div" id="phone_error"></div>
+            <div class="opt">
+                <div class="btn cancel">取消</div>
+                <div class="btn save">保存</div>    
+            </div>
+            
+        </div>
+    </div>
     <!-- 顶部 -->
     <?php echo $top; ?>
     <!-- 主体 -->
+
     <div class="container">
         <div class="payment">
             <div class="pmh">确认收货信息</div>
-            <?php if(! empty($address)) {?>
             <div class="addressbox">
+            <?php if(! empty($address)) {?>
+            
                 <div class="info">
                     <span class="address">
                         寄送到： <?=$address['address']?> （<?=$address['contact']?> 收）
@@ -18,42 +51,46 @@
                     </span>    
                 </div>
                 
-                <div class="editaddress">
-                    <a href="" class="link">修改地址</a>
+                <div class="toeditaddress">
+                    <a href="javascript:void(0);" class="link changeadress">修改地址</a>
                 </div>
+
+                <!-- 暂无收货地址，请 <a class="link changeadress" href="javascript:void(0);">添加收货地址</a> -->
+
                 <?php } else { ?>
                 暂无收货地址，请 <a class="link" href="">添加收货地址</a>
                 <?php } ?>
+
             </div>
             <div class="pmh">确认配送方式</div>
             <div class="peisong">
                 <ul>
-                    <li class="focus">
+                    <li>
                         自提
                         <div class="intro" style="display:none">
-                            <span>0 RMB</span> （自提地址：广州市天河区某某某某地方）
+                            <span id="price">0</span> RMB （自提地址：广州市天河区某某某某地方）
                         </div>
                     </li>
                     <li>
                         送货上门
                         <div class="intro" style="display:none">
-                            <span>0 RMB</span> （广州地区免费送货上门）
+                            <span id="price">0</span> RMB （广州地区免费送货上门）
                         </div>
                     </li>
                     <li>
                         中铁物流
                         <div class="intro" style="display:none">
-                            <span>100 RMB</span> （专业中铁艺术物流）
+                            <span id="price">100</span> RMB （专业中铁艺术物流）
                         </div>
                     </li>
                     <li class="nomargin">
                         顺丰快递
                         <div class="intro" style="display:none">
-                            <span>50 RMB</span> （顺丰速递）
+                            <span id="price">50</span> RMB （顺丰速递）
                         </div>
                     </li>
                 </ul>
-                <div class="tips"><span>0 RMB</span> （自提地址：广州市天河区某某某某地方）</div>
+                <div class="tips"></div>
             </div>
             <div class="pmh">清单</div>
             <div class="goodslist">
@@ -79,6 +116,7 @@
                 <div class="item">
                     <div class="icon tick"></div>
                     <img src="<?=base_url()?>public/img/pay_Ali.jpg" alt="支付宝">
+                    <div class="poundage">手续费：1.2%</div>
                 </div>
             </div>
             <div class="pmh">发票信息</div>
@@ -96,15 +134,15 @@
             <div class="sumup">
                 <div class="part">
                     <label for="">商品总额：</label>
-                    <span class="partprice">10200 RMB</span>
+                    <span class="partprice f_sumgoods_price">10200</span> RMB
                 </div>
                 <div class="part">
                     <label for="">运费：</label>
-                    <span class="partprice">0 RMB</span>
+                    <span class="partprice f_peisong_price">0</span> RMB
                 </div>
                 <div class="part">
                     <label for="">手续费：</label>
-                    <span class="partprice">100 RMB</span>
+                    <span class="partprice f_poundage_price">100</span> RMB
                 </div>
                 <div class="sum">
                     <div class="text">应付总额：<span class="sum_price">10300</span> RMB</div>
@@ -135,7 +173,10 @@
                     $(this).addClass('focus');
                     var tip = $(this).find(".intro").html();
                     $(".peisong .tips").html(tip);
-                }            
+                    var peisong_price = $(".peisong .tips").find("#price").html();
+                    $(".f_peisong_price").html(peisong_price);
+                    calsumprice();
+                }
             })
         });
         $('input:radio[name="invoice"]').change(function(){
@@ -145,7 +186,22 @@
             }else{
                 $(".invoice_title").css({"display":"none"});
             }
-        });
+        })
+        $(".changeadress").click(function(){
+            $(".editaddress").css({"display":"block"});
+        })
+        $(".editaddress .cancel").click(function(){
+            $(".editaddress").css({"display":"none"});  
+        })
+        
+
+        function calsumprice(){
+            var goods_price = parseInt($(".f_sumgoods_price").html());
+            var peisong_price = parseInt($(".f_peisong_price").html());
+            var poundage_price = parseInt($(".f_poundage_price").html());
+            var sum_price = goods_price + peisong_price + poundage_price;
+            $(".sum_price").html(sum_price);
+        }
 
         //提交订单
         $('#submit').click(function(){
@@ -162,7 +218,7 @@
                     console.log(data);
                 },
                 error: function (data) {
-//                    sweetAlert('Network connect fail');
+    //                    sweetAlert('Network connect fail');
                     console.log(data);
                 }
             });
@@ -170,6 +226,7 @@
             $('#uj').val('qsc');
             $('form').submit();
         });
+
     })
 
 </script>
