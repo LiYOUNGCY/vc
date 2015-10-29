@@ -135,6 +135,13 @@ class Cart_model extends CI_Model
         return $this->db->affected_rows() === 1;
     }
 
+    /**
+     * 检查购物车中的艺术品是否售罄
+     * @param $user_id
+     * @return bool
+     * 不为空的数组: 售罄
+     * false: 在售
+     */
     public function check_goods_sell_out($user_id)
     {
         $query = $this->db
@@ -147,7 +154,7 @@ class Cart_model extends CI_Model
             ->result_array();
 
         if(empty($query)) {
-            return true;
+            return false;
         }
 
         foreach($query as $key => $value) {

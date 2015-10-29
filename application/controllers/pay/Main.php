@@ -8,12 +8,43 @@ class Main extends MY_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->service('order_service');
+        $this->load->service('user_service');
+    }
+
+
+    public function pay_for_cart()
+    {
+        $user_id = $this->user['id'];
+        $contact_id = $this->sc->input('contact_id');
+        $transport_id = $this->sc->input('transport_id');
+        $issue_header = $this->sc->input('issue_header');
+        $use_js = $this->sc->input('uj');
+        if($use_js != 'qsc') {
+            show_404();
+        }
+
+        $order = $this->order_service->buy_in_cart($user_id, $contact_id, $transport_id, $issue_header);
+
+        $this->_alipay($order['order_no'], $order['order_name'], $order['total']);
+    }
+
+    /**
+     * 支付前的验证
+     */
+    public function validate_pay()
+    {
+        $user_id = $this->user['id'];
+        $transport_id = $this->sc->input('transport_id');
+
+        $this->order_service->validate_pay($user_id, $transport_id);
+        $this->message->success();
     }
 
     /**
      * 使用支付宝支付
      */
-    public function index()
+    private function _alipay($order_no, $order_name, $total)
     {
         require_once(APPPATH . 'third_party/alipay/alipay.config.php');
         require_once(APPPATH . 'third_party/alipay/lib/alipay_submit.class.php');
@@ -32,15 +63,15 @@ class Main extends MY_Controller
 
         //商户订单号
 //        $out_trade_no = $_POST['WIDout_trade_no'];
-        $out_trade_no = time();
+        $out_trade_no = $order_no;
         //商户网站订单系统中唯一订单号，必填
 
         //订单名称
-        $subject = 'TEST';
+        $subject = $order_name;
         //必填
 
         //付款金额
-        $total_fee = 0.1;
+        $total_fee = $total;
         //必填
 
 
@@ -56,6 +87,7 @@ class Main extends MY_Controller
             "out_trade_no" => $out_trade_no,
             "subject" => $subject,
             "total_fee" => $total_fee,
+            'it_b_pay' => '1d', //一天后关闭支付
             "_input_charset" => trim(strtolower($alipay_config['input_charset']))
         );
 
@@ -66,7 +98,7 @@ class Main extends MY_Controller
     }
 
     /**
-     * 支付成功的回调
+     * 支付的回调
      */
     public function success()
     {
@@ -113,5 +145,13 @@ class Main extends MY_Controller
             //如要调试，请看alipay_notify.php页面的verifyReturn函数
             echo "验证失败";
         }
+    }
+
+    public function test()
+    {
+        $str = "广东省广州市从化区广州大学华软软件学院";
+        $address = mb_substr($str, 0, 6);
+        echo strcmp($address, "广东省广州");
+//        var_dump($str);
     }
 }

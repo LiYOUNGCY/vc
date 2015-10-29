@@ -51,3 +51,5 @@ public/headpic/*
 public/production/*
 public/image/*
 application/vendor/*
+
+application/third_party/alipay/alipay.config.php
