@@ -8,11 +8,14 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->load->model('user_model');
+        $this->load->model('transport_model');
     }
 
     public function index()
     {
-        $str = Common::get_thumb_url_by_suffix('http://oss-cn-shenzhen.aliyuncs.com/hanzh/public/image/ed2836751578cc83c2e0d7742f81b7e1.jpg');
+        $query = $this->transport_model->get_transport_list_by_range(NOT_IN_GUANGZHUO);
+
+        echo json_encode($query);
     }
 
     public function check_email()
@@ -52,4 +55,5 @@ class User extends CI_Controller
         $data['title'] = 'Login';
         $this->load->view('test/user/login_view', $data);
     }
+
 }

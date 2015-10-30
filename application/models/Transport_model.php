@@ -63,13 +63,30 @@ class Transport_model extends CI_Model
         return $this->db->affected_rows();
     }
 
+    /**
+     * 根据配送范围返回配送方式，全国一定有
+     * @param $range
+     * @return mixed
+     */
+    public function get_transport_list_by_range($range)
+    {
+        $query = $this->db->select('*')
+            ->from('transport')
+            ->or_where('transport.range', 0)
+            ->or_where('transport.range', $range)
+            ->get()
+            ->result_array();
+
+        return $query;
+    }
+
 
     private function _extends_range($range_number)
     {
         $data = array(
             0 => '全国',
-            1 => '广州市内',
-            2 => '广州市外'
+            IN_GUANGZHUO => '广州市内',
+            NOT_IN_GUANGZHUO => '广州市外'
         );
 
         return $data[$range_number];

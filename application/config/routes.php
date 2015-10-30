@@ -101,7 +101,7 @@ $route['cart'] = 'cart/main';
 $route['transaction'] = 'transaction/main';
 
 //订单
-$route['payment'] = 'order/main';
+$route['order'] = 'order/main';
 
 //支付
 $route['pay'] = 'pay/main/index';

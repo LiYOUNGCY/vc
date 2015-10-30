@@ -30,7 +30,7 @@ class Order_service extends MY_Service
 
         if ($count <= 0) {
             //购物车为空
-            $this->message->error('购物车没有商品'."{$count}");
+            $this->message->error('购物车没有商品' . "{$count}");
         }
 
         //检查艺术品售罄
@@ -55,27 +55,55 @@ class Order_service extends MY_Service
         }
 
         //检查配送方式是否符合地址
-        if (! $this->_check_address($address['address'], $transport)) {
+        if (!$this->_check_address($address['address'], $transport)) {
             //错误！！！送往该地址不用这种配送方式
             $this->message->error('系统错误');
         }
     }
 
+    /**
+     * 根据地址返回配送方式
+     * @param $address
+     */
+    public function get_transport_by_address($address)
+    {
+        if ($this->_check_address_in_GuangZhuo($address)) {
+            return $this->transport_model->get_transport_list_by_range(IN_GUANGZHUO);
+        }
 
+        return $this->transport_model->get_transport_list_by_range(NOT_IN_GUANGZHUO);
+    }
+
+    /**
+     * 检查地址是否合法
+     * @param $address
+     * @param $transport
+     * @return bool
+     */
     private function _check_address($address, $transport)
     {
         //广州市内
         if ($transport['range'] == 1) {
-            if(strcmp(mb_substr($address, 0, 6), '广东省广州市') != 0) {
+            //该配送方式是送往广州,但是地址不在广州，所以不合法
+            if (!$this->_check_address_in_GuangZhuo($address)) {
                 return false;
             }
         } //广州市外
         else if ($transport['range'] == 2) {
-            if(strcmp(mb_substr($address, 0, 6), '广东省广州市') == 0) {
+            if ($this->_check_address_in_GuangZhuo($address)) {
                 return false;
             }
         }
         return true;
+    }
+
+    /**
+     * 检查该地址是否广州
+     * @param $address
+     */
+    private function _check_address_in_GuangZhuo($address)
+    {
+        return strcmp(mb_substr($address, 0, 6), '广东省广州市') === 0;
     }
 
     private function _check_empty_var($array)

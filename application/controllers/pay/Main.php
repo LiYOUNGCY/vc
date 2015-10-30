@@ -16,9 +16,9 @@ class Main extends MY_Controller
     public function pay_for_cart()
     {
         $user_id = $this->user['id'];
-        $contact_id = $this->sc->input('contact_id');
-        $transport_id = $this->sc->input('transport_id');
-        $issue_header = $this->sc->input('issue_header');
+        $contact_id = $this->user_service->get_address($user_id)['id'];
+        $transport_id = $this->sc->input('tid');
+        $issue_header = $this->sc->input('ish');
         $use_js = $this->sc->input('uj');
         if($use_js != 'qsc') {
             show_404();

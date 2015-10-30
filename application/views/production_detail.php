@@ -58,7 +58,7 @@
                                     <div class="frame_price">
                                         ￥ <span id="fp"><?=$value['price']?></span>
                                     </div>
-                                </li> 
+                                </li>
                             <?php $i++;} ?>
                         </ul>
                         <?php foreach ($frame as $value) {
@@ -67,7 +67,7 @@
                         <div class="frame_detail" id="fd<?=$value['id']?>">
                             <img src="<?=$value['thumb']?>" alt="">
                         </div>
-                        <?php 
+                        <?php
     }
 } ?>
                     </div>
@@ -75,7 +75,7 @@
                 <div class="price"><span style="font-weight:normal;color:#888888;font-size:16px;">售价：</span><?=$production['price']?> <font class="price_fp"></font> RMB</div>
                 <div class="useropt">
                     <div class="btn addcart">加入购物车</div>
-                    <div class="btn buy">立即购买</div>
+                    <div class="btn buy" id="buy">立即购买</div>
                 </div>
                 <div class="csopt">
                     <div class="phonecs">
@@ -95,7 +95,11 @@
 
         </div>
     </div>
-    <input type="hidden" id="pid" value="<?=$production['id']?>">
+
+    <form action="<?=base_url()?>order?t=pis" method="post" id="buy_form">
+        <input type="hidden" id="pid" name="pid" value="<?=$production['id']?>">
+        <input type="hidden" id="fid" name="fid" value="">
+    </form>
     <?php echo $footer;?>
 </div>
 </body>
@@ -164,6 +168,12 @@ $(function() {
             }
         });
     });
+
+    $('#buy').click(function(){
+        $('#fid').val(fid);
+        $('#buy_form').submit();
+    });
+
     //点赞
     var pid = $('#pid').val();
     $("#vote").click(function () {

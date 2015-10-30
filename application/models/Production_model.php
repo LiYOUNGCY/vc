@@ -335,4 +335,40 @@ class Production_model extends CI_Model
 
         return $this->db->count_all_results() === 1;
     }
+
+    public function get_production_with_frame($production_id, $frame_id)
+    {
+        $frame_table = $this->db->dbprefix('frame');
+        $production_table = $this->db->dbprefix('production');
+        $query = $this->db
+            ->select("
+                    production.id as production_id,
+                    production.name,
+                    image.image_path as pic,
+                    production_style.name as style,
+                    production_medium.name as medium,
+                    production.price,
+                    production.w,
+                    production.h,
+                    production.status,
+                    production.creat_time,
+                    frame.name as frame_name,
+                    frame.price as frame_price,
+                    artist.id as artist_id,
+                    artist.name as artist_name,
+                    ({$frame_table}.price + {$production_table}.price) as sum_price
+                    ")
+            ->from('production, image, frame, artist, production_medium, production_style, production_frame')
+            ->where('production.image_id = image.image_id')
+            ->where('artist.id = production.aid')
+            ->where('production.style = production_style.id')
+            ->where('production.medium = production_medium.id')
+            ->where('production.id', $production_id)
+            ->where('production_frame.production_id = production.id')
+            ->where('production_frame.frame_id = frame.id')
+            ->where('frame.id', $frame_id)
+            ->get()->result_array();
+
+        return $query;
+    }
 }
