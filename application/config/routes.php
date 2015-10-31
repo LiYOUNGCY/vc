@@ -107,7 +107,7 @@ $route['order'] = 'order/main';
 $route['pay'] = 'pay/main/index';
 
 //支付成功
-$route['pay/success'] = 'pay/main/success';
+$route['pay/result'] = 'pay/main/result';
 
 /*
  * 用户

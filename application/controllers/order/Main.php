@@ -54,7 +54,12 @@ class Main extends MY_Controller
             //作品列表
             $goods = $this->cart_service->get_good_list($this->user['id']);
             $body['goods'] = $goods;
+            if(empty($goods)) {
+                show_404();
+                exit();
+            }
             $body['post_url'] = base_url() .'pay/main/pay_for_cart';
+            $body['ca'] = 'c';
 
             $this->load->view('common/head', $data);
             $this->load->view('pay', $body);
@@ -66,8 +71,15 @@ class Main extends MY_Controller
 
             //作品列表
             $goods = $this->production_service->get_production_with_frame($production_id, $frame_id);
+
+            if(empty($goods)) {
+                show_404();
+                exit();
+            }
+
             $body['goods'] = $goods;
-            $body['post_url'] = base_url() .'pay/main/pay_for_cart';
+            $body['post_url'] = base_url() .'pay/main/pay_for_production';
+            $body['ca'] = 'p';
 
             $this->load->view('common/head', $data);
             $this->load->view('pay', $body);

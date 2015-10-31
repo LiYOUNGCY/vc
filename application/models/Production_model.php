@@ -352,6 +352,7 @@ class Production_model extends CI_Model
                     production.h,
                     production.status,
                     production.creat_time,
+                    frame.id as frame_id,
                     frame.name as frame_name,
                     frame.price as frame_price,
                     artist.id as artist_id,

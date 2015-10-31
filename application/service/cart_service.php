@@ -92,4 +92,14 @@ class Cart_service extends MY_Service
     {
         return $this->cart_model->check_goods_sell_out($user_id);
     }
+
+    /**
+     * 清空购物车
+     * @param $user_id
+     * @return mixed
+     */
+    public function empty_cart($user_id)
+    {
+        return $this->cart_model->empty_cart($user_id);
+    }
 }

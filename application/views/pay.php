@@ -140,9 +140,15 @@
         </div>
     </div>
     <form action="<?=$post_url?>" method="post" target="_blank">
-        <input type="hidden" name="tid" value="1" id="tid">
+        <input type="hidden" name="tid" value="" id="tid">
         <input type="hidden" name="ish" value="" id="ish">
         <input type="hidden" name="uj" value="" id="uj">
+        <input type="hidden" name="ca" value="" id="ca">
+        <?php if($ca == 'p') {?>
+        <input type="hidden" name="pid" value="<?=$goods[0]['production_id']?>" id="pid">
+        <input type="hidden" name="fid" value="<?=$goods[0]['frame_id']?>" id="fid">
+        <?php } ?>
+
     </form>
     <?php echo $footer; ?>
 </div>
@@ -214,25 +220,28 @@
         $('#submit').click(function(){
             console.log('submit');
             var submit_status = true;
-            $.ajax({
-                url: BASE_URL + 'pay/main/validate_pay',
-                type: 'post',
-                data: {
-                    transport_id: 1
-                },
-                dataType: 'json',
-                async:false,
-                success: function (data) {
-                    console.log(data);
-                    if(data.error == 0) {
-                        submit_status = false;
+            var ca = $('#ca').val();
+            if( ca == 'c') {
+                $.ajax({
+                    url: BASE_URL + 'pay/main/validate_pay',
+                    type: 'post',
+                    data: {
+                        transport_id: 1
+                    },
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+                        console.log(data);
+                        if (data.error == 0) {
+                            submit_status = false;
+                        }
+                    },
+                    error: function (data) {
+                        //                    sweetAlert('Network connect fail');
+                        console.log(data);
                     }
-                },
-                error: function (data) {
-    //                    sweetAlert('Network connect fail');
-                    console.log(data);
-                }
-            });
+                });
+            }
 
             if(submit_status == true) {
                 $('#uj').val('qsc');
