@@ -90,4 +90,10 @@ class Main extends MY_Controller
             show_404();
         }
     }
+
+    public function test()
+    {
+        $this->load->model('order_model');
+        $this->order_model->create_order(2, 1, 1, '');
+    }
 }

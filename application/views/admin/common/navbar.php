@@ -127,6 +127,9 @@
                     <a href="#">订单管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
+                            <a href="<?= base_url().ADMINROUTE ?>order/index">查看所有订单</a>
+                        </li>
+                        <li>
                             <a href="<?= base_url().ADMINROUTE ?>transport">配送方式</a>
                         </li>
                     </ul>

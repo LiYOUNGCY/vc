@@ -5,7 +5,7 @@
 
 html,
 body {
-    height: 100%;
+    min-height: 100%;
     overflow: hidden;
 }
 
@@ -247,7 +247,6 @@ a:visited {
     padding-left: 10px;
 }
 
-
 .conversation-list .form-inline {
     position: absolute;
     left: 0;
@@ -266,3 +265,4 @@ a:visited {
     width: calc(100% - 80px);
     margin-right: 10px;
 }
+

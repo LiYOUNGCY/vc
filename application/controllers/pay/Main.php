@@ -84,7 +84,7 @@ class Main extends MY_Controller
         //需http://格式的完整路径，不能加?id=123这类自定义参数
 
         //页面跳转同步通知页面路径
-        $return_url = "http://www.artvc.cc/artvc/pay/result";
+        $return_url = "http://www.artvc.cc/pay/result";
         //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
         //商户订单号
