@@ -2,9 +2,9 @@
 
 <div class="main-wrapper">
     <!-- 修改地址 -->
-    <div class="editaddress" style="display:none;">
+    <div class="modal editaddress" style="display:none;">
         <div class="box">
-            <label for="address">收货地址</label>
+            <label for="address">* 收货地址</label>
             <div style="margin:10px 0;">
                 <select class="select" name="province" id="s1">
                     <option></option>
@@ -19,10 +19,10 @@
             </div>
             <input type="text" value="" name="address" placeholder="详细地址" id="address">
             <div class="error_div" id="address_error"></div>
-            <label for="contact">收件人</label>
+            <label for="contact">* 收件人</label>
             <input type="text" value="" name="contact" id="contact" placeholder="例如：张三">
             <div class="error_div" id="contact_error"></div>
-            <label for="phone">联系电话</label>
+            <label for="phone">* 联系电话</label>
             <input type="text" value="" name="phone" id="phone">
             <div class="error_div" id="phone_error"></div>
             <div class="opt">

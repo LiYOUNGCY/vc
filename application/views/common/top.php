@@ -40,7 +40,7 @@
     ?>
                 <div class="useropt">
                     <a href="<?=base_url()?>cart" class="link" title="购物车"><span class="cart"><i class="fa fa-shopping-cart" style="font-size: 16px;"></i> （ <font color="#f7cc1e" id="cartcount"></font> ）</span></a>
-                    <span class="user">Hi，<a href="<?=base_url()?>like" class="link"><?=$user['name']?></a><div class="dot" id="notification_dot"></div></span>
+                    <span class="user">Hi，<a href="<?=base_url()?>setting" class="link"><?=$user['name']?></a><div class="dot" id="notification_dot"></div></span>
                     <a href="javascript:void(0);" id="logout" class="link"><span class="logout">退出</span></a>
                 </div>
                 <?php 
