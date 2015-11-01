@@ -237,7 +237,8 @@
                 success: function (data) {
                     if (data.success == 0) {
                         //成功的操作
-                        swal("Good job!", "You clicked the button!", "success")
+                        // swal("评论成功", "", "success")
+                        window.location.reload();
                     }
                     else if (data.error != null) {
                          swal({

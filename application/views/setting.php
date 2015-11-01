@@ -92,7 +92,7 @@
                     </div>
                     <div class="editinfo">
                         <div class="item">
-                            <label for="name">昵称：</label><span class="name">1212121</span>
+                            <label for="name">昵称：</label><span class="name"><?=$user['name']?></span>
                             <a href="javascript:void(0)" id="changenick" class="link fs-14">[ 修改昵称 ]</a>
                         </div>
                         <label>收货信息：</label>
@@ -274,6 +274,8 @@
                         console.log(data);
                         if(data.success == 0) {
                             swal("修改成功", "", "success");
+                            base_nick_name = name;
+                            cancel_changenick();
                         }
                         else if(data.error == 0) {
                             swal("修改失败", "", "warning");

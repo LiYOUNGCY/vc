@@ -110,7 +110,7 @@ class Setting extends MY_Controller
         $result = $this->image_service->upload_headpic('upfile', $user_id);
 
         //save by database
-        $this->user_service->change_headpic($user_id, $result['filepath']);
+        $this->user_service->change_headpic($user_id, base_url().$result['filepath']);
 
         header('Content-Type:application/json');
         echo json_encode($result);
