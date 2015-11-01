@@ -247,4 +247,9 @@ class Production_service extends MY_Service
     {
         return $this->frame_model->get_frame_by_production_id($id);
     }
+
+    public function get_production_with_frame($production_id, $frame_id)
+    {
+        return $this->production_model->get_production_with_frame($production_id, $frame_id);
+    }
 }

@@ -86,3 +86,6 @@ define('EXIT_DATABASE', 8); // database error
 define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
+
+define('IN_GUANGZHUO', 1);
+define('NOT_IN_GUANGZHUO', 2);

@@ -34,7 +34,7 @@
                 <div class="total">￥<font style="font-size:32px;" id="totalprice"></font></div>
             </div>
             <div class="topay">
-              <div class="btn">去结算</div>
+              <a href="<?=base_url()?>order?t=cty"><div class="btn">去结算</div></a>
             </div>
         </div>
     </div>
@@ -91,7 +91,7 @@ $(function(){
                     if(status == 1){
                         status_elm = '<div class="status-1">作品已售出，请移除商品再进行结算</div>';
                     }else if(status == 2){
-                        status_elm = '<div class="status-1">作品已下架，请移除商品再进行结算</div>';                        
+                        status_elm = '<div class="status-1">作品已下架，请移除商品再进行结算</div>';
                     }
                     var id          = good[i].production_id;
                     var pid         = good[i].production_id;

@@ -1,4 +1,3 @@
-
 var BASE_URL = document.getElementById('BASE_URL').value;
 var GET_ARTICLE_URL = BASE_URL + "article/main/get_article_list";
 var GET_TOPIC_URL = BASE_URL + "article/main/get_topic_list";
@@ -79,8 +78,7 @@ var CHANGE_PWD = BASE_URL + 'account/setting/change_password';
 /**
  * [trim 去掉字符串前后两端的空格]
  */
-function trim(str)
-{
+function trim(str) {
     return str.replace(/(^\s*)|(\s*$)/g, "");
 }
 
@@ -116,6 +114,26 @@ function getTime() {
     });
 
     return time;
+}
+
+
+function alipay_poundage(total) {
+    total = parseFloat(total);
+    poundage = 0;
+
+    if (total >= 0 && total <= 60000) {
+        poundage = total * 0.012;
+    } else if (total > 60000 && total <= 500000) {
+        poundage = 60000 * 0.012 + (total - 60000) * 0.01;
+    } else if (total > 500000 && total <= 1000000) {
+        poundage = 60000 * 0.012 + (500000 - 60000) * 0.01 + (total - 500000) * 0.009;
+    } else if (total > 1000000 && total <= 2000000) {
+        poundage = 60000 * 0.012 + (500000 - 60000) * 0.01 + (1000000 - 500000) * 0.009 + (total - 1000000) * 0.008;
+    } else if (total > 2000000) {
+        poundage = 60000 * 0.012 + (500000 - 60000) * 0.01 + (1000000 - 500000) * 0.009 + (2000000 - 1000000) * 0.008 + (total - 2000000) * 0.007;
+    }
+
+    return Math.ceil(poundage);
 }
 
 

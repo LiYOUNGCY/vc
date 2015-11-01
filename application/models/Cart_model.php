@@ -164,6 +164,11 @@ class Cart_model extends CI_Model
         return $query;
     }
 
+    public function empty_cart($user_id)
+    {
+        $this->db->where('user_id', $user_id)->delete('cart');
+    }
+
     /**
      * [_extends_status 艺术品的状态]
      * @param  [type] $status_number [description]

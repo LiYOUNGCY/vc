@@ -10,21 +10,47 @@ class Main extends MY_Controller
         parent::__construct();
         $this->load->service('order_service');
         $this->load->service('user_service');
+        $this->load->service('cart_service');
     }
 
 
     public function pay_for_cart()
     {
         $user_id = $this->user['id'];
-        $contact_id = $this->sc->input('contact_id');
-        $transport_id = $this->sc->input('transport_id');
-        $issue_header = $this->sc->input('issue_header');
+        $contact_id = $this->user_service->get_address($user_id)['id'];
+        $transport_id = $this->sc->input('tid');
+        $issue_header = $this->sc->input('ish');
         $use_js = $this->sc->input('uj');
         if($use_js != 'qsc') {
             show_404();
         }
 
         $order = $this->order_service->buy_in_cart($user_id, $contact_id, $transport_id, $issue_header);
+
+        $this->_alipay($order['order_no'], $order['order_name'], $order['total']);
+    }
+
+    public function pay_for_production()
+    {
+        $user_id = $this->user['id'];
+        $contact_id = $this->user_service->get_address($user_id)['id'];
+        $transport_id = $this->sc->input('tid');
+        $issue_header = $this->sc->input('ish');
+        $production_id = $this->sc->input('pid');
+        $frame_id = $this->sc->input('fid');
+
+        $use_js = $this->sc->input('uj');
+        if($use_js != 'qsc') {
+            show_404();
+        }
+
+        $order = $this->order_service->buy_production($user_id, $contact_id, $transport_id, $issue_header, $production_id, $frame_id);
+
+        if($order == false) {
+            echo '发生未知错误';
+            exit();
+        }
+
 
         $this->_alipay($order['order_no'], $order['order_name'], $order['total']);
     }
@@ -58,7 +84,7 @@ class Main extends MY_Controller
         //需http://格式的完整路径，不能加?id=123这类自定义参数
 
         //页面跳转同步通知页面路径
-        $return_url = "http://localhost/artvc/pay/success";
+        $return_url = "http://www.artvc.cc/pay/result";
         //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
         //商户订单号
@@ -100,7 +126,7 @@ class Main extends MY_Controller
     /**
      * 支付的回调
      */
-    public function success()
+    public function result()
     {
         require_once(APPPATH . 'third_party/alipay/alipay.config.php');
         require_once(APPPATH . 'third_party/alipay/lib/alipay_notify.class.php');
@@ -130,6 +156,12 @@ class Main extends MY_Controller
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
+
+                //交易成公，商品下架, 更新订单状态
+                $this->order_service->complete_transaction($out_trade_no);
+
+                //清空购物车
+                $this->cart_service->empty_cart($this->user['id']);
                 echo '恭喜你，支付成功';
             } else {
                 echo "trade_status=" . $_GET['trade_status'];
@@ -149,9 +181,6 @@ class Main extends MY_Controller
 
     public function test()
     {
-        $str = "广东省广州市从化区广州大学华软软件学院";
-        $address = mb_substr($str, 0, 6);
-        echo strcmp($address, "广东省广州");
-//        var_dump($str);
+        $this->order_service->buy_production(2, 1, 1, '', 51, 5);
     }
 }

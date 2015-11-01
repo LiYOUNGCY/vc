@@ -1,15 +1,15 @@
-<body>
+<body onload="setup();preselect('北京市');promptinfo();">
 
 <div class="main-wrapper">
     <!-- 修改地址 -->
     <div class="modal editaddress" style="display:none;">
         <div class="box">
-            <label for="address">* 收货地址</label>
-            <div style="margin:10px 0;">
+            <label for="address">收货地址</label>
+            <div style="margin: 10px 0;">
                 <select class="select" name="province" id="s1">
                     <option></option>
                 </select>
-                <select class="select" name="city"< id="s2">
+                <select class="select" name="city" id="s2">
                     <option></option>
                 </select>
                 <select class="select" name="town" id="s3">
@@ -17,7 +17,7 @@
                 </select>
                 <input id="address" name="address" type="hidden" value=""/>
             </div>
-            <input type="text" value="" name="address" placeholder="详细地址" id="address">
+            <input type="text" value="" name="ad" placeholder="详细地址" id="ad">
             <div class="error_div" id="address_error"></div>
             <label for="contact">* 收件人</label>
             <input type="text" value="" name="contact" id="contact" placeholder="例如：张三">
@@ -27,9 +27,9 @@
             <div class="error_div" id="phone_error"></div>
             <div class="opt">
                 <div class="btn cancel">取消</div>
-                <div class="btn save">保存</div>    
+                <div class="btn save" id="address_save">保存</div>
             </div>
-            
+
         </div>
     </div>
     <!-- 顶部 -->
@@ -41,16 +41,16 @@
             <div class="pmh">确认收货信息</div>
             <div class="addressbox">
             <?php if(! empty($address)) {?>
-            
+
                 <div class="info">
                     <span class="address">
                         寄送到： <?=$address['address']?> （<?=$address['contact']?> 收）
                     </span>
                     <span class="tel">
                         <?=$address['phone']?>
-                    </span>    
+                    </span>
                 </div>
-                
+
                 <div class="toeditaddress">
                     <a href="javascript:void(0);" class="link changeadress">修改地址</a>
                 </div>
@@ -65,37 +65,25 @@
             <div class="pmh">确认配送方式</div>
             <div class="peisong">
                 <ul>
-                    <li>
-                        自提
+                    <?php
+                    $first = true;
+                    foreach($transport as $key => $value) {?>
+                    <li data-id="<?=$value['id']?>" <?php if($first){echo 'class="focus"'; $first = !$first;}?>>
+                        <?=$value['name']?>
                         <div class="intro" style="display:none">
-                            <span id="price">0</span> RMB （自提地址：广州市天河区某某某某地方）
+                            <span id="price"><?=$value['price']?></span> RMB （自提地址：广州市天河区某某某某地方）
                         </div>
                     </li>
-                    <li>
-                        送货上门
-                        <div class="intro" style="display:none">
-                            <span id="price">0</span> RMB （广州地区免费送货上门）
-                        </div>
-                    </li>
-                    <li>
-                        中铁物流
-                        <div class="intro" style="display:none">
-                            <span id="price">100</span> RMB （专业中铁艺术物流）
-                        </div>
-                    </li>
-                    <li class="nomargin">
-                        顺丰快递
-                        <div class="intro" style="display:none">
-                            <span id="price">50</span> RMB （顺丰速递）
-                        </div>
-                    </li>
+                    <?php } ?>
                 </ul>
                 <div class="tips"></div>
             </div>
             <div class="pmh">清单</div>
             <div class="goodslist">
 
-                <?php foreach($goods as $key => $value) { ?>
+                <?php
+                $total = 0;
+                foreach($goods as $key => $value) { $total += $value['sum_price']; ?>
                 <div class="item">
                     <a href="javascript:void(0)">
                         <div class="pic" style="background: url(<?= $value['pic']?>);background-size:cover;background-position:50% 50%;"></div>
@@ -122,7 +110,7 @@
             <div class="pmh">发票信息</div>
             <div class="invoice">
                 <div class="opt">
-                    <label><input name="invoice" id="invoice" type="radio" value="0" checked="" /> 不开发票 </label> 
+                    <label><input name="invoice" id="invoice" type="radio" value="0" checked="" /> 不开发票 </label>
                     <label><input name="invoice" id="invoice" type="radio" value="1" /> 开发票 </label>
                 </div>
                 <div class="invoice_title" style="display:none">
@@ -134,7 +122,7 @@
             <div class="sumup">
                 <div class="part">
                     <label for="">商品总额：</label>
-                    <span class="partprice f_sumgoods_price">10200</span> RMB
+                    <span class="partprice f_sumgoods_price"><?=$total?></span> RMB
                 </div>
                 <div class="part">
                     <label for="">运费：</label>
@@ -142,28 +130,43 @@
                 </div>
                 <div class="part">
                     <label for="">手续费：</label>
-                    <span class="partprice f_poundage_price">100</span> RMB
+                    <span class="partprice f_poundage_price">0</span> RMB
                 </div>
                 <div class="sum">
-                    <div class="text">应付总额：<span class="sum_price">10300</span> RMB</div>
+                    <div class="text">应付总额：<span class="sum_price">0</span> RMB</div>
                     <div class="btn submitorder" id="submit">提交订单</div>
                 </div>
             </div>
         </div>
     </div>
-    <form action="<?=base_url()?>pay/main/pay_for_cart" method="post" target="_blank">
-        <input type="hidden" name="contact_id" value="1">
-        <input type="hidden" name="transport_id" value="1">
-        <input type="hidden" name="issue_header" value="">
+    <form action="<?=$post_url?>" method="post" target="_blank">
+        <input type="hidden" name="tid" value="" id="tid">
+        <input type="hidden" name="ish" value="" id="ish">
         <input type="hidden" name="uj" value="" id="uj">
+        <input type="hidden" name="ca" value="" id="ca">
+        <?php if($ca == 'p') {?>
+        <input type="hidden" name="pid" value="<?=$goods[0]['production_id']?>" id="pid">
+        <input type="hidden" name="fid" value="<?=$goods[0]['frame_id']?>" id="fid">
+        <?php } ?>
+
     </form>
     <?php echo $footer; ?>
 </div>
 <script type="text/javascript" src="<?= base_url() ?>public/js/swiper.min.js"></script>
 </body>
 <script>
+    function promptinfo() {
+        var address = document.getElementById('address');
+        var s1 = document.getElementById('s1');
+        var s2 = document.getElementById('s2');
+        var s3 = document.getElementById('s3');
+        address.value = s1.value + s2.value + s3.value;
+        return address.value + $('#ad').val();
+    }
 
     $(function () {
+        calc_poundage();
+        calsumprice();
         $(".peisong li").each(function(){
             $(this).click(function(){
                 if($(this).hasClass('focus')){
@@ -175,6 +178,7 @@
                     $(".peisong .tips").html(tip);
                     var peisong_price = $(".peisong .tips").find("#price").html();
                     $(".f_peisong_price").html(peisong_price);
+                    calc_poundage();
                     calsumprice();
                 }
             })
@@ -191,9 +195,18 @@
             $(".editaddress").css({"display":"block"});
         })
         $(".editaddress .cancel").click(function(){
-            $(".editaddress").css({"display":"none"});  
-        })
-        
+            $(".editaddress").css({"display":"none"});
+        });
+
+        function calc_poundage()
+        {
+            var goods_price = parseInt($(".f_sumgoods_price").html());
+            var peisong_price = parseInt($(".f_peisong_price").html());
+            var poundage = alipay_poundage(goods_price + peisong_price);
+            console.log(poundage);
+            $(".f_poundage_price").html(poundage);
+        }
+
 
         function calsumprice(){
             var goods_price = parseInt($(".f_sumgoods_price").html());
@@ -206,29 +219,88 @@
         //提交订单
         $('#submit').click(function(){
             console.log('submit');
-            $.ajax({
-                url: BASE_URL + 'pay/main/validate_pay',
-                type: 'post',
-                data: {
-                    transport_id: 1
-                },
-                dataType: 'json',
-                async:false,
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (data) {
-    //                    sweetAlert('Network connect fail');
-                    console.log(data);
+            var submit_status = true;
+            var ca = $('#ca').val();
+            if( ca == 'c') {
+                $.ajax({
+                    url: BASE_URL + 'pay/main/validate_pay',
+                    type: 'post',
+                    data: {
+                        transport_id: 1
+                    },
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+                        console.log(data);
+                        if (data.error == 0) {
+                            submit_status = false;
+                        }
+                    },
+                    error: function (data) {
+                        //                    sweetAlert('Network connect fail');
+                        console.log(data);
+                    }
+                });
+            }
+
+            if(submit_status == true) {
+                $('#uj').val('qsc');
+                $transport_id = $(".peisong").find('li[class=focus]').attr('data-id');
+                $('#tid').val($transport_id);
+                $('#ish').val($('#invoice_title').val());
+                $('form').submit();
+            }
+        });
+
+        $('input[type=text]').each(function () {
+            var input = $(this);
+            $(this).blur(function () {
+                var key = input.attr('name');
+                var value = input.val();
+                validate(key, value);
+            });
+        });
+
+
+        $('#address_save').click(function(){
+            //检查所有值
+            var empty = true;
+            $('input[type=text]').each(function () {
+                var input = $(this);
+                var key = input.attr('name');
+                var value = input.val();
+                if(validate(key, value) == false) {
+                    empty = false;
                 }
             });
 
-            $('#uj').val('qsc');
-            $('form').submit();
-        });
+            if(! empty) {
+                return false;
+            }
+            var address = promptinfo();
+            var phone = $('#phone').val();
+            var contact = $('#contact').val();
+            console.log(address + phone + contact);
 
+            $.ajax({
+                url: BASE_URL + 'account/main/set_address',
+                type: 'post',
+                data: {
+                    address: address,
+                    phone: phone,
+                    contact: contact
+                },
+                dataType: 'json',
+                success: function(data){
+                    // console.log(data);
+                    if(data.success == 0) {
+                        window.location.reload();
+                    }
+                }
+            });
+        });
     })
 
 </script>
 </html>
-  
+
