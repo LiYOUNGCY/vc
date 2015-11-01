@@ -197,43 +197,6 @@ class User_model extends CI_Model
         }
     }
 
-    /**
-     * [update_account 更新用户信息字段].
-     *
-     * @param [type] $uid    [description]
-     * @param [type] $update [array('name'	=> 'tom', .......)]
-     *
-     * @return [type] [description]
-     */
-    public function update_account($uid, $update)
-    {
-        if (!is_array($update)) {
-            return FASLE;
-        }
-
-        $address['address'] = $update['address'];
-        $address['contact'] = $update['contact'];
-        $address['phone'] = $update['phone'];
-
-        unset($update['uid']);
-        unset($update['address']);
-        unset($update['contact']);
-        unset($update['phone']);
-
-        $result1 = true;
-
-        //更新 收货信息
-        $this->db->where('uid', $uid)->update('user_address', $address);
-        if ($this->db->affected_rows() !== 1) {
-            $result1 = false;
-        }
-
-        //删除敏感字段
-        unset($update['pwd']);
-        $this->db->where('id', $uid)->update('user', $update);
-
-        return (($this->db->affected_rows() === 1) || $result1);
-    }
 
     public function get_address($uid)
     {
@@ -279,6 +242,27 @@ class User_model extends CI_Model
         }
         $this->error->output('old_password_error', array('script' => 'window.location.href = "'.base_url().'setting/pwd";'));
     }
+
+    public function change_name($user_id, $name)
+    {
+        $data = array(
+            'name' => $name
+        );
+
+        $this->db->where('id', $user_id)->update('user', $data);
+
+        return $this->db->affected_rows() === 1;
+    }
+
+    public function change_headpic($user_id, $pic)
+    {
+        $data = array(
+            'pic' => $pic
+        );
+        $this->db->where('id', $user_id)->update('user', $data);
+        return $this->db->affected_rows() === 1;
+    }
+
     /**
      * [update_password 更新用户密码].
      *
