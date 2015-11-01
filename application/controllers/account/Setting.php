@@ -33,9 +33,10 @@ class Setting extends MY_Controller
         $body['top'] = $this->load->view('common/top', $user, true);
         $body['footer'] = $this->load->view('common/footer', '', true);
 
-        $address = $this->user_service->get_address($this->user['id']);
+
         $body['user'] = $this->user_service->get_user_by_id($this->user['id']);
 //        $body['user']         = $this->user;
+
 
         if ($type == 'safe') {
             //修改密码
@@ -45,15 +46,12 @@ class Setting extends MY_Controller
         }
         //修改个人信息的页面
         elseif ($type == 'user') {
-            $data['title'] = '修改个人信息';
-            foreach ($address as $key => $value) {
-                $body['user'][$key] = $value;
-            }
-
+            $data['title'] = '账户设置';
             $this->load->view('common/head', $data);
             $this->load->view('setting', $body);
 //            echo json_encode($body);
         }
+
     }
 
     /**

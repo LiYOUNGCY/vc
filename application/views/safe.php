@@ -5,27 +5,17 @@
     <!-- 主体 -->
     <div class="container">
         <div class="personal">
-            <div class="userinfo clearfix">
-                <div class="uhead">
-                    <img src="<?= $user['pic'] ?>">
-                </div>
-                <div class="info">
-                    <ul>
-                        <li><label>昵称</label>：<?= $user['name'] ?></li>
-                        <li><label>收货地址</label>：<?php echo 1 ? '空' : $user['address']; ?></li>
-                        <li><label>联系电话</label>：<?php echo 1 ? '空' : $user['tel']; ?></li>
-                        <li><label>联系人</label>：</li>
-                    </ul>
-                    <a href="<?= base_url() ?>setting">
-                        <div class="editinfo btn">修改信息</div>
-                    </a>
-                </div>
-            </div>
             <div class="ptitle">
                 个人中心
             </div>
             <div class="pmenu">
                 <ul>
+                    <li class="active">
+                        <a href="javascript:void(0);">
+                            <div class="icon psetting"></div>
+                            <div class="mt">账户设置</div>
+                        </a>
+                    </li>
                     <li>
                         <a href="<?= base_url() ?>like">
                             <div class="icon plike"></div>
@@ -50,64 +40,127 @@
                             <div class="mt">信息</div>
                         </a>
                     </li>
-                    <li class="active">
-                        <a href="javascript:void(0);">
-                            <div class="icon psetting"></div>
-                            <div class="mt">安全设置</div>
-                        </a>
-                    </li>
                 </ul>
             </div>
-
-            <div class="safesettig clearfix ">
-                <div class="setpwd">
-                    <div class="type">修改密码</div>
-                    <label for="olepwd">旧密码</label>
-                    <input id="olepwd" name="olepwd" type="text">
-                    <div class="error_div" id="olepwd_error">旧密码错误</div>
-                    <label for="newpwd">新密码</label>
-                    <input id="newpwd" name="newpwd" type="text">
-                    <div class="error_div" id="newpwd_error"></div>
-                    <label for="conpwd">确认新密码</label>
-                    <input id="conpwd" name="conpwd" type="text">
-                    <div class="error_div" id="conpwd_error">两次密码不对</div>
-                    <div class="btn" id="submitpwd">确认修改</div>
+            <div class="setting">
+                <div class="psubmenu">
+                    <div><a href="<?= base_url() ?>setting">账户设置</a></div>
+                    &nbsp; / &nbsp;
+                    <div class="active">安全设置</div>
                 </div>
-                <div class="setaccount">
-                    <div class="type">账号绑定</div>
-                    <div class="bindphone">
-                        <div class="phone">
-                            <label >已绑定手机号码</label>
-                            <?php if ($user['phone'] == null) {
-    ?>
-                            无<a href="javascript:void(0);" class="link" id="bindphone"> [绑定手机]</a>
-                            <?php 
-} else {
-    ?>
-                            <?=$user['phone']?><a href="javascript:void(0);" class="link" id="bindphone"> [重新绑定]</a>
-                            <?php 
-} ?>
+                <div class="safesettig">
+                    <div class="item">
+                        <label >邮箱</label>
+                        <?php if ($user['email'] == null) { ?>
+                        <a href="javascript:void(0);" class="link" id="bindemail"> 绑定邮箱</a>
+                        <?php } else { ?>
+                        <?=$user['email']?><a href="javascript:void(0);" class="link" id="bindemail"> 修改</a>
+                        <?php } ?>
+                    </div>
+                    <div class="item">
+                        <label >手机</label>
+                        <?php if ($user['phone'] == null) { ?>
+                            <a href="javascript:void(0);" class="link" id="bindphone">绑定手机</a>
+                        <?php } else { ?>
+                            <?=$user['phone']?><a href="javascript:void(0);" class="link" id="bindphone"> 修改</a>
+                        <?php } ?>
+                    </div>
+                    <div class="item">
+                        <label >账号密码</label>
+                        <a href="javascript:void(0);" class="link" id="updatepwd">修改密码</a>
+                    </div>
+                    <!-- <div class="setaccount">
+                        <div class="type">账号绑定</div>
+                        <div class="item">
+                            <div class="phone">
+                                <label >手机号码：</label>
+                                <?php if ($user['phone'] == null) {
+        ?>
+                                无<a href="javascript:void(0);" class="link" id="bindphone"> [绑定手机]</a>
+                                <?php 
+    } else {
+        ?>
+                                <?=$user['phone']?><a href="javascript:void(0);" class="link" id="bindphone"> [重新绑定]</a>
+                                <?php 
+    } ?>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="email">
+                                <label >邮箱：</label>
+                                <?php if ($user['email'] == null) {
+        ?>
+                                无<a href="javascript:void(0);" class="link" id="bindemail"> [绑定邮箱]</a>
+                                <?php 
+    } else {
+        ?>
+                                <?=$user['email']?><a href="javascript:void(0);" class="link" id="bindemail"> 修改</a>
+                                <?php 
+    } ?>
+                            </div>
                         </div>
                     </div>
-                    <div class="bindemail">
-                        <div class="email">
-                            <label >已绑定邮箱</label>
-                            <?php if ($user['email'] == null) {
-    ?>
-                            无<a href="javascript:void(0);" class="link" id="bindemail"> [绑定邮箱]</a>
-                            <?php 
-} else {
-    ?>
-                            <?=$user['email']?><a href="javascript:void(0);" class="link" id="bindemail"> [重新绑定]</a>
-                            <?php 
-} ?>
-                        </div>
-                    </div>
+                    <div class="setpwd">
+                        <div class="type">修改密码</div>
+                        <label for="olepwd">旧密码</label>
+                        <input id="olepwd" name="olepwd" type="text">
+                        <div class="error_div" id="olepwd_error">旧密码错误</div>
+                        <label for="newpwd">新密码</label>
+                        <input id="newpwd" name="newpwd" type="text">
+                        <div class="error_div" id="newpwd_error"></div>
+                        <label for="conpwd">确认新密码</label>
+                        <input id="conpwd" name="conpwd" type="text">
+                        <div class="error_div" id="conpwd_error">两次密码不对</div>
+                        <div class="btn" id="submitpwd">确认修改</div>
+                    </div> -->
                 </div>
             </div>
+            
         </div>
     </div>
     <?php echo $footer; ?>
+    <!-- 绑定邮箱模态框 -->
+    <div class="modal bindemail" style="display:none">
+        <div class="box">
+            <label for="email">需要绑定的邮箱：</label>
+            <input type="text" value="" name="email" id="email">
+            <div class="error_div" id="email_error"></div>
+            <div class="opt">
+                <div class="btn cancel">取消</div>
+                <div class="btn">发送验证码</div>
+            </div>
+        </div>
+    </div>
+    <!-- 绑定手机模态框 -->
+    <div class="modal bindphone" style="display:none">
+        <div class="box">
+            <label for="phone">手机号码：</label>
+            <input type="text" value="" name="phone" id="phone">
+            <div class="error_div" id="phone_error"></div>
+            <label for="verify">验证码：</label>
+            <input type="text" value="" name="verify" id="verify">
+            <span class="sendverify"><a href="javascript:void(0)" class="link send">发送验证码</a></span>
+            <div class="opt">
+                <div class="btn cancel">取消</div>
+                <div class="btn">提交</div>
+            </div>
+        </div>
+    </div>
+    <!-- 修改密码模态框 -->
+    <div class="modal updatepwd" style="display:none">
+        <div class="box">
+            <label for="opwd">旧密码：</label>
+            <input type="text" value="" name="opwd" id="opwd">
+            <label for="npwd">新密码：</label>
+            <input type="text" value="" name="npwd" id="npwd">
+            <label for="cnpwd">确认新密码：</label>
+            <input type="text" value="" name="cnpwd" id="cnpwd">
+            <div class="opt">
+                <div class="btn cancel">取消</div>
+                <div class="btn">保存</div>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript" src="<?= base_url() ?>public/js/swiper.min.js"></script>
 </body>
@@ -119,29 +172,20 @@
         var phone_code = '';
 
         $("#bindphone").click(function(){
-            var elem = '' +
-            '<label for="phone">输入需要绑定的手机</label>' +
-            '<input id="phone" name="phone" type="text">' +
-                '<div class="error_div" id="phone_error"></div>' +
-            '<div class="pinarea">' +
-            '<input id="pin" name="pin" class="pin" type="text">' +
-            '<duv class="getpin btn" id="getpin">发送验证码</duv></div>' +
-                    '<div class="error_div" id="pin_error" style="display: none;">验证码错误</div>' +
-            '<div class="btn submitphone" id="submitphone">提交</div>';
-            $(".phone").html(elem);
-
-
-            $('#getpin').click(getpin_event);
-            $('#submitphone').click(change_phone);
+            $(".bindphone").css({"display":"block"})
         });
         $("#bindemail").click(function(){
-            var elem = '' +
-            '<label for="email">输入需要绑定的邮箱</label>' +
-            '<input id="email" name="email" type="text">' +
-            '<div class="btn sendpin" id="sendpin">验证邮箱</div>';
-            $(".email").html(elem);
+            $(".bindemail").css({"display":"block"})
         });
+        $("#updatepwd").click(function(){
+            $(".updatepwd").css({"display":"block"})
+        })
 
+        $(".modal .cancel").each(function(){
+            $(this).click(function(){
+                $(this).parent().parent().parent().css({"display":"none"});
+            })
+        })
 
         //修改密码
         $('#submitpwd').click(function(){

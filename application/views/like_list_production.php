@@ -6,27 +6,17 @@
     <!-- 主体 -->
     <div class="container">
         <div class="personal">
-            <div class="userinfo clearfix">
-                <div class="uhead">
-                    <img src="<?= $user['pic'] ?>">
-                </div>
-                <div class="info">
-                    <ul>
-                        <li><label>昵称</label>：<?= $user['name'] ?></li>
-                        <li><label>收货地址</label>：<?php echo 1 ? '空' : $user['address']; ?></li>
-                        <li><label>联系电话</label>：<?php echo 1 ? '空' : $user['tel']; ?></li>
-                        <li><label>联系人</label>：</li>
-                    </ul>
-                    <a href="<?= base_url() ?>setting">
-                        <div class="editinfo btn">修改信息</div>
-                    </a>
-                </div>
-            </div>
             <div class="ptitle">
                 个人中心
             </div>
             <div class="pmenu">
                 <ul>
+                    <li>
+                        <a href="<?= base_url() ?>setting">
+                            <div class="icon psetting"></div>
+                            <div class="mt">账户设置</div>
+                        </a>
+                    </li>
                     <li class="active">
                         <a href="javascript:void(0);">
                             <div class="icon plike"></div>
@@ -51,18 +41,13 @@
                             <div class="mt">信息</div>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?= base_url() ?>setting/safe">
-                            <div class="icon psetting"></div>
-                            <div class="mt">安全设置</div>
-                        </a>
-                    </li>
+
                 </ul>
             </div>
             <div class="psubmenu">
-                <div><a href="<?= base_url() ?>like">赞过的文章</a></div>
-                &nbsp; / &nbsp;
                 <div class="active">赞过的作品</div>
+                &nbsp; / &nbsp;
+                <div ><a href="<?= base_url() ?>like/article">赞过的文章</a></div>
             </div>
             <div class="item-list" id="item-list">
 
@@ -147,7 +132,8 @@
                         var height = data[i].height;
 
 
-                        var box = $('<div class="production">' +
+                        var box = $('<a href="' + BASE_URL + 'production/' + id + '">' +
+                            '<div class="production">' +
                             '<img class="image" src="' + img + '" style="width: '+width+'px; height: '+height+'px;">' +
                             '<p class="title">' + title + '</p>' +
                             '<p class="author">作者：' + author + '</p>' +
@@ -159,7 +145,7 @@
                             '<div class="price" title="价格">' + price + ' RMB</div>' +
                             '<div class="vote" title="收藏">' + like + '<div class="icon like"></div></div>' +
                             '</div>' +
-                            '</div>');
+                            '</div></a>');
 
                         $container.append(box);
                         masonry.appended(box);

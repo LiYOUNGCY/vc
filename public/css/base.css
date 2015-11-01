@@ -91,6 +91,15 @@ pre {
 .show {
     display: block;
 }
+.fs-14{
+    font-size:14px; 
+}
+.fs-18{
+    font-size:18px; 
+}
+.fs-20{
+    font-size:20px; 
+}
 .clearfix:before,
 .clearfix:after {
     display: table;
@@ -328,7 +337,7 @@ pre {
 
 /*article start*/
 .item-list {
-    margin: 0 auto;
+
 }
 
 .item-list .menu {
@@ -3506,8 +3515,8 @@ img.zoom-img {
     background-color: #F8E901;
 }
 .ptitle{
-    margin-top: 50px;
-    text-align: left;
+    margin-top: 30px;
+    text-align: center;
     font-size: 32px;
     color: #0C0F08;
 }
@@ -3541,7 +3550,7 @@ img.zoom-img {
 }
 .psubmenu{
     text-align: left;
-    margin: 20px 0;
+    margin: 20px 0 0;
     display: inline-block;
     width: 100%;
 
@@ -3669,7 +3678,7 @@ img.zoom-img {
 }
 .safesettig{
     text-align: left;
-    color: #B3B3B3;
+    color: #878787;
 }
 .safesettig input[type="text"] {
     padding: 5px;
@@ -3684,10 +3693,9 @@ img.zoom-img {
 }
 
 .safesettig .type {
-    color: #8C8C8C;
-    font-weight: bold;
-    margin: 10px 0;
-    width: 200px;
+    width: 100%;
+    font-size: 22px; 
+    text-align: center;
 }
 .safesettig .btn{
     width: 100px;
@@ -3696,18 +3704,21 @@ img.zoom-img {
     margin-top: 10px;
     border-radius: 5px;
 }
-.safesettig label{
-    display: block;
-    margin:10px 0 7px;
-    color: #B3B3B3;
+.safesettig .item{
+    border-bottom: 1px solid #f4f4f4;
+    font-size: 15px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.safesettig .item label{
+    display: inline-block;
+    width: 100px;
 }
 .safesettig .setpwd{
-    float: left;
-    width: 40%;
+    width: 100%;
 }
 .safesettig .setaccount{
-    float: left;
-    width: 40%;
+    width: 100%;
 }
 .safesettig .setaccount .phone,
 .safesettig .setaccount .email{
@@ -4274,18 +4285,27 @@ img.zoom-img {
 }
 .setting{
     width: 95%;
-    margin: 30px auto 0;
+    max-width: 760px;
+    margin: 0px auto;
     box-shadow: 2px 3px 5px #a1a1a1;
     border:1px solid #f4f4f4;
-    padding: 35px 0;
+    padding: 20px;
+}
+.setting .psubmenu{
+    margin:0 0 20px;
+}
+.setting .baseinfo{
+    display: inline-block;
+    width: 100%;
 }
 .setting .headpic{
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     margin: 0 auto 40px;
     box-sizing:border-box;
     overflow: hidden;
     position: relative;
+    float: left;
 }
 .setting .headpic .drawer{
     width: 100%;
@@ -4337,10 +4357,52 @@ img.zoom-img {
     text-align: left;
     display: inline-block;
     font-size: 18px;
+    float: left;
+    margin-left: 20px;
+    width: 540px;
+    font-size: 15px;
 }
+.setting .editinfo .item{
+    color: #878787;
+    margin-bottom: 10px;
+}
+.setting .editinfo .item .nickopt{
+    display: inline-block;
+}
+.setting .editinfo .item .nickopt .btn{
+    width: 70px;
+    height: 27px;
+    line-height: 27px;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+.setting .editinfo .item .nickopt .btn#savenick{
+    background: #0C0F08;
+}
+.setting .editinfo .item .nickopt .btn#cancel_changenick{
+    background: #B3B3B3;
+}
+.setting .editinfo .name{
+    color: #878787;
+    margin-right: 10px;
+}
+.setting .editinfo .addressinfo{
+    padding: 10px;
+    border:1px #888888 dashed;
+    margin-top:10px;
+    width: 100%;
+    color: #878787;
+    box-sizing:border-box;
+}
+.setting .editinfo .addressinfo:hover{
+    background: #EEEEEE;
+}
+
 .setting input[type="text"]{
+    font-size: 15px;
+    margin-right: 10px;
     padding: 5px;
-    width: 300px;
+    width: 150px;
     color: #888888;
     border:1px #B3B3B3 solid ;
     transition: border-color .2s ease-in-out 0s;
@@ -4350,9 +4412,7 @@ img.zoom-img {
     border-color:#FCEE21;
 }
 .setting label{
-    display: block;
-    margin:10px 0 7px;
-    color: #534741;
+    color: #878787;
 }
 
 .setting .opt{
@@ -4575,7 +4635,7 @@ img.zoom-img {
 .payment .sum .btn:hover{
     opacity: 0.7;
 }
-.editaddress{
+.modal{
     width: 100%;
     height: 100%;
     position: fixed;
@@ -4584,7 +4644,7 @@ img.zoom-img {
     top:0;
     left: 0;
 }
-.editaddress .box{
+.modal .box{
     position: absolute;
     top: 35%;
     left: 50%;
@@ -4596,40 +4656,53 @@ img.zoom-img {
     -webkit-transform:translate(-50%,-50%);
     -moz-transform:translate(-50%,-50%);
 }
-.editaddress .box .editinfo{
+.modal .box .editinfo{
     text-align: left;
     display: inline-block;
     font-size: 18px;
 }
-.editaddress .box input[type="text"]{
+
+
+.modal .box input[type="text"]{
     padding: 5px;
     width: 260px;
     color: #888888;
     border:1px #B3B3B3 solid ;
     transition: border-color .2s ease-in-out 0s;
 }
-.editaddress .box input[type="text"]:hover,
-.editaddress .box input[type="text"]:focus {
+.modal .box input[type="text"]:hover,
+.modal .box input[type="text"]:focus {
     border-color:#FCEE21;
 }
-.editaddress .box label{
+.modal .box label{
     display: block;
     margin:10px 0 7px;
     color: #534741;
 }
-.editaddress .opt{
+
+.modal .box #verify{
+    width: 100px;
+}
+.modal .box .sendverify{
+    line-height: 29px;
+    font-size: 14px;
+    margin-left: 15px;
+}
+
+.modal .opt{
     margin-top: 15px;
     text-align: center;
 }
-.editaddress .opt .btn{
+.modal .opt .btn{
     width: 100px;
-    height: 40px;
-    line-height: 40px;
+    line-height: 2.5;
     background: #0C0F08;
     display: inline-block;
     margin: 0 10px;
     color: #FFFFFF;
+    font-size: 14px;
 }
-.editaddress .opt .btn.cancel{
-    background: #B3B3B3;
+.modal .opt .btn.cancel{
+    background: #e6e6e6;
+    color: #878787;
 }

@@ -8,7 +8,7 @@ class Main extends MY_Controller
         $this->load->service('like_service');
     }
 
-    public function index($type = 'article')
+    public function index($type = 'production')
     {
         $data['css'] = array(
             'swiper.min.css',
