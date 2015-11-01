@@ -111,6 +111,7 @@ class Setting extends MY_Controller
 
         //save by database
         $this->user_service->change_headpic($user_id, $result['filepath']);
+
         header('Content-Type:application/json');
         echo json_encode($result);
     }
