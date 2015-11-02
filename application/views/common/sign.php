@@ -53,7 +53,7 @@
                 <input type="email" name="email" id="email" placeholder="邮箱地址"/>
                 <input type="password" name="password" id="password" class="noborder" placeholder="密码"/>
             </div>
-            <div class="error_div" id="signupError" style="text-align:left;margin-bottom:10px"></div>
+            <div class="error_div" id="signupError" style="text-align:left;"></div>
             <div class="btn" onclick="signup()" id="signupbtn">注册</div>
             <div class="tips">
                 <p>注册即默认您同意本站<a class="link" href="<?=base_url()?>about/terms">《用户协议》</a></p>
@@ -326,11 +326,19 @@
 
             var phone = $("#phonesign #phone").val();
             var pwd = $("#phonesign #password").val();
+            var input_phone_code = $('#velidata').val();
 
             var phone_result = validate('phone', phone);
             var pwd_result = validate('pwd', pwd);
 
             var cp = phone_result && pwd_result && phone_check ;
+
+            if(phone == "" || pwd == "" || input_phone_code ==""){
+                $("#signupError").html("请输入完毕注册信息");
+                return ;
+            }else{
+                $("#signupError").html("");
+            }
 
             if(!pwd_result){
                 $("#signupError").html("密码长度在8~36位");
@@ -352,8 +360,6 @@
 
             if (cp == true) {
 
-                //检验手机验证码
-                var input_phone_code = $('#velidata').val();
                 //验证码不对
 
                 if (phone_code == '' || input_phone_code != phone_code || input_phone_code == '') {
@@ -398,6 +404,13 @@
 
             var ce = email_result && pwd_result && email_check;
 
+            if(email == "" || pwd == ""){
+                $("#signupError").html("请输入完毕注册信息");
+                return ;
+            }else{
+                $("#signupError").html("");
+            }
+
             if(!pwd_result){
                 $("#signupError").html("密码长度在8~36位");
             }else if(!email_check){
@@ -408,7 +421,7 @@
                 $("#signupError").html("");
             }
 
-            if($("#signinError").html() != "" || phone == ""){
+            if($("#signinError").html() != ""){
                 return ;
             }
 
