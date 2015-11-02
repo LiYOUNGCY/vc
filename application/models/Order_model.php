@@ -290,7 +290,7 @@ WHERE {$production_table}.id = ? AND {$production_table}.id = {$production_frame
     public function get_order_information_by_id($user_id)
     {
         $query = $this->db
-            ->select('order.id, order.total, order.transport_name, order.address, order.state, order.create_time')
+            ->select('order.id, order.total, order.transport_name, order.address, order.state, order.create_time, order.phone, order.contact, order.poundage, order.transport_price')
             ->from('order')
             ->where('order.state != 1')
             ->where('order.user_id', $user_id)
@@ -303,7 +303,7 @@ WHERE {$production_table}.id = ? AND {$production_table}.id = {$production_frame
 
         foreach($query as $key => $value) {
             $query[$key]['production'] = $this->db
-                ->select('orderitem.total, production.id as production_id, production.name as production_name, image.image_path as pic, production.price as production_price, frame.price as frame_price, frame.price, frame.name as frame_name')
+                ->select('orderitem.total, production.id as production_id, production.name as production_name, image.image_path as pic, production.price as production_price, frame.price as frame_price, frame.name as frame_name, orderitem.total')
                 ->from('orderitem, production, frame, image')
                 ->where('orderitem.order_id', $value['id'])
                 ->where('production.image_id = image.image_id')

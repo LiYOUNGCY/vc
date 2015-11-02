@@ -21,10 +21,8 @@
                         <?php foreach ($query['article'] as $key => $value) {
                             ?>
                             <div class="item clearfix" onclick="article(<?= $value['id'] ?>)">
-                                <div class="image-warp">
-                                    <img class="image"
-                                         src="<?= $query['article'][$key]['content']['article_image'] ?>"
-                                         alt="">
+                                <div class="image-warp"
+                                    style="background: url(<?= $query['article'][$key]['content']['article_image'] ?>);background-size:cover;background-position:50% 50%;">
                                 </div>
                                 <p class="title"><?= $query['article'][$key]['content']['article_title'] ?></p>
 
@@ -58,10 +56,8 @@
                         <?php foreach ($query['production'] as $key => $value) {
                             ?>
                             <div class="item clearfix" onclick="production(<?=$value['id']?>)">
-                                <div class="image-warp">
-                                    <img class="image"
-                                         src="<?= $value['pic'] ?>"
-                                         alt="">
+                                <div class="image-warp"
+                                    style="background: url(<?= $value['pic'] ?>);background-size:cover;background-position:50% 50%;">
                                 </div>
                                 <p class="title"><?= $value['name'] ?></p>
 
@@ -96,10 +92,8 @@
                         <?php foreach ($query['artist'] as $key => $value) {
                             ?>
                             <div class="item clearfix" onclick="artist(<?=$value['id']?>)">
-                                <div class="image-warp">
-                                    <img class="image"
-                                         src="<?= $value['pic'] ?>"
-                                         alt="">
+                                <div class="image-warp"
+                                    style="background: url(<?= $value['pic'] ?>);background-size:cover;background-position:50% 50%;">
                                 </div>
                                 <p class="title"><?= $value['name'] ?></p>
 

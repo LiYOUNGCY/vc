@@ -140,6 +140,10 @@ if ($user['role'] == 0) {
                 window.location.href = BASE_URL + 'search?keyword='+ keyword;
             }
         });
+        $("#s_sipt").click(function(){
+            var keyword = $('#pageslide .s_ipt').val();
+            window.location.href = BASE_URL + 'search?keyword='+ keyword;
+        })
 
 
         /**

@@ -46,12 +46,14 @@
             <div class="transaction">
                 <div class="list">
                     <?php if (empty($order)) { ?>
-                        <div class="box">
-                            <div class="text">您还没有购买记录呢</div>
-                            <div class="go">快去选购吧！</div>
-                            <div class="opt">
-                                <div class="btn"><a href="<?= base_url() ?>topic">专题推荐</a></div>
-                                <div class="btn"><a href="<?= base_url() ?>production">精选作品</a></div>
+                        <div class="nonebox">
+                            <div class="box">
+                                <div class="text">您还没有购买记录呢</div>
+                                <div class="go">快去选购吧！</div>
+                                <div class="opt">
+                                    <div class="btn"><a href="<?= base_url() ?>topic">专题推荐</a></div>
+                                    <div class="btn"><a href="<?= base_url() ?>production">精选作品</a></div>
+                                </div>
                             </div>
                         </div>
                     <?php } else { ?>
@@ -75,33 +77,38 @@
                                             <div class="name">
                                                 <a href="<?= base_url() ?>production/<?= $value['production_id'] ?>"
                                                    class="link">
-                                                    《<?= $value['production_name'] ?>》
+                                                    （<?= $value['production_name'] ?>）
+                                                    <?= $value['frame_name']?>
+                                                    <?= $value['total']?>
+                                                    <?= $value['production_price']?>
+                                                    <?= $value['frame_price']?>
                                                 </a>
                                             </div>
                                         </div>
                                     <?php } ?>
 
-                                    <div class="total"><p>￥<?=$o['total']?></p></div>
+                                    <div class="total"><p>￥<?=$o['total']?></p> <?=$o['transport_price']?><?=$o['poundage']?></div>
+                                    <?php if ($o['state'] == 2) { ?>
+                                        <div class="status icon psending">待发货</div>
+                                    <?php } else if($o['state'] == 3) { ?>
+                                        <div class="logistics">
+                                            <p>配送方式：<?=$o['transport_name']?></p>
+                                            <p>地址：<?=$o['address']?></p>
+                                            <?=$o['phone']?>
+                                            <?=$o['contact']?>
+                                            <div class="confirmgood btn">确认收货</div>
+                                        </div>
+
+                                        <div class="status icon psended">已发货</div>
+                                    <?php } else if($o['state'] == 4) {?>
+                                        <div class="status icon pconform">确认收货</div>
+                                    <?php } ?>                                    
                                 </div>
 
-                                <?php if ($o['state'] == 2) { ?>
-                                    <div class="status icon psending">待发货</div>
-                                <?php } else if($o['state'] == 3) { ?>
-                                    <div class="logistics">
-                                        <p>快递：<?=$o['transport_name']?></p>
-                                        <p>地址：<?=$o['address']?></p>
-                                        <div class="confirmgood btn">确认收货</div>
-                                    </div>
 
-                                    <div class="status icon psended">已发货</div>
-                                <?php } else if($o['state'] == 4) {?>
-                                    <div class="status icon pconform">确认收货</div>
-                                <?php } ?>
                             </div>
                         <?php } ?>
                     <?php } ?>
-                </div>
-                <div class="nonebox">
                 </div>
             </div>
         </div>
