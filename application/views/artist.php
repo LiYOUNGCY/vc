@@ -36,8 +36,7 @@
         var container = document.querySelector('.item-list');
         var $container = $('.item-list');
 
-        LoadMore();
-        WindowEvent();
+
         var masonry = new Masonry(container, {
             itemSelector: '.artist',
             columnWidth: 300,
@@ -53,7 +52,9 @@
             }
         });
 
-        
+
+        LoadMore();
+        WindowEvent();
 
         function WindowEvent() {
             $(window).scroll(function () {
@@ -95,7 +96,7 @@
                         var content = data[i].intro;
                         var img = data[i].pic;
 
-                        var box = '' +
+                        var box = $('' +
                         '<div class="artist">' +
                         '<a href="<?=base_url()?>artist/'+ id +'">' +
                         '<div class="backcard">' +
@@ -109,9 +110,10 @@
                         '<div class="artistpic">' +
                         '<img class="image" src="'+ img +'"></div>' +
                         '<div class="artistname">（<span class="name">'+ name +'</span>）</div>' +
-                        '</div></a></div>';
+                        '</div></a></div>');
 
                         $('.item-list').append(box);
+                        masonry.appended(box);
 
                         $(box).imageloader({
                             selector: '.image',

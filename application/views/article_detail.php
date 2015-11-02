@@ -32,9 +32,11 @@
 
                 <!-- END 文章内容-->
                 <div class="share clearfix">
-                    <div class="likebtn <?php if ($like_status) {
-    echo 'focus';
-} ?>" id="vote">
+                <?php if ($like_status) {?>
+                    <div class="likebtn focus" id="vote">
+                <?php } else { ?>
+                    <div class="likebtn" id="vote">
+                <?php } ?>
                         <div class="support" id="mark-like"></div>
                         <div class="num" id="seeLike"><?=$article['like']?></div>
                     </div>
