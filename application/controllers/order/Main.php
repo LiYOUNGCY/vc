@@ -91,9 +91,37 @@ class Main extends MY_Controller
         }
     }
 
-    public function test()
+
+    public function list_order()
     {
-        $this->load->model('order_model');
-        $this->order_model->create_order(2, 1, 1, '');
+        $data['css'] = array(
+            'swiper.min.css',
+            'font-awesome/css/font-awesome.min.css',
+            'base.css',
+            'radiocheck.min.css',
+        );
+        $data['javascript'] = array(
+            'jquery.js',
+            'geo.js',
+            'error.js',
+        );
+
+        $user['user'] = $this->user;
+        $user['sign'] = $this->load->view('common/sign', '', true);
+        $data['title'] = '购买记录';
+
+
+        $body['top'] = $this->load->view('common/top', $user, true);
+        $body['footer'] = $this->load->view('common/footer', '', true);
+        $body['user'] = $this->user;
+        $user_id = $this->user['id'];
+
+        $order = $this->order_service->get_order_information_by_id($user_id);
+        $body['order'] = $order;
+//
+        $this->load->view('common/head', $data);
+        $this->load->view('transaction', $body);
+
+//        echo json_encode($order);
     }
 }

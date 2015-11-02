@@ -13,8 +13,12 @@
                     <img src="<?=$production['pic']?>" class="thumb" data-src="<?=$production['pic']?>"/>
                 </div>
                 <div class="like">
+                    <?php if ($production['like_status']) {?>
+                    <div class="likebtn focus" id="vote">
+                <?php } else { ?>
                     <div class="likebtn" id="vote">
-                        <div class="support"></div>
+                <?php } ?>
+                        <div class="support" id="mark-like"></div>
                         <div class="num" id="seeLike"><?=$production['like']?></div>
                     </div>
                 </div>

@@ -158,7 +158,10 @@ WHERE {$production_table}.id = ? AND {$production_table}.id = {$production_frame
         return $query;
     }
 
-
+    /**
+     * 支付成功
+     * @param $order_no
+     */
     public function complete_order($order_no)
     {
         $query = $this->db->select('production.id')
@@ -282,5 +285,34 @@ WHERE {$production_table}.id = ? AND {$production_table}.id = {$production_frame
 
         $this->db->where('id', $order_id)->update('order', $data);
         return $this->db->affected_rows() === 1;
+    }
+
+    public function get_order_information_by_id($user_id)
+    {
+        $query = $this->db
+            ->select('order.id, order.total, order.transport_name, order.address, order.state, order.create_time')
+            ->from('order')
+            ->where('order.state != 1')
+            ->where('order.user_id', $user_id)
+            ->get()
+            ->result_array();
+
+        if(empty($query)) {
+            return false;
+        }
+
+        foreach($query as $key => $value) {
+            $query[$key]['production'] = $this->db
+                ->select('orderitem.total, production.id as production_id, production.name as production_name, image.image_path as pic, production.price as production_price, frame.price as frame_price, frame.price, frame.name as frame_name')
+                ->from('orderitem, production, frame, image')
+                ->where('orderitem.order_id', $value['id'])
+                ->where('production.image_id = image.image_id')
+                ->where('orderitem.production_id = production.id')
+                ->where('orderitem.frame_id = frame.id')
+                ->get()
+                ->result_array();
+        }
+
+        return $query;
     }
 }

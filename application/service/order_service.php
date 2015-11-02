@@ -125,6 +125,11 @@ class Order_service extends MY_Service
         $this->order_model->complete_order($order_no);
     }
 
+    public function get_order_information_by_id($user_id)
+    {
+        return $this->order_model->get_order_information_by_id($user_id);
+    }
+
     /**
      * 检查地址是否合法
      * @param $address

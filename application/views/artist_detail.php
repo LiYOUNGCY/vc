@@ -50,7 +50,7 @@ $(function() {
     var page = 0;
     var aid = $("#aid").val();
     var arts = document.querySelector('#arts');
-    loadarts();
+
     var masonry = new Masonry(arts, {
         itemSelector: '.production',
         columnWidth: 300,
@@ -58,6 +58,8 @@ $(function() {
         isFitWidth: true,
         isAnimate: true
     });
+
+    loadarts();
     $("#loadmore").click(function(){
         if($(this).hasClass("disable")){
             return ;
@@ -99,7 +101,7 @@ $(function() {
 
 
 
-                    var box = '' +
+                    var $box =$(
                     '<div class="production">' +
                     '<img class="image" src="'+ image +'" style="width: '+width+'px;height: '+height+'px;">' +
                     '<p class="title">'+ name +'</p>' +
@@ -110,9 +112,10 @@ $(function() {
                     '<div class="bottom clearfix">' +
                     '<div class="price" title="价格">'+ price +' RMB</div>' +
                     '<div class="vote" title="收藏">'+ like +'<div class="icon like"></div></div>' +
-                    '</div></div>';
+                    '</div></div>');
 
-                    $('.item-list').append(box);
+                    $('.item-list').append($box);
+                    masonry.appended($box)
 
                 }
             }

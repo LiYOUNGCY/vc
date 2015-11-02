@@ -33,7 +33,7 @@ class MY_Controller extends CI_Controller
         $auth = $this->auth_service->check_user_auth();
 
         //没有权限或没有登录的用户
-        if (!$auth) {
+        if (!$auth && ! Common::is_ajax()) {
             header(redirect(base_url().'home?callback=login'));
         }
     }

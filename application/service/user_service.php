@@ -122,17 +122,6 @@ class User_service extends MY_Service
     }
 
     /**
-     * [update_account 更新个人信息].
-     */
-    public function update_account($uid, $data)
-    {
-        //清除值为空的变量
-        $this->_clear($data);
-
-        return $this->user_model->update_account($uid, $data);
-    }
-
-    /**
      * [get_user_base_id 获得用户的基本的信息].
      */
     public function get_user_base_id($uid)
@@ -152,6 +141,15 @@ class User_service extends MY_Service
         return false;
     }
 
+    public function change_name($user_id, $name)
+    {
+        return $this->user_model->change_name($user_id, $name);
+    }
+
+    public function change_headpic($user_id, $path)
+    {
+        return $this->user_model->change_headpic($user_id, $path);
+    }
     /**
      * [check_email 查看邮箱是否重复].
      *

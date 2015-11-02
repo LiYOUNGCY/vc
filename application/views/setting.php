@@ -16,7 +16,11 @@
                 </select>
                 <input id="address" name="address" type="hidden" value=""/>
             </div>
+<<<<<<< HEAD
             <input type="text" value="" name="address" placeholder="详细地址" id="address">
+=======
+            <input type="text" value="" name="ad" placeholder="详细地址" id="ad">
+>>>>>>> 2aad3e358d1e2d015d55bcf575362ef69de9cd77
             <div class="error_div" id="address_error"></div>
             <label for="contact">* 收件人</label>
             <input type="text" value="" name="contact" id="contact" placeholder="例如：张三">
@@ -26,7 +30,11 @@
             <div class="error_div" id="phone_error"></div>
             <div class="opt">
                 <div class="btn cancel">取消</div>
+<<<<<<< HEAD
                 <div class="btn save">保存</div>    
+=======
+                <div class="btn save" id="save_address">保存</div>
+>>>>>>> 2aad3e358d1e2d015d55bcf575362ef69de9cd77
             </div>
         </div>
     </div>
@@ -89,17 +97,26 @@
                             </div>
                         </div>
                         <input type="file" class="uploadhead" name="upfile" id="upfile" onchange="fileUpload()">
+<<<<<<< HEAD
                     </div>    
                     <div class="editinfo">
                         <div class="item">
                             <label for="name">昵称：</label><span class="name">1212121</span>
                             <a href="javascript:void(0)" id="changenick" class="link fs-14">[ 修改昵称 ]</a>    
+=======
+                    </div>
+                    <div class="editinfo">
+                        <div class="item">
+                            <label for="name">昵称：</label><span class="name"><?=$user['name']?></span>
+                            <a href="javascript:void(0)" id="changenick" class="link fs-14">[ 修改昵称 ]</a>
+>>>>>>> 2aad3e358d1e2d015d55bcf575362ef69de9cd77
                         </div>
                         <label>收货信息：</label>
                         <div class="addressinfo">
                             <!-- 暂无收信息，您可以 <a href="javascript:void(0)" class="link">添加收货信息</a>。 -->
                             <div class="item">
                                 <label for="name">收货地址：</label>
+<<<<<<< HEAD
                                 <span >广东省 广州市 天河区 高德置地A栋2座1201广东省 </span>    
                             </div>
                             <div class="item">
@@ -113,6 +130,21 @@
                             <a href="javascript:void(0)" class="link changeadress">[ 修改收货信息 ]</a>
                         </div>
                         
+=======
+                                <span ><?=$address['address']?></span>
+                            </div>
+                            <div class="item">
+                                <label for="">联系电话：</label>
+                                <span><?=$address['phone']?></span>
+                            </div>
+                            <div class="item">
+                                <label for="">收货人：</label>
+                                <span><?=$address['contact']?></span>
+                            </div>
+                            <a href="javascript:void(0)" class="link changeadress">[ 修改收货信息 ]</a>
+                        </div>
+
+>>>>>>> 2aad3e358d1e2d015d55bcf575362ef69de9cd77
                         <!-- <label for="address">收货地址</label>
                         <div style="margin: 10px 0;">
                             <select class="select" name="province" id="s1">
@@ -149,7 +181,7 @@
         var s2 = document.getElementById('s2');
         var s3 = document.getElementById('s3');
         address.value = s1.value + s2.value + s3.value;
-        console.log(address.value);
+        return address.value + $('#ad').val();
     }
 
     $(function () {
@@ -176,7 +208,11 @@
             $(".editaddress").css({"display":"block"});
         })
         $(".editaddress .cancel").click(function(){
+<<<<<<< HEAD
             $(".editaddress").css({"display":"none"});  
+=======
+            $(".editaddress").css({"display":"none"});
+>>>>>>> 2aad3e358d1e2d015d55bcf575362ef69de9cd77
         })
 
         //ajax 提交
@@ -242,12 +278,21 @@
         function changenick(){
             base_nick_name = $("#changenick").parent().find(".name").html();
             var elem =  '' +
+<<<<<<< HEAD
             '<label for="name">昵称：</label>' + 
             '<input type="text" value="'+ base_nick_name +'" name="name" id="name">' + 
             '<div class="nickopt"><div class="btn " id="savenick">保存</div>' +
             '<div class="btn " id="cancel_changenick">取消</div></div>' +
             '<div class="error_div" id="name_error"></div>';
             
+=======
+            '<label for="name">昵称：</label>' +
+            '<input type="text" value="'+ base_nick_name +'" name="name" id="name">' +
+            '<div class="nickopt"><div class="btn " id="savenick">保存</div>' +
+            '<div class="btn " id="cancel_changenick">取消</div></div>' +
+            '<div class="error_div" id="name_error"></div>';
+
+>>>>>>> 2aad3e358d1e2d015d55bcf575362ef69de9cd77
             $("#changenick").parent().html(elem);
 
             $("#name").blur(function () {
@@ -257,24 +302,99 @@
 
             $("#cancel_changenick").click(function(){
                 cancel_changenick();
+<<<<<<< HEAD
             })
+=======
+            });
+
+            $("#savenick").click(function(){
+                var name = $('#name').val();
+                console.log(name);
+
+                $.ajax({
+                    url: BASE_URL + 'account/setting/change_name',
+                    type: 'post',
+                    data: {
+                        name: name
+                    },
+                    dataType: 'json',
+                    success: function(data){
+                        console.log(data);
+                        if(data.success == 0) {
+                            swal("修改成功", "", "success");
+                            base_nick_name = name;
+                            cancel_changenick();
+                        }
+                        else if(data.error == 0) {
+                            swal("修改失败", "", "warning");
+                        }
+                    }
+                });
+            });
+>>>>>>> 2aad3e358d1e2d015d55bcf575362ef69de9cd77
         }
         function cancel_changenick(){
             var base_elem = ''+
                 '<label for="name">昵称：</label><span class="name">'+ base_nick_name +'</span>' +
                 '<a href="javascript:void(0)" id="changenick" class="link fs-14">[ 修改昵称 ]</a>'
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 2aad3e358d1e2d015d55bcf575362ef69de9cd77
             $("#cancel_changenick").parent().parent().html(base_elem);
             $("#changenick").click(function(){
                 changenick();
             });
         }
+<<<<<<< HEAD
+=======
+
+        $('#save_address').click(function(){
+            //检查所有值
+            var empty = true;
+            $('.modal').find('input[type=text]').each(function () {
+                var input = $(this);
+                var key = input.attr('name');
+                var value = input.val();
+                console.log(value);
+                if(validate(key, value) == false) {
+                    empty = false;
+                }
+            });
+
+            if(! empty) {
+                return false;
+            }
+            var address = promptinfo();
+            var phone = $('#phone').val();
+            var contact = $('#contact').val();
+            console.log(address + phone + contact);
+
+            $.ajax({
+                url: BASE_URL + 'account/main/set_address',
+                type: 'post',
+                data: {
+                    address: address,
+                    phone: phone,
+                    contact: contact
+                },
+                dataType: 'json',
+                success: function(data){
+                    // console.log(data);
+                    if(data.success == 0) {
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+>>>>>>> 2aad3e358d1e2d015d55bcf575362ef69de9cd77
 
     });
 
     function fileUpload() {
         $.ajaxFileUpload({
-            url: BASE_URL + 'publish/image/upload_headpic',
+            url: BASE_URL + 'account/setting/change_headpic',
             fileElementId: 'upfile',
             dataType: 'JSON',
             type: 'post',

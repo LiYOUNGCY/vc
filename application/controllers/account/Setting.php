@@ -47,6 +47,7 @@ class Setting extends MY_Controller
         //修改个人信息的页面
         elseif ($type == 'user') {
             $data['title'] = '账户设置';
+            $body['address'] = $this->user_service->get_address($this->user['id']);
             $this->load->view('common/head', $data);
             $this->load->view('setting', $body);
 //            echo json_encode($body);
@@ -73,41 +74,6 @@ class Setting extends MY_Controller
         }
     }
 
-    /**
-     * [update_account 更新个人资料].
-     *
-     * @return [type] [description]
-     */
-    public function update_account()
-    {
-        $data = array(
-            'name',
-            'sex',
-            'phone',
-            'contact',
-        );
-
-        $data = $this->sc->input($data);
-        $province = $this->sc->input('province');
-        $city = $this->sc->input('city');
-        $town = $this->sc->input('town');
-        $address = $this->sc->input('address');
-
-        $address = $province.$city.$town.$address;
-
-        $data['address'] = $address;
-
-        $result = $this->user_service->update_account($this->user['id'], $data);
-
-        if ($result) {
-            $this->sc->output_success();
-        } else {
-            $this->sc->output_error();
-        }
-
-//        var_dump($data);
-    }
-
     public function change_phone()
     {
         $phone = $this->sc->input('phone');
@@ -120,5 +86,33 @@ class Setting extends MY_Controller
         } else {
             $this->sc->output_error();
         }
+    }
+
+    public function change_name()
+    {
+        $name = $this->sc->input('name');
+        $user_id = $this->user['id'];
+
+        $result = $this->user_service->change_name($user_id, $name);
+
+        if($result) {
+            $this->message->success();
+        }
+
+        $this->message->error($name. $user_id);
+    }
+
+    public function change_headpic()
+    {
+        $this->load->service('image_service');
+
+        $user_id = $this->user['id'];
+        $result = $this->image_service->upload_headpic('upfile', $user_id);
+
+        //save by database
+        $this->user_service->change_headpic($user_id, base_url().$result['filepath']);
+
+        header('Content-Type:application/json');
+        echo json_encode($result);
     }
 }
