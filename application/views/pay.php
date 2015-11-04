@@ -4,8 +4,8 @@
     <!-- 修改地址 -->
     <div class="modal editaddress" style="display:none;">
         <div class="box">
-            <label for="address">* 收货地址</label>
-            <div style="margin:10px 0;">
+            <label for="address">收货地址</label>
+            <div style="margin: 10px 0;">
                 <select class="select" name="province" id="s1">
                     <option></option>
                 </select>
@@ -58,7 +58,7 @@
                 <!-- 暂无收货地址，请 <a class="link changeadress" href="javascript:void(0);">添加收货地址</a> -->
 
                 <?php } else { ?>
-                暂无收货地址，请 <a class="link" href="">添加收货地址</a>
+                暂无收货地址，请 <a class="link changeadress" href="javascript:void(0)">添加收货地址</a>
                 <?php } ?>
 
             </div>
@@ -66,9 +66,8 @@
             <div class="peisong">
                 <ul>
                     <?php
-                    $first = true;
                     foreach($transport as $key => $value) {?>
-                    <li data-id="<?=$value['id']?>" <?php if($first){echo 'class="focus"'; $first = !$first;}?>>
+                    <li data-id="<?=$value['id']?>">
                         <?=$value['name']?>
                         <div class="intro" style="display:none">
                             <span id="price"><?=$value['price']?></span> RMB （自提地址：广州市天河区某某某某地方）

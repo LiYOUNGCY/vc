@@ -337,7 +337,7 @@ pre {
 
 /*article start*/
 .item-list {
-
+    margin:0 auto;
 }
 
 .item-list .menu {
@@ -752,9 +752,9 @@ pre {
 }
 
 .search .item:hover{
-    -webkit-box-shadow: 0 0 5px #666;
-    -moz-box-shadow: 0 0 5px #666;
-    box-shadow: 0 0 5px #666;
+    -webkit-box-shadow: 0 0 5px #a1a1a1;
+    -moz-box-shadow: 0 0 5px #a1a1a1;
+    box-shadow: 0 0 5px #a1a1a1;
 
     border-radius: 5px;
 }
@@ -762,13 +762,10 @@ pre {
 .search .item .image-warp {
     float: left;
     margin-right: 10px;
-    margin-bottom: 10px;
-}
-
-.search .item .image-warp .image {
-    width: 200px;
+    width: 144px;
     height: 125px;
 }
+
 
 .search .item .title {
     margin-bottom: 5px;
@@ -3643,6 +3640,7 @@ img.zoom-img {
     font-weight: bold;
     font-size: 24px;
     line-height: 45px;
+    text-align: center;
 }
 .transaction .box .status.psending{
     color:#FFFFFF;
