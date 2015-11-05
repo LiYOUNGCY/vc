@@ -222,6 +222,7 @@
 
                     var box = $('<div class="production">' +
                         '<a href="<?=base_url()?>production/'+ id +'">' +
+                        '<div class="outsidebox"></div>' +
                         '<img class="image" src="' + img + '" style="width: '+width+'px; height: '+height+'px;">' +
                         '<p class="title">' + title + '</p>' +
                         '<p class="author">作者：' + author + '</p>' +

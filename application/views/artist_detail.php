@@ -88,6 +88,7 @@ $(function() {
                 }
                 page++;
                 for (var i = 0; i < arts.length; i++){
+                    var id      = arts[i].id;
                     var image   = arts[i].pic;
                     var style   = arts[i].style;
                     var like    = arts[i].like;
@@ -95,7 +96,6 @@ $(function() {
                     var name    = arts[i].name;
                     var w       = arts[i].w;
                     var h       = arts[i].h;
-                    var artist  = arts[i].aid;
                     var width   = arts[i].width;
                     var height  = arts[i].height;
 
@@ -103,6 +103,8 @@ $(function() {
 
                     var $box =$(
                     '<div class="production">' +
+                    '<a href="<?=base_url()?>production/'+ id +'">' +
+                    '<div class="outsidebox"></div>' +
                     '<img class="image" src="'+ image +'" style="width: '+width+'px;height: '+height+'px;">' +
                     '<p class="title">'+ name +'</p>' +
                     '<div class="info">' +
@@ -112,7 +114,7 @@ $(function() {
                     '<div class="bottom clearfix">' +
                     '<div class="price" title="价格">'+ price +' RMB</div>' +
                     '<div class="vote" title="收藏">'+ like +'<div class="icon like"></div></div>' +
-                    '</div></div>');
+                    '</div></a></div>');
 
                     $('.item-list').append($box);
                     masonry.appended($box)
