@@ -118,6 +118,7 @@ $route['setting/(([a-z]*))'] = 'account/setting/index/$1';
 
 //邮件发送验证页面
 $route['email/(([a-z]*))'] = 'account/email/index/$1';
+$route['account/reset_password'] = 'account/main/reset_password';
 
 /*
  * 收藏列表

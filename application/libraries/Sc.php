@@ -40,7 +40,6 @@ class Sc
             'parent_id' => 'numeric',
             'conversation_content' => 'required|min_length[1]|max_length[400]',
             'comment' => 'max_length[255]',
-            'tel' => 'max_length[22]',
             'amount' => 'required|numeric',
         );
 

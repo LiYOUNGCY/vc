@@ -10,19 +10,20 @@ class Main extends MY_Controller
         $this->load->service('user_service');
     }
 
-    public function index($type = 'forget')
+    public function index()
     {
         $data['css'] = array(
             'swiper.min.css',
             'font-awesome/css/font-awesome.min.css',
             'base.css',
-
+            'alert.css'
         );
         $data['javascript'] = array(
             'jquery.js',
             'masonry.pkgd.min.js',
             'jquery.imageloader.js',
             'error.js',
+            'alert.min.js'
         );
 
         $user['user'] = $this->user;
@@ -35,6 +36,106 @@ class Main extends MY_Controller
 
         $this->load->view('common/head', $data);
         $this->load->view('forget_pwd', $body);
+    }
+
+    public function forget_password($type)
+    {
+        if (!isset($type)) {
+            show_404();
+        }
+
+        if ($type == 'email') {
+            $email = $this->sc->input('email');
+            $user_id = $this->user_service->get_user_id_by_email($email);
+
+            if ($user_id == false) {
+                exit();
+            }
+
+            $this->user_service->forget_password_by_email($user_id, $email);
+
+
+            $data['css'] = array(
+                'swiper.min.css',
+                'font-awesome/css/font-awesome.min.css',
+                'base.css',
+                'alert.css'
+            );
+            $data['javascript'] = array(
+                'jquery.js',
+                'masonry.pkgd.min.js',
+                'jquery.imageloader.js',
+                'error.js',
+                'alert.min.js'
+            );
+
+            $user['user'] = $this->user;
+            $user['sign'] = $this->load->view('common/sign', '', true);
+
+            $data['title'] = '发送邮件成功';
+            $body['top'] = $this->load->view('common/top', $user, true);
+            $body['footer'] = $this->load->view('common/footer', '', true);
+            $body['user'] = $this->user;
+            $body['email'] = $email;
+
+            $this->load->view('common/head', $data);
+            $this->load->view('email_success', $body);
+
+        } else if ($type == 'phone') {
+
+        }
+    }
+
+    public function reset_password()
+    {
+        $token = $this->sc->input('token', 'get');
+
+
+        $data['css'] = array(
+            'swiper.min.css',
+            'font-awesome/css/font-awesome.min.css',
+            'base.css',
+            'alert.css'
+        );
+        $data['javascript'] = array(
+            'jquery.js',
+            'masonry.pkgd.min.js',
+            'jquery.imageloader.js',
+            'error.js',
+            'alert.min.js'
+        );
+
+        $user['user'] = $this->user;
+        $user['sign'] = $this->load->view('common/sign', '', true);
+
+        $data['title'] = '重置密码';
+        $body['top'] = $this->load->view('common/top', $user, true);
+        $body['footer'] = $this->load->view('common/footer', '', true);
+        $body['user'] = $this->user;
+        $body['token'] = $token;
+
+        $this->load->view('common/head', $data);
+        $this->load->view('reset_password', $body);
+    }
+
+    public function set_password()
+    {
+        $token = $this->sc->input('token');
+        $pwd = $this->sc->input('pwd');
+
+        $user_id = $this->user_service->get_user_id_by_token($token);
+
+        if ($user_id == false) {
+            $this->message->error('重置密码链接已经失效');
+        }
+
+        $result = $this->user_service->set_password($user_id, $pwd);
+
+        if (!$result) {
+            $this->message->error();
+        }
+
+        $this->message->success();
     }
 
     /**
@@ -97,7 +198,7 @@ class Main extends MY_Controller
         $result = $this->user_service->register_action($name, $pwd, $email, null);
         if ($result) {
             //注册成功, 重定向首页
-            echo json_encode(array('success' => 0, 'note' => '', 'script' => 'window.location.href="'.base_url().'";'));
+            echo json_encode(array('success' => 0, 'note' => '', 'script' => 'window.location.href="' . base_url() . '";'));
         } else {
             $this->error->output('REGISTER_ERROR');
         }
@@ -115,7 +216,7 @@ class Main extends MY_Controller
         $result = $this->user_service->register_action($name, $pwd, null, $phone);
         if ($result) {
             //注册成功, 重定向首页
-            echo json_encode(array('success' => 0, 'note' => '', 'script' => 'window.location.href="'.base_url().'";'));
+            echo json_encode(array('success' => 0, 'note' => '', 'script' => 'window.location.href="' . base_url() . '";'));
         } else {
             $this->error->output('REGISTER_ERROR');
         }
@@ -204,7 +305,7 @@ class Main extends MY_Controller
 
         $query = $this->user_service->set_address($this->user['id'], $address, $phone, $contact);
 
-        if(! $query) {
+        if (!$query) {
             $this->message->error();
         }
 
@@ -219,7 +320,7 @@ class Main extends MY_Controller
     {
         $query = $this->user_service->get_address($this->user['id']);
 
-        if(empty($query)) {
+        if (empty($query)) {
             $this->message->error();
         }
 

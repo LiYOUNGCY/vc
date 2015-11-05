@@ -7,8 +7,10 @@
     <div class="container">
         <div class="forgetpwd">
             <h2>找回密码</h2>
+
             <div class="btn usephone" onclick="usephone()">使用手机短信找回</div>
             <label>适用于已绑定手机号码的用户</label>
+
             <div class="btn useemail" onclick="useemail()">使用电子邮箱找回</div>
             <label>适用于已绑定电子邮箱的用户</label>
         </div>
@@ -23,27 +25,40 @@
 
     })
 
-    function usephone(){
+    function usephone() {
         var elem = '' +
-        '<h2>找回密码</h2>' +
-        '<div class="form">' +
-        '<input type="text" id="phonenum" class="phonenum" placeholder="手机号码">' +
-        '<input type="text" id="pinnum" class="pinnum" placeholder="手机验证码">' +
-        '<div class="btn sendvelidata" id="sendvelidata" onclick="sendvailidata()">发送验证码</div>' +
-        '</div>' +
-        '<div class="btn submit" id="submitphone">提交</div>' +
-        '<span class="changemethor" onclick="useemail()">使用电子邮箱找回</span>';
+            '<form action="' + BASE_URL + 'account/main/forget_password/email" method="post">' +
+            '<h2>找回密码</h2>' +
+            '<div class="form">' +
+            '<input type="text" id="phonenum" class="phonenum" placeholder="手机号码">' +
+            '<input type="text" id="pinnum" class="pinnum" placeholder="手机验证码">' +
+            '<div class="btn sendvelidata" id="sendvelidata" onclick="sendvailidata()">发送验证码</div>' +
+            '</div>' +
+            '<div class="btn submit" id="submitphone">提交</div>' +
+            '</form>' +
+            '<span class="changemethor" onclick="useemail()">使用电子邮箱找回</span>';
         $(".forgetpwd").html(elem);
     }
-    function useemail(){
+    function useemail() {
         var elem = '' +
-        '<h2>找回密码</h2>' +
-        '<div class="form">' +
-        '<input type="text" id="emailadress" class="emailadress" placeholder="邮箱地址">' +
-        '</div>' +
-        '<div class="btn submit" id="submitemail">提交</div>' +
-        '<span class="changemethor" onclick="usephone()">使用手机短信找回</span>';
+            '<form action="' + BASE_URL + 'account/main/forget_password/email" method="post">' +
+            '<h2>找回密码</h2>' +
+            '<div class="form">' +
+            '<input type="text" id="emailadress" class="emailadress" name="email" placeholder="邮箱地址">' +
+            '<div id="email_error" class="error_div"></div>' +
+            '</div>' +
+            '<div class="btn submit" id="submitemail">提交</div>' +
+            '</form>' +
+            '<span class="changemethor" onclick="usephone()">使用手机短信找回</span>';
         $(".forgetpwd").html(elem);
+
+        $('#submitemail').click(function () {
+            var email =  $('#emailadress').val();
+            console.log(email);
+            if (validate('email', email)) {
+                $('form').submit();
+            }
+        });
     }
     /**
      * 接受验证码

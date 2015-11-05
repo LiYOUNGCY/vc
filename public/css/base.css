@@ -92,13 +92,13 @@ pre {
     display: block;
 }
 .fs-14{
-    font-size:14px; 
+    font-size:14px;
 }
 .fs-18{
-    font-size:18px; 
+    font-size:18px;
 }
 .fs-20{
-    font-size:20px; 
+    font-size:20px;
 }
 .clearfix:before,
 .clearfix:after {
@@ -2907,7 +2907,7 @@ hr.line {
 
     font-size: 20px;
     font-weight: bold;
-    
+
     text-align: left;
     color: #f7cc1e;
 }
@@ -2923,7 +2923,7 @@ hr.line {
 }
 .artistarea .frame ul{
     display: inline-block;
-    margin-top: 10px; 
+    margin-top: 10px;
     position: relative;
 }
 .artistarea .frame ul li{
@@ -2933,7 +2933,7 @@ hr.line {
     box-sizing:border-box;
     margin-left: 12px;
     text-align: center;
-    cursor: pointer;    
+    cursor: pointer;
 }
 
 .artistarea .frame ul .fc{
@@ -2973,7 +2973,7 @@ hr.line {
     background: #FFFFFF;
     width:340px;
     height: 125px;
-    box-shadow: 0 0 10px #878787; 
+    box-shadow: 0 0 10px #878787;
     top: 15px;
     left: 0px;
     opacity: 0;
@@ -3692,7 +3692,7 @@ img.zoom-img {
 
 .safesettig .type {
     width: 100%;
-    font-size: 22px; 
+    font-size: 22px;
     text-align: center;
 }
 .safesettig .btn{
@@ -4020,22 +4020,21 @@ img.zoom-img {
     width: 300px;
     margin: 0 auto;
 }
-.forgetpwd .form input[type="text"]{
+.forgetpwd .form input[type="text"],
+.forgetpwd .form input[type="password"]{
     width: 300px;
     height: 40px;
     border: 1px #534741 solid;
     margin: 15px auto;
     color: #534741;
     padding:5px;
-    box-sizing:border-box;
-    transition:border-color .2s ease-in-out;
+    box-sizing:border-box
+;    transition:border-color .2s ease-in-out;
 }
 .forgetpwd .form input[type="text"]:hover,
-.forgetpwd .form input[type="text"]:focus{
-    border-color: #FCEE21;
-}
-.forgetpwd .form input[type="text"]:hover,
-.forgetpwd .form input[type="text"]:focus{
+.forgetpwd .form input[type="text"]:focus,
+.forgetpwd .form input[type="password"]:hover,
+.forgetpwd .form input[type="password"]:focus{
     border-color: #FCEE21;
 }
 .forgetpwd .form .sendvelidata{
@@ -4465,7 +4464,7 @@ img.zoom-img {
 .payment .addressbox .toeditaddress{
     float: right;
     margin-right: 20px;
-    width: 
+    width:
 }
 .payment .peisong ul{
     margin-top: 15px;
