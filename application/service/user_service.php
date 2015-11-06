@@ -184,10 +184,8 @@ class User_service extends MY_Service
 
         $this->load->library('phone_validate');
         $result = json_decode($this->phone_validate->send_code($phone, $code));
-        // var_dump($result);
-        $result->code = $code;
 
-        return json_encode($result);
+        return $code;
     }
 
     /**
@@ -227,6 +225,11 @@ class User_service extends MY_Service
     public function get_user_id_by_token($token)
     {
         return $this->user_model->get_user_id_by_token($token);
+    }
+
+    public function get_user_id_by_phone($phone)
+    {
+        return $this->user_model->get_user_id_by_phone($phone);
     }
 
     public function set_password($user_id, $password)

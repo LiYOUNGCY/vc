@@ -75,7 +75,7 @@
                         if (data.success == 0) {
                             swal({title: "重置密码成功", text: "3秒后跳转到首页", timer: 3000, type: 'success'});
                             setTimeout(function () {
-                                window.location.href = BASE_URL;
+                                window.location.href = BASE_URL + '/home?callback=login';
                             }, 3000)
                         }
                         else if (data.error == 0) {

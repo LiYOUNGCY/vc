@@ -15,11 +15,12 @@
         'olepwd': '^[^\s]{8,16}$',
         'contact': '^(.){1,36}$',
         'address': '^(.){1,64}$',
-        'confirm_pwd':'^(.){8,36}$'
+        'confirm_pwd':'^(.){8,36}$',
+        'phonenum' : '^\\d{11}$'
     };
     var VALIDATE_ERROR = {
-        'format_name': '昵称必须为长度在1~10的字符*',
-        'format_phone': '手机号码必须为11位*',
+        'format_name': '昵称必须为长度在1~10的字符',
+        'format_phone': '手机号码必须为11位',
         'format_sex': '性别必选*',
         'format_alias': '至少3个英文字符，数字，下滑线',
         'format_pwd': '密码长度在8~36',
@@ -31,7 +32,8 @@
         'format_newpwd': '密码长度在8~36，只能含数字，字母，及下划线',
         'format_olepwd': '密码错误',
         'format_contact': '联系人不能为空',
-        'format_address': '详细地址不能为空'
+        'format_address': '详细地址不能为空',
+        'format_phonenum':'手机号码必须为11位'
     };
 
     self.validate = function (_formname, value) {

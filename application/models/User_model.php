@@ -466,4 +466,19 @@ class User_model extends CI_Model
 
         return $query['uid'];
     }
+
+    public function get_user_id_by_phone($phone)
+    {
+        $query = $this->db->select('user.id')
+            ->from('user')
+            ->where('user.phone', $phone)
+            ->get()
+            ->row_array();
+
+        if(empty($query)) {
+            return false;
+        }
+
+        return $query['id'];
+    }
 }
