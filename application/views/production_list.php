@@ -3,37 +3,34 @@
     <?php echo $top; ?>
     <div class="container">
         <div class="item-list">
-            <div class="filter-warp" id="filter">
-                <div class="filter clearfix" style="border: none;">
-                    <select class="dropdown" id="medium">
-                        <option value="0">全部艺术门类</option>
-                        <?php foreach ($medium as $key => $value) {
+            <div class="productionfilter">
+                <select class="dropdown" id="medium">
+                    <option value="0">全部艺术门类</option>
+                    <?php foreach ($medium as $key => $value) {
     ?>
-                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-                        <?php 
-} ?>
-                    </select>
+                        <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                    <?php 
+    } ?>
+                </select>
 
-                    <select class="dropdown" id="style">
-                        <option value="0">全部风格</option>
-                        <?php foreach ($style as $key => $value) {
+                <select class="dropdown" id="style">
+                    <option value="0">全部风格</option>
+                    <?php foreach ($style as $key => $value) {
     ?>
-                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-                        <?php 
-} ?>
-                    </select>
+                        <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                    <?php 
+    } ?>
+                </select>
 
-                    <select class="dropdown" id="price">
-                        <option value="0">全部价格</option>
-                        <?php foreach ($price as $key => $value) {
+                <select class="dropdown" id="price">
+                    <option value="0">全部价格</option>
+                    <?php foreach ($price as $key => $value) {
     ?>
-                            <option value="<?= $value['value'] ?>"><?= $value['name'] ?></option>
-                        <?php 
-} ?>
-                    </select>
-                </div>
+                        <option value="<?= $value['value'] ?>"><?= $value['name'] ?></option>
+                    <?php 
+    } ?>
+                </select>
             </div>
-
             <!--            <div class="production">-->
             <!--                <img class="image" src="http://hanzh.oss-cn-shenzhen.aliyuncs.com/public/production/thumb1_1440593600_1.jpg">-->
             <!--                <p class="title">天梯</p>-->
@@ -75,7 +72,7 @@
     var Select_status = true;
 
     var masonry = new Masonry(container, {
-        stamp: '.filter-warp',
+        stamp: '.productionfilter',
         itemSelector: '.production',
         columnWidth: 300,
         gutter: 25,

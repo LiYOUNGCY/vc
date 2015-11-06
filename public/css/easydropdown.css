@@ -103,7 +103,6 @@
 .dropdown li{
 	display: block;
     text-align: left;
-	font-size: 16px;
 	line-height: 1;
 	color: #000;
 	padding: 9px 12px;
@@ -194,7 +193,7 @@
 /* .focus class is also added on hover */
 
 .dropdown li.focus{
-	background: #d24a67;
+	background: #0C0F08;
 	position: relative;
 	z-index: 3;
 	color: #fff;
