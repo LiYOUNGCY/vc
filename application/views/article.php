@@ -110,6 +110,7 @@
 
                         var box = $('<div class="box">' +
                             '<a href="<?=base_url()?>article/'+ article_id +'">' +
+                            '<div class="outsidebox"></div>' +
                             '<div class="image" style="background-image:url(' + img + ')"></div>' +
                             '<p class="title">' + article_title + '</p>' +
                             '<p class="content">' + article_content + '</p>' +
