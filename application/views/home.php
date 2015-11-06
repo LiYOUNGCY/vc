@@ -25,7 +25,8 @@
     <div class="container">
         <!-- 导语 -->
         <div class="vcinfo">
-            <div class="icon info"></div>
+            <div class="title">最专业的艺术品导购平台</div>
+            <div class="subtitle">The most professional art shopping guide platform</div>
         </div>
         <!-- 最新专题 -->
         <div class="new-subject">
