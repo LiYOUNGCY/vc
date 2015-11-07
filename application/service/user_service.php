@@ -150,6 +150,7 @@ class User_service extends MY_Service
     {
         return $this->user_model->change_headpic($user_id, $path);
     }
+
     /**
      * [check_email 查看邮箱是否重复].
      *
@@ -183,10 +184,8 @@ class User_service extends MY_Service
 
         $this->load->library('phone_validate');
         $result = json_decode($this->phone_validate->send_code($phone, $code));
-        // var_dump($result);
-        $result->code = $code;
 
-        return json_encode($result);
+        return $code;
     }
 
     /**
@@ -197,12 +196,45 @@ class User_service extends MY_Service
         //生成 token
         $factory = new RandomLib\Factory();
         $generator = $factory->getGenerator(new SecurityLib\Strength(SecurityLib\Strength::MEDIUM));
-        $token = md5(md5($generator->generate(128)).time());
+        $token = md5(md5($generator->generate(128)) . time());
 
         //发邮件
         $this->send_email($email, $token);
 
         $this->email_model->insert_token($uid, $token);
+    }
+
+    public function forget_password_by_email($user_id, $email)
+    {
+        //生成 token
+        $factory = new RandomLib\Factory();
+        $generator = $factory->getGenerator(new SecurityLib\Strength(SecurityLib\Strength::MEDIUM));
+        $token = md5(md5($generator->generate(128)) . time());
+
+        //发邮件
+        $this->send_forget_password_email($email, $token);
+
+        $this->email_model->insert_token($user_id, $token);
+    }
+
+    public function get_user_id_by_email($email)
+    {
+        return $this->user_model->get_user_id_by_email($email);
+    }
+
+    public function get_user_id_by_token($token)
+    {
+        return $this->user_model->get_user_id_by_token($token);
+    }
+
+    public function get_user_id_by_phone($phone)
+    {
+        return $this->user_model->get_user_id_by_phone($phone);
+    }
+
+    public function set_password($user_id, $password)
+    {
+        return $this->user_model->set_password($user_id, $password);
     }
 
     /**
@@ -234,10 +266,25 @@ class User_service extends MY_Service
         $this->email->from('rachechenmu@163.com', 'Artvc');
         $this->email->to($email);
 
-        $url = base_url().'account/email/active?token=';
+        $url = base_url() . 'account/email/active?token=';
 
         $this->email->subject('Artvc账号激活邮件');
         $this->email->message("你可以通过下面的链接激活您的账号。\n {$url}{$token}");
+
+        $this->email->send();
+    }
+
+    private function send_forget_password_email($email, $token)
+    {
+        $this->load->library('email');
+
+        $this->email->from('rachechenmu@163.com', 'Artvc');
+        $this->email->to($email);
+
+        $url = base_url() . 'account/reset_password?token=';
+
+        $this->email->subject('Artvc - 重置密码邮件');
+        $this->email->message("你可以通过下面的链接重置您的账号密码。\n {$url}{$token}");
 
         $this->email->send();
     }

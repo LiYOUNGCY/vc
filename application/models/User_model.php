@@ -5,19 +5,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class User_model extends CI_Model
 {
     private $base_field;
+
     public function __construct()
     {
         parent::__construct();
         $this->load->library('passwordhash');
         $this->passwordhash->setPasswordHash(8, false);
 
-        $this->base_field = array('id', 'name', 'pic', 'role', 'email_status','phone','email');
+        $this->base_field = array('id', 'name', 'pic', 'role', 'email_status', 'phone', 'email');
     }
 
     /**
      * [register_action description].
      *
-     * @param [array] $register_type [array('phone' => xxx), array('email'	=> xxx)]
+     * @param [array] $register_type [array('phone' => xxx), array('email'    => xxx)]
      */
     public function register_action($name, $register_type, $pwd)
     {
@@ -34,7 +35,7 @@ class User_model extends CI_Model
         $register_type['pwd'] = $this->passwordhash->HashPassword($pwd);
         $register_type['name'] = $name;
         $register_type['register_time'] = date('Y-m-d H:i:s', time());
-        $register_type['pic'] = base_url().'public/img/pfp7.png';
+        $register_type['pic'] = base_url() . 'public/img/pfp7.png';
 
         $this->db->insert('user', $register_type);
         $uid = $this->db->insert_id();
@@ -50,10 +51,20 @@ class User_model extends CI_Model
         $this->error->output('register_error');
     }
 
+    public function set_password($user_id, $password)
+    {
+        $data = array(
+            'pwd' => $this->passwordhash->HashPassword($password)
+        );
+
+        $this->db->where('id', $user_id)->update('user', $data);
+        return $this->db->affected_rows();
+    }
+
     /**
      * [login_action description].
      *
-     * @param [array]  $login_type [array('phone' => xxx), array('email'	=> xxx)]
+     * @param [array]  $login_type [array('phone' => xxx), array('email'    => xxx)]
      * @param [string] $pwd        [description]
      *
      * @return [type] [description]
@@ -67,8 +78,7 @@ class User_model extends CI_Model
         } elseif (isset($login_type['email'])) {
             $query = $query->where('email', $login_type['email']);
             //$query = $query->where('email_status', 1);
-        }
-        //调用错误
+        } //调用错误
         else {
             return false;
         }
@@ -140,8 +150,8 @@ class User_model extends CI_Model
         }
         $query = $this->db->where('id', $uid)->get('user')->result_array();
 
-      //删除敏感信息
-      unset($query[0]['pwd']);
+        //删除敏感信息
+        unset($query[0]['pwd']);
 
         return !empty($query) ? $query[0] : null;
     }
@@ -182,13 +192,13 @@ class User_model extends CI_Model
     {
         $where = array('id' => $uid);
         $query = $this->db->select($field['name'])
-                          ->from('user')
-                          ->where($where)
-                          ->get()
-                          ->row_array();
+            ->from('user')
+            ->where($where)
+            ->get()
+            ->row_array();
 
         if (!empty($query)) {
-            $query[$field['name']] = (int) $query[$field['name']] + (int) $field['amount'];
+            $query[$field['name']] = (int)$query[$field['name']] + (int)$field['amount'];
             $this->db->where($where)->update('user', $query);
 
             return $this->db->affected_rows() === 1;
@@ -214,10 +224,9 @@ class User_model extends CI_Model
         );
 
         $query = $this->get_address($uid);
-        if(empty($query)) {
+        if (empty($query)) {
             $this->db->insert('user_address', $data);
-        }
-        else {
+        } else {
             unset($data['uid']);
             $this->db->where('uid', $uid)->update('user_address', $data);
         }
@@ -240,7 +249,7 @@ class User_model extends CI_Model
                 return $this->db->affected_rows() === 1;
             }
         }
-        $this->error->output('old_password_error', array('script' => 'window.location.href = "'.base_url().'setting/pwd";'));
+        $this->error->output('old_password_error', array('script' => 'window.location.href = "' . base_url() . 'setting/pwd";'));
     }
 
     public function change_name($user_id, $name)
@@ -282,9 +291,9 @@ class User_model extends CI_Model
      * [get_user_list 获取用户列表].
      *
      * @param [type] $page   [页数]
-     * @param int    $limit  [页面个数限制]
-     * @param string $order  [排序]
-     * @param array  $custom [自定义条件查询]
+     * @param int $limit [页面个数限制]
+     * @param string $order [排序]
+     * @param array $custom [自定义条件查询]
      *
      * @return [type] [description]
      */
@@ -296,11 +305,11 @@ class User_model extends CI_Model
             $this->db->select('user.id,user.name,role,user_role.name as role_name,phone,email,forbidden,register_time,user_online.last_active');
         }
         $query = $this->db->join('user_online', 'user.id = user_online.uid', 'left')
-                        ->join('user_role', 'user.role = user_role.id', 'left')
-                        ->order_by($order)
-                        ->limit($limit, $page * $limit)
-                        ->get('user')
-                        ->result_array();
+            ->join('user_role', 'user.role = user_role.id', 'left')
+            ->order_by($order)
+            ->limit($limit, $page * $limit)
+            ->get('user')
+            ->result_array();
 
         return $query;
     }
@@ -403,7 +412,7 @@ class User_model extends CI_Model
             //插入 user_online 表
             $this->_insert_user_online($uid);
             //更新默认键值
-            $this->update_account($uid, array('alias' => 'home/uid_'.$uid, 'pic' => base_url().'public/img/pfp7.png'));
+            $this->update_account($uid, array('alias' => 'home/uid_' . $uid, 'pic' => base_url() . 'public/img/pfp7.png'));
 
             return true;
         } else {
@@ -421,5 +430,55 @@ class User_model extends CI_Model
         $this->db->where('id', $id)->update('user', array('phone' => $phone));
 
         return $this->db->affected_rows() === 1;
+    }
+
+    public function get_user_id_by_email($email)
+    {
+        $query = $this->db->select('user.id')
+            ->from('user')
+            ->where('email', $email)
+            ->get()
+            ->row_array();
+
+        if (empty($query)) {
+            return false;
+        }
+
+        return $query['id'];
+    }
+
+    public function get_user_id_by_token($token)
+    {
+        $time = time();
+        $query = $this->db->select('email.uid')
+            ->from('email')
+            ->where('email.token', $token)
+            ->where('email.status', 0)
+            ->where("{$time} <= email.exptime")
+            ->get()
+            ->row_array();
+
+        if (empty($query)) {
+            return false;
+        }
+
+        $this->db->where('token', $token)->update('email', array('status' => 1));
+
+        return $query['uid'];
+    }
+
+    public function get_user_id_by_phone($phone)
+    {
+        $query = $this->db->select('user.id')
+            ->from('user')
+            ->where('user.phone', $phone)
+            ->get()
+            ->row_array();
+
+        if(empty($query)) {
+            return false;
+        }
+
+        return $query['id'];
     }
 }

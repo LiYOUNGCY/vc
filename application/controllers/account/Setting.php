@@ -115,4 +115,6 @@ class Setting extends MY_Controller
         header('Content-Type:application/json');
         echo json_encode($result);
     }
+
+
 }
