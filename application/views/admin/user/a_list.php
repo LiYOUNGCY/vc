@@ -87,7 +87,7 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                    <?php 
+                                    <?php
 } ?>
                                     </tbody>
                                 </table>
@@ -130,7 +130,7 @@
                             <div class="tab-pane fade" id="add">
                                 <table class="table table-striped">
                                     <form id="add_form" method="post"
-                                          action="http://127.0.0.1/artvc/admin/user/add_auth">
+                                          action="<?=base_url()?>artvc/admin/user/add_auth">
                                         <tbody>
                                         <tr>
                                             <td>
@@ -177,7 +177,7 @@
                                                                 <option value="|<?= $v['id'] ?>|">
                                                                     <?= $v['name'] ?>
                                                                 </option>
-                                                            <?php 
+                                                            <?php
 } ?>
                                                         </select>
                                                     </div>

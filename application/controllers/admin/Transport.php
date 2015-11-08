@@ -71,10 +71,11 @@ class Transport extends MY_Controller
         $name = $this->sc->input('name');
         $price = $this->sc->input('price');
         $range = $this->sc->input('range');
+        $remark = $this->sc->input('remark');
 
         // echo $name, $price, $range;
 
-        $result = $this->transport_model->insert_transport($name, $price, $range);
+        $result = $this->transport_model->insert_transport($name, $price, $range, $remark);
 
         if ($result) {
             echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'transport/";</script>';
@@ -105,8 +106,9 @@ class Transport extends MY_Controller
         $name = $this->sc->input('name');
         $price = $this->sc->input('price');
         $range = $this->sc->input('range');
+        $remark = $this->sc->input('remark');
 
-        $result = $this->transport_model->update_transport($id, $name, $price, $range);
+        $result = $this->transport_model->update_transport($id, $name, $price, $range, $remark);
 
         if ($result) {
             echo '<script>alert("操作成功!");window.location.href="'.base_url().ADMINROUTE.'transport/";</script>';

@@ -70,7 +70,7 @@
                     <li data-id="<?=$value['id']?>">
                         <?=$value['name']?>
                         <div class="intro" style="display:none">
-                            <span id="price"><?=$value['price']?></span> RMB （自提地址：广州市天河区某某某某地方）
+                            <span id="price"><?=$value['price']?></span> RMB （<?=$value['remark']?>）
                         </div>
                     </li>
                     <?php } ?>
