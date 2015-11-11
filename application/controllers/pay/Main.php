@@ -120,7 +120,7 @@ class Main extends MY_Controller
 //建立请求
         $alipaySubmit = new AlipaySubmit($alipay_config);
         $html_text = $alipaySubmit->buildRequestForm($parameter, "get", "确认");
-        echo $html_text;
+        echo '<style>input[type="submit"] {display: none;}</style>', $html_text;
     }
 
     /**
@@ -182,5 +182,25 @@ class Main extends MY_Controller
     public function test()
     {
         $this->order_service->buy_production(2, 1, 1, '', 51, 5);
+        $data['css'] = array(
+            'swiper.min.css',
+            'font-awesome/css/font-awesome.min.css',
+            'base.css',
+
+        );
+        $data['javascript'] = array(
+            'jquery.js',
+            'error.js',
+        );
+
+        $user['user'] = $this->user;
+        $user['sign'] = $this->load->view('common/sign', '', true);
+        $body['top'] = $this->load->view('common/top', $user, true);
+        $body['footer'] = $this->load->view('common/footer', '', true);
+        $body['user'] = $this->user;
+
+        $data['title'] = '已发送邮件';
+        $this->load->view('common/head', $data);
+        $this->load->view('pay_success', $body);
     }
 }

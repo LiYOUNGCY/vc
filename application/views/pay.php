@@ -1,37 +1,6 @@
 <body onload="setup();preselect('北京市');promptinfo();">
 
 <div class="main-wrapper">
-    <!-- 修改地址 -->
-    <div class="modal editaddress" style="display:none;">
-        <div class="box">
-            <label for="address">收货地址</label>
-            <div style="margin: 10px 0;">
-                <select class="select" name="province" id="s1">
-                    <option></option>
-                </select>
-                <select class="select" name="city" id="s2">
-                    <option></option>
-                </select>
-                <select class="select" name="town" id="s3">
-                    <option></option>
-                </select>
-                <input id="address" name="address" type="hidden" value=""/>
-            </div>
-            <input type="text" value="" name="ad" placeholder="详细地址" id="ad">
-            <div class="error_div" id="address_error"></div>
-            <label for="contact">* 收件人</label>
-            <input type="text" value="" name="contact" id="contact" placeholder="例如：张三">
-            <div class="error_div" id="contact_error"></div>
-            <label for="phone">* 联系电话</label>
-            <input type="text" value="" name="phone" id="phone">
-            <div class="error_div" id="phone_error"></div>
-            <div class="opt">
-                <div class="btn cancel">取消</div>
-                <div class="btn save" id="address_save">保存</div>
-            </div>
-
-        </div>
-    </div>
     <!-- 顶部 -->
     <?php echo $top; ?>
     <!-- 主体 -->
@@ -84,11 +53,11 @@
                 $total = 0;
                 foreach($goods as $key => $value) { $total += $value['sum_price']; ?>
                 <div class="item">
-                    <a href="javascript:void(0)">
+                    <a href="<?=base_url()?>production/<?= $value['production_id']?>" target="_blank">
                         <div class="pic" style="background: url(<?= $value['pic']?>);background-size:cover;background-position:50% 50%;"></div>
                     </a>
                     <div class="info">
-                        <div class="name">（ <a href="" class="link"><?=$value['name']?></a> ）</div>
+                        <div class="name">（ <a href="<?=base_url()?>production/<?= $value['production_id']?>" target="_blank" class="link"><?=$value['name']?></a> ）</div>
                         <div class="detail">
                             <div>装裱选择：<?=$value['frame_name']?>（￥<?=$value['frame_price']?>）</div>
                             <div>售价：￥<?=$value['price']?></div>
@@ -142,7 +111,7 @@
         <input type="hidden" name="tid" value="" id="tid">
         <input type="hidden" name="ish" value="" id="ish">
         <input type="hidden" name="uj" value="" id="uj">
-        <input type="hidden" name="ca" value="" id="ca">
+        <input type="hidden" name="ca" value="c" id="ca">
         <?php if($ca == 'p') {?>
         <input type="hidden" name="pid" value="<?=$goods[0]['production_id']?>" id="pid">
         <input type="hidden" name="fid" value="<?=$goods[0]['frame_id']?>" id="fid">
@@ -150,6 +119,42 @@
 
     </form>
     <?php echo $footer; ?>
+    <!-- 修改地址 -->
+    <div class="modal editaddress" style="display:none;">
+        <div class="box">
+            <label for="address">收货地址</label>
+            <div style="margin: 10px 0;">
+                <select class="select" name="province" id="s1">
+                    <option></option>
+                </select>
+                <select class="select" name="city" id="s2">
+                    <option></option>
+                </select>
+                <select class="select" name="town" id="s3">
+                    <option></option>
+                </select>
+                <input id="address" name="address" type="hidden" value=""/>
+            </div>
+            <input type="text" value="" name="ad" placeholder="详细地址" id="ad">
+            <div class="error_div" id="address_error"></div>
+            <label for="contact">* 收件人</label>
+            <input type="text" value="" name="contact" id="contact" placeholder="例如：张三">
+            <div class="error_div" id="contact_error"></div>
+            <label for="phone">* 联系电话</label>
+            <input type="text" value="" name="phone" id="phone">
+            <div class="error_div" id="phone_error"></div>
+            <div class="opt">
+                <div class="btn cancel">取消</div>
+                <div class="btn save" id="address_save">保存</div>
+            </div>
+        </div>
+    </div>
+    <!-- 提示 -->
+    <div class="modal paystatus" style="display:none">
+        <div class="box payresult">
+            
+        </div>
+    </div>
 </div>
 <script type="text/javascript" src="<?= base_url() ?>public/js/swiper.min.js"></script>
 </body>
@@ -218,7 +223,7 @@
         //提交订单
         $('#submit').click(function(){
             console.log('submit');
-            var submit_status = true;
+            var submit_status = false;
             var ca = $('#ca').val();
             if( ca == 'c') {
                 $.ajax({
@@ -231,8 +236,8 @@
                     async: false,
                     success: function (data) {
                         console.log(data);
-                        if (data.error == 0) {
-                            submit_status = false;
+                        if (data.success == 0) {
+                            submit_status = true;
                         }
                     },
                     error: function (data) {
@@ -243,6 +248,17 @@
             }
 
             if(submit_status == true) {
+                $(".paystatus").css({"display":"block"});
+                $(".paystatus .payresult").html(''+
+                    '<div class="tips">' +
+                    '<p>请在打开的页面上完成支付。</p>' +
+                    '<p class="notice">完成付款后请根据您的情况点击下面的按钮：</p>' +
+                    '</div>' +
+                    '<div class="opt">' +
+                    '<div class="btn">已完成支付</div>' +
+                    '<div class="btn">未完成支付</div>' +
+                    '</div>');
+                
                 $('#uj').val('qsc');
                 $transport_id = $(".peisong").find('li[class=focus]').attr('data-id');
                 $('#tid').val($transport_id);
