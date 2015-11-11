@@ -71,7 +71,6 @@
 
         <!-- 最新上架 -->
         <div class="new-art">
-
             <div class="list" id="art-list">
                 <div class="wrapper clearfix">
                     <div class="hd clearfix">

@@ -8,19 +8,10 @@
         <div class="callbackbox">
             <div class="icon logo-normal"></div>
             <div class="econtent">
-                <div class="icon emailconfirm"></div>
+                <div class="icon tick"></div>
                 <div class="success">
-                    <p>已将验证邮件发送至 <?=$email?></p>
-                    <div class="tips">
-                        <p>没收到邮件怎么办？</p>
-                        <p>1. 尝试到垃圾邮件或垃圾箱、广告邮件中找找</p>
-                        <p>2. 或再发一遍邮件 点击发送</p>
-                        <p>3. 如果依然无法没收到邮件，请您更换其他的邮件地址 <a href="<?=base_url()?>home?callback=login">重新注册</a></p>
-                    
-                    </div>
-
+                    <p>支付成功！您可以 <a class="link" href="<?=base_url()?>transaction">查看购买记录</a></p>
                 </div>
-                
             </div>
         </div>
     </div>

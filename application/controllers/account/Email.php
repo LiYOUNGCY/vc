@@ -18,8 +18,6 @@ class Email extends MY_Controller
         );
         $data['javascript'] = array(
             'jquery.js',
-            'masonry.pkgd.min.js',
-            'jquery.imageloader.js',
             'error.js',
         );
 
