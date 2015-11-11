@@ -15,7 +15,11 @@ class Slider_model extends CI_Model
     public function get_slider_list()
     {
         $query = $this->db->get('slider')
-                          ->result_array();
+            ->result_array();
+
+        foreach ($query as $key => $value) {
+            $query[$key]['type'] = $this->_extend_type($value['type']);
+        }
 
         return $query;
     }
@@ -30,8 +34,8 @@ class Slider_model extends CI_Model
     public function get_slider_by_id($id)
     {
         $query = $this->db->where('id', $id)
-                           ->get('slider')
-                           ->row_array();
+            ->get('slider')
+            ->row_array();
 
         return $query;
     }
@@ -46,11 +50,12 @@ class Slider_model extends CI_Model
      *
      * @return [type] [description]
      */
-    public function insert_slider($title, $pic, $href, $uid)
+    public function insert_slider($title, $pic, $href, $uid, $type)
     {
         $arr = array(
             'title' => $title,
             'pic' => $pic,
+            'type' => $type,
             'href' => $href,
             'creat_by' => $uid,
             'creat_time' => date('Y-m-d H:i:s', time()),
@@ -81,5 +86,18 @@ class Slider_model extends CI_Model
         $this->db->delete('slider', array('id' => $sid));
 
         return $this->db->affected_rows() === 1;
+    }
+
+    private function _extend_type($num)
+    {
+        $data = array(
+            0 => '',
+            1 => '专题',
+            2 => '作品',
+            3 => '活动',
+            4 => '资讯'
+        );
+
+        return $data[$num];
     }
 }

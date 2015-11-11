@@ -34,12 +34,13 @@
                                         <th>配送方式名称</th>
                                         <th>价格（元）</th>
                                         <th>配送范围</th>
+                                        <th>备注</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
-                                    <?php foreach ($data as $k => $v) {?>
+                                    <?php foreach ($data as $k => $v) { ?>
                                         <tr class="selected">
                                             <td class="center">
                                                 <label>
@@ -59,6 +60,9 @@
                                             </td>
                                             <td>
                                                 <?= $v['range'] ?>
+                                            </td>
+                                            <td>
+                                                <?= $v['remark'] ?>
                                             </td>
                                             <td class="tooltip-btn">
                                                 <button data-toggle="tooltip" title="编辑" effect="edit"
@@ -104,12 +108,14 @@
                             </div>
                             <div class="tab-pane fade" id="add">
                                 <table class="table table-striped">
-                                    <form id="add_form" method="post" action="<?= base_url() ?>admin/transport/add_transport">
+                                    <form id="add_form" method="post"
+                                          action="<?= base_url() ?>admin/transport/add_transport">
                                         <tbody>
                                         <tr>
                                             <td>
                                                 <div class="form-group">
                                                     <span class="col-sm-4 col-xs-3 control-label">配送方式名称:</span>
+
                                                     <div class="col-sm-5 col-xs-8">
                                                         <input class="form-control" name="name" type="text"/>
                                                     </div>
@@ -138,6 +144,19 @@
                                                             <option value="1">广州市内</option>
                                                             <option value="2">广州市外</option>
                                                         </select>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <span class="col-sm-4 col-xs-3 control-label">备注(可空):</span>
+
+                                                    <div class="col-sm-5 col-xs-8">
+                                                        <input class="form-control" name="remark" type="text"
+                                                               placeholder="例如：自提的地址"/>
                                                     </div>
                                                 </div>
                                             </td>

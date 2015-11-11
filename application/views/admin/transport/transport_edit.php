@@ -58,10 +58,29 @@ echo $navbar;
 
                                             <div class="col-sm-5 col-xs-8">
                                                 <select class="form-control" name="range">
-                                                    <option value="0" <?php if($data['range'] == 0) echo 'selected' ?>>全国</option>
-                                                    <option value="1" <?php if($data['range'] == 1) echo 'selected' ?>>广州市内</option>
-                                                    <option value="2" <?php if($data['range'] == 2) echo 'selected' ?>>广州市外</option>
+                                                    <option value="0" <?php if ($data['range'] == 0) echo 'selected' ?>>
+                                                        全国
+                                                    </option>
+                                                    <option value="1" <?php if ($data['range'] == 1) echo 'selected' ?>>
+                                                        广州市内
+                                                    </option>
+                                                    <option value="2" <?php if ($data['range'] == 2) echo 'selected' ?>>
+                                                        广州市外
+                                                    </option>
                                                 </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <span class="col-sm-4 col-xs-3 control-label">备注(可空):</span>
+
+                                            <div class="col-sm-5 col-xs-8">
+                                                <input class="form-control" name="remark" type="text"
+                                                       placeholder="例如：自提的地址" value="<?=$data['remark']?>">
                                             </div>
                                         </div>
                                     </td>

@@ -62,7 +62,7 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                    <?php 
+                                    <?php
 } ?>
                                     </tbody>
                                 </table>
@@ -105,7 +105,7 @@
                             <div class="tab-pane fade" id="add">
                                 <table class="table table-striped">
                                     <form id="add_form" method="post"
-                                          action="http://127.0.0.1/artvc/admin/user/add_role">
+                                          action="<?=base_url()?>artvc/admin/user/add_role">
                                         <tbody>
                                         <tr>
                                             <td>

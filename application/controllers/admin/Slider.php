@@ -81,11 +81,14 @@ class Slider extends MY_Controller
         $title = $this->sc->input('slider_title');
         $pic = $this->sc->input('pic');
         $href = $this->sc->input('href');
+        $type = $this->sc->input('type');
+
         $arr = array(
             'title' => $title,
             'pic' => $pic,
             'href' => $href,
             'modify_by' => $this->user['id'],
+            'type'  => $type
         );
 
         $result = $this->slider_model->update_slider($sid, $arr);
@@ -111,8 +114,9 @@ class Slider extends MY_Controller
         $title = $this->sc->input('slider_title');
         $pic = $this->sc->input('pic');
         $href = $this->sc->input('href');
+        $type = $this->sc->input('type');
 
-        $result = $this->slider_model->insert_slider($title, $pic, $href, $this->user['id']);
+        $result = $this->slider_model->insert_slider($title, $pic, $href, $this->user['id'], $type);
         if ($result) {
             redirect(base_url().ADMINROUTE.'slider', 'location');
         } else {

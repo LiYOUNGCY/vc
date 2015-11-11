@@ -2,7 +2,7 @@
     <!-- Page Content -->
     <div id="page-wrapper">
         <div class="container-fluid">
-            <div class="row">            	
+            <div class="row">
                 <div class="col-lg-12"  style="padding:10px 0px;">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -41,16 +41,16 @@
 													邮箱
 												</th>
 												<th>
-													<i class="fa fa-calendar fa-fw"></i>				
+													<i class="fa fa-calendar fa-fw"></i>
 													注册时间
-												</th>							
+												</th>
 												<th>
 													<i class="fa fa-calendar fa-fw"></i>
 													最后活跃时间
 												</th>
 												<th>
 													状态
-												</th>									
+												</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -64,10 +64,10 @@
 																<input u="<?=$v['id']?>" type="checkbox" class="ace" tag="child_check">
 																<span class="lbl"></span>
 															</label>
-														</td>			
+														</td>
 														<td>
 															<?=$v['id']?>
-														</td>				
+														</td>
 														<td>
 															<?=$v['name']?>
 														</td>
@@ -93,15 +93,15 @@
     echo '被封禁';
 }
     ?>
-														</td>											
+														</td>
 														<td class="tooltip-btn">
 															<button data-toggle="tooltip"  title="编辑" effect="edit" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-edit"></i>
 											                </button>
 															<button data-toggle="tooltip"  title="封禁" effect="forbidden" u="<?=$v['id']?>" type="button" class="btn btn-success btn-circle"><i class="fa fa-ban"></i>
-											                </button>								                				
+											                </button>
 														</td>
-													</tr>																					
-												<?php 
+													</tr>
+												<?php
 }?>
 										</tbody>
 									</table>
@@ -131,14 +131,14 @@
 				                        <!-- /.modal -->
 
 			                        <!--分页-->
-			                        <?=$pagination?>	
-			                		<!-- /分页-->                                   
+			                        <?=$pagination?>
+			                		<!-- /分页-->
                                 </div>
 
                                 <!--添加用户-->
                                 <div class="tab-pane fade" id="add">
 									<table class="table table-striped">
-										<form id="add_form" method="post" action="http://127.0.0.1/artvc/admin/user/add_user">
+										<form id="add_form" method="post" action="<?=base_url()?>artvc/admin/user/add_user">
 						                    <tbody>
 							                    <tr>
 							                        <td>
@@ -189,16 +189,16 @@
 			   														<?php foreach ($role as $k => $v) {
     ?>
 																			<option value="<?=$v['id']?>"><?=$v['name']?></option>
-			   														<?php 
+			   														<?php
 }?>
 			                                                    </select>
 							                                </div>
 							                            </div>
 							                        </td>
-							                    </tr>	                    				                    				                    
+							                    </tr>
 											</tbody>
 										</form>
-									</table>   
+									</table>
 		                        	<div class="panel-footer">
 			                        	<center>
 											<button id="add_submit" type="button" class="btn btn-outline btn-primary">提交</button>
@@ -210,9 +210,9 @@
                         </div>
                         <!-- /.panel-body -->
                     </div>
-                    <!-- /.panel -->    
+                    <!-- /.panel -->
 
-                       
+
 
                 </div>
                 <!-- /.col-lg-12 -->
@@ -241,27 +241,27 @@ $(function()
 		var child = $("input[tag=child_check]");
 		if(child.prop('checked') == true)
 		{
-			child.prop("checked",false);			
+			child.prop("checked",false);
 		}
 		else
 		{
-			child.prop("checked",true);			
+			child.prop("checked",true);
 		}
 
 	});
-	
+
 	//删除按钮事件
 	$("#delete").click(function(){
 		var child = $("input[tag=child_check]:checked");
 		if(child.length != 0)
 		{
-			$("#modal_open").click();			
+			$("#modal_open").click();
 		}
 		else{
 			alert('请选择用户！');
 			return false;
 		}
-	});	
+	});
 
 	//确认删除
 	$("#delete_confirm").click(function(){
@@ -272,7 +272,7 @@ $(function()
 			var uid = $(this).attr('u');
 			if(uid != null && uid != undefined && uid != "")
 			{
-				delete_str += uid+",";		
+				delete_str += uid+",";
 			}
 		});
 		if(delete_str != "")
@@ -289,17 +289,17 @@ $(function()
 						$(this).fadeOut();
 						if(data.script != "")
 						{
-							eval(data.script);							
+							eval(data.script);
 						}
-	
+
 					});
-				}	
+				}
 				else if(data.success == 0)
-				{ 
+				{
 					$(".alert-success").append(data.note);
 					$(".alert-success").fadeIn(1000,function(){
-						$(this).fadeOut();	
-						eval(data.script);								
+						$(this).fadeOut();
+						eval(data.script);
 					});
 				}
 			});
@@ -321,17 +321,17 @@ $(function()
 						$(this).fadeOut();
 						if(data.script != "")
 						{
-							eval(data.script);							
+							eval(data.script);
 						}
-	
+
 					});
-				}	
+				}
 				else if(data.success == 0)
-				{ 
+				{
 					$(".alert-success").append(data.note);
 					$(".alert-success").fadeIn(1000,function(){
-						$(this).fadeOut();	
-						eval(data.script);								
+						$(this).fadeOut();
+						eval(data.script);
 					});
 				}
 			});
@@ -340,7 +340,7 @@ $(function()
 	//编辑
 	$("button[effect=edit]").click(function()
 	{
-		var uid = $(this).attr('u');	
+		var uid = $(this).attr('u');
 		if(uid != null && uid != "")
 		{
 			window.location.href=ADMIN+"user/edit/u/"+uid;

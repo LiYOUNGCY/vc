@@ -30,12 +30,13 @@ class Transport_model extends CI_Model
         return $query;
     }
 
-    public function insert_transport($name, $price, $range)
+    public function insert_transport($name, $price, $range, $remark)
     {
         $data = array(
             'name' => $name,
             'price' => $price,
-            'range' => $range
+            'range' => $range,
+            'remark' => $remark
         );
 
         $this->db->insert('transport', $data);
@@ -43,12 +44,13 @@ class Transport_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function update_transport($id, $name, $price, $range)
+    public function update_transport($id, $name, $price, $range, $remark)
     {
         $data = array(
             'name' => $name,
             'price' => $price,
-            'range' => $range
+            'range' => $range,
+            'remark' => $remark
         );
 
         $this->db->where('id', $id)->update('transport', $data);

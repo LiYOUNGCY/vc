@@ -28,6 +28,6 @@ class phone_validate
     {
         $ucpass = new Ucpaas($this->options);
 
-        return $ucpass->templateSMS($this->appId, $phone, $this->templateId, $code);
+        return $ucpass->templateSMS($this->appId, $phone, $this->templateId, $code.', 5');
     }
 }
