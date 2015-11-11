@@ -89,3 +89,6 @@ define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 define('IN_GUANGZHUO', 1);
 define('NOT_IN_GUANGZHUO', 2);
+
+define('SYSTEM_MESSAGE', 1);
+define('GOODS_MESSAGE', 2);

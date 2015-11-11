@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<?=base_url()?>">Artvc主页</a>
+        <a class="navbar-brand" href="<?= base_url() ?>">Artvc主页</a>
     </div>
     <ul class="nav navbar-top-links navbar-right">
         <!-- /.dropdown -->
@@ -23,7 +23,7 @@
                 <li><a href="<?= base_url() ?>setting"><i class="fa fa-gear fa-fw"></i>个人设置</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="<?= base_url().ADMINROUTE ?>main/logout" id="logout"><i class="fa fa-sign-out fa-fw"></i>注销</a>
+                <li><a href="<?= base_url() . ADMINROUTE ?>main/logout" id="logout"><i class="fa fa-sign-out fa-fw"></i>注销</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
@@ -54,13 +54,13 @@
                     <a href="#">用户管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>user/u">信息管理</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>user/u">信息管理</a>
                         </li>
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>user/a">权限管理</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>user/a">权限管理</a>
                         </li>
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>user/index/r">用户组管理</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>user/index/r">用户组管理</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -69,10 +69,10 @@
                     <a href="#">文章管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>article">文章管理</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>article">文章管理</a>
                         </li>
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>article/index/article_tag">标签管理</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>article/index/article_tag">标签管理</a>
                         </li>
                     </ul>
                 </li>
@@ -81,44 +81,44 @@
                     <a href="#">专题管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>topic">专题管理</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>topic">专题管理</a>
                         </li>
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>topic/who">送礼的标签</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>topic/who">送礼的标签</a>
                         </li>
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>topic/where">装修的标签</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>topic/where">装修的标签</a>
                         </li>
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>topic/when">收藏的标签</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>topic/when">收藏的标签</a>
                         </li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="<?= base_url().ADMINROUTE ?>artist">艺术家管理</a>
+                    <a href="<?= base_url() . ADMINROUTE ?>artist">艺术家管理</a>
                 </li>
 
                 <li>
                     <a href="#">艺术品管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>production/p">艺术品</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>production/p">艺术品</a>
                         </li>
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>production/frame">裱</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>production/frame">裱</a>
                         </li>
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>production/medium">题材</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>production/medium">题材</a>
                         </li>
                         <li style="display:none;">
-                            <a href="<?= base_url().ADMINROUTE ?>production/categories">种类</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>production/categories">种类</a>
                         </li>
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>production/style">风格</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>production/style">风格</a>
                         </li>
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>production/price">价格分类</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>production/price">价格分类</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -127,15 +127,24 @@
                     <a href="#">订单管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>order/index">查看所有订单</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>order/index">查看所有订单</a>
                         </li>
                         <li>
-                            <a href="<?= base_url().ADMINROUTE ?>transport">配送方式</a>
+                            <a href="<?= base_url() . ADMINROUTE ?>transport">配送方式</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="<?= base_url().ADMINROUTE ?>slider">轮播管理</a>
+                    <a href="<?= base_url() . ADMINROUTE ?>slider">轮播管理</a>
+                </li>
+                <li>
+                    <a href="#">消息管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="<?= base_url() . ADMINROUTE ?>notification/SystemMessage">系统消息</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
                 </li>
                 <li style="display:none;">
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i>网站设置<span class="fa arrow"></span></a>
@@ -150,7 +159,7 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="<?= base_url().ADMINROUTE ?>Customer">在线客服</a>
+                    <a href="<?= base_url() . ADMINROUTE ?>Customer">在线客服</a>
                     <!-- /.nav-second-level -->
                 </li>
                 <li style="display:none;">

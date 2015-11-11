@@ -22,7 +22,7 @@
         },
         "time": "2013-04-30 18:00:34",
         "type": "library",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-0": {
                 "SecurityLib": "lib"
@@ -71,7 +71,7 @@
                 "dev-master": "1.0.x-dev"
             }
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-0": {
                 "RandomLib": "lib"
@@ -95,66 +95,6 @@
             "random",
             "random-numbers",
             "random-strings"
-        ]
-    },
-    {
-        "name": "endroid/qrcode",
-        "version": "1.5.4",
-        "version_normalized": "1.5.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/endroid/QrCode.git",
-            "reference": "89dbd7418715f48056da2948fba00f728b56afc3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/endroid/QrCode/zipball/89dbd7418715f48056da2948fba00f728b56afc3",
-            "reference": "89dbd7418715f48056da2948fba00f728b56afc3",
-            "shasum": ""
-        },
-        "require": {
-            "ext-gd": "*",
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "fabpot/php-cs-fixer": "~1.0",
-            "phpunit/phpunit": "~4.0",
-            "symfony/var-dumper": "~2.3"
-        },
-        "time": "2015-07-04 19:44:13",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "Endroid\\QrCode\\": [
-                    "src/",
-                    "tests/"
-                ]
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jeroen van den Enden",
-                "email": "info@endroid.nl",
-                "homepage": "http://endroid.nl/"
-            }
-        ],
-        "description": "Endroid QR Code",
-        "homepage": "https://github.com/endroid/QrCode",
-        "keywords": [
-            "code",
-            "endroid",
-            "qr",
-            "qrcode"
         ]
     },
     {
@@ -182,7 +122,7 @@
         },
         "time": "2015-07-05 09:09:12",
         "type": "library",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-0": {
                 "PHPImageWorkshop": "src"

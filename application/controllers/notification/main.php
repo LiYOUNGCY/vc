@@ -1,6 +1,6 @@
 <?php
 
-class main extends MY_Controller
+class Main extends MY_Controller
 {
     public function __construct()
     {
@@ -47,61 +47,31 @@ class main extends MY_Controller
         }
     }
 
-    /**
-     * [get_notification_list 获取消息列表].
-     *
-     * @return [type] [description]
-     */
-    public function get_notification_list()
+    public function get_system_message()
     {
-        // $page = $this->sc->input('page');
-        $page = 0;
-        //消息类型
-        // $type = $this->sc->input('type');
-        $type = 1;
-        $type = !empty($type) ? $type : 'all';
+        $user_id = $this->user['id'];
+        $page = $this->sc->input('page');
 
-        $notification = $this->notification_service->get_notification_list($page, $this->user['id'], $type);
+        $query = $this->message_service->get_system_message_by_user($user_id, $page);
 
-        echo json_encode($notification);
+        if(empty($query)) {
+            $this->message->error();
+        }
+
+        echo json_encode($query);
     }
 
-    /**
-     * [read 阅读消息].
-     *
-     * @return [type] [description]
-     */
-    /*
-    public function read()
+    public function get_goods_message()
     {
-        $nid = $this->sc->input('nid');
-        $type= $this->sc->input('type');
+        $user_id = $this->user['id'];
+        $page = $this->sc->input('page');
 
-        $result = $this->notification_service->update($this->user['id'],$nid,$type,array('read_flag' => 1));
-        if(!empty($result))
-        {
-            echo json_encode(array('success' => 0));
+        $query = $this->message_service->get_goods_message_by_user($user_id, $page);
+
+        if(empty($query)) {
+            $this->message->error();
         }
-        else
-        {
-            $this->error->output('INVALID_REQUEST');
-        }
-    }
-    */
-    /**
-     * [delete 删除消息].
-     *
-     * @return [type] [description]
-     */
-    public function delete()
-    {
-        $nid = $this->sc->input('nid');
-        $type = $this->sc->input('type');
-        $result = $this->notification_service->delete($this->user['id'], $nid, $type);
-        if (!empty($result)) {
-            echo json_encode(array('success' => 0));
-        } else {
-            $this->error->output('INVALID_REQUEST');
-        }
+
+        echo json_encode($query);
     }
 }

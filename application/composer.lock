@@ -4,67 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "242791d547d97b7f3c11d3b3c85cfaf8",
-    "content-hash": "38d62db834adeba31dfcad3ab3b91d86",
+    "hash": "22552cf088af880f07e4a3ddeb4bd767",
+    "content-hash": "813036ccec831300f8408f56128cf7a0",
     "packages": [
-        {
-            "name": "endroid/qrcode",
-            "version": "1.5.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/endroid/QrCode.git",
-                "reference": "89dbd7418715f48056da2948fba00f728b56afc3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/endroid/QrCode/zipball/89dbd7418715f48056da2948fba00f728b56afc3",
-                "reference": "89dbd7418715f48056da2948fba00f728b56afc3",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gd": "*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "fabpot/php-cs-fixer": "~1.0",
-                "phpunit/phpunit": "~4.0",
-                "symfony/var-dumper": "~2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Endroid\\QrCode\\": [
-                        "src/",
-                        "tests/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jeroen van den Enden",
-                    "email": "info@endroid.nl",
-                    "homepage": "http://endroid.nl/"
-                }
-            ],
-            "description": "Endroid QR Code",
-            "homepage": "https://github.com/endroid/QrCode",
-            "keywords": [
-                "code",
-                "endroid",
-                "qr",
-                "qrcode"
-            ],
-            "time": "2015-07-04 19:44:13"
-        },
         {
             "name": "ircmaxell/random-lib",
             "version": "v1.0.0",

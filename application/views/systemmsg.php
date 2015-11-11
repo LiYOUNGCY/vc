@@ -70,8 +70,7 @@
                 url: GET_NOTIFICATION,
                 async: false,
                 data: {
-                    page: page,
-                    type: type
+                    page: page
                 },
                 dataType: 'json',
                 success: function (data) {
