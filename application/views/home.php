@@ -11,11 +11,27 @@
                 <div class="swiper-slide">
                     <a href="<?= $v['href'] ?>">
                     <img data-src="<?= $v['pic'] ?>" class="swiper-lazy">
-                    <div class="swiper-shadow" ></div>
+                    <div class="swiper-shadow" >
+                        <div class="swiper-detail">
+                            <div class="type">
+                                <?= $v['type'] ?>
+                            </div>
+                            <div class="title">
+                                <span><?= $v['title'] ?></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="swiper-lazy-preloader"></div>
                     </a>
                 </div>
             <?php endforeach; ?>
+        </div>
+        <!-- 前进后退 -->
+        <div class="swiper-button-prev control">
+            <i class="fa fa-angle-left fa-3x"></i>
+        </div>
+        <div class="swiper-button-next control">
+            <i class="fa fa-angle-right fa-3x"></i>
         </div>
         <!-- 轮播位置 -->
         <div class="swiper-pagination swiper-pagination-white"></div>
@@ -164,14 +180,10 @@
         autoplay: 5000,
         autoplayDisableOnInteraction: false,
         speed: 500,
-        
+        prevButton:'.swiper-button-prev',
+        nextButton:'.swiper-button-next',
     });
-    var swiper = new Swiper('.artist-swiper', {
-        autoplayDisableOnInteraction: false,
-        speed: 500,
-        prevButton: '.swiper-button-prev',
-        nextButton: '.swiper-button-next'
-    });
+
 
     $(function () {
         var subject = document.querySelector('#subject-list');
